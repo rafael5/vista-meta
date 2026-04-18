@@ -1,0 +1,25 @@
+# vista-meta .gitignore
+# Spec: docs/vista-meta-spec-v0.4.md § 3
+
+# Runtime config (contains Tailscale IP)
+.env
+
+# Bake raw output — regenerated, large
+vista/export/**/raw/
+
+# Bake logs
+vista/export/logs/
+
+# Named-volume snapshots
+snapshots/
+
+# Host Python venv
+host/.venv/
+
+# YottaDB temp/journal files
+*.o
+*.mjo
+
+# OS artifacts
+.DS_Store
+Thumbs.db

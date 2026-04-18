@@ -1,0 +1,15 @@
+# VistA RPC Broker — port 9430
+# Serves CPRS, DDR, and host analytics scripts.
+# ydb-run wrapper sources YDB env before exec'ing mumps.
+
+service xwb
+{
+    type        = UNLISTED
+    port        = 9430
+    socket_type = stream
+    protocol    = tcp
+    wait        = no
+    user        = vehu
+    server      = /usr/local/bin/ydb-run
+    server_args = -run XWBTCPM
+}

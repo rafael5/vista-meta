@@ -1,0 +1,13 @@
+# vista-meta sshd configuration
+# Docker maps host :2222 -> container :22
+# Tailscale IP binding handled via docker -p flag (ADR-008)
+
+Port 22
+ListenAddress 0.0.0.0
+
+PermitRootLogin no
+PasswordAuthentication yes
+PubkeyAuthentication yes
+X11Forwarding no
+PrintMotd yes
+AcceptEnv LANG LC_*
