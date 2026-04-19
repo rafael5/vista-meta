@@ -14,6 +14,95 @@ Status: provisional | verified | superseded by RF-NNN.
 
 ## 2026-04-19 — First analytical session
 
+### RF-020: Routine → routine call graph — 241,309 edges
+
+- **Date**: 2026-04-19
+- **Scope**: All 39,330 routines in the inventory. Static regex scan
+  for DO/GOTO/JOB commands and $$ function calls referencing another
+  routine. Phase 5 of ADR-045.
+- **Method**: `host/scripts/build_routine_calls.py` reads MANIFEST,
+  strips strings and comments from each line, matches two patterns:
+  - `\b(D|DO|G|GOTO|J|JOB)\b(?::\S+)? +([A-Z%][A-Z0-9]*)?\^(%?[A-Z][A-Z0-9]*)`
+  - `\$\$([A-Z%][A-Z0-9]*)?\^(%?[A-Z][A-Z0-9]*)`
+  One row per (caller, callee_tag, callee_routine, kind) tuple with
+  ref_count. Run via `make routine-calls`. Runtime: ~10s for 39,330
+  routines.
+- **Finding**:
+  - **241,309 edges** across **32,289 callers** (82.1% of routines
+    make at least one call). 444,802 total call instances summed
+    across ref_counts.
+  - **20,974 distinct callees**. **Cross-reference against MANIFEST:
+    20,502 (97.7%) are in MANIFEST** — very high validity rate. The
+    472 not in MANIFEST are T-002 cohort names (A1A-prefix Albany
+    OIFO, %A1*, A7R*, %AAH* percent routines — File 9.8-registered
+    but not shipped under `Packages/`).
+  - **By call kind**:
+    - do   — 155,402 (64.4%)
+    - func — 74,986 (31.1%) — $$ extrinsic function calls
+    - goto — 10,880 (4.5%)
+    - job  — 41 (<0.1%) — background JOB is rare in this corpus
+  - **Top callees by in-degree (unique caller count)** are exactly
+    the VistA utility-library "bones" — precisely the names that
+    Phase 3a's initial (buggy) regex misidentified as globals
+    before the lookbehind fix:
+    - DIC — 7,511 (FileMan lookup)
+    - DIE — 7,509 (FileMan data editor)
+    - DIR — 7,219 (terminal reader)
+    - XLFDT — 6,643 (date/time library)
+    - DIQ — 6,464 (FileMan retrieval)
+    - %DTC — 4,143 (date conversion)
+    - XPDUTL — 3,866 (KIDS utilities)
+    - %ZTLOAD — 3,784 (TaskMan scheduler)
+    - %ZIS — 3,647 (device/IO handler)
+    - %DT — 3,459 (date input)
+    - DIK — 3,325 (FileMan kill)
+    - DICN — 2,781 (FileMan add-new)
+    - XLFSTR — 2,571 (string library)
+    - VADPT — 1,860 (Patient API)
+    - VALM1 — 1,586 (List Manager)
+    - XMD — 1,538 (MailMan delivery)
+  - **Top callers by out-degree (unique callee count)** are
+    dispatch/controller routines:
+    - SDEC (65) — Scheduling hub. Also topped RPC counts (124
+      RPCs in Phase 4b) — the scheduling orchestrator.
+    - MCARP (50) — Medicine/Cardiology
+    - SDES (44), PSSJXR (42), IBAMTC (40), PSGOEE (39),
+      PRCFFMOM (39), PSJOE (37), IBXS11 (37), DGREG (37).
+- **Iteration and validation logic**:
+  - The 20,974-callee result on first run was surprising (expected
+    lower). Cross-ref check against MANIFEST revealed 97.7% hit rate,
+    which reframed it as legitimate (VistA really is that
+    interconnected). The 472 not-in-MANIFEST callees map cleanly to
+    the T-002 File-9.8-only cohort — consistent signal across
+    phases.
+  - Top-callee list equals the Phase 3a false-positive list from the
+    initial regex: DIQ, XLFDT, XPDUTL, XLFSTR, DIE. These are
+    routines, not globals — Phase 3a's lookbehind fix was correct.
+    Phase 5's data is the validation that those identifications
+    were right.
+- **Evidence**: `vista/export/normalized/routine-calls.tsv` — 241,309
+  rows, 6 columns (caller_name, caller_package, callee_tag,
+  callee_routine, kind, ref_count).
+- **Known MVP limitations (documented)**:
+  - Comma-continuation (`D A^R1,B^R2`) catches only the first call.
+  - Line-offset calls (`D TAG+3^ROU`) are skipped.
+  - Indirection (`D @X`, `D @^ROU`) is undecidable statically.
+  - Strings and comments are stripped before matching.
+- **Implications**:
+  - Combined with Phase 4 (roles) and Phase 3a (globals), we now
+    have the three edge types needed for a complete routine-level
+    view: routine→routine (Phase 5), routine→global (Phase 3a),
+    and routine→role-tables (Phase 4).
+  - Phase 6 (package manifest unification) can now measure
+    cross-package call coupling by joining `routine-calls.tsv` with
+    `routines.tsv` on caller_package vs callee's package (looked up
+    via routines.tsv).
+  - Library routines (high in-degree, low out-degree) and dispatch
+    routines (high out-degree) are now identifiable quantitatively.
+    These are the natural clustering axes for any modernization /
+    decomposition plan.
+- **Status**: verified (within MVP limits)
+
 ### RF-019: VistA File 101 (PROTOCOL) extraction — 6,556 protocols
 
 - **Date**: 2026-04-19

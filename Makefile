@@ -190,6 +190,12 @@ routine-globals: ## Scan each routine for subscripted ^GLOBAL refs (ADR-045 Phas
 		{ echo "Run 'make sync-routines' first."; exit 1; }
 	/usr/bin/python3 host/scripts/build_routine_globals.py
 
+.PHONY: routine-calls
+routine-calls: ## Scan each routine for DO/GOTO/JOB and $$ calls → routine-calls.tsv (ADR-045 Phase 5)
+	@[ -f vista/vista-m-host/MANIFEST.tsv ] || \
+		{ echo "Run 'make sync-routines' first."; exit 1; }
+	/usr/bin/python3 host/scripts/build_routine_calls.py
+
 .PHONY: dump-file-9-8
 dump-file-9-8: ## Dump File 9.8 (ROUTINE) via VMDUMP98 → vista-file-9-8.tsv (ADR-045 Phase 4a)
 	$(DOCKER) exec -u vehu $(CONTAINER) bash -lc 'echo "D RUN^VMDUMP98 H" | $$ydb_dist/mumps -direct'
