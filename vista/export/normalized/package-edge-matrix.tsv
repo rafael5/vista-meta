@@ -1,0 +1,1873 @@
+source_package	dest_package	call_edges	distinct_caller_routines	distinct_callee_routines
+Integrated Billing	Integrated Billing	8566	1717	1406
+Scheduling	Scheduling	6699	1232	1018
+IFCAP	IFCAP	6521	1255	1016
+Registration	Registration	6172	1440	1264
+Integrated Billing	VA FileMan	5961	1782	38
+Lab Service	Lab Service	5132	992	744
+Registration	VA FileMan	5010	1412	46
+Outpatient Pharmacy	Outpatient Pharmacy	4778	664	612
+Order Entry Results Reporting	Order Entry Results Reporting	4666	1065	989
+VA FileMan	VA FileMan	4215	725	678
+IFCAP	VA FileMan	3688	993	39
+Inpatient Medications	Inpatient Medications	3326	465	423
+Scheduling	VA FileMan	3076	1275	41
+Text Integration Utility	Text Integration Utility	3000	425	315
+Accounts Receivable	Accounts Receivable	2944	550	478
+Kernel	Kernel	2551	623	443
+Clinical Reminders	Clinical Reminders	2331	395	356
+Surgery	Surgery	2172	549	473
+Radiology Nuclear Medicine	Radiology Nuclear Medicine	2125	353	313
+Integrated Billing	Kernel	2048	1169	34
+Imaging	Imaging	1921	431	364
+Lab Service	VA FileMan	1918	771	38
+Outpatient Pharmacy	VA FileMan	1891	695	31
+Fee Basis	Fee Basis	1854	334	249
+Clinical Case Registries	Clinical Case Registries	1851	220	153
+Registration	Kernel	1833	828	41
+Scheduling	Kernel	1642	860	33
+MailMan	MailMan	1575	218	167
+PAID	PAID	1520	359	242
+Accounts Receivable	VA FileMan	1500	566	35
+PCE Patient Care Encounter	PCE Patient Care Encounter	1486	320	328
+Prosthetics	Prosthetics	1410	345	274
+Lexicon Utility	Kernel	1397	410	8
+Nursing Service	Nursing Service	1341	225	164
+E Claims Management Engine	E Claims Management Engine	1302	161	151
+Automated Lab Instruments	Automated Lab Instruments	1299	292	151
+Order Entry Results Reporting	Kernel	1291	541	41
+Dietetics	Dietetics	1269	301	203
+Oncology	Oncology	1262	372	325
+Lexicon Utility	Lexicon Utility	1231	337	241
+Kernel	VA FileMan	1218	496	49
+Order Entry Results Reporting	VA FileMan	1187	579	23
+Automated Information Collection System	VA FileMan	1173	224	30
+Radiology Nuclear Medicine	VA FileMan	1126	390	31
+Lab Service	Kernel	1114	479	33
+Health Level Seven	Health Level Seven	1077	209	186
+Fee Basis	VA FileMan	1076	393	31
+Mental Health	Mental Health	1062	376	278
+Surgery	VA FileMan	1017	515	19
+Automated Information Collection System	Automated Information Collection System	1013	308	279
+Integrated Billing	List Manager	1010	348	6
+Prosthetics	VA FileMan	946	364	18
+Outpatient Pharmacy	Kernel	939	397	34
+VPE Shell	VPE Shell	872	163	156
+DSS Extracts	DSS Extracts	855	161	122
+Text Integration Utility	VA FileMan	840	352	31
+Engineering	VA FileMan	831	324	32
+Engineering	Engineering	814	248	207
+Event Capture	Event Capture	806	175	216
+Oncology	VA FileMan	802	362	21
+Pharmacy Data Management	Pharmacy Data Management	800	203	226
+Clinical Reminders	VA FileMan	786	330	24
+Lexicon Utility	VA FileMan	756	390	16
+Imaging	VA FileMan	753	343	23
+Automated Medical Information Exchange	Automated Medical Information Exchange	742	202	164
+National Online Information Sharing	National Online Information Sharing	736	154	154
+Health Summary	Health Summary	735	214	120
+DRG Grouper	DRG Grouper	729	164	193
+Integrated Billing	Registration	717	421	68
+Controlled Substances	VA FileMan	712	269	16
+Toolkit	Toolkit	703	156	147
+Inpatient Medications	VA FileMan	694	325	19
+Accounts Receivable	Kernel	691	356	20
+Consult Request Tracking	Consult Request Tracking	670	134	125
+Womens Health	Womens Health	655	98	80
+Medicine	Medicine	651	189	217
+Event Capture	VA FileMan	628	269	18
+PCE Patient Care Encounter	VA FileMan	625	264	24
+General Medical Record - Vitals	General Medical Record - Vitals	613	191	181
+Enterprise Health Management Platform	Enterprise Health Management Platform	612	101	89
+Medicine	VA FileMan	611	234	21
+Clinical Reminders	Kernel	606	305	15
+Record Tracking	Record Tracking	601	114	116
+Scheduling	Registration	599	337	71
+Mental Health	VA FileMan	593	277	25
+Uncategorized	VA FileMan	593	278	35
+Automated Medical Information Exchange	VA FileMan	587	226	31
+Patient Data Exchange	Patient Data Exchange	581	149	153
+PAID	VA FileMan	575	246	22
+Pharmacy Data Management	VA FileMan	571	233	22
+MailMan	VA FileMan	557	191	19
+Radiology Nuclear Medicine	Kernel	557	289	26
+Barcode Medication Administration	Barcode Medication Administration	549	97	73
+DSS Extracts	VA FileMan	526	227	14
+Text Integration Utility	Kernel	524	248	28
+Order Entry Results Reporting	Toolkit	511	320	4
+Enrollment Application System	Enrollment Application System	504	117	107
+Event Capture	Kernel	498	247	11
+Uncategorized	Uncategorized	483	142	166
+Imaging	Kernel	477	246	21
+Clinical Case Registries	VA FileMan	473	155	17
+Record Tracking	VA FileMan	450	111	19
+Income Verification Match	Income Verification Match	442	111	122
+Adverse Reaction Tracking	Adverse Reaction Tracking	431	112	94
+DSS Extracts	Kernel	417	196	13
+Health Level Seven	Kernel	416	158	18
+Quasar	VA FileMan	402	83	28
+Incomplete Records Tracking	VA FileMan	401	56	13
+Emergency Department Integration Software	Emergency Department Integration Software	397	65	60
+Automated Lab Instruments	VA FileMan	389	162	21
+Remote Order Entry System	Remote Order Entry System	383	117	110
+Virtual Patient Record	Virtual Patient Record	381	86	51
+Controlled Substances	Controlled Substances	374	192	153
+Dental	Dental	366	99	84
+Mental Health	Kernel	363	170	28
+Consult Request Tracking	VA FileMan	361	163	22
+Fee Basis	Kernel	355	180	14
+PCE Patient Care Encounter	Kernel	352	169	26
+Nursing Service	VA FileMan	346	173	28
+Health Summary	VA FileMan	343	177	18
+Consult Request Tracking	Kernel	342	148	19
+CMOP	CMOP	341	88	87
+Outpatient Pharmacy	List Manager	338	171	6
+Registration	List Manager	336	123	4
+Dietetics	VA FileMan	335	186	16
+Capacity Management	Capacity Management	332	74	56
+DRG Grouper	Kernel	325	175	6
+Toolkit	VA FileMan	318	145	27
+Quasar	Quasar	316	64	58
+Drug Accountability	Drug Accountability	314	95	92
+Pharmacy Benefits Management	Pharmacy Benefits Management	312	80	94
+HINQ	VA FileMan	307	85	24
+DRG Grouper	VA FileMan	303	157	16
+Problem List	Problem List	303	57	44
+Automated Lab Instruments	Kernel	302	131	20
+Clinical Case Registries	Kernel	302	134	14
+Clinical Procedures	VA FileMan	302	97	14
+Clinical Procedures	Clinical Procedures	298	93	69
+Drug Accountability	VA FileMan	296	123	16
+Scheduling	List Manager	294	126	6
+Income Verification Match	Registration	292	102	75
+Text Integration Utility	List Manager	287	127	5
+My HealtheVet	My HealtheVet	286	84	29
+Outpatient Pharmacy	Pharmacy Data Management	277	136	22
+Adverse Reaction Tracking	VA FileMan	276	136	16
+Outpatient Pharmacy	Registration	273	182	21
+Automated Medical Information Exchange	Kernel	271	153	16
+E Claims Management Engine	VA FileMan	267	142	16
+CMOP	VA FileMan	263	112	9
+IFCAP	Kernel	257	135	17
+Enrollment Application System	VA FileMan	253	126	14
+Accounts Receivable	List Manager	248	105	4
+Inpatient Medications	Kernel	244	138	12
+Surgery	Registration	242	207	8
+Utilization Review	VA FileMan	239	35	13
+Master Patient Index VistA	Master Patient Index VistA	235	62	36
+VA Point of Service	VA Point of Service	232	36	30
+Dental	VA FileMan	230	95	15
+National Drug File	VA FileMan	230	96	15
+Registration	Health Level Seven	226	129	12
+Asists	VA FileMan	222	71	13
+Barcode Medication Administration	VA FileMan	222	93	17
+MailMan	Kernel	221	113	17
+Occurrence Screen	VA FileMan	219	67	13
+General Medical Record - IO	General Medical Record - IO	214	38	40
+Dietetics	Kernel	213	184	7
+Health Level Seven	VA FileMan	211	114	21
+Hospital Based Home Care	Hospital Based Home Care	211	60	24
+Adverse Reaction Tracking	Kernel	209	100	12
+National Drug File	National Drug File	208	53	46
+Automated Information Collection System	List Manager	203	91	5
+Hines OIFO	Hines OIFO	202	24	25
+Enrollment Application System	Registration	198	80	49
+Health Summary	Kernel	198	115	12
+Asists	Asists	197	55	51
+Clinical Information Resource Network	Clinical Information Resource Network	197	58	58
+Income Verification Match	VA FileMan	197	101	12
+Pharmacy Data Management	Kernel	196	113	10
+Registration	MailMan	192	168	10
+Police and Security	VA FileMan	189	68	13
+Uncategorized	Kernel	188	90	39
+Health Data and Informatics	Health Data and Informatics	186	42	33
+Order Entry Results Reporting	Registration	183	128	29
+Enrollment Application System	Kernel	181	87	12
+Womens Health	VA FileMan	180	80	23
+General Medical Record - Vitals	Kernel	178	124	12
+Scheduling	MailMan	176	156	12
+HINQ	HINQ	175	52	71
+Engineering	Kernel	174	86	15
+Integrated Billing	Accounts Receivable	171	106	23
+Beneficiary Travel	VA FileMan	169	56	22
+Clinical Information Resource Network	Kernel	169	76	14
+Inpatient Medications	List Manager	168	110	5
+Vendor - Document Storage Systems	VA FileMan	167	71	16
+Prosthetics	Kernel	166	137	12
+Income Verification Match	Kernel	165	79	8
+Toolkit	Kernel	163	91	19
+Accounts Receivable	Registration	161	98	20
+Automated Lab Instruments	Lab Service	160	81	39
+Enterprise Health Management Platform	Kernel	160	73	10
+Integrated Billing	MailMan	160	144	14
+Lexicon Utility	DRG Grouper	160	47	4
+E Claims Management Engine	Kernel	159	94	17
+PAID	Kernel	159	117	14
+VA Certified Components - DSSI	VA Certified Components - DSSI	159	48	40
+Capacity Management	Kernel	158	76	9
+Integrated Patient Fund	Integrated Patient Fund	158	32	25
+Prosthetics	Registration	158	91	3
+Barcode Medication Administration	Kernel	155	83	18
+National Online Information Sharing	VA FileMan	155	95	12
+Clinical Reminders	List Manager	152	54	4
+Auto Replenishment Ward Stock	Auto Replenishment Ward Stock	151	65	43
+RPC Broker	RPC Broker	147	30	27
+Automated Information Collection System	Kernel	145	99	5
+Virtual Patient Record	Kernel	145	59	12
+Enterprise Health Management Platform	VA FileMan	143	70	14
+Generic Code Sheet	Generic Code Sheet	143	34	31
+Beneficiary Travel	Beneficiary Travel	140	34	33
+Clinical Information Resource Network	VA FileMan	140	70	15
+Womens Health	Kernel	140	72	9
+Incomplete Records Tracking	Incomplete Records Tracking	139	60	58
+Master Patient Index VistA	Registration	136	55	18
+Virtual Patient Record	VA FileMan	136	77	11
+General Medical Record - Vitals	VA FileMan	135	75	12
+CMOP	Kernel	134	62	8
+Order Entry Results Reporting	Pharmacy Data Management	134	63	27
+VBECS	VBECS	134	38	28
+Auto Replenishment Ward Stock	VA FileMan	128	74	8
+Remote Order Entry System	VA FileMan	126	76	7
+Controlled Substances	Kernel	125	76	8
+Accounts Receivable	Integrated Billing	124	77	40
+Police and Security	Police and Security	124	59	61
+Inpatient Medications	Registration	123	77	13
+Lab Service	Registration	122	93	10
+IFCAP	MailMan	121	90	10
+Inpatient Medications	Pharmacy Data Management	120	68	21
+Clinical Information Resource Network	Registration	119	59	21
+General Medical Record - Vitals	Registration	118	73	8
+Master Patient Index VistA	Kernel	118	54	8
+Vendor - Document Storage Systems	Vendor - Document Storage Systems	118	50	63
+Problem List	VA FileMan	117	53	15
+Accounts Receivable	MailMan	114	93	13
+General Medical Record - Generator	General Medical Record - Generator	114	33	32
+Nursing Service	Kernel	112	100	6
+Pharmacy Data Management	National Drug File	111	60	5
+Registration	Master Patient Index VistA	111	69	11
+HINQ	Kernel	109	48	9
+Integrated Billing	Health Level Seven	109	38	11
+Order Entry Results Reporting	List Manager	109	52	3
+HINQ	Registration	108	22	25
+Mobile Scheduling Applications Suite	Mobile Scheduling Applications Suite	108	16	20
+Order Entry Results Reporting	Text Integration Utility	108	38	42
+Clinical Procedures	Kernel	107	72	16
+Clinical Procedures	Toolkit	107	59	1
+Registration	DRG Grouper	106	58	6
+Automated Medical Information Exchange	Registration	104	50	27
+National Online Information Sharing	Kernel	104	70	6
+Registration	Scheduling	102	65	30
+VBECS	VA FileMan	102	45	14
+Problem List	Kernel	100	49	8
+Kernel	MailMan	99	79	21
+Outpatient Pharmacy	Order Entry Results Reporting	98	65	21
+Emergency Department Integration Software	Kernel	97	51	13
+Albany OIFO	VA FileMan	96	28	19
+Order Entry Results Reporting	MailMan	95	84	9
+Surgery	CPT HCPCS Codes	95	60	3
+Capacity Management	VA FileMan	94	51	11
+Consult Request Tracking	List Manager	94	50	3
+IFCAP	Generic Code Sheet	94	32	5
+VPE Shell	VA FileMan	94	34	24
+Order Entry Results Reporting	Lab Service	93	35	26
+Surgery	Kernel	93	60	8
+Clinical Monitoring System	Clinical Monitoring System	92	50	28
+My HealtheVet	Kernel	90	56	7
+Patient Data Exchange	VA FileMan	90	52	13
+Survey Generator	VA FileMan	90	34	8
+Dental	VA Certified Components - DSSI	89	40	17
+List Manager	List Manager	89	18	18
+Mental Health	Registration	88	58	13
+VA Certified Components - DSSI	VA FileMan	88	33	13
+Health Data and Informatics	Kernel	87	42	11
+National Drug File	Kernel	87	45	11
+Screen Handler for Fileman	Screen Handler for Fileman	87	11	16
+VA FileMan	Kernel	87	45	14
+Clinical Monitoring System	VA FileMan	86	40	13
+Equipment Turn-In Request	VA FileMan	86	36	10
+Master Patient Index VistA	VA FileMan	86	41	11
+Release Of Information	VA FileMan	86	24	10
+Survey Generator	Survey Generator	85	29	21
+Vendor - ISI	Vendor - ISI	85	38	52
+Accounts Receivable	Generic Code Sheet	84	29	5
+Emergency Department Integration Software	VA FileMan	83	38	11
+Occurrence Screen	Occurrence Screen	83	44	37
+Dental	Kernel	82	45	8
+E Claims Management Engine	List Manager	82	44	4
+Hospital Based Home Care	VA FileMan	82	40	10
+IFCAP	List Manager	82	41	4
+Master Patient Index VistA	Clinical Information Resource Network	82	29	4
+Outpatient Pharmacy	MailMan	82	78	4
+Problem List	DRG Grouper	82	28	3
+Kernel	Health Level Seven	80	47	11
+Health Level Seven	List Manager	78	22	4
+Patient Data Exchange	List Manager	78	33	3
+Clinical Information Resource Network	Master Patient Index VistA	77	44	10
+Oncology	Kernel	77	50	12
+Outpatient Pharmacy	E Claims Management Engine	77	29	18
+Pharmacy Benefits Management	VA FileMan	77	53	8
+Barcode Medication Administration	Inpatient Medications	75	42	8
+Equipment Turn-In Request	Equipment Turn-In Request	75	36	30
+Insurance Capture Buffer	VA FileMan	75	25	11
+Registration	Income Verification Match	75	56	16
+VA Point of Service	VA FileMan	75	38	8
+Vendor - ISI	VA FileMan	74	32	12
+Integrated Billing	Scheduling	73	41	8
+My HealtheVet	VA FileMan	73	41	11
+ODS	VA FileMan	73	23	17
+Scheduling	PCE Patient Care Encounter	72	44	12
+Income Verification Match	Health Level Seven	71	45	8
+Interim Management Support	VA FileMan	71	41	7
+VA Certified Components - DSSI	Kernel	71	36	12
+Release Of Information	Release Of Information	70	16	8
+VBECS	Kernel	70	34	13
+Scheduling	Health Level Seven	69	29	11
+Graphics	VA FileMan	68	7	10
+Imaging	Registration	68	39	13
+VistALink	VistALink	68	13	10
+Consult Request Tracking	Registration	67	33	11
+Lab Service	MailMan	67	53	9
+Lab Service	Toolkit	67	56	6
+Order Entry Results Reporting	Consult Request Tracking	67	20	26
+Vendor - Document Storage Systems	Kernel	67	42	8
+Beneficiary Travel	Kernel	66	36	4
+Health Data and Informatics	VA FileMan	66	26	9
+Integrated Billing	Outpatient Pharmacy	66	44	14
+PCE Patient Care Encounter	Scheduling	66	22	24
+Adverse Reaction Tracking	Registration	65	46	5
+Master Patient Index VistA	Health Level Seven	65	31	9
+Text Integration Utility	Registration	65	40	11
+Authorization Subscription	Authorization Subscription	64	21	17
+PCE Patient Care Encounter	Registration	64	37	12
+Utilization Management Rollup	Utilization Management Rollup	63	23	23
+Asists	Kernel	62	33	8
+CMOP	MailMan	62	35	3
+Clinical Information Resource Network	Health Level Seven	62	31	11
+E Claims Management Engine	Outpatient Pharmacy	62	31	17
+Occurrence Screen	Quality Assurance Integration	62	39	6
+Order Entry Results Reporting	Scheduling	62	27	14
+Uncategorized	Registration	62	35	21
+Albany OIFO	Albany OIFO	61	22	32
+Integrated Billing	CPT HCPCS Codes	61	52	2
+Outpatient Pharmacy	Integrated Billing	61	37	9
+Imaging	Radiology Nuclear Medicine	60	32	22
+Medicine	Kernel	60	44	8
+PCE Patient Care Encounter	DRG Grouper	60	43	4
+Visual Impairment Service Team	VA FileMan	60	28	13
+List Manager	Kernel	59	18	16
+Toolkit	List Manager	59	11	3
+Ext Rev Track	Ext Rev Track	58	30	24
+General Medical Record - IO	VA FileMan	58	29	8
+Registration	Integrated Billing	58	37	24
+Registration	Toolkit	58	48	2
+Run Time Library	Run Time Library	58	18	16
+Albany OIFO	Registration	57	21	15
+CW GUIMAIL	CW GUIMAIL	57	12	14
+Enrollment Application System	Income Verification Match	57	17	25
+Mental Health	Toolkit	57	33	3
+Order Entry Results Reporting	Clinical Reminders	57	22	27
+E Claims Management Engine	Integrated Billing	56	35	18
+Houston VAMC	Houston VAMC	56	14	17
+Barcode Medication Administration	Toolkit	55	43	4
+Enterprise Health Management Platform	Order Entry Results Reporting	55	24	23
+Beneficiary Travel	Registration	54	27	10
+CMOP	Outpatient Pharmacy	54	19	25
+CPT HCPCS Codes	Kernel	54	25	4
+IFCAP	Health Level Seven	54	22	12
+Pharmacy Data Management	M XML Parser	54	14	2
+CW GUIMAIL	MailMan	53	11	12
+IFCAP	Toolkit	53	52	2
+National Health Information Network	National Health Information Network	53	17	6
+Order Entry Results Reporting	Outpatient Pharmacy	53	38	20
+Vendor - ISI	Lab Service	53	9	27
+DSS Extracts	Registration	52	31	13
+Insurance Capture Buffer	Insurance Capture Buffer	52	17	16
+Integrated Patient Fund	VA FileMan	52	27	11
+PCE Patient Care Encounter	List Manager	52	24	3
+Virtual Patient Record	Registration	52	17	15
+Order Entry Results Reporting	PCE Patient Care Encounter	51	19	16
+EEO Complaint Tracking	EEO Complaint Tracking	50	22	19
+Event Capture	CPT HCPCS Codes	50	40	2
+Inpatient Medications	Order Entry Results Reporting	50	35	19
+Generic Code Sheet	VA FileMan	49	31	11
+Kernel	Toolkit	49	37	13
+Adverse Reaction Tracking	National Drug File	48	22	6
+Controlled Substances	Registration	48	26	5
+Health Summary	Registration	48	28	7
+Lab Service	Automated Lab Instruments	48	30	17
+Vendor - Document Storage Systems	Order Entry Results Reporting	48	9	23
+Enrollment Application System	List Manager	47	21	4
+Clinical Reminders	Registration	46	24	11
+Drug Accountability	IFCAP	46	22	1
+Fee Basis	Registration	46	31	13
+Inpatient Medications	MailMan	46	46	2
+Order Entry Results Reporting	Inpatient Medications	46	29	12
+Event Capture	MailMan	45	45	1
+Ext Rev Track	VA FileMan	45	23	7
+Integrated Billing	Income Verification Match	45	25	4
+Medicine	Registration	45	25	2
+Prosthetics	IFCAP	45	33	13
+Toolkit	MailMan	45	31	6
+Web Services Client	VA FileMan	45	13	11
+Clinical Information Resource Network	Run Time Library	44	14	14
+Clinical Procedures	Text Integration Utility	44	16	9
+Drug Accountability	Kernel	44	33	6
+Enterprise Health Management Platform	Registration	44	17	14
+Imaging	Text Integration Utility	44	18	14
+Order Entry Results Reporting	DRG Grouper	44	23	2
+Outpatient Pharmacy	Health Level Seven	44	22	6
+Radiology Nuclear Medicine	Health Level Seven	44	24	9
+Radiology Nuclear Medicine	Registration	44	34	6
+Uncategorized	Scheduling	44	11	23
+Clinical Procedures	Registration	43	24	10
+Order Entry Results Reporting	Lexicon Utility	43	14	7
+PCE Patient Care Encounter	Lexicon Utility	43	35	6
+Prosthetics	List Manager	43	16	3
+Surgery	Text Integration Utility	43	18	9
+PCE Patient Care Encounter	CPT HCPCS Codes	42	34	3
+Pharmacy Data Management	MailMan	42	42	4
+Radiology Nuclear Medicine	MailMan	42	36	7
+Registration	PCE Patient Care Encounter	42	14	5
+VistALink Security	Kernel	42	6	22
+Automated Medical Information Exchange	Toolkit	41	31	1
+Barcode Medication Administration	Registration	41	24	10
+Dental	Registration	41	28	5
+Income Verification Match	List Manager	41	19	4
+Lab Service	DRG Grouper	41	23	3
+Outpatient Pharmacy	National Drug File	41	32	6
+RPC Broker	Kernel	41	16	17
+Text Integration Utility	Authorization Subscription	41	38	5
+Automated Lab Instruments	Health Level Seven	40	19	9
+General Medical Record - Generator	VA FileMan	40	21	8
+General Medical Record - Vitals	Toolkit	40	15	2
+Insurance Capture Buffer	Kernel	40	18	7
+Registration	ODS	40	39	3
+Authorization Subscription	List Manager	39	15	5
+Automated Information Collection System	Registration	39	23	9
+Kernel	RPC Broker	39	12	16
+Mobile Scheduling Applications Suite	VA FileMan	39	18	6
+Shift Handoff Tool	Shift Handoff Tool	39	14	14
+Lexicon Utility	CPT HCPCS Codes	38	22	3
+Authorization Subscription	VA FileMan	37	20	9
+Automated Medical Information Exchange	MailMan	37	29	7
+Graphics	Registration	37	8	12
+List Manager	VA FileMan	37	21	8
+Methicillin Resistant Staph Aurerus Initiative Reports	Kernel	37	13	4
+Problem List	List Manager	37	14	3
+VA Point of Service	Kernel	37	20	7
+Virtual Patient Record	Order Entry Results Reporting	37	16	4
+Clinical Case Registries	Scheduling	36	5	4
+Clinical Reminders	Lexicon Utility	36	18	5
+EEO Complaint Tracking	VA FileMan	36	22	6
+Insurance Capture Buffer	VA Certified Components - DSSI	36	14	7
+Methicillin Resistant Staph Aurerus Initiative Reports	Methicillin Resistant Staph Aurerus Initiative Reports	36	10	11
+Utilization Management Rollup	VA FileMan	36	21	6
+Web Services Client	Web Services Client	36	14	12
+Automated Lab Instruments	Registration	35	17	8
+Clinical Case Registries	Registration	35	28	13
+Consult Request Tracking	Health Level Seven	35	19	7
+Surgery	MailMan	35	35	3
+Imaging	Health Level Seven	34	16	7
+Lab Service	List Manager	34	17	3
+National Health Information Network	VA FileMan	34	18	6
+Nursing Service	General Medical Record - Generator	34	20	10
+ODS	ODS	34	15	14
+Scheduling	DRG Grouper	34	18	2
+Order Entry Results Reporting	Problem List	33	13	12
+CPT HCPCS Codes	CPT HCPCS Codes	32	11	7
+Clinical Monitoring System	Quality Assurance Integration	32	22	7
+National Online Information Sharing	List Manager	32	27	3
+Nursing Service	Registration	32	28	2
+PAID	List Manager	32	10	5
+Problem List	Lexicon Utility	32	14	7
+Quality Assurance Integration	VA FileMan	32	13	8
+Quasar	Kernel	32	18	6
+Virtual Patient Record	Text Integration Utility	32	11	9
+Birmingham CIOFO	VA FileMan	31	16	5
+Income Verification Match	MailMan	31	30	2
+M XML Parser	M XML Parser	31	4	3
+Pharmacy Data Management	Inpatient Medications	31	17	16
+VistALink Security	VistALink Security	31	6	6
+Web Services Client	List Manager	31	7	4
+A1BF Response Time	A1BF Response Time	30	10	18
+Adverse Reaction Tracking	MailMan	30	25	8
+Fee Basis	IFCAP	30	18	6
+Health Summary	Order Entry Results Reporting	30	13	12
+Methicillin Resistant Staph Aurerus Initiative Reports	VA FileMan	30	12	8
+Network Health Exchange	VA FileMan	30	12	6
+Outpatient Pharmacy	Adverse Reaction Tracking	30	26	4
+Patient Data Exchange	Registration	30	19	12
+Surgery	Health Level Seven	30	18	5
+Vendor - ISI	Kernel	30	26	5
+Virtual Patient Record	Pharmacy Data Management	30	8	8
+Consult Request Tracking	MailMan	29	18	5
+Lab Service	Order Entry Results Reporting	29	21	13
+Network Health Exchange	Kernel	29	11	7
+Order Entry Results Reporting	Dietetics	29	16	9
+Quasar	Registration	29	22	5
+Text Integration Utility	Toolkit	29	21	5
+Vendor - Document Storage Systems	VA Certified Components - DSSI	29	16	10
+Consult Request Tracking	Toolkit	28	18	2
+Incomplete Records Tracking	List Manager	28	14	4
+Integrated Billing	RPC Broker	28	8	2
+Kernel	Registration	28	27	4
+Pharmacy Benefits Management	MailMan	28	28	1
+Text Integration Utility	PCE Patient Care Encounter	28	19	9
+Uncategorized	Inpatient Medications	28	4	15
+Uncategorized	MailMan	28	20	9
+VA Point of Service	Registration	28	11	13
+Web Services Client	Kernel	28	14	10
+Clinical Case Registries	DRG Grouper	27	15	2
+Mental Health	Text Integration Utility	27	13	10
+Prosthetics	DRG Grouper	27	14	3
+Scheduling	Toolkit	27	18	3
+Shift Handoff Tool	VA FileMan	27	12	6
+Vendor - Document Storage Systems	Registration	27	18	7
+VistALink	Kernel	27	9	14
+Automated Information Collection System	Scheduling	26	9	12
+Engineering	MailMan	26	20	9
+Enterprise Health Management Platform	Text Integration Utility	26	7	9
+Fee Basis	MailMan	26	19	6
+Health Summary	Outpatient Pharmacy	26	11	6
+Imaging	MailMan	26	21	8
+Mental Health	MailMan	26	26	4
+Screen Handler for Fileman	VA FileMan	26	14	6
+Text Integration Utility	MailMan	26	26	3
+Uncategorized	Order Entry Results Reporting	26	4	18
+Vendor - Document Storage Systems	Problem List	26	5	10
+Adverse Reaction Tracking	List Manager	25	5	4
+Controlled Substances	MailMan	25	17	3
+Enterprise Health Management Platform	Toolkit	25	15	3
+Fee Basis	CPT HCPCS Codes	25	10	3
+Network Health Exchange	MailMan	25	12	7
+Shift Handoff Tool	Order Entry Results Reporting	25	8	14
+Visual Impairment Service Team	Registration	25	17	4
+West Palm Beach VAMC	VA FileMan	25	13	10
+A4AR Registration	A4AR Registration	24	13	11
+Automated Medical Information Exchange	List Manager	24	7	6
+Clinical Information Resource Network	List Manager	24	9	4
+Consult Request Tracking	Order Entry Results Reporting	24	17	10
+DSS Extracts	MailMan	24	21	5
+HINQ	Income Verification Match	24	15	2
+My HealtheVet	Outpatient Pharmacy	24	6	11
+Order Entry Results Reporting	Radiology Nuclear Medicine	24	17	6
+PCE Patient Care Encounter	MailMan	24	21	6
+Pharmacy Data Management	Toolkit	24	19	4
+Prosthetics	MailMan	24	20	4
+Scheduling	CPT HCPCS Codes	24	16	2
+Clinical Reminders	Order Entry Results Reporting	23	13	13
+Enrollment Application System	Health Level Seven	23	11	6
+PAID	MailMan	23	21	5
+Text Integration Utility	Consult Request Tracking	23	12	8
+VDEF	VA FileMan	23	9	4
+Virtual Patient Record	Lab Service	23	11	5
+Capacity Management	Registration	22	22	2
+Clinical Reminders	DRG Grouper	22	13	3
+Clinical Reminders	Toolkit	22	17	5
+Clinical Reminders	Womens Health	22	9	9
+Enterprise Terminology Services	Enterprise Terminology Services	22	5	9
+Imaging	Master Patient Index VistA	22	20	1
+Income Verification Match	Scheduling	22	7	5
+Integrated Billing	Automated Information Collection System	22	20	4
+Integrated Billing	E Claims Management Engine	22	17	8
+My HealtheVet	Registration	22	14	4
+National Health Information Network	Kernel	22	12	7
+Outpatient Pharmacy	Toolkit	22	18	5
+Registration	Clinical Information Resource Network	22	11	4
+Run Time Library	Clinical Information Resource Network	22	13	3
+Scheduling	Income Verification Match	22	11	2
+Uncategorized	List Manager	22	7	4
+Virtual Patient Record	Scheduling	22	10	5
+VistA Integration Adapter	Kernel	22	10	7
+Clinical Procedures	Consult Request Tracking	21	16	7
+Emergency Department Integration Software	Toolkit	21	11	1
+Hospital Based Home Care	DRG Grouper	21	13	1
+Incomplete Records Tracking	Registration	21	11	5
+Inpatient Medications	Health Level Seven	21	13	4
+Methicillin Resistant Staph Aurerus Initiative Reports	Registration	21	9	4
+Mobile Scheduling Applications Suite	Scheduling	21	4	12
+Outpatient Pharmacy	Scheduling	21	11	6
+PCE Patient Care Encounter	Toolkit	21	17	4
+Palo Alto HCS	Text Integration Utility	21	4	12
+Radiology Nuclear Medicine	Order Entry Results Reporting	21	14	10
+Run Time Library	Kernel	21	11	3
+VBECS	VistALink	21	18	1
+VDEF	VDEF	21	8	7
+Vendor - Document Storage Systems	Scheduling	21	8	6
+Vendor - Document Storage Systems	Text Integration Utility	21	5	11
+Accounts Receivable	IFCAP	20	9	11
+Automated Information Collection System	CPT HCPCS Codes	20	15	2
+Controlled Substances	Health Level Seven	20	6	5
+Kernel	List Manager	20	6	5
+Outpatient Pharmacy	Inpatient Medications	20	17	12
+Outpatient Pharmacy	M XML Parser	20	20	1
+Patient Assessment Documentation	VA FileMan	20	7	6
+Quasar	DRG Grouper	20	13	2
+Shift Handoff Tool	Kernel	20	10	3
+Shift Handoff Tool	Toolkit	20	11	2
+Text Integration Utility	Health Summary	20	10	10
+Vendor - ISI	Imaging	20	7	8
+VistA Integration Adapter	VA FileMan	20	10	6
+VistA Integration Adapter	VistA Integration Adapter	20	6	4
+West Palm Beach VAMC	West Palm Beach VAMC	20	8	7
+Wounded Injured and Ill Warriors	List Manager	20	6	3
+Automated Medical Information Exchange	Scheduling	19	10	6
+Clinical Procedures	Health Level Seven	19	13	7
+Clinical Reminders	PCE Patient Care Encounter	19	14	4
+Event Capture	List Manager	19	4	4
+Fee Basis	DRG Grouper	19	9	3
+Insurance Capture Buffer	Toolkit	19	3	4
+Integrated Billing	ODS	19	19	1
+Order Entry Results Reporting	VBECS	19	8	7
+Release Of Information	Kernel	19	14	6
+Scheduling	Master Patient Index VistA	19	19	1
+Virtual Patient Record	General Medical Record - Vitals	19	7	6
+Womens Health	Clinical Reminders	19	9	8
+Consult Request Tracking	Master Patient Index VistA	18	9	3
+Consult Request Tracking	Text Integration Utility	18	13	10
+Event Capture	DRG Grouper	18	10	2
+Health Level Seven	MailMan	18	17	7
+Houston VAMC	VA FileMan	18	8	6
+Imaging	Vendor - ISI	18	10	6
+Incomplete Records Tracking	Kernel	18	10	4
+Nursing Service	General Medical Record - Vitals	18	5	12
+Old DMMS	Old DMMS	18	12	5
+Order Entry Results Reporting	Health Summary	18	10	10
+PCE Patient Care Encounter	Clinical Reminders	18	10	6
+Pharmacy Benefits Management	Kernel	18	13	5
+Pharmacy Data Management	Web Services Client	18	8	2
+Problem List	Registration	18	9	6
+Scheduling	Integrated Billing	18	8	3
+Virtual Patient Record	PCE Patient Care Encounter	18	13	2
+VistALink	VA FileMan	18	8	7
+West Palm Beach VAMC	Kernel	18	9	5
+Accounts Receivable	Toolkit	17	10	3
+Automated Information Collection System	DRG Grouper	17	11	3
+Automated Information Collection System	Lexicon Utility	17	8	5
+CPT HCPCS Codes	VA FileMan	17	11	9
+CW GUIMAIL	Kernel	17	9	5
+Clinical Reminders	Scheduling	17	10	6
+Foundations	List Manager	17	2	4
+Health Summary	Patient Data Exchange	17	8	6
+HealtheVet Desktop	Kernel	17	9	5
+Lab Service	CPT HCPCS Codes	17	14	2
+Mental Health	Health Level Seven	17	5	7
+Quality Assurance Integration	Quality Assurance Integration	17	5	9
+Scheduling	Order Entry Results Reporting	17	10	8
+VA Certified Components - DSSI	Registration	17	8	3
+Adverse Reaction Tracking	Order Entry Results Reporting	16	4	8
+Authorization Subscription	Kernel	16	11	6
+Automated Lab Instruments	Toolkit	16	11	3
+Clinical Case Registries	Pharmacy Data Management	16	10	3
+Clinical Information Resource Network	RPC Broker	16	7	2
+Clinical Procedures	Medicine	16	8	10
+Clinical Reminders	CPT HCPCS Codes	16	12	2
+Clinical Reminders	MailMan	16	8	8
+Controlled Substances	Outpatient Pharmacy	16	6	8
+E Claims Management Engine	Registration	16	15	3
+Emergency Department Integration Software	Order Entry Results Reporting	16	8	3
+Foundations	Foundations	16	5	3
+Foundations	VA FileMan	16	6	8
+General Medical Record - Vitals	Order Entry Results Reporting	16	9	5
+Hospital Based Home Care	Kernel	16	10	6
+Inpatient Medications	Outpatient Pharmacy	16	15	11
+Interim Management Support	Interim Management Support	16	8	8
+Mobile Scheduling Applications Suite	Kernel	16	12	3
+National Drug File	MailMan	16	16	2
+Nursing Service	General Medical Record - IO	16	4	9
+Outpatient Pharmacy	CMOP	16	15	8
+RPC Broker	VA FileMan	16	8	7
+Remote Order Entry System	Registration	16	7	1
+Uncategorized	Fee Basis	16	3	7
+VPE Shell	Kernel	16	10	5
+Capacity Management	MailMan	15	12	4
+Drug Accountability	MailMan	15	14	2
+Enterprise Health Management Platform	List Manager	15	5	4
+Enterprise Health Management Platform	Pharmacy Data Management	15	5	9
+Health Level Seven	Registration	15	15	1
+Lexicon Utility	MailMan	15	14	3
+Order Entry Results Reporting	Adverse Reaction Tracking	15	9	7
+Order Entry Results Reporting	CORBA Services	15	14	1
+Order Entry Results Reporting	General Medical Record - Vitals	15	9	7
+Pharmacy Benefits Management	Registration	15	12	3
+Prosthetics	Integrated Billing	15	9	1
+Real Time Location System	VA FileMan	15	8	7
+Text Integration Utility	Order Entry Results Reporting	15	9	9
+Uncategorized	Integrated Billing	15	3	10
+Uncategorized	Outpatient Pharmacy	15	9	10
+Virtual Patient Record	Radiology Nuclear Medicine	15	9	2
+Wounded Injured and Ill Warriors	VA FileMan	15	7	5
+Adverse Reaction Tracking	VDEF	14	6	4
+Automated Lab Instruments	MailMan	14	12	5
+Automated Medical Information Exchange	HINQ	14	6	4
+Barcode Medication Administration	Health Level Seven	14	6	3
+CMOP	E Claims Management Engine	14	5	4
+Drug Accountability	List Manager	14	5	3
+Emergency Department Integration Software	Registration	14	10	7
+Enterprise Health Management Platform	Master Patient Index VistA	14	11	1
+Enterprise Health Management Platform	Scheduling	14	9	5
+HealtheVet Desktop	Toolkit	14	6	3
+Hines OIFO	VA FileMan	14	10	3
+Inpatient Medications	National Drug File	14	8	3
+Integrated Billing	Pharmacy Data Management	14	11	3
+Kernel	Uncategorized	14	5	2
+Mental Health	DRG Grouper	14	9	2
+Micom	VA FileMan	14	7	6
+Order Entry Results Reporting	Web Services Client	14	5	1
+Outpatient Pharmacy	Web Services Client	14	9	1
+Police and Security	Kernel	14	9	5
+Prosthetics	Consult Request Tracking	14	6	5
+Text Integration Utility	Health Level Seven	14	7	6
+Uncategorized	Lab Service	14	4	8
+Utilization Management Rollup	Integrated Billing	14	12	2
+VA Certified Components - DSSI	Toolkit	14	2	3
+Virtual Patient Record	Consult Request Tracking	14	8	3
+Womens Health	MailMan	14	14	1
+A4AR Registration	Accounts Receivable	13	7	4
+Automated Information Collection System	PCE Patient Care Encounter	13	5	3
+CMOP	Health Level Seven	13	9	1
+CMOP	Registration	13	10	2
+Clinical Case Registries	Toolkit	13	5	1
+Clinical Information Resource Network	MailMan	13	12	4
+DSS Extracts	CPT HCPCS Codes	13	9	3
+Enrollment Application System	Integrated Billing	13	12	6
+Enrollment Application System	MailMan	13	13	2
+Event Capture	Scheduling	13	9	9
+Hospital Based Home Care	Scheduling	13	2	2
+Income Verification Match	Integrated Billing	13	11	6
+Integrated Patient Fund	Kernel	13	6	5
+Master Patient Index VistA	RPC Broker	13	5	2
+National Drug File	Pharmacy Data Management	13	7	5
+Old DMMS	VA FileMan	13	4	7
+Scheduling	Automated Medical Information Exchange	13	3	5
+Shift Handoff Tool	Registration	13	10	3
+Surgery	DRG Grouper	13	5	3
+VA Point of Service	Scheduling	13	5	6
+VDEF	Kernel	13	6	6
+Vendor - Document Storage Systems	Lab Service	13	2	8
+Virtual Patient Record	CPT HCPCS Codes	13	8	2
+Virtual Patient Record	DRG Grouper	13	5	1
+Visual Impairment Service Team	Visual Impairment Service Team	13	7	6
+Accounts Receivable	Health Level Seven	12	12	2
+Accounts Receivable	Outpatient Pharmacy	12	12	4
+Asists	MailMan	12	6	4
+Automated Medical Information Exchange	Health Level Seven	12	6	3
+Automated Medical Information Exchange	Income Verification Match	12	6	2
+CMOP	National Drug File	12	12	1
+Clinical Procedures	PCE Patient Care Encounter	12	7	4
+Clinical Procedures	Scheduling	12	4	4
+DRG Grouper	Lexicon Utility	12	9	3
+Enterprise Health Management Platform	General Medical Record - Vitals	12	4	7
+Health Summary	Clinical Reminders	12	7	6
+HealtheVet Desktop	VA FileMan	12	7	4
+IFCAP	Drug Accountability	12	10	1
+Inpatient Medications	Toolkit	12	11	2
+Integrated Billing	Master Patient Index VistA	12	9	2
+Lab Service	Clinical Reminders	12	3	1
+Medicine	MailMan	12	9	5
+National Health Information Network	Registration	12	3	7
+Oncology	M XML Parser	12	3	2
+Outpatient Pharmacy	Text Integration Utility	12	8	8
+Palo Alto HCS	VA FileMan	12	6	4
+Registration	Enrollment Application System	12	8	5
+Registration	RPC Broker	12	5	3
+Scheduling	Web Services Client	12	6	1
+Text Integration Utility	Outpatient Pharmacy	12	5	8
+Uncategorized	Health Summary	12	2	5
+Utilization Review	Utilization Review	12	12	12
+Vendor - Pioneer	Vendor - Pioneer	12	7	7
+VistALink Security	VistALink	12	4	4
+Barcode Medication Administration	MailMan	11	8	4
+Clinical Case Registries	National Drug File	11	7	5
+Clinical Case Registries	Outpatient Pharmacy	11	6	4
+Clinical Procedures	Lexicon Utility	11	3	3
+Clinical Reminders	Mental Health	11	6	6
+E Claims Management Engine	MailMan	11	10	4
+Enterprise Health Management Platform	CPT HCPCS Codes	11	7	2
+Enterprise Health Management Platform	Radiology Nuclear Medicine	11	7	2
+Equipment Turn-In Request	Kernel	11	8	4
+Functional Independence	VA FileMan	11	6	4
+HealtheVet Desktop	HealtheVet Desktop	11	6	3
+Hines OIFO	Accounts Receivable	11	3	4
+Imaging	CPT HCPCS Codes	11	11	2
+Imaging	Toolkit	11	8	2
+Integrated Billing	DRG Grouper	11	5	4
+Lab Service	Health Level Seven	11	8	4
+Lab Service	Lexicon Utility	11	7	3
+Lab Service	PCE Patient Care Encounter	11	8	4
+Network Health Exchange	Network Health Exchange	11	8	6
+Order Entry Results Reporting	National Drug File	11	5	4
+Record Tracking	Kernel	11	9	5
+Registration	Lexicon Utility	11	8	3
+Registration	Web Services Client	11	6	1
+Run Time Library	VA FileMan	11	6	6
+Surgery	Pharmacy Data Management	11	6	4
+Text Integration Utility	Pharmacy Data Management	11	3	4
+Vendor - ISI	Radiology Nuclear Medicine	11	5	7
+Virtual Patient Record	Master Patient Index VistA	11	11	1
+Visual Impairment Service Team	Toolkit	11	4	1
+Womens Health	Registration	11	7	3
+Clinical Case Registries	Automated Lab Instruments	10	9	4
+Clinical Procedures	MailMan	10	9	3
+Consult Request Tracking	Medicine	10	7	4
+Dietetics	Registration	10	8	7
+E Claims Management Engine	Health Level Seven	10	6	5
+Enterprise Terminology Services	Kernel	10	8	3
+Enterprise Terminology Services	VA FileMan	10	7	4
+General Medical Record - IO	Registration	10	8	2
+General Medical Record - Vitals	General Medical Record - IO	10	5	5
+Health Data and Informatics	Registration	10	10	1
+Health Data and Informatics	Toolkit	10	3	1
+Health Summary	DRG Grouper	10	6	3
+Health Summary	PCE Patient Care Encounter	10	9	9
+Health Summary	Pharmacy Data Management	10	8	3
+Health Summary	Text Integration Utility	10	8	5
+Imaging	RPC Broker	10	10	1
+Insurance Capture Buffer	Integrated Billing	10	4	7
+Kernel	M XML Parser	10	2	2
+My HealtheVet	Master Patient Index VistA	10	8	2
+Oncology	Web Services Client	10	2	1
+Order Entry Results Reporting	Integrated Billing	10	10	3
+Patient Data Exchange	Kernel	10	7	6
+Pharmacy Benefits Management	National Drug File	10	5	1
+Pharmacy Data Management	Health Level Seven	10	4	3
+Radiology Nuclear Medicine	Imaging	10	7	5
+Radiology Nuclear Medicine	Scheduling	10	7	4
+Registration	CPT HCPCS Codes	10	8	3
+Registration	Outpatient Pharmacy	10	7	2
+Salt Lake OIFO	Kernel	10	3	4
+Text Integration Utility	RPC Broker	10	10	1
+Uncategorized	Accounts Receivable	10	6	6
+Utilization Review	Registration	10	10	1
+VA Certified Components - DSSI	PCE Patient Care Encounter	10	9	4
+Vendor - Document Storage Systems	PCE Patient Care Encounter	10	8	6
+Virtual Patient Record	Adverse Reaction Tracking	10	5	2
+Virtual Patient Record	Outpatient Pharmacy	10	5	5
+Albany OIFO	MailMan	9	9	1
+Capacity Management	List Manager	9	6	3
+Clinical Case Registries	CPT HCPCS Codes	9	8	1
+Clinical Case Registries	Health Level Seven	9	5	5
+Clinical Case Registries	PCE Patient Care Encounter	9	4	3
+Clinical Reminders	Pharmacy Data Management	9	6	4
+Dental	MailMan	9	9	1
+Enterprise Health Management Platform	Lab Service	9	6	6
+Event Capture	PCE Patient Care Encounter	9	8	3
+Fee Basis	Integrated Billing	9	8	5
+Foundations	VistALink	9	2	1
+Graphics	Graphics	9	3	9
+HINQ	MailMan	9	8	3
+Health Data and Informatics	MailMan	9	6	3
+Health Summary	MailMan	9	5	4
+Health Summary	Toolkit	9	8	2
+Hospital Based Home Care	MailMan	9	9	2
+Inpatient Medications	Adverse Reaction Tracking	9	7	2
+Inpatient Medications	Barcode Medication Administration	9	9	4
+Integrated Billing	Patient Data Exchange	9	3	4
+Kernel	Integrated Billing	9	2	6
+Lab Service	Imaging	9	7	2
+Lab Service	Scheduling	9	7	6
+Lab Service	Text Integration Utility	9	5	5
+Master Patient Index VistA	Scheduling	9	1	2
+Micom	Micom	9	7	3
+My HealtheVet	Health Level Seven	9	6	5
+Occurrence Screen	Registration	9	6	2
+Oncology	Registration	9	6	2
+Order Entry Results Reporting	Mental Health	9	5	6
+Outpatient Pharmacy	DRG Grouper	9	6	3
+PCE Patient Care Encounter	Integrated Billing	9	7	1
+Patient Data Exchange	MailMan	9	7	5
+Pharmacy Data Management	Outpatient Pharmacy	9	9	6
+Pharmacy Data Management	Registration	9	8	2
+Providence VAMC	Health Summary	9	4	3
+Quasar	CPT HCPCS Codes	9	6	2
+Real Time Location System	Kernel	9	6	5
+Scheduling	Consult Request Tracking	9	6	4
+Text Integration Utility	Scheduling	9	9	4
+Uncategorized	A1BF Response Time	9	4	4
+Uncategorized	Radiology Nuclear Medicine	9	3	3
+Uncategorized	Text Integration Utility	9	7	4
+VBECS	M XML Parser	9	6	2
+Vendor - Document Storage Systems	List Manager	9	8	3
+VistA Integration Adapter	Lexicon Utility	9	3	5
+VistA Integration Adapter	Registration	9	4	5
+West Palm Beach VAMC	MailMan	9	5	2
+Advanced Medication Platform	Kernel	8	2	8
+Adverse Reaction Tracking	Toolkit	8	8	1
+Auto Replenishment Ward Stock	MailMan	8	8	1
+Barcode Medication Administration	Pharmacy Data Management	8	6	4
+Clinical Case Registries	Problem List	8	4	3
+Clinical Reminders	National Drug File	8	6	2
+Consult Request Tracking	Web Services Client	8	4	1
+Controlled Substances	Order Entry Results Reporting	8	3	4
+DSS Extracts	Outpatient Pharmacy	8	7	3
+Dental	Toolkit	8	4	2
+Electronic Health Modernization	VA FileMan	8	2	6
+Emergency Department Integration Software	Lexicon Utility	8	4	3
+Enterprise Health Management Platform	Consult Request Tracking	8	5	3
+Equipment Turn-In Request	IFCAP	8	4	5
+Event Capture	Lexicon Utility	8	3	3
+Event Capture	Registration	8	8	3
+Fee Basis	Lexicon Utility	8	6	2
+General Medical Record - Generator	Kernel	8	7	5
+General Medical Record - IO	Kernel	8	7	3
+HINQ	ODS	8	8	1
+Health Summary	Scheduling	8	6	4
+Imaging	Medicine	8	7	3
+Master Patient Index VistA	List Manager	8	4	3
+Mental Health	Clinical Reminders	8	3	2
+Mental Health	Pharmacy Data Management	8	4	3
+National Health Information Network	Outpatient Pharmacy	8	3	3
+National Online Information Sharing	MailMan	8	4	4
+Order Entry Results Reporting	Authorization Subscription	8	8	1
+Order Entry Results Reporting	Master Patient Index VistA	8	8	1
+Outpatient Pharmacy	General Medical Record - Vitals	8	8	1
+Outpatient Pharmacy	Master Patient Index VistA	8	6	2
+Outpatient Pharmacy	Mental Health	8	4	3
+Quasar	PCE Patient Care Encounter	8	6	1
+RPC Broker	Health Level Seven	8	3	6
+RPC Broker	M XML Parser	8	3	2
+Salt Lake OIFO	VA FileMan	8	3	4
+Scheduling	ODS	8	8	1
+Text Integration Utility	Surgery	8	3	2
+Uncategorized	Income Verification Match	8	4	2
+Uncategorized	ODS	8	8	1
+VA Certified Components - DSSI	Scheduling	8	5	4
+VA FileMan	MailMan	8	7	4
+VBECS	Lab Service	8	5	3
+VBECS	Registration	8	8	2
+Vendor - Audiofax Inc	Outpatient Pharmacy	8	1	3
+Virtual Patient Record	Functional Independence	8	3	1
+Virtual Patient Record	Surgery	8	7	1
+WEBVRAM	Kernel	8	6	3
+Womens Health	Toolkit	8	6	2
+A1BF Response Time	VA FileMan	7	5	3
+Adverse Reaction Tracking	Scheduling	7	1	1
+Automated Lab Instruments	Master Patient Index VistA	7	4	1
+Birmingham CIOFO	Birmingham CIOFO	7	4	6
+CMOP	Pharmacy Data Management	7	7	2
+Clinical Procedures	DRG Grouper	7	5	2
+Consult Request Tracking	Scheduling	7	5	2
+DSS Extracts	Scheduling	7	4	2
+Dental	Health Level Seven	7	4	3
+Event Capture	Toolkit	7	5	1
+Foundations	Kernel	7	5	4
+Functional Independence	Functional Independence	7	2	3
+Functional Independence	Kernel	7	5	3
+Health Summary	Mental Health	7	4	5
+Imaging	M XML Parser	7	2	2
+Income Verification Match	Master Patient Index VistA	7	5	2
+Inpatient Medications	Scheduling	7	7	3
+Integrated Billing	PCE Patient Care Encounter	7	5	3
+Master Patient Index VistA	MailMan	7	7	1
+Medicine	DRG Grouper	7	2	1
+National Laboratory Test	VA FileMan	7	3	4
+Order Entry Results Reporting	CPT HCPCS Codes	7	6	3
+Pharmacy Benefits Management	Master Patient Index VistA	7	7	1
+Police and Security	MailMan	7	6	3
+Progress Notes	VA FileMan	7	7	2
+Radiology Nuclear Medicine	Adverse Reaction Tracking	7	4	3
+Radiology Nuclear Medicine	CPT HCPCS Codes	7	5	2
+Radiology Nuclear Medicine	Fee Basis	7	5	2
+Radiology Nuclear Medicine	Pharmacy Data Management	7	3	2
+Record Tracking	MailMan	7	6	3
+Text Integration Utility	Clinical Reminders	7	6	5
+Toolkit	Registration	7	7	2
+VA FileMan	List Manager	7	3	4
+VA Point of Service	Health Level Seven	7	1	4
+Vendor - Document Storage Systems	Integrated Billing	7	4	6
+Vendor - Document Storage Systems	Toolkit	7	5	2
+Vendor - ISI	Text Integration Utility	7	3	5
+Virtual Patient Record	Problem List	7	5	2
+Virtual Patient Record	Toolkit	7	7	1
+WEBVRAM	VA FileMan	7	6	2
+Womens Health	Health Summary	7	4	3
+Wounded Injured and Ill Warriors	Kernel	7	7	3
+A1BF Response Time	MailMan	6	6	1
+Automated Information Collection System	MailMan	6	6	1
+Barcode Medication Administration	General Medical Record - Vitals	6	5	5
+Barcode Medication Administration	List Manager	6	4	3
+Barcode Medication Administration	PCE Patient Care Encounter	6	5	3
+Care Management	Kernel	6	3	4
+Clinical Procedures	Order Entry Results Reporting	6	5	3
+Clinical Reminders	Text Integration Utility	6	5	3
+DSS Extracts	Inpatient Medications	6	6	3
+DSS Extracts	Pharmacy Data Management	6	5	2
+Dietetics	Order Entry Results Reporting	6	5	3
+EEO Complaint Tracking	MailMan	6	6	2
+Emergency Department Integration Software	DRG Grouper	6	3	1
+Enrollment Application System	Scheduling	6	5	4
+Enterprise Health Management Platform	National Drug File	6	2	4
+Equipment Turn-In Request	MailMan	6	6	2
+Ext Rev Track	MailMan	6	6	1
+Fee Basis	Master Patient Index VistA	6	4	1
+General Medical Record - Generator	Registration	6	3	1
+General Medical Record - Vitals	VDEF	6	3	4
+Health Summary	CPT HCPCS Codes	6	4	2
+Health Summary	Inpatient Medications	6	6	2
+Hospital Based Home Care	Lexicon Utility	6	3	3
+Houston VAMC	MailMan	6	4	2
+Income Verification Match	Enrollment Application System	6	5	3
+Integrated Billing	Order Entry Results Reporting	6	6	2
+Kernel	Web Services Client	6	3	1
+Lab Service	Health Data and Informatics	6	4	4
+MASH Utilities	VA FileMan	6	2	5
+Medicine	Health Level Seven	6	4	2
+My HealtheVet	Scheduling	6	3	4
+National Health Information Network	CPT HCPCS Codes	6	3	2
+Oncology	MailMan	6	4	3
+Order Entry Results Reporting	Health Level Seven	6	3	6
+Order Entry Results Reporting	Medicine	6	5	2
+Outpatient Pharmacy	Clinical Reminders	6	3	3
+Outpatient Pharmacy	Health Summary	6	6	2
+Palo Alto HCS	List Manager	6	4	3
+Palo Alto HCS	MailMan	6	3	2
+Patient Data Exchange	Integrated Billing	6	3	4
+Phoenix VAMC	Phoenix VAMC	6	4	3
+Problem List	Clinical Reminders	6	3	3
+Problem List	MailMan	6	4	3
+Problem List	Toolkit	6	5	3
+Radiology Nuclear Medicine	Womens Health	6	5	1
+Record Tracking	Registration	6	6	3
+Registration	Clinical Reminders	6	3	3
+Registration	HINQ	6	4	3
+Release Of Information	Toolkit	6	4	1
+Remote Order Entry System	MailMan	6	3	3
+Scheduling	Enrollment Application System	6	6	1
+Surgery	PCE Patient Care Encounter	6	3	1
+Uncategorized	IFCAP	6	5	6
+VDEF	Health Level Seven	6	4	4
+VistALink	VistALink Security	6	4	4
+Voluntary Timekeeping	VA FileMan	6	1	5
+Womens Health	Order Entry Results Reporting	6	5	3
+Wounded Injured and Ill Warriors	Registration	6	2	1
+Automated Information Collection System	Integrated Billing	5	4	3
+Automated Medical Information Exchange	Order Entry Results Reporting	5	3	4
+Automated Medical Information Exchange	Web Services Client	5	3	1
+Barcode Medication Administration	Adverse Reaction Tracking	5	4	2
+Barcode Medication Administration	Nursing Service	5	5	1
+CW GUIMAIL	Toolkit	5	3	1
+Clinical Case Registries	General Medical Record - Vitals	5	4	3
+Clinical Information Resource Network	Scheduling	5	4	1
+Clinical Monitoring System	Registration	5	5	2
+Clinical Procedures	CPT HCPCS Codes	5	4	1
+Clinical Reminders	Authorization Subscription	5	3	1
+Clinical Reminders	Health Data and Informatics	5	4	1
+Clinical Reminders	Outpatient Pharmacy	5	4	4
+DSS Extracts	DRG Grouper	5	5	1
+DSS Extracts	National Drug File	5	5	1
+Dental	Lexicon Utility	5	2	3
+Dental	PCE Patient Care Encounter	5	4	1
+Dietetics	General Medical Record - Vitals	5	5	1
+Dietetics	Pharmacy Data Management	5	3	2
+Emergency Department Integration Software	PCE Patient Care Encounter	5	3	1
+Enrollment Application System	Master Patient Index VistA	5	4	2
+Enterprise Health Management Platform	DRG Grouper	5	3	1
+Enterprise Health Management Platform	PCE Patient Care Encounter	5	5	2
+Enterprise Health Management Platform	Problem List	5	4	2
+Equipment Turn-In Request	Engineering	5	5	2
+Fee Basis	Health Level Seven	5	4	4
+Functional Independence	Health Level Seven	5	1	3
+Functional Independence	Registration	5	1	2
+General Medical Record - Vitals	MailMan	5	5	1
+General Medical Record - Vitals	Nursing Service	5	3	1
+Generic Code Sheet	Kernel	5	3	3
+Generic Code Sheet	MailMan	5	5	2
+HINQ	Toolkit	5	2	1
+Hospital Based Home Care	List Manager	5	1	3
+IFCAP	Registration	5	5	2
+Imaging	Consult Request Tracking	5	4	3
+Incident Reporting	VA FileMan	5	2	4
+Inpatient Medications	DSS Extracts	5	4	2
+Inpatient Medications	Mental Health	5	3	1
+Insurance Capture Buffer	Registration	5	3	3
+Kernel	Outpatient Pharmacy	5	3	2
+Lexicon Utility	Toolkit	5	4	2
+Master Patient Index VistA	Web Services Client	5	2	1
+Mental Health	Lexicon Utility	5	2	2
+Mental Health	Order Entry Results Reporting	5	4	4
+Methicillin Resistant Staph Aurerus Initiative Reports	Lab Service	5	3	2
+My HealtheVet	Health Summary	5	5	5
+National Drug File	Registration	5	5	2
+Order Entry Results Reporting	Surgery	5	2	2
+Order Entry Results Reporting	Womens Health	5	4	4
+Outpatient Pharmacy	VDEF	5	4	4
+PAID	Registration	5	5	2
+PCE Patient Care Encounter	National Drug File	5	1	2
+PCE Patient Care Encounter	Problem List	5	5	1
+Patient Assessment Documentation	Patient Assessment Documentation	5	2	3
+Pharmacy Benefits Management	List Manager	5	5	1
+Pharmacy Data Management	Clinical Reminders	5	2	2
+Pharmacy Data Management	Health Data and Informatics	5	2	3
+Pharmacy Data Management	Order Entry Results Reporting	5	4	4
+Providence VAMC	Registration	5	2	2
+Quasar	MailMan	5	2	3
+RPC Broker	Toolkit	5	5	2
+Radiology Nuclear Medicine	Clinical Reminders	5	2	2
+Radiology Nuclear Medicine	Integrated Billing	5	5	1
+Registration	Order Entry Results Reporting	5	5	3
+Silver Sprint OIFO Applications	VA FileMan	5	5	2
+Suicide Hotline	VA FileMan	5	4	3
+Surgery	General Medical Record - Vitals	5	5	2
+Surgery	Integrated Billing	5	3	1
+Surgery	Lexicon Utility	5	2	2
+Surgery	Order Entry Results Reporting	5	4	2
+Survey Generator	Kernel	5	5	2
+Survey Generator	MailMan	5	2	5
+Text Integration Utility	Lexicon Utility	5	2	2
+Text Integration Utility	Web Services Client	5	2	1
+Toolkit	RPC Broker	5	3	4
+Uncategorized	Health Level Seven	5	2	5
+Uncategorized	Toolkit	5	5	4
+Utilization Management Rollup	List Manager	5	5	1
+VA Certified Components - DSSI	CPT HCPCS Codes	5	1	2
+VA Point of Service	Order Entry Results Reporting	5	3	5
+VBECS	MailMan	5	5	2
+Vendor - Document Storage Systems	Adverse Reaction Tracking	5	2	5
+Vendor - Document Storage Systems	Consult Request Tracking	5	4	5
+Vendor - Document Storage Systems	Radiology Nuclear Medicine	5	3	2
+VistA Integration Adapter	PCE Patient Care Encounter	5	2	3
+VistA Integration Adapter	Pharmacy Data Management	5	2	2
+VistA Integration Adapter	Toolkit	5	3	1
+VistALink	Foundations	5	1	2
+VistALink Security	VA FileMan	5	4	2
+WEBVRAM	Toolkit	5	2	1
+A1BF Response Time	Kernel	4	3	2
+Accounts Receivable	E Claims Management Engine	4	4	1
+Advanced Medication Platform	VA FileMan	4	2	4
+Adverse Reaction Tracking	RPC Broker	4	4	1
+Automated Medical Information Exchange	Fee Basis	4	1	4
+Automated Medical Information Exchange	Lab Service	4	1	2
+Automated Medical Information Exchange	Master Patient Index VistA	4	4	2
+Automated Medical Information Exchange	ODS	4	4	1
+CORBA Services	VA FileMan	4	1	3
+CW GUIMAIL	VA FileMan	4	1	4
+Care Management	VA FileMan	4	2	4
+Clinical Case Registries	MailMan	4	4	2
+Clinical Case Registries	Master Patient Index VistA	4	3	1
+Clinical Case Registries	Radiology Nuclear Medicine	4	3	1
+Clinical Procedures	Imaging	4	3	4
+Consult Request Tracking	DRG Grouper	4	4	1
+DRG Grouper	MailMan	4	3	2
+DSS Extracts	Lab Service	4	3	3
+Dental	DRG Grouper	4	1	1
+E Claims Management Engine	Pharmacy Data Management	4	3	2
+EEO Complaint Tracking	Kernel	4	4	1
+Electronic Health Modernization	Kernel	4	2	3
+Electronic Signature	VA FileMan	4	1	2
+Emergency Department Integration Software	General Medical Record - Vitals	4	2	3
+Emergency Department Integration Software	Lab Service	4	4	1
+Enterprise Health Management Platform	Adverse Reaction Tracking	4	3	2
+Enterprise Health Management Platform	Medicine	4	3	2
+Enterprise Health Management Platform	Surgery	4	3	1
+Fee Basis	List Manager	4	2	2
+Functional Independence	MailMan	4	3	2
+General Medical Record - Vitals	Clinical Procedures	4	2	2
+HINQ	DRG Grouper	4	4	1
+Health Summary	Health Level Seven	4	1	1
+Health Summary	Lab Service	4	4	2
+Hospital Based Home Care	CPT HCPCS Codes	4	2	2
+Hospital Based Home Care	Registration	4	3	2
+IFCAP	Engineering	4	4	1
+Incomplete Records Tracking	Record Tracking	4	4	1
+Inpatient Medications	Text Integration Utility	4	4	2
+Integrated Billing	Toolkit	4	2	4
+Kernel	Capacity Management	4	3	3
+Lab Service	Surgery	4	3	3
+Library	VA FileMan	4	1	3
+List Manager	Order Entry Results Reporting	4	2	4
+Master Patient Index VistA	M XML Parser	4	4	1
+Mobile Scheduling Applications Suite	Registration	4	2	2
+My HealtheVet	Event Capture	4	2	4
+My HealtheVet	Order Entry Results Reporting	4	3	2
+NDBI	VA FileMan	4	2	3
+National Drug File	Adverse Reaction Tracking	4	4	1
+National Drug File	Web Services Client	4	1	1
+National Health Information Network	Lab Service	4	3	2
+National Health Information Network	Pharmacy Data Management	4	3	3
+National Health Information Network	Text Integration Utility	4	2	2
+Order Entry Results Reporting	Barcode Medication Administration	4	3	3
+Order Entry Results Reporting	Clinical Case Registries	4	2	1
+Order Entry Results Reporting	RPC Broker	4	4	2
+Outpatient Pharmacy	Womens Health	4	4	2
+PAID	Quality Assurance Integration	4	4	1
+PCE Patient Care Encounter	Automated Information Collection System	4	4	1
+PCE Patient Care Encounter	Health Data and Informatics	4	2	3
+PCE Patient Care Encounter	Order Entry Results Reporting	4	4	3
+Palo Alto HCS	Dietetics	4	2	2
+Palo Alto HCS	Outpatient Pharmacy	4	4	1
+Palo Alto HCS	Registration	4	2	1
+Patient Assessment Documentation	Lab Service	4	1	2
+Patient Representative	Kernel	4	1	2
+Patient Representative	VA FileMan	4	1	3
+Pharmacy Benefits Management	DRG Grouper	4	3	2
+Pharmacy Data Management	List Manager	4	4	1
+Pharmacy Prescription Practice	VA FileMan	4	1	3
+Prosthetics	Lexicon Utility	4	1	2
+Prosthetics	Toolkit	4	2	1
+Providence VAMC	VA FileMan	4	3	3
+Quasar	Automated Medical Information Exchange	4	3	1
+Radiology Nuclear Medicine	Health Summary	4	4	1
+Radiology Nuclear Medicine	List Manager	4	2	3
+Radiology Nuclear Medicine	Record Tracking	4	3	4
+Registration	Text Integration Utility	4	4	3
+Silver Sprint OIFO Applications	Kernel	4	1	2
+Silver Sprint OIFO Applications	Silver Sprint OIFO Applications	4	1	2
+Social Work	VA FileMan	4	1	3
+Surgery	Scheduling	4	4	1
+Text Integration Utility	Incomplete Records Tracking	4	1	1
+Text Integration Utility	Lab Service	4	4	2
+Text Integration Utility	Problem List	4	3	4
+Toolkit	Master Patient Index VistA	4	4	2
+Uncategorized	Automated Lab Instruments	4	2	3
+Uncategorized	Birmingham CIOFO	4	2	4
+Uncategorized	General Medical Record - Vitals	4	4	2
+Uncategorized	Surgery	4	1	3
+Utilization Management Rollup	Registration	4	3	2
+VA Certified Components - DSSI	DRG Grouper	4	1	2
+VA Point of Service	General Medical Record - Vitals	4	2	4
+VA Point of Service	Master Patient Index VistA	4	4	1
+Vendor - Document Storage Systems	MailMan	4	2	2
+Veterans Data Integration and Federation	VA FileMan	4	1	4
+Virtual Patient Record	Medicine	4	3	2
+VistA Integration Adapter	CPT HCPCS Codes	4	3	1
+VistA Web	VA FileMan	4	1	2
+Visual Impairment Service Team	Kernel	4	3	4
+West Palm Beach VAMC	List Manager	4	3	2
+Adverse Reaction Tracking	Health Data and Informatics	3	2	3
+Adverse Reaction Tracking	Pharmacy Data Management	3	3	1
+Adverse Reaction Tracking	Text Integration Utility	3	1	3
+Auto Replenishment Ward Stock	Toolkit	3	3	1
+Automated Information Collection System	Health Summary	3	1	3
+Automated Lab Instruments	Lexicon Utility	3	3	1
+Automated Medical Information Exchange	RPC Broker	3	3	2
+Barcode Medication Administration	Order Entry Results Reporting	3	3	3
+Beneficiary Travel	Master Patient Index VistA	3	1	2
+Beneficiary Travel	RPC Broker	3	1	2
+Care Management	Order Entry Results Reporting	3	1	3
+Clinical Case Registries	RPC Broker	3	3	1
+Clinical Information Resource Network	Toolkit	3	3	2
+Clinical Procedures	Health Summary	3	3	1
+Clinical Reminders	Fee Basis	3	1	1
+Clinical Reminders	Health Level Seven	3	2	3
+Consult Request Tracking	Electronic Health Modernization	3	3	1
+Consult Request Tracking	Prosthetics	3	2	2
+Controlled Substances	IFCAP	3	3	1
+Controlled Substances	Inpatient Medications	3	3	2
+Controlled Substances	Pharmacy Data Management	3	3	2
+DSS Extracts	Event Capture	3	3	1
+Dietetics	MailMan	3	3	1
+Electronic Signature	Kernel	3	1	2
+Engineering	Generic Code Sheet	3	1	2
+Enterprise Health Management Platform	Clinical Procedures	3	2	1
+Enterprise Health Management Platform	Clinical Reminders	3	2	2
+Enterprise Health Management Platform	Lexicon Utility	3	2	3
+Enterprise Health Management Platform	Outpatient Pharmacy	3	1	3
+Enterprise Support Solution	Kernel	3	1	1
+Enterprise Support Solution	VA FileMan	3	1	3
+Event Driven Reporting	Event Driven Reporting	3	2	2
+Fee Basis	VA Certified Components - DSSI	3	1	2
+General Medical Record - Vitals	Clinical Reminders	3	2	2
+General Medical Record - Vitals	Health Data and Informatics	3	2	3
+Health Summary	Adverse Reaction Tracking	3	3	1
+Health Summary	Lexicon Utility	3	3	2
+Health Summary	National Drug File	3	3	2
+Imaging	Lexicon Utility	3	1	3
+Imaging	Surgery	3	2	3
+Incident Reporting	Kernel	3	1	2
+Inpatient Medications	Pharmacy Benefits Management	3	3	1
+Integrated Billing	Fee Basis	3	1	3
+Integrated Billing	Health Data and Informatics	3	1	2
+Integrated Billing	VDEF	3	3	1
+Integrated Patient Fund	Registration	3	3	2
+Kernel	Health Data and Informatics	3	1	2
+Kernel	Order Entry Results Reporting	3	1	3
+Lab Service	Integrated Billing	3	3	1
+Lab Service	VBECS	3	2	2
+Lab Service	Womens Health	3	1	2
+Library	Kernel	3	1	2
+M XML Parser	Kernel	3	2	2
+MCCR Backbilling	Registration	3	2	3
+MCCR Backbilling	VA FileMan	3	2	2
+Medical Health E-Screening	Kernel	3	1	2
+Medicine	Adverse Reaction Tracking	3	3	2
+Medicine	Outpatient Pharmacy	3	1	3
+Mental Health	Lab Service	3	3	1
+Mental Health	List Manager	3	1	2
+Mental Health	Outpatient Pharmacy	3	3	3
+Mental Health	Scheduling	3	3	1
+Methicillin Resistant Staph Aurerus Initiative Reports	Order Entry Results Reporting	3	3	1
+My HealtheVet	MailMan	3	3	1
+My HealtheVet	Problem List	3	2	1
+National Health Information Network	Order Entry Results Reporting	3	2	1
+National Health Information Network	PCE Patient Care Encounter	3	3	2
+National Health Information Network	Radiology Nuclear Medicine	3	2	2
+National Health Information Network	Scheduling	3	2	2
+National Health Information Network	Surgery	3	2	1
+ODS	Registration	3	2	3
+Occurrence Screen	MailMan	3	2	2
+Oncology	DRG Grouper	3	2	2
+Order Entry Results Reporting	Care Management	3	3	1
+Outpatient Pharmacy	Pharmacy Benefits Management	3	3	2
+PCE Patient Care Encounter	General Medical Record - Vitals	3	2	2
+Palo Alto HCS	Health Summary	3	3	2
+Palo Alto HCS	Inpatient Medications	3	3	1
+Palo Alto HCS	Kernel	3	3	1
+Palo Alto HCS	Problem List	3	3	1
+Patient Assessment Documentation	General Medical Record - Vitals	3	1	3
+Patient Assessment Documentation	Kernel	3	2	1
+Pharmacy Prescription Practice	Kernel	3	1	2
+Phoenix VAMC	Registration	3	1	1
+Phoenix VAMC	VA FileMan	3	1	2
+Problem List	Health Summary	3	2	2
+Prosthetics	Master Patient Index VistA	3	2	1
+Providence VAMC	Text Integration Utility	3	2	2
+Radiology Nuclear Medicine	General Medical Record - Vitals	3	3	1
+Radiology Nuclear Medicine	Health Data and Informatics	3	1	3
+Radiology Nuclear Medicine	PCE Patient Care Encounter	3	2	1
+Radiology Nuclear Medicine	Toolkit	3	2	2
+Real Time Location System	Web Services Client	3	1	1
+Registration	Generic Code Sheet	3	3	3
+Registration	Health Data and Informatics	3	1	2
+Registration	Pharmacy Data Management	3	3	2
+Registration	Record Tracking	3	3	2
+Registration	VistALink	3	3	1
+Salt Lake OIFO	Text Integration Utility	3	1	2
+Scheduling	Authorization Subscription	3	3	1
+Scheduling	Record Tracking	3	2	2
+Scheduling	Text Integration Utility	3	3	3
+Scheduling	VA Point of Service	3	3	1
+Social Work	Kernel	3	1	2
+Surgery	Virtual Patient Record	3	2	1
+Survey Generator	Registration	3	3	1
+Text Integration Utility	Adverse Reaction Tracking	3	3	2
+Text Integration Utility	CPT HCPCS Codes	3	2	2
+Text Integration Utility	Clinical Procedures	3	2	1
+Toolkit	Clinical Information Resource Network	3	2	2
+Uncategorized	Dietetics	3	2	2
+Uncategorized	Master Patient Index VistA	3	3	2
+Uncategorized	Oncology	3	2	3
+Uncategorized	Record Tracking	3	2	3
+Utilization Management Rollup	MailMan	3	3	2
+VA Certified Components - DSSI	Master Patient Index VistA	3	1	1
+VA FileMan	Toolkit	3	3	2
+VA Point of Service	Problem List	3	1	2
+VBECS	Health Level Seven	3	2	3
+VBECS	Master Patient Index VistA	3	2	1
+VBECS	Toolkit	3	2	1
+Vendor - Document Storage Systems	DRG Grouper	3	1	2
+Vendor - Document Storage Systems	Medicine	3	2	2
+Vendor - ISI	Order Entry Results Reporting	3	3	2
+Vendor - ISI	Scheduling	3	1	3
+Virtual Patient Record	Clinical Procedures	3	2	1
+Virtual Patient Record	Integrated Billing	3	3	1
+Virtual Patient Record	National Drug File	3	2	2
+VistA Integration Adapter	Consult Request Tracking	3	1	2
+VistA Integration Adapter	DRG Grouper	3	2	2
+VistA Integration Adapter	Scheduling	3	3	2
+VistA Integration Adapter	Text Integration Utility	3	2	1
+Visual Impairment Service Team	MailMan	3	2	2
+Voluntary Timekeeping	Kernel	3	1	2
+West Palm Beach VAMC	Lab Service	3	3	1
+Womens Health	Pharmacy Data Management	3	2	2
+A4AR Registration	Kernel	2	2	1
+A4AR Registration	MailMan	2	2	1
+A4AR Registration	VA FileMan	2	2	1
+Accounts Receivable	DRG Grouper	2	1	1
+Advanced Medication Platform	MailMan	2	2	1
+Albany OIFO	Income Verification Match	2	2	1
+Authorization Subscription	Enterprise Health Management Platform	2	2	1
+Automated Information Collection System	General Medical Record - Vitals	2	1	1
+Automated Information Collection System	Mental Health	2	2	1
+Automated Medical Information Exchange	M XML Parser	2	2	1
+Automated Medical Information Exchange	PCE Patient Care Encounter	2	1	1
+Automated Medical Information Exchange	Surgery	2	1	2
+Barcode Medication Administration	Master Patient Index VistA	2	1	1
+Barcode Medication Administration	National Drug File	2	2	1
+Beneficiary Travel	Integrated Billing	2	2	1
+Birmingham CIOFO	MailMan	2	2	1
+Capacity Management	Health Level Seven	2	2	1
+Capacity Management	Toolkit	2	1	1
+Care Management	Lab Service	2	1	2
+Clinical Case Registries	M XML Parser	2	2	2
+Clinical Monitoring System	MailMan	2	1	2
+Clinical Procedures	Adverse Reaction Tracking	2	2	1
+Clinical Procedures	Master Patient Index VistA	2	2	1
+Clinical Procedures	VDEF	2	2	1
+Clinical Reminders	Health Summary	2	2	2
+Clinical Reminders	Inpatient Medications	2	2	2
+Clinical Reminders	Radiology Nuclear Medicine	2	2	2
+Consult Request Tracking	Authorization Subscription	2	2	1
+Consult Request Tracking	General Medical Record - Vitals	2	2	1
+Consult Request Tracking	Lexicon Utility	2	1	2
+DSS Extracts	Integrated Billing	2	2	2
+DSS Extracts	PCE Patient Care Encounter	2	2	1
+Dental	Master Patient Index VistA	2	1	1
+Dietetics	Outpatient Pharmacy	2	1	2
+Drug Accountability	National Drug File	2	2	1
+Drug Accountability	Pharmacy Data Management	2	1	1
+Drug Accountability	Toolkit	2	1	2
+E Claims Management Engine	National Drug File	2	2	2
+E Claims Management Engine	Toolkit	2	1	1
+Emergency Department Integration Software	List Manager	2	1	2
+Emergency Department Integration Software	Outpatient Pharmacy	2	2	1
+Engineering	IFCAP	2	2	2
+Enterprise Health Management Platform	Mental Health	2	1	2
+Enterprise Support Solution	MailMan	2	2	1
+Event Capture	Problem List	2	1	1
+Event Driven Reporting	VA FileMan	2	1	2
+Ext Rev Track	Kernel	2	2	1
+Fee Basis	Enrollment Application System	2	2	2
+Fee Basis	Income Verification Match	2	2	1
+Fee Basis	Toolkit	2	1	1
+General Medical Record - Vitals	Inpatient Medications	2	2	1
+HINQ	Accounts Receivable	2	1	1
+HINQ	Automated Medical Information Exchange	2	2	1
+HINQ	Outpatient Pharmacy	2	1	2
+Health Data and Informatics	List Manager	2	2	1
+Health Data and Informatics	M XML Parser	2	2	2
+Health Data and Informatics	VistALink	2	2	1
+Health Summary	Authorization Subscription	2	1	1
+Health Summary	General Medical Record - Vitals	2	2	1
+Health Summary	Medicine	2	1	1
+Health Summary	Problem List	2	2	2
+Health Summary	RPC Broker	2	2	1
+Health Summary	Surgery	2	2	1
+Health Summary	VBECS	2	2	1
+HealtheVet Desktop	Registration	2	1	1
+Hines OIFO	Kernel	2	2	2
+IFCAP	Order Entry Results Reporting	2	2	1
+Imaging	Adverse Reaction Tracking	2	2	1
+Imaging	Clinical Procedures	2	1	2
+Imaging	General Medical Record - Vitals	2	2	1
+Imaging	Health Summary	2	1	1
+Inpatient Medications	General Medical Record - Vitals	2	2	1
+Integrated Billing	National Drug File	2	2	2
+Integrated Patient Fund	Master Patient Index VistA	2	2	1
+Interim Management Support	Registration	2	2	2
+Lab Service	Inpatient Medications	2	1	1
+MailMan	Authorization Subscription	2	2	1
+Master Patient Index VistA	PCE Patient Care Encounter	2	1	1
+Master Patient Index VistA	Toolkit	2	2	1
+Medicine	Toolkit	2	2	1
+Mental Health	Master Patient Index VistA	2	2	1
+Mental Health	PCE Patient Care Encounter	2	2	1
+Mental Health	Virtual Patient Record	2	1	1
+Mobile Mental Health Program	Kernel	2	1	2
+My HealtheVet	Accounts Receivable	2	1	1
+My HealtheVet	Adverse Reaction Tracking	2	1	2
+My HealtheVet	National Drug File	2	2	1
+My HealtheVet	Pharmacy Data Management	2	2	1
+My HealtheVet	Text Integration Utility	2	2	1
+National Drug File	CMOP	2	2	1
+National Drug File	Health Data and Informatics	2	2	1
+National Health Information Network	Adverse Reaction Tracking	2	1	2
+National Health Information Network	DRG Grouper	2	1	1
+National Health Information Network	General Medical Record - Vitals	2	1	2
+National Health Information Network	Master Patient Index VistA	2	2	1
+National Health Information Network	National Drug File	2	1	2
+National Health Information Network	Problem List	2	1	1
+National VistA Support	Kernel	2	1	2
+National VistA Support	MailMan	2	2	1
+Nursing Service	Health Summary	2	1	1
+ODS	MailMan	2	1	2
+Occurrence Screen	Clinical Monitoring System	2	2	2
+Oncology	General Medical Record - Vitals	2	2	1
+Oncology	Master Patient Index VistA	2	2	1
+Order Entry Results Reporting	Emergency Department Integration Software	2	1	1
+Order Entry Results Reporting	Health Data and Informatics	2	1	2
+Order Entry Results Reporting	M XML Parser	2	1	2
+Outpatient Pharmacy	Enterprise Terminology Services	2	2	1
+PCE Patient Care Encounter	M XML Parser	2	2	1
+PCE Patient Care Encounter	Master Patient Index VistA	2	1	1
+Palo Alto HCS	Palo Alto HCS	2	2	1
+Patient Assessment Documentation	Outpatient Pharmacy	2	2	1
+Patient Assessment Documentation	Toolkit	2	1	1
+Pharmacy Benefits Management	Adverse Reaction Tracking	2	1	2
+Pharmacy Benefits Management	Health Level Seven	2	1	2
+Pharmacy Data Management	General Medical Record - Vitals	2	2	1
+Pharmacy Data Management	IFCAP	2	1	1
+Phoenix VAMC	Text Integration Utility	2	1	2
+Police and Security	Registration	2	2	2
+Problem List	Automated Information Collection System	2	1	1
+Problem List	Order Entry Results Reporting	2	2	2
+Problem List	PCE Patient Care Encounter	2	2	1
+Prosthetics	CPT HCPCS Codes	2	2	1
+Prosthetics	Order Entry Results Reporting	2	2	2
+Prosthetics	PCE Patient Care Encounter	2	2	1
+Providence VAMC	CPT HCPCS Codes	2	2	1
+Quasar	Lexicon Utility	2	2	1
+Quasar	Master Patient Index VistA	2	2	1
+Radiology Nuclear Medicine	DRG Grouper	2	2	1
+Radiology Nuclear Medicine	Lexicon Utility	2	1	2
+Radiology Nuclear Medicine	M XML Parser	2	2	1
+Record Tracking	Scheduling	2	2	2
+Registration	Consult Request Tracking	2	1	2
+Registration	Electronic Health Modernization	2	2	1
+Registration	National Drug File	2	2	1
+Registration	Nursing Service	2	2	1
+Release Of Information	Lab Service	2	1	1
+Release Of Information	Registration	2	2	1
+Release Of Information	VA Certified Components - DSSI	2	1	1
+Remote Order Entry System	Kernel	2	2	2
+Scheduling	DSS Extracts	2	1	2
+Scheduling	M XML Parser	2	2	1
+Scheduling	Mental Health	2	2	1
+Spinal Cord Dysfunction	VA FileMan	2	2	1
+Suicide Hotline	Registration	2	2	1
+Surgery	Adverse Reaction Tracking	2	2	1
+Surgery	Lab Service	2	1	2
+Text Integration Utility	Automated Information Collection System	2	2	1
+Text Integration Utility	DRG Grouper	2	1	1
+Text Integration Utility	General Medical Record - Vitals	2	2	1
+Text Integration Utility	Health Data and Informatics	2	1	2
+Toolkit	M XML Parser	2	2	1
+Uncategorized	Authorization Subscription	2	2	1
+Uncategorized	DRG Grouper	2	2	1
+Uncategorized	Lexicon Utility	2	2	1
+Uncategorized	Mental Health	2	2	2
+Uncategorized	Mobile Scheduling Applications Suite	2	1	2
+Uncategorized	Problem List	2	2	1
+VA Certified Components - DSSI	Lexicon Utility	2	1	2
+VA Certified Components - DSSI	Problem List	2	1	1
+VA Certified Components - DSSI	RPC Broker	2	2	1
+VA Certified Components - DSSI	Text Integration Utility	2	1	2
+VA Point of Service	Clinical Reminders	2	1	2
+VA Point of Service	Integrated Billing	2	1	2
+VA Point of Service	Toolkit	2	1	1
+VBECS	CPT HCPCS Codes	2	2	1
+VPE Shell	MailMan	2	2	1
+VPE Shell	Toolkit	2	1	2
+Vendor - Audiofax Inc	Pharmacy Data Management	2	1	1
+Vendor - Audiofax Inc	VA FileMan	2	1	2
+Vendor - Document Storage Systems	CPT HCPCS Codes	2	2	2
+Vendor - Document Storage Systems	General Medical Record - Vitals	2	2	2
+Vendor - Document Storage Systems	Inpatient Medications	2	1	2
+Vendor - Document Storage Systems	Record Tracking	2	1	2
+Vendor - ISI	Automated Lab Instruments	2	1	2
+Vendor - ISI	Outpatient Pharmacy	2	1	2
+Veterans Data Integration and Federation	Kernel	2	1	2
+Virtual Patient Record	Clinical Reminders	2	1	1
+Virtual Patient Record	Enterprise Terminology Services	2	1	2
+Virtual Patient Record	Lexicon Utility	2	2	1
+Virtual Patient Record	Womens Health	2	2	1
+VistA Integration Adapter	Barcode Medication Administration	2	1	2
+VistA Integration Adapter	Inpatient Medications	2	2	2
+VistA Integration Adapter	Lab Service	2	2	1
+VistA Integration Adapter	Problem List	2	2	1
+VistALink	M XML Parser	2	2	2
+VistALink Security	RPC Broker	2	1	1
+Washington VAMC	VA FileMan	2	1	2
+West Palm Beach VAMC	Order Entry Results Reporting	2	1	2
+West Palm Beach VAMC	Registration	2	1	1
+Womens Health	Outpatient Pharmacy	2	1	1
+Womens Health	PCE Patient Care Encounter	2	2	2
+Womens Health	Scheduling	2	2	1
+Wounded Injured and Ill Warriors	MailMan	2	2	1
+Wounded Injured and Ill Warriors	Wounded Injured and Ill Warriors	2	2	2
+Accounts Receivable	National Drug File	1	1	1
+Advanced Medication Platform	Registration	1	1	1
+Adverse Reaction Tracking	General Medical Record - Vitals	1	1	1
+Adverse Reaction Tracking	Health Summary	1	1	1
+Adverse Reaction Tracking	Inpatient Medications	1	1	1
+Adverse Reaction Tracking	Outpatient Pharmacy	1	1	1
+Asists	RPC Broker	1	1	1
+Authorization Subscription	MailMan	1	1	1
+Authorization Subscription	RPC Broker	1	1	1
+Authorization Subscription	Text Integration Utility	1	1	1
+Auto Replenishment Ward Stock	Drug Accountability	1	1	1
+Automated Information Collection System	Accounts Receivable	1	1	1
+Automated Information Collection System	Adverse Reaction Tracking	1	1	1
+Automated Information Collection System	Clinical Reminders	1	1	1
+Automated Information Collection System	Order Entry Results Reporting	1	1	1
+Automated Information Collection System	Outpatient Pharmacy	1	1	1
+Automated Lab Instruments	CPT HCPCS Codes	1	1	1
+Automated Lab Instruments	Health Data and Informatics	1	1	1
+Automated Lab Instruments	Scheduling	1	1	1
+Automated Medical Information Exchange	CORBA Services	1	1	1
+Automated Medical Information Exchange	Pharmacy Data Management	1	1	1
+Automated Medical Information Exchange	Radiology Nuclear Medicine	1	1	1
+Beneficiary Travel	List Manager	1	1	1
+Beneficiary Travel	MailMan	1	1	1
+Beneficiary Travel	Scheduling	1	1	1
+CMOP	Integrated Billing	1	1	1
+CMOP	List Manager	1	1	1
+CMOP	Master Patient Index VistA	1	1	1
+CORBA Services	CORBA Services	1	1	1
+CORBA Services	Kernel	1	1	1
+Capacity Management	Uncategorized	1	1	1
+Capacity Management	Virtual Patient Record	1	1	1
+Care Management	Authorization Subscription	1	1	1
+Care Management	Consult Request Tracking	1	1	1
+Care Management	MailMan	1	1	1
+Care Management	Radiology Nuclear Medicine	1	1	1
+Care Management	Registration	1	1	1
+Care Management	Toolkit	1	1	1
+Clinical Case Registries	Clinical Procedures	1	1	1
+Clinical Case Registries	Lexicon Utility	1	1	1
+Clinical Case Registries	Medicine	1	1	1
+Clinical Case Registries	Order Entry Results Reporting	1	1	1
+Clinical Information Resource Network	CPT HCPCS Codes	1	1	1
+Clinical Information Resource Network	Outpatient Pharmacy	1	1	1
+Clinical Monitoring System	Kernel	1	1	1
+Clinical Procedures	Automated Information Collection System	1	1	1
+Clinical Procedures	Automated Lab Instruments	1	1	1
+Clinical Procedures	General Medical Record - Vitals	1	1	1
+Clinical Reminders	Enrollment Application System	1	1	1
+Clinical Reminders	General Medical Record - Vitals	1	1	1
+Clinical Reminders	Lab Service	1	1	1
+Clinical Reminders	Problem List	1	1	1
+Consult Request Tracking	Clinical Procedures	1	1	1
+Consult Request Tracking	Enterprise Health Management Platform	1	1	1
+Consult Request Tracking	Imaging	1	1	1
+Consult Request Tracking	RPC Broker	1	1	1
+Controlled Substances	List Manager	1	1	1
+Credentials Tracking	VA FileMan	1	1	1
+DRG Grouper	Registration	1	1	1
+DSS Extracts	Dietetics	1	1	1
+DSS Extracts	Enrollment Application System	1	1	1
+DSS Extracts	Master Patient Index VistA	1	1	1
+DSS Extracts	Quasar	1	1	1
+Dental	Order Entry Results Reporting	1	1	1
+Dietetics	Adverse Reaction Tracking	1	1	1
+Dietetics	Lab Service	1	1	1
+Dietetics	National Drug File	1	1	1
+Dietetics	Problem List	1	1	1
+Dietetics	Scheduling	1	1	1
+Dietetics	Text Integration Utility	1	1	1
+E Claims Management Engine	Adverse Reaction Tracking	1	1	1
+E Claims Management Engine	CMOP	1	1	1
+E Claims Management Engine	General Medical Record - Vitals	1	1	1
+EEO Complaint Tracking	Quality Assurance Integration	1	1	1
+Electronic Health Modernization	Registration	1	1	1
+Emergency Department Integration Software	Adverse Reaction Tracking	1	1	1
+Emergency Department Integration Software	Care Management	1	1	1
+Emergency Department Integration Software	M XML Parser	1	1	1
+Emergency Department Integration Software	Radiology Nuclear Medicine	1	1	1
+Emergency Department Integration Software	Text Integration Utility	1	1	1
+Enrollment Application System	Fee Basis	1	1	1
+Enrollment Application System	VDEF	1	1	1
+Enterprise Health Management Platform	Authorization Subscription	1	1	1
+Enterprise Health Management Platform	Barcode Medication Administration	1	1	1
+Enterprise Health Management Platform	Integrated Billing	1	1	1
+Enterprise Health Management Platform	MailMan	1	1	1
+Enterprise Health Management Platform	RPC Broker	1	1	1
+Event Capture	Order Entry Results Reporting	1	1	1
+Event Driven Reporting	MailMan	1	1	1
+Event Driven Reporting	Order Entry Results Reporting	1	1	1
+Fee Basis	Generic Code Sheet	1	1	1
+Fee Basis	Order Entry Results Reporting	1	1	1
+Fee Basis	Scheduling	1	1	1
+Functional Independence	Consult Request Tracking	1	1	1
+Functional Independence	Order Entry Results Reporting	1	1	1
+General Medical Record - Vitals	Adverse Reaction Tracking	1	1	1
+General Medical Record - Vitals	Scheduling	1	1	1
+Graphics	ODS	1	1	1
+HINQ	Inpatient Medications	1	1	1
+HINQ	Integrated Billing	1	1	1
+HINQ	List Manager	1	1	1
+HINQ	Order Entry Results Reporting	1	1	1
+Health Summary	Automated Medical Information Exchange	1	1	1
+Health Summary	Dietetics	1	1	1
+Health Summary	Integrated Billing	1	1	1
+Health Summary	Womens Health	1	1	1
+HealtheVet Desktop	Text Integration Utility	1	1	1
+Hines OIFO	Integrated Billing	1	1	1
+Hines OIFO	MailMan	1	1	1
+Hines OIFO	Registration	1	1	1
+IFCAP	CPT HCPCS Codes	1	1	1
+IFCAP	Fee Basis	1	1	1
+IFCAP	Surgery	1	1	1
+Imaging	Lab Service	1	1	1
+Imaging	Order Entry Results Reporting	1	1	1
+Imaging	Problem List	1	1	1
+Incident Reporting	MailMan	1	1	1
+Income Verification Match	Fee Basis	1	1	1
+Income Verification Match	Order Entry Results Reporting	1	1	1
+Income Verification Match	Pharmacy Data Management	1	1	1
+Income Verification Match	Toolkit	1	1	1
+Incomplete Records Tracking	Beneficiary Travel	1	1	1
+Incomplete Records Tracking	MailMan	1	1	1
+Inpatient Medications	Clinical Reminders	1	1	1
+Inpatient Medications	Dietetics	1	1	1
+Inpatient Medications	PCE Patient Care Encounter	1	1	1
+Inpatient Medications	RPC Broker	1	1	1
+Insurance Capture Buffer	MailMan	1	1	1
+Insurance Capture Buffer	RPC Broker	1	1	1
+Integrated Billing	Enrollment Application System	1	1	1
+Integrated Billing	HINQ	1	1	1
+Integrated Billing	Health Summary	1	1	1
+Integrated Billing	Lexicon Utility	1	1	1
+Integrated Billing	Surgery	1	1	1
+Integrated Patient Fund	IFCAP	1	1	1
+Integrated Patient Fund	MailMan	1	1	1
+Joint Legacy Viewer	Kernel	1	1	1
+Joint Legacy Viewer	VA FileMan	1	1	1
+Kernel	PAID	1	1	1
+Lab Service	DSS Extracts	1	1	1
+Lab Service	General Medical Record - Vitals	1	1	1
+Lab Service	M XML Parser	1	1	1
+Lab Service	Master Patient Index VistA	1	1	1
+Lexicon Utility	Clinical Reminders	1	1	1
+Lexicon Utility	Order Entry Results Reporting	1	1	1
+Lexicon Utility	Problem List	1	1	1
+Lexicon Utility	Registration	1	1	1
+Library	MailMan	1	1	1
+Lighthouse	Kernel	1	1	1
+List Manager	MailMan	1	1	1
+M XML Parser	VA FileMan	1	1	1
+MASH Utilities	Kernel	1	1	1
+MailMan	Imaging	1	1	1
+MailMan	Toolkit	1	1	1
+Master Patient Index VistA	Fee Basis	1	1	1
+Master Patient Index VistA	Outpatient Pharmacy	1	1	1
+Medicine	Clinical Procedures	1	1	1
+Medicine	Enterprise Health Management Platform	1	1	1
+Medicine	Inpatient Medications	1	1	1
+Mental Health	RPC Broker	1	1	1
+Methicillin Resistant Staph Aurerus Initiative Reports	MailMan	1	1	1
+Mobile Scheduling Applications Suite	Consult Request Tracking	1	1	1
+Mobile Scheduling Applications Suite	List Manager	1	1	1
+My HealtheVet	CPT HCPCS Codes	1	1	1
+My HealtheVet	Clinical Reminders	1	1	1
+My HealtheVet	DRG Grouper	1	1	1
+My HealtheVet	General Medical Record - Vitals	1	1	1
+My HealtheVet	Medicine	1	1	1
+My HealtheVet	PCE Patient Care Encounter	1	1	1
+My HealtheVet	Radiology Nuclear Medicine	1	1	1
+NDBI	Kernel	1	1	1
+NDBI	Registration	1	1	1
+National Health Information Network	Health Summary	1	1	1
+Network Health Exchange	Health Summary	1	1	1
+Network Health Exchange	Registration	1	1	1
+Nursing Service	Adverse Reaction Tracking	1	1	1
+Nursing Service	Dietetics	1	1	1
+Nursing Service	MailMan	1	1	1
+Oncology	Problem List	1	1	1
+Order Entry Results Reporting	Automated Information Collection System	1	1	1
+Order Entry Results Reporting	Event Capture	1	1	1
+Outpatient Pharmacy	Controlled Substances	1	1	1
+Outpatient Pharmacy	Fee Basis	1	1	1
+PAID	Health Level Seven	1	1	1
+PAID	Nursing Service	1	1	1
+PCE Patient Care Encounter	Health Level Seven	1	1	1
+PCE Patient Care Encounter	Outpatient Pharmacy	1	1	1
+PCE Patient Care Encounter	Virtual Patient Record	1	1	1
+Palo Alto HCS	Authorization Subscription	1	1	1
+Patient Assessment Documentation	Adverse Reaction Tracking	1	1	1
+Patient Assessment Documentation	Authorization Subscription	1	1	1
+Patient Assessment Documentation	Order Entry Results Reporting	1	1	1
+Patient Assessment Documentation	Scheduling	1	1	1
+Patient Data Exchange	Adverse Reaction Tracking	1	1	1
+Patient Data Exchange	Health Summary	1	1	1
+Patient Data Exchange	Order Entry Results Reporting	1	1	1
+Patient Data Exchange	Outpatient Pharmacy	1	1	1
+Patient Data Exchange	Scheduling	1	1	1
+Patient Representative	MailMan	1	1	1
+Pharmacy Benefits Management	Lab Service	1	1	1
+Pharmacy Benefits Management	Outpatient Pharmacy	1	1	1
+Pharmacy Benefits Management	Scheduling	1	1	1
+Pharmacy Data Management	Master Patient Index VistA	1	1	1
+Pharmacy Data Management	Pharmacy Benefits Management	1	1	1
+Pharmacy Prescription Practice	MailMan	1	1	1
+Phoenix VAMC	Dietetics	1	1	1
+Phoenix VAMC	Order Entry Results Reporting	1	1	1
+Problem List	Scheduling	1	1	1
+Prosthetics	Health Level Seven	1	1	1
+Prosthetics	Police and Security	1	1	1
+Providence VAMC	List Manager	1	1	1
+Providence VAMC	Mental Health	1	1	1
+Providence VAMC	Problem List	1	1	1
+Providence VAMC	Providence VAMC	1	1	1
+Quality Assurance Integration	Kernel	1	1	1
+Radiology Nuclear Medicine	Consult Request Tracking	1	1	1
+Radiology Nuclear Medicine	RPC Broker	1	1	1
+Real Time Location System	IFCAP	1	1	1
+Real Time Location System	Real Time Location System	1	1	1
+Registration	Adverse Reaction Tracking	1	1	1
+Registration	Automated Information Collection System	1	1	1
+Registration	Enterprise Health Management Platform	1	1	1
+Registration	Inpatient Medications	1	1	1
+Registration	Lab Service	1	1	1
+Registration	Mental Health	1	1	1
+Registration	Radiology Nuclear Medicine	1	1	1
+Registration	Uncategorized	1	1	1
+Release Of Information	Master Patient Index VistA	1	1	1
+Remote Order Entry System	Master Patient Index VistA	1	1	1
+Run Time Library	MailMan	1	1	1
+Run Time Library	Registration	1	1	1
+Run Time Library	Toolkit	1	1	1
+Salt Lake OIFO	MailMan	1	1	1
+Scheduling	Accounts Receivable	1	1	1
+Scheduling	Clinical Reminders	1	1	1
+Scheduling	Fee Basis	1	1	1
+Scheduling	Outpatient Pharmacy	1	1	1
+Scheduling	RPC Broker	1	1	1
+Shift Handoff Tool	Scheduling	1	1	1
+Silver Sprint OIFO Applications	MailMan	1	1	1
+Social Work	MailMan	1	1	1
+Suicide Hotline	Integrated Billing	1	1	1
+Surgery	Authorization Subscription	1	1	1
+Surgery	Inpatient Medications	1	1	1
+Surgery	Master Patient Index VistA	1	1	1
+Surgery	Toolkit	1	1	1
+Surgery	VBECS	1	1	1
+Text Integration Utility	Enterprise Health Management Platform	1	1	1
+Text Integration Utility	Imaging	1	1	1
+Text Integration Utility	Master Patient Index VistA	1	1	1
+Text Integration Utility	Virtual Patient Record	1	1	1
+Text Integration Utility	Womens Health	1	1	1
+Toolkit	Health Data and Informatics	1	1	1
+Toolkit	Health Summary	1	1	1
+Toolkit	Inpatient Medications	1	1	1
+Toolkit	Web Services Client	1	1	1
+Uncategorized	Adverse Reaction Tracking	1	1	1
+Uncategorized	Barcode Medication Administration	1	1	1
+Uncategorized	Health Data and Informatics	1	1	1
+Uncategorized	Medicine	1	1	1
+Uncategorized	Network Health Exchange	1	1	1
+Uncategorized	Palo Alto HCS	1	1	1
+Uncategorized	RPC Broker	1	1	1
+Uncategorized	VistALink	1	1	1
+Utilization Management Rollup	Kernel	1	1	1
+VA Certified Components - DSSI	Authorization Subscription	1	1	1
+VA Certified Components - DSSI	Integrated Billing	1	1	1
+VA Certified Components - DSSI	MailMan	1	1	1
+VA Certified Components - DSSI	Surgery	1	1	1
+VA FileMan	Master Patient Index VistA	1	1	1
+VA FileMan	RPC Broker	1	1	1
+VA Point of Service	Accounts Receivable	1	1	1
+VA Point of Service	Consult Request Tracking	1	1	1
+VA Point of Service	Enrollment Application System	1	1	1
+VA Point of Service	National Drug File	1	1	1
+VA Point of Service	Outpatient Pharmacy	1	1	1
+VA Point of Service	Pharmacy Data Management	1	1	1
+VA Point of Service	Radiology Nuclear Medicine	1	1	1
+VBECS	Order Entry Results Reporting	1	1	1
+VBECS	Outpatient Pharmacy	1	1	1
+VBECS	Scheduling	1	1	1
+VDEF	MailMan	1	1	1
+Vendor - Audiofax Inc	MailMan	1	1	1
+Vendor - Audiofax Inc	Order Entry Results Reporting	1	1	1
+Vendor - Document Storage Systems	Clinical Reminders	1	1	1
+Vendor - Document Storage Systems	Dietetics	1	1	1
+Vendor - Document Storage Systems	Health Summary	1	1	1
+Vendor - Document Storage Systems	Income Verification Match	1	1	1
+Vendor - Document Storage Systems	Outpatient Pharmacy	1	1	1
+Vendor - Document Storage Systems	Surgery	1	1	1
+Vendor - ISI	Adverse Reaction Tracking	1	1	1
+Vendor - ISI	General Medical Record - Vitals	1	1	1
+Vendor - ISI	Problem List	1	1	1
+Vendor - Pioneer	VA FileMan	1	1	1
+Virtual Patient Record	CMOP	1	1	1
+Virtual Patient Record	List Manager	1	1	1
+Virtual Patient Record	MailMan	1	1	1
+VistA Integration Adapter	Automated Information Collection System	1	1	1
+VistA Integration Adapter	Health Summary	1	1	1
+VistA Integration Adapter	Order Entry Results Reporting	1	1	1
+VistA Integration Adapter	Outpatient Pharmacy	1	1	1
+VistA Integration Adapter	Surgery	1	1	1
+Visual Impairment Service Team	Master Patient Index VistA	1	1	1
+Voluntary Timekeeping	MailMan	1	1	1
+Washington VAMC	Kernel	1	1	1
+Web Services Client	MailMan	1	1	1
+Womens Health	Lexicon Utility	1	1	1

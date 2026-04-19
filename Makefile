@@ -214,6 +214,14 @@ routines-comprehensive: ## Per-routine comprehensive view joining all signals (A
 	done
 	/usr/bin/python3 host/scripts/build_routines_comprehensive.py
 
+.PHONY: package-edge-matrix
+package-edge-matrix: ## Package-to-package call edge matrix (ADR-045 Phase 6c)
+	@[ -f vista/export/normalized/routines.tsv ] || \
+		{ echo "Missing routines.tsv"; exit 1; }
+	@[ -f vista/export/normalized/routine-calls.tsv ] || \
+		{ echo "Missing routine-calls.tsv"; exit 1; }
+	/usr/bin/python3 host/scripts/build_package_edge_matrix.py
+
 .PHONY: dump-file-9-8
 dump-file-9-8: ## Dump File 9.8 (ROUTINE) via VMDUMP98 → vista-file-9-8.tsv (ADR-045 Phase 4a)
 	$(DOCKER) exec -u vehu $(CONTAINER) bash -lc 'echo "D RUN^VMDUMP98 H" | $$ydb_dist/mumps -direct'

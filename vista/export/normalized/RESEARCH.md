@@ -14,6 +14,100 @@ Status: provisional | verified | superseded by RF-NNN.
 
 ## 2026-04-19 — First analytical session
 
+### RF-023: Package-to-package edge matrix — VistA's dependency shape
+
+- **Date**: 2026-04-19
+- **Scope**: Aggregate routine-calls.tsv up to the package level.
+  Sparse matrix: one row per (src_pkg, dst_pkg) pair with edge
+  count > 0. Phase 6c of ADR-045.
+- **Method**: `host/scripts/build_package_edge_matrix.py` joins
+  routine-calls.tsv with routines.tsv (for callee → package
+  resolution) and aggregates. Runtime <1s.
+- **Finding**:
+  - **1,872 non-zero pairs** out of 175 × 175 = 30,625 possible —
+    the matrix is ~94% sparse.
+  - **172 packages make outbound calls, 144 receive them.** Some
+    packages appear only as sources (small code-only add-ons),
+    some only as destinations (pure libraries nothing in VEHU
+    calls them from).
+  - **Edge reconciliation**:
+    - Intra-package edges: 112,215 (51.5%)
+    - Cross-package edges: 105,750 (48.5%)
+    - Edges skipped (callee's package unknown — T-002 cohort):
+      23,344 (these are real calls to routines not shipped in
+      `Packages/`, so no canonical package to assign)
+    - Total: 217,965 + 23,344 = 241,309 — matches RF-020 exactly.
+    - The 48.5% figure has the intra/inter denominator; RF-021's
+      43.8% had the full denominator including unknowns. Both
+      correct, different scopes.
+- **Top cross-package edges — all top destinations are FileMan
+  or Kernel**:
+  - Integrated Billing → VA FileMan: 5,961 edges from 1,782
+    distinct caller routines to just 38 FileMan routines
+  - Registration → VA FileMan: 5,010
+  - IFCAP → VA FileMan: 3,688
+  - Scheduling → VA FileMan: 3,076
+  - Integrated Billing → Kernel: 2,048
+  - Lab Service → VA FileMan: 1,918
+- **Fan-in ranking — "VistA's operating system"**:
+  - **VA FileMan: 55,477 inbound cross-pkg edges (52.5%)**
+  - **Kernel: 24,216 (22.9%)**
+  - **FileMan + Kernel together absorb 75.4% of all cross-package
+    traffic.** These two packages are effectively the shared
+    substrate — every other package depends on them.
+  - After those two: Registration (5,588 — everyone needs
+    patient data), List Manager (4,324 — UI framework), MailMan
+    (2,416), Toolkit (1,561), HL7 (1,249), DRG Grouper (838),
+    Scheduling (746), Pharmacy Data Management (735).
+- **Fan-out ranking — heavy consumers of the VistA OS**:
+  - Integrated Billing (10,591 outbound), Registration (8,329),
+    Scheduling (6,160), Order Entry Results Reporting (4,414),
+    IFCAP (4,375), Outpatient Pharmacy (4,337), Lab Service
+    (3,554), Accounts Receivable (2,990), Lexicon Utility
+    (2,375), TIU (2,013). The classic clinical-administrative
+    workhorses.
+  - **Lexicon Utility is #9 in fan-out despite being a small
+    package** (539 routines, 10th by routine count) — confirms
+    RF-021's 63.3% cross-package finding. A small but
+    fan-out-heavy terminology service.
+- **Intra-package coupling (tight internal cohesion)**:
+  - Integrated Billing → itself: 8,566 edges
+  - Scheduling → itself: 6,699
+  - IFCAP → itself: 6,521
+  - Registration → itself: 6,172
+  - Lab Service → itself: 5,132
+  - These big clinical-admin packages are simultaneously
+    internally cohesive AND externally broadcast-heavy.
+- **Evidence**: `vista/export/normalized/package-edge-matrix.tsv`
+  — 1,872 rows × 5 columns (source_package, dest_package,
+  call_edges, distinct_caller_routines,
+  distinct_callee_routines).
+- **Implications — the architectural picture is clear**:
+  - **VistA has three structural layers visible from the call
+    graph**:
+    1. **Foundation layer**: VA FileMan + Kernel. 75% of
+       cross-package traffic terminates here. These are the
+       substrate; nothing happens without them.
+    2. **Shared service layer**: List Manager, MailMan, Toolkit,
+       HL7, Lexicon Utility, Registration-as-lookup. Moderate
+       fan-in; provide specialized services across domains.
+    3. **Domain layer**: Integrated Billing, Scheduling,
+       Pharmacy, Lab, etc. High fan-out to the layers below,
+       high internal cohesion, moderate cross-domain coupling.
+  - **Any decomposition or modernization plan starts with the
+    foundation layer.** You cannot extract Billing without
+    bringing FileMan + Kernel with it (or replacing them).
+  - **The shared service layer (List Manager, MailMan etc.) is
+    the likely candidate for the next extraction wave** after the
+    foundation — they're moderately fan-in'd but well-defined
+    with tight surfaces.
+  - The matrix itself is a straightforward input to graph
+    analysis tools (Structure101, Gephi, NetworkX) for cluster
+    detection, cycle analysis, centrality metrics — all of which
+    are natural next steps if the project goes deeper into
+    architecture analysis.
+- **Status**: verified
+
 ### RF-022: Per-routine comprehensive view — 39,330 rows × 19 columns
 
 - **Date**: 2026-04-19
