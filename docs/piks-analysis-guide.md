@@ -9,17 +9,107 @@ Research log: vista/export/normalized/RESEARCH.md (RF-001 through RF-009)
 
 ---
 
-## 1. What is PIKS?
+## 1. What is PIKS and why does it exist?
 
-Every FileMan file and global is classified into one of four categories
-based on its primary audience and purpose:
+VistA is a 40-year-old integrated system: 8,261 FileMan files, ~70,000
+fields, and 486 globals spanning clinical care, facility management,
+terminology, and the plumbing that runs the MUMPS process itself.
+Treating it as a single undifferentiated "database" makes every
+downstream task harder — exchange, modernization, security review,
+migration, reporting — because a lab result, a provider SSN, an ICD
+code, and a TaskMan queue entry have almost nothing in common beyond
+living in `^` globals on the same disk.
 
-| Category | What it holds | Who uses it |
+**PIKS is the top-level cut** that separates these four kinds of data
+before any schema modeling, FHIR mapping, or migration planning begins.
+It is deliberately coarse: four buckets, assigned by audience and
+purpose rather than by package or global. Once every file carries a
+PIKS label, each bucket can be handled by the people, tools, rules,
+and retention policies that suit it — instead of applying a single
+one-size-fits-all policy to the whole system.
+
+### 1.1 The four categories
+
+| Category | What it holds | Primary audience |
 |---|---|---|
-| **P** (Patient) | Clinical care data — demographics, encounters, diagnoses, medications, labs, vitals, notes, orders, billing | Clinicians, patients, care coordinators |
-| **I** (Institution) | Facility/org structure — locations, divisions, **providers/staff (File 200)**, teams, scheduling, procurement | Administrators, planners, VISN leadership |
-| **K** (Knowledge) | Terminologies, code tables, templates, formulary, reminders, order dialogs, clinical rules | Clinical informaticists, coding specialists |
-| **S** (System) | Config, operations, VistA internals — Kernel, FileMan meta, protocols, HL7, security, TaskMan | IT staff, VistA developers |
+| **P** (Patient) | Clinical care data about identified individuals — demographics, encounters, problems, diagnoses, medications, allergies, labs, vitals, imaging, notes, orders, consults, billing, consents | Clinicians, patients, care coordinators, HIEs, payers |
+| **I** (Institution) | Who and where the care happens — facilities, divisions, wards, clinics, rooms, beds, **providers/staff (File 200)**, teams, schedules, procurement, assets | Administrators, schedulers, HR, VISN leadership, finance |
+| **K** (Knowledge) | Reference content that is not about any one patient — terminologies (ICD, CPT, LOINC, RxNorm, Lexicon), code tables, formularies, templates, reminders, order dialogs, clinical decision rules | Clinical informaticists, coding specialists, terminology stewards, standards bodies |
+| **S** (System) | VistA's own plumbing — Kernel, FileMan meta, option/menu tree, protocols, HL7 routing, security keys, TaskMan queues, error logs, site parameters | IT staff, VistA developers, release managers, security/audit |
+
+### 1.2 Security, regulation, retention, and rate of change
+
+These properties are not incidental — they are the reason the cut
+exists. Each category has a fundamentally different profile:
+
+| Property | **P** Patient | **I** Institution | **K** Knowledge | **S** System |
+|---|---|---|---|---|
+| Sensitivity | **Protected** (PHI) | Operational / PII-bearing (staff) | Public or licensed | Operational, some secrets |
+| Governing regime | HIPAA, 42 CFR Part 2, state PHI law, VA directives | HR law, contracting rules, FOIA carve-outs | Terminology licenses (CPT, SNOMED), copyright | SecOps policy, FISMA, internal IT |
+| Retention | **Long-term / lifetime+** (legal record of care) | Medium-term (employment, contract life) | Versioned, supersede-in-place | Short/rolling (logs rotate, config moves forward) |
+| Immutability | **Immutable** once recorded — appended, never edited in place; prior state must remain auditable | Corrigible — staff move, rooms get renamed | Versioned — new code set replaces old, history matters for lookback | Mutable — config changes are the norm |
+| Rate of change | Continuous append, rare correction | Slow (org chart, staff roster) | Episodic (quarterly/annual releases) | Anywhere from static (keys) to ephemeral (queues, logs) |
+| Portability | Per-patient export (C-CDA, FHIR Bundle) | Site-specific; rarely portable as a whole | Universal by design — terminologies cross sites and systems | Site-specific; not portable |
+| Distinguishing constraint | **Must be exchangeable, storable, and retrievable for decades, and must remain faithful to what actually happened** | Reflects current-state org reality | Must be versionable and cite-able | Must be reproducible enough to restore a running system |
+
+**P is the outlier, and the reason PIKS leads with it.** Patient data
+is the only slice that is simultaneously highly regulated, lifetime-
+retained, append-only/immutable in its historical record, and
+*required* to move between institutions on demand (continuity of care,
+HIE, VA↔DoD, VA↔community). I, K, and S do not share that combination.
+I changes with the org. K is replaced by new versions. S is rebuilt
+from config. Only P must travel with the person and stay truthful to
+what was recorded, forever.
+
+### 1.3 What PIKS lets you do
+
+Having the label on every file turns a monolithic VistA database into
+four independently-manageable slices:
+
+- **Extract by category.** "Give me every patient's complete record"
+  becomes a defined operation over the P slice. "Give me the facility
+  and staff directory" is an I-slice export. "Give me the site's
+  terminology bindings" is a K-slice export. Each targets a different
+  consumer and uses a different format (FHIR Bundle, org chart/NPI
+  feed, code system release).
+- **Exchange and interoperate.** P is the slice that crosses
+  institutional boundaries under HIPAA and TEFCA. Labeling it cleanly
+  is the prerequisite for a migration or HIE extract that doesn't
+  accidentally leak staff SSNs (I) or bundle site-specific TaskMan
+  state (S).
+- **Diff and compare across sites.** Two VistA instances can be
+  compared K-to-K (do they use the same ICD release, the same order
+  dialogs?) and I-to-I (org structure, staffing mix) without having
+  to touch P at all. This is how you benchmark sites or spot drift.
+- **Merge and standardize.** K is the slice where standardization
+  actually matters and is achievable — a national formulary, a single
+  terminology server, shared reminder definitions. Attempting to
+  "standardize" P or I across sites is the wrong goal; they are
+  inherently local and longitudinal.
+- **Route to the right owners.** Clinical informatics owns K.
+  Facilities/HR owns I. IT/SecOps owns S. Clinicians and HIM own P.
+  PIKS lets each group work on its slice without stepping on the
+  others, and lets governance policies attach to the right scope.
+- **Apply the right storage and protection.** P warrants encrypted
+  long-term archival with audit, legal hold, and break-glass access.
+  S warrants backup of current config and rolling log retention. K
+  warrants a versioned content repository. I sits between. A single
+  storage policy for "the database" over-protects S and under-serves P.
+- **Migrate and modernize in waves.** A VistA-to-Cerner/Oracle or
+  VistA-to-FHIR effort can sequence work by PIKS: freeze and migrate
+  K first (reference), then I (org), then stream P (longitudinal
+  clinical history), and finally decommission S. Without the cut,
+  every migration is "move everything at once."
+- **Scope security and audit.** Cross-PIKS pointer analysis (§4.4)
+  shows exactly where one category touches another. **S→P** edges are
+  the high-priority review set for unauthorized PHI exposure; **K→P**
+  edges should be near-zero in a clean architecture and are worth
+  auditing when they appear.
+
+Everything else in this document — heuristics, triage, the cross-PIKS
+matrix, File 200's reclassification — is in service of getting this
+top-level cut right, because every downstream model (conceptual,
+logical, physical) inherits from it.
 
 ---
 
