@@ -12,4 +12,182 @@ Status: provisional | verified | superseded by RF-NNN.
 
 ---
 
-*No findings yet. First entries will follow the initial bake run.*
+## 2026-04-19 — First analytical session
+
+### RF-007: Field-level cross-PIKS analysis reveals VistA's semantic wiring
+
+- **Date**: 2026-04-19
+- **Scope**: All 69,809 fields across 8,261 FileMan files
+- **Method**: VMFPIKS routine — classifies each field with file_piks
+  (inherited from parent file), ref_piks (target file's PIKS for pointer
+  fields), cross_piks flag, and sensitivity_flag.
+- **Finding**: 5,055 pointer fields cross PIKS boundaries. The cross-PIKS
+  matrix reveals VistA's structural wiring patterns:
+  - S→I (1,520): System infrastructure heavily references facilities
+  - P→I (868): Patient records reference where care happened
+  - P→S (489): Patient data references system entities (protocols, options)
+  - S→P (461): System files reference patient data — security concern
+  - P→K (362): Clinical data coded with terminologies (ICD, CPT, drugs)
+  - I→K (340): Facility setup uses knowledge tables
+  - K→P (22): Knowledge pointing to patient data — rare and worth investigating
+- **Evidence**: `normalized/field-piks.tsv` (69,810 rows)
+- **Implications**:
+  - The 461 S→P fields need security review — system files holding patient references
+  - The 362 P→K fields are the FHIR terminology binding points
+  - The 22 K→P fields may indicate misclassified files (knowledge should be patient-independent)
+  - 866 sensitivity flags found (protected person data in non-P files) but
+    over-flagged — .01 NAME fields in template/entity files aren't person names
+- **Status**: provisional — sensitivity flag logic needs refinement
+
+### RF-006: PIKS classification complete — 98.3% coverage
+
+- **Date**: 2026-04-19
+- **Scope**: All 8,261 FileMan files (2,954 top-level + 5,307 subfiles)
+- **Method**: VMPIKS routine (Tiers 1-6, 9) + manual triage (217 files)
+- **Finding**: 8,120 of 8,261 files classified (98.3%). Distribution:
+  - P (Patient):     2,815 (34.1%) — clinical care data
+  - S (System):      2,671 (32.3%) — config, ops, VistA internals
+  - I (Institution): 1,539 (18.6%) — facility/org structure
+  - K (Knowledge):   1,096 (13.3%) — terminologies, templates, workflows
+  - Unclassified:      141 (1.7%) — subfiles awaiting inheritance
+- **Evidence**: `normalized/piks.tsv` + `normalized/piks-triage.tsv`
+- **Implications**:
+  - System is the second-largest category (32.3%) — VistA has massive
+    infrastructure overhead relative to clinical data
+  - Patient + Knowledge together = 47.4% — the clinically relevant data
+  - Institution (18.6%) is larger than expected — many facility config files
+  - Every classification has piks_method + piks_evidence for traceability
+- **Status**: verified (for classified files; 141 subfiles pending)
+
+### RF-005: Heuristic accuracy — Tier 2 (pointer-to-anchor) is the strongest signal
+
+- **Date**: 2026-04-19
+- **Scope**: 8,261 files, 24 heuristics across 6 tiers + propagation
+- **Method**: VMPIKS run analysis — which heuristics classified the most files
+- **Finding**: Heuristic contributions ranked by file count:
+  - H-05 (subfile inheritance): 4,424 — the workhorse (53.6% of all classifications)
+  - H-09 (pointer→File 200): 783 — many files reference NEW PERSON
+  - H-14 (Patient package prefix): 603 — package namespace is high-yield
+  - H-06 (pointer→File 2/PATIENT): 360 — direct patient reference
+  - H-08 (pointer→File 4/INSTITUTION): 284 — facility reference
+  - H-10 (Patient global root): 236
+  - H-15 (Institution package prefix): 202
+  - H-12 (Knowledge global root): 197
+  - H-02 (file# < 2, FM meta): 127
+  - H-13 (System global root): 119
+  - H-39 (orphan→S): 114
+- **Evidence**: VMPIKS run output; `piks.tsv` piks_method column
+- **Implications**:
+  - Inheritance (H-05) dominates because VistA has 5,307 subfiles — each
+    inherits from parent. This is the right behavior.
+  - Pointer-to-anchor (Tier 2) is the most reliable single-pass signal.
+    File 200 (NEW PERSON) with 1,244 inbound pointers is VistA's most
+    central file — it's the user/provider reference for everything.
+  - Package namespace (Tier 4) was high-yield after expanding the prefix
+    lists. Initial lists were too narrow — needed 3 iterations to cover
+    the major packages.
+- **Status**: verified
+
+### RF-004: File 200 (NEW PERSON) is VistA's most-referenced file
+
+- **Date**: 2026-04-19
+- **Scope**: pointer_in counts from files.tsv (8,261 files)
+- **Method**: VMFILES extraction, sorted by pointer_in descending
+- **Finding**: Top 10 most-referenced files by inbound pointer count:
+  1. File 200 (NEW PERSON): 1,244 inbound pointers
+  2. File 2 (PATIENT): 379
+  3. File 4 (INSTITUTION): 321
+  4. File 44 (HOSPITAL LOCATION): 248
+  5. File 5 (STATE): 124
+  6. File 80 (ICD DIAGNOSIS): 117
+  7. File 40.8 (MEDICAL CENTER DIVISION): 85
+  8. File 50 (DRUG): 83
+  9. File 60 (LABORATORY TEST): 81
+  10. File 3.5 (DEVICE): 73
+- **Evidence**: `normalized/files.tsv` pointer_in column
+- **Implications**:
+  - File 200 has 3.3x more inbound pointers than File 2 (PATIENT). This
+    makes it VistA's structural hub — not Patient, not Institution, but
+    the user/provider identity file.
+  - File 200 is classified S (System) with secondary I (Institution) —
+    it serves both user management and provider identity.
+  - The top 10 list cleanly maps to PIKS anchors: 200=S, 2=P, 4=I,
+    44=I, 5=K, 80=K, 40.8=I, 50=K, 60=K, 3.5=S
+- **Status**: verified
+
+### RF-003: VistA has 8,261 FileMan files — widest is 2,603 fields
+
+- **Date**: 2026-04-19
+- **Scope**: Complete ^DD walk
+- **Method**: VMFILES extraction
+- **Finding**:
+  - 8,261 total files: 2,954 top-level + 5,307 subfiles (ratio 1:1.8)
+  - Widest files: Generic Code Sheet (2,603 fields), Oncology Primary
+    (1,902), CHEM/HEM Lab (965), PAID Employee (769), Surgery (761),
+    Patient (594)
+  - Largest tables by record count: Lexicon 757.x (~900K), RxNorm 129.x
+    (~500K), ICD DRG 83.51 (1M)
+  - Mean field count: ~8.5 fields per file (heavily skewed — median likely ~4)
+- **Evidence**: `normalized/files.tsv` (8,262 rows including header)
+- **Implications**:
+  - The 1:1.8 top-level to subfile ratio means VistA is deeply hierarchical.
+    Subfile inheritance (H-05) is the most important PIKS heuristic because
+    it covers 64% of all files.
+  - Lexicon and RxNorm dominate record counts — these are Knowledge tables
+    that account for the bulk of the database by row count, even though
+    Patient data dominates by file count and clinical importance.
+- **Status**: verified
+
+### RF-002: 86% of VEHU globals are FileMan-described
+
+- **Date**: 2026-04-19
+- **Scope**: All 486 globals in the VEHU database
+- **Method**: VMCENSUS Phase 1 recon — enumerate via `mupip size`,
+  match against ^DIC(file,0,"GL")
+- **Finding**:
+  - 486 total globals (1 scratch/temp excluded)
+  - 418 FileMan-matched (86.0%)
+  - 67 non-FileMan (13.8%)
+  - Non-FM globals are mostly small: largest is ^DMRTRACE (778 nodes)
+  - ZZ* globals (23 globals, ~200 nodes) are site-specific artifacts
+  - %Z* globals are Kernel system globals
+- **Evidence**: VMCENSUS Phase 1 output
+- **Implications**:
+  - The spec's concern about massive non-FM Pharmacy/Lab data does NOT
+    materialize in VEHU. All Pharmacy (^PS*, ^PSR*) and Lab (^LR*, ^LA*)
+    globals are FileMan-matched.
+  - Non-FM data may be a production-runtime phenomenon (data written
+    during clinical operations outside DD control) rather than structural.
+  - The DD-based heuristics (H-01 through H-52) cover the vast majority
+    of the database. The 6 non-FM heuristics (G-01 through G-06) are
+    available but less needed than anticipated.
+- **Status**: verified for VEHU; may differ on production systems
+
+### RF-001: mupip load silently fails on paths with spaces — 94% of globals not loaded
+
+- **Date**: 2026-04-19
+- **Scope**: VEHU-M global import during Docker build
+- **Method**: Quality check comparing Packages.csv against ^DD/$D checks
+- **Finding**: First builds loaded only 176 of 3,138 ZWR files. 2,962
+  files failed because `mupip load` on YottaDB r2.02 treats spaces in
+  file paths as parameter separators even when quoted. Packages with
+  spaces in directory names (VA FileMan, Lab Service, Mental Health,
+  Scheduling, etc.) ALL failed silently — the `|| echo WARN` in the
+  Dockerfile caught each failure but the build continued per
+  continue-on-error policy.
+  
+  Most critically, `^DD` (Data Dictionary — 859K entries, 44MB) was
+  empty, meaning no file structure metadata was available despite
+  FileMan routines loading successfully.
+- **Evidence**: BL-012; build output grep showing 2,962 WARN lines
+- **Fix**: Symlink each ZWR to `/tmp/_load.zwr` before calling mupip load.
+  Post-fix: 2,607/2,608 files load successfully.
+- **Implications**:
+  - This is a YottaDB r2.02 bug or undocumented limitation.
+  - Any VistA-on-YottaDB project using mupip load with OSEHRA/WorldVistA
+    archives will hit this. The workaround (symlink to space-free path)
+    should be documented upstream.
+  - The continue-on-error policy (ADR-023) masked a critical failure —
+    the build "succeeded" but the database was essentially empty.
+    Quality checks (like the Packages.csv comparison) are essential.
+- **Status**: verified; fix confirmed working
