@@ -36,8 +36,22 @@ ROUTINE_FIELDS = [
     "line_count",
     "byte_size",
     "first_line_comment",
+    "version_line",
+    "tag_count",
+    "comment_line_count",
+    "is_percent_routine",
 ]
-PACKAGE_FIELDS = ["package", "routine_count", "total_lines", "total_bytes"]
+PACKAGE_FIELDS = [
+    "package",
+    "routine_count",
+    "percent_routine_count",
+    "total_lines",
+    "total_bytes",
+]
+
+# MUMPS label: line starts in column 0 with an alphanumeric char or '%'.
+# Everything else (whitespace, ';', blank) is not a label line.
+_LABEL_CHARS = set(b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%")
 
 
 def translate(container_path: str) -> Path:
@@ -46,17 +60,58 @@ def translate(container_path: str) -> Path:
     return Path(HOST_PREFIX + container_path[len(CONTAINER_PREFIX):])
 
 
-def scan_routine(host_path: Path) -> tuple[int, int, str]:
+def truncate(s: str, n: int = 120) -> str:
+    return s if len(s) <= n else s[: n - 3] + "..."
+
+
+def scan_routine(host_path: Path) -> dict:
     data = host_path.read_bytes()
     byte_size = len(data)
     line_count = data.count(b"\n")
     if data and not data.endswith(b"\n"):
         line_count += 1
-    nl = data.find(b"\n")
-    first = (data if nl == -1 else data[:nl]).decode("utf-8", errors="replace").strip()
-    if len(first) > 120:
-        first = first[:117] + "..."
-    return line_count, byte_size, first
+
+    lines = data.split(b"\n")
+    # Drop a trailing empty element caused by a final newline.
+    if lines and lines[-1] == b"":
+        lines = lines[:-1]
+
+    first_line = lines[0] if lines else b""
+    first_line_comment = truncate(
+        first_line.decode("utf-8", errors="replace").strip()
+    )
+
+    # VistA convention: line 2 is typically ` ;;VERSION;PACKAGE;SEQ;BUILDDATE`.
+    # Body lines are space-indented, so `;;` is at col 1, not col 0.
+    version_line = ""
+    if len(lines) >= 2 and lines[1].lstrip().startswith(b";;"):
+        version_line = truncate(lines[1].decode("utf-8", errors="replace").strip())
+
+    tag_count = 0
+    comment_line_count = 0
+    for ln in lines:
+        if not ln:
+            continue
+        if ln[0:1] in (b" ", b"\t"):
+            # Body line; may still be a comment-only body.
+            if ln.lstrip().startswith(b";"):
+                comment_line_count += 1
+            continue
+        if ln[0:1] == b";":
+            # Line starting with ';' in column 0 (rare but valid comment form).
+            comment_line_count += 1
+            continue
+        if ln[0] in _LABEL_CHARS:
+            tag_count += 1
+
+    return {
+        "line_count": line_count,
+        "byte_size": byte_size,
+        "first_line_comment": first_line_comment,
+        "version_line": version_line,
+        "tag_count": tag_count,
+        "comment_line_count": comment_line_count,
+    }
 
 
 def main() -> int:
@@ -94,14 +149,13 @@ def main() -> int:
                 missing.append(str(host_path))
                 continue
 
-            lines, size, comment = scan_routine(host_path)
+            features = scan_routine(host_path)
             rows.append({
                 "routine_name": name,
                 "package": pkg,
                 "source_path": src,
-                "line_count": lines,
-                "byte_size": size,
-                "first_line_comment": comment,
+                "is_percent_routine": "Y" if name.startswith("_") else "N",
+                **features,
             })
 
     if missing:
@@ -130,11 +184,18 @@ def main() -> int:
         w.writerows(rows)
 
     pkg_stats: dict[str, dict] = defaultdict(
-        lambda: {"routine_count": 0, "total_lines": 0, "total_bytes": 0}
+        lambda: {
+            "routine_count": 0,
+            "percent_routine_count": 0,
+            "total_lines": 0,
+            "total_bytes": 0,
+        }
     )
     for r in rows:
         s = pkg_stats[r["package"]]
         s["routine_count"] += 1
+        if r["is_percent_routine"] == "Y":
+            s["percent_routine_count"] += 1
         s["total_lines"] += r["line_count"]
         s["total_bytes"] += r["byte_size"]
 

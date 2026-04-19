@@ -14,6 +14,49 @@ Status: provisional | verified | superseded by RF-NNN.
 
 ## 2026-04-19 — First analytical session
 
+### RF-011: Static routine features — structural shape of the corpus
+
+- **Date**: 2026-04-19
+- **Scope**: All 39,330 routines inventoried in RF-010. Features extracted
+  strictly mechanically from each `.m` file (no heuristics, no role
+  inference) — Phase 2a of ADR-045.
+- **Method**: `host/scripts/build_routine_inventory.py` extended to
+  capture four additional columns per routine (`version_line`,
+  `tag_count`, `comment_line_count`, `is_percent_routine`) plus one
+  package aggregate (`percent_routine_count`). Run via `make inventory`.
+- **Finding** (all derived by strict extraction, not interpretation):
+  - **Tags (column-0 labels)**: 396,441 total across 39,330 routines,
+    averaging ~10 tags per routine. Tag counts distinguish routines
+    with many public entry points from single-entry routines.
+  - **Comment lines**: 1,511,879 out of 4,138,428 total lines = **36.5%
+    comment density** across the corpus. MUMPS style here is heavily
+    commented by modern-code standards.
+  - **Version line coverage**: 35,706 routines (**90.8%**) have a
+    VistA-convention `;;VERSION;PACKAGE;SEQ;BUILDDATE` line 2.
+    3,624 routines (**9.2%**) do not — candidates for future
+    investigation (may be generated code, older routines pre-dating the
+    convention, or package-specific exceptions).
+  - **Percent routines in MANIFEST**: **0**. All `_*.m` files live
+    outside `Packages/*/Routines/` so none appear in this inventory.
+    Confirms that the +8 compiled `.o` divergence flagged in T-001 is
+    almost certainly from percent routines installed via `$ydb_dist`
+    or an equivalent path outside `Packages/`.
+  - Packages with percent routines: 0 (consistent with the above).
+- **Evidence**: `routines.tsv` now 10 columns including the 4 new
+  feature columns; `packages.tsv` now 5 columns including
+  `percent_routine_count`.
+- **Implications**:
+  - Feature columns are the honest foundation for human-driven
+    exploration (sort by size, by tag count, by comment density).
+    No "role" label has been assigned — role classification requires
+    call-graph and VistA metadata, deferred to Phase 4+ per ADR-045.
+  - The 9.2% of routines lacking a `;;` version line are a
+    well-defined cohort worth reviewing before any cleanup work.
+  - RF-011 is observational and stable: the same extraction against
+    the same sources will produce identical outputs. No heuristic
+    drift.
+- **Status**: verified
+
 ### RF-010: Host-side routine inventory — 39,330 routines across 174 packages
 
 - **Date**: 2026-04-19
