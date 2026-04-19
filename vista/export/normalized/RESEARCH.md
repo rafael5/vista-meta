@@ -14,6 +14,65 @@ Status: provisional | verified | superseded by RF-NNN.
 
 ## 2026-04-19 — First analytical session
 
+### RF-016: VistA File 9.8 (ROUTINE) extraction — 30,665 entries, compared to MANIFEST
+
+- **Date**: 2026-04-19
+- **Scope**: Every entry in VEHU's File 9.8 (ROUTINE) — VistA's own
+  self-inventory of routines. Phase 4a of ADR-045.
+- **Method**: New MUMPS routine `vista/dev-r/VMDUMP98.m` walks
+  `^DIC(9.8,IEN,0)` via `$ORDER`, extracts `.01 NAME`, `1 TYPE`,
+  `1.2 SIZE (BYTES)`, `1.5 RSUM VALUE`, plus `7.2 CHECKSUM VALUE` from
+  sub-node 4. Output piped to `/tmp/vista-file-9-8.tsv` inside the
+  container (vehu cannot write to the ubuntu-owned export bind mount),
+  then `docker cp`-ed out to `vista/export/normalized/`. Run via
+  `make dump-file-9-8`.
+- **Finding**:
+  - **File 9.8 contains 30,665 entries**: 30,255 typed as R (routine),
+    0 as P (package — DD allows it but VEHU has none), 410 with an
+    empty TYPE field.
+  - **Cross-reference against MANIFEST.tsv (39,330 shipped routines)**:
+    - Intersection: **29,102** — known to both, core routines
+    - **MANIFEST-only: 10,228** — shipped as .m files under
+      `Packages/*/Routines/` but NOT registered in File 9.8
+    - **File 9.8-only: 1,563** — registered in Kernel's ROUTINE file
+      but not found as shipped `.m` source
+  - **File 9.8-only prefix distribution** shows the "registered but
+    not shipped" cohort is dominated by specific package namespaces:
+    PSN (304 — Pharmacy National), MAG (149 — Imaging), PRA (126),
+    LBR (75), ABS (74 — IHS namespace), DSI (59), QAC (58), ONC (57),
+    QAN (53), SOW (52). These suggest routines installed directly
+    into the routine namespace by some path outside the FOIA
+    `Packages/` tree.
+  - **Optional fields are essentially empty in VEHU**: 34/30,665
+    rows have SIZE (BYTES), 24 have CHECKSUM VALUE, 0 have RSUM
+    VALUE. These fields are populated by KIDS during patch install
+    cycles and VEHU is a fresh-build snapshot — expected.
+- **Evidence**: `vista/export/normalized/vista-file-9-8.tsv` (30,665
+  rows, 6 columns).
+- **Interpretation — MANIFEST and File 9.8 measure different things**:
+  MANIFEST answers "what .m files ship in the FOIA distribution?"
+  File 9.8 answers "what routines does VistA's Kernel know about at
+  runtime?" Neither is wrong; the 10,228/1,563 diffs are legitimate.
+  This finding does NOT resolve T-001 (which is about the +1 symlink
+  / +8 compiled `.o` in the Dockerfile build artifacts — a different
+  dimension entirely). T-001 remains open.
+- **Implications**:
+  - The intersection (29,102 routines known to both) is the "solid
+    core" for any analysis that needs VistA to acknowledge the
+    routine exists.
+  - The 10,228 MANIFEST-only cohort is a well-defined set worth
+    investigating — likely includes routines shipped but never
+    registered, test/sample code, or dev-only utilities.
+  - The 1,563 File 9.8-only cohort suggests additional routine
+    sources beyond `Packages/*/Routines/`. Candidate sources:
+    `$ydb_dist` system routines, directly-loaded routine globals,
+    patch routines from alternative install paths. Worth a separate
+    TODO.
+  - Authoritative role classification (deferred in Phase 2b) now has
+    its baseline dataset ready. Phase 4b (File 8994 RPCs) and 4c
+    (File 19 options) will layer on top.
+- **Status**: verified
+
 ### RF-015: Routine → global edges — 77,838 subscripted references
 
 - **Date**: 2026-04-19

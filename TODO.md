@@ -86,3 +86,46 @@ a reference point. That figure had no source — it was a fabricated
 estimate by the AI assistant. The real numbers are above. T-001 is
 about the small real +1/+8 divergence, not the nonexistent 24k/39k
 gap.
+
+---
+
+## T-002: MANIFEST ↔ File 9.8 delta — investigate the two legitimate cohorts
+
+**Flagged**: 2026-04-19, during RF-016 (Phase 4a of ADR-045).
+
+**Observation** (from Phase 4a cross-reference):
+- Intersection (known to both): **29,102 routines**
+- **MANIFEST-only (shipped but not in File 9.8): 10,228**
+- **File 9.8-only (registered in Kernel but not shipped): 1,563**
+
+These are legitimate differences — MANIFEST and File 9.8 measure
+different things — but the cohorts themselves are interesting and
+may carry signal about package install conventions.
+
+**Worth investigating (post-session)**:
+1. **MANIFEST-only cohort (10,228)**: routines shipped under
+   `Packages/*/Routines/` that Kernel never registered. Sample names
+   in the cohort start with `A1A1*` (Albany OIFO). Hypotheses:
+   - Field-OIFO add-ons / IRM local modifications shipped for
+     reference but not part of the formal install path.
+   - Test/sample routines that never get DIFROM-registered.
+   - Routines whose packages use a non-FileMan install route.
+2. **File 9.8-only cohort (1,563)**: routines Kernel knows about
+   that don't appear under `Packages/*/Routines/`. Top prefixes:
+   PSN (304 — Pharmacy National), MAG (149 — Imaging), PRA (126),
+   LBR (75), ABS (74 — IHS), DSI (59), QAC (58), ONC (57), QAN (53),
+   SOW (52). Hypotheses:
+   - Routines installed directly into ^ROU globals from sources
+     outside `Packages/`.
+   - Patch-only or stub entries retained for compatibility.
+   - References to routines expected but not present in this build.
+
+**Resolution criteria**:
+- Each cohort gets a characterization: what kind of routines, from
+  what sources, why they diverge. A small number of sub-cohort RF
+  entries or package-level breakdown is probably enough.
+- No code changes expected — this is a documentation and
+  understanding exercise, not a correction.
+
+**Not a blocker** for any later phase. Phase 6 joins will flag cross-
+references that sit on only one side, which is the visible surface.
