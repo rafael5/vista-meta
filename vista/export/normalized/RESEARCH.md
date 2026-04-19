@@ -14,6 +14,87 @@ Status: provisional | verified | superseded by RF-NNN.
 
 ## 2026-04-19 — First analytical session
 
+### RF-022: Per-routine comprehensive view — 39,330 rows × 19 columns
+
+- **Date**: 2026-04-19
+- **Scope**: Every routine in the MANIFEST inventory, one row,
+  with every per-routine signal from prior phases joined in.
+  Phase 6b of ADR-045.
+- **Method**: `host/scripts/build_routines_comprehensive.py` joins
+  routines.tsv (base + static features), vista-file-9-8.tsv (Kernel
+  knowledge), rpcs.tsv (File 8994), options.tsv TYPE=R (File 19),
+  routine-calls.tsv (degrees + volumes), routine-globals.tsv
+  (data breadth). 19 columns. Run via
+  `make routines-comprehensive`. Runtime: ~1s.
+- **Finding — routines by role signal** (from the join):
+  - Backs ≥1 RPC: **1,446** (matches RF-017 ∩ MANIFEST)
+  - Backs ≥1 TYPE=R option: **4,816** (matches RF-018 ∩ MANIFEST)
+  - Backs **both** RPC and option: **49** — dual-surface routines
+    serving both CPRS (via RPC Broker) and legacy terminal menus.
+    Named set dominated by DSIROIU (Release of Information),
+    DSIVIC* (Insurance Capture Buffer), DVBA*/DVBC* (Automated
+    Medical Information Exchange — heavy dual-surface legacy),
+    IBC*/IBO* (Integrated Billing). These are strong modernization
+    candidates — their role duplication signals migration-in-flight
+    or legacy coverage.
+  - In File 9.8: **29,102** (matches RF-016 intersection)
+- **Finding — call graph shape**:
+  - **out_degree = 0** (leaves, no outbound calls): **7,041**
+    routines. Pure-function utilities and terminal actions.
+  - **in_degree = 0** (sinks, no caller in our data): **18,828**
+    routines (47.9%). Decomposes further into:
+    - 824 back RPCs (legitimately invoked via RPC Broker, not `.m`
+      source)
+    - 3,020 back TYPE=R options (invoked via menu system)
+    - **15,010 truly unreferenced** — no RPC, no option, no `.m`
+      caller found by Phase 5. Candidate categories:
+      (a) invoked from File 101 protocol ENTRY ACTION (MUMPS text
+      Phase 5 doesn't parse), (b) called via indirection, (c)
+      missed by comma-continuation or line-offset limitations, or
+      (d) genuinely dead.
+  - **Truly unreferenced by package** (top): AICS (2,856),
+    Integrated Billing (849), Registration (753), AMIE (721),
+    Nursing Service (709), "Uncategorized" (476 — worth noting
+    as a distinct package in its own right), Scheduling (464),
+    IFCAP (409), Kernel (396), Lab (353). AICS's share is
+    striking — suggests either substantial dead code or heavy
+    reliance on invocation mechanisms outside `.m` source.
+- **Finding — library hubs (top in_degree)**:
+  All in VA FileMan and Kernel, all with rpc_count=0 and
+  option_count=0 — internal libraries, not user-facing:
+  - DIC (7,511 callers), DIE (7,509), DIR (7,219), XLFDT (6,643),
+    DIQ (6,464), XPDUTL (3,866), DIK (3,325), DICN (2,781),
+    VADPT (1,860).
+  - **XLFSTR (2,571 callers, 0 outbound calls)** — a pure leaf
+    utility. Every caller, no callees. The cleanest node in the
+    graph.
+- **Finding — dispatch hubs (top out_degree)**:
+  - SDEC (65 callees, 14 callers, 124 RPCs) — Scheduling
+    orchestrator, already identified in RF-017 and RF-020.
+    Cross-validated across three phases.
+  - MCARP (50 out, 19 options) — Medicine/Cardiology front-end.
+  - SDES (44 out, 20 RPCs, 0 callers) — Scheduling event entry.
+  - PSSJXR (42 out, 0 callers, 0 RPCs, 0 options) — interesting
+    cases: heavy outbound coupling but no detected caller. Likely
+    invoked via protocol ENTRY ACTION.
+- **Evidence**: `vista/export/normalized/routines-comprehensive.tsv`
+  — 39,330 rows × 19 columns.
+- **Implications**:
+  - **Direct human-sortable view of the whole routine corpus.**
+    "Which routines are RPCs with >5 callers and touch Patient
+    data?" becomes a two-line awk.
+  - **Library vs dispatch vs leaf vs dual-role** are now
+    first-class computed attributes per routine. These are the
+    natural clustering axes for decomposition/modernization.
+  - The **15,010 truly-unreferenced** cohort is the next
+    high-value investigation — partitioning it into "invoked via
+    protocol" vs "invoked via indirection" vs "truly dead" needs
+    File 101 ENTRY ACTION parsing (deferred Phase 5 refinement).
+    Worth a TODO.
+  - **The 49 dual-role routines** are a well-defined
+    modernization-candidate set worth naming for follow-up.
+- **Status**: verified
+
 ### RF-021: Package manifest — code↔data bridge in full form
 
 - **Date**: 2026-04-19

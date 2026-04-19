@@ -205,6 +205,15 @@ package-manifest: ## Join everything into per-package manifest (ADR-045 Phase 6a
 	done
 	/usr/bin/python3 host/scripts/build_package_manifest.py
 
+.PHONY: routines-comprehensive
+routines-comprehensive: ## Per-routine comprehensive view joining all signals (ADR-045 Phase 6b)
+	@for f in routines.tsv vista-file-9-8.tsv rpcs.tsv options.tsv \
+	          routine-calls.tsv routine-globals.tsv; do \
+		[ -f vista/export/normalized/$$f ] || \
+			{ echo "Missing: vista/export/normalized/$$f"; exit 1; }; \
+	done
+	/usr/bin/python3 host/scripts/build_routines_comprehensive.py
+
 .PHONY: dump-file-9-8
 dump-file-9-8: ## Dump File 9.8 (ROUTINE) via VMDUMP98 → vista-file-9-8.tsv (ADR-045 Phase 4a)
 	$(DOCKER) exec -u vehu $(CONTAINER) bash -lc 'echo "D RUN^VMDUMP98 H" | $$ydb_dist/mumps -direct'
