@@ -233,19 +233,23 @@ TIER4(FILE,PIKS,METH,CONF,EVID) ;Tier 4 — Package namespace (H-14 to H-17)
  ;
  ; Map known prefixes to PIKS
  ; H-14: Patient packages
- I ",DG,DPT,GMRV,GMRD,GMRA,GMRC,GMRE,GMRR,GMRS,TIU,OR,PSO,PSB,PSJ,PSG,PSGM,LR,LRAD,LRAR,RA,RAAB,SR,SROA,PX,PXRM,DVB,DVBA,NUR,NURA,SD,SDAC,FH,FHY,EC,EDP,WV,WII,MHV,MHE,VEJD,VBEC,JLV,GMPL,"[(","_PREFIX_",") D  Q
+ N PL14 S PL14=",DG,DPT,GMRV,GMRD,GMRA,GMRC,GMRE,GMRR,GMRS,TIU,OR,PSO,PSB,PSJ,PSG,PSGM,PSW,LR,LRAD,LRAR,RA,RAAB,RAD,RAR,SR,SROA,SRU,SRF,PX,PXRM,DVB,DVBA,DVBB,DVBC,NUR,NURA,SD,SDAC,SDV,FH,FHY,FHN,EC,EDP,WV,WII,MHV,MHE,VEJD,VBEC,JLV,GMPL,GMP,IB,IBA,IBC,IBD,IBE,IBT,IBQ,MAG,MCA,MCB,MCE,MCF,MDC,MDD,YS,YSA,YST,YTT,BPS,FBA,FB,FB5,FB7,ROR,DSI,DSIR,DGM,DGP,DGT,SCE,NUP,NUPA,PTX,QAC,QAM,QAN,QAO,QAP,QAR,VPR,"
+ I PL14[(","_PREFIX_",") D  Q
  . S PIKS="P",METH="H-14",CONF="moderate",EVID="package="_PKGNAME_" ("_PREFIX_")"
  ;
  ; H-15: Institution packages
- I ",DG,DGBT,A4A7,A4A8,EAS,VPS,VSIT,"[(","_PREFIX_",") D  Q
+ N PL15 S PL15=",DG,DGBT,A4A7,A4A8,EAS,VPS,VSIT,PRC,PRCA,PRCN,PRCP,PRS,PRSX,ENG,EN,ENPL,RMP,RMPC,RMPF,RMPR,RMPS,RMI,EEO,EEOA,HOL,VAT,SOW,SOWA,SOWC,PRP,PRPF,PRPX,OOP,OOPS,"
+ I PL15[(","_PREFIX_",") D  Q
  . S PIKS="I",METH="H-15",CONF="moderate",EVID="package="_PKGNAME_" ("_PREFIX_")"
  ;
  ; H-16: Knowledge packages
- I ",ICD,ICPT,LEX,PSD,PSN,PSS,PSNDF,NLT,ETSRXN,KLAS,ONCZ,ONC,AUTTHF,"[(","_PREFIX_",") D  Q
+ N PL16 S PL16=",ICD,ICPT,LEX,PSD,PSN,PSS,PSNDF,PSU,PSA,PSC,NLT,ETSRXN,KLAS,ONCZ,ONC,AUTTHF,AUTTLOC,AUT,OCX,LAB,LAM,LAH,LAR,RAD,"
+ I PL16[(","_PREFIX_",") D  Q
  . S PIKS="K",METH="H-16",CONF="moderate",EVID="package="_PKGNAME_" ("_PREFIX_")"
  ;
  ; H-17: System packages
- I ",XU,XUCS,XT,XTML,XM,XMDB,DI,DIPK,XPD,XWB,XQ,XQOR,HL,XH,XHD,XOBE,XOBS,XOBU,XOBV,ZT,A,USR,"[(","_PREFIX_",") D  Q
+ N PL17 S PL17=",XU,XUCS,XUS,XT,XTML,XM,XMDB,XMD,DI,DIPK,XPD,XWB,XQ,XQOR,HL,HLC,HLD,HLE,HLM,HLS,XH,XHD,XOBE,XOBS,XOBU,XOBV,XOBW,ZT,A,USR,QA7,KMP,KMPD,KMPR,XCR,XLM,XIP,XDR,RG,RGUT,RGED,ZRK,ZMS,"
+ I PL17[(","_PREFIX_",") D  Q
  . S PIKS="S",METH="H-17",CONF="moderate",EVID="package="_PKGNAME_" ("_PREFIX_")"
  Q
  ;
@@ -379,9 +383,15 @@ INITGL(PG,IG,KG,SG) ;Initialize known global root lists
  S PG("DVB")="",PG("NUR")=""
  S PG("RADPT")="",PG("RAR")=""
  S PG("FH")="",PG("FHN")="",PG("FHNU")=""
+ S PG("IB")="",PG("IBA")="",PG("IBC")="",PG("IBT")=""
+ S PG("MAG")="",PG("MCA")="",PG("MCB")=""
+ S PG("YS")="",PG("YST")=""
+ S PG("BPS")="",PG("FBA")=""
+ S PG("DSI")="",PG("GMP")=""
  ;
  ; H-11: Institution globals
  S IG("SC")="",IG("DG")=""
+ S IG("ENG")="",IG("PRC")="",IG("HOL")=""
  ;
  ; H-12: Knowledge globals
  S KG("ICD9")="",KG("ICD0")="",KG("ICPT")="",KG("ICD")=""
@@ -391,6 +401,8 @@ INITGL(PG,IG,KG,SG) ;Initialize known global root lists
  S KG("PSNDF")="",KG("PSN")=""
  S KG("ORD")="",KG("ORP")=""
  S KG("ETSRXN")=""
+ S KG("PS")="",KG("PSC")="",KG("PSU")=""
+ S KG("LAB")="",KG("OCX")=""
  ;
  ; H-13: System globals
  S SG("XTV")="",SG("XMB")="",SG("XUS")=""
@@ -399,6 +411,7 @@ INITGL(PG,IG,KG,SG) ;Initialize known global root lists
  S SG("DDD")="",SG("DDE")=""
  S SG("XPD")="",SG("XT")=""
  S SG("VA")=""
+ S SG("QA7")="",SG("ZRK")="",SG("RG")="",SG("RGED")=""
  Q
  ;
 FINDPKG(GNAME) ;Find package for a global name via ^DIC(9.4) prefix match
