@@ -14,6 +14,58 @@ Status: provisional | verified | superseded by RF-NNN.
 
 ## 2026-04-19 — First analytical session
 
+### RF-009: Cross-PIKS matrix recalculated after File 200 reclassification
+
+- **Date**: 2026-04-19
+- **Scope**: All 69,809 fields, updated with File 200 = I (not S)
+- **Method**: Reran VMPIKS (H-04b for File 200 = I, H-09 downgraded to
+  low/I instead of high/S), then reran VMFPIKS
+- **Finding**: Cross-PIKS matrix changed dramatically:
+  - Total cross-PIKS fields: 5,055 → 3,868 (-23%)
+  - P→I: 868 → 1,477 (+609) — patient→provider is now P→I, not P→S
+  - S→I: 1,520 → 58 (-1,462) — most were I files, not S
+  - S→P: 461 → 36 (-425) — the "security concern" was mostly I files
+  - Fewer cross-boundary pointers = cleaner PIKS boundaries
+  - PIKS distribution: S dropped from 32% to 10%; I rose from 18% to 35%
+- **Evidence**: Updated piks.tsv, field-piks.tsv
+- **Implications**:
+  - The original S→P "security concern" (461 fields) was largely a
+    misclassification artifact. True S→P is only 36 fields.
+  - P→I (1,477) is now the dominant cross-PIKS pattern — clinical
+    records referencing providers/staff. This is correct and expected.
+  - The remaining 36 S→P fields deserve individual security review.
+  - VistA's true System category is much smaller than initially measured —
+    ~10% of files, not 32%.
+- **Status**: verified
+
+### RF-008: File 200 (NEW PERSON) is staff/provider PII, not system data
+
+- **Date**: 2026-04-19
+- **Scope**: File 200 (NEW PERSON), 1,551 entries, 203 fields
+- **Method**: Direct global interrogation (VMINV200, VMINV2B routines)
+- **Finding**: File 200 contains staff/provider demographics and credentials:
+  - 1,551 entries (providers, clerks, techs, nurses, pharmacists, programmers)
+  - SSN: 1,462 populated (94%)
+  - DOB: 1,151 populated (74%)
+  - Address: 119, Phone: 132, Email: 2
+  - Also: access codes, verify codes, security keys, menu options, DEA#, NPI
+  - NO patients. IEN overlap with ^DPT is coincidental (31 shared IENs,
+    different people).
+  - File 200 is VistA's most-referenced file (1,244 inbound pointers) —
+    every file that references a user/provider points here.
+- **Evidence**: VMINV200.m + VMINV2B.m output; direct ^VA(200,*) queries
+- **Fix**: Reclassified from S to I (primary), S (secondary). Updated
+  H-09 heuristic: pointer to File 200 now classifies as I (low confidence)
+  instead of S (high confidence). Added H-04b for File 200 = I (certain).
+  Cascade effect: 783 files reclassified, S category dropped from 32% to 10%.
+- **Implications**:
+  - Sensitivity = protected regardless of PIKS category (1,462 SSNs)
+  - The 1,244 inbound pointers mean File 200's PIKS classification
+    cascades to a large fraction of the database via H-09
+  - Any PIKS classifier MUST handle File 200 correctly or the entire
+    distribution is skewed
+- **Status**: verified
+
 ### RF-007: Field-level cross-PIKS analysis reveals VistA's semantic wiring
 
 - **Date**: 2026-04-19

@@ -15,13 +15,13 @@ categories based on its primary audience and purpose:
 
 | Category | What it holds | Who uses it | Count | % |
 |---|---|---|---|---|
-| **P** (Patient) | Clinical care data — demographics, encounters, diagnoses, medications, labs, vitals, notes, orders, billing | Clinicians, patients, care coordinators | 2,815 | 34.1% |
-| **I** (Institution) | Facility/org structure — locations, divisions, providers, teams, scheduling, procurement, engineering | Administrators, planners, VISN leadership | 1,539 | 18.6% |
-| **K** (Knowledge) | Terminologies, code tables, templates, formulary, reminders, order dialogs, clinical rules | Clinical informaticists, coding specialists | 1,096 | 13.3% |
-| **S** (System) | Config, operations, VistA internals — Kernel, FileMan meta, protocols, HL7, security, TaskMan, devices | IT staff, VistA developers | 2,671 | 32.3% |
+| **P** (Patient) | Clinical care data — demographics, encounters, diagnoses, medications, labs, vitals, notes, orders, billing | Clinicians, patients, care coordinators | 3,073 | 37.2% |
+| **I** (Institution) | Facility/org structure — locations, divisions, **providers/staff**, teams, scheduling, procurement, engineering | Administrators, planners, VISN leadership | 2,880 | 34.9% |
+| **K** (Knowledge) | Terminologies, code tables, templates, formulary, reminders, order dialogs, clinical rules | Clinical informaticists, coding specialists | 1,106 | 13.4% |
+| **S** (System) | Config, operations, VistA internals — Kernel, FileMan meta, protocols, HL7, security, TaskMan, devices | IT staff, VistA developers | 845 | 10.2% |
 
-Coverage: 8,120 of 8,261 files classified (98.3%).
-141 subfiles pending inheritance propagation (1.7%).
+Coverage: 7,904 of 8,261 files auto-classified (95.7%) + 217 triage.
+File 200 (NEW PERSON) reclassified from S to I per RF-008.
 
 ---
 
@@ -100,29 +100,40 @@ connects System, Institution, and Patient domains.
 
 ### 3.3 Cross-PIKS pointer matrix
 
-5,055 pointer fields cross PIKS boundaries. This is VistA's semantic
+3,868 pointer fields cross PIKS boundaries. This is VistA's semantic
 wiring — how the four data categories interconnect:
 
 ```
               Target PIKS
               P       I       K       S
-Source  P     —       868     362     489
-PIKS    I     280     —       340     278
-        K     22      48      —       104
-        S     461     1,520   283     —
+Source  P     —      1,477    433     308
+PIKS    I     560     —       524     231
+        K     23      129     —        70
+        S     36       58      19      —
 ```
+
+(Updated 2026-04-19 after File 200 reclassification from S to I — see RF-008, RF-009)
 
 Key patterns:
 
 | Pattern | Count | Meaning |
 |---|---|---|
-| **S→I** | 1,520 | System infrastructure references facilities — user accounts, options, protocols configured per division/location |
-| **P→I** | 868 | Patient records reference where care happened — admissions, appointments, transfers all link to facilities |
-| **P→S** | 489 | Patient data references system entities — order protocols, notification options, menu settings |
-| **S→P** | 461 | System files reference patient data — **security concern**: audit logs, queues, notifications that hold patient identifiers |
-| **P→K** | 362 | Clinical data coded with terminologies — these are the FHIR terminology binding points (ICD, CPT, drug codes) |
-| **I→K** | 340 | Facility setup uses knowledge tables — clinic types, service categories, coding configurations |
-| **K→P** | 22 | Knowledge tables pointing to patient data — very rare, which is correct. Investigate these 22 for possible misclassification. |
+| **P→I** | 1,477 | Patient records reference providers/staff and facilities — the dominant cross-PIKS pattern. Every encounter, order, and note links to who did it and where. |
+| **I→P** | 560 | Institution/staff files reference patient data — provider workload, team assignments, scheduling |
+| **I→K** | 524 | Facility setup uses knowledge tables — clinic types, service categories, coding configurations |
+| **P→K** | 433 | Clinical data coded with terminologies — the FHIR terminology binding points (ICD, CPT, drug codes) |
+| **P→S** | 308 | Patient data references system entities — order protocols, notification options |
+| **I→S** | 231 | Institution config references system infrastructure |
+| **K→I** | 129 | Knowledge tables reference institution data — formulary by facility, location-specific rules |
+| **K→S** | 70 | Knowledge references system infrastructure |
+| **S→I** | 58 | System config references facility data |
+| **S→P** | 36 | System files reference patient data — small and warrants individual security review |
+| **K→P** | 23 | Knowledge pointing to patient data — rare, investigate individually |
+| **S→K** | 19 | System references knowledge tables |
+
+**Key insight from RF-008**: The original S→P count (461) was inflated by
+File 200's misclassification. True System→Patient is only 36 fields —
+much smaller security review scope.
 
 ### 3.4 FileMan coverage
 

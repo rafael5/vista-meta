@@ -131,6 +131,9 @@ TIER1(FILE,PIKS,METH,CONF,EVID) ;Tier 1 — Structural identity
  ;
  ; H-04: File IS file 4
  I FILE=4 S PIKS="I",METH="H-04",CONF="certain",EVID="file=4 INSTITUTION" Q
+ ;
+ ; H-04b: File IS file 200 — staff/provider, not patient (RF-008)
+ I FILE=200 S PIKS="I",METH="H-04b",CONF="certain",EVID="file=200 NEW PERSON (staff/provider PII, RF-008)" Q
  Q
  ;
 TIER2(FILE,PIKS,METH,CONF,EVID) ;Tier 2 — Pointer to anchor files
@@ -159,9 +162,12 @@ TIER2(FILE,PIKS,METH,CONF,EVID) ;Tier 2 — Pointer to anchor files
  . S EVID="has ptr to file 4; no ptr to file 2"
  ;
  ; H-09: Points to File 200 but NOT File 2 and NOT File 4
+ ; RF-008: File 200 is I (staff), not S. Pointer to 200 means
+ ; "references a person/user" — could be any PIKS category.
+ ; Downgraded from high→low confidence, classify as I not S.
  I HAS200,'HAS2,'HAS4 D  Q
- . S PIKS="S",METH="H-09",CONF="high"
- . S EVID="has ptr to file 200; no ptr to file 2 or 4"
+ . S PIKS="I",METH="H-09",CONF="low"
+ . S EVID="has ptr to file 200 (staff/provider); no ptr to file 2 or 4"
  Q
  ;
 TIER3(FILE,PGLOBS,IGLOBS,KGLOBS,SGLOBS,PIKS,METH,CONF,EVID) ;Tier 3 — Global root patterns
