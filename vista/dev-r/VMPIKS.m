@@ -41,6 +41,9 @@ RUN ;Full classification run
  . ; --- Tier 3: Global root patterns (H-10 to H-13) ---
  . D TIER3(FILE,.PGLOBS,.IGLOBS,.KGLOBS,.SGLOBS,.PIKS,.METH,.CONF,.EVID) I PIKS'="" S RESULT(FILE)=PIKS_"^"_METH_"^"_CONF_"^"_EVID,CLASSIFIED=CLASSIFIED+1 Q
  . ;
+ . ; --- Tier 4: Package namespace (H-14 to H-17) ---
+ . D TIER4(FILE,.PIKS,.METH,.CONF,.EVID) I PIKS'="" S RESULT(FILE)=PIKS_"^"_METH_"^"_CONF_"^"_EVID,CLASSIFIED=CLASSIFIED+1 Q
+ . ;
  . ; --- Tier 5: Pointer topology (H-18, H-19) ---
  . D TIER5(FILE,.PIKS,.METH,.CONF,.EVID) I PIKS'="" S RESULT(FILE)=PIKS_"^"_METH_"^"_CONF_"^"_EVID,CLASSIFIED=CLASSIFIED+1 Q
  . ;
@@ -54,7 +57,8 @@ RUN ;Full classification run
  S FILE=""
  F  S FILE=$O(^DD(FILE)) Q:FILE=""  Q:FILE'=+FILE  D
  . ; Skip if already classified with certain or high confidence
- . I $D(RESULT(FILE)) D  Q:$P(RESULT(FILE),"^",3)="certain"  Q:$P(RESULT(FILE),"^",3)="high"
+ . I $D(RESULT(FILE)),$P(RESULT(FILE),"^",3)="certain" Q
+ . I $D(RESULT(FILE)),$P(RESULT(FILE),"^",3)="high" Q
  . N PAR S PAR=$G(^DD(FILE,0,"UP"))
  . Q:PAR=""
  . ; Walk up parent chain until we find a classified parent
@@ -66,6 +70,29 @@ RUN ;Full classification run
  . . I '$D(RESULT(FILE)) S CLASSIFIED=CLASSIFIED+1  ; new classification
  . . S RESULT(FILE)=PPIKS_"^H-05^certain^inherits from "_$$GETPAR(FILE)
  . . S INHCOUNT=INHCOUNT+1
+ ;
+ ; === Pass 3: Tier 9 — graph propagation ===
+ W !,"Pass 3: Graph propagation...",!
+ N PROPCOUNT S PROPCOUNT=0
+ D PROPAGATE(.RESULT)
+ ; Count new classifications from propagation
+ S FILE="" F  S FILE=$O(RESULT(FILE)) Q:FILE=""  D
+ . I $P(RESULT(FILE),"^",2)["H-3"!($P(RESULT(FILE),"^",2)="H-39")!($P(RESULT(FILE),"^",2)="H-40") S PROPCOUNT=PROPCOUNT+1
+ S CLASSIFIED=CLASSIFIED+PROPCOUNT
+ ; Also propagate inheritance for newly classified files' subfiles
+ N INHCOUNT2 S INHCOUNT2=0
+ S FILE=""
+ F  S FILE=$O(^DD(FILE)) Q:FILE=""  Q:FILE'=+FILE  D
+ . Q:$D(RESULT(FILE))
+ . N PAR S PAR=$G(^DD(FILE,0,"UP"))
+ . Q:PAR=""
+ . N PPIKS S PPIKS=""
+ . F  Q:PAR=""  Q:PPIKS'=""  D
+ . . I $D(RESULT(PAR)) S PPIKS=$P(RESULT(PAR),"^",1) Q
+ . . S PAR=$G(^DD(PAR,0,"UP"))
+ . I PPIKS'="" S RESULT(FILE)=PPIKS_"^H-05^certain^inherits(prop) from "_$$GETPAR(FILE),INHCOUNT2=INHCOUNT2+1,CLASSIFIED=CLASSIFIED+1
+ W "  Post-propagation inheritance: ",INHCOUNT2," subfiles",!
+ S INHCOUNT=INHCOUNT+INHCOUNT2
  ;
  ; === Write piks.tsv ===
  N PATH S PATH="/home/vehu/export/normalized/piks.tsv"
@@ -190,6 +217,111 @@ TIER6(FILE,PIKS,METH,CONF,EVID) ;Tier 6 — Name patterns (H-20 to H-23)
  . S PIKS="P",METH="H-23",CONF="low",EVID="name contains P-pattern"
  Q
  ;
+TIER4(FILE,PIKS,METH,CONF,EVID) ;Tier 4 — Package namespace (H-14 to H-17)
+ ; Map file to package via ^DIC(9.4) prefix matching on global root
+ N GL,GNAME,PKG,PREFIX,PKGPIKS
+ S GL=$G(^DIC(FILE,0,"GL"))
+ Q:GL=""
+ S GNAME=$P($P(GL,"^",2),"(",1)
+ Q:GNAME=""
+ ;
+ ; Find package by matching global name prefix against ^DIC(9.4) prefixes
+ S PKG=$$FINDPKG(GNAME)
+ Q:PKG=""
+ S PREFIX=$P(PKG,"^",2)
+ N PKGNAME S PKGNAME=$P(PKG,"^",1)
+ ;
+ ; Map known prefixes to PIKS
+ ; H-14: Patient packages
+ I ",DG,DPT,GMRV,GMRD,GMRA,GMRC,GMRE,GMRR,GMRS,TIU,OR,PSO,PSB,PSJ,PSG,PSGM,LR,LRAD,LRAR,RA,RAAB,SR,SROA,PX,PXRM,DVB,DVBA,NUR,NURA,SD,SDAC,FH,FHY,EC,EDP,WV,WII,MHV,MHE,VEJD,VBEC,JLV,GMPL,"[(","_PREFIX_",") D  Q
+ . S PIKS="P",METH="H-14",CONF="moderate",EVID="package="_PKGNAME_" ("_PREFIX_")"
+ ;
+ ; H-15: Institution packages
+ I ",DG,DGBT,A4A7,A4A8,EAS,VPS,VSIT,"[(","_PREFIX_",") D  Q
+ . S PIKS="I",METH="H-15",CONF="moderate",EVID="package="_PKGNAME_" ("_PREFIX_")"
+ ;
+ ; H-16: Knowledge packages
+ I ",ICD,ICPT,LEX,PSD,PSN,PSS,PSNDF,NLT,ETSRXN,KLAS,ONCZ,ONC,AUTTHF,"[(","_PREFIX_",") D  Q
+ . S PIKS="K",METH="H-16",CONF="moderate",EVID="package="_PKGNAME_" ("_PREFIX_")"
+ ;
+ ; H-17: System packages
+ I ",XU,XUCS,XT,XTML,XM,XMDB,DI,DIPK,XPD,XWB,XQ,XQOR,HL,XH,XHD,XOBE,XOBS,XOBU,XOBV,ZT,A,USR,"[(","_PREFIX_",") D  Q
+ . S PIKS="S",METH="H-17",CONF="moderate",EVID="package="_PKGNAME_" ("_PREFIX_")"
+ Q
+ ;
+ ; =====================================================================
+ ; TIER 9: GRAPH PROPAGATION (runs after all single-pass tiers + inheritance)
+ ; =====================================================================
+ ;
+PROPAGATE(RESULT) ;Tier 9 — classify remaining files using neighbor labels
+ ; H-36: >70% of pointer targets are classified P → P
+ ; H-38: pointers to >=3 PIKS categories → P (bridge file)
+ ; H-39: 0 pointers in AND 0 pointers out → S (orphan)
+ ; H-40: points only to K-classified files (>=2) → K
+ ;
+ N FILE,NEWCOUNT,ITER
+ S ITER=0
+ F  D  Q:NEWCOUNT=0  S ITER=ITER+1 Q:ITER>5
+ . S NEWCOUNT=0,FILE=""
+ . F  S FILE=$O(^DD(FILE)) Q:FILE=""  Q:FILE'=+FILE  D
+ . . Q:$D(RESULT(FILE))  ; already classified
+ . . Q:$G(^DD(FILE,0,"UP"))'=""  ; subfiles handled by H-05
+ . . ;
+ . . N PIKS,METH,CONF,EVID
+ . . S PIKS="",METH="",CONF="",EVID=""
+ . . D PROPTRY(FILE,.RESULT,.PIKS,.METH,.CONF,.EVID)
+ . . Q:PIKS=""
+ . . S RESULT(FILE)=PIKS_"^"_METH_"^"_CONF_"^"_EVID
+ . . S NEWCOUNT=NEWCOUNT+1
+ . W "  Propagation iter ",ITER+1,": ",NEWCOUNT," newly classified",!
+ Q
+ ;
+PROPTRY(FILE,RESULT,PIKS,METH,CONF,EVID) ;Try propagation heuristics on one file
+ N FLD,TYPE,TARG,TARGETS,TCNT,PCATS
+ N PCNT,ICNT,KCNT,SCNT,TOTCLASS
+ S FLD="",TCNT=0
+ S PCNT=0,ICNT=0,KCNT=0,SCNT=0,TOTCLASS=0
+ ;
+ ; Collect pointer targets and their PIKS
+ F  S FLD=$O(^DD(FILE,FLD)) Q:FLD=""  Q:FLD'=+FLD  D
+ . Q:'$D(^DD(FILE,FLD,0))
+ . S TYPE=$P(^DD(FILE,FLD,0),"^",2)
+ . S TARG=$$GETPTARG(TYPE)
+ . Q:TARG=""
+ . S TCNT=TCNT+1
+ . I $D(RESULT(TARG)) D
+ . . S TOTCLASS=TOTCLASS+1
+ . . N TP S TP=$P(RESULT(TARG),"^",1)
+ . . I TP="P" S PCNT=PCNT+1
+ . . I TP="I" S ICNT=ICNT+1
+ . . I TP="K" S KCNT=KCNT+1
+ . . I TP="S" S SCNT=SCNT+1
+ ;
+ ; H-39: Orphan — no pointers in or out
+ I TCNT=0,$$PTRIN(FILE)=0 D  Q
+ . S PIKS="S",METH="H-39",CONF="moderate",EVID="orphan: 0 ptrs in, 0 ptrs out"
+ ;
+ ; Need at least 2 classified targets for propagation
+ Q:TOTCLASS<2
+ ;
+ ; H-38: Bridge file — points to >=3 PIKS categories
+ N CATCNT S CATCNT=0
+ I PCNT>0 S CATCNT=CATCNT+1
+ I ICNT>0 S CATCNT=CATCNT+1
+ I KCNT>0 S CATCNT=CATCNT+1
+ I SCNT>0 S CATCNT=CATCNT+1
+ I CATCNT>=3 D  Q
+ . S PIKS="P",METH="H-38",CONF="moderate",EVID="targets span "_CATCNT_" PIKS categories"
+ ;
+ ; H-36: >70% of targets are P
+ I TOTCLASS>0,PCNT/TOTCLASS>.7 D  Q
+ . S PIKS="P",METH="H-36",CONF="moderate",EVID=PCNT_"/"_TOTCLASS_" targets classified P"
+ ;
+ ; H-40: Points only to K files (>=2)
+ I KCNT>=2,PCNT=0,ICNT=0,SCNT=0 D  Q
+ . S PIKS="K",METH="H-40",CONF="moderate",EVID=KCNT_" targets all classified K"
+ Q
+ ;
  ; =====================================================================
  ; HELPER FUNCTIONS
  ; =====================================================================
@@ -268,6 +400,21 @@ INITGL(PG,IG,KG,SG) ;Initialize known global root lists
  S SG("XPD")="",SG("XT")=""
  S SG("VA")=""
  Q
+ ;
+FINDPKG(GNAME) ;Find package for a global name via ^DIC(9.4) prefix match
+ ; Returns "pkgname^prefix" or ""
+ N I,PREFIX,PKGNAME,BESTLEN,BESTPKG
+ S BESTLEN=0,BESTPKG=""
+ S I="" F  S I=$O(^DIC(9.4,I)) Q:I=""  D
+ . Q:'$D(^DIC(9.4,I,0))
+ . S PREFIX=$P(^DIC(9.4,I,0),"^",2)
+ . Q:PREFIX=""
+ . S PKGNAME=$P(^DIC(9.4,I,0),"^",1)
+ . ; Check if global name starts with this prefix
+ . I $E(GNAME,1,$L(PREFIX))=PREFIX,$L(PREFIX)>BESTLEN D
+ . . S BESTLEN=$L(PREFIX),BESTPKG=PKGNAME_"^"_PREFIX
+ I BESTLEN>0 Q BESTPKG
+ Q ""
  ;
 SHOWSTATS(RESULT,TOTAL,CLASSIFIED,INHCOUNT) ;Display classification stats
  N P,I,K,S,U,FILE,PIKS

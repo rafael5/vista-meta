@@ -192,7 +192,8 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 3.0775	S	H-05	certain	inherits from 3.077
 3.079	S	H-21	low	name contains S-pattern
 3.081	I	H-08	high	has ptr to file 4; no ptr to file 2
-3.083	S	H-21	low	name contains S-pattern
+3.083	S	H-17	moderate	package=KERNEL (XU)
+3.084	S	H-17	moderate	package=KERNEL (XU)
 3.1	S	H-13	high	global=
 3.2	K	H-20	low	name contains K-pattern
 3.2055	K	H-05	certain	inherits from 3.2
@@ -207,9 +208,13 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 3.51	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 3.5121	S	H-05	certain	inherits from 3.51
 3.5131	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+3.519	S	H-17	moderate	package=MAILMAN (XM)
+3.5193	S	H-05	certain	inherits from 3.519
 3.52	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 3.521	S	H-05	certain	inherits from 3.52
 3.532	S	H-05	certain	inherits from 3.5
+3.54	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+3.542	S	H-05	certain	inherits(prop) from 3.54
 3.6	S	H-13	high	global=
 3.61	S	H-05	certain	inherits from 3.6
 3.62	S	H-05	certain	inherits from 3.6
@@ -267,10 +272,14 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 4.23	I	H-05	certain	inherits from 4.2
 4.24	I	H-05	certain	inherits from 4.2
 4.25	I	H-05	certain	inherits from 4.2
+4.281	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+4.2812	S	H-05	certain	inherits(prop) from 4.281
 4.299	I	H-05	certain	inherits from 4.21
 4.2995	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 4.2996	S	H-13	high	global=
 4.29961	S	H-05	certain	inherits from 4.2996
+4.2997	S	H-17	moderate	package=MAILMAN (XM)
+4.2998	S	H-17	moderate	package=MAILMAN (XM)
 4.2999	I	H-08	high	has ptr to file 4; no ptr to file 2
 4.29991	I	H-05	certain	inherits from 4.2999
 4.29992	I	H-05	certain	inherits from 4.2999
@@ -285,6 +294,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 4.37	I	H-05	certain	inherits from 4.3
 4.4	S	H-13	high	global=
 4.5	S	H-13	high	global=
+4.501	S	H-17	moderate	package=MAILMAN (XM)
 4.51	S	H-05	certain	inherits from 4.5
 4.52	S	H-05	certain	inherits from 4.5
 4.53	S	H-05	certain	inherits from 4.52
@@ -299,7 +309,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 5.11	K	H-20	low	name contains K-pattern
 5.12	K	H-20	low	name contains K-pattern
 5.13	K	H-20	low	name contains K-pattern
-6.666	S	H-21	low	name contains S-pattern
+6.666	S	H-17	moderate	package=KERNEL (XU)
 6.676	S	H-05	certain	inherits from 6.666
 7	S	H-13	high	global=
 7.1	S	H-13	high	global=
@@ -381,13 +391,22 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 10.2	S	H-13	high	global=
 10.21	S	H-05	certain	inherits from 10.2
 10.3	S	H-13	high	global=
+10.99	P	H-14	moderate	package=REGISTRATION (DG)
+10.9901	P	H-05	certain	inherits from 10.99
+10.99901	P	H-05	certain	inherits from 10.99
 11	S	H-13	high	global=
+11.99	P	H-14	moderate	package=REGISTRATION (DG)
+11.9901	P	H-05	certain	inherits from 11.99
+11.99901	P	H-05	certain	inherits from 11.99
 12	S	H-13	high	global=
 12.01	S	H-05	certain	inherits from 12
 12.11	I	H-11	high	global=
 12.12	I	H-11	high	global=
 13	S	H-13	high	global=
 13.01	S	H-05	certain	inherits from 13
+13.99	P	H-14	moderate	package=REGISTRATION (DG)
+13.9901	P	H-05	certain	inherits from 13.99
+13.99901	P	H-05	certain	inherits from 13.99
 14.4	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 14.7	S	H-21	low	name contains S-pattern
 14.71	S	H-21	low	name contains S-pattern
@@ -413,6 +432,15 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 15.232	S	H-05	certain	inherits from 15.23
 15.3	S	H-13	high	global=
 15.31	S	H-05	certain	inherits from 15.3
+15.4	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+15.41	S	H-05	certain	inherits(prop) from 15.4
+15.411	S	H-05	certain	inherits(prop) from 15.41
+15.42	S	H-05	certain	inherits(prop) from 15.4
+15.421	S	H-05	certain	inherits(prop) from 15.42
+15.43	S	H-05	certain	inherits(prop) from 15.4
+17.9001	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+17.90011	S	H-05	certain	inherits(prop) from 17.9001
+17.90012	S	H-05	certain	inherits(prop) from 17.9001
 18.01	I	H-08	high	has ptr to file 4; no ptr to file 2
 18.012	I	H-05	certain	inherits from 18.01
 18.02	I	H-22	low	name contains I-pattern
@@ -450,7 +478,12 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 23	S	H-13	high	global=
 24	S	H-13	high	global=
 25	S	H-13	high	global=
+25.11	P	H-14	moderate	package=REGISTRATION (DG)
+25.13	P	H-05	certain	inherits from 25.11
+25.14	P	H-05	certain	inherits from 25.11
 26	S	H-13	high	global=
+26.11	P	H-14	moderate	package=REGISTRATION (DG)
+26.111	P	H-05	certain	inherits from 26.11
 26.112	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 26.12	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 26.122	S	H-05	certain	inherits from 26.12
@@ -460,11 +493,13 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 26.14	I	H-08	high	has ptr to file 4; no ptr to file 2
 26.141	I	H-05	certain	inherits from 26.14
 26.142	I	H-08	high	has ptr to file 4; no ptr to file 2
+26.15	P	H-14	moderate	package=REGISTRATION (DG)
+26.151	P	H-05	certain	inherits from 26.15
 26.152	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-26.16	K	H-20	low	name contains K-pattern
+26.16	P	H-14	moderate	package=REGISTRATION (DG)
 26.17	I	H-08	high	has ptr to file 4; no ptr to file 2
 26.1707	I	H-05	certain	inherits from 26.17
-26.18	S	H-21	low	name contains S-pattern
+26.18	P	H-14	moderate	package=REGISTRATION (DG)
 26.19	I	H-08	high	has ptr to file 4; no ptr to file 2
 26.1907	I	H-05	certain	inherits from 26.19
 26.21	P	H-06	high	field=.01 PATIENT points to file 2
@@ -473,6 +508,12 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 27.12	P	H-06	high	field=.01 PATIENT points to file 2
 27.14	P	H-06	high	field=.03 PATIENT points to file 2
 27.141	P	H-05	certain	inherits from 27.14
+27.15	P	H-14	moderate	package=REGISTRATION (DG)
+27.1525	P	H-05	certain	inherits from 27.15
+27.16	P	H-14	moderate	package=REGISTRATION (DG)
+27.17	P	H-14	moderate	package=REGISTRATION (DG)
+27.174	P	H-05	certain	inherits from 27.17
+27.176	P	H-05	certain	inherits from 27.17
 27.18	I	H-11	high	global=
 28.11	P	H-06	high	field=.01 PATIENT points to file 2
 29.11	P	H-06	high	field=2 NAME points to file 2
@@ -486,7 +527,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 33.1	P	H-06	high	field=.01 PATIENT points to file 2
 33.11	I	H-08	high	has ptr to file 4; no ptr to file 2
 33.12	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-33.3	S	H-21	low	name contains S-pattern
+33.3	P	H-14	moderate	package=REGISTRATION (DG)
 34	S	H-13	high	global=
 35	S	H-13	high	global=
 35.1	I	H-11	high	global=
@@ -504,6 +545,8 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 38.11	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 38.5	P	H-06	high	field=.01 NAME points to file 2
 38.51	P	H-05	certain	inherits from 38.5
+38.6	P	H-14	moderate	package=REGISTRATION (DG)
+38.61	P	H-05	certain	inherits from 38.6
 39.1	S	H-13	high	global=
 39.11	S	H-05	certain	inherits from 39.1
 39.12	S	H-05	certain	inherits from 39.11
@@ -518,7 +561,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 40.15	P	H-06	high	field=.01 NAME points to file 2
 40.152	P	H-05	certain	inherits from 40.15
 40.16	P	H-05	certain	inherits from 40.15
-40.6	K	H-20	low	name contains K-pattern
+40.6	P	H-14	moderate	package=SCHEDULING (SD)
 40.7	S	H-13	high	global=
 40.8	I	H-08	high	has ptr to file 4; no ptr to file 2
 40.801	I	H-05	certain	inherits from 40.8
@@ -546,13 +589,19 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 42.09	S	H-05	certain	inherits from 42
 42.4	S	H-13	high	global=
 42.41	S	H-05	certain	inherits from 42.4
+42.5	P	H-14	moderate	package=REGISTRATION (DG)
 42.51	P	H-06	high	field=.01 PATIENT points to file 2
 42.52	P	H-05	certain	inherits from 42.51
 42.55	S	H-13	high	global=
 42.56	S	H-05	certain	inherits from 42.55
+42.6	P	H-14	moderate	package=REGISTRATION (DG)
+42.6001	P	H-05	certain	inherits from 42.6
 42.61	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+42.7	P	H-14	moderate	package=REGISTRATION (DG)
+42.701	P	H-05	certain	inherits from 42.7
 42.702	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-42.801	I	H-22	low	name contains I-pattern
+42.8	P	H-14	moderate	package=REGISTRATION (DG)
+42.801	P	H-05	certain	inherits from 42.8
 43	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 43.01	S	H-05	certain	inherits from 43
 43.02	S	H-05	certain	inherits from 43
@@ -598,11 +647,13 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 44.101	I	H-05	certain	inherits from 44
 44.11	I	H-05	certain	inherits from 44
 44.1902	I	H-05	certain	inherits from 44
+44.3	P	H-14	moderate	package=SCHEDULING (SD)
 44.40457	I	H-05	certain	inherits from 44
-44.9001	K	H-20	low	name contains K-pattern
-44.9002	K	H-05	certain	inherits from 44.9001
+44.9	P	H-14	moderate	package=SCHEDULING (SD)
+44.9001	P	H-05	certain	inherits from 44.9
+44.9002	P	H-05	certain	inherits from 44.9001
 45	P	H-06	high	field=.01 PATIENT points to file 2
-45.00046	S	H-21	low	name contains S-pattern
+45.00046	S	H-17	moderate	package=VA FILEMAN (DI)
 45.01	P	H-05	certain	inherits from 45
 45.02	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 45.03	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -612,7 +663,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 45.06	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 45.1	S	H-13	high	global=
 45.11	S	H-05	certain	inherits from 45.1
-45.2	I	H-22	low	name contains I-pattern
+45.2	P	H-14	moderate	package=REGISTRATION (DG)
 45.3	S	H-13	high	global=
 45.4	I	H-11	high	global=
 45.5	P	H-06	high	field=1 PATIENT points to file 2
@@ -646,10 +697,14 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 45.9101	I	H-05	certain	inherits from 45.91
 46	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 46.1	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-46.12	I	H-22	low	name contains I-pattern
+46.11	P	H-14	moderate	package=REGISTRATION (DG)
+46.12	P	H-14	moderate	package=REGISTRATION (DG)
+46.13	P	H-14	moderate	package=REGISTRATION (DG)
 46.14	P	H-06	high	field=.01 NAME points to file 2
 46.15	P	H-05	certain	inherits from 46.14
 46.3	P	H-06	high	field=.04 PATIENT points to file 2
+46.4	P	H-14	moderate	package=REGISTRATION (DG)
+46.5	P	H-14	moderate	package=REGISTRATION (DG)
 47	S	H-13	high	global=
 47.01	S	H-05	certain	inherits from 47
 47.75	I	H-11	high	global=
@@ -716,6 +771,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 50.31	K	H-05	certain	inherits from 50.3
 50.311	K	H-05	certain	inherits from 50.31
 50.32	K	H-05	certain	inherits from 50.3
+50.35	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 50.41641	K	H-20	low	name contains K-pattern
 50.5	K	H-20	low	name contains K-pattern
 50.6	K	H-12	high	global=
@@ -729,6 +785,45 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 50.609	K	H-18	moderate	ptr_in=11 ptr_out=0
 50.612	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 50.615	K	H-05	certain	inherits from 50.605
+50.621	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+50.6211	S	H-05	certain	inherits(prop) from 50.621
+50.62111	S	H-05	certain	inherits(prop) from 50.621
+50.62112	S	H-05	certain	inherits(prop) from 50.621
+50.62113	S	H-05	certain	inherits(prop) from 50.621
+50.62114	S	H-05	certain	inherits(prop) from 50.621
+50.62115	S	H-05	certain	inherits(prop) from 50.621
+50.6212	S	H-05	certain	inherits(prop) from 50.621
+50.6213	S	H-05	certain	inherits(prop) from 50.621
+50.6214	S	H-05	certain	inherits(prop) from 50.621
+50.6215	S	H-05	certain	inherits(prop) from 50.621
+50.6216	S	H-05	certain	inherits(prop) from 50.621
+50.6217	S	H-05	certain	inherits(prop) from 50.621
+50.6218	S	H-05	certain	inherits(prop) from 50.621
+50.6219	S	H-05	certain	inherits(prop) from 50.621
+50.622	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+50.6221	S	H-05	certain	inherits(prop) from 50.622
+50.62211	S	H-05	certain	inherits(prop) from 50.622
+50.62212	S	H-05	certain	inherits(prop) from 50.622
+50.62213	S	H-05	certain	inherits(prop) from 50.622
+50.62214	S	H-05	certain	inherits(prop) from 50.622
+50.62215	S	H-05	certain	inherits(prop) from 50.622
+50.6222	S	H-05	certain	inherits(prop) from 50.622
+50.6223	S	H-05	certain	inherits(prop) from 50.622
+50.6224	S	H-05	certain	inherits(prop) from 50.622
+50.6225	S	H-05	certain	inherits(prop) from 50.622
+50.6226	S	H-05	certain	inherits(prop) from 50.622
+50.6227	S	H-05	certain	inherits(prop) from 50.622
+50.6228	S	H-05	certain	inherits(prop) from 50.622
+50.6229	S	H-05	certain	inherits(prop) from 50.622
+50.623	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+50.624	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+50.625	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+50.6251	S	H-05	certain	inherits(prop) from 50.625
+50.626	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+50.6261	S	H-05	certain	inherits(prop) from 50.626
+50.627	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+50.631	S	H-05	certain	inherits(prop) from 50.621
+50.632	S	H-05	certain	inherits(prop) from 50.622
 50.64	K	H-12	high	global=
 50.65	K	H-05	certain	inherits from 50.6
 50.651	K	H-05	certain	inherits from 50.65
@@ -755,8 +850,10 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 50.807	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 50.808	I	H-22	low	name contains I-pattern
 50.809	I	H-05	certain	inherits from 50.808
+50.9	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 50.9001	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 50.9002	S	H-05	certain	inherits from 50.9001
+50.9003	S	H-05	certain	inherits(prop) from 50.9
 50.9004	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 50.9005	P	H-23	low	name contains P-pattern
 50.9006	I	H-22	low	name contains I-pattern
@@ -766,7 +863,11 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 50.901	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 51.01	I	H-22	low	name contains I-pattern
 51.11	I	H-22	low	name contains I-pattern
+51.15	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+51.153	S	H-05	certain	inherits(prop) from 51.15
 51.2	K	H-18	moderate	ptr_in=19 ptr_out=1
+51.25	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+51.251	S	H-05	certain	inherits(prop) from 51.25
 51.263	K	H-20	low	name contains K-pattern
 51.27	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 51.28	K	H-20	low	name contains K-pattern
@@ -802,6 +903,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 52.2551	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 52.3	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 52.34	S	H-05	certain	inherits from 52.3
+52.35	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 52.351	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 52.352	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 52.353	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -884,7 +986,15 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 52.51	P	H-06	high	field=2 PATIENT points to file 2
 52.52	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 52.53	S	H-21	low	name contains S-pattern
+52.6	K	H-40	moderate	3 targets all classified K
 52.61	K	H-20	low	name contains K-pattern
+52.62	K	H-05	certain	inherits(prop) from 52.6
+52.63	K	H-05	certain	inherits(prop) from 52.6
+52.64	K	H-05	certain	inherits(prop) from 52.6
+52.7	K	H-40	moderate	3 targets all classified K
+52.702	K	H-05	certain	inherits(prop) from 52.7
+52.703	K	H-05	certain	inherits(prop) from 52.7
+52.704	K	H-05	certain	inherits(prop) from 52.7
 52.7252	P	H-05	certain	inherits from 52.0725
 52.72521	P	H-05	certain	inherits from 52.7252
 52.72522	P	H-05	certain	inherits from 52.7252
@@ -916,16 +1026,24 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 53.13	P	H-05	certain	inherits from 53.1
 53.157	P	H-05	certain	inherits from 53.1
 53.158	P	H-05	certain	inherits from 53.1
+53.2	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+53.21	S	H-05	certain	inherits(prop) from 53.2
+53.2102	S	H-05	certain	inherits(prop) from 53.21
+53.22	S	H-05	certain	inherits(prop) from 53.2
+53.23	S	H-05	certain	inherits(prop) from 53.22
 53.3	S	H-21	low	name contains S-pattern
 53.4	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 53.401	P	H-06	high	field=.01 PATIENT points to file 2
 53.4011	P	H-05	certain	inherits from 53.401
 53.401101	P	H-05	certain	inherits from 53.4011
+53.41	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 53.4101	I	H-22	low	name contains I-pattern
 53.4102	P	H-06	high	field=.01 PATIENT points to file 2
 53.4103	P	H-05	certain	inherits from 53.4102
 53.4104	P	H-05	certain	inherits from 53.4103
 53.42	P	H-23	low	name contains P-pattern
+53.43	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+53.4301	S	H-05	certain	inherits(prop) from 53.43
 53.43011	P	H-06	high	field=.01 PATIENT points to file 2
 53.44	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 53.4401	P	H-06	high	field=.01 PATIENT points to file 2
@@ -937,6 +1055,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 53.455	S	H-05	certain	inherits from 53.45
 53.456	S	H-05	certain	inherits from 53.45
 53.46	K	H-20	low	name contains K-pattern
+53.47	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 53.51	P	H-06	high	field=.01 PATIENT points to file 2
 53.52	P	H-05	certain	inherits from 53.51
 53.53	P	H-05	certain	inherits from 53.52
@@ -947,6 +1066,14 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 53.687	P	H-05	certain	inherits from 53.68
 53.69	P	H-06	high	field=.12 PATIENT points to file 2
 53.692	P	H-05	certain	inherits from 53.69
+53.7	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+53.701	S	H-05	certain	inherits(prop) from 53.7
+53.702	S	H-05	certain	inherits(prop) from 53.7
+53.70211	S	H-05	certain	inherits(prop) from 53.702
+53.70212	S	H-05	certain	inherits(prop) from 53.702
+53.70213	S	H-05	certain	inherits(prop) from 53.702
+53.7028	S	H-05	certain	inherits(prop) from 53.702
+53.703	S	H-05	certain	inherits(prop) from 53.702
 53.71	S	H-21	low	name contains S-pattern
 53.713	S	H-05	certain	inherits from 53.71
 53.7135	S	H-05	certain	inherits from 53.713
@@ -963,6 +1090,8 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 53.797	P	H-05	certain	inherits from 53.79
 53.799	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 53.8	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+54	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+54.1	S	H-05	certain	inherits(prop) from 54
 55	P	H-06	high	field=.01 NAME points to file 2
 55.01	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 55.0105	P	H-05	certain	inherits from 55
@@ -1005,13 +1134,21 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 55.6114	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 55.6132	P	H-05	certain	inherits from 55.06
 55.6135	P	H-05	certain	inherits from 55.06
+56	K	H-40	moderate	2 targets all classified K
 57	S	H-13	high	global=
+57.23	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+57.231	S	H-05	certain	inherits(prop) from 57.23
 57.233	S	H-21	low	name contains S-pattern
 57.2331	S	H-21	low	name contains S-pattern
+57.2332	S	H-05	certain	inherits(prop) from 57.23
+57.2333	S	H-05	certain	inherits(prop) from 57.23
+57.2334	S	H-05	certain	inherits(prop) from 57.23
+57.234	S	H-05	certain	inherits(prop) from 57.23
 57.236	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 57.24	S	H-21	low	name contains S-pattern
 57.5	I	H-22	low	name contains I-pattern
 57.51	I	H-05	certain	inherits from 57.5
+57.6	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 57.61	I	H-22	low	name contains I-pattern
 57.62	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 57.63	S	H-05	certain	inherits from 57.62
@@ -1021,14 +1158,19 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 58.13	K	H-20	low	name contains K-pattern
 58.14	I	H-22	low	name contains I-pattern
 58.16	K	H-20	low	name contains K-pattern
+58.17	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 58.18	K	H-05	certain	inherits from 58.16
 58.19	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+58.2	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+58.21	S	H-05	certain	inherits(prop) from 58.2
 58.22	K	H-20	low	name contains K-pattern
+58.23	S	H-05	certain	inherits(prop) from 58.2
 58.24	S	H-05	certain	inherits from 58.19
 58.25	S	H-05	certain	inherits from 58.24
 58.26	I	H-22	low	name contains I-pattern
 58.27	I	H-05	certain	inherits from 58.14
 58.28	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+58.29	S	H-05	certain	inherits(prop) from 58.2
 58.291	K	H-20	low	name contains K-pattern
 58.35	K	H-12	high	global=
 58.351	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -1049,6 +1191,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 58.42002	S	H-05	certain	inherits from 58.42
 58.42102	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 58.42201	S	H-05	certain	inherits from 58.42
+58.5	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 58.501	P	H-23	low	name contains P-pattern
 58.51	P	H-05	certain	inherits from 58.501
 58.52	P	H-05	certain	inherits from 58.501
@@ -1131,6 +1274,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 59.121	P	H-05	certain	inherits from 59.12
 59.122	P	H-05	certain	inherits from 59.12
 59.123	P	H-05	certain	inherits from 59.12
+59.2	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 59.2001	I	H-22	low	name contains I-pattern
 59.20081	I	H-05	certain	inherits from 59.02008
 59.4	I	H-08	high	has ptr to file 4; no ptr to file 2
@@ -1142,7 +1286,9 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 59.7221	S	H-05	certain	inherits from 59.722
 59.723	S	H-05	certain	inherits from 59.7
 59.7231	S	H-05	certain	inherits from 59.723
+59.73	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 59.731	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+59.74	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 59.747	S	H-05	certain	inherits from 59.7
 59.782	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 59.79001	S	H-05	certain	inherits from 59.7
@@ -1159,6 +1305,9 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 60.14	K	H-20	low	name contains K-pattern
 60.15	I	H-08	high	has ptr to file 4; no ptr to file 2
 60.28	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+61	K	H-40	moderate	3 targets all classified K
+61.01	K	H-05	certain	inherits(prop) from 61
+61.02	K	H-05	certain	inherits(prop) from 61
 61.023	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 61.0231	S	H-05	certain	inherits from 61.023
 61.1	K	H-18	moderate	ptr_in=11 ptr_out=0
@@ -1179,12 +1328,16 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 61.33	K	H-05	certain	inherits from 61.32
 61.34	K	H-05	certain	inherits from 61.3
 61.37	K	H-05	certain	inherits from 61.3
+61.38	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+61.382	S	H-05	certain	inherits(prop) from 61.38
 61.39	K	H-20	low	name contains K-pattern
 61.391	K	H-05	certain	inherits from 61.39
 61.392	K	H-05	certain	inherits from 61.39
 61.393	K	H-05	certain	inherits from 61.39
 61.394	K	H-05	certain	inherits from 61.39
 61.3941	K	H-05	certain	inherits from 61.394
+62	K	H-40	moderate	2 targets all classified K
+62.01	K	H-05	certain	inherits(prop) from 62
 62.02	K	H-20	low	name contains K-pattern
 62.023	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 62.0231	S	H-05	certain	inherits from 62.023
@@ -1205,9 +1358,17 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 62.482	S	H-05	certain	inherits from 62.48
 62.483	S	H-05	certain	inherits from 62.48
 62.485	S	H-21	low	name contains S-pattern
+62.487	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 62.4871	I	H-22	low	name contains I-pattern
+62.49	K	H-40	moderate	2 targets all classified K
+62.49002	K	H-05	certain	inherits(prop) from 62.49
+62.49162	K	H-05	certain	inherits(prop) from 62.49
+62.495	K	H-05	certain	inherits(prop) from 62.49
+62.55	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 62.7501	K	H-05	certain	inherits from 62.07
 62.75011	K	H-05	certain	inherits from 62.7501
+62.8	K	H-40	moderate	2 targets all classified K
+62.801	K	H-05	certain	inherits(prop) from 62.8
 62.85	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 62.9	I	H-08	high	has ptr to file 4; no ptr to file 2
 62.9001	I	H-08	high	has ptr to file 4; no ptr to file 2
@@ -1442,6 +1603,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 64.03	I	H-08	high	has ptr to file 4; no ptr to file 2
 64.036	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 64.04	K	H-05	certain	inherits from 64
+64.05	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 64.06	I	H-08	high	has ptr to file 4; no ptr to file 2
 64.061	K	H-18	moderate	ptr_in=20 ptr_out=2
 64.062	K	H-20	low	name contains K-pattern
@@ -1454,11 +1616,15 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 64.13	I	H-05	certain	inherits from 64.1
 64.131	I	H-05	certain	inherits from 64.13
 64.186	K	H-05	certain	inherits from 64.018
+64.19999	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 64.2	K	H-20	low	name contains K-pattern
+64.20999	S	H-05	certain	inherits(prop) from 64.19999
 64.21	K	H-20	low	name contains K-pattern
 64.21999	K	H-20	low	name contains K-pattern
+64.22999	S	H-05	certain	inherits(prop) from 64.19999
 64.23	K	H-05	certain	inherits from 64.2
 64.23999	K	H-20	low	name contains K-pattern
+64.24999	S	H-05	certain	inherits(prop) from 64.20999
 64.317	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 64.368	S	H-05	certain	inherits from 64.036
 64.369	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -1527,22 +1693,29 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 66.08	K	H-05	certain	inherits from 66
 66.09	K	H-05	certain	inherits from 66
 66.1	I	H-08	high	has ptr to file 4; no ptr to file 2
+66.2	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 66.21	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 66.211	S	H-05	certain	inherits from 66.21
 66.22	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+66.3	P	H-14	moderate	package=LAB SERVICE (LR)
+66.399	P	H-05	certain	inherits from 66.3
 66.4	I	H-08	high	has ptr to file 4; no ptr to file 2
+66.9	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+66.91	S	H-05	certain	inherits(prop) from 66.9
+66.92	S	H-05	certain	inherits(prop) from 66.9
 67	P	H-06	high	field=2 PATIENT FILE REF points to file 2
 67.1	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 67.11	I	H-08	high	has ptr to file 4; no ptr to file 2
 67.111	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 67.2	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 67.3	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-67.4	P	H-23	low	name contains P-pattern
+67.4	P	H-14	moderate	package=LAB SERVICE (LR)
 67.9	I	H-08	high	has ptr to file 4; no ptr to file 2
 67.901	I	H-08	high	has ptr to file 4; no ptr to file 2
 67.911	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 67.9114	S	H-05	certain	inherits from 67.911
 67.91148	S	H-05	certain	inherits from 67.9114
+67.99999	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 67.9999901	I	H-22	low	name contains I-pattern
 67.9999911	I	H-05	certain	inherits from 67.9999901
 67.99999114	I	H-05	certain	inherits from 67.9999911
@@ -1562,6 +1735,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 68.12	S	H-05	certain	inherits from 68.11
 68.13	I	H-05	certain	inherits from 68.05
 68.14	I	H-08	high	has ptr to file 4; no ptr to file 2
+68.2	P	H-14	moderate	package=LAB SERVICE (LR)
 68.21	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 68.22	S	H-05	certain	inherits from 68.21
 68.222	S	H-05	certain	inherits from 68.22
@@ -1573,30 +1747,48 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 68.27	I	H-05	certain	inherits from 68.23
 68.28	I	H-05	certain	inherits from 68.23
 68.29	I	H-05	certain	inherits from 68.23
+68.3	P	H-05	certain	inherits from 68.2
 68.4	S	H-13	high	global=
 68.41	S	H-05	certain	inherits from 68.4
+69	P	H-14	moderate	package=LAB SERVICE (LR)
 69.01	I	H-08	high	has ptr to file 4; no ptr to file 2
 69.02	I	H-05	certain	inherits from 69.01
 69.03	I	H-08	high	has ptr to file 4; no ptr to file 2
 69.04	I	H-05	certain	inherits from 69.01
 69.05	I	H-05	certain	inherits from 69.03
-69.211	K	H-20	low	name contains K-pattern
-69.212	S	H-21	low	name contains S-pattern
+69.1	P	H-14	moderate	package=LAB SERVICE (LR)
+69.11	P	H-05	certain	inherits from 69.1
+69.2	P	H-14	moderate	package=LAB SERVICE (LR)
+69.21	P	H-05	certain	inherits from 69.2
+69.211	P	H-05	certain	inherits from 69.2
+69.212	P	H-05	certain	inherits from 69.2
 69.2166113	I	H-05	certain	inherits from 69.01
 69.2166114	I	H-05	certain	inherits from 69.01
 69.2166115	I	H-05	certain	inherits from 69.01
 69.2166116	I	H-05	certain	inherits from 69.01
+69.22	P	H-05	certain	inherits from 69.2
 69.221661	I	H-05	certain	inherits from 69.02
 69.2216612	I	H-05	certain	inherits from 69.02
 69.22166124	I	H-05	certain	inherits from 69.2216612
+69.23	P	H-05	certain	inherits from 69.2
+69.24	P	H-05	certain	inherits from 69.2
+69.25	P	H-05	certain	inherits from 69.2
+69.26	P	H-05	certain	inherits from 69.2
+69.27	P	H-05	certain	inherits from 69.2
 69.28	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+69.29	P	H-05	certain	inherits from 69.2
+69.299	P	H-05	certain	inherits from 69.2
 69.3	P	H-06	high	field=.06 VA PATIENT NUMBER points to file 2
 69.31	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 69.32	S	H-05	certain	inherits from 69.31
 69.321	S	H-05	certain	inherits from 69.32
 69.3211	S	H-05	certain	inherits from 69.321
+69.33	P	H-05	certain	inherits from 69.2
+69.34	P	H-05	certain	inherits from 69.33
 69.35	S	H-05	certain	inherits from 69.28
 69.36	S	H-05	certain	inherits from 69.35
+69.37	P	H-05	certain	inherits from 69.299
+69.38	P	H-05	certain	inherits from 69.2
 69.399	I	H-05	certain	inherits from 69.03
 69.3991	I	H-05	certain	inherits from 69.03
 69.51	K	H-20	low	name contains K-pattern
@@ -1606,6 +1798,9 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 69.6061	I	H-05	certain	inherits from 69.6
 69.6063	I	H-08	high	has ptr to file 4; no ptr to file 2
 69.60631	I	H-05	certain	inherits from 69.6063
+69.61	P	H-05	certain	inherits from 69.2
+69.62	P	H-05	certain	inherits from 69.61
+69.63	P	H-05	certain	inherits from 69.61
 69.64	I	H-05	certain	inherits from 69.6
 69.699	I	H-05	certain	inherits from 69.6
 69.71	S	H-21	low	name contains S-pattern
@@ -1634,6 +1829,9 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 69.9006	I	H-08	high	has ptr to file 4; no ptr to file 2
 69.9007	I	H-08	high	has ptr to file 4; no ptr to file 2
 69.9008	I	H-05	certain	inherits from 69.9
+69.91	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+69.911	S	H-05	certain	inherits(prop) from 69.91
+69.9113	S	H-05	certain	inherits(prop) from 69.911
 69.913	S	H-21	low	name contains S-pattern
 69.914	K	H-20	low	name contains K-pattern
 69.915	K	H-20	low	name contains K-pattern
@@ -1665,19 +1863,55 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 70.3135	S	H-05	certain	inherits from 70.03
 70.3225	S	H-05	certain	inherits from 70.03
 70.346	S	H-05	certain	inherits from 70.03
-71.03	K	H-20	low	name contains K-pattern
+71	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
+71.01	P	H-05	certain	inherits from 71
+71.0125	P	H-05	certain	inherits from 71
+71.0135	P	H-05	certain	inherits from 71
+71.02	P	H-05	certain	inherits from 71
+71.03	P	H-05	certain	inherits from 71
+71.04	P	H-05	certain	inherits from 71
+71.05	P	H-05	certain	inherits from 71
+71.055	P	H-05	certain	inherits from 71
 71.06	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-71.1	K	H-20	low	name contains K-pattern
-71.1103	K	H-20	low	name contains K-pattern
-71.1235	S	H-21	low	name contains S-pattern
-71.23	K	H-20	low	name contains K-pattern
-71.5	K	H-20	low	name contains K-pattern
+71.07	P	H-05	certain	inherits from 71
+71.0731	P	H-05	certain	inherits from 71
+71.08	P	H-05	certain	inherits from 71
+71.09	P	H-05	certain	inherits from 71
+71.1	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
+71.11	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
+71.1102	P	H-05	certain	inherits from 71.11
+71.1103	P	H-05	certain	inherits from 71.11
+71.1105	P	H-05	certain	inherits from 71.11
+71.1108	P	H-05	certain	inherits from 71.11
+71.111	P	H-05	certain	inherits from 71.11
+71.11125	P	H-05	certain	inherits from 71.11
+71.11135	P	H-05	certain	inherits from 71.11
+71.1155	P	H-05	certain	inherits from 71.11
+71.11731	P	H-05	certain	inherits from 71.11
+71.12	P	H-05	certain	inherits from 71.11
+71.1235	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
+71.13	P	H-05	certain	inherits from 71.11
+71.2	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
+71.23	P	H-05	certain	inherits from 71.2
+71.3	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
+71.312	P	H-05	certain	inherits from 71.3
+71.4	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
+71.5	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
+71.6	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
+71.61	P	H-05	certain	inherits from 71.6
+71.62	P	H-05	certain	inherits from 71.6
+71.7	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
+71.701	P	H-05	certain	inherits from 71.7
+71.8	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
+71.9	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
 71.98	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-71.99	S	H-21	low	name contains S-pattern
-71.9901	S	H-05	certain	inherits from 71.99
-71.993	S	H-05	certain	inherits from 71.99
-71.9999	S	H-05	certain	inherits from 71.99
-73.2	K	H-20	low	name contains K-pattern
+71.99	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
+71.9901	P	H-05	certain	inherits from 71.99
+71.993	P	H-05	certain	inherits from 71.99
+71.9999	P	H-05	certain	inherits from 71.99
+72	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
+73.1	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
+73.2	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
 74	P	H-06	high	field=2 PATIENT NAME points to file 2
 74.01	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 74.02	P	H-05	certain	inherits from 74
@@ -1686,11 +1920,15 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 74.04	P	H-05	certain	inherits from 74
 74.05	P	H-05	certain	inherits from 74
 74.06	P	H-05	certain	inherits from 74
+74.1	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
+74.11	P	H-05	certain	inherits from 74.1
+74.12	P	H-05	certain	inherits from 74.1
 74.16	S	H-05	certain	inherits from 74.01
 74.18	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 74.19	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 74.2	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 74.21	S	H-05	certain	inherits from 74.2
+74.3	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
 74.33	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 74.4	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 74.62	P	H-05	certain	inherits from 74.06
@@ -1700,26 +1938,38 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 75.12	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 75.125	P	H-05	certain	inherits from 75.1
 75.13	P	H-05	certain	inherits from 75.1
-78.1	K	H-20	low	name contains K-pattern
-78.22	S	H-21	low	name contains S-pattern
-78.3	K	H-20	low	name contains K-pattern
+75.2	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
+75.3	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
+78.1	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
+78.2	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
+78.21	P	H-05	certain	inherits from 78.2
+78.22	P	H-05	certain	inherits from 78.2
+78.3	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
+78.4	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
+78.6	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
+78.7	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
 79	I	H-08	high	has ptr to file 4; no ptr to file 2
 79.01	I	H-05	certain	inherits from 79
 79.0125	I	H-05	certain	inherits from 79
 79.0175	I	H-05	certain	inherits from 79
 79.02	I	H-05	certain	inherits from 79
 79.03	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-79.11	I	H-22	low	name contains I-pattern
+79.1	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
+79.11	P	H-05	certain	inherits from 79.1
+79.1135	P	H-05	certain	inherits from 79.1
+79.12	P	H-05	certain	inherits from 79.1
 79.13	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-79.2	K	H-18	moderate	ptr_in=15 ptr_out=0
-79.21	K	H-05	certain	inherits from 79.2
-79.22	K	H-05	certain	inherits from 79.2
+79.188	P	H-05	certain	inherits from 79.1
+79.2	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
+79.21	P	H-05	certain	inherits from 79.2
+79.22	P	H-05	certain	inherits from 79.2
 79.23	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 79.3	P	H-06	high	field=.03 PATIENT points to file 2
-79.72	K	H-20	low	name contains K-pattern
-79.721	K	H-05	certain	inherits from 79.72
-79.7211	K	H-05	certain	inherits from 79.721
-79.72114	K	H-05	certain	inherits from 79.7211
+79.7	P	H-14	moderate	package=RADIOLOGY/NUCLEAR MEDICINE (RA)
+79.72	P	H-05	certain	inherits from 79.7
+79.721	P	H-05	certain	inherits from 79.72
+79.7211	P	H-05	certain	inherits from 79.721
+79.72114	P	H-05	certain	inherits from 79.7211
 80	K	H-12	high	global=
 80.01	K	H-05	certain	inherits from 80
 80.0103	K	H-05	certain	inherits from 80
@@ -1756,16 +2006,26 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 80.3	K	H-18	moderate	ptr_in=16 ptr_out=0
 80.31	K	H-05	certain	inherits from 80.3
 80.32	K	H-05	certain	inherits from 80.31
-80.4	K	H-18	moderate	ptr_in=10 ptr_out=1
-80.62	K	H-20	low	name contains K-pattern
-80.63	K	H-20	low	name contains K-pattern
+80.4	K	H-16	moderate	package=DRG GROUPER (ICD)
+80.5	K	H-16	moderate	package=DRG GROUPER (ICD)
+80.51	K	H-05	certain	inherits from 80.5
+80.511	K	H-05	certain	inherits from 80.51
+80.6	K	H-16	moderate	package=DRG GROUPER (ICD)
+80.62	K	H-05	certain	inherits from 80.6
+80.63	K	H-05	certain	inherits from 80.6
 80.682	K	H-05	certain	inherits from 80.068
-80.71	K	H-20	low	name contains K-pattern
+80.7	K	H-16	moderate	package=DRG GROUPER (ICD)
+80.71	K	H-05	certain	inherits from 80.7
 80.711	K	H-05	certain	inherits from 80.071
-80.72	K	H-20	low	name contains K-pattern
-80.73	K	H-20	low	name contains K-pattern
-80.82	K	H-20	low	name contains K-pattern
-80.94	I	H-22	low	name contains I-pattern
+80.72	K	H-05	certain	inherits from 80.7
+80.73	K	H-05	certain	inherits from 80.7
+80.8	K	H-16	moderate	package=DRG GROUPER (ICD)
+80.82	K	H-05	certain	inherits from 80.8
+80.9	K	H-16	moderate	package=DRG GROUPER (ICD)
+80.91	K	H-05	certain	inherits from 80.9
+80.92	K	H-05	certain	inherits from 80.9
+80.93	K	H-05	certain	inherits from 80.9
+80.94	K	H-05	certain	inherits from 80.93
 81	K	H-12	high	global=
 81.01	K	H-05	certain	inherits from 81
 81.02	K	H-05	certain	inherits from 81
@@ -1783,9 +2043,9 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 81.362	K	H-05	certain	inherits from 81.3
 81.372	K	H-05	certain	inherits from 81.362
 81.621	K	H-05	certain	inherits from 81.062
-82	K	H-20	low	name contains K-pattern
-82.1	K	H-20	low	name contains K-pattern
-82.11	K	H-20	low	name contains K-pattern
+82	K	H-16	moderate	package=DRG GROUPER (ICD)
+82.1	K	H-16	moderate	package=DRG GROUPER (ICD)
+82.11	K	H-16	moderate	package=DRG GROUPER (ICD)
 82.111	K	H-05	certain	inherits from 82.11
 82.1111	K	H-05	certain	inherits from 82.111
 82.1112	K	H-05	certain	inherits from 82.111
@@ -1794,7 +2054,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 82.1115	K	H-05	certain	inherits from 82.111
 82.1116	K	H-05	certain	inherits from 82.111
 82.11161	K	H-05	certain	inherits from 82.1116
-82.12	K	H-20	low	name contains K-pattern
+82.12	K	H-16	moderate	package=DRG GROUPER (ICD)
 82.121	K	H-05	certain	inherits from 82.12
 82.1211	K	H-05	certain	inherits from 82.121
 82.1212	K	H-05	certain	inherits from 82.121
@@ -1803,19 +2063,30 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 82.1215	K	H-05	certain	inherits from 82.121
 82.1216	K	H-05	certain	inherits from 82.121
 82.12161	K	H-05	certain	inherits from 82.1216
-83	K	H-20	low	name contains K-pattern
-83.1	K	H-20	low	name contains K-pattern
+82.13	K	H-16	moderate	package=DRG GROUPER (ICD)
+82.131	K	H-05	certain	inherits from 82.13
+83	K	H-16	moderate	package=DRG GROUPER (ICD)
+83.1	K	H-16	moderate	package=DRG GROUPER (ICD)
 83.1001	K	H-05	certain	inherits from 83.1
-83.11	K	H-20	low	name contains K-pattern
+83.11	K	H-16	moderate	package=DRG GROUPER (ICD)
 83.1101	K	H-05	certain	inherits from 83.11
-83.2	K	H-20	low	name contains K-pattern
+83.2	K	H-16	moderate	package=DRG GROUPER (ICD)
 83.2001	K	H-05	certain	inherits from 83.2
-83.3	K	H-20	low	name contains K-pattern
-83.5002	K	H-20	low	name contains K-pattern
-83.5003	K	H-20	low	name contains K-pattern
-83.6002	K	H-20	low	name contains K-pattern
-83.6003	K	H-20	low	name contains K-pattern
-83.71	K	H-20	low	name contains K-pattern
+83.3	K	H-16	moderate	package=DRG GROUPER (ICD)
+83.5	K	H-16	moderate	package=DRG GROUPER (ICD)
+83.5001	K	H-05	certain	inherits from 83.5
+83.5002	K	H-05	certain	inherits from 83.5
+83.5003	K	H-05	certain	inherits from 83.5
+83.51	K	H-16	moderate	package=DRG GROUPER (ICD)
+83.6	K	H-16	moderate	package=DRG GROUPER (ICD)
+83.6001	K	H-05	certain	inherits from 83.6
+83.6002	K	H-05	certain	inherits from 83.6
+83.6003	K	H-05	certain	inherits from 83.6
+83.61	K	H-16	moderate	package=DRG GROUPER (ICD)
+83.6101	K	H-05	certain	inherits from 83.61
+83.6102	K	H-05	certain	inherits from 83.61
+83.7	K	H-16	moderate	package=DRG GROUPER (ICD)
+83.71	K	H-16	moderate	package=DRG GROUPER (ICD)
 90	P	H-06	high	field=.01 NAME points to file 2
 90.01	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 90.02	S	H-05	certain	inherits from 90.01
@@ -1829,6 +2100,13 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 90.16	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 90.17	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 95.11	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+95.3	K	H-40	moderate	11 targets all classified K
+95.3099	K	H-05	certain	inherits(prop) from 95.3
+95.32	K	H-05	certain	inherits(prop) from 95.3
+95.33	K	H-05	certain	inherits(prop) from 95.3
+95.384	K	H-05	certain	inherits(prop) from 95.3
+95.39	K	H-05	certain	inherits(prop) from 95.3
+95.399	K	H-05	certain	inherits(prop) from 95.3
 95.4	I	H-08	high	has ptr to file 4; no ptr to file 2
 95.401	I	H-05	certain	inherits from 95.4
 95.4011	I	H-05	certain	inherits from 95.401
@@ -1978,6 +2256,8 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 101.06	S	H-05	certain	inherits from 101
 101.07	S	H-05	certain	inherits from 101
 101.0775	S	H-05	certain	inherits from 101
+101.11	S	H-17	moderate	package=KERNEL (XU)
+101.111	S	H-05	certain	inherits from 101.11
 101.13	K	H-12	high	global=
 101.15	K	H-12	high	global=
 101.152	K	H-05	certain	inherits from 101.15
@@ -2034,9 +2314,9 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 102.3	P	H-06	high	field=3 PATIENT points to file 2
 102.31	P	H-05	certain	inherits from 102.3
 102.4	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-102.91	K	H-20	low	name contains K-pattern
-102.912	K	H-05	certain	inherits from 102.91
-102.913	K	H-05	certain	inherits from 102.91
+102.91	P	H-14	moderate	package=ORDER ENTRY/RESULTS REPORTING (OR)
+102.912	P	H-05	certain	inherits from 102.91
+102.913	P	H-05	certain	inherits from 102.91
 103	P	H-06	high	field=.01 PATIENT points to file 2
 103.011	P	H-05	certain	inherits from 103
 103.0112	P	H-05	certain	inherits from 103
@@ -2061,6 +2341,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 105.32	K	H-05	certain	inherits from 105.03
 106	S	H-21	low	name contains S-pattern
 107.1	K	H-20	low	name contains K-pattern
+107.2	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 107.21	S	H-21	low	name contains S-pattern
 108	S	H-21	low	name contains S-pattern
 108.01	S	H-05	certain	inherits from 108
@@ -2081,6 +2362,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 112.62	S	H-05	certain	inherits from 112.61
 112.63	S	H-05	certain	inherits from 112.62
 112.64	S	H-05	certain	inherits from 112.62
+113	P	H-14	moderate	package=DIETETICS (FH)
 113.1	P	H-10	high	global=
 113.2	P	H-10	high	global=
 114	P	H-10	high	global=
@@ -2234,6 +2516,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 120.814	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 120.82	P	H-10	high	global=
 120.8205	P	H-05	certain	inherits from 120.82
+120.821	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 120.822	P	H-05	certain	inherits from 120.82
 120.8221	P	H-05	certain	inherits from 120.822
 120.823	P	H-05	certain	inherits from 120.82
@@ -2243,6 +2526,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 120.8262	S	H-05	certain	inherits from 120.826
 120.8299	P	H-05	certain	inherits from 120.82
 120.83	P	H-10	high	global=
+120.831	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 120.832	P	H-05	certain	inherits from 120.83
 120.833	P	H-05	certain	inherits from 120.83
 120.8331	P	H-05	certain	inherits from 120.833
@@ -2316,12 +2600,14 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 124.3	P	H-06	high	field=.02 PATIENT points to file 2
 124.31	P	H-05	certain	inherits from 124.3
 124.313	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-125.01	K	H-20	low	name contains K-pattern
-125.11	K	H-20	low	name contains K-pattern
-125.111	K	H-05	certain	inherits from 125.11
-125.12	K	H-20	low	name contains K-pattern
+125	P	H-14	moderate	package=PROBLEM LIST (GMPL)
+125.01	P	H-05	certain	inherits from 125
+125.1	P	H-14	moderate	package=PROBLEM LIST (GMPL)
+125.11	P	H-14	moderate	package=PROBLEM LIST (GMPL)
+125.111	P	H-05	certain	inherits from 125.11
+125.12	P	H-14	moderate	package=PROBLEM LIST (GMPL)
 125.8	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-125.99	S	H-21	low	name contains S-pattern
+125.99	P	H-14	moderate	package=PROBLEM LIST (GMPL)
 126	P	H-06	high	field=.01 PATIENT points to file 2
 126.01	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 126.02	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -2345,6 +2631,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 126.95	P	H-10	high	global=
 129.12	K	H-20	low	name contains K-pattern
 129.13	K	H-20	low	name contains K-pattern
+129.14	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 129.2	K	H-12	high	global=
 129.21	K	H-12	high	global=
 129.22	K	H-12	high	global=
@@ -2440,7 +2727,25 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 130.5	S	H-05	certain	inherits from 130.06
 130.534	P	H-05	certain	inherits from 130.053
 130.8	P	H-05	certain	inherits from 130
-131.01	S	H-21	low	name contains S-pattern
+131	P	H-14	moderate	package=SURGERY (SR)
+131.01	P	H-14	moderate	package=SURGERY (SR)
+131.02	P	H-14	moderate	package=SURGERY (SR)
+131.03	P	H-05	certain	inherits from 131
+131.04	P	H-14	moderate	package=SURGERY (SR)
+131.05	P	H-05	certain	inherits from 131
+131.06	P	H-14	moderate	package=SURGERY (SR)
+131.23	P	H-05	certain	inherits from 131.02
+131.25	P	H-14	moderate	package=SURGERY (SR)
+131.251	P	H-05	certain	inherits from 131.25
+131.3	P	H-14	moderate	package=SURGERY (SR)
+131.34	P	H-05	certain	inherits from 131.3
+131.4	P	H-14	moderate	package=SURGERY (SR)
+131.45	P	H-05	certain	inherits from 131.04
+131.5	P	H-14	moderate	package=SURGERY (SR)
+131.56	P	H-05	certain	inherits from 131.5
+131.6	P	H-14	moderate	package=SURGERY (SR)
+131.63	P	H-05	certain	inherits from 131.6
+131.64	P	H-05	certain	inherits from 131.06
 131.7	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 131.701	S	H-05	certain	inherits from 131.7
 131.702	S	H-05	certain	inherits from 131.7
@@ -2451,41 +2756,56 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 131.8	P	H-10	high	global=
 131.81	P	H-05	certain	inherits from 131.8
 131.82	P	H-05	certain	inherits from 131.8
-132.8	K	H-20	low	name contains K-pattern
-132.9	K	H-20	low	name contains K-pattern
-132.92	K	H-05	certain	inherits from 132.9
-132.95	K	H-20	low	name contains K-pattern
-132.952	K	H-05	certain	inherits from 132.95
+131.9	P	H-14	moderate	package=SURGERY (SR)
+132	P	H-14	moderate	package=SURGERY (SR)
+132.05	P	H-14	moderate	package=SURGERY (SR)
+132.4	P	H-14	moderate	package=SURGERY (SR)
+132.8	P	H-14	moderate	package=SURGERY (SR)
+132.9	P	H-14	moderate	package=SURGERY (SR)
+132.92	P	H-05	certain	inherits from 132.9
+132.95	P	H-14	moderate	package=SURGERY (SR)
+132.952	P	H-05	certain	inherits from 132.95
 133	I	H-08	high	has ptr to file 4; no ptr to file 2
 133.012	I	H-05	certain	inherits from 133
 133.027	I	H-05	certain	inherits from 133
 133.028	I	H-05	certain	inherits from 133
 133.031	I	H-05	certain	inherits from 133
 133.036	I	H-05	certain	inherits from 133
-133.2	S	H-21	low	name contains S-pattern
-133.21	S	H-05	certain	inherits from 133.2
+133.2	P	H-14	moderate	package=SURGERY (SR)
+133.21	P	H-05	certain	inherits from 133.2
 133.281	I	H-05	certain	inherits from 133.028
-133.29	S	H-05	certain	inherits from 133.2
+133.29	P	H-05	certain	inherits from 133.2
 133.361	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+133.4	P	H-14	moderate	package=SURGERY (SR)
+133.6	P	H-14	moderate	package=SURGERY (SR)
+133.7	P	H-14	moderate	package=SURGERY (SR)
+133.8	P	H-14	moderate	package=SURGERY (SR)
 133.801	P	H-06	high	field=.01 PATIENT points to file 2
 133.8013	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 133.8014	P	H-05	certain	inherits from 133.801
-134	K	H-20	low	name contains K-pattern
-134.01	K	H-05	certain	inherits from 134
-135.3	P	H-23	low	name contains P-pattern
-135.4	P	H-23	low	name contains P-pattern
-136	K	H-20	low	name contains K-pattern
-136.01	K	H-05	certain	inherits from 136
+134	P	H-14	moderate	package=SURGERY (SR)
+134.01	P	H-05	certain	inherits from 134
+135	P	H-14	moderate	package=SURGERY (SR)
+135.1	P	H-14	moderate	package=SURGERY (SR)
+135.2	P	H-14	moderate	package=SURGERY (SR)
+135.3	P	H-14	moderate	package=SURGERY (SR)
+135.4	P	H-14	moderate	package=SURGERY (SR)
+136	P	H-14	moderate	package=SURGERY (SR)
+136.01	P	H-05	certain	inherits from 136
 136.011	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-136.02	K	H-05	certain	inherits from 136
-136.03	K	H-05	certain	inherits from 136
-136.04	K	H-05	certain	inherits from 136
-136.31	K	H-05	certain	inherits from 136.03
-136.32	K	H-05	certain	inherits from 136.03
-136.5	K	H-20	low	name contains K-pattern
-136.52	K	H-05	certain	inherits from 136.5
-136.53	K	H-05	certain	inherits from 136.5
-137.45	K	H-18	moderate	ptr_in=10 ptr_out=2
+136.02	P	H-05	certain	inherits from 136
+136.03	P	H-05	certain	inherits from 136
+136.04	P	H-05	certain	inherits from 136
+136.31	P	H-05	certain	inherits from 136.03
+136.32	P	H-05	certain	inherits from 136.03
+136.5	P	H-14	moderate	package=SURGERY (SR)
+136.52	P	H-05	certain	inherits from 136.5
+136.53	P	H-05	certain	inherits from 136.5
+137	P	H-14	moderate	package=SURGERY (SR)
+137.45	P	H-14	moderate	package=SURGERY (SR)
+138	P	H-14	moderate	package=SURGERY (SR)
+139.2	P	H-14	moderate	package=SURGERY (SR)
+139.21	P	H-05	certain	inherits from 139.2
 139.5	P	H-06	high	field=.01 PATIENT points to file 2
 139.544	P	H-05	certain	inherits from 139.5
 142	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -2496,38 +2816,47 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 142.51	S	H-05	certain	inherits from 142.5
 142.98	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 142.99	S	H-21	low	name contains S-pattern
-150.2	K	H-20	low	name contains K-pattern
+150.1	I	H-15	moderate	package=VISIT TRACKING (VSIT)
+150.2	I	H-15	moderate	package=VISIT TRACKING (VSIT)
 150.9	S	H-13	high	global=
 150.93	S	H-05	certain	inherits from 150.9
-160	S	H-21	low	name contains S-pattern
-160.01	S	H-05	certain	inherits from 160
-160.02	S	H-05	certain	inherits from 160
-160.03	S	H-05	certain	inherits from 160
-160.031	S	H-05	certain	inherits from 160
+160	K	H-16	moderate	package=ONCOLOGY (ONC)
+160.01	K	H-05	certain	inherits from 160
+160.02	K	H-05	certain	inherits from 160
+160.03	K	H-05	certain	inherits from 160
+160.031	K	H-05	certain	inherits from 160
 160.04	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-160.041	S	H-05	certain	inherits from 160
-160.042	S	H-05	certain	inherits from 160
-160.044	S	H-05	certain	inherits from 160
+160.041	K	H-05	certain	inherits from 160
+160.042	K	H-05	certain	inherits from 160
+160.044	K	H-05	certain	inherits from 160
 160.05	I	H-08	high	has ptr to file 4; no ptr to file 2
-160.06	S	H-05	certain	inherits from 160
+160.06	K	H-05	certain	inherits from 160
 160.075	I	H-08	high	has ptr to file 4; no ptr to file 2
 160.1	I	H-08	high	has ptr to file 4; no ptr to file 2
 160.11	I	H-05	certain	inherits from 160.1
-160.12	K	H-20	low	name contains K-pattern
+160.12	K	H-16	moderate	package=ONCOLOGY (ONC)
 160.13	I	H-05	certain	inherits from 160.1
-160.16	S	H-21	low	name contains S-pattern
-160.161	S	H-05	certain	inherits from 160.16
-160.162	S	H-05	certain	inherits from 160.16
-160.17	S	H-21	low	name contains S-pattern
-160.171	S	H-05	certain	inherits from 160.17
-160.172	S	H-05	certain	inherits from 160.17
+160.14	K	H-16	moderate	package=ONCOLOGY (ONC)
+160.15	K	H-16	moderate	package=ONCOLOGY (ONC)
+160.16	K	H-16	moderate	package=ONCOLOGY (ONC)
+160.161	K	H-05	certain	inherits from 160.16
+160.162	K	H-05	certain	inherits from 160.16
+160.17	K	H-16	moderate	package=ONCOLOGY (ONC)
+160.171	K	H-05	certain	inherits from 160.17
+160.172	K	H-05	certain	inherits from 160.17
 160.18	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-160.19	I	H-22	low	name contains I-pattern
+160.19	K	H-16	moderate	package=ONCOLOGY (ONC)
+160.2	K	H-16	moderate	package=ONCOLOGY (ONC)
+160.21	K	H-05	certain	inherits from 160.2
 160.22	I	H-08	high	has ptr to file 4; no ptr to file 2
+160.23	K	H-05	certain	inherits from 160.2
 160.24	I	H-05	certain	inherits from 160.1
 160.25	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 160.26	I	H-05	certain	inherits from 160.1
+160.3	K	H-16	moderate	package=ONCOLOGY (ONC)
+160.4	K	H-16	moderate	package=ONCOLOGY (ONC)
 160.45	S	H-05	certain	inherits from 160.04
+160.6	K	H-16	moderate	package=ONCOLOGY (ONC)
 161	P	H-06	high	field=.01 NAME points to file 2
 161.01	I	H-08	high	has ptr to file 4; no ptr to file 2
 161.011	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -2536,10 +2865,12 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 161.06	I	H-05	certain	inherits from 161.01
 161.192	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 161.193	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+161.23	P	H-36	moderate	2/2 targets classified P
 161.24	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 161.26	P	H-06	high	field=.01 NAME points to file 2
 161.4	I	H-08	high	has ptr to file 4; no ptr to file 2
 161.428	I	H-05	certain	inherits from 161.4
+161.45	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 161.5	P	H-06	high	field=2 VETERAN points to file 2
 161.517	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 161.5171	S	H-05	certain	inherits from 161.517
@@ -2579,6 +2910,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 162.2	P	H-06	high	field=3 VETERAN points to file 2
 162.215	P	H-05	certain	inherits from 162.2
 162.292	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+162.3	P	H-36	moderate	3/3 targets classified P
 162.371	I	H-05	certain	inherits from 162.03
 162.3711	I	H-05	certain	inherits from 162.371
 162.37112	I	H-05	certain	inherits from 162.3711
@@ -2604,88 +2936,136 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 162.792	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 162.793	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 162.8	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+162.92	P	H-36	moderate	2/2 targets classified P
+162.921	P	H-05	certain	inherits(prop) from 162.92
+162.96	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+162.961	S	H-05	certain	inherits(prop) from 162.96
+162.98	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+162.981	S	H-05	certain	inherits(prop) from 162.98
+163.5	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+163.511	S	H-05	certain	inherits(prop) from 163.5
+163.57	S	H-05	certain	inherits(prop) from 163.5
 163.7	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 163.85	K	H-20	low	name contains K-pattern
 163.851	K	H-05	certain	inherits from 163.85
 163.98	S	H-21	low	name contains S-pattern
-164.01	K	H-20	low	name contains K-pattern
-164.0101	K	H-20	low	name contains K-pattern
-164.0103	K	H-20	low	name contains K-pattern
-164.0104	K	H-20	low	name contains K-pattern
-164.0105	K	H-20	low	name contains K-pattern
-164.0106	K	H-20	low	name contains K-pattern
-164.0108	K	H-20	low	name contains K-pattern
-164.0109	K	H-20	low	name contains K-pattern
-164.0117	K	H-20	low	name contains K-pattern
-164.0118	K	H-20	low	name contains K-pattern
-164.0119	K	H-20	low	name contains K-pattern
-164.012	K	H-20	low	name contains K-pattern
-164.0121	K	H-20	low	name contains K-pattern
-164.0122	K	H-20	low	name contains K-pattern
-164.0123	K	H-20	low	name contains K-pattern
-164.0124	K	H-20	low	name contains K-pattern
-164.0125	K	H-20	low	name contains K-pattern
-164.0126	K	H-20	low	name contains K-pattern
-164.0127	K	H-20	low	name contains K-pattern
-164.0128	K	H-20	low	name contains K-pattern
-164.0129	K	H-20	low	name contains K-pattern
-164.0131	K	H-20	low	name contains K-pattern
-164.02	K	H-20	low	name contains K-pattern
-164.03	K	H-20	low	name contains K-pattern
-164.06	K	H-20	low	name contains K-pattern
-164.065	K	H-20	low	name contains K-pattern
-164.09	K	H-20	low	name contains K-pattern
-164.1	S	H-21	low	name contains S-pattern
-164.11	S	H-05	certain	inherits from 164.1
-164.12	S	H-05	certain	inherits from 164.1
-164.13	S	H-05	certain	inherits from 164.1
-164.16	S	H-05	certain	inherits from 164.1
-164.2	S	H-21	low	name contains S-pattern
-164.21	S	H-05	certain	inherits from 164.2
-164.22	S	H-05	certain	inherits from 164.2
-164.23	S	H-05	certain	inherits from 164.2
-164.24	S	H-05	certain	inherits from 164.2
-164.25	S	H-05	certain	inherits from 164.2
-164.26	S	H-05	certain	inherits from 164.2
-164.27	S	H-05	certain	inherits from 164.2
-164.272	S	H-05	certain	inherits from 164.27
-164.3	S	H-21	low	name contains S-pattern
-164.31	S	H-05	certain	inherits from 164.3
-164.331	K	H-20	low	name contains K-pattern
-164.3311	K	H-20	low	name contains K-pattern
-164.3312	K	H-20	low	name contains K-pattern
-164.3313	K	H-20	low	name contains K-pattern
-164.3314	K	H-20	low	name contains K-pattern
-164.3315	K	H-20	low	name contains K-pattern
-164.3316	K	H-20	low	name contains K-pattern
-164.3317	K	H-20	low	name contains K-pattern
-164.3318	K	H-20	low	name contains K-pattern
-164.3319	K	H-20	low	name contains K-pattern
-164.332	K	H-20	low	name contains K-pattern
-164.3321	K	H-20	low	name contains K-pattern
-164.334	K	H-20	low	name contains K-pattern
-164.335	K	H-20	low	name contains K-pattern
-164.336	K	H-20	low	name contains K-pattern
-164.337	K	H-20	low	name contains K-pattern
-164.338	K	H-20	low	name contains K-pattern
-164.34	K	H-20	low	name contains K-pattern
-164.35	K	H-20	low	name contains K-pattern
-164.42	K	H-20	low	name contains K-pattern
-164.44	S	H-21	low	name contains S-pattern
-164.441	S	H-05	certain	inherits from 164.44
-164.442	S	H-05	certain	inherits from 164.44
-164.46	K	H-20	low	name contains K-pattern
-164.47	K	H-20	low	name contains K-pattern
+163.99	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+163.991	S	H-05	certain	inherits(prop) from 163.99
+164	K	H-16	moderate	package=ONCOLOGY (ONC)
+164.01	K	H-05	certain	inherits from 164
+164.0101	K	H-05	certain	inherits from 164
+164.0103	K	H-05	certain	inherits from 164
+164.0104	K	H-05	certain	inherits from 164
+164.0105	K	H-05	certain	inherits from 164
+164.0106	K	H-05	certain	inherits from 164
+164.0108	K	H-05	certain	inherits from 164
+164.0109	K	H-05	certain	inherits from 164
+164.0111	K	H-05	certain	inherits from 164
+164.0112	K	H-05	certain	inherits from 164
+164.0113	K	H-05	certain	inherits from 164
+164.0114	K	H-05	certain	inherits from 164
+164.0115	K	H-05	certain	inherits from 164
+164.0116	K	H-05	certain	inherits from 164
+164.0117	K	H-05	certain	inherits from 164
+164.0118	K	H-05	certain	inherits from 164
+164.0119	K	H-05	certain	inherits from 164
+164.012	K	H-05	certain	inherits from 164
+164.0121	K	H-05	certain	inherits from 164
+164.0122	K	H-05	certain	inherits from 164
+164.0123	K	H-05	certain	inherits from 164
+164.0124	K	H-05	certain	inherits from 164
+164.0125	K	H-05	certain	inherits from 164
+164.0126	K	H-05	certain	inherits from 164
+164.0127	K	H-05	certain	inherits from 164
+164.0128	K	H-05	certain	inherits from 164
+164.0129	K	H-05	certain	inherits from 164
+164.0131	K	H-05	certain	inherits from 164
+164.0132	K	H-05	certain	inherits from 164
+164.0133	K	H-05	certain	inherits from 164
+164.0134	K	H-05	certain	inherits from 164
+164.02	K	H-05	certain	inherits from 164
+164.03	K	H-05	certain	inherits from 164
+164.04	K	H-05	certain	inherits from 164
+164.05	K	H-05	certain	inherits from 164
+164.06	K	H-05	certain	inherits from 164
+164.065	K	H-05	certain	inherits from 164
+164.066	K	H-05	certain	inherits from 164
+164.07	K	H-05	certain	inherits from 164
+164.08	K	H-16	moderate	package=ONCOLOGY (ONC)
+164.09	K	H-05	certain	inherits from 164
+164.1	K	H-16	moderate	package=ONCOLOGY (ONC)
+164.11	K	H-05	certain	inherits from 164.1
+164.12	K	H-05	certain	inherits from 164.1
+164.13	K	H-05	certain	inherits from 164.1
+164.14	K	H-16	moderate	package=ONCOLOGY (ONC)
+164.15	K	H-16	moderate	package=ONCOLOGY (ONC)
+164.16	K	H-05	certain	inherits from 164.1
+164.17	K	H-16	moderate	package=ONCOLOGY (ONC)
+164.18	K	H-16	moderate	package=ONCOLOGY (ONC)
+164.182	K	H-05	certain	inherits from 164.18
+164.2	K	H-16	moderate	package=ONCOLOGY (ONC)
+164.21	K	H-05	certain	inherits from 164.2
+164.22	K	H-05	certain	inherits from 164.2
+164.23	K	H-05	certain	inherits from 164.2
+164.24	K	H-05	certain	inherits from 164.2
+164.25	K	H-05	certain	inherits from 164.2
+164.26	K	H-05	certain	inherits from 164.2
+164.27	K	H-05	certain	inherits from 164.2
+164.272	K	H-05	certain	inherits from 164.27
+164.3	K	H-16	moderate	package=ONCOLOGY (ONC)
+164.31	K	H-05	certain	inherits from 164.3
+164.33	K	H-16	moderate	package=ONCOLOGY (ONC)
+164.331	K	H-05	certain	inherits from 164.33
+164.3311	K	H-05	certain	inherits from 164.33
+164.3312	K	H-05	certain	inherits from 164.33
+164.3313	K	H-05	certain	inherits from 164.33
+164.3314	K	H-05	certain	inherits from 164.33
+164.3315	K	H-05	certain	inherits from 164.33
+164.3316	K	H-05	certain	inherits from 164.33
+164.3317	K	H-05	certain	inherits from 164.33
+164.3318	K	H-05	certain	inherits from 164.33
+164.3319	K	H-05	certain	inherits from 164.33
+164.332	K	H-05	certain	inherits from 164.33
+164.3321	K	H-05	certain	inherits from 164.33
+164.333	K	H-05	certain	inherits from 164.33
+164.334	K	H-05	certain	inherits from 164.33
+164.335	K	H-05	certain	inherits from 164.33
+164.336	K	H-05	certain	inherits from 164.33
+164.337	K	H-05	certain	inherits from 164.33
+164.338	K	H-05	certain	inherits from 164.33
+164.34	K	H-05	certain	inherits from 164.33
+164.35	K	H-05	certain	inherits from 164.33
+164.4	K	H-16	moderate	package=ONCOLOGY (ONC)
+164.41	K	H-05	certain	inherits from 164.4
+164.42	K	H-16	moderate	package=ONCOLOGY (ONC)
+164.43	K	H-16	moderate	package=ONCOLOGY (ONC)
+164.44	K	H-16	moderate	package=ONCOLOGY (ONC)
+164.441	K	H-05	certain	inherits from 164.44
+164.442	K	H-05	certain	inherits from 164.44
+164.45	K	H-16	moderate	package=ONCOLOGY (ONC)
+164.46	K	H-16	moderate	package=ONCOLOGY (ONC)
+164.47	K	H-16	moderate	package=ONCOLOGY (ONC)
 164.472	K	H-05	certain	inherits from 164.47
 164.473	K	H-05	certain	inherits from 164.47
-164.5	K	H-20	low	name contains K-pattern
+164.5	K	H-16	moderate	package=ONCOLOGY (ONC)
+164.52	K	H-16	moderate	package=ONCOLOGY (ONC)
+164.522	K	H-05	certain	inherits from 164.52
 164.54	K	H-05	certain	inherits from 164.5
-164.6	K	H-20	low	name contains K-pattern
-164.9	K	H-20	low	name contains K-pattern
+164.6	K	H-16	moderate	package=ONCOLOGY (ONC)
+164.7	K	H-16	moderate	package=ONCOLOGY (ONC)
+164.8	K	H-16	moderate	package=ONCOLOGY (ONC)
+164.81	K	H-16	moderate	package=ONCOLOGY (ONC)
+164.82	K	H-16	moderate	package=ONCOLOGY (ONC)
+164.83	K	H-16	moderate	package=ONCOLOGY (ONC)
+164.84	K	H-16	moderate	package=ONCOLOGY (ONC)
+164.9	K	H-16	moderate	package=ONCOLOGY (ONC)
 165	I	H-08	high	has ptr to file 4; no ptr to file 2
-165.2	K	H-20	low	name contains K-pattern
+165.1	K	H-16	moderate	package=ONCOLOGY (ONC)
+165.11	K	H-05	certain	inherits from 165.1
+165.13	K	H-05	certain	inherits from 165.1
+165.2	K	H-16	moderate	package=ONCOLOGY (ONC)
 165.21	K	H-05	certain	inherits from 165.2
-165.3	K	H-20	low	name contains K-pattern
+165.3	K	H-16	moderate	package=ONCOLOGY (ONC)
 165.5	I	H-08	high	has ptr to file 4; no ptr to file 2
 165.51	I	H-05	certain	inherits from 165.5
 165.5103	I	H-05	certain	inherits from 165.5
@@ -2711,40 +3091,57 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 165.529	I	H-05	certain	inherits from 165.52
 165.53	I	H-05	certain	inherits from 165.5
 165.54	I	H-05	certain	inherits from 165.5
+165.55	K	H-16	moderate	package=ONCOLOGY (ONC)
 165.572	I	H-05	certain	inherits from 165.5
 165.573	I	H-05	certain	inherits from 165.5
-165.7	K	H-20	low	name contains K-pattern
-165.801	K	H-20	low	name contains K-pattern
-165.802	K	H-20	low	name contains K-pattern
-165.803	K	H-20	low	name contains K-pattern
-165.82	K	H-20	low	name contains K-pattern
-165.83	K	H-20	low	name contains K-pattern
-165.84	K	H-20	low	name contains K-pattern
-165.87	K	H-20	low	name contains K-pattern
-165.88	K	H-20	low	name contains K-pattern
-165.9	S	H-21	low	name contains S-pattern
-165.92	S	H-05	certain	inherits from 165.9
-165.921	S	H-05	certain	inherits from 165.92
-165.93	S	H-05	certain	inherits from 165.9
-165.931	S	H-05	certain	inherits from 165.93
-165.94	S	H-05	certain	inherits from 165.9
-165.941	S	H-05	certain	inherits from 165.94
-166.3	S	H-21	low	name contains S-pattern
-167	S	H-21	low	name contains S-pattern
-167.61	K	H-20	low	name contains K-pattern
+165.59	K	H-16	moderate	package=ONCOLOGY (ONC)
+165.7	K	H-16	moderate	package=ONCOLOGY (ONC)
+165.8	K	H-16	moderate	package=ONCOLOGY (ONC)
+165.801	K	H-05	certain	inherits from 165.8
+165.802	K	H-05	certain	inherits from 165.8
+165.803	K	H-05	certain	inherits from 165.8
+165.82	K	H-05	certain	inherits from 165.8
+165.83	K	H-05	certain	inherits from 165.8
+165.84	K	H-05	certain	inherits from 165.8
+165.85	K	H-05	certain	inherits from 165.8
+165.86	K	H-05	certain	inherits from 165.8
+165.87	K	H-05	certain	inherits from 165.8
+165.88	K	H-05	certain	inherits from 165.8
+165.9	K	H-16	moderate	package=ONCOLOGY (ONC)
+165.92	K	H-05	certain	inherits from 165.9
+165.921	K	H-05	certain	inherits from 165.92
+165.93	K	H-05	certain	inherits from 165.9
+165.931	K	H-05	certain	inherits from 165.93
+165.94	K	H-05	certain	inherits from 165.9
+165.941	K	H-05	certain	inherits from 165.94
+166	K	H-16	moderate	package=ONCOLOGY (ONC)
+166.12	K	H-16	moderate	package=ONCOLOGY (ONC)
+166.13	K	H-16	moderate	package=ONCOLOGY (ONC)
+166.3	K	H-16	moderate	package=ONCOLOGY (ONC)
+167	K	H-16	moderate	package=ONCOLOGY (ONC)
+167.1	K	H-16	moderate	package=ONCOLOGY (ONC)
+167.2	K	H-16	moderate	package=ONCOLOGY (ONC)
+167.3	K	H-16	moderate	package=ONCOLOGY (ONC)
+167.4	K	H-16	moderate	package=ONCOLOGY (ONC)
+167.5	K	H-16	moderate	package=ONCOLOGY (ONC)
+167.6	K	H-16	moderate	package=ONCOLOGY (ONC)
+167.61	K	H-05	certain	inherits from 167.6
 167.611	K	H-05	certain	inherits from 167.61
-168	K	H-20	low	name contains K-pattern
-169	K	H-20	low	name contains K-pattern
-169.3	S	H-21	low	name contains S-pattern
-169.32	S	H-05	certain	inherits from 169.3
-169.99	S	H-21	low	name contains S-pattern
+167.7	K	H-16	moderate	package=ONCOLOGY (ONC)
+168	K	H-16	moderate	package=ONCOLOGY (ONC)
+169	K	H-16	moderate	package=ONCOLOGY (ONC)
+169.3	K	H-16	moderate	package=ONCOLOGY (ONC)
+169.32	K	H-05	certain	inherits from 169.3
+169.99	K	H-16	moderate	package=ONCOLOGY (ONC)
 183	S	H-21	low	name contains S-pattern
 183.01	S	H-05	certain	inherits from 183
 183.12	S	H-05	certain	inherits from 183.01
+183.2	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 183.21	P	H-06	high	field=.01 PATIENT points to file 2
 183.3	P	H-23	low	name contains P-pattern
 183.31	P	H-06	high	field=.01 PATIENTS points to file 2
 183.32	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+183.4	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 183.41	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 190	P	H-06	high	field=9 PATIENT FILE POINTER points to file 2
 190.1	I	H-08	high	has ptr to file 4; no ptr to file 2
@@ -2754,6 +3151,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 190.3	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 194.2	I	H-08	high	has ptr to file 4; no ptr to file 2
 194.21	I	H-05	certain	inherits from 194.2
+194.3	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 194.31	P	H-06	high	field=.01 DFN points to file 2
 194.4	S	H-13	high	global=
 194.41	S	H-05	certain	inherits from 194.4
@@ -2834,21 +3232,36 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 210.18	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 210.19	S	H-05	certain	inherits from 210
 210.192	S	H-05	certain	inherits from 210.19
-211.3	I	H-22	low	name contains I-pattern
-211.41	I	H-22	low	name contains I-pattern
+211.1	P	H-14	moderate	package=NURSING SERVICE (NUR)
+211.2	P	H-14	moderate	package=NURSING SERVICE (NUR)
+211.3	P	H-14	moderate	package=NURSING SERVICE (NUR)
+211.4	P	H-14	moderate	package=NURSING SERVICE (NUR)
+211.41	P	H-05	certain	inherits from 211.4
 211.414	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 211.415	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-211.416	I	H-22	low	name contains I-pattern
-211.5	I	H-22	low	name contains I-pattern
+211.416	P	H-05	certain	inherits from 211.4
+211.43	P	H-05	certain	inherits from 211.4
+211.5	P	H-14	moderate	package=NURSING SERVICE (NUR)
+211.6	P	H-14	moderate	package=NURSING SERVICE (NUR)
+211.7	P	H-14	moderate	package=NURSING SERVICE (NUR)
+211.8	P	H-14	moderate	package=NURSING SERVICE (NUR)
 211.82	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-212.4	I	H-22	low	name contains I-pattern
-212.41	I	H-05	certain	inherits from 212.4
-212.42	K	H-20	low	name contains K-pattern
-212.8	K	H-20	low	name contains K-pattern
+211.83	P	H-05	certain	inherits from 211.8
+211.9	P	H-14	moderate	package=NURSING SERVICE (NUR)
+212.1	P	H-14	moderate	package=NURSING SERVICE (NUR)
+212.2	P	H-14	moderate	package=NURSING SERVICE (NUR)
+212.3	P	H-14	moderate	package=NURSING SERVICE (NUR)
+212.4	P	H-14	moderate	package=NURSING SERVICE (NUR)
+212.41	P	H-05	certain	inherits from 212.4
+212.42	P	H-14	moderate	package=NURSING SERVICE (NUR)
+212.6	P	H-14	moderate	package=NURSING SERVICE (NUR)
+212.7	P	H-14	moderate	package=NURSING SERVICE (NUR)
+212.8	P	H-14	moderate	package=NURSING SERVICE (NUR)
 213.2	I	H-08	high	has ptr to file 4; no ptr to file 2
-213.3	I	H-22	low	name contains I-pattern
+213.3	P	H-14	moderate	package=NURSING SERVICE (NUR)
 213.4	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 213.41	S	H-05	certain	inherits from 213.4
+213.5	P	H-14	moderate	package=NURSING SERVICE (NUR)
 213.51	P	H-06	high	field=.01 PATIENT points to file 2
 213.52	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 213.9	S	H-13	high	global=
@@ -2856,6 +3269,8 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 214	P	H-06	high	field=.01 NAME points to file 2
 214.6	P	H-06	high	field=.02 NAME points to file 2
 214.7	P	H-06	high	field=.02 NAME points to file 2
+216.8	P	H-14	moderate	package=NURSING SERVICE (NUR)
+216.81	P	H-05	certain	inherits from 216.8
 216.82	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 216.83	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 216.84	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -2873,6 +3288,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 217.431	S	H-05	certain	inherits from 217.43
 217.44	S	H-05	certain	inherits from 217.43
 217.47	S	H-05	certain	inherits from 217.43
+219.7	P	H-14	moderate	package=NURSING SERVICE (NUR)
 220	P	H-06	high	field=.01 NAME points to file 2
 220.01	P	H-05	certain	inherits from 220
 220.02	P	H-05	certain	inherits from 220
@@ -2885,6 +3301,9 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 220.4	S	H-13	high	global=
 220.5	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 220.51	K	H-20	low	name contains K-pattern
+220.52	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+220.6	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+220.67	S	H-05	certain	inherits(prop) from 220.6
 221	P	H-06	high	field=3 PATIENT (POINTER) points to file 2
 223	K	H-20	low	name contains K-pattern
 225	S	H-21	low	name contains S-pattern
@@ -2900,16 +3319,19 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 228.21	P	H-05	certain	inherits from 228.2
 228.221	P	H-05	certain	inherits from 228.2
 228.223	P	H-05	certain	inherits from 228.2
+228.25	K	H-40	moderate	3 targets all classified K
 228.26	P	H-05	certain	inherits from 228.2
 228.27	P	H-05	certain	inherits from 228.2
 228.28	P	H-05	certain	inherits from 228.2
 228.29	P	H-05	certain	inherits from 228.2
+228.4	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 228.41	P	H-05	certain	inherits from 228.2
 228.5	P	H-06	high	field=.04 PATIENT points to file 2
 228.6	P	H-06	high	field=.01 DENTAL PATIENT points to file 2
 228.601	P	H-05	certain	inherits from 228.6
 228.7	P	H-06	high	field=.03 PATIENT points to file 2
 228.71	P	H-05	certain	inherits from 228.7
+228.8	K	H-40	moderate	2 targets all classified K
 230	P	H-06	high	field=.06 PATIENT ID points to file 2
 230.04	P	H-05	certain	inherits from 230
 230.08	P	H-05	certain	inherits from 230
@@ -2923,23 +3345,37 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 231.93	I	H-05	certain	inherits from 231.9
 231.94	I	H-05	certain	inherits from 231.9
 231.941	I	H-05	certain	inherits from 231.94
-232.1	K	H-20	low	name contains K-pattern
-232.12	K	H-05	certain	inherits from 232.1
-232.13	K	H-05	certain	inherits from 232.1
+232.1	P	H-14	moderate	package=EMERGENCY DEPARTMENT (EDP)
+232.11	P	H-14	moderate	package=EMERGENCY DEPARTMENT (EDP)
+232.12	P	H-05	certain	inherits from 232.1
+232.13	P	H-05	certain	inherits from 232.1
+232.5	P	H-14	moderate	package=EMERGENCY DEPARTMENT (EDP)
 232.6	I	H-08	high	has ptr to file 4; no ptr to file 2
 232.61	I	H-05	certain	inherits from 232.6
 232.62	I	H-05	certain	inherits from 232.6
 232.621	I	H-05	certain	inherits from 232.62
 232.622	I	H-05	certain	inherits from 232.62
 232.63	I	H-05	certain	inherits from 232.6
-232.725	S	H-21	low	name contains S-pattern
-232.73	K	H-20	low	name contains K-pattern
-233.1	K	H-20	low	name contains K-pattern
-233.12	K	H-05	certain	inherits from 233.1
-233.2	K	H-20	low	name contains K-pattern
-233.21	K	H-05	certain	inherits from 233.2
-233.8	P	H-23	low	name contains P-pattern
-233.81	P	H-23	low	name contains P-pattern
+232.71	P	H-14	moderate	package=EMERGENCY DEPARTMENT (EDP)
+232.711	P	H-05	certain	inherits from 232.71
+232.712	P	H-05	certain	inherits from 232.71
+232.72	P	H-14	moderate	package=EMERGENCY DEPARTMENT (EDP)
+232.725	P	H-05	certain	inherits from 232.72
+232.727	P	H-05	certain	inherits from 232.72
+232.728	P	H-05	certain	inherits from 232.72
+232.729	P	H-05	certain	inherits from 232.72
+232.73	P	H-14	moderate	package=EMERGENCY DEPARTMENT (EDP)
+232.74	P	H-14	moderate	package=EMERGENCY DEPARTMENT (EDP)
+233.1	P	H-14	moderate	package=EMERGENCY DEPARTMENT (EDP)
+233.12	P	H-05	certain	inherits from 233.1
+233.2	P	H-14	moderate	package=EMERGENCY DEPARTMENT (EDP)
+233.21	P	H-05	certain	inherits from 233.2
+233.8	P	H-14	moderate	package=EMERGENCY DEPARTMENT (EDP)
+233.81	P	H-14	moderate	package=EMERGENCY DEPARTMENT (EDP)
+233.82	P	H-14	moderate	package=EMERGENCY DEPARTMENT (EDP)
+233.821	P	H-05	certain	inherits from 233.82
+233.8211	P	H-05	certain	inherits from 233.821
+233.822	P	H-05	certain	inherits from 233.82
 234	P	H-06	high	field=2 PATIENT points to file 2
 301.5	P	H-06	high	field=.01 PATIENT points to file 2
 301.501	P	H-05	certain	inherits from 301.5
@@ -2958,6 +3394,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 340.501	S	H-21	low	name contains S-pattern
 340.54	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 340.55	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+340.7	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 341	I	H-08	high	has ptr to file 4; no ptr to file 2
 341.01	I	H-05	certain	inherits from 341
 341.1	K	H-20	low	name contains K-pattern
@@ -2967,11 +3404,17 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 342.02	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 342.04	I	H-05	certain	inherits from 342
 342.2	K	H-20	low	name contains K-pattern
+342.3	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 342.31	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+343	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+343.01	S	H-05	certain	inherits(prop) from 343
 344	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 344.01	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 344.1	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 344.11	S	H-05	certain	inherits from 344.1
+344.2	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+344.21	S	H-05	certain	inherits(prop) from 344.2
+344.211	S	H-05	certain	inherits(prop) from 344.21
 344.22	S	H-21	low	name contains S-pattern
 344.31	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 344.312	S	H-05	certain	inherits from 344.31
@@ -3000,12 +3443,24 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 344.711	S	H-05	certain	inherits from 344.71
 344.72	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 344.73	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+344.74	P	H-36	moderate	2/2 targets classified P
 344.9	S	H-21	low	name contains S-pattern
+344.91	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+344.911	S	H-05	certain	inherits(prop) from 344.91
+345	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+345.04	S	H-05	certain	inherits(prop) from 345
 345.1	K	H-20	low	name contains K-pattern
+346	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+346.04	S	H-05	certain	inherits(prop) from 346
 347.1	K	H-20	low	name contains K-pattern
 347.3	K	H-20	low	name contains K-pattern
+347.4	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+348	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+348.1	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 348.2	K	H-20	low	name contains K-pattern
+348.4	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 348.41	P	H-06	high	field=.02 PATIENT points to file 2
+348.42	S	H-05	certain	inherits(prop) from 348.4
 348.43	P	H-06	high	field=.01 COPAY PATIENT points to file 2
 348.5	K	H-20	low	name contains K-pattern
 348.6	K	H-20	low	name contains K-pattern
@@ -3016,6 +3471,8 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 349.12	I	H-05	certain	inherits from 349.1
 349.151	I	H-05	certain	inherits from 349.1
 349.161	I	H-08	high	has ptr to file 4; no ptr to file 2
+349.3	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+349.37	S	H-05	certain	inherits(prop) from 349.3
 349.4	K	H-20	low	name contains K-pattern
 349.7	S	H-21	low	name contains S-pattern
 349.8	K	H-20	low	name contains K-pattern
@@ -3058,6 +3515,9 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 351.612	I	H-05	certain	inherits from 351.61
 351.613	I	H-05	certain	inherits from 351.61
 351.62	K	H-20	low	name contains K-pattern
+351.71	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+351.711	S	H-05	certain	inherits(prop) from 351.71
+351.7111	S	H-05	certain	inherits(prop) from 351.711
 351.73	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 351.731	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 351.81	P	H-06	high	field=.02 PATIENT points to file 2
@@ -3081,14 +3541,19 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 353.4	K	H-20	low	name contains K-pattern
 354	P	H-06	high	field=.01 PATIENT NAME points to file 2
 354.1	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+354.3	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 354.4	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 354.5	K	H-20	low	name contains K-pattern
 354.5002	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 354.52	K	H-05	certain	inherits from 354.5
+354.6	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+354.61	S	H-05	certain	inherits(prop) from 354.6
+354.62	S	H-05	certain	inherits(prop) from 354.6
 354.7	P	H-06	high	field=.01 PATIENT points to file 2
 354.701	P	H-05	certain	inherits from 354.7
 354.71	I	H-08	high	has ptr to file 4; no ptr to file 2
 354.711	I	H-08	high	has ptr to file 4; no ptr to file 2
+354.75	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 355.1	K	H-20	low	name contains K-pattern
 355.11	K	H-05	certain	inherits from 355.1
 355.14	K	H-05	certain	inherits from 355.1
@@ -3102,8 +3567,13 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 355.32	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 355.321	S	H-05	certain	inherits from 355.32
 355.33	P	H-06	high	field=60.01 PATIENT NAME points to file 2
+355.34	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+355.35	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+355.3503	S	H-05	certain	inherits(prop) from 355.35
 355.3505	S	H-21	low	name contains S-pattern
 355.35051	S	H-05	certain	inherits from 355.3505
+355.351	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+355.35103	S	H-05	certain	inherits(prop) from 355.351
 355.3511	S	H-21	low	name contains S-pattern
 355.35111	S	H-05	certain	inherits from 355.3511
 355.4	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -3145,6 +3615,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 356.111	S	H-05	certain	inherits from 356.1
 356.112	S	H-05	certain	inherits from 356.1
 356.113	S	H-05	certain	inherits from 356.1
+356.19	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 356.2	P	H-06	high	field=.05 PATIENT points to file 2
 356.211	P	H-05	certain	inherits from 356.2
 356.212	P	H-05	certain	inherits from 356.2
@@ -3171,6 +3642,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 356.2316	P	H-05	certain	inherits from 356.2216
 356.25	P	H-06	high	field=.02 PATIENT points to file 2
 356.26	P	H-06	high	field=.02 PATIENT points to file 2
+356.399	P	H-36	moderate	2/2 targets classified P
 356.4	K	H-20	low	name contains K-pattern
 356.41	K	H-05	certain	inherits from 356.4
 356.6	K	H-20	low	name contains K-pattern
@@ -3189,11 +3661,24 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 357.12	P	H-05	certain	inherits from 357.1
 357.13	P	H-05	certain	inherits from 357.1
 357.14	P	H-05	certain	inherits from 357.1
+357.2	P	H-36	moderate	2/2 targets classified P
+357.21	P	H-05	certain	inherits(prop) from 357.2
+357.22	P	H-05	certain	inherits(prop) from 357.2
 357.3	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 357.31	S	H-05	certain	inherits from 357.3
 357.33	S	H-05	certain	inherits from 357.3
+357.5	P	H-36	moderate	2/2 targets classified P
+357.52	P	H-05	certain	inherits(prop) from 357.5
+357.6	P	H-38	moderate	targets span 3 PIKS categories
+357.61	P	H-05	certain	inherits(prop) from 357.6
+357.613	P	H-05	certain	inherits(prop) from 357.6
+357.615	P	H-05	certain	inherits(prop) from 357.6
+357.66	P	H-05	certain	inherits(prop) from 357.6
+357.67	P	H-05	certain	inherits(prop) from 357.6
 357.69	K	H-20	low	name contains K-pattern
 357.91	K	H-20	low	name contains K-pattern
+357.93	P	H-36	moderate	2/2 targets classified P
+357.931	P	H-05	certain	inherits(prop) from 357.93
 357.94	P	H-23	low	name contains P-pattern
 357.95	K	H-20	low	name contains K-pattern
 357.9501	K	H-05	certain	inherits from 357.95
@@ -3217,8 +3702,27 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 358.02	P	H-05	certain	inherits from 358
 358.1	P	H-23	low	name contains P-pattern
 358.11	P	H-05	certain	inherits from 358.1
+358.2	P	H-36	moderate	2/2 targets classified P
+358.21	P	H-05	certain	inherits(prop) from 358.2
+358.22	P	H-05	certain	inherits(prop) from 358.2
+358.5	P	H-36	moderate	2/2 targets classified P
+358.52	P	H-05	certain	inherits(prop) from 358.5
+358.6	P	H-36	moderate	3/4 targets classified P
+358.61	P	H-05	certain	inherits(prop) from 358.6
+358.613	P	H-05	certain	inherits(prop) from 358.6
+358.615	P	H-05	certain	inherits(prop) from 358.6
+358.66	P	H-05	certain	inherits(prop) from 358.6
+358.67	P	H-05	certain	inherits(prop) from 358.6
+358.93	P	H-36	moderate	2/2 targets classified P
+358.931	P	H-05	certain	inherits(prop) from 358.93
+358.94	P	H-36	moderate	2/2 targets classified P
+359	P	H-36	moderate	2/2 targets classified P
+359.01	P	H-05	certain	inherits(prop) from 359
+359.2	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+359.21	S	H-05	certain	inherits(prop) from 359.2
 359.3	P	H-06	high	field=.02 PATIENT points to file 2
 359.31	P	H-05	certain	inherits from 359.3
+359.94	P	H-36	moderate	3/3 targets classified P
 360	P	H-06	high	field=.02 PATIENT points to file 2
 360.04	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 361.02	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -3241,8 +3745,14 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 361.121	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 361.1211	S	H-05	certain	inherits from 361.121
 361.18	S	H-05	certain	inherits from 361.1
+361.2	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 361.3	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 361.41	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+362.1	P	H-36	moderate	2/2 targets classified P
+362.111	P	H-05	certain	inherits(prop) from 362.1
+363	P	H-36	moderate	2/2 targets classified P
+363.0011	P	H-05	certain	inherits(prop) from 363
+363.1	P	H-36	moderate	5/5 targets classified P
 363.3111	I	H-22	low	name contains I-pattern
 363.3121	I	H-08	high	has ptr to file 4; no ptr to file 2
 363.33	K	H-20	low	name contains K-pattern
@@ -3259,6 +3769,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 364.53	K	H-05	certain	inherits from 364.5
 364.6	K	H-20	low	name contains K-pattern
 364.73	K	H-20	low	name contains K-pattern
+364.8	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 365	P	H-06	high	field=.02 PATIENT points to file 2
 365.01	P	H-05	certain	inherits from 365
 365.013	K	H-18	moderate	ptr_in=11 ptr_out=0
@@ -3313,6 +3824,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 366.14	S	H-21	low	name contains S-pattern
 366.141	P	H-06	high	field=.14 PATIENT IN IBD points to file 2
 366.1412	P	H-05	certain	inherits from 366.141
+366.15	P	H-36	moderate	2/2 targets classified P
 367.11	K	H-20	low	name contains K-pattern
 368	P	H-06	high	field=109.01 PATIENT NAME [D] points to file 2
 368.001	K	H-20	low	name contains K-pattern
@@ -3337,12 +3849,20 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 375.099	P	H-05	certain	inherits from 375
 389.9	I	H-08	high	has ptr to file 4; no ptr to file 2
 390	P	H-06	high	field=2 PATIENT points to file 2
-390.12	P	H-23	low	name contains P-pattern
+390.01	P	H-14	moderate	package=REGISTRATION (DG)
+390.02	P	H-14	moderate	package=REGISTRATION (DG)
+390.03	P	H-14	moderate	package=REGISTRATION (DG)
+390.04	P	H-14	moderate	package=REGISTRATION (DG)
+390.1	S	H-17	moderate	package=TOOLKIT (XT)
+390.12	P	H-05	certain	inherits from 390.01
+390.2	S	H-17	moderate	package=TOOLKIT (XT)
+390.21	P	H-05	certain	inherits from 390.02
+390.23	P	H-05	certain	inherits from 390.02
 391	I	H-11	high	global=
 391.1	I	H-11	high	global=
 391.11	I	H-05	certain	inherits from 391.1
 391.12	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-391.23	K	H-20	low	name contains K-pattern
+391.23	P	H-14	moderate	package=REGISTRATION (DG)
 391.31	P	H-06	high	field=1 PATIENT points to file 2
 391.317	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 391.71	P	H-06	high	field=.03 PATIENT points to file 2
@@ -3350,13 +3870,27 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 391.919	I	H-08	high	has ptr to file 4; no ptr to file 2
 391.92	I	H-08	high	has ptr to file 4; no ptr to file 2
 391.98	P	H-06	high	field=.01 PATIENT points to file 2
-391.99	P	H-23	low	name contains P-pattern
+391.984	P	H-14	moderate	package=REGISTRATION (DG)
+391.99	P	H-14	moderate	package=REGISTRATION (DG)
 392	P	H-06	high	field=2 NAME points to file 2
-392.1001	I	H-22	low	name contains I-pattern
+392.1	I	H-15	moderate	package=BENEFICIARY TRAVEL (DGBT)
+392.1001	I	H-05	certain	inherits from 392.1
 392.2	P	H-06	high	field=2 NAME points to file 2
-392.41	K	H-20	low	name contains K-pattern
+392.3	I	H-15	moderate	package=BENEFICIARY TRAVEL (DGBT)
+392.31	I	H-15	moderate	package=BENEFICIARY TRAVEL (DGBT)
+392.4	I	H-15	moderate	package=BENEFICIARY TRAVEL (DGBT)
+392.41	I	H-15	moderate	package=BENEFICIARY TRAVEL (DGBT)
+392.42	I	H-15	moderate	package=BENEFICIARY TRAVEL (DGBT)
+392.43	I	H-15	moderate	package=BENEFICIARY TRAVEL (DGBT)
 392.51	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+392.6	I	H-15	moderate	package=BENEFICIARY TRAVEL (DGBT)
+392.61	I	H-05	certain	inherits from 392.6
+392.62	I	H-05	certain	inherits from 392.6
+392.63	I	H-05	certain	inherits from 392.6
+392.64	I	H-05	certain	inherits from 392.6
 392.7	P	H-06	high	field=2 PATIENT NAME points to file 2
+392.8	I	H-15	moderate	package=BENEFICIARY TRAVEL (DGBT)
+392.81	I	H-05	certain	inherits from 392.8
 392.9	P	H-06	high	field=.01 BT PATIENT points to file 2
 392.91	P	H-05	certain	inherits from 392.9
 393	P	H-06	high	field=.01 PATIENT points to file 2
@@ -3373,12 +3907,16 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 394.611	P	H-05	certain	inherits from 394.61
 394.6171	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 394.618	P	H-05	certain	inherits from 394.61
+394.62	P	H-36	moderate	2/2 targets classified P
+394.625	P	H-05	certain	inherits(prop) from 394.62
+394.73	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 394.81	I	H-08	high	has ptr to file 4; no ptr to file 2
 394.82	I	H-08	high	has ptr to file 4; no ptr to file 2
 394.83	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 394.831	I	H-08	high	has ptr to file 4; no ptr to file 2
 394.84	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 394.841	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+394.86	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 394.87	P	H-06	high	field=10 Patient Ptr points to file 2
 394.873	P	H-05	certain	inherits from 394.87
 395	P	H-10	high	global=
@@ -3479,21 +4017,33 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 399.078	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 399.0781	S	H-05	certain	inherits from 399.078
 399.096	P	H-05	certain	inherits from 399
+399.1	P	H-36	moderate	3/3 targets classified P
 399.11	K	H-20	low	name contains K-pattern
 399.2	K	H-18	moderate	ptr_in=12 ptr_out=0
 399.3	K	H-20	low	name contains K-pattern
 399.30416	S	H-05	certain	inherits from 399.0304
 399.30491	S	H-05	certain	inherits from 399.0304
+399.5	P	H-36	moderate	2/2 targets classified P
 399.6	K	H-20	low	name contains K-pattern
+401	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+403.12	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 403.35	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-403.462	K	H-20	low	name contains K-pattern
+403.43	P	H-14	moderate	package=SCHEDULING (SD)
+403.435	P	H-05	certain	inherits from 403.43
+403.44	P	H-14	moderate	package=SCHEDULING (SD)
+403.445	P	H-05	certain	inherits from 403.44
+403.46	P	H-14	moderate	package=SCHEDULING (SD)
+403.46001	P	H-05	certain	inherits from 403.46
+403.462	P	H-05	certain	inherits from 403.46
+403.47	P	H-14	moderate	package=SCHEDULING (SD)
+403.47001	P	H-05	certain	inherits from 403.47
 403.5	P	H-06	high	field=.01 PATIENT NAME points to file 2
-403.51	K	H-20	low	name contains K-pattern
-403.52	K	H-20	low	name contains K-pattern
-403.521	K	H-05	certain	inherits from 403.52
-403.53	K	H-20	low	name contains K-pattern
+403.51	P	H-14	moderate	package=SCHEDULING (SD)
+403.52	P	H-14	moderate	package=SCHEDULING (SD)
+403.521	P	H-05	certain	inherits from 403.52
+403.53	P	H-14	moderate	package=SCHEDULING (SD)
 403.54	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-403.55	K	H-20	low	name contains K-pattern
+403.55	P	H-14	moderate	package=SCHEDULING (SD)
 403.56	P	H-06	high	field=.01 PATIENT NAME points to file 2
 403.57	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 403.58	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -3518,28 +4068,30 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 404.54	P	H-06	high	field=.01 PATIENT points to file 2
 404.575	I	H-22	low	name contains I-pattern
 404.61	K	H-20	low	name contains K-pattern
-404.91	S	H-21	low	name contains S-pattern
+404.91	P	H-14	moderate	package=SCHEDULING (SD)
 404.9101	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 404.9102	I	H-08	high	has ptr to file 4; no ptr to file 2
 404.91021	I	H-05	certain	inherits from 404.9102
 404.91709	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-404.9171	S	H-05	certain	inherits from 404.91
-404.92	K	H-20	low	name contains K-pattern
-404.9201	K	H-05	certain	inherits from 404.92
-404.9202	K	H-05	certain	inherits from 404.92
-404.9203	K	H-05	certain	inherits from 404.92
-404.9204	K	H-05	certain	inherits from 404.92
-404.93	K	H-20	low	name contains K-pattern
-404.9301	K	H-05	certain	inherits from 404.93
+404.9171	P	H-05	certain	inherits from 404.91
+404.92	P	H-14	moderate	package=SCHEDULING (SD)
+404.9201	P	H-05	certain	inherits from 404.92
+404.9202	P	H-05	certain	inherits from 404.92
+404.9203	P	H-05	certain	inherits from 404.92
+404.9204	P	H-05	certain	inherits from 404.92
+404.93	P	H-14	moderate	package=SCHEDULING (SD)
+404.9301	P	H-05	certain	inherits from 404.93
+404.94	P	H-14	moderate	package=SCHEDULING (SD)
+404.9401	P	H-05	certain	inherits from 404.94
 404.95	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 404.9501	S	H-05	certain	inherits from 404.95
 404.9502	S	H-05	certain	inherits from 404.95
 404.9503	S	H-05	certain	inherits from 404.95
-404.98	K	H-20	low	name contains K-pattern
+404.98	P	H-14	moderate	package=SCHEDULING (SD)
 404.9825	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-404.985	K	H-05	certain	inherits from 404.98
-404.9875	K	H-05	certain	inherits from 404.98
-404.98755	K	H-05	certain	inherits from 404.9875
+404.985	P	H-05	certain	inherits from 404.98
+404.9875	P	H-05	certain	inherits from 404.98
+404.98755	P	H-05	certain	inherits from 404.9875
 405	P	H-06	high	field=.03 PATIENT points to file 2
 405.099	P	H-05	certain	inherits from 405
 405.1	I	H-11	high	global=
@@ -3557,12 +4109,14 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 407.52	S	H-05	certain	inherits from 407.5
 407.53	S	H-05	certain	inherits from 407.5
 407.6	S	H-13	high	global=
+407.7	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 407.71	I	H-08	high	has ptr to file 4; no ptr to file 2
 408	I	H-08	high	has ptr to file 4; no ptr to file 2
 408.08	I	H-05	certain	inherits from 408
 408.11	I	H-11	high	global=
 408.12	P	H-06	high	field=.01 PATIENT points to file 2
 408.1275	P	H-05	certain	inherits from 408.12
+408.13	P	H-14	moderate	package=REGISTRATION (DG)
 408.21	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 408.22	P	H-06	high	field=.01 PATIENT points to file 2
 408.31	P	H-06	high	field=.02 PATIENT points to file 2
@@ -3576,10 +4130,11 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 408.41	P	H-06	high	field=.04 PATIENT points to file 2
 408.42	I	H-11	high	global=
 408.43	I	H-11	high	global=
-409.1	K	H-18	moderate	ptr_in=13 ptr_out=1
-409.11	K	H-05	certain	inherits from 409.1
+409.1	P	H-14	moderate	package=SCHEDULING (SD)
+409.11	P	H-05	certain	inherits from 409.1
+409.2	P	H-14	moderate	package=SCHEDULING (SD)
 409.3	P	H-06	high	field=.01 PATIENT points to file 2
-409.31	I	H-22	low	name contains I-pattern
+409.31	P	H-14	moderate	package=SCHEDULING (SD)
 409.311	I	H-08	high	has ptr to file 4; no ptr to file 2
 409.32	I	H-08	high	has ptr to file 4; no ptr to file 2
 409.324	P	H-05	certain	inherits from 409.3
@@ -3588,46 +4143,59 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 409.345	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 409.35	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 409.355	S	H-05	certain	inherits from 409.35
+409.36	P	H-14	moderate	package=SCHEDULING (SD)
+409.364	P	H-05	certain	inherits from 409.36
 409.39	P	H-06	high	field=.01 PATIENT points to file 2
-409.41	K	H-20	low	name contains K-pattern
-409.415	K	H-05	certain	inherits from 409.41
-409.4175	K	H-05	certain	inherits from 409.41
-409.42	K	H-20	low	name contains K-pattern
-409.43	P	H-23	low	name contains P-pattern
+409.41	P	H-14	moderate	package=SCHEDULING (SD)
+409.415	P	H-05	certain	inherits from 409.41
+409.4175	P	H-05	certain	inherits from 409.41
+409.42	P	H-14	moderate	package=SCHEDULING (SD)
+409.43	P	H-14	moderate	package=SCHEDULING (SD)
 409.44	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-409.45	K	H-20	low	name contains K-pattern
-409.4575	K	H-05	certain	inherits from 409.45
+409.45	P	H-14	moderate	package=SCHEDULING (SD)
+409.4575	P	H-05	certain	inherits from 409.45
 409.48	P	H-06	high	field=.11 PATIENT points to file 2
 409.481	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 409.5	P	H-06	high	field=2 PATIENT points to file 2
 409.51	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 409.55	P	H-06	high	field=.02 PATIENT points to file 2
-409.6	S	H-21	low	name contains S-pattern
-409.61	K	H-20	low	name contains K-pattern
-409.621	K	H-05	certain	inherits from 409.61
+409.6	P	H-14	moderate	package=SCHEDULING (SD)
+409.61	P	H-14	moderate	package=SCHEDULING (SD)
+409.62	P	H-14	moderate	package=SCHEDULING (SD)
+409.621	P	H-05	certain	inherits from 409.61
+409.63	P	H-14	moderate	package=SCHEDULING (SD)
+409.636	P	H-05	certain	inherits from 409.63
+409.64	P	H-14	moderate	package=SCHEDULING (SD)
+409.641	P	H-05	certain	inherits from 409.64
 409.65	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-409.66	K	H-20	low	name contains K-pattern
-409.67	I	H-22	low	name contains I-pattern
-409.671	I	H-05	certain	inherits from 409.67
+409.66	P	H-14	moderate	package=SCHEDULING (SD)
+409.67	P	H-14	moderate	package=SCHEDULING (SD)
+409.671	P	H-05	certain	inherits from 409.67
 409.68	P	H-06	high	field=.02 PATIENT points to file 2
 409.69	P	H-06	high	field=.01 PATIENT points to file 2
-409.7	S	H-05	certain	inherits from 409.6
+409.7	P	H-05	certain	inherits from 409.6
 409.73	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 409.74	P	H-06	high	field=.02 PATIENT points to file 2
-409.75	S	H-21	low	name contains S-pattern
-409.76	K	H-20	low	name contains K-pattern
-409.7621	K	H-05	certain	inherits from 409.76
+409.75	P	H-14	moderate	package=SCHEDULING (SD)
+409.76	P	H-14	moderate	package=SCHEDULING (SD)
+409.7621	P	H-05	certain	inherits from 409.76
 409.77	P	H-06	high	field=.03 PATIENT points to file 2
-409.823	K	H-20	low	name contains K-pattern
-409.824	K	H-20	low	name contains K-pattern
+409.81	P	H-14	moderate	package=SCHEDULING (SD)
+409.822	P	H-14	moderate	package=SCHEDULING (SD)
+409.823	P	H-14	moderate	package=SCHEDULING (SD)
+409.824	P	H-14	moderate	package=SCHEDULING (SD)
 409.831	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 409.8311	S	H-05	certain	inherits from 409.831
 409.8311201	S	H-05	certain	inherits from 409.831
 409.8311301	S	H-05	certain	inherits from 409.831
 409.8312001	S	H-05	certain	inherits from 409.831
+409.832	P	H-14	moderate	package=SCHEDULING (SD)
+409.8321	P	H-05	certain	inherits from 409.832
 409.833	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+409.834	P	H-14	moderate	package=SCHEDULING (SD)
 409.84	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 409.841	S	H-05	certain	inherits from 409.84
+409.842	P	H-14	moderate	package=SCHEDULING (SD)
 409.843	S	H-05	certain	inherits from 409.84
 409.845	P	H-06	high	field=.01 PATIENT points to file 2
 409.8451	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -3638,6 +4206,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 409.851	P	H-05	certain	inherits from 409.85
 409.852	P	H-05	certain	inherits from 409.85
 409.8527	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+409.853	P	H-14	moderate	package=SCHEDULING (SD)
 409.854	P	H-05	certain	inherits from 409.85
 409.8544	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 409.8545	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -3647,22 +4216,26 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 409.863	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 409.87	P	H-06	high	field=.02 PATIENT points to file 2
 409.871	P	H-05	certain	inherits from 409.87
-409.89	K	H-20	low	name contains K-pattern
+409.88	P	H-14	moderate	package=SCHEDULING (SD)
+409.89	P	H-14	moderate	package=SCHEDULING (SD)
 409.91	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 409.916	S	H-05	certain	inherits from 409.91
 409.9161	S	H-05	certain	inherits from 409.916
 409.91614	S	H-05	certain	inherits from 409.9161
 409.917	S	H-05	certain	inherits from 409.91
 409.9171	S	H-05	certain	inherits from 409.917
-409.92	K	H-20	low	name contains K-pattern
-409.93	K	H-20	low	name contains K-pattern
-409.95	I	H-22	low	name contains I-pattern
-409.9501	I	H-05	certain	inherits from 409.95
-409.9502	I	H-05	certain	inherits from 409.95
-409.96	I	H-22	low	name contains I-pattern
-409.961	I	H-05	certain	inherits from 409.96
+409.92	P	H-14	moderate	package=SCHEDULING (SD)
+409.93	P	H-14	moderate	package=SCHEDULING (SD)
+409.94	P	H-14	moderate	package=SCHEDULING (SD)
+409.95	P	H-14	moderate	package=SCHEDULING (SD)
+409.9501	P	H-05	certain	inherits from 409.95
+409.9502	P	H-05	certain	inherits from 409.95
+409.96	P	H-14	moderate	package=SCHEDULING (SD)
+409.961	P	H-05	certain	inherits from 409.96
 409.97	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-409.987	K	H-20	low	name contains K-pattern
+409.98	P	H-14	moderate	package=SCHEDULING (SD)
+409.981	P	H-05	certain	inherits from 409.98
+409.987	P	H-05	certain	inherits from 409.98
 410	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 410.01	S	H-05	certain	inherits from 410
 410.02	S	H-05	certain	inherits from 410
@@ -3671,6 +4244,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 410.05	S	H-05	certain	inherits from 410
 410.06	S	H-05	certain	inherits from 410
 410.061	S	H-05	certain	inherits from 410
+410.1	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 410.2	K	H-20	low	name contains K-pattern
 410.212	S	H-05	certain	inherits from 410.02
 410.5	K	H-20	low	name contains K-pattern
@@ -3718,11 +4292,16 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 413.3	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 413.4	K	H-20	low	name contains K-pattern
 413.464	S	H-05	certain	inherits from 413.046
+413.7	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 414.02	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 414.021	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+414.04	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 414.061	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 414.0613	S	H-05	certain	inherits from 414.061
 414.07	K	H-20	low	name contains K-pattern
+414.41	S	H-05	certain	inherits(prop) from 414.04
+417	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+417.1	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 420.01	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 420.02	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 420.03	S	H-05	certain	inherits from 420.01
@@ -3735,6 +4314,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 420.12	S	H-05	certain	inherits from 420.1
 420.132	K	H-20	low	name contains K-pattern
 420.134	K	H-20	low	name contains K-pattern
+420.141	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 420.16	K	H-20	low	name contains K-pattern
 420.1999	K	H-18	moderate	ptr_in=19 ptr_out=1
 420.2	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -3746,6 +4326,12 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 420.7	K	H-20	low	name contains K-pattern
 420.8	K	H-20	low	name contains K-pattern
 420.911	I	H-22	low	name contains I-pattern
+420.92	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+420.923	S	H-05	certain	inherits(prop) from 420.92
+420.924	S	H-05	certain	inherits(prop) from 420.92
+420.97	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+420.98	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+420.99	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 420.9999	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 421	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 421.01	S	H-05	certain	inherits from 421
@@ -3762,8 +4348,13 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 421.523	S	H-05	certain	inherits from 421.5
 421.531	S	H-05	certain	inherits from 421.5
 421.541	S	H-05	certain	inherits from 421.5
+421.7	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+421.8	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+421.84	S	H-05	certain	inherits(prop) from 421.8
+421.9	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 422	K	H-20	low	name contains K-pattern
 422.01	K	H-05	certain	inherits from 422
+422.2	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 423	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 423.01	S	H-05	certain	inherits from 423
 423.0117	S	H-05	certain	inherits from 423
@@ -3803,6 +4394,10 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 430.22	P	H-05	certain	inherits from 430.02
 430.3	K	H-20	low	name contains K-pattern
 430.5	K	H-20	low	name contains K-pattern
+430.7	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+430.71	S	H-05	certain	inherits(prop) from 430.7
+430.8	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+430.81	S	H-05	certain	inherits(prop) from 430.8
 433	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 433.001	K	H-20	low	name contains K-pattern
 433.01	S	H-05	certain	inherits from 433
@@ -3826,6 +4421,8 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 440.5	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 440.512	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 440.6	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+440.7	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+440.701	S	H-05	certain	inherits(prop) from 440.7
 440.8	S	H-21	low	name contains S-pattern
 441	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 441.01	S	H-05	certain	inherits from 441
@@ -3868,8 +4465,10 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 442.9	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 443	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 443.012	S	H-05	certain	inherits from 443
+443.1	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 443.2	S	H-21	low	name contains S-pattern
 443.26	S	H-05	certain	inherits from 443.2
+443.3	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 443.4	K	H-20	low	name contains K-pattern
 443.5	S	H-21	low	name contains S-pattern
 443.51	S	H-05	certain	inherits from 443.5
@@ -3910,6 +4509,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 444.19	K	H-20	low	name contains K-pattern
 444.2	K	H-20	low	name contains K-pattern
 444.21	K	H-20	low	name contains K-pattern
+444.3	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 444.4	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 445	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 445.01	S	H-05	certain	inherits from 445
@@ -3949,6 +4549,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 446.52	S	H-21	low	name contains S-pattern
 446.53	K	H-20	low	name contains K-pattern
 446.54	K	H-20	low	name contains K-pattern
+446.7	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 447	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 450	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 450.01	S	H-05	certain	inherits from 450
@@ -3956,8 +4557,11 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 450.0633	S	H-05	certain	inherits from 450
 450.0757	S	H-05	certain	inherits from 450
 450.11	S	H-21	low	name contains S-pattern
+450.12	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+451	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 451.06	I	H-08	high	has ptr to file 4; no ptr to file 2
 451.09	I	H-08	high	has ptr to file 4; no ptr to file 2
+451.1	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 451.4	K	H-20	low	name contains K-pattern
 451.49	K	H-05	certain	inherits from 451.4
 451.5	K	H-20	low	name contains K-pattern
@@ -4098,6 +4702,9 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 458.7	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 458.701	S	H-05	certain	inherits from 458.7
 458.83	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+459	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+459.01	S	H-05	certain	inherits(prop) from 459
+459.1173	S	H-05	certain	inherits(prop) from 459.01
 470	P	H-06	high	field=.01 NAME points to file 2
 470.01	P	H-05	certain	inherits from 470
 470.02	P	H-05	certain	inherits from 470
@@ -4130,17 +4737,24 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 513.811	S	H-05	certain	inherits from 513.801
 513.85	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 513.852	S	H-05	certain	inherits from 513.85
+538	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+538.113	S	H-05	certain	inherits(prop) from 538
 550	I	H-08	high	has ptr to file 4; no ptr to file 2
 550.04	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 550.07	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 550.08	I	H-05	certain	inherits from 550
 550.09	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+550.1	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+550.11	S	H-05	certain	inherits(prop) from 550.1
+550.1101	S	H-05	certain	inherits(prop) from 550.1
 550.2	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 550.215	P	H-06	high	field=.03 PATIENT points to file 2
 550.216	S	H-05	certain	inherits from 550.2
+560	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 560.02	P	H-06	high	field=.01 PATIENT NAME points to file 2
 577.4	K	H-20	low	name contains K-pattern
 579.5	S	H-21	low	name contains S-pattern
+600.7	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 600.71	P	H-06	high	field=1 PATIENT points to file 2
 601	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 601.01	S	H-05	certain	inherits from 601
@@ -4172,13 +4786,23 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 601.781	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 601.84	P	H-06	high	field=1 PATIENT points to file 2
 601.841	P	H-05	certain	inherits from 601.84
+601.89	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 601.94	P	H-06	high	field=1 PATIENT points to file 2
 601.949	P	H-05	certain	inherits from 601.94
+601.95	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+601.951	S	H-05	certain	inherits(prop) from 601.95
+601.952	S	H-05	certain	inherits(prop) from 601.95
 601.953	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+601.954	S	H-05	certain	inherits(prop) from 601.95
+601.96	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+601.961	S	H-05	certain	inherits(prop) from 601.96
 601.97	K	H-20	low	name contains K-pattern
 603.01	P	H-06	high	field=1 CLOZAPINE PATIENT points to file 2
+603.02	K	H-40	moderate	2 targets all classified K
 603.03	S	H-21	low	name contains S-pattern
+603.04	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 603.05	P	H-06	high	field=.01 CLOZAPINE PATIENT points to file 2
+603.41	S	H-05	certain	inherits(prop) from 603.04
 603.51	P	H-05	certain	inherits from 603.05
 603.52	P	H-05	certain	inherits from 603.05
 604	P	H-06	high	field=.02 NAME points to file 2
@@ -4196,9 +4820,19 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 604.3	K	H-20	low	name contains K-pattern
 604.45	P	H-23	low	name contains P-pattern
 604.5	K	H-20	low	name contains K-pattern
+604.55	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+604.66	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+604.6613	S	H-05	certain	inherits(prop) from 604.66
+604.6614	S	H-05	certain	inherits(prop) from 604.66
+604.68	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+604.681	S	H-05	certain	inherits(prop) from 604.68
 604.77	K	H-20	low	name contains K-pattern
 604.8	I	H-08	high	has ptr to file 4; no ptr to file 2
 604.81	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+605.1	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+605.12	S	H-05	certain	inherits(prop) from 605.1
+605.124	S	H-05	certain	inherits(prop) from 605.12
+605.13	S	H-05	certain	inherits(prop) from 605.1
 615	P	H-06	high	field=.01 NAME points to file 2
 615.01	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 615.02	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -4275,10 +4909,13 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 633.222	S	H-05	certain	inherits from 633.2
 633.223	S	H-05	certain	inherits from 633.2
 633.224	S	H-05	certain	inherits from 633.2
+634	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 634.1	P	H-06	high	field=.01 PATIENT NAME points to file 2
 634.2	P	H-06	high	field=.01 PATIENT NAME points to file 2
 634.3	P	H-06	high	field=.01 PATIENT NAME points to file 2
+634.4	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 634.5	P	H-06	high	field=.01 PATIENT NAME points to file 2
+634.6	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 634.7	S	H-21	low	name contains S-pattern
 660	I	H-08	high	has ptr to file 4; no ptr to file 2
 660.028	I	H-05	certain	inherits from 660
@@ -4303,8 +4940,10 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 662	K	H-20	low	name contains K-pattern
 662.06	K	H-05	certain	inherits from 662
 663	K	H-20	low	name contains K-pattern
+663.2	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 663.21	K	H-20	low	name contains K-pattern
 663.22	K	H-20	low	name contains K-pattern
+663.3	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 663.4	I	H-08	high	has ptr to file 4; no ptr to file 2
 664	I	H-08	high	has ptr to file 4; no ptr to file 2
 664.02	I	H-05	certain	inherits from 664
@@ -4356,6 +4995,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 668.111	P	H-05	certain	inherits from 668.011
 668.81	P	H-05	certain	inherits from 668
 668.82	P	H-05	certain	inherits from 668
+669.1	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 669.9	I	H-08	high	has ptr to file 4; no ptr to file 2
 669.9001	I	H-05	certain	inherits from 669.9
 669.9002	I	H-05	certain	inherits from 669.9
@@ -4373,6 +5013,8 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 690.1	S	H-21	low	name contains S-pattern
 690.17	S	H-05	certain	inherits from 690.1
 690.18	S	H-05	certain	inherits from 690.1
+690.97	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+690.99	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 691	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 691.01	S	H-05	certain	inherits from 691
 691.02	S	H-05	certain	inherits from 691
@@ -4508,6 +5150,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 696.5	S	H-21	low	name contains S-pattern
 697.2	K	H-18	moderate	ptr_in=12 ptr_out=0
 697.21	K	H-05	certain	inherits from 697.2
+697.3	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 697.31	K	H-20	low	name contains K-pattern
 697.5	K	H-18	moderate	ptr_in=11 ptr_out=1
 697.51	K	H-05	certain	inherits from 697.5
@@ -4599,6 +5242,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 700.08	S	H-05	certain	inherits from 700
 700.09	S	H-05	certain	inherits from 700
 700.3229	S	H-05	certain	inherits from 700.032
+700.5	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 701	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 701.01	S	H-05	certain	inherits from 701
 701.0108	S	H-05	certain	inherits from 701
@@ -4621,6 +5265,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 704.002	P	H-06	high	field=.06 PATIENT points to file 2
 704.004	S	H-21	low	name contains S-pattern
 704.005	P	H-06	high	field=.01 PATIENT points to file 2
+704.007	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 704.101	K	H-18	moderate	ptr_in=16 ptr_out=1
 704.102	K	H-20	low	name contains K-pattern
 704.107	P	H-06	high	field=.08 PATIENT_ID points to file 2
@@ -4647,31 +5292,49 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 704.2026	P	H-05	certain	inherits from 704.202
 704.209	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 704.2091	S	H-05	certain	inherits from 704.209
+711	I	H-15	moderate	package=ENROLLMENT APPLICATION SYSTEM (EAS)
 712	P	H-06	high	field=3.4 LINK TO FILE #2 points to file 2
 712.01	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 712.013	P	H-05	certain	inherits from 712
-712.6	K	H-20	low	name contains K-pattern
+712.5	I	H-15	moderate	package=ENROLLMENT APPLICATION SYSTEM (EAS)
+712.6	I	H-15	moderate	package=ENROLLMENT APPLICATION SYSTEM (EAS)
 713	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 713.025	I	H-08	high	has ptr to file 4; no ptr to file 2
 713.1	P	H-06	high	field=.01 NAME points to file 2
 713.2	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 713.27	S	H-05	certain	inherits from 713.2
+713.3	I	H-15	moderate	package=ENROLLMENT APPLICATION SYSTEM (EAS)
+713.33	I	H-05	certain	inherits from 713.3
 713.34	I	H-08	high	has ptr to file 4; no ptr to file 2
 713.341	I	H-05	certain	inherits from 713.34
+714.1	I	H-15	moderate	package=ENROLLMENT APPLICATION SYSTEM (EAS)
 714.5	P	H-06	high	field=.01 PATIENT NAME points to file 2
-720.1	S	H-21	low	name contains S-pattern
-720.3	K	H-20	low	name contains K-pattern
-720.5	K	H-20	low	name contains K-pattern
+720.1	P	H-14	moderate	package=EVENT CAPTURE (EC)
+720.3	P	H-14	moderate	package=EVENT CAPTURE (EC)
+720.4	P	H-14	moderate	package=EVENT CAPTURE (EC)
+720.5	P	H-14	moderate	package=EVENT CAPTURE (EC)
 721	P	H-06	high	field=1 PATIENT points to file 2
 721.036	P	H-05	certain	inherits from 721
 721.038	P	H-05	certain	inherits from 721
 721.042	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 722	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-726	K	H-20	low	name contains K-pattern
+723	P	H-14	moderate	package=EVENT CAPTURE (EC)
+724	P	H-14	moderate	package=EVENT CAPTURE (EC)
+725	P	H-14	moderate	package=EVENT CAPTURE (EC)
+726	P	H-14	moderate	package=EVENT CAPTURE (EC)
 727.1	K	H-20	low	name contains K-pattern
 727.11	K	H-05	certain	inherits from 727.1
+727.2	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+727.21	S	H-05	certain	inherits(prop) from 727.2
+727.211	S	H-05	certain	inherits(prop) from 727.21
+727.22	S	H-05	certain	inherits(prop) from 727.2
+727.23	S	H-05	certain	inherits(prop) from 727.2
+727.24	S	H-05	certain	inherits(prop) from 727.2
 727.3	I	H-22	low	name contains I-pattern
 727.4	I	H-22	low	name contains I-pattern
+727.5	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+727.51	S	H-05	certain	inherits(prop) from 727.5
+727.7	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 727.802	P	H-06	high	field=4 PATIENT NO. - DFN points to file 2
 727.804	P	H-06	high	field=4 PATIENT NO. - DFN points to file 2
 727.805	P	H-06	high	field=4 PATIENT NO. - DFN points to file 2
@@ -4700,13 +5363,19 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 728.441	I	H-22	low	name contains I-pattern
 728.4412	I	H-05	certain	inherits from 728.441
 728.442	K	H-20	low	name contains K-pattern
+728.45	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+728.451	S	H-05	certain	inherits(prop) from 728.45
 728.46	I	H-08	high	has ptr to file 4; no ptr to file 2
-730	K	H-18	moderate	ptr_in=10 ptr_out=0
-730.01	K	H-05	certain	inherits from 730
-730.0747	K	H-05	certain	inherits from 730
+729	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+730	P	H-14	moderate	package=EVENT CAPTURE (EC)
+730.01	P	H-05	certain	inherits from 730
+730.0747	P	H-05	certain	inherits from 730
+731	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 731.01	I	H-22	low	name contains I-pattern
+731.02	S	H-05	certain	inherits(prop) from 731
 731.03	P	H-23	low	name contains P-pattern
 731.04	P	H-23	low	name contains P-pattern
+731.7	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 731.701	I	H-22	low	name contains I-pattern
 740	I	H-08	high	has ptr to file 4; no ptr to file 2
 740.01	I	H-05	certain	inherits from 740
@@ -4727,9 +5396,13 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 741.15	S	H-05	certain	inherits from 741.01
 741.3	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 741.4	I	H-22	low	name contains I-pattern
+741.95	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+741.99	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 743.03	I	H-22	low	name contains I-pattern
 743.1	P	H-06	high	field=.01 PATIENT points to file 2
 743.11	P	H-05	certain	inherits from 743.1
+743.6	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+743.61	S	H-05	certain	inherits(prop) from 743.6
 748	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 748.01	S	H-05	certain	inherits from 748
 748.02	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -4747,6 +5420,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 757.03	K	H-12	high	global=
 757.033	K	H-12	high	global=
 757.04	K	H-12	high	global=
+757.041	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 757.043	K	H-05	certain	inherits from 757.033
 757.05	K	H-12	high	global=
 757.06	K	H-12	high	global=
@@ -4754,6 +5428,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 757.0701	K	H-05	certain	inherits from 757.07
 757.071	K	H-12	high	global=
 757.08	K	H-05	certain	inherits from 757.03
+757.09	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 757.1	K	H-12	high	global=
 757.11	K	H-12	high	global=
 757.112	K	H-05	certain	inherits from 757.11
@@ -4766,7 +5441,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 757.17	K	H-05	certain	inherits from 757.01
 757.18	K	H-05	certain	inherits from 757.01
 757.181	K	H-05	certain	inherits from 757.018
-757.2	K	H-20	low	name contains K-pattern
+757.2	K	H-16	moderate	package=LEXICON UTILITY (LEX)
 757.201	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 757.21	K	H-12	high	global=
 757.22	K	H-05	certain	inherits from 757.2
@@ -4791,29 +5466,54 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 757.411	K	H-05	certain	inherits from 757.41
 757.5	K	H-12	high	global=
 757.53	K	H-05	certain	inherits from 757.05
-770	S	H-21	low	name contains S-pattern
+770	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
 770.01	S	H-05	certain	inherits from 770
-771	K	H-18	moderate	ptr_in=14 ptr_out=2
-771.05	K	H-05	certain	inherits from 771
-771.06	K	H-05	certain	inherits from 771
-771.2	K	H-20	low	name contains K-pattern
-771.23	K	H-05	certain	inherits from 771.2
-771.3	K	H-20	low	name contains K-pattern
-771.33	K	H-05	certain	inherits from 771.3
-771.4	K	H-20	low	name contains K-pattern
-771.43	K	H-05	certain	inherits from 771.4
-771.5	K	H-18	moderate	ptr_in=16 ptr_out=1
-771.7	S	H-21	low	name contains S-pattern
+771	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+771.05	S	H-05	certain	inherits from 771
+771.06	S	H-05	certain	inherits from 771
+771.1	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+771.11	S	H-05	certain	inherits from 771.1
+771.113	S	H-05	certain	inherits from 771.1
+771.12	S	H-05	certain	inherits from 771.1
+771.2	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+771.23	S	H-05	certain	inherits from 771.2
+771.3	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+771.33	S	H-05	certain	inherits from 771.3
+771.4	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+771.43	S	H-05	certain	inherits from 771.4
+771.5	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+771.6	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+771.63	S	H-05	certain	inherits from 771.6
+771.7	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
 771.72	S	H-05	certain	inherits from 771.7
+771.8	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+771.82	S	H-05	certain	inherits from 771.8
+771.9	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+771.9051	S	H-05	certain	inherits from 771.9
+771.93	S	H-05	certain	inherits from 771.9
+772	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+772.02	S	H-05	certain	inherits from 772
+773	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+773.01	S	H-05	certain	inherits from 773
+774	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
 774.01	I	H-08	high	has ptr to file 4; no ptr to file 2
 774.18	I	H-05	certain	inherits from 774.01
+776	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+776.001	S	H-05	certain	inherits from 776
+776.002	S	H-05	certain	inherits from 776
+776.003	S	H-05	certain	inherits from 776
+776.1	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+776.101	S	H-05	certain	inherits from 776.1
+776.1041	S	H-05	certain	inherits from 776.1
+776.106	S	H-05	certain	inherits from 776.1
 776.1061	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+776.1062	S	H-05	certain	inherits from 776.1
 776.2	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 776.201	S	H-05	certain	inherits from 776.2
 776.2051	S	H-05	certain	inherits from 776.2
-776.3	K	H-20	low	name contains K-pattern
+776.3	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
 776.32	I	H-08	high	has ptr to file 4; no ptr to file 2
-776.33	K	H-05	certain	inherits from 776.3
+776.33	S	H-05	certain	inherits from 776.3
 776.4	I	H-08	high	has ptr to file 4; no ptr to file 2
 776.41	I	H-05	certain	inherits from 776.4
 776.42	I	H-05	certain	inherits from 776.4
@@ -4823,25 +5523,39 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 776.52	S	H-05	certain	inherits from 776.5
 776.53	S	H-05	certain	inherits from 776.5
 776.54	S	H-05	certain	inherits from 776.5
-776.999	S	H-21	low	name contains S-pattern
-779.001	K	H-20	low	name contains K-pattern
-779.002	K	H-20	low	name contains K-pattern
-779.00201	K	H-05	certain	inherits from 779.002
-779.004	K	H-18	moderate	ptr_in=12 ptr_out=0
-779.00401	K	H-05	certain	inherits from 779.004
-779.00409	K	H-05	certain	inherits from 779.004
-779.005	K	H-20	low	name contains K-pattern
-779.0053	K	H-05	certain	inherits from 779.005
-779.0101	K	H-05	certain	inherits from 779.001
-779.1	S	H-21	low	name contains S-pattern
+776.999	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+777	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+777.01	S	H-05	certain	inherits from 777
+777.02	S	H-05	certain	inherits from 777
+777.21	S	H-05	certain	inherits from 777.02
+778	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+778.03	S	H-05	certain	inherits from 778
+779.001	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+779.002	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+779.00201	S	H-05	certain	inherits from 779.002
+779.003	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+779.00301	S	H-05	certain	inherits from 779.003
+779.004	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+779.00401	S	H-05	certain	inherits from 779.004
+779.00409	S	H-05	certain	inherits from 779.004
+779.005	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+779.0053	S	H-05	certain	inherits from 779.005
+779.0101	S	H-05	certain	inherits from 779.001
+779.1	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
 779.11	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 779.111	S	H-05	certain	inherits from 779.11
 779.115	S	H-05	certain	inherits from 779.11
-779.21	K	H-20	low	name contains K-pattern
-779.5	K	H-20	low	name contains K-pattern
-779.51	K	H-05	certain	inherits from 779.5
-779.512	K	H-05	certain	inherits from 779.51
-779.5123	K	H-05	certain	inherits from 779.512
+779.2	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+779.21	S	H-05	certain	inherits from 779.2
+779.3	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+779.4	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+779.41	S	H-05	certain	inherits from 779.4
+779.5	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+779.51	S	H-05	certain	inherits from 779.5
+779.512	S	H-05	certain	inherits from 779.51
+779.5123	S	H-05	certain	inherits from 779.512
+779.9	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+779.91	S	H-05	certain	inherits from 779.9
 783	P	H-06	high	field=.03 PATIENT points to file 2
 783.01	P	H-05	certain	inherits from 783
 783.9	I	H-08	high	has ptr to file 4; no ptr to file 2
@@ -4864,9 +5578,11 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 790.01	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 790.011	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 790.02	I	H-08	high	has ptr to file 4; no ptr to file 2
-790.04	S	H-21	low	name contains S-pattern
+790.03	P	H-14	moderate	package=WOMEN'S HEALTH (WV)
+790.04	P	H-14	moderate	package=WOMEN'S HEALTH (WV)
 790.05	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 790.06	P	H-05	certain	inherits from 790
+790.07	P	H-14	moderate	package=WOMEN'S HEALTH (WV)
 790.08	P	H-06	high	field=.02 PATIENT points to file 2
 790.09	P	H-05	certain	inherits from 790
 790.1	I	H-08	high	has ptr to file 4; no ptr to file 2
@@ -4879,19 +5595,32 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 790.17	S	H-05	certain	inherits from 790.05
 790.18	S	H-05	certain	inherits from 790.16
 790.19	I	H-05	certain	inherits from 790.1
-790.2	K	H-20	low	name contains K-pattern
-790.21	K	H-05	certain	inherits from 790.2
-790.22	K	H-05	certain	inherits from 790.2
+790.2	P	H-14	moderate	package=WOMEN'S HEALTH (WV)
+790.21	P	H-05	certain	inherits from 790.2
+790.22	P	H-05	certain	inherits from 790.2
 790.23	I	H-05	certain	inherits from 790.1
 790.24	I	H-05	certain	inherits from 790.1
 790.243	I	H-05	certain	inherits from 790.02
-790.32	K	H-20	low	name contains K-pattern
+790.3	P	H-14	moderate	package=WOMEN'S HEALTH (WV)
+790.31	P	H-14	moderate	package=WOMEN'S HEALTH (WV)
+790.32	P	H-14	moderate	package=WOMEN'S HEALTH (WV)
 790.4	I	H-08	high	has ptr to file 4; no ptr to file 2
-790.403	K	H-20	low	name contains K-pattern
+790.403	P	H-14	moderate	package=WOMEN'S HEALTH (WV)
+790.404	P	H-14	moderate	package=WOMEN'S HEALTH (WV)
+790.405	P	H-14	moderate	package=WOMEN'S HEALTH (WV)
+790.414	P	H-05	certain	inherits from 790.404
+790.5	P	H-14	moderate	package=WOMEN'S HEALTH (WV)
+790.51	P	H-14	moderate	package=WOMEN'S HEALTH (WV)
+790.6	P	H-14	moderate	package=WOMEN'S HEALTH (WV)
+790.61	P	H-05	certain	inherits from 790.6
 790.71	I	H-08	high	has ptr to file 4; no ptr to file 2
 790.72	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+790.8	P	H-14	moderate	package=WOMEN'S HEALTH (WV)
+790.801	P	H-05	certain	inherits from 790.8
+790.802	P	H-05	certain	inherits from 790.801
 790.9	P	H-06	high	field=2 PATIENT points to file 2
 790.9001	P	H-05	certain	inherits from 790.9
+791	P	H-14	moderate	package=WOMEN'S HEALTH (WV)
 798	I	H-08	high	has ptr to file 4; no ptr to file 2
 798.01	I	H-08	high	has ptr to file 4; no ptr to file 2
 798.02	I	H-05	certain	inherits from 798
@@ -4923,6 +5652,8 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 798.87	S	H-05	certain	inherits from 798.8
 798.872	S	H-05	certain	inherits from 798.87
 798.873	S	H-05	certain	inherits from 798.87
+798.9	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+798.92	S	H-05	certain	inherits(prop) from 798.9
 799.34	S	H-21	low	name contains S-pattern
 799.3411	S	H-05	certain	inherits from 799.34
 799.3412	S	H-05	certain	inherits from 799.34
@@ -4931,61 +5662,70 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 799.425	I	H-05	certain	inherits from 799.4
 799.64	S	H-21	low	name contains S-pattern
 799.641	S	H-05	certain	inherits from 799.64
-800	K	H-20	low	name contains K-pattern
-800.01	K	H-05	certain	inherits from 800
-800.016	K	H-05	certain	inherits from 800
-800.02	K	H-05	certain	inherits from 800
-800.04	K	H-05	certain	inherits from 800
-800.41	K	H-05	certain	inherits from 800.04
-801	K	H-20	low	name contains K-pattern
-801.01	K	H-05	certain	inherits from 801
-801.015	K	H-05	certain	inherits from 801
+800	P	H-14	moderate	package=CLINICAL REMINDERS (PXRM)
+800.01	P	H-05	certain	inherits from 800
+800.016	P	H-05	certain	inherits from 800
+800.02	P	H-05	certain	inherits from 800
+800.04	P	H-05	certain	inherits from 800
+800.41	P	H-05	certain	inherits from 800.04
+801	P	H-14	moderate	package=PCE PATIENT CARE ENCOUNTER (PX)
+801.01	P	H-05	certain	inherits from 801
+801.015	P	H-05	certain	inherits from 801
 801.03	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-801.04	K	H-05	certain	inherits from 801
-801.1	K	H-20	low	name contains K-pattern
-801.11	K	H-05	certain	inherits from 801.1
-801.12	K	H-05	certain	inherits from 801.1
+801.04	P	H-05	certain	inherits from 801
+801.1	P	H-14	moderate	package=PCE PATIENT CARE ENCOUNTER (PX)
+801.11	P	H-05	certain	inherits from 801.1
+801.12	P	H-05	certain	inherits from 801.1
 801.13	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 801.132	S	H-05	certain	inherits from 801.13
-801.147	K	H-05	certain	inherits from 801.1
+801.147	P	H-05	certain	inherits from 801.1
 801.32	S	H-05	certain	inherits from 801.03
-801.41	K	H-20	low	name contains K-pattern
-801.41121	K	H-05	certain	inherits from 801.41
-801.411211	K	H-05	certain	inherits from 801.41121
-801.41143	K	H-05	certain	inherits from 801.41
-801.4118	K	H-05	certain	inherits from 801.41
-801.412	K	H-05	certain	inherits from 801.41
-801.4125	K	H-05	certain	inherits from 801.41
-801.4135	K	H-05	certain	inherits from 801.41
-801.4145	K	H-05	certain	inherits from 801.41
-801.42	K	H-20	low	name contains K-pattern
-801.421	K	H-05	certain	inherits from 801.42
-801.422	K	H-05	certain	inherits from 801.42
-801.43	K	H-20	low	name contains K-pattern
+801.41	P	H-14	moderate	package=CLINICAL REMINDERS (PXRM)
+801.41121	P	H-05	certain	inherits from 801.41
+801.411211	P	H-05	certain	inherits from 801.41121
+801.41143	P	H-05	certain	inherits from 801.41
+801.4118	P	H-05	certain	inherits from 801.41
+801.412	P	H-05	certain	inherits from 801.41
+801.4125	P	H-05	certain	inherits from 801.41
+801.4135	P	H-05	certain	inherits from 801.41
+801.4145	P	H-05	certain	inherits from 801.41
+801.42	P	H-14	moderate	package=CLINICAL REMINDERS (PXRM)
+801.421	P	H-05	certain	inherits from 801.42
+801.422	P	H-05	certain	inherits from 801.42
+801.43	P	H-14	moderate	package=CLINICAL REMINDERS (PXRM)
 801.44	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 801.442	S	H-05	certain	inherits from 801.44
-801.45	K	H-20	low	name contains K-pattern
-801.451	K	H-05	certain	inherits from 801.45
-801.4515	K	H-05	certain	inherits from 801.451
-801.46	K	H-20	low	name contains K-pattern
-801.47	K	H-20	low	name contains K-pattern
-801.473	K	H-05	certain	inherits from 801.47
-801.474	K	H-05	certain	inherits from 801.47
-801.4742	K	H-05	certain	inherits from 801.474
-801.48	K	H-20	low	name contains K-pattern
-801.485	K	H-05	certain	inherits from 801.48
-801.486	K	H-05	certain	inherits from 801.48
-801.487	K	H-05	certain	inherits from 801.48
+801.45	P	H-14	moderate	package=CLINICAL REMINDERS (PXRM)
+801.451	P	H-05	certain	inherits from 801.45
+801.4515	P	H-05	certain	inherits from 801.451
+801.46	P	H-14	moderate	package=CLINICAL REMINDERS (PXRM)
+801.47	P	H-14	moderate	package=CLINICAL REMINDERS (PXRM)
+801.473	P	H-05	certain	inherits from 801.47
+801.474	P	H-05	certain	inherits from 801.47
+801.4742	P	H-05	certain	inherits from 801.474
+801.48	P	H-14	moderate	package=CLINICAL REMINDERS (PXRM)
+801.485	P	H-05	certain	inherits from 801.48
+801.486	P	H-05	certain	inherits from 801.48
+801.487	P	H-05	certain	inherits from 801.48
 801.5	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 801.55	P	H-06	high	field=.01 PATIENT points to file 2
 801.9	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 801.9001	S	H-05	certain	inherits from 801.9
 801.901	S	H-05	certain	inherits from 801.9
-802.24	K	H-20	low	name contains K-pattern
-802.241	K	H-05	certain	inherits from 802.24
-802.2411	K	H-05	certain	inherits from 802.241
-802.4	K	H-20	low	name contains K-pattern
-802.41	K	H-05	certain	inherits from 802.4
+801.95	P	H-14	moderate	package=CLINICAL REMINDERS (PXRM)
+801.9501	P	H-05	certain	inherits from 801.95
+802.1	P	H-14	moderate	package=CLINICAL REMINDERS (PXRM)
+802.2	P	H-14	moderate	package=CLINICAL REMINDERS (PXRM)
+802.24	P	H-05	certain	inherits from 802.2
+802.241	P	H-05	certain	inherits from 802.24
+802.2411	P	H-05	certain	inherits from 802.241
+802.25	P	H-05	certain	inherits from 802.2
+802.3	P	H-14	moderate	package=CLINICAL REMINDERS (PXRM)
+802.313	P	H-05	certain	inherits from 802.3
+802.314	P	H-05	certain	inherits from 802.3
+802.34	P	H-05	certain	inherits from 802.3
+802.4	P	H-14	moderate	package=CLINICAL REMINDERS (PXRM)
+802.41	P	H-05	certain	inherits from 802.4
 802.42	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 802.422	S	H-05	certain	inherits from 802.42
 809	P	H-06	high	field=2 PATIENT points to file 2
@@ -5002,10 +5742,10 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 810.16	P	H-06	high	field=.01 PATIENT points to file 2
 810.17	S	H-05	certain	inherits from 810.1
 810.18	S	H-05	certain	inherits from 810.1
-810.2	K	H-20	low	name contains K-pattern
-810.21	K	H-05	certain	inherits from 810.2
-810.22	K	H-05	certain	inherits from 810.21
-810.23	K	H-05	certain	inherits from 810.2
+810.2	P	H-14	moderate	package=CLINICAL REMINDERS (PXRM)
+810.21	P	H-05	certain	inherits from 810.2
+810.22	P	H-05	certain	inherits from 810.21
+810.23	P	H-05	certain	inherits from 810.2
 810.24	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 810.242	S	H-05	certain	inherits from 810.24
 810.3	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -5015,8 +5755,8 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 810.331	I	H-05	certain	inherits from 810.33
 810.3316	P	H-06	high	field=.01 UNIQUE APPLICABLE PATIENT points to file 2
 810.36	S	H-05	certain	inherits from 810.3
-810.4	K	H-20	low	name contains K-pattern
-810.41	K	H-05	certain	inherits from 810.4
+810.4	P	H-14	moderate	package=CLINICAL REMINDERS (PXRM)
+810.41	P	H-05	certain	inherits from 810.4
 810.42	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 810.422	S	H-05	certain	inherits from 810.42
 810.5	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -5027,106 +5767,106 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 810.535	S	H-05	certain	inherits from 810.5
 810.54	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 810.545	S	H-05	certain	inherits from 810.5
-810.7	K	H-20	low	name contains K-pattern
-810.701	K	H-05	certain	inherits from 810.7
-810.71	K	H-05	certain	inherits from 810.7
+810.7	P	H-14	moderate	package=CLINICAL REMINDERS (PXRM)
+810.701	P	H-05	certain	inherits from 810.7
+810.71	P	H-05	certain	inherits from 810.7
 810.72	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 810.722	S	H-05	certain	inherits from 810.72
-810.8	K	H-20	low	name contains K-pattern
-810.801	K	H-05	certain	inherits from 810.8
+810.8	P	H-14	moderate	package=CLINICAL REMINDERS (PXRM)
+810.801	P	H-05	certain	inherits from 810.8
 810.82	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 810.822	S	H-05	certain	inherits from 810.82
-810.9	K	H-20	low	name contains K-pattern
-810.9001	K	H-05	certain	inherits from 810.9
-810.90011	K	H-05	certain	inherits from 810.9001
+810.9	P	H-14	moderate	package=CLINICAL REMINDERS (PXRM)
+810.9001	P	H-05	certain	inherits from 810.9
+810.90011	P	H-05	certain	inherits from 810.9001
 810.9002	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 810.90022	S	H-05	certain	inherits from 810.9002
-810.91	K	H-05	certain	inherits from 810.9
-810.944	K	H-05	certain	inherits from 810.9
-811.1	K	H-20	low	name contains K-pattern
-811.2	K	H-20	low	name contains K-pattern
+810.91	P	H-05	certain	inherits from 810.9
+810.944	P	H-05	certain	inherits from 810.9
+811.1	P	H-14	moderate	package=PCE PATIENT CARE ENCOUNTER (PX)
+811.2	P	H-14	moderate	package=PCE PATIENT CARE ENCOUNTER (PX)
 811.21	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 811.212	S	H-05	certain	inherits from 811.21
-811.22	K	H-05	certain	inherits from 811.2
-811.23	K	H-05	certain	inherits from 811.2
-811.231	K	H-05	certain	inherits from 811.23
-811.2312	K	H-05	certain	inherits from 811.231
-811.24	K	H-05	certain	inherits from 811.2
-811.4	K	H-20	low	name contains K-pattern
-811.41	K	H-05	certain	inherits from 811.4
+811.22	P	H-05	certain	inherits from 811.2
+811.23	P	H-05	certain	inherits from 811.2
+811.231	P	H-05	certain	inherits from 811.23
+811.2312	P	H-05	certain	inherits from 811.231
+811.24	P	H-05	certain	inherits from 811.2
+811.4	P	H-14	moderate	package=CLINICAL REMINDERS (PXRM)
+811.41	P	H-05	certain	inherits from 811.4
 811.42	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 811.422	S	H-05	certain	inherits from 811.42
-811.5	K	H-20	low	name contains K-pattern
-811.51	K	H-05	certain	inherits from 811.5
-811.52	K	H-05	certain	inherits from 811.5
+811.5	P	H-14	moderate	package=CLINICAL REMINDERS (PXRM)
+811.51	P	H-05	certain	inherits from 811.5
+811.52	P	H-05	certain	inherits from 811.5
 811.53	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 811.532	S	H-05	certain	inherits from 811.53
-811.54	K	H-05	certain	inherits from 811.52
-811.6	K	H-18	moderate	ptr_in=17 ptr_out=0
-811.61	K	H-05	certain	inherits from 811.6
-811.611	K	H-05	certain	inherits from 811.61
-811.62	K	H-05	certain	inherits from 811.6
+811.54	P	H-05	certain	inherits from 811.52
+811.6	P	H-14	moderate	package=CLINICAL REMINDERS (PXRM)
+811.61	P	H-05	certain	inherits from 811.6
+811.611	P	H-05	certain	inherits from 811.61
+811.62	P	H-05	certain	inherits from 811.6
 811.63	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 811.632	S	H-05	certain	inherits from 811.63
-811.7	K	H-20	low	name contains K-pattern
-811.701	K	H-05	certain	inherits from 811.7
-811.71	K	H-05	certain	inherits from 811.7
-811.72	K	H-05	certain	inherits from 811.7
-811.8	K	H-20	low	name contains K-pattern
-811.801	K	H-05	certain	inherits from 811.8
-811.802	K	H-05	certain	inherits from 811.8
-811.8021	K	H-05	certain	inherits from 811.802
-811.803	K	H-05	certain	inherits from 811.8
-811.8031	K	H-05	certain	inherits from 811.803
-811.80315	K	H-05	certain	inherits from 811.8031
-811.804	K	H-05	certain	inherits from 811.8
-811.805	K	H-05	certain	inherits from 811.8
-811.9	K	H-20	low	name contains K-pattern
+811.7	P	H-14	moderate	package=CLINICAL REMINDERS (PXRM)
+811.701	P	H-05	certain	inherits from 811.7
+811.71	P	H-05	certain	inherits from 811.7
+811.72	P	H-05	certain	inherits from 811.7
+811.8	P	H-14	moderate	package=PCE PATIENT CARE ENCOUNTER (PX)
+811.801	P	H-05	certain	inherits from 811.8
+811.802	P	H-05	certain	inherits from 811.8
+811.8021	P	H-05	certain	inherits from 811.802
+811.803	P	H-05	certain	inherits from 811.8
+811.8031	P	H-05	certain	inherits from 811.803
+811.80315	P	H-05	certain	inherits from 811.8031
+811.804	P	H-05	certain	inherits from 811.8
+811.805	P	H-05	certain	inherits from 811.8
+811.9	P	H-14	moderate	package=PCE PATIENT CARE ENCOUNTER (PX)
 811.9001	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 811.90012	S	H-05	certain	inherits from 811.9001
-811.9002	K	H-05	certain	inherits from 811.9
-811.90021	K	H-05	certain	inherits from 811.9002
-811.9003	K	H-05	certain	inherits from 811.9
-811.9004	K	H-05	certain	inherits from 811.9
-811.902	K	H-05	certain	inherits from 811.9
-811.90221	K	H-05	certain	inherits from 811.902
-811.9024	K	H-05	certain	inherits from 811.902
-811.9025	K	H-05	certain	inherits from 811.902
-811.92	K	H-05	certain	inherits from 811.9
-811.925	K	H-05	certain	inherits from 811.9
-811.9251	K	H-05	certain	inherits from 811.925
-811.9252	K	H-05	certain	inherits from 811.925
-811.9253	K	H-05	certain	inherits from 811.925
-811.9255	K	H-05	certain	inherits from 811.925
-811.9256	K	H-05	certain	inherits from 811.9255
-811.93	K	H-05	certain	inherits from 811.9
-811.948	K	H-05	certain	inherits from 811.9
-811.961	K	H-05	certain	inherits from 811.9
-811.965	K	H-05	certain	inherits from 811.9
-811.966	K	H-05	certain	inherits from 811.9
-811.97	K	H-05	certain	inherits from 811.9
-811.971	K	H-05	certain	inherits from 811.9
-811.973	K	H-05	certain	inherits from 811.97
-811.974	K	H-05	certain	inherits from 811.97
-811.975	K	H-05	certain	inherits from 811.9
-811.976	K	H-05	certain	inherits from 811.9
-811.983	K	H-05	certain	inherits from 811.9
-811.984	K	H-05	certain	inherits from 811.9
-811.993	K	H-05	certain	inherits from 811.9
-811.994	K	H-05	certain	inherits from 811.9
+811.9002	P	H-05	certain	inherits from 811.9
+811.90021	P	H-05	certain	inherits from 811.9002
+811.9003	P	H-05	certain	inherits from 811.9
+811.9004	P	H-05	certain	inherits from 811.9
+811.902	P	H-05	certain	inherits from 811.9
+811.90221	P	H-05	certain	inherits from 811.902
+811.9024	P	H-05	certain	inherits from 811.902
+811.9025	P	H-05	certain	inherits from 811.902
+811.92	P	H-05	certain	inherits from 811.9
+811.925	P	H-05	certain	inherits from 811.9
+811.9251	P	H-05	certain	inherits from 811.925
+811.9252	P	H-05	certain	inherits from 811.925
+811.9253	P	H-05	certain	inherits from 811.925
+811.9255	P	H-05	certain	inherits from 811.925
+811.9256	P	H-05	certain	inherits from 811.9255
+811.93	P	H-05	certain	inherits from 811.9
+811.948	P	H-05	certain	inherits from 811.9
+811.961	P	H-05	certain	inherits from 811.9
+811.965	P	H-05	certain	inherits from 811.9
+811.966	P	H-05	certain	inherits from 811.9
+811.97	P	H-05	certain	inherits from 811.9
+811.971	P	H-05	certain	inherits from 811.9
+811.973	P	H-05	certain	inherits from 811.97
+811.974	P	H-05	certain	inherits from 811.97
+811.975	P	H-05	certain	inherits from 811.9
+811.976	P	H-05	certain	inherits from 811.9
+811.983	P	H-05	certain	inherits from 811.9
+811.984	P	H-05	certain	inherits from 811.9
+811.993	P	H-05	certain	inherits from 811.9
+811.994	P	H-05	certain	inherits from 811.9
 812	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 812.01	S	H-05	certain	inherits from 812
 812.02	S	H-05	certain	inherits from 812.01
-815	S	H-21	low	name contains S-pattern
-815.01	S	H-05	certain	inherits from 815
-815.0401	S	H-05	certain	inherits from 815
-815.0701	S	H-05	certain	inherits from 815
-815.0702	S	H-05	certain	inherits from 815
-815.0801	S	H-05	certain	inherits from 815
-815.0802	S	H-05	certain	inherits from 815
-815.0803	S	H-05	certain	inherits from 815
-815.0804	S	H-05	certain	inherits from 815
-815.0805	S	H-05	certain	inherits from 815
+815	P	H-14	moderate	package=PCE PATIENT CARE ENCOUNTER (PX)
+815.01	P	H-05	certain	inherits from 815
+815.0401	P	H-05	certain	inherits from 815
+815.0701	P	H-05	certain	inherits from 815
+815.0702	P	H-05	certain	inherits from 815
+815.0801	P	H-05	certain	inherits from 815
+815.0802	P	H-05	certain	inherits from 815
+815.0803	P	H-05	certain	inherits from 815
+815.0804	P	H-05	certain	inherits from 815
+815.0805	P	H-05	certain	inherits from 815
 818	P	H-06	high	field=.01 PATIENT points to file 2
 818.01	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 818.02	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -5134,15 +5874,18 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 818.04	S	H-05	certain	inherits from 818.01
 818.141	S	H-05	certain	inherits from 818.01
 818.41	S	H-05	certain	inherits from 818.04
-839.01	S	H-21	low	name contains S-pattern
-839.011	S	H-05	certain	inherits from 839.01
-839.012	S	H-05	certain	inherits from 839.01
+839.01	P	H-14	moderate	package=PCE PATIENT CARE ENCOUNTER (PX)
+839.011	P	H-05	certain	inherits from 839.01
+839.012	P	H-05	certain	inherits from 839.01
 839.7	I	H-08	high	has ptr to file 4; no ptr to file 2
 839.7101	I	H-05	certain	inherits from 839.7
-853.011	K	H-20	low	name contains K-pattern
-853.012	K	H-20	low	name contains K-pattern
-853.013	K	H-20	low	name contains K-pattern
-853.1	S	H-21	low	name contains S-pattern
+853	I	H-15	moderate	package=VPS KIOSK (VPS)
+853.01	I	H-05	certain	inherits from 853
+853.011	I	H-05	certain	inherits from 853.01
+853.012	I	H-05	certain	inherits from 853.01
+853.013	I	H-05	certain	inherits from 853.01
+853.1	I	H-15	moderate	package=VPS KIOSK (VPS)
+853.3	I	H-15	moderate	package=VPS KIOSK (VPS)
 853.5	P	H-06	high	field=.01 PATIENT points to file 2
 853.51	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 853.5121	S	H-05	certain	inherits from 853.51
@@ -5167,6 +5910,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 853.57	I	H-05	certain	inherits from 853.52
 853.58	I	H-05	certain	inherits from 853.52
 853.59	S	H-05	certain	inherits from 853.53
+853.7	I	H-15	moderate	package=VPS KIOSK (VPS)
 853.8	P	H-06	high	field=.01 PATIENT points to file 2
 853.805	P	H-05	certain	inherits from 853.8
 853.81	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -5177,6 +5921,10 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 853.81132	S	H-05	certain	inherits from 853.8113
 853.81133	S	H-05	certain	inherits from 853.8113
 853.811336	S	H-05	certain	inherits from 853.81133
+853.85	I	H-15	moderate	package=VPS KIOSK (VPS)
+853.853	I	H-05	certain	inherits from 853.85
+853.875	I	H-15	moderate	package=VPS KIOSK (VPS)
+853.9	I	H-15	moderate	package=VPS KIOSK (VPS)
 853.91	P	H-06	high	field=2 PATIENT points to file 2
 860.1	P	H-06	high	field=.01 PATIENT points to file 2
 860.11	P	H-05	certain	inherits from 860.1
@@ -5188,14 +5936,23 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 860.712	P	H-05	certain	inherits from 860.71
 860.7122	P	H-05	certain	inherits from 860.712
 860.71223	P	H-05	certain	inherits from 860.7122
+860.8	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 860.801	K	H-20	low	name contains K-pattern
+860.81	S	H-05	certain	inherits(prop) from 860.8
+860.9	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+860.91	S	H-05	certain	inherits(prop) from 860.9
 861	S	H-21	low	name contains S-pattern
 861.01	S	H-05	certain	inherits from 861
 863	K	H-20	low	name contains K-pattern
 863.01	K	H-05	certain	inherits from 863
 863.02	K	H-05	certain	inherits from 863
+863.1	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 863.11	S	H-21	low	name contains S-pattern
+863.12	S	H-05	certain	inherits(prop) from 863.1
+863.13	S	H-05	certain	inherits(prop) from 863.1
 863.21	S	H-21	low	name contains S-pattern
+863.3	K	H-40	moderate	3 targets all classified K
+863.31	K	H-05	certain	inherits(prop) from 863.3
 863.32	S	H-21	low	name contains S-pattern
 863.41	S	H-21	low	name contains S-pattern
 863.5	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -5209,10 +5966,11 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 863.81	K	H-05	certain	inherits from 863.8
 863.84	K	H-05	certain	inherits from 863.8
 863.91	S	H-21	low	name contains S-pattern
+864	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 864.1	K	H-20	low	name contains K-pattern
 864.11	K	H-05	certain	inherits from 864.1
-869.1	K	H-20	low	name contains K-pattern
-869.2	S	H-21	low	name contains S-pattern
+869.1	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
+869.2	S	H-17	moderate	package=HEALTH LEVEL SEVEN (HL)
 869.3	I	H-08	high	has ptr to file 4; no ptr to file 2
 869.31	I	H-05	certain	inherits from 869.3
 869.311	I	H-05	certain	inherits from 869.31
@@ -5230,6 +5988,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 870.02	I	H-05	certain	inherits from 870
 870.13	I	H-05	certain	inherits from 870.01
 870.193	I	H-05	certain	inherits from 870.019
+910.1	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 910.11	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 910.12	S	H-05	certain	inherits from 910.11
 910.2	S	H-21	low	name contains S-pattern
@@ -5261,6 +6020,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 912.18	S	H-05	certain	inherits from 912.17
 912.3	I	H-22	low	name contains I-pattern
 912.31	I	H-05	certain	inherits from 912.3
+912.4	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 912.41	I	H-22	low	name contains I-pattern
 912.5	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 912.55	S	H-05	certain	inherits from 912.5
@@ -5281,13 +6041,35 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 920.05	I	H-08	high	has ptr to file 4; no ptr to file 2
 920.051	I	H-05	certain	inherits from 920.05
 920.052	I	H-05	certain	inherits from 920.05
+920.1	P	H-14	moderate	package=PCE PATIENT CARE ENCOUNTER (PX)
+920.199	P	H-05	certain	inherits from 920.1
+920.2	P	H-14	moderate	package=PCE PATIENT CARE ENCOUNTER (PX)
+920.299	P	H-05	certain	inherits from 920.2
+920.3	P	H-14	moderate	package=PCE PATIENT CARE ENCOUNTER (PX)
+920.399	P	H-05	certain	inherits from 920.3
+920.4	P	H-14	moderate	package=PCE PATIENT CARE ENCOUNTER (PX)
+920.43	P	H-05	certain	inherits from 920.4
+920.499	P	H-05	certain	inherits from 920.4
+920.5	P	H-14	moderate	package=PCE PATIENT CARE ENCOUNTER (PX)
+920.599	P	H-05	certain	inherits from 920.5
+920.6	P	H-14	moderate	package=PCE PATIENT CARE ENCOUNTER (PX)
+920.61	P	H-05	certain	inherits from 920.6
+920.71	P	H-14	moderate	package=PCE PATIENT CARE ENCOUNTER (PX)
+920.75	P	H-14	moderate	package=PCE PATIENT CARE ENCOUNTER (PX)
+920.76	P	H-14	moderate	package=PCE PATIENT CARE ENCOUNTER (PX)
 920.761	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+920.77	P	H-14	moderate	package=PCE PATIENT CARE ENCOUNTER (PX)
+920.772	P	H-05	certain	inherits from 920.77
+920.773	P	H-05	certain	inherits from 920.77
+920.774	P	H-05	certain	inherits from 920.77
 950	S	H-21	low	name contains S-pattern
 950.01	S	H-05	certain	inherits from 950
 984.1	P	H-23	low	name contains P-pattern
+984.5	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+984.8	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 984.9	P	H-06	high	field=.04 PATIENT points to file 2
 987.5	P	H-06	high	field=18 PATIENTS INTERNAL ENTRY NUMBER points to file 2
-987.6	S	H-21	low	name contains S-pattern
+987.6	P	H-14	moderate	package=WOUNDED INJURED ILL WARRIORS (WII)
 990.8	I	H-08	high	has ptr to file 4; no ptr to file 2
 991.1	S	H-21	low	name contains S-pattern
 991.11	K	H-20	low	name contains K-pattern
@@ -5297,7 +6079,13 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 991.1211	P	H-05	certain	inherits from 991.12
 991.8	P	H-06	high	field=118 PSEUDO INIT LAST points to file 2
 991.817	P	H-05	certain	inherits from 991.8
+996.2	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+1609	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+1609.01	S	H-05	certain	inherits(prop) from 1609
+1609.1	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 1927.09	P	H-06	high	field=4 PATIENT points to file 2
+1927.3	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+1927.33	S	H-05	certain	inherits(prop) from 1927.3
 1927.4	P	H-06	high	field=1 PATIENT points to file 2
 1927.4011	K	H-20	low	name contains K-pattern
 1927.403	S	H-21	low	name contains S-pattern
@@ -5351,11 +6139,14 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 1927.703	P	H-05	certain	inherits from 1927.4
 1927.704	P	H-05	certain	inherits from 1927.4
 1927.92	P	H-05	certain	inherits from 1927.09
+2000	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 2000.07	K	H-20	low	name contains K-pattern
+2001	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 2001.07	K	H-20	low	name contains K-pattern
 2005	P	H-06	high	field=5 PATIENT points to file 2
 2005.0021	I	H-08	high	has ptr to file 4; no ptr to file 2
 2005.0022	I	H-05	certain	inherits from 2005.0021
+2005.003	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 2005.0031	I	H-08	high	has ptr to file 4; no ptr to file 2
 2005.0032	I	H-05	certain	inherits from 2005.0031
 2005.01	P	H-05	certain	inherits from 2005
@@ -5364,6 +6155,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 2005.0111	P	H-05	certain	inherits from 2005
 2005.02	K	H-20	low	name contains K-pattern
 2005.021	K	H-20	low	name contains K-pattern
+2005.03	P	H-36	moderate	4/5 targets classified P
 2005.04	P	H-05	certain	inherits from 2005
 2005.05	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 2005.099	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -5378,17 +6170,27 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 2005.21	K	H-05	certain	inherits from 2005.02
 2005.24	K	H-05	certain	inherits from 2005.02
 2005.4	S	H-21	low	name contains S-pattern
+2005.41	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 2005.42	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 2005.421	S	H-05	certain	inherits from 2005.42
 2005.43	I	H-08	high	has ptr to file 4; no ptr to file 2
 2005.51	S	H-05	certain	inherits from 2005.05
 2005.6	P	H-06	high	field=3 PATIENT FILE REFERENCE points to file 2
+2005.61	P	H-36	moderate	2/2 targets classified P
+2005.62	P	H-36	moderate	2/2 targets classified P
+2005.63	P	H-36	moderate	5/6 targets classified P
+2005.632	P	H-36	moderate	3/3 targets classified P
 2005.6362	K	H-20	low	name contains K-pattern
 2005.6366	K	H-20	low	name contains K-pattern
+2005.64	P	H-36	moderate	2/2 targets classified P
 2005.65	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 2005.66	P	H-06	high	field=4 PATIENT points to file 2
 2005.67	S	H-21	low	name contains S-pattern
+2005.71	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+2005.712	S	H-05	certain	inherits(prop) from 2005.71
+2005.713	S	H-05	certain	inherits(prop) from 2005.712
 2005.8	I	H-22	low	name contains I-pattern
+2005.81	P	H-36	moderate	4/4 targets classified P
 2005.82	K	H-20	low	name contains K-pattern
 2005.83	K	H-20	low	name contains K-pattern
 2005.84	K	H-18	moderate	ptr_in=12 ptr_out=2
@@ -5397,8 +6199,12 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 2005.865	K	H-20	low	name contains K-pattern
 2005.87	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 2006.03	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+2006.033	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 2006.035	I	H-08	high	has ptr to file 4; no ptr to file 2
+2006.036	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+2006.03601	S	H-05	certain	inherits(prop) from 2006.036
 2006.04	I	H-08	high	has ptr to file 4; no ptr to file 2
+2006.041	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 2006.1	I	H-08	high	has ptr to file 4; no ptr to file 2
 2006.11	I	H-05	certain	inherits from 2006.1
 2006.112	I	H-05	certain	inherits from 2006.1
@@ -5414,6 +6220,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 2006.137	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 2006.1371	S	H-05	certain	inherits from 2006.137
 2006.1372	S	H-05	certain	inherits from 2006.1371
+2006.15	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 2006.166	I	H-05	certain	inherits from 2006.1
 2006.1662	I	H-05	certain	inherits from 2006.166
 2006.1664	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -5425,13 +6232,27 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 2006.191	I	H-05	certain	inherits from 2006.19
 2006.5	P	H-06	high	field=2 PATIENT points to file 2
 2006.502	P	H-05	certain	inherits from 2006.5
+2006.51	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+2006.511	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+2006.5112	S	H-05	certain	inherits(prop) from 2006.511
+2006.514	S	H-05	certain	inherits(prop) from 2006.51
 2006.52	P	H-05	certain	inherits from 2006.5
 2006.5204	P	H-05	certain	inherits from 2006.52
+2006.53	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+2006.5305	S	H-05	certain	inherits(prop) from 2006.53
+2006.531	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 2006.532	K	H-20	low	name contains K-pattern
+2006.539	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+2006.5391	S	H-05	certain	inherits(prop) from 2006.539
 2006.54	K	H-20	low	name contains K-pattern
 2006.541	I	H-08	high	has ptr to file 4; no ptr to file 2
 2006.5411	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 2006.54111	S	H-05	certain	inherits from 2006.5411
+2006.542	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+2006.5421	S	H-05	certain	inherits(prop) from 2006.542
+2006.5422	S	H-05	certain	inherits(prop) from 2006.542
+2006.5423	S	H-05	certain	inherits(prop) from 2006.542
+2006.5424	S	H-05	certain	inherits(prop) from 2006.542
 2006.543	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 2006.5431	S	H-05	certain	inherits from 2006.543
 2006.5432	S	H-05	certain	inherits from 2006.543
@@ -5453,23 +6274,46 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 2006.5634	P	H-05	certain	inherits from 2006.563
 2006.5635	P	H-05	certain	inherits from 2006.563
 2006.5636	I	H-08	high	has ptr to file 4; no ptr to file 2
+2006.564	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+2006.5641	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 2006.565	P	H-06	high	field=15 PATIENT points to file 2
 2006.56519	P	H-05	certain	inherits from 2006.565
 2006.56599	P	H-05	certain	inherits from 2006.565
+2006.57	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+2006.5701	S	H-05	certain	inherits(prop) from 2006.57
+2006.5711	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+2006.5713	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+2006.5715	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 2006.5719	S	H-21	low	name contains S-pattern
+2006.572	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+2006.573	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+2006.5732	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+2006.57321	S	H-05	certain	inherits(prop) from 2006.5732
+2006.5733	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 2006.57331	I	H-08	high	has ptr to file 4; no ptr to file 2
 2006.57332	I	H-05	certain	inherits from 2006.57331
 2006.57333	I	H-05	certain	inherits from 2006.57332
 2006.574	I	H-08	high	has ptr to file 4; no ptr to file 2
 2006.5744	I	H-05	certain	inherits from 2006.574
 2006.575	I	H-08	high	has ptr to file 4; no ptr to file 2
+2006.5751	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+2006.5752	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 2006.57526	I	H-05	certain	inherits from 2006.575
 2006.5757	S	H-21	low	name contains S-pattern
 2006.5758	S	H-21	low	name contains S-pattern
 2006.5759	I	H-08	high	has ptr to file 4; no ptr to file 2
+2006.5761	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+2006.57611	S	H-05	certain	inherits(prop) from 2006.5761
+2006.5762	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 2006.57621	I	H-08	high	has ptr to file 4; no ptr to file 2
 2006.576211	I	H-05	certain	inherits from 2006.57621
+2006.5763	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+2006.57631	S	H-05	certain	inherits(prop) from 2006.5763
 2006.576311	I	H-08	high	has ptr to file 4; no ptr to file 2
+2006.5764	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+2006.57641	S	H-05	certain	inherits(prop) from 2006.5764
+2006.577	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+2006.5771	S	H-05	certain	inherits(prop) from 2006.577
 2006.58	S	H-21	low	name contains S-pattern
 2006.5801	S	H-05	certain	inherits from 2006.58
 2006.5802	S	H-05	certain	inherits from 2006.58
@@ -5479,6 +6323,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 2006.583	I	H-08	high	has ptr to file 4; no ptr to file 2
 2006.5831	I	H-08	high	has ptr to file 4; no ptr to file 2
 2006.58311	I	H-05	certain	inherits from 2006.5831
+2006.584	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 2006.5841	I	H-08	high	has ptr to file 4; no ptr to file 2
 2006.5842	I	H-08	high	has ptr to file 4; no ptr to file 2
 2006.5843	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -5488,13 +6333,20 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 2006.5849	I	H-08	high	has ptr to file 4; no ptr to file 2
 2006.5852	K	H-20	low	name contains K-pattern
 2006.58522	K	H-05	certain	inherits from 2006.5852
+2006.586	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+2006.5863	S	H-05	certain	inherits(prop) from 2006.586
+2006.58633	S	H-05	certain	inherits(prop) from 2006.5863
 2006.587	I	H-08	high	has ptr to file 4; no ptr to file 2
 2006.5871	I	H-05	certain	inherits from 2006.587
+2006.588	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 2006.5903	S	H-21	low	name contains S-pattern
+2006.596	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+2006.5961	S	H-05	certain	inherits(prop) from 2006.596
 2006.598	S	H-21	low	name contains S-pattern
 2006.5985	S	H-05	certain	inherits from 2006.598
 2006.5986	S	H-05	certain	inherits from 2006.598
 2006.599	S	H-21	low	name contains S-pattern
+2006.59935	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 2006.621	S	H-21	low	name contains S-pattern
 2006.6211	S	H-05	certain	inherits from 2006.621
 2006.62111	S	H-05	certain	inherits from 2006.6211
@@ -5506,6 +6358,8 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 2006.631	K	H-20	low	name contains K-pattern
 2006.6311	K	H-05	certain	inherits from 2006.631
 2006.6312	K	H-05	certain	inherits from 2006.631
+2006.634	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+2006.634206	S	H-05	certain	inherits(prop) from 2006.634
 2006.65	S	H-21	low	name contains S-pattern
 2006.66	S	H-05	certain	inherits from 2006.65
 2006.68	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -5520,6 +6374,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 2006.82	P	H-06	high	field=5 PATIENT points to file 2
 2006.821	P	H-05	certain	inherits from 2006.82
 2006.823	P	H-05	certain	inherits from 2006.82
+2006.83	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 2006.911	I	H-08	high	has ptr to file 4; no ptr to file 2
 2006.9112	I	H-08	high	has ptr to file 4; no ptr to file 2
 2006.912	I	H-08	high	has ptr to file 4; no ptr to file 2
@@ -5540,6 +6395,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 2006.9422	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 2006.9423	I	H-22	low	name contains I-pattern
 2006.95	P	H-06	high	field=7 PATIENT points to file 2
+2006.96	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 2006.961	P	H-06	high	field=.01 PATIENT points to file 2
 2006.9613	P	H-05	certain	inherits from 2006.961
 2040	P	H-06	high	field=.01 NAME points to file 2
@@ -5563,6 +6419,8 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 2041.7	I	H-22	low	name contains I-pattern
 2041.732	I	H-05	certain	inherits from 2041.7
 2042	I	H-22	low	name contains I-pattern
+2043	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+2043.01	S	H-05	certain	inherits(prop) from 2043
 2043.51	I	H-08	high	has ptr to file 4; no ptr to file 2
 2044	I	H-22	low	name contains I-pattern
 2048	P	H-06	high	field=.01 PATIENT points to file 2
@@ -5630,18 +6488,28 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 2264.066	S	H-05	certain	inherits from 2264
 2264.077	S	H-05	certain	inherits from 2264
 2275	P	H-06	high	field=.01 VETERAN points to file 2
-2275.3	K	H-20	low	name contains K-pattern
-2275.31	K	H-05	certain	inherits from 2275.3
-2275.32	K	H-05	certain	inherits from 2275.3
+2275.3	P	H-14	moderate	package=My HealtheVet (MHV)
+2275.31	P	H-05	certain	inherits from 2275.3
+2275.32	P	H-05	certain	inherits from 2275.3
+2275.4	P	H-14	moderate	package=My HealtheVet (MHV)
 2276	S	H-21	low	name contains S-pattern
+2276.1	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+2276.11	S	H-05	certain	inherits(prop) from 2276.1
+2276.3	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+2276.999	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 6000	I	H-08	high	has ptr to file 4; no ptr to file 2
 6001	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 6001.01	S	H-05	certain	inherits from 6001
 6001.02	S	H-05	certain	inherits from 6001
 6002.01	P	H-06	high	field=9 DFN points to file 2
 6002.03	P	H-06	high	field=1 DFN points to file 2
-6003	S	H-21	low	name contains S-pattern
-6003.01	S	H-05	certain	inherits from 6003
+6002.04	P	H-14	moderate	package=VBECS (VBEC)
+6003	P	H-14	moderate	package=VBECS (VBEC)
+6003.01	P	H-05	certain	inherits from 6003
+6005	P	H-14	moderate	package=VBECS (VBEC)
+6007	P	H-14	moderate	package=VBECS (VBEC)
+6009	P	H-14	moderate	package=VBECS (VBEC)
+6009.01	P	H-05	certain	inherits from 6009
 6910	I	H-08	high	has ptr to file 4; no ptr to file 2
 6910.01	I	H-05	certain	inherits from 6910
 6910.012	I	H-05	certain	inherits from 6910
@@ -5651,6 +6519,10 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 6910.2	S	H-21	low	name contains S-pattern
 6910.21	S	H-05	certain	inherits from 6910.2
 6910.3	I	H-22	low	name contains I-pattern
+6910.5	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+6910.51	S	H-05	certain	inherits(prop) from 6910.5
+6910.52	S	H-05	certain	inherits(prop) from 6910.5
+6910.9	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 6910.97	K	H-20	low	name contains K-pattern
 6911	K	H-20	low	name contains K-pattern
 6911.01	K	H-05	certain	inherits from 6911
@@ -5665,6 +6537,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 6914.092	S	H-05	certain	inherits from 6914
 6914.1	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 6914.43	S	H-05	certain	inherits from 6914.04
+6915.1	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 6915.2	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 6915.21	S	H-05	certain	inherits from 6915.2
 6915.3	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -5675,8 +6548,17 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 6915.51	S	H-05	certain	inherits from 6915.5
 6915.6	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 6915.61	S	H-05	certain	inherits from 6915.6
+6915.9	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+6915.91	S	H-05	certain	inherits(prop) from 6915.9
+6915.911	S	H-05	certain	inherits(prop) from 6915.91
+6915.9111	S	H-05	certain	inherits(prop) from 6915.911
+6916	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+6916.07	S	H-05	certain	inherits(prop) from 6916
+6916.08	S	H-05	certain	inherits(prop) from 6916.07
 6916.09	K	H-20	low	name contains K-pattern
 6916.1	I	H-22	low	name contains I-pattern
+6916.11	S	H-05	certain	inherits(prop) from 6916
+6916.12	S	H-05	certain	inherits(prop) from 6916.11
 6916.3	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 6916.31	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 6917	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -5687,6 +6569,14 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 6919	S	H-21	low	name contains S-pattern
 6919.01	S	H-05	certain	inherits from 6919
 6919.02	S	H-05	certain	inherits from 6919
+6919.1	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+6919.11	S	H-05	certain	inherits(prop) from 6919.1
+6919.12	S	H-05	certain	inherits(prop) from 6919.1
+6919.2	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+6919.21	S	H-05	certain	inherits(prop) from 6919.2
+6919.22	S	H-05	certain	inherits(prop) from 6919.2
+6919.23	S	H-05	certain	inherits(prop) from 6919.2
+6919.24	S	H-05	certain	inherits(prop) from 6919.2
 6920	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 6920.01	S	H-05	certain	inherits from 6920
 6920.02	S	H-05	certain	inherits from 6920
@@ -5713,10 +6603,13 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 6925.05	I	H-05	certain	inherits from 6925
 6925.06	I	H-05	certain	inherits from 6925
 6925.3	K	H-20	low	name contains K-pattern
+7115.1	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+7115.11	S	H-05	certain	inherits(prop) from 7115.1
 7115.3	K	H-20	low	name contains K-pattern
 7115.34	K	H-05	certain	inherits from 7115.3
 7118.21	I	H-08	high	has ptr to file 4; no ptr to file 2
 7118.22	I	H-22	low	name contains I-pattern
+7118.27	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 7118.29	S	H-21	low	name contains S-pattern
 7336.3	K	H-20	low	name contains K-pattern
 7336.8	K	H-20	low	name contains K-pattern
@@ -5801,42 +6694,72 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 8928	I	H-08	high	has ptr to file 4; no ptr to file 2
 8928.01	I	H-05	certain	inherits from 8928
 8928.02	I	H-05	certain	inherits from 8928
-8930	K	H-18	moderate	ptr_in=16 ptr_out=1
-8930.01	K	H-05	certain	inherits from 8930
+8930	S	H-17	moderate	package=AUTHORIZATION/SUBSCRIPTION (USR)
+8930.01	S	H-05	certain	inherits from 8930
+8930.1	S	H-17	moderate	package=AUTHORIZATION/SUBSCRIPTION (USR)
+8930.11	S	H-05	certain	inherits from 8930.1
+8930.2	S	H-17	moderate	package=AUTHORIZATION/SUBSCRIPTION (USR)
+8930.21	S	H-05	certain	inherits from 8930.2
 8930.3	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+8930.4	S	H-17	moderate	package=AUTHORIZATION/SUBSCRIPTION (USR)
+8930.6	S	H-17	moderate	package=AUTHORIZATION/SUBSCRIPTION (USR)
+8930.61	S	H-05	certain	inherits from 8930.6
+8930.8	S	H-17	moderate	package=AUTHORIZATION/SUBSCRIPTION (USR)
+8930.81	S	H-05	certain	inherits from 8930.8
+8930.82	S	H-05	certain	inherits from 8930.8
 8932.1	K	H-18	moderate	ptr_in=12 ptr_out=1
 8932.111	K	H-05	certain	inherits from 8932.1
 8932.199	K	H-05	certain	inherits from 8932.1
 8933.1	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-8935.91	K	H-20	low	name contains K-pattern
-8935.912	K	H-05	certain	inherits from 8935.91
-8935.913	K	H-05	certain	inherits from 8935.91
+8935.91	S	H-17	moderate	package=HEALTHEVET DESKTOP (XHD)
+8935.912	S	H-05	certain	inherits from 8935.91
+8935.913	S	H-05	certain	inherits from 8935.91
+8969	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+8969.02	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 8969.03	S	H-21	low	name contains S-pattern
+8970.1	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+8970.11	S	H-05	certain	inherits(prop) from 8970.1
+8971.1	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 8972.1	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 8972.11	S	H-05	certain	inherits from 8972.1
 8972.111	S	H-05	certain	inherits from 8972.1
+8972.3	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 8973	I	H-08	high	has ptr to file 4; no ptr to file 2
 8973.01	I	H-05	certain	inherits from 8973
 8973.02	I	H-05	certain	inherits from 8973
 8973.03	I	H-05	certain	inherits from 8973
 8973.04	I	H-05	certain	inherits from 8973
 8973.05	I	H-05	certain	inherits from 8973
+8973.1	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 8973.2	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 8973.201	I	H-05	certain	inherits from 8973
+8973.3	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 8973.31	K	H-20	low	name contains K-pattern
 8980	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 8980.01	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 8980.021	S	H-05	certain	inherits from 8980
 8980.2	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 8980.21	S	H-05	certain	inherits from 8980.2
+8980.22	S	H-17	moderate	package=KERNEL (XU)
 8984.1	S	H-13	high	global=
 8984.2	S	H-13	high	global=
 8984.3	S	H-13	high	global=
 8984.31	S	H-05	certain	inherits from 8984.3
 8984.4	S	H-13	high	global=
-8985.1	K	H-20	low	name contains K-pattern
-8985.11	K	H-05	certain	inherits from 8985.1
+8985.1	S	H-17	moderate	package=TOOLKIT (XT)
+8985.11	S	H-05	certain	inherits from 8985.1
+8987.1	S	H-17	moderate	package=MSM CAPACITY MANAGEMENT (XUCS)
+8987.13	S	H-05	certain	inherits from 8987.1
 8987.16	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+8987.17	S	H-05	certain	inherits from 8987.1
+8987.2	S	H-17	moderate	package=MSM CAPACITY MANAGEMENT (XUCS)
+8987.21	S	H-05	certain	inherits from 8987.2
+8987.32	S	H-05	certain	inherits from 8987.21
+8987.33	S	H-05	certain	inherits from 8987.21
+8987.34	S	H-05	certain	inherits from 8987.21
+8987.35	S	H-05	certain	inherits from 8987.21
+8987.36	S	H-05	certain	inherits from 8987.21
+8987.37	S	H-05	certain	inherits from 8987.21
 8989.2	S	H-13	high	global=
 8989.3	I	H-08	high	has ptr to file 4; no ptr to file 2
 8989.304	I	H-05	certain	inherits from 8989.3
@@ -5905,13 +6828,16 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 8993.15	I	H-05	certain	inherits from 8993.1
 8993.2	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 8993.21	S	H-05	certain	inherits from 8993.2
-8994.02	S	H-21	low	name contains S-pattern
+8994	S	H-17	moderate	package=RPC BROKER (XWB)
+8994.01	S	H-05	certain	inherits from 8994
+8994.02	S	H-05	certain	inherits from 8994
 8994.021	S	H-05	certain	inherits from 8994.02
-8994.03	S	H-21	low	name contains S-pattern
+8994.03	S	H-05	certain	inherits from 8994
 8994.1	I	H-08	high	has ptr to file 4; no ptr to file 2
 8994.17	I	H-05	certain	inherits from 8994.1
 8994.171	I	H-05	certain	inherits from 8994.17
-8994.51	K	H-20	low	name contains K-pattern
+8994.5	S	H-17	moderate	package=RPC BROKER (XWB)
+8994.51	S	H-05	certain	inherits from 8994.5
 9001	K	H-20	low	name contains K-pattern
 11500.1	P	H-06	high	field=.12 LOCAL PATIENT ENTRY points to file 2
 11500.11	P	H-05	certain	inherits from 11500.1
@@ -5923,10 +6849,12 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 11500.62	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 11500.63	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 11500.64	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+19200.112	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+19200.1121	S	H-05	certain	inherits(prop) from 19200.112
 19200.114	S	H-21	low	name contains S-pattern
 19200.11421	S	H-05	certain	inherits from 19200.114
 19200.124	S	H-05	certain	inherits from 19200.114
-19610.45	S	H-21	low	name contains S-pattern
+19610.45	P	H-14	moderate	package=VENDOR - DOCUMENT STORAGE SYS (VEJD)
 19617	P	H-06	high	field=.01 NAME points to file 2
 19617.021	P	H-05	certain	inherits from 19617
 19617.022	P	H-05	certain	inherits from 19617
@@ -5935,8 +6863,10 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 19619	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 19619.1	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 19619.132	S	H-05	certain	inherits from 19619.1
-19619.2	K	H-20	low	name contains K-pattern
+19619.2	P	H-14	moderate	package=VENDOR - DOCUMENT STORAGE SYS (VEJD)
 19619.9	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+19619.99	P	H-14	moderate	package=VENDOR - DOCUMENT STORAGE SYS (VEJD)
+19619.991	P	H-05	certain	inherits from 19619.99
 19620	I	H-08	high	has ptr to file 4; no ptr to file 2
 19620.01	I	H-05	certain	inherits from 19620
 19620.02	I	H-05	certain	inherits from 19620
@@ -5959,10 +6889,13 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 19620.7	K	H-20	low	name contains K-pattern
 19620.71	K	H-20	low	name contains K-pattern
 19620.8	K	H-20	low	name contains K-pattern
+19620.87	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 19620.871	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 19620.91	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 19620.94	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 19620.96	P	H-23	low	name contains P-pattern
+19620.98	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+19620.9801	S	H-05	certain	inherits(prop) from 19620.98
 19621	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 19621.01	S	H-05	certain	inherits from 19621
 19625	P	H-06	high	field=.01 PATIENT points to file 2
@@ -5971,6 +6904,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 19625.07	P	H-05	certain	inherits from 19625
 19625.08	P	H-05	certain	inherits from 19625
 19625.09	P	H-05	certain	inherits from 19625
+19625.1	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 19625.11	P	H-06	high	field=.03 PATIENT points to file 2
 19625.3	P	H-06	high	field=.01 PATIENT points to file 2
 23450	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -5978,11 +6912,14 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 23451	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 23451.01	S	H-05	certain	inherits from 23451
 23451.13	S	H-05	certain	inherits from 23451.01
+23453	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 23453.01	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 23453.14	S	H-05	certain	inherits from 23453.01
 25002.1	S	H-13	high	global=
 177100.12	I	H-08	high	has ptr to file 4; no ptr to file 2
 177100.13	I	H-08	high	has ptr to file 4; no ptr to file 2
+509850.1	K	H-40	moderate	2 targets all classified K
+509850.11	K	H-05	certain	inherits(prop) from 509850.1
 509850.2	P	H-06	high	field=.01 NAME points to file 2
 509850.22	P	H-05	certain	inherits from 509850.2
 509850.3	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
@@ -6000,7 +6937,11 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 509850.64	I	H-05	certain	inherits from 509850.61
 509850.65	I	H-05	certain	inherits from 509850.6
 509850.66	I	H-05	certain	inherits from 509850.6
+509850.7	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+509850.71	S	H-05	certain	inherits(prop) from 509850.7
+509850.72	S	H-05	certain	inherits(prop) from 509850.7
 509850.73	K	H-20	low	name contains K-pattern
+509850.74	S	H-05	certain	inherits(prop) from 509850.7
 509850.75	I	H-22	low	name contains I-pattern
 509850.751	I	H-05	certain	inherits from 509850.75
 509850.752	I	H-05	certain	inherits from 509850.75
@@ -6022,9 +6963,14 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 548071	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 548071.09	S	H-05	certain	inherits from 548071
 548270	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
-580950.1	S	H-21	low	name contains S-pattern
+580950.1	S	H-17	moderate	package=VA FILEMAN (DI)
 580950.11	S	H-05	certain	inherits from 580950.1
-580950.8	K	H-20	low	name contains K-pattern
+580950.4	S	H-17	moderate	package=VA FILEMAN (DI)
+580950.5	S	H-17	moderate	package=VA FILEMAN (DI)
+580950.6	S	H-17	moderate	package=VA FILEMAN (DI)
+580950.61	S	H-05	certain	inherits from 580950.6
+580950.7	S	H-17	moderate	package=VA FILEMAN (DI)
+580950.8	S	H-17	moderate	package=VA FILEMAN (DI)
 791810	P	H-06	high	field=.04 PATIENT points to file 2
 791810.0101	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 791810.0201	P	H-05	certain	inherits from 791810
@@ -6037,14 +6983,20 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 791810.1102	K	H-05	certain	inherits from 791810.1
 791810.1103	K	H-05	certain	inherits from 791810.1
 791810.201101	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+791810.3	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+791810.3101	S	H-05	certain	inherits(prop) from 791810.3
 791811.0102	K	H-20	low	name contains K-pattern
 791812	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 791812.0101	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 791813	I	H-08	high	has ptr to file 4; no ptr to file 2
 791813.0101	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
+800000	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 800000.01	P	H-06	high	field=.01 PATIENT NAME points to file 2
+800000.02	S	H-05	certain	inherits(prop) from 800000
 800000.1	P	H-06	high	field=.02 PATIENT points to file 2
 800000.101	P	H-05	certain	inherits from 800000.1
+800000.11	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+800000.111	S	H-05	certain	inherits(prop) from 800000.11
 800000.14	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 800000.142	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 800001.05	S	H-21	low	name contains S-pattern
@@ -6052,6 +7004,8 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 800001.21	S	H-05	certain	inherits from 800001.2
 800001.23	P	H-06	high	field=.01 PATIENT points to file 2
 800001.5	P	H-06	high	field=.01 PATIENT NAME points to file 2
+800003	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+800003.01	S	H-05	certain	inherits(prop) from 800003
 1200036	S	H-13	high	global=
 9000001	P	H-06	high	field=.01 NAME points to file 2
 9000001.12	P	H-05	certain	inherits from 9000001
@@ -6086,6 +7040,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 9000080.1127	S	H-05	certain	inherits from 9000080.11
 9000080.113	S	H-05	certain	inherits from 9000080.11
 9000080.1182	S	H-05	certain	inherits from 9000080.11
+9002099.3	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 9002313.02	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 9002313.0201	S	H-05	certain	inherits from 9002313.02
 9002313.022044	S	H-05	certain	inherits from 9002313.0201
@@ -6139,6 +7094,8 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 9002313.401353	S	H-05	certain	inherits from 9002313.0401
 9002313.401392	S	H-05	certain	inherits from 9002313.0401
 9002313.401472	S	H-05	certain	inherits from 9002313.0401
+9002313.43	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+9002313.44	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 9002313.45	K	H-20	low	name contains K-pattern
 9002313.56	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 9002313.5601	S	H-05	certain	inherits from 9002313.56
@@ -6149,6 +7106,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 9002313.57141	P	H-05	certain	inherits from 9002313.5714
 9002313.57142	P	H-05	certain	inherits from 9002313.5714
 9002313.57902	P	H-05	certain	inherits from 9002313.57
+9002313.58	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 9002313.59	P	H-06	high	field=5 PATIENT points to file 2
 9002313.59111	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 9002313.5913	P	H-05	certain	inherits from 9002313.59
@@ -6210,6 +7168,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 9009032.414	P	H-05	certain	inherits from 9009032.4
 9009032.415	P	H-05	certain	inherits from 9009032.4
 9009032.416	P	H-05	certain	inherits from 9009032.4
+9999994.01	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
 9999999.06	I	H-08	high	has ptr to file 4; no ptr to file 2
 9999999.09	K	H-18	moderate	ptr_in=10 ptr_out=2
 9999999.091001	K	H-05	certain	inherits from 9999999.09
@@ -6218,7 +7177,15 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 9999999.1	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 9999999.11	K	H-05	certain	inherits from 9999999.09
 9999999.12	S	H-05	certain	inherits from 9999999.1
+9999999.14	K	H-40	moderate	2 targets all classified K
+9999999.141	K	H-05	certain	inherits(prop) from 9999999.14
+9999999.142	K	H-05	certain	inherits(prop) from 9999999.14
+9999999.143	K	H-05	certain	inherits(prop) from 9999999.14
 9999999.1431	K	H-20	low	name contains K-pattern
+9999999.144	K	H-05	certain	inherits(prop) from 9999999.14
+9999999.145	K	H-05	certain	inherits(prop) from 9999999.14
+9999999.147	K	H-05	certain	inherits(prop) from 9999999.14
+9999999.1499	K	H-05	certain	inherits(prop) from 9999999.14
 9999999.16	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 9999999.162	S	H-05	certain	inherits from 9999999.16
 9999999.18	K	H-20	low	name contains K-pattern
@@ -6238,3 +7205,27 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 9999999.66	K	H-05	certain	inherits from 9999999.64
 9999999.67	S	H-09	high	has ptr to file 200; no ptr to file 2 or 4
 9999999.9201	K	H-05	certain	inherits from 9999999.09
+99999941	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+99999942	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+99999943	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+99999944	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+99999945	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+99999946	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+99999947	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+99999948	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+99999949	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+999999410	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+999999411	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+999999412	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+999999413	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+999999414	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+999999415	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+999999416	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+999999417	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+999999418	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+999999419	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+999999420	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+999999421	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+999999422	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+999999423	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
+999999424	S	H-39	moderate	orphan: 0 ptrs in, 0 ptrs out
