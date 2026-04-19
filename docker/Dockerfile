@@ -34,7 +34,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
         curl wget unzip sudo openssh-server xinetd tini git \
         python3 python3-pip python3-venv \
-        build-essential cmake pkg-config \
+        build-essential cmake pkg-config file \
+        bison flex nodejs \
         ca-certificates locales \
         libelf-dev libicu-dev libconfig-dev libreadline-dev libssl-dev \
         libsodium-dev libcurl4-openssl-dev \
@@ -92,6 +93,7 @@ RUN printf '#!/bin/bash\nsource /etc/profile.d/ydb_env.sh\nexec $ydb_dist/mumps 
     && chmod +x /usr/local/bin/ydb-run
 
 # ── Layer 5: VEHU-M fetch ────────────────────────────────────────────
+# BL-010: VEHU-M archive lacks % routines — installed via ZTMGRSET in layer 7.
 RUN mkdir -p /opt/VistA-M \
     && curl -fSsL "${VEHU_M_URL}" -o /tmp/vehu-m.zip \
     && cd /tmp && unzip -q vehu-m.zip \
@@ -101,10 +103,10 @@ RUN mkdir -p /opt/VistA-M \
 # ── Layer 6: Symlink farm + GDE ──────────────────────────────────────
 # ADR-029: symlink farm for flat routine namespace
 # ADR-030: single DEFAULT region → one mumps.dat
+# BL-009: YDB $ZRO cannot follow symlinks — use hard copies instead.
+# This increases layer size (~100MB) but ensures routine resolution works.
 RUN set -e \
     && mkdir -p /opt/VistA-M/r /opt/VistA-M/o \
-    #
-    # Build symlink farm: Packages/<pkg>/Routines/*.m → /opt/VistA-M/r/*.m
     && printf 'routine\tpackage\tsource\n' > /opt/VistA-M/r/MANIFEST.tsv \
     && find /opt/VistA-M/Packages -path '*/Routines/*.m' | sort | while read -r src; do \
         routine=$(basename "$src"); \
@@ -112,25 +114,21 @@ RUN set -e \
         target="/opt/VistA-M/r/$routine"; \
         if [ -e "$target" ]; then \
             echo "FATAL: duplicate routine: $routine" >&2; \
-            echo "  existing: $(readlink -f "$target")" >&2; \
+            echo "  existing: $target" >&2; \
             echo "  conflict: $src" >&2; \
             exit 1; \
         fi; \
-        ln -s "$src" "$target"; \
+        cp "$src" "$target"; \
         printf '%s\t%s\t%s\n' "${routine%.m}" "$pkg" "$src" \
             >> /opt/VistA-M/r/MANIFEST.tsv; \
     done \
-    && echo "Symlink farm: $(( $(wc -l < /opt/VistA-M/r/MANIFEST.tsv) - 1 )) routines" \
-    #
-    # GDE: global directory → /home/vehu/g/mumps.gld pointing at mumps.dat
+    && echo "Routine farm: $(( $(wc -l < /opt/VistA-M/r/MANIFEST.tsv) - 1 )) routines" \
     && printf '%s\n' \
         'change -segment DEFAULT -file=/home/vehu/g/mumps.dat' \
-        'change -region DEFAULT -record_size=1048576 -key_size=1019 -null_subscripts=always' \  # VistA requires null subscripts
+        'change -region DEFAULT -record_size=1048576 -key_size=1019 -null_subscripts=always' \
         'exit' \
         | $ydb_dist/mumps -r GDE \
-    #
-    # Create database file owned by vehu
-    && chown -R vehu:vehu /home/vehu/g \
+    && chown -R vehu:vehu /home/vehu/g /opt/VistA-M/o \
     && su -s /bin/bash vehu -c "source /etc/profile.d/ydb_env.sh && mupip create"
 
 # ── Layer 7: VEHU-M import (expensive: ~5-15 min) ────────────────────
@@ -138,24 +136,29 @@ RUN set -e \
 # ADR-006: skip bootstrap — VEHU-M already has demo users + patients.
 USER vehu
 WORKDIR /home/vehu
-# Build-time ZRO omits dev-r (empty during build) — runtime ZRO restored in layer 15
-ENV ydb_routines="/opt/VistA-M/r(/opt/VistA-M/o) $ydb_dist/libyottadbutil.so"
+# Build-time ZRO: object dir first, then source dir (BL-009: no parenthesized syntax)
+ENV ydb_routines="/opt/VistA-M/o /opt/VistA-M/r $ydb_dist/libyottadbutil.so"
 
 RUN set -e \
-    #
-    # Import globals
     && echo "=== Importing globals ===" \
     && find /opt/VistA-M/Packages -name '*.zwr' | sort | while read -r f; do \
-        $ydb_dist/mupip load -ignorechset "$f" 2>&1 \  # -ignorechset: VEHU files may declare UTF-8 but we run M mode
+        $ydb_dist/mupip load -ignorechset "$f" 2>&1 \
             || echo "WARN: failed to load $f"; \
     done \
-    #
-    # Compile routines → /opt/VistA-M/o/
-    && echo "=== Compiling routines ===" \
+    && echo "=== Compiling routines → /opt/VistA-M/o/ ===" \
     && cd /opt/VistA-M/o \
     && find /opt/VistA-M/r -name '*.m' -print0 \
-        | xargs -0 -n 200 $ydb_dist/mumps 2>&1 || true \  # some routines have known compile errors; tolerate them
-    && echo "Compiled $(ls -1 /opt/VistA-M/o/*.o 2>/dev/null | wc -l) object files"
+        | xargs -0 -n 200 $ydb_dist/mumps 2>&1 || true \
+    && echo "Compiled $(ls -1 /opt/VistA-M/o/*.o 2>/dev/null | wc -l) object files" \
+    && echo "=== Installing percent routines via ZTMGRSET ===" \
+    && $ydb_dist/mumps -run %XCMD \
+        'S ZTMODE=0,ZTOS=8,U="^",SCR="I 1" D @ZTOS^ZTMGRSET,TM^ZTMGRSET,ETRAP^ZTMGRSET,DEV^ZTMGRSET,OTHER^ZTMGRSET' \
+        2>&1 || true \
+    && echo "=== Installing FileMan percent routines (DT, DTC, RCR) ===" \
+    && $ydb_dist/mumps -run %XCMD \
+        'S U="^",ZTOS=8,SCR="I 1",%S="DIDT^DIDTC^DIRCR",%D="%DT^%DTC^%RCR" D MOVE^ZTMGRSET' \
+        2>&1 || true \
+    && echo "Percent routines: $(ls -1 /opt/VistA-M/o/_*.o 2>/dev/null | wc -l) installed"
 
 USER root
 
@@ -218,14 +221,14 @@ COPY etc/sshd_config     /etc/ssh/sshd_config
 
 # ── Layer 14: Entrypoint + bake + healthcheck ────────────────────────
 COPY entrypoint.sh   /usr/local/bin/entrypoint.sh
+COPY bake.sh         /usr/local/bin/bake.sh
 COPY healthcheck.sh  /usr/local/bin/healthcheck.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh /usr/local/bin/healthcheck.sh
-# bake.sh will be added in a later implementation pass
-# COPY bake.sh /usr/local/bin/bake.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh /usr/local/bin/bake.sh /usr/local/bin/healthcheck.sh
 
 # ── Layer 15: Metadata ───────────────────────────────────────────────
-# Reset ydb_routines to full 3-layer path for runtime (ADR-012)
-ENV ydb_routines="/home/vehu/dev/r(/home/vehu/dev/o) /opt/VistA-M/r(/opt/VistA-M/o) $ydb_dist/libyottadbutil.so"
+# Runtime ZRO: dev dirs first (shadow VEHU), then VEHU, then YDB libs (ADR-012)
+# BL-009: flat dirs, no parenthesized source(object) syntax
+ENV ydb_routines="/home/vehu/dev/o /home/vehu/dev/r /opt/VistA-M/o /opt/VistA-M/r $ydb_dist/libyottadbutil.so"
 
 EXPOSE 22 9430 8001 1338 8089
 

@@ -55,12 +55,18 @@ XINETD_PID=$!
 # exec replaces the su/bash shell with the actual service process,
 # so the PID we capture is the service itself, not a wrapper shell.
 log "  rocto (Octo SQL :1338)"
-su -s /bin/bash vehu -c "source /etc/profile.d/ydb_env.sh && exec rocto -p 1338" &
+su -s /bin/bash vehu -c "source /etc/profile.d/ydb_env.sh && exec \$ydb_dist/plugin/bin/rocto -p 1338" &
 ROCTO_PID=$!
 
-log "  YDB GUI (:8089)"
-su -s /bin/bash vehu -c "source /etc/profile.d/ydb_env.sh && exec \$ydb_dist/yottadb -run start^%ydbwebreq --port 8089" &
-YDBGUI_PID=$!
+# YDBGUI uses a Node.js WebSocket server. Start only if node is available.
+if command -v node >/dev/null 2>&1; then
+    log "  YDB GUI (:8089)"
+    su -s /bin/bash vehu -c "exec node \$ydb_dist/plugin/etc/ydbgui/node/startup.js --port=8089 --ydb_dist=\$ydb_dist" &
+    YDBGUI_PID=$!
+else
+    log "  YDB GUI (:8089) — SKIPPED (node not installed)"
+    YDBGUI_PID=""
+fi
 
 # ── Phase 4: First-run bake (background) ─────────────────────────────
 # ADR-022: bake runs in background after services are up
@@ -93,7 +99,7 @@ cleanup() {
     kill "$XINETD_PID" 2>/dev/null || true
 
     # Stop YDB GUI
-    kill "$YDBGUI_PID" 2>/dev/null || true
+    [ -n "$YDBGUI_PID" ] && kill "$YDBGUI_PID" 2>/dev/null || true
 
     # Stop sshd
     kill "$SSHD_PID" 2>/dev/null || true

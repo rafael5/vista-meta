@@ -16,6 +16,9 @@ export ydb_gbldir="/home/vehu/g/mumps.gld"
 export ydb_chset="M"
 export ydb_log="/home/vehu/export/logs/ydb"
 export ydb_tmp="/tmp/ydb"
-export ydb_routines="/home/vehu/dev/r(/home/vehu/dev/o) /opt/VistA-M/r(/opt/VistA-M/o) $ydb_dist/libyottadbutil.so"
+# BL-009: parenthesized source(object) $ZRO syntax broken in YDB r2.02.
+# Use flat directory entries instead. Object dirs listed before source
+# dirs so pre-compiled .o files are found first.
+export ydb_routines="/home/vehu/dev/o /home/vehu/dev/r /opt/VistA-M/o /opt/VistA-M/r $ydb_dist/libyottadbutil.so"
 export LD_LIBRARY_PATH="$ydb_dist${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 export PATH="$PATH:$ydb_dist"

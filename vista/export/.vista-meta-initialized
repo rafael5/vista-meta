@@ -1,0 +1,12 @@
+{
+  "initialized_at": "2026-04-19T02:51:17Z",
+  "image_tag": "vista-meta:stub",
+  "ydb_version": "V7.0-005",
+  "vehu_m_source": "stub",
+  "phases": {
+    "xindex":      { "status": "pending", "items_ok": 0, "items_failed": 0, "duration_sec": 0, "log": "" },
+    "dd-text":     { "status": "pending", "items_ok": 0, "items_failed": 0, "duration_sec": 0, "log": "" },
+    "dd-fmql":     { "status": "pending", "items_ok": 0, "items_failed": 0, "duration_sec": 0, "log": "" },
+    "dd-template": { "status": "pending", "items_ok": 0, "items_failed": 0, "duration_sec": 0, "log": "" }
+  }
+}
