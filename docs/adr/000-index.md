@@ -72,3 +72,4 @@ What we rejected and why.
 | 042 | Skip M Web Server (port 9080) | Accepted |
 | 043 | Drop ViViaN/DOX (deferred) | Accepted |
 | 044 | Project root = ~/vista-meta, standalone repo | Accepted |
+| 045 | Separate data and code classification; package as the bridge | Accepted |
