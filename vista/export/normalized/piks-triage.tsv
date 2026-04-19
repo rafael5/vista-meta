@@ -1,0 +1,218 @@
+file_number	piks	piks_method	piks_confidence	piks_evidence
+3.23	S	manual-package	moderate	prefix=%ZI batch triage
+5.1	P	manual-package	moderate	prefix=VIC batch triage
+14.5	S	manual-package	moderate	prefix=%ZI batch triage
+14.6	S	manual-package	moderate	prefix=%ZI batch triage
+104.1	P	manual-package	moderate	prefix=MMR batch triage
+105	S	manual-package	moderate	prefix=%ZI batch triage
+107	S	manual-package	moderate	prefix=%ZI batch triage
+107.3	S	manual-package	moderate	prefix=%ZI batch triage
+129.1	I	manual-package	moderate	prefix=ETS batch triage
+129.11	I	manual-package	moderate	prefix=ETS batch triage
+222	P	manual-package	moderate	prefix=DEN batch triage
+224	P	manual-package	moderate	prefix=DEN batch triage
+228.3	P	manual-package	moderate	prefix=DEN batch triage
+228.42	P	manual-package	moderate	prefix=DEN batch triage
+301.91	P	manual-package	moderate	prefix=IVM batch triage
+301.92	P	manual-package	moderate	prefix=IVM batch triage
+301.93	P	manual-package	moderate	prefix=IVM batch triage
+301.94	P	manual-package	moderate	prefix=IVM batch triage
+391.72	P	manual-package	moderate	prefix=VAT batch triage
+394.1	P	manual-package	moderate	prefix=VAT batch triage
+394.3	P	manual-package	moderate	prefix=VAT batch triage
+394.71	P	manual-package	moderate	prefix=VAT batch triage
+394.72	P	manual-package	moderate	prefix=VAT batch triage
+394.85	P	manual-package	moderate	prefix=VAT batch triage
+394.88	P	manual-package	moderate	prefix=VAT batch triage
+404.45	I	manual-package	moderate	prefix=SCT batch triage
+404.46	I	manual-package	moderate	prefix=SCT batch triage
+404.56	I	manual-package	moderate	prefix=SCT batch triage
+404.57	I	manual-package	moderate	prefix=SCT batch triage
+404.58	I	manual-package	moderate	prefix=SCT batch triage
+404.59	I	manual-package	moderate	prefix=SCT batch triage
+577	P	manual-package	moderate	prefix=VDE batch triage
+579.1	P	manual-package	moderate	prefix=VDE batch triage
+579.2	P	manual-package	moderate	prefix=VDE batch triage
+579.3	P	manual-package	moderate	prefix=VDE batch triage
+579.6	P	manual-package	moderate	prefix=VDE batch triage
+601.3	P	manual-package	moderate	prefix=YTT batch triage
+601.6	P	manual-package	moderate	prefix=YTT batch triage
+601.71	P	manual-package	moderate	prefix=YTT batch triage
+601.712	P	manual-package	moderate	prefix=YTT batch triage
+601.72	P	manual-package	moderate	prefix=YTT batch triage
+601.73	P	manual-package	moderate	prefix=YTT batch triage
+601.75	P	manual-package	moderate	prefix=YTT batch triage
+601.76	P	manual-package	moderate	prefix=YTT batch triage
+601.77	P	manual-package	moderate	prefix=YTT batch triage
+601.78	P	manual-package	moderate	prefix=YTT batch triage
+601.79	P	manual-package	moderate	prefix=YTT batch triage
+601.81	P	manual-package	moderate	prefix=YTT batch triage
+601.82	P	manual-package	moderate	prefix=YTT batch triage
+601.83	P	manual-package	moderate	prefix=YTT batch triage
+601.844	P	manual-package	moderate	prefix=YTT batch triage
+601.85	P	manual-package	moderate	prefix=YTT batch triage
+601.86	P	manual-package	moderate	prefix=YTT batch triage
+601.87	P	manual-package	moderate	prefix=YTT batch triage
+601.88	P	manual-package	moderate	prefix=YTT batch triage
+601.91	P	manual-package	moderate	prefix=YTT batch triage
+601.92	P	manual-package	moderate	prefix=YTT batch triage
+601.93	P	manual-package	moderate	prefix=YTT batch triage
+631.1	P	manual-package	moderate	prefix=HBH batch triage
+631.2	P	manual-package	moderate	prefix=HBH batch triage
+631.3	P	manual-package	moderate	prefix=HBH batch triage
+633	P	manual-package	moderate	prefix=HBH batch triage
+690.2	P	manual-package	moderate	prefix=MCA batch triage
+690.5	P	manual-package	moderate	prefix=MCA batch triage
+690.7	P	manual-package	moderate	prefix=MCA batch triage
+693	P	manual-package	moderate	prefix=MCA batch triage
+693.2	P	manual-package	moderate	prefix=MCA batch triage
+693.3	P	manual-package	moderate	prefix=MCA batch triage
+693.5	P	manual-package	moderate	prefix=MCA batch triage
+693.6	P	manual-package	moderate	prefix=MCA batch triage
+694.1	P	manual-package	moderate	prefix=MCA batch triage
+695	P	manual-package	moderate	prefix=MCA batch triage
+695.1	P	manual-package	moderate	prefix=MCA batch triage
+695.3	P	manual-package	moderate	prefix=MCA batch triage
+695.4	P	manual-package	moderate	prefix=MCA batch triage
+695.5	P	manual-package	moderate	prefix=MCA batch triage
+695.6	P	manual-package	moderate	prefix=MCA batch triage
+695.8	P	manual-package	moderate	prefix=MCA batch triage
+695.9	P	manual-package	moderate	prefix=MCA batch triage
+696	P	manual-package	moderate	prefix=MCA batch triage
+696.1	P	manual-package	moderate	prefix=MCA batch triage
+696.4	P	manual-package	moderate	prefix=MCA batch triage
+696.7	P	manual-package	moderate	prefix=MCA batch triage
+696.9	P	manual-package	moderate	prefix=MCA batch triage
+697	P	manual-package	moderate	prefix=MCA batch triage
+697.1	P	manual-package	moderate	prefix=MCA batch triage
+698.4	P	manual-package	moderate	prefix=MCA batch triage
+698.6	P	manual-package	moderate	prefix=MCA batch triage
+698.9	P	manual-package	moderate	prefix=MCA batch triage
+699.48	P	manual-package	moderate	prefix=MCA batch triage
+699.55	P	manual-package	moderate	prefix=MCA batch triage
+699.57	P	manual-package	moderate	prefix=MCA batch triage
+699.6	P	manual-package	moderate	prefix=MCA batch triage
+699.81	P	manual-package	moderate	prefix=MCA batch triage
+699.83	P	manual-package	moderate	prefix=MCA batch triage
+699.84	P	manual-package	moderate	prefix=MCA batch triage
+699.86	P	manual-package	moderate	prefix=MCA batch triage
+699.88	P	manual-package	moderate	prefix=MCA batch triage
+700.1	P	manual-package	moderate	prefix=MCA batch triage
+700.2	P	manual-package	moderate	prefix=MCA batch triage
+702.001	P	manual-package	moderate	prefix=MDD batch triage
+704.006	P	manual-package	moderate	prefix=MDC batch triage
+704.008	P	manual-package	moderate	prefix=MDC batch triage
+704.103	P	manual-package	moderate	prefix=MDC batch triage
+704.104	P	manual-package	moderate	prefix=MDC batch triage
+704.105	P	manual-package	moderate	prefix=MDC batch triage
+704.106	P	manual-package	moderate	prefix=MDC batch triage
+704.108	P	manual-package	moderate	prefix=MDC batch triage
+704.109	P	manual-package	moderate	prefix=MDC batch triage
+704.111	P	manual-package	moderate	prefix=MDC batch triage
+704.1112	P	manual-package	moderate	prefix=MDC batch triage
+704.112	P	manual-package	moderate	prefix=MDC batch triage
+704.1121	P	manual-package	moderate	prefix=MDC batch triage
+704.1123	P	manual-package	moderate	prefix=MDC batch triage
+704.113	P	manual-package	moderate	prefix=MDC batch triage
+704.1161	P	manual-package	moderate	prefix=MDC batch triage
+704.118	P	manual-package	moderate	prefix=MDC batch triage
+740.1	S	manual-package	moderate	prefix=QA7 batch triage
+741.1	S	manual-package	moderate	prefix=QA7 batch triage
+741.2	S	manual-package	moderate	prefix=QA7 batch triage
+741.5	S	manual-package	moderate	prefix=QA7 batch triage
+741.6	S	manual-package	moderate	prefix=QA7 batch triage
+741.7	S	manual-package	moderate	prefix=QA7 batch triage
+741.8	S	manual-package	moderate	prefix=QA7 batch triage
+741.9	S	manual-package	moderate	prefix=QA7 batch triage
+741.93	S	manual-package	moderate	prefix=QA7 batch triage
+741.97	S	manual-package	moderate	prefix=QA7 batch triage
+743	S	manual-package	moderate	prefix=QA7 batch triage
+743.2	S	manual-package	moderate	prefix=QA7 batch triage
+743.3	S	manual-package	moderate	prefix=QA7 batch triage
+743.4	S	manual-package	moderate	prefix=QA7 batch triage
+743.5	S	manual-package	moderate	prefix=QA7 batch triage
+743.91	S	manual-package	moderate	prefix=QA7 batch triage
+743.92	S	manual-package	moderate	prefix=QA7 batch triage
+748.2	S	manual-package	moderate	prefix=QA7 batch triage
+748.25	S	manual-package	moderate	prefix=QA7 batch triage
+748.3	S	manual-package	moderate	prefix=QA7 batch triage
+860.2	K	manual-package	moderate	prefix=OCX batch triage
+860.3	K	manual-package	moderate	prefix=OCX batch triage
+860.4	K	manual-package	moderate	prefix=OCX batch triage
+860.5	K	manual-package	moderate	prefix=OCX batch triage
+860.6	K	manual-package	moderate	prefix=OCX batch triage
+863.2	K	manual-package	moderate	prefix=OCX batch triage
+863.4	K	manual-package	moderate	prefix=OCX batch triage
+863.6	K	manual-package	moderate	prefix=OCX batch triage
+863.7	K	manual-package	moderate	prefix=OCX batch triage
+863.9	K	manual-package	moderate	prefix=OCX batch triage
+910	P	manual-package	moderate	prefix=ESP batch triage
+910.7	P	manual-package	moderate	prefix=ESP batch triage
+910.8	P	manual-package	moderate	prefix=ESP batch triage
+912.7	P	manual-package	moderate	prefix=ESP batch triage
+916	P	manual-package	moderate	prefix=ESP batch triage
+920	K	manual-package	moderate	prefix=AUT batch triage
+2041.5	K	manual-package	moderate	prefix=ANR batch triage
+2042.5	K	manual-package	moderate	prefix=ANR batch triage
+2043.5	K	manual-package	moderate	prefix=ANR batch triage
+6930	P	manual-package	moderate	prefix=VIA batch triage
+7115.5	I	manual-package	moderate	prefix=HDI batch triage
+7115.6	I	manual-package	moderate	prefix=HDI batch triage
+7118.11	I	manual-package	moderate	prefix=HDI batch triage
+7118.25	I	manual-package	moderate	prefix=HDI batch triage
+7335.7	K	manual-package	moderate	prefix=OFM batch triage
+7336.6	K	manual-package	moderate	prefix=OFM batch triage
+548260	P	manual-package	moderate	prefix=AXA batch triage
+548260.1	P	manual-package	moderate	prefix=AXA batch triage
+548261	P	manual-package	moderate	prefix=AXA batch triage
+800000.2	P	manual-package	moderate	prefix=HMP batch triage
+800000.21	P	manual-package	moderate	prefix=HMP batch triage
+800000.22	P	manual-package	moderate	prefix=HMP batch triage
+800001	P	manual-package	moderate	prefix=HMP batch triage
+9999999.04	K	manual-package	moderate	prefix=AUT batch triage
+9999999.15	K	manual-package	moderate	prefix=AUT batch triage
+9999999.17	K	manual-package	moderate	prefix=AUT batch triage
+9999999.27	K	manual-package	moderate	prefix=AUT batch triage
+18.03	S	manual-package	moderate	prefix=XOB (VistALink system)
+18.12	S	manual-package	moderate	prefix=XOB (Web Server system)
+18.13	S	manual-package	moderate	prefix=XOB (Web Server system)
+40.5	I	manual	moderate	HOLIDAY — institution reference data
+50.60699	K	manual	moderate	MASTER DOSAGE FORM — drug knowledge
+58.1	K	manual	moderate	PHARMACY AOU STOCK — pharmacy knowledge
+58.3	K	manual	moderate	PHARMACY BACKORDER — pharmacy knowledge
+62.91	K	manual	moderate	LAB SHIPPING CONTAINER — lab reference
+62.92	K	manual	moderate	LAB SHIPPING METHOD — lab reference
+62.93	K	manual	moderate	LAB SHIPPING CONDITIONS — lab reference
+63.9999	P	manual	moderate	ARCHIVED LR DATA — patient lab data
+64.7	P	manual	moderate	CUMULATIVE — patient lab cumulative
+142.1	K	manual	moderate	HEALTH SUMMARY COMPONENT — template/knowledge
+217.1	K	manual	moderate	NURQ STANDARDS — nursing knowledge
+217.2	K	manual	moderate	NURQ RATIONALE — nursing knowledge
+217.3	K	manual	moderate	NURQ FREQUENCY — nursing knowledge
+340.5	P	manual	moderate	AR REPAYMENT PLAN — patient billing
+342.1	P	manual	moderate	AR GROUP — patient billing
+344.3	P	manual	moderate	EDI LOCKBOX DEPOSIT — patient billing
+344.49	P	manual	moderate	EDI LOCKBOX EOB — patient billing
+344.5	P	manual	moderate	AR EDI LOCKBOX MESSAGES — patient billing
+347	P	manual	moderate	AR FMS DOCUMENT — patient billing
+349.2	P	manual	moderate	AR CCPC STATEMENTS — patient billing
+399.4	P	manual	moderate	MCCR INCONSISTENT DATA — patient billing
+404.49	I	manual	moderate	PCMM HL7 ID — team management
+665.72	P	manual	moderate	HOME OXYGEN TRANSACTIONS — patient care
+702.09	P	manual	moderate	CP INSTRUMENT — clinical procedure
+727.29	K	manual	moderate	DSS LOINC FILE — terminology knowledge
+727.813	P	manual	moderate	LABORATORY EXTRACT — patient lab
+727.831	I	manual	moderate	DSS TREATING SPECIALTY — facility reference
+731.5	I	manual	moderate	VAMC PLANNED EQUIPMENT — facility
+8932.2	K	manual	moderate	PROGRAM OF STUDY — knowledge reference
+8993	S	manual	moderate	XULM LOCK DICTIONARY — system
+19200.11	S	manual	moderate	VPE RTN LBRY — system dev tools
+19200.111	S	manual	moderate	VPE PERSON — system dev tools
+19200.113	S	manual	moderate	VPE PROGRAMMER CALL — system dev tools
+509850	P	manual	moderate	CDR ACCOUNT — patient audiology
+509850.5	K	manual	moderate	A&SP PROCEDURE MODIFIER — knowledge
+580950.2	S	manual-vestigial	low	*AJK1UB — obsolete local
+580950.3	S	manual-vestigial	low	*AJK1UB STATUS — obsolete local
+9001017	S	manual-vestigial	low	unnamed file — no global root
+9009032.5	K	manual	moderate	APSP INTERVENTION — pharmacy knowledge
+107.3	S	manual-vestigial	low	MICOM PORT — vestigial
