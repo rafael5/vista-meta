@@ -206,6 +206,14 @@ dump-file-8994: ## Dump File 8994 (REMOTE PROCEDURE) via VMDUMP8994 → rpcs.tsv
 	@echo "Written: vista/export/normalized/rpcs.tsv"
 	@wc -l vista/export/normalized/rpcs.tsv
 
+.PHONY: dump-file-19
+dump-file-19: ## Dump File 19 (OPTION) via VMDUMP19 → options.tsv (ADR-045 Phase 4c)
+	$(DOCKER) exec -u vehu $(CONTAINER) bash -lc 'echo "D RUN^VMDUMP19 H" | $$ydb_dist/mumps -direct'
+	$(DOCKER) cp $(CONTAINER):/tmp/options.tsv vista/export/normalized/options.tsv
+	$(DOCKER) exec -u vehu $(CONTAINER) rm -f /tmp/options.tsv
+	@echo "Written: vista/export/normalized/options.tsv"
+	@wc -l vista/export/normalized/options.tsv
+
 # ── Verify ────────────────────────────────────────────────────────────
 
 .PHONY: smoke

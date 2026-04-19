@@ -14,6 +14,73 @@ Status: provisional | verified | superseded by RF-NNN.
 
 ## 2026-04-19 — First analytical session
 
+### RF-018: VistA File 19 (OPTION) extraction — 13,163 menu options
+
+- **Date**: 2026-04-19
+- **Scope**: Every entry in VEHU's File 19 (OPTION) — VistA's menu
+  system, including menus, actions, broker endpoints, server
+  listeners, print templates, etc. Phase 4c of ADR-045.
+- **Method**: New MUMPS routine `vista/dev-r/VMDUMP19.m` walks
+  `^DIC(19,IEN,...)`. Extracts NAME, MENU TEXT, TYPE, and PACKAGE
+  from the 0-node (pieces 1/2/4/12), resolves the PACKAGE IEN through
+  `^DIC(9.4,ien,0)` to a name, and reads the ROUTINE spec from the
+  `25` sub-node (a string that may be `TAG^ROUTINE` or `ROUTINE`).
+  Splits the routine spec on `^` into `tag` + `routine` columns.
+  Same `/tmp` + `docker cp` pattern. Run via `make dump-file-19`.
+- **Finding**:
+  - **13,163 options** total (max IEN 17,050 — 3,887 gaps from
+    deletions). 8,296 have a routine set (25-subnode populated).
+  - **TYPE distribution** — the primary role signal this extraction
+    gives us:
+    - R (run routine) — **8,184** (62%) — the dominant type;
+      options that directly invoke a routine
+    - M (menu) — **2,111** — container options grouping children
+    - A (action) — **1,780** — inline MUMPS action
+    - P (print) — 480 — print-template options
+    - E (edit) — 268
+    - B (broker/client-server) — **138** — Broker entry-point
+      options for setting up RPC contexts
+    - S (server) — 96 — incoming server/mail messages
+    - I (inquire) — 72, C (ScreenMan) — 12, X (extended) — 6,
+      O (protocol) — 5, Q (protocol menu) — 2, empty — 9
+  - **Routine cross-reference**: 5,105 distinct routines referenced
+    across all options; **4,910 (96.2%) are in MANIFEST**. Same
+    pattern as File 8994 — 195 in File 9.8-only cohort (T-002).
+  - **Package coverage**: 7,032 of 13,163 options (53.4%) have a
+    PACKAGE (File 9.4) pointer. The other 6,131 are core Kernel or
+    site-local options.
+  - **Top packages by option count**: LAB SERVICE (627),
+    REGISTRATION (360), INTEGRATED BILLING (345), CLINICAL
+    REMINDERS (305), OE/RR (292), SCHEDULING (261), OUTPATIENT
+    PHARMACY (242), IFCAP (231), TEXT INTEGRATION UTILITIES (230),
+    KERNEL (228). Expected shape — these are the core VistA
+    domains with the most user-facing functionality.
+- **Evidence**: `vista/export/normalized/options.tsv` — 13,163 rows,
+  8 columns (ien, name, menu_text, type, package, routine_raw, tag,
+  routine).
+- **Join-issue noted for Phase 6**: File 19's PACKAGE field
+  resolves to **uppercase** names (`LAB SERVICE`, `OUTPATIENT
+  PHARMACY`), while `packages.tsv` uses **title case** from the
+  filesystem (`Lab Service`, `Outpatient Pharmacy`). Phase 6 will
+  need either case-insensitive joining or a name-normalization step.
+  Worth documenting separately once more join sources are in hand.
+- **Implications**:
+  - Second authoritative role signal. A routine listed in
+    `options.tsv.routine` with TYPE=R is a **menu-invokable entry
+    point** — distinct from (but may overlap with) an RPC entry
+    point.
+  - Comparison to be done in Phase 6: how many routines serve both
+    as RPC and as option entry point? And how many are neither
+    (pure utility/library/task)?
+  - TYPE=B (138 Broker options) are specifically CPRS RPC context
+    entry points — they configure the broker environment before
+    RPCs fire. Worth examining the 138 names against CPRS context
+    conventions.
+  - 6,131 options without a PACKAGE assignment is a data-quality
+    observation but not surprising — core Kernel options predate
+    the File 9.4 registry model.
+- **Status**: verified
+
 ### RF-017: VistA File 8994 (REMOTE PROCEDURE) extraction — 4,501 RPCs
 
 - **Date**: 2026-04-19
