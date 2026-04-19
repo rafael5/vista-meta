@@ -14,6 +14,109 @@ Status: provisional | verified | superseded by RF-NNN.
 
 ## 2026-04-19 — First analytical session
 
+### RF-024: Phase 6 closure — protocol invocations, role matrix, reconciliation
+
+- **Date**: 2026-04-19
+- **Scope**: Close the biggest Phase 6 gap (protocol ENTRY ACTION
+  invocations missing from the call graph, RF-022), refresh the
+  per-routine view with that signal, compute the complete role
+  intersection matrix, and reconcile every count across phases.
+- **Method**:
+  - New **Phase 5b** extractor `build_protocol_calls.py` applies
+    the Phase 5 call regex to the entry_action + exit_action MUMPS
+    text from `protocols.tsv`. Output:
+    `vista/export/normalized/protocol-calls.tsv`.
+  - `build_routines_comprehensive.py` extended with one new column
+    (`protocol_invoked_count`) that joins protocol-calls edges back
+    to their callee routines.
+  - Role intersection matrix computed from the refreshed
+    comprehensive TSV.
+- **Phase 5b findings**:
+  - **5,081 protocol → routine edges** across **4,631 protocols**
+    with at least one call. **1,189 distinct callee routines**
+    invoked from File 101 ENTRY or EXIT ACTION.
+  - Split: 4,685 from entry actions, 396 from exit actions.
+  - Call kinds: do=5,025 (99%), func=53, goto=3. Protocols
+    overwhelmingly call out with plain `D TAG^ROUTINE`.
+  - Top protocol-invoked routines:
+    - VALM1 (112 protocols) — List Manager
+    - GMTS (67) — Health Summary
+    - FSCLMP (47) — National Online Info Sharing
+    - GMRCP (36) — Consult Request Tracking
+    - ORCHART (29) — OE/RR chart driver
+- **Orphan cohort refinement (closes RF-022's open item)**:
+  - Before Phase 5b: 15,010 "truly unreferenced" routines
+    (in_degree=0, no RPC, no option).
+  - After Phase 5b: **14,658 truly unreferenced** (also no
+    protocol invocation). 352 routines moved out of the cohort.
+  - The residual 14,658 are still large and likely include:
+    indirection (`D @X`), XECUTE of dynamic MUMPS strings,
+    FileMan DD callbacks (computed fields, cross-refs, input
+    transforms — MUMPS code stored in ^DD), KIDS install-time
+    dispatch, comma-continuation misses in Phase 5. Further
+    reduction requires either DD-code parsing (^DD traversal) or
+    the XECUTE surface — both non-trivial and deferred to T-003.
+- **Role intersection matrix** (complete, from
+  routines-comprehensive.tsv):
+
+  | Role combination | Count |
+  |---|---|
+  | RPC only | 1,388 |
+  | Option only | 4,602 |
+  | Protocol only | 992 |
+  | RPC + Option | 49 |
+  | RPC + Protocol | 9 |
+  | Option + Protocol | 165 |
+  | **All three** | **0** |
+  | **Backing ≥1 user-facing role** | **7,205** (18.3%) |
+
+  Zero routines back all three surfaces simultaneously — a clean
+  architectural observation. Dual-role sets are small but
+  concentrated: the 49 RPC+Option set is the primary
+  modernization-candidate cohort already identified (RF-022); the
+  165 Option+Protocol set is a larger group of routines that
+  serve legacy terminal menus AND CPRS context — worth a named
+  follow-up.
+- **Cross-phase reconciliation — all totals tie**:
+
+  | Measure | Value | First source | Cross-check source |
+  |---|---|---|---|
+  | Total routines (MANIFEST) | 39,330 | RF-010 | All phase outputs |
+  | Distinct files shipped | 2,899 | RF-013 | RF-014 (P+I+K+S+unclass) |
+  | PIKS split (P/I/K/S) | 1287/822/393/377 | RF-014 | RF-021 (package manifest) |
+  | Routines in File 9.8 | 30,665 | RF-016 | — |
+  | MANIFEST ∩ File 9.8 | 29,102 | RF-016 | RF-022 in_file_9_8=Y |
+  | RPCs total | 4,501 | RF-017 | — |
+  | RPC-backing routines in MANIFEST | 1,446 | RF-017 | RF-021, RF-022 |
+  | Options total | 13,163 | RF-018 | — |
+  | Option-backing routines (TYPE=R ∩ MANIFEST) | 4,816 | RF-018 | RF-021, RF-022 |
+  | Protocols total | 6,556 | RF-019 | — |
+  | Routine→global edges | 77,838 | RF-015 | — |
+  | Routine→routine edges | 241,309 | RF-020 | RF-021 outbound sum |
+  | Protocol→routine edges | 5,081 | **RF-024** | RF-024 |
+  | Package-edge matrix rows | 1,872 | RF-023 | — |
+  | Intra + inter + unknown-callee-pkg | 112,215 + 105,750 + 23,344 | RF-023 | = 241,309 ✓ |
+
+  Every total propagates correctly across all join artifacts.
+- **Evidence**: `vista/export/normalized/protocol-calls.tsv` (5,081
+  rows × 7 cols). Refreshed `routines-comprehensive.tsv` now 20
+  columns including `protocol_invoked_count`.
+- **Outstanding items promoted to TODO**:
+  - **T-003** (new): characterize the 14,658 residual
+    truly-unreferenced cohort. Hypotheses to test:
+    indirection, XECUTE dynamic dispatch, DD-embedded MUMPS,
+    KIDS install-time dispatch, comma-continuation.
+  - **T-001** (unchanged): +1/+8 Dockerfile build-artifact
+    divergence.
+  - **T-002** (unchanged): MANIFEST ↔ File 9.8 cohort
+    characterization (10,228 ship-only, 1,563 reg-only).
+- **Phase 6 is closed.** No further specific gaps identified
+  within the ADR-045 scope. All documented outputs reconcile
+  cleanly. Residual limitations are all captured in TODO.md as
+  separate investigations that don't block the artifact set's
+  correctness.
+- **Status**: verified (reconciliation confirmed)
+
 ### RF-023: Package-to-package edge matrix — VistA's dependency shape
 
 - **Date**: 2026-04-19

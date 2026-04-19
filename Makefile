@@ -196,6 +196,12 @@ routine-calls: ## Scan each routine for DO/GOTO/JOB and $$ calls → routine-cal
 		{ echo "Run 'make sync-routines' first."; exit 1; }
 	/usr/bin/python3 host/scripts/build_routine_calls.py
 
+.PHONY: protocol-calls
+protocol-calls: ## Scan protocol ENTRY/EXIT ACTION for routine calls (ADR-045 Phase 5b)
+	@[ -f vista/export/normalized/protocols.tsv ] || \
+		{ echo "Run 'make dump-file-101' first."; exit 1; }
+	/usr/bin/python3 host/scripts/build_protocol_calls.py
+
 .PHONY: package-manifest
 package-manifest: ## Join everything into per-package manifest (ADR-045 Phase 6a)
 	@for f in packages.tsv routines.tsv package-piks-summary.tsv rpcs.tsv \

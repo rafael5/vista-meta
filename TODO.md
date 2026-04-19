@@ -129,3 +129,61 @@ may carry signal about package install conventions.
 
 **Not a blocker** for any later phase. Phase 6 joins will flag cross-
 references that sit on only one side, which is the visible surface.
+
+---
+
+## T-003: Characterize the 14,658 truly-unreferenced routine cohort
+
+**Flagged**: 2026-04-19, during RF-024 (Phase 6 closure).
+
+**Observation**: after Phase 5 (routine→routine call graph) and
+Phase 5b (protocol→routine from File 101 ENTRY/EXIT ACTION), 14,658
+routines still have:
+- `in_degree` = 0 (no `.m`-source caller found)
+- `rpc_count` = 0 (no RPC backs them)
+- `option_count` = 0 (no TYPE=R option backs them)
+- `protocol_invoked_count` = 0 (no File 101 protocol invokes them)
+
+Yet many are clearly live code (Kernel utilities, FileMan routines,
+clinical modules). The reference must be arriving via paths the
+current extractors don't see.
+
+**Hypotheses to test**:
+1. **FileMan DD-embedded MUMPS** — `^DD(file,field,0)` node 6+
+   contains input transforms, computed-field code, and cross-reference
+   SET/KILL logic. These are MUMPS strings executed at FileMan time,
+   and often reference routines via `D ^NAME`. Extract all `^DD`
+   executable subnodes and run the Phase 5 regex against them.
+2. **KIDS install-time dispatch** — package installation runs
+   routines via `D ^XPDIL`, `X $G(^DIC(9.4,...))`, and similar
+   late-bound mechanisms. These are not in ENTRY/EXIT ACTION or
+   plain `.m` source.
+3. **XECUTE of dynamic MUMPS** — any `X STR` where STR is computed
+   at runtime is undecidable statically. Accept as a floor.
+4. **Comma-continuation in DO** — `D A^R1,B^R2,C^R3` — Phase 5
+   catches only the first callee. Fix the regex to walk past commas.
+5. **Line-offset calls** — `D TAG+3^ROU` — Phase 5 skips.
+6. **Event drivers via subscribers** — protocol E/S pairs — already
+   captured via Phase 5b, but the indirect chain (protocol A drives,
+   B subscribes, B calls routine) may break visibility.
+
+**Quick wins before a full investigation**:
+- Fix the comma-continuation regex in `build_routine_calls.py`. Cost:
+  ~5 lines. Expected absorption: a few hundred to a few thousand
+  routines shifting out of the cohort.
+- Extract DD-embedded MUMPS and scan — new `VMDDCODE.m` extractor
+  pulling from `^DD(fnum,fld,>=6)` nodes. Cost: a day of work.
+  Expected absorption: meaningful (FileMan cross-refs and computed
+  fields reach thousands of routines).
+
+**Resolution criteria**:
+- Reduce the truly-unreferenced cohort to something under 5% of
+  MANIFEST (~1,500 routines), OR
+- Definitively characterize the residual as dead code by triangulating
+  against File 9.8 (never registered in Kernel = stronger dead
+  signal) and XINDEX (VistA's own code analyzer).
+
+**Impact**: not a correctness blocker — the existing artifacts are
+correct about what they measure. T-003 is about completeness of the
+call graph, which affects decomposition/modernization analysis but
+not the package manifest's basic utility.

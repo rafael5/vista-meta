@@ -11,13 +11,13 @@ Reads (all from vista/export/normalized/):
   - options.tsv            (is-option-entry signal from File 19, TYPE=R)
   - routine-calls.tsv      (out/in degree, call volumes)
   - routine-globals.tsv    (data access breadth)
+  - protocol-calls.tsv     (invocations from File 101 ENTRY/EXIT ACTION)
 
 Writes:
-  - vista/export/normalized/routines-comprehensive.tsv  (39,330 rows × 17 cols)
+  - vista/export/normalized/routines-comprehensive.tsv  (39,330 rows × 20 cols)
 
-Protocol entry counts are NOT included — protocols invoke code via
-ENTRY ACTION MUMPS text (File 101), not via a direct ROUTINE field,
-and parsing those text blobs is outside MVP scope.
+protocol_invoked_count column captures the Phase 5b result: how many
+distinct protocols invoke this routine via ENTRY or EXIT ACTION.
 """
 
 from __future__ import annotations
@@ -35,6 +35,7 @@ FIELDS = [
     "line_count", "byte_size", "tag_count", "comment_line_count",
     "version_line", "is_percent_routine",
     "in_file_9_8", "file_9_8_type", "rpc_count", "option_count",
+    "protocol_invoked_count",
     "out_degree", "in_degree", "out_calls_total", "in_calls_total",
     "distinct_globals_touched", "global_ref_total",
 ]
@@ -47,7 +48,8 @@ def load_tsv(path: Path) -> list[dict]:
 
 def main() -> int:
     required = ("routines.tsv", "vista-file-9-8.tsv", "rpcs.tsv",
-                "options.tsv", "routine-calls.tsv", "routine-globals.tsv")
+                "options.tsv", "routine-calls.tsv", "routine-globals.tsv",
+                "protocol-calls.tsv")
     for f in required:
         if not (NORM / f).exists():
             print(f"ERROR: {NORM/f} missing.", file=sys.stderr)
@@ -93,6 +95,12 @@ def main() -> int:
         glob_degree[rou].add(glob)
         glob_total[rou] += cnt
 
+    # Protocol invocations — distinct protocols that call each routine
+    # (Phase 5b: routines invoked from File 101 ENTRY/EXIT ACTION).
+    proto_invokers: dict[str, set[str]] = defaultdict(set)
+    for r in load_tsv(NORM / "protocol-calls.tsv"):
+        proto_invokers[r["callee_routine"]].add(r["protocol_name"])
+
     out_rows: list[dict] = []
     for r in load_tsv(NORM / "routines.tsv"):
         name = r["routine_name"]
@@ -110,6 +118,7 @@ def main() -> int:
             "file_9_8_type": f98.get(name, ""),
             "rpc_count": rpc_count.get(name, 0),
             "option_count": opt_count.get(name, 0),
+            "protocol_invoked_count": len(proto_invokers.get(name, ())),
             "out_degree": len(out_degree.get(name, ())),
             "in_degree": len(in_degree.get(name, ())),
             "out_calls_total": out_total.get(name, 0),
@@ -126,17 +135,26 @@ def main() -> int:
 
     total_rpc = sum(1 for r in out_rows if r["rpc_count"] > 0)
     total_opt = sum(1 for r in out_rows if r["option_count"] > 0)
-    total_both = sum(1 for r in out_rows if r["rpc_count"] > 0 and r["option_count"] > 0)
+    total_proto = sum(1 for r in out_rows if r["protocol_invoked_count"] > 0)
+    total_any = sum(1 for r in out_rows if r["rpc_count"] > 0 or r["option_count"] > 0 or r["protocol_invoked_count"] > 0)
     total_in_f98 = sum(1 for r in out_rows if r["in_file_9_8"] == "Y")
     total_leaves = sum(1 for r in out_rows if r["out_degree"] == 0)
     total_sinks = sum(1 for r in out_rows if r["in_degree"] == 0)
+    total_orphan_no_role = sum(
+        1 for r in out_rows
+        if r["in_degree"] == 0 and r["rpc_count"] == 0
+        and r["option_count"] == 0 and r["protocol_invoked_count"] == 0
+    )
     print(f"routines-comprehensive.tsv: {len(out_rows):,} rows")
     print(f"  backs >=1 RPC:               {total_rpc:,}")
     print(f"  backs >=1 option (TYPE=R):   {total_opt:,}")
-    print(f"  backs both RPC and option:   {total_both:,}")
+    print(f"  invoked from >=1 protocol:   {total_proto:,}")
+    print(f"  backs >=1 of any role:       {total_any:,}")
     print(f"  in File 9.8:                 {total_in_f98:,}")
     print(f"  out_degree == 0 (leaves):    {total_leaves:,}")
     print(f"  in_degree == 0 (sinks):      {total_sinks:,}")
+    print(f"  truly unreferenced:          {total_orphan_no_role:,}")
+    print(f"    (in_deg=0 AND no RPC, option, or protocol invocation)")
     return 0
 
 
