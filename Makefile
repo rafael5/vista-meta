@@ -164,6 +164,12 @@ sync-routines: ## Copy /opt/VistA-M/Packages/ from container to vista/vista-m-ho
 	@echo "MANIFEST:  $$(( $$(wc -l < vista/vista-m-host/MANIFEST.tsv) - 1 )) entries"
 	@echo "Size:      $$(du -sh vista/vista-m-host/Packages | cut -f1)"
 
+.PHONY: inventory
+inventory: ## Build routines.tsv + packages.tsv from vista-m-host snapshot (ADR-045)
+	@[ -f vista/vista-m-host/MANIFEST.tsv ] || \
+		{ echo "No snapshot found. Run 'make sync-routines' first."; exit 1; }
+	/usr/bin/python3 host/scripts/build_routine_inventory.py
+
 # ── Verify ────────────────────────────────────────────────────────────
 
 .PHONY: smoke

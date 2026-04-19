@@ -14,6 +14,49 @@ Status: provisional | verified | superseded by RF-NNN.
 
 ## 2026-04-19 — First analytical session
 
+### RF-010: Host-side routine inventory — 39,330 routines across 174 packages
+
+- **Date**: 2026-04-19
+- **Scope**: All `.m` routines in `/opt/VistA-M/Packages/*/Routines/` from the
+  VEHU image baseline, synced to host at `vista/vista-m-host/` via
+  `make sync-routines` (ADR-045, Phase 1a).
+- **Method**: `host/scripts/build_routine_inventory.py` reads the
+  Dockerfile-generated `MANIFEST.tsv`, stats each source file for
+  byte size and line count, and captures the first-line comment.
+- **Finding**:
+  - **39,330 routines** (substantially more than the ~24k earlier estimate
+    based on compiled `.o` counts)
+  - **176 package directories**; **174 contain routines**. Two are
+    data-only (Globals/ but no Routines/): "Altoona VA" and
+    "VA-DOD Sharing"
+  - **4,138,428 total lines** of MUMPS source; **162 MB** on disk
+  - Largest packages by routine count:
+    - Automated Information Collection System — 3,147
+    - Integrated Billing — 2,451
+    - Registration — 2,179
+    - Scheduling — 1,798
+    - IFCAP — 1,640
+    - Order Entry Results Reporting — 1,394
+    - Lab Service — 1,369
+    - Automated Medical Information Exchange — 977
+    - Kernel — 934
+    - Nursing Service — 922
+- **Evidence**: `vista/export/normalized/routines.tsv` (39,330 rows),
+  `vista/export/normalized/packages.tsv` (174 rows). MANIFEST row count
+  equals `routines.tsv` row count — no partial sync, no orphaned entries.
+- **Implications**:
+  - Foundation for Phase 2+ of ADR-045 (role classification, globals-
+    touched extraction, call graph). All downstream routine-side work
+    joins against this inventory.
+  - Code-side mass (39k routines, 4M lines) is roughly ~4-5x the
+    file-side mass by artifact count (8,261 files). Any code↔data
+    tooling should plan for that asymmetry.
+  - Data-only packages (2 of 176) confirm that "package" is already the
+    right unifying bridge: some packages own only data, some own both —
+    classifying per artifact type and joining at the package level
+    (per ADR-045) is the honest shape.
+- **Status**: verified
+
 ### RF-009: Cross-PIKS matrix recalculated after File 200 reclassification
 
 - **Date**: 2026-04-19

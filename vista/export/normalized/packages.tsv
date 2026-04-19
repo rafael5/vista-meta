@@ -1,0 +1,175 @@
+package	routine_count	total_lines	total_bytes
+A1BF Response Time	26	1235	57667
+A4AR Registration	18	1076	66145
+Accounts Receivable	776	102686	4334196
+Advanced Medication Platform	2	302	12682
+Adverse Reaction Tracking	171	12366	562042
+Albany OIFO	85	3711	172464
+Asists	89	10397	475816
+Authorization Subscription	36	2199	91398
+Auto Replenishment Ward Stock	105	3560	251052
+Automated Information Collection System	3147	410451	11945770
+Automated Lab Instruments	396	38526	1385916
+Automated Medical Information Exchange	977	86888	3734200
+Barcode Medication Administration	132	20583	925816
+Beneficiary Travel	67	6920	330014
+Birmingham CIOFO	20	624	49223
+CMOP	143	11305	581800
+CORBA Services	2	805	52179
+CPT HCPCS Codes	55	10243	204954
+CW GUIMAIL	16	1351	50957
+Capacity Management	103	14500	537801
+Care Management	3	254	11031
+Clinical Case Registries	247	46386	1677022
+Clinical Information Resource Network	125	11068	456550
+Clinical Monitoring System	79	3264	185233
+Clinical Procedures	141	15187	610339
+Clinical Reminders	519	75285	2594688
+Consult Request Tracking	225	26609	1105233
+Controlled Substances	299	15553	972247
+Credentials Tracking	2	25	850
+DRG Grouper	507	66341	2791715
+DSS Extracts	306	31206	1313168
+Dental	147	12561	626521
+Dietetics	635	64650	3671985
+Drug Accountability	202	14781	993694
+E Claims Management Engine	217	35571	1310461
+EEO Complaint Tracking	29	1743	94064
+Electronic Health Modernization	2	201	6959
+Electronic Signature	1	204	6400
+Emergency Department Integration Software	81	8533	322471
+Engineering	419	29332	1354042
+Enrollment Application System	195	22863	906864
+Enterprise Health Management Platform	128	18191	750465
+Enterprise Support Solution	2	405	31644
+Enterprise Terminology Services	10	2070	73167
+Equipment Turn-In Request	61	3260	118912
+Event Capture	353	39018	1468671
+Event Driven Reporting	8	267	12264
+Ext Rev Track	64	2470	120678
+Fee Basis	469	42871	1893554
+Foundations	8	1155	34682
+Functional Independence	7	709	23611
+General Medical Record - Generator	44	1847	127032
+General Medical Record - IO	49	1956	133875
+General Medical Record - Vitals	286	16637	802516
+Generic Code Sheet	50	2877	117994
+Graphics	29	1390	64523
+HINQ	136	11510	459825
+Health Data and Informatics	71	9438	326324
+Health Level Seven	267	42090	1457074
+Health Summary	294	27175	1208561
+HealtheVet Desktop	13	1150	47445
+Hines OIFO	38	4231	137186
+Hospital Based Home Care	81	5501	312163
+Houston VAMC	23	1947	64889
+IFCAP	1640	118642	5577428
+Imaging	576	85414	3484219
+Incident Reporting	4	136	5115
+Income Verification Match	197	22590	860338
+Incomplete Records Tracking	78	5029	258094
+Inpatient Medications	581	56380	2905203
+Insurance Capture Buffer	41	5467	232252
+Integrated Billing	2451	296913	12314313
+Integrated Patient Fund	46	2758	152034
+Interim Management Support	49	1305	88687
+Joint Legacy Viewer	1	13	533
+Kernel	934	89707	3504126
+Lab Service	1369	121199	4909136
+Lexicon Utility	539	83383	3713201
+Library	1	84	3146
+Lighthouse	1	38	1450
+List Manager	48	3064	119272
+M XML Parser	6	998	28631
+MASH Utilities	13	2540	111142
+MCCR Backbilling	2	92	6305
+MailMan	252	26932	1040565
+Master Patient Index VistA	72	8130	356449
+Medical Health E-Screening	1	48	1701
+Medicine	361	23652	1059215
+Mental Health	642	56471	2772363
+Methicillin Resistant Staph Aurerus Initiative Reports	16	3397	134291
+Micom	11	143	9452
+Mobile Mental Health Program	1	33	964
+Mobile Scheduling Applications Suite	29	4192	176231
+My HealtheVet	98	12001	415835
+NDBI	3	211	7779
+National Drug File	139	11752	556020
+National Health Information Network	20	2551	98199
+National Laboratory Test	4	174	5414
+National Online Information Sharing	217	13616	527411
+National VistA Support	2	266	9158
+Network Health Exchange	19	1200	45295
+New Mexico HCS	1	23	706
+Nursing Service	922	76940	3372995
+ODS	30	1548	72849
+Occurrence Screen	90	4884	236890
+Old DMMS	21	765	46873
+Oncology	496	55281	2421733
+Order Entry Results Reporting	1394	189083	6958082
+Outpatient Pharmacy	905	119530	5901688
+PAID	462	43339	1729416
+PCE Patient Care Encounter	475	55603	2023913
+Palo Alto HCS	10	1148	47949
+Patient Assessment Documentation	8	1607	76653
+Patient Data Exchange	188	16372	575597
+Patient Representative	1	119	4047
+Pharmacy Benefits Management	121	14288	486170
+Pharmacy Data Management	381	42250	2075268
+Pharmacy Prescription Practice	1	79	2568
+Phoenix VAMC	12	1415	59555
+Police and Security	106	5733	296968
+Problem List	94	10514	456038
+Progress Notes	8	248	9687
+Prosthetics	488	47943	1949890
+Providence VAMC	5	507	20234
+Quality Assurance Integration	22	1174	61875
+Quasar	110	13937	647517
+RPC Broker	40	5230	176424
+Radiology Nuclear Medicine	515	55638	2494437
+Real Time Location System	12	1172	46844
+Record Tracking	154	8189	408237
+Registration	2179	217933	8972896
+Release Of Information	29	5761	246908
+Remote Order Entry System	140	8332	381116
+Richmond VAMC	2	106	3386
+Run Time Library	30	2462	80857
+Salt Lake OIFO	5	375	16181
+Scheduling	1798	218981	8915279
+Screen Handler for Fileman	20	741	48625
+Shift Handoff Tool	19	2102	88336
+Silver Sprint OIFO Applications	6	337	15490
+Social Work	1	84	3234
+Spinal Cord Dysfunction	4	172	4626
+Suicide Hotline	4	235	12519
+Surgery	692	37501	2259346
+Survey Generator	39	1611	101370
+Text Integration Utility	548	58846	2640078
+Toolkit	286	28542	1224771
+Uncategorized	702	40920	1780443
+Utilization Management Rollup	39	2169	91821
+Utilization Review	38	1729	89485
+VA Certified Components - DSSI	66	8276	322865
+VA FileMan	861	95215	3477461
+VA Point of Service	48	8503	345508
+VBECS	63	7629	317454
+VDEF	12	1300	51094
+VPE Shell	339	27782	1038407
+Vendor - Audiofax Inc	1	177	11477
+Vendor - Document Storage Systems	128	12324	557124
+Vendor - ISI	61	7615	278439
+Vendor - Pioneer	30	1129	28429
+Veterans Data Integration and Federation	1	55	2339
+Virtual Patient Record	104	13320	527681
+VistA Integration Adapter	16	2778	117688
+VistA Web	1	71	2210
+VistALink	17	2442	75034
+VistALink Security	7	1081	43918
+Visual Impairment Service Team	32	1964	89646
+Voluntary Timekeeping	1	105	4098
+WEBVRAM	7	575	18392
+Washington VAMC	2	118	7352
+Web Services Client	19	3317	111411
+West Palm Beach VAMC	21	2448	83774
+Womens Health	128	15967	600253
+Wounded Injured and Ill Warriors	10	708	33428
