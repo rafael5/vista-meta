@@ -14,6 +14,48 @@ Status: provisional | verified | superseded by RF-NNN.
 
 ## 2026-04-19 — First analytical session
 
+### RF-012: VistA package distribution shape — code+data bundles
+
+- **Date**: 2026-04-19
+- **Scope**: All 176 package directories under
+  `/opt/VistA-M/Packages/` in the VEHU image.
+- **Method**: `find -mindepth 2 -maxdepth 2 -type d` to enumerate the
+  subdirectories each package ships, then cross-classify by presence
+  of `Routines/` and `Globals/`.
+- **Finding**: VistA's FOIA distribution ships each package as a
+  code-plus-data bundle. Across the 176 package directories:
+  - **123 ship both Routines/ and Globals/** — the normal shape.
+    Code (MUMPS `.m`) plus ZWR exports of the FileMan files the
+    package owns. Example: Clinical Procedures ships MD-namespace
+    routines under `Routines/` and ZWR exports like
+    `702+CP TRANSACTION.zwr`, `702.01+CP DEFINITION.zwr` under
+    `Globals/`, which KIDS replays at install time to create the
+    DD and load seed records for File 702, 702.01, etc.
+  - **51 ship Routines only** — code-only packages that operate on
+    data owned by other packages (utilities, add-ons).
+  - **2 ship Globals only** — "Altoona VA" and "VA-DOD Sharing"
+    (previously noted in RF-010). DD/seed data with no routines.
+  - Only two subdirectory types exist across the entire distribution:
+    `Routines/` and `Globals/`. No `Docs/`, `Init/`, or other
+    top-level subdirs in this VEHU.
+- **Evidence**: `find` enumeration over `vista/vista-m-host/Packages/`
+  reproducibly yields the 123/51/2 split.
+- **Implications**:
+  - Directly validates the ADR-045 choice of package as the unifying
+    bridge between data and code. The package is already the native
+    code+data shipping unit in VistA's own conventions — we aren't
+    imposing a synthetic grouping on top.
+  - The "files-per-package" inventory is the natural counterpart to
+    the "routines-per-package" inventory in RF-010. Cataloging the
+    `Globals/*.zwr` filenames (which encode FileMan file numbers)
+    would give the code↔data join at the package level described in
+    ADR-045's Phase 4, without needing to parse routine globals-
+    touched (Phase 3).
+  - 51 code-only packages will have interesting cross-package global
+    access patterns when Phase 3 lands — they necessarily read/write
+    data owned by other packages.
+- **Status**: verified
+
 ### RF-011: Static routine features — structural shape of the corpus
 
 - **Date**: 2026-04-19
