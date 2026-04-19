@@ -14,6 +14,90 @@ Status: provisional | verified | superseded by RF-NNN.
 
 ## 2026-04-19 — First analytical session
 
+### RF-025: XINDEX reference — comprehensive catalog of its metrics and outputs
+
+- **Date**: 2026-04-19
+- **Scope**: Investigate every metric, parameter, and output surface
+  produced by XINDEX — VistA's own static analyzer (Toolkit
+  XT*7.3*158). Contextualized by the DOX web surface
+  (vivian.worldvista.org/dox/) which uses XINDEX as one of its data
+  sources but surfaces only a subset.
+- **Method**: Read the 17 `XIND*.m` routines under
+  `/opt/VistA-M/Packages/Toolkit/Routines/`, enumerate
+  `^UTILITY($J,...)` scratch-global usage patterns, walk File 9.8
+  DD including subfiles 9.801/9.803/9.804/9.805/9.806/9.808/9.818/
+  9.819, and fetch DOX sample pages for comparison.
+- **Findings recorded in `docs/xindex-reference.md`** (full catalog;
+  ~270 lines). Highlights:
+  - **66 distinct error/warning codes** across four severity levels
+    (F=Fatal, S=Standard/SAC-violation, W=Warning, I=Info). Codes 1-66
+    in XINDX1's ERROR label. Some codes have namespace exclude lists.
+  - **Twelve INP() parameters** control XINDEX's run — print detail,
+    summary-only, index-called-routines, include-compiled-templates,
+    and critically **INP(7) "save parameters in ROUTINE file"** which
+    causes File 9.8 subfiles to be populated.
+  - **Scratch global structure** — `^UTILITY($J,1,RTN,...)` holds
+    everything XINDEX computes per routine: line-by-line errors with
+    severity and text, tag/label inventory, external cross-references,
+    local-variable usage, global access, RSUM checksum. A rollup at
+    `^UTILITY($J,1,"***",LOC,S)` aggregates references across the
+    whole run, by LOC ∈ {G=global, L=local, T=tag, X=external}.
+  - **File 9.8 persistent writes** (when INP(7)=Y): top-level
+    1.2/1.4/1.5/7.x metadata fields plus six subfiles: 5 TAG (9.801),
+    19 ROUTINE INVOKED (9.803), 20 INVOKED BY (9.804), 21 VARIABLES
+    (9.805), 22 GLOBALS (9.806), 2.1 BRIEF DESCRIPTION (9.808). Each
+    subfile row has a `FOUND BY %INDEX` provenance flag.
+  - **DOX uses XINDEX as primarily a call-graph data source** —
+    surfaces the caller-graph PNG, entry points, and RPC/FileMan
+    bindings, but **discards** all 66 error/severity data, line
+    counts, checksums, and the VARIABLES/GLOBALS subfile content.
+    Our project already surpasses DOX in the per-routine data we
+    capture (RF-022's 20-column comprehensive TSV).
+- **VEHU population state**: File 9.8 subfiles are almost entirely
+  empty in our current bake:
+  - 34 / 30,665 rows have SIZE (BYTES)
+  - 24 / 30,665 have CHECKSUM VALUE; 0 have RSUM VALUE
+  - 27 routines have any ROUTINE INVOKED entries
+  - 21 routines have any INVOKED BY entries
+  - 0 routines have any TAG subfile entries
+  - The bake sentinel shows `"xindex": "pending"` — XINDEX has
+    **not** been run batch-wide with INP(7)=Y against this VEHU.
+- **Implications for our artifact set**:
+  - **XINDEX would be a strict accuracy upgrade** to Phase 3a
+    (globals) and Phase 5 (call graph). XINDEX is a proper parser:
+    catches comma-continuation in DO args, indirection (`D @X`),
+    line-offset calls (`D TAG+3^ROU`), naked refs (`^(N)`), and
+    extended refs (`^|pkg|NAME`) — all MVP limitations of our regex
+    scans.
+  - **T-003 ("truly unreferenced" 14,658 routines) would almost
+    certainly shrink** once File 9.8 subfile 20 (INVOKED BY) is
+    populated by an XINDEX run. A fair portion of our residual
+    orphan cohort likely has callers XINDEX would find that our
+    regex misses.
+  - **Phase 4 (VistA metadata) and Phase 5b (protocol parsing) are
+    unaffected** — XINDEX doesn't parse File 101 ENTRY ACTION; our
+    approach stands for that surface.
+  - **Nothing XINDEX produces obviates our existing artifacts** —
+    it refines, not replaces. routines-comprehensive.tsv's 20
+    columns already go beyond what DOX surfaces; XINDEX would add
+    accuracy to in_degree/out_degree/distinct_globals_touched and
+    enable a severity-graded error view per routine.
+- **Next-step paths documented in xindex-reference.md §11**:
+  1. Short path — `make bake-xindex` + extend VMDUMP98.m to emit
+     subfile TSVs (invoked, invoked-by, variables, globals). Four
+     new TSVs, zero new MUMPS parsing.
+  2. Longer path — extract the scratch-global `"E"` subtree during
+     a fresh XINDEX run to get per-line error classifications
+     across all 39,330 routines. Code-quality heatmap.
+- **Not acting on this now** — this is a reference/catalog finding.
+  Acting requires the user's decision on whether to invest in an
+  XINDEX bake run (~30+ minutes per ADR-018) and associated
+  extraction tooling.
+- **Evidence**: `docs/xindex-reference.md` (comprehensive catalog),
+  Toolkit routine source `/opt/VistA-M/Packages/Toolkit/Routines/
+  XIND*.m`, DD introspection of File 9.8 subfiles, bake sentinel.
+- **Status**: verified (research output; no data artifacts changed)
+
 ### RF-024: Phase 6 closure — protocol invocations, role matrix, reconciliation
 
 - **Date**: 2026-04-19
