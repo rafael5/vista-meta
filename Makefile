@@ -147,6 +147,23 @@ restore-globals: ## Restore globals from snapshot (SNAPSHOT=path/to/file.tar.gz)
 	$(DOCKER) run --rm -v $(VOLUME):/data -v $(PWD)/$(SNAPSHOT):/snapshot.tar.gz \
 		alpine sh -c 'rm -rf /data/* && tar xzf /snapshot.tar.gz -C /data'
 
+# ── Host sync ─────────────────────────────────────────────────────────
+
+.PHONY: sync-routines
+sync-routines: ## Copy /opt/VistA-M/Packages/ from container to vista/vista-m-host/ (ADR-045)
+	@$(DOCKER) ps --format '{{.Names}}' | grep -q '^$(CONTAINER)$$' || \
+		{ echo "Container '$(CONTAINER)' is not running. Run 'make run' first."; exit 1; }
+	@echo "Syncing VistA-M routines from container..."
+	@rm -rf vista/vista-m-host
+	@mkdir -p vista/vista-m-host
+	$(DOCKER) cp $(CONTAINER):/opt/VistA-M/Packages vista/vista-m-host/Packages
+	$(DOCKER) cp $(CONTAINER):/opt/VistA-M/r/MANIFEST.tsv vista/vista-m-host/MANIFEST.tsv
+	@echo "---"
+	@echo "Packages:  $$(ls vista/vista-m-host/Packages | wc -l)"
+	@echo "Routines:  $$(find vista/vista-m-host/Packages -path '*/Routines/*.m' | wc -l)"
+	@echo "MANIFEST:  $$(( $$(wc -l < vista/vista-m-host/MANIFEST.tsv) - 1 )) entries"
+	@echo "Size:      $$(du -sh vista/vista-m-host/Packages | cut -f1)"
+
 # ── Verify ────────────────────────────────────────────────────────────
 
 .PHONY: smoke

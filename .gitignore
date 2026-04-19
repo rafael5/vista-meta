@@ -10,6 +10,9 @@ vista/export/**/raw/
 # Bake logs
 vista/export/logs/
 
+# Host-side routine snapshot — synced from image via `make sync-routines` (ADR-045)
+vista/vista-m-host/
+
 # Named-volume snapshots
 snapshots/
 
