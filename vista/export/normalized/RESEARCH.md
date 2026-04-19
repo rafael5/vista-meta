@@ -24,8 +24,13 @@ Status: provisional | verified | superseded by RF-NNN.
   Dockerfile-generated `MANIFEST.tsv`, stats each source file for
   byte size and line count, and captures the first-line comment.
 - **Finding**:
-  - **39,330 routines** (substantially more than the ~24k earlier estimate
-    based on compiled `.o` counts)
+  - **39,330 routines** in source `.m` files under `Packages/*/Routines/`
+  - Container-side counts for cross-reference:
+    `/opt/VistA-M/r/` symlinks = 39,331 (+1 vs source);
+    `/opt/VistA-M/o/` compiled objects = 39,338 (+8 vs source);
+    MANIFEST.tsv entries = 39,330 (matches source)
+  - Source and MANIFEST agree exactly. The +1 symlink and +8 compiled
+    objects beyond the source set are open questions — see TODO below.
   - **176 package directories**; **174 contain routines**. Two are
     data-only (Globals/ but no Routines/): "Altoona VA" and
     "VA-DOD Sharing"
@@ -55,7 +60,17 @@ Status: provisional | verified | superseded by RF-NNN.
     right unifying bridge: some packages own only data, some own both —
     classifying per artifact type and joining at the package level
     (per ADR-045) is the honest shape.
-- **Status**: verified
+- **TODO (post-session)**: chase down the +1 symlink and +8 compiled-
+  object files beyond the 39,330 source set. Hypotheses to test:
+  percent routines (`_ZOSF`, `_ZUTIL`, etc.) installed outside the
+  Packages/ tree; YottaDB utility routines inherited via $ZRO search
+  path; or artifacts of the Dockerfile's build steps (Octo/VistA
+  Octo wrapper at Dockerfile:173). Resolution should identify which
+  "routines" are real code vs toolchain artifacts, and whether this is
+  a VEHU distribution quirk, a YottaDB behavior, or a build-time
+  side effect. See TODO.md.
+- **Status**: verified (for source/MANIFEST counts); +1/+8 object-side
+  divergence flagged for follow-up
 
 ### RF-009: Cross-PIKS matrix recalculated after File 200 reclassification
 
