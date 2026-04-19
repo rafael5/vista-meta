@@ -14,6 +14,59 @@ Status: provisional | verified | superseded by RF-NNN.
 
 ## 2026-04-19 — First analytical session
 
+### RF-013: Package-shipped data inventory — 3,138 ZWR exports
+
+- **Date**: 2026-04-19
+- **Scope**: All `Globals/*.zwr` files across the 125 packages with
+  `Globals/` subdirectories in the VEHU image.
+- **Method**: `host/scripts/build_package_data_inventory.py` walks
+  `vista/vista-m-host/Packages/*/Globals/*.zwr` and classifies each
+  filename by one of three strict patterns. No ZWR parsing — filename
+  and byte size only. Run via `make package-data`.
+- **Finding**: VistA FOIA ZWR filenames follow three shapes, all
+  mechanically recognizable:
+  - **`<file_number>+<name>.zwr`** — whole FileMan file export
+    (2,878 rows). Example: `340+AR DEBTOR.zwr` → FileMan file 340.
+  - **`<file_number>-<chunk>+<name>.zwr`** — sharded FileMan file
+    (98 chunk rows across 21 distinct files). Big reference tables
+    are split across multiple ~67 MB ZWRs. Examples: ICD DIAGNOSIS
+    (file 80) in 5 chunks; EXPRESSIONS (Lexicon, file 757.01) in
+    20 chunks; DRUG INTERACTION (file 56) in 11 chunks; RXNORM
+    RELATED CONCEPTS (file 129.22) in 6 chunks.
+  - **`<name>.zwr`** — non-FileMan global export
+    (162 rows). Filename IS the global name. Examples: `PRCA.zwr`
+    (^PRCA), `RC.zwr` (^RC), `PXRMINDX.zwr` (^PXRMINDX — Clinical
+    Reminders index global).
+  - **Totals**: 3,138 ZWR files, 2,899 distinct FileMan file numbers
+    shipped with data, 125 packages shipping data, ~7.3 GB of ZWR
+    content on disk.
+  - **Anomaly**: `0-1+ICDLD82.zwr` and `0-2+ICDLD82.zwr` ship under
+    DRG Grouper with `file_number=0`. FileMan doesn't have a "file 0"
+    in the normal sense — this is a legacy bulk-load convention for
+    `^ICDLD82` (a direct global load, not a DD-described file).
+    Mechanical extraction captures it as-is.
+- **Evidence**: `vista/export/normalized/package-data.tsv` (3,138
+  rows, 7 columns). Reconciles exactly with `find` count of
+  `Globals/*.zwr`.
+- **Implications**:
+  - Delivers the **code↔data join at the package level** described in
+    ADR-045 Phase 4 — via filename extraction only, no ZWR parsing or
+    globals-touched scan required. Each row links a package to a
+    FileMan file number or a non-FileMan global.
+  - `routines.tsv` + `package-data.tsv` together form a complete
+    package manifest. Joining on `package` answers "what code and
+    what data does this package ship?" directly.
+  - Joining `package-data.tsv` on `file_number` against `files.tsv`
+    (from PIKS work) will give each package a PIKS distribution of
+    the data it owns. Candidate for a future RF once we do the join.
+  - The 162 non-FileMan global exports correspond to the non-FM
+    globals RF-002 identified (67 unique in the database). The 162
+    here is package-ships-of-globals, not unique global count —
+    some globals are shipped by multiple packages, and some packages
+    ship multiple globals. Reconciling the two counts is a candidate
+    follow-up.
+- **Status**: verified
+
 ### RF-012: VistA package distribution shape — code+data bundles
 
 - **Date**: 2026-04-19

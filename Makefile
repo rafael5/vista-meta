@@ -170,6 +170,12 @@ inventory: ## Build routines.tsv + packages.tsv from vista-m-host snapshot (ADR-
 		{ echo "No snapshot found. Run 'make sync-routines' first."; exit 1; }
 	/usr/bin/python3 host/scripts/build_routine_inventory.py
 
+.PHONY: package-data
+package-data: ## Inventory Globals/*.zwr exports → package-data.tsv (ADR-045)
+	@[ -d vista/vista-m-host/Packages ] || \
+		{ echo "No snapshot found. Run 'make sync-routines' first."; exit 1; }
+	/usr/bin/python3 host/scripts/build_package_data_inventory.py
+
 # ── Verify ────────────────────────────────────────────────────────────
 
 .PHONY: smoke
