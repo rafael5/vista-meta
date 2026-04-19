@@ -14,6 +14,70 @@ Status: provisional | verified | superseded by RF-NNN.
 
 ## 2026-04-19 — First analytical session
 
+### RF-015: Routine → global edges — 77,838 subscripted references
+
+- **Date**: 2026-04-19
+- **Scope**: All 39,330 routines in the inventory. Static regex scan
+  for subscripted global references (`^IDENT(`). Phase 3a of ADR-045.
+- **Method**: `host/scripts/build_routine_globals.py` reads MANIFEST.tsv,
+  strips strings (`"..."` with `""` escape) and `;`-comments from each
+  line, then regex-matches `(?<![A-Z0-9$])\^(%?[A-Z][A-Z0-9]*)\(`. The
+  lookbehind excludes routine-call patterns like `$$TAG^ROU(args)` and
+  `$$^ROU(args)` — the `^` there is preceded by an alpha tag or `$`.
+  Run via `make routine-globals`. Runtime: ~8s for 39,330 routines.
+- **Finding**:
+  - **77,838 edges** across 30,205 routines (76.8% of routines reference
+    at least one subscripted global). 490,094 total references counted.
+  - **618 distinct globals** referenced — on the low end of expected
+    VistA global count (~300-500 unique across a full system), but
+    consistent with a wider surface that includes many subset globals.
+  - **Top globals by routine-count** match well-known VistA structure:
+    - `^TMP` (12,002 routines — scratch)
+    - `^DD` (4,820 — FileMan data dictionary)
+    - `^DIC` (4,434 — FileMan file header / lookup)
+    - `^DPT` (3,643 — PATIENT file)
+    - `^VA` (2,840 — VA-specific global)
+    - `^UTILITY` (2,314 — FileMan scratch)
+    - `^%ZOSF` (2,012 — OS-specific system functions)
+    - `^XTMP` (1,843 — 90-day temp scratch)
+    - package-namespace clinical globals: `^PS` (Pharmacy, 1,562),
+      `^SC` (Scheduling, 1,426), `^IBE` (Billing, 1,317),
+      `^LAB` (1,149), `^PRC` (IFCAP, 1,134), `^ORD` (Order Entry,
+      1,059), `^DG` (Registration, 1,040), `^XMB` (MailMan, 889)
+- **Iteration during validation**: initial naive regex `\^IDENT\(`
+  produced **10,316 "globals"** across **164,736 edges** — false
+  positives from `$$TAG^ROU(args)` patterns where routines were
+  misidentified as globals (DIQ, XLFDT, XPDUTL, XLFSTR all ranked
+  top-10). The negative lookbehind for alphanumeric-or-`$` cut the
+  edge count in half and brought the distinct-global count down to
+  realistic scale before commit.
+- **Known limitations (MVP, documented):**
+  - Bare globals without subscripts (`K ^FOO`, `S X=^FOO`) are not
+    captured.
+  - `D ^ROU(args)` / `J ^ROU(args)` DO/JOB with args are still
+    counted as globals (lookbehind only catches single-char context,
+    not the preceding command). The residual 207 "DIE" references
+    are believed to be mostly of this form; DIE is primarily a
+    FileMan routine, not a global.
+  - Indirection (`^@X`, naked `^(subscripts)`) is undecidable statically
+    and skipped entirely.
+  - Extended references (`^|pkg|NAME`, `^$JOB`) are skipped.
+- **Evidence**: `vista/export/normalized/routine-globals.tsv` — 77,838
+  rows, 4 columns (routine_name, package, global_name, ref_count).
+- **Implications**:
+  - Foundation for Phase 6 — joining routine-globals.tsv against
+    package-data.tsv on `global_name` answers "which routines touch
+    which package's data?" Cross-package edges (routine in pkg A
+    touches global owned by pkg B) are the cross-boundary coupling
+    we want to measure.
+  - 618 distinct globals is tractable for human review. Candidates
+    for clustering: per-namespace prefix (DG*, PS*), per-package,
+    per-PIKS-of-owning-file.
+  - Joining on file_number (via global_root → file_number mapping
+    from files.tsv) will give routine→FileMan-file edges, and thus
+    routine→PIKS edges — the final piece for per-routine PIKS mix.
+- **Status**: verified (within documented MVP limits)
+
 ### RF-014: Per-package PIKS distribution — code↔data bridge realized
 
 - **Date**: 2026-04-19

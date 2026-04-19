@@ -184,6 +184,12 @@ package-piks: ## Join package-data × files.tsv → per-package PIKS distributio
 		{ echo "files.tsv missing (from PIKS work)."; exit 1; }
 	/usr/bin/python3 host/scripts/build_package_piks_summary.py
 
+.PHONY: routine-globals
+routine-globals: ## Scan each routine for subscripted ^GLOBAL refs (ADR-045 Phase 3a)
+	@[ -f vista/vista-m-host/MANIFEST.tsv ] || \
+		{ echo "Run 'make sync-routines' first."; exit 1; }
+	/usr/bin/python3 host/scripts/build_routine_globals.py
+
 # ── Verify ────────────────────────────────────────────────────────────
 
 .PHONY: smoke
