@@ -3,89 +3,149 @@
 Classification results and analytical findings from the vista-meta
 PIKS classification of VEHU's FileMan data structures.
 
-Date: 2026-04-19
+Last updated: 2026-04-19
 Spec: docs/vista-meta-spec-v0.4.md § 11
+Research log: vista/export/normalized/RESEARCH.md (RF-001 through RF-009)
 
 ---
 
 ## 1. What is PIKS?
 
-Every FileMan file and global is classified into exactly one of four
-categories based on its primary audience and purpose:
+Every FileMan file and global is classified into one of four categories
+based on its primary audience and purpose:
 
-| Category | What it holds | Who uses it | Count | % |
-|---|---|---|---|---|
-| **P** (Patient) | Clinical care data — demographics, encounters, diagnoses, medications, labs, vitals, notes, orders, billing | Clinicians, patients, care coordinators | 3,073 | 37.2% |
-| **I** (Institution) | Facility/org structure — locations, divisions, **providers/staff**, teams, scheduling, procurement, engineering | Administrators, planners, VISN leadership | 2,880 | 34.9% |
-| **K** (Knowledge) | Terminologies, code tables, templates, formulary, reminders, order dialogs, clinical rules | Clinical informaticists, coding specialists | 1,106 | 13.4% |
-| **S** (System) | Config, operations, VistA internals — Kernel, FileMan meta, protocols, HL7, security, TaskMan, devices | IT staff, VistA developers | 845 | 10.2% |
-
-Coverage: 7,904 of 8,261 files auto-classified (95.7%) + 217 triage.
-File 200 (NEW PERSON) reclassified from S to I per RF-008.
+| Category | What it holds | Who uses it |
+|---|---|---|
+| **P** (Patient) | Clinical care data — demographics, encounters, diagnoses, medications, labs, vitals, notes, orders, billing | Clinicians, patients, care coordinators |
+| **I** (Institution) | Facility/org structure — locations, divisions, **providers/staff (File 200)**, teams, scheduling, procurement | Administrators, planners, VISN leadership |
+| **K** (Knowledge) | Terminologies, code tables, templates, formulary, reminders, order dialogs, clinical rules | Clinical informaticists, coding specialists |
+| **S** (System) | Config, operations, VistA internals — Kernel, FileMan meta, protocols, HL7, security, TaskMan | IT staff, VistA developers |
 
 ---
 
-## 2. How files were classified
+## 2. PIKS distribution
 
-### 2.1 Automated heuristics (95.7% of classifications)
+### 2.1 By file count (8,261 files)
 
-The `VMPIKS` routine applies deterministic rules in tier order:
+```
+  P (Patient)      3,203  37.2%  ████████████████████████▌
+  I (Institution)  2,896  34.9%  ██████████████████████▊
+  K (Knowledge)    1,140  13.3%  ████████▋
+  S (System)         881  10.2%  ██████▋
+  (unclassified)     141   1.7%  █▏
+                   ─────
+                   8,261
+```
 
-| Tier | Heuristics | Confidence | Files classified | What it checks |
-|---|---|---|---|---|
-| 1 | H-01 to H-04 | Certain | 130 | Structural identity: File 2=P, File 4=I, ^DD=S |
-| 2 | H-06 to H-09 | High | 1,427 | Pointer to anchor file: ptr→File 2=P, →File 4=I, →File 200=S |
-| 3 | H-10 to H-13 | High | 651 | Known global root patterns |
-| 4 | H-14 to H-17 | Moderate | 964 | Package namespace prefix |
-| 5 | H-18 | Moderate | 10 | Pointer topology: high in / low out = K (reference table) |
-| 6 | H-20 to H-23 | Low | 175 | File name patterns: "TYPE"→K, "PARAMETER"→S |
-| — | H-05 | Certain | 4,424 | Subfile inheritance from classified parent |
-| 9 | H-36,H-38-H-40 | Moderate | 125 | Graph propagation using neighbor labels |
+### 2.2 By field count (69,809 fields)
 
-### 2.2 Manual triage (4.6% of classifications)
+```
+  I (Institution) 32,107  46.0%  ██████████████████████████████
+  P (Patient)     26,787  38.4%  █████████████████████████
+  K (Knowledge)    5,748   8.2%  █████▍
+  S (System)       5,157   7.4%  ████▊
+                  ──────
+                  69,809
+```
 
-217 top-level files classified in three batches:
+Institution dominates by field count because File 200 (NEW PERSON)
+has 203 fields and 1,551 entries, with many subfiles — the
+provider/staff data structure is wider than most clinical files.
+
+### 2.3 By record count (top 10 largest tables)
+
+```
+  ICD DRG PDX (83.51)         1,000,000  K  ████████████████████
+  EXPRESSIONS (757.01)        1,000,000  K  ████████████████████
+  RXNORM CONCEPTS (129.22)    1,000,000  K  ████████████████████
+  RXNORM ATTRIBUTES (129.21)  1,000,000  K  ████████████████████
+  SEMANTIC MAP (757.1)          961,809  K  ███████████████████▎
+  CONCEPT USAGE (757.001)       905,353  K  ██████████████████▏
+  MAJOR CONCEPT MAP (757)       905,272  K  ██████████████████
+  CODES (757.02)                855,576  K  █████████████████▏
+  SUBSETS (757.21)              604,572  K  ████████████▏
+  RXNORM NAMES (129.2)         565,257  K  ███████████▎
+```
+
+Knowledge dominates by record count — terminology tables (Lexicon,
+RxNorm, ICD) account for the bulk of the database by row volume.
+
+---
+
+## 3. Classification methodology
+
+### 3.1 Automated heuristics (95.7% of files)
+
+```
+  H-05  (subfile inherit)     4,869  ████████████████████████████████████████
+  H-14  (Patient package)       603  █████
+  H-06  (ptr → Patient)         360  ███
+  H-09  (ptr → File 200)        338  ██▊
+  H-08  (ptr → Institution)     283  ██▎
+  H-10  (Patient global)        236  ██
+  H-15  (Institution package)   202  █▋
+  H-12  (Knowledge global)      197  █▋
+  H-02  (FileMan meta → S)      127  █
+  H-13  (System global)         119  █
+  H-39  (orphan → S)            114  ▉
+  H-11  (Institution global)     98  ▊
+  H-16  (Knowledge package)      85  ▋
+  H-20  (name → K)               79  ▋
+  H-17  (System package)         74  ▋
+```
+
+### 3.2 By confidence level
+
+```
+  Certain    4,999  61.4%  ████████████████████████████████████████
+  Moderate   1,311  16.1%  ██████████▌
+  High       1,293  15.9%  ██████████▍
+  Low          517   6.4%  ███▍
+             ─────
+             8,120  classified
+```
+
+### 3.3 Manual triage (4.3% of files)
 
 | Triage category | Count | Method |
 |---|---|---|
 | B (package batch) | 174 | Global prefix → known package → PIKS |
 | C (individual) | 42 | Domain knowledge, file name, pointer analysis |
-| A (vestigial) | 1 | Empty file, no pointers, no data → S |
+| A (vestigial) | 1 | Empty file, no pointers → S |
 
-### 2.3 Traceability
+### 3.4 Traceability
 
-Every classification has two fields:
-- `piks_method`: which heuristic fired (H-01 through H-40) or `manual`/`manual-package`
+Every classification records:
+- `piks_method`: which heuristic (H-01 to H-40) or `manual`/`manual-package`
 - `piks_evidence`: the specific data that triggered it
 
 Example: File 52 (PRESCRIPTION) → `piks=P, method=H-06, evidence=field=.02 PATIENT points to file 2`
 
 ---
 
-## 3. Key structural findings
+## 4. Key structural findings
 
-### 3.1 VistA's most-referenced files
+### 4.1 VistA's most-referenced files (pointer hubs)
 
-These are the structural hubs — the files everything else points to:
+```
+  File 200  NEW PERSON           1,244 ptrs in  I  ████████████████████████████████████████
+  File 2    PATIENT                379 ptrs in  P  ████████████▎
+  File 4    INSTITUTION            321 ptrs in  I  ██████████▍
+  File 44   HOSPITAL LOCATION      248 ptrs in  I  ████████
+  File 5    STATE                  124 ptrs in  K  ████
+  File 80   ICD DIAGNOSIS          117 ptrs in  K  ███▊
+  File 40.8 MED CENTER DIVISION     85 ptrs in  I  ██▊
+  File 50   DRUG                    83 ptrs in  K  ██▋
+  File 60   LABORATORY TEST         81 ptrs in  K  ██▋
+  File 3.5  DEVICE                  73 ptrs in  S  ██▍
+```
 
-| Rank | File | Name | Inbound pointers | PIKS |
-|---|---|---|---|---|
-| 1 | 200 | NEW PERSON | 1,244 | S |
-| 2 | 2 | PATIENT | 379 | P |
-| 3 | 4 | INSTITUTION | 321 | I |
-| 4 | 44 | HOSPITAL LOCATION | 248 | I |
-| 5 | 5 | STATE | 124 | K |
-| 6 | 80 | ICD DIAGNOSIS | 117 | K |
-| 7 | 40.8 | MEDICAL CENTER DIVISION | 85 | I |
-| 8 | 50 | DRUG | 83 | K |
-| 9 | 60 | LABORATORY TEST | 81 | K |
-| 10 | 3.5 | DEVICE | 73 | S |
+**RF-004/RF-008**: File 200 (NEW PERSON) is VistA's structural center —
+3.3x more referenced than PATIENT. It holds staff/provider PII (1,462
+SSNs, 1,151 DOBs) and was reclassified from S to I because it describes
+WHO works at the facility, not system configuration.
 
-File 200 (NEW PERSON) is VistA's structural center — 3.3x more
-referenced than PATIENT. It's the user/provider identity hub that
-connects System, Institution, and Patient domains.
-
-### 3.2 Scale and hierarchy
+### 4.2 Scale and hierarchy
 
 | Metric | Value |
 |---|---|
@@ -96,143 +156,106 @@ connects System, Institution, and Patient domains.
 | Total fields | 69,809 |
 | Widest file | Generic Code Sheet (2,603 fields) |
 | Largest table | ICD DRG PDX (1M records), Lexicon (905K) |
-| Average fields/file | ~8.5 |
 
-### 3.3 Cross-PIKS pointer matrix
-
-3,868 pointer fields cross PIKS boundaries. This is VistA's semantic
-wiring — how the four data categories interconnect:
+### 4.3 Field data types
 
 ```
-              Target PIKS
-              P       I       K       S
-Source  P     —      1,477    433     308
-PIKS    I     560     —       524     231
-        K     23      129     —        70
-        S     36       58      19      —
+  FREE TEXT         20,538  29.4%  █████████████████████████████▍
+  SET OF CODES      12,476  17.9%  █████████████████▉
+  POINTER           11,900  17.0%  █████████████████
+  NUMERIC           11,792  16.9%  ████████████████▉
+  DATE               6,300   9.0%  █████████
+  OTHER              3,429   4.9%  ████▉
+  WORD PROCESSING    1,427   2.0%  ██
+  COMPUTED           1,022   1.5%  █▌
+  MUMPS                754   1.1%  █
+  VARIABLE POINTER     171   0.2%  ▏
 ```
 
-(Updated 2026-04-19 after File 200 reclassification from S to I — see RF-008, RF-009)
+11,900 POINTER fields + 171 VARIABLE POINTER fields = 12,071 pointer
+relationships in the database. These are the cross-file wiring of VistA.
 
-Key patterns:
+### 4.4 Cross-PIKS pointer matrix
 
-| Pattern | Count | Meaning |
-|---|---|---|
-| **P→I** | 1,477 | Patient records reference providers/staff and facilities — the dominant cross-PIKS pattern. Every encounter, order, and note links to who did it and where. |
-| **I→P** | 560 | Institution/staff files reference patient data — provider workload, team assignments, scheduling |
-| **I→K** | 524 | Facility setup uses knowledge tables — clinic types, service categories, coding configurations |
-| **P→K** | 433 | Clinical data coded with terminologies — the FHIR terminology binding points (ICD, CPT, drug codes) |
-| **P→S** | 308 | Patient data references system entities — order protocols, notification options |
-| **I→S** | 231 | Institution config references system infrastructure |
-| **K→I** | 129 | Knowledge tables reference institution data — formulary by facility, location-specific rules |
-| **K→S** | 70 | Knowledge references system infrastructure |
-| **S→I** | 58 | System config references facility data |
-| **S→P** | 36 | System files reference patient data — small and warrants individual security review |
-| **K→P** | 23 | Knowledge pointing to patient data — rare, investigate individually |
-| **S→K** | 19 | System references knowledge tables |
+3,868 pointer fields cross PIKS boundaries — how the four data
+categories interconnect:
 
-**Key insight from RF-008**: The original S→P count (461) was inflated by
-File 200's misclassification. True System→Patient is only 36 fields —
-much smaller security review scope.
+```
+                    ┌──────── Target PIKS ────────┐
+                    P        I        K        S
+Source   P          —      1,477      433      308
+PIKS     I        560        —        524      231
+         K         23       129        —        70
+         S         36        58        19       —
+```
 
-### 3.4 FileMan coverage
+```
+  P→I   1,477  ██████████████████████████████████████▎  patient → provider/facility
+  I→P     560  ██████████████▌                          staff → patient data
+  I→K     524  █████████████▌                           facility → terminology
+  P→K     433  ███████████▏                             clinical → coding (FHIR binding)
+  P→S     308  ███████▉                                 patient → system config
+  I→S     231  ██████                                   institution → system
+  K→I     129  ███▎                                     knowledge → institution
+  K→S      70  █▊                                       knowledge → system
+  S→I      58  █▌                                       system → facility
+  S→P      36  ▉                                        system → patient (security)
+  K→P      23  ▋                                        knowledge → patient (investigate)
+  S→K      19  ▌                                        system → knowledge
+```
 
-| Category | Count | % |
-|---|---|---|
-| Total globals in database | 486 | 100% |
-| FileMan-described | 418 | 86.0% |
-| Non-FileMan | 67 | 13.8% |
-| Scratch/temp | 1 | 0.2% |
+**Key insights:**
+- **P→I (1,477)** is the dominant pattern: every clinical encounter,
+  order, and note references who did it (provider) and where (facility).
+- **S→P (36)** is the true security concern scope — much smaller than
+  the original 461 (inflated by File 200 misclassification, RF-008/RF-009).
+- **K→P (23)** should be zero in a clean architecture. These 23 fields
+  are either misclassified files or genuine anomalies worth investigating.
+- **P→K (433)** are the FHIR terminology binding points — clinical data
+  coded with ICD, CPT, drug codes, lab test definitions.
 
-The non-FileMan globals are mostly small utility/reference data.
-Pharmacy and Lab globals in VEHU ARE FileMan-described — the
-non-FM concern from the spec may be production-specific.
+### 4.5 FileMan coverage
 
----
+```
+  FileMan-described   418  86.0%  ████████████████████████████████████████
+  Non-FileMan          67  13.8%  ██████▍
+  Scratch/temp          1   0.2%  ▏
+                      ───
+                      486  total globals
+```
 
-## 4. PIKS distribution details
+Non-FM globals are mostly small utility/reference data in VEHU.
+Pharmacy and Lab globals ARE FileMan-described in this distribution
+(RF-002).
 
-### 4.1 Patient (P) — 2,815 files (34.1%)
+### 4.6 File 200 (NEW PERSON) — the structural hub (RF-008)
 
-Clinical care data: the longitudinal patient record.
+File 200 is VistA's most-referenced file and a critical PIKS finding.
 
-Top subdomains (by file count):
-- Registration/ADT (DG*): demographics, admissions, eligibility
-- Pharmacy (PS*): prescriptions, dispensing, IV, unit dose
-- Lab (LR*): orders, results, accessions
-- Radiology (RA*): exams, reports, procedures
-- Surgery (SR*): cases, procedures, operative reports
-- TIU (TIU*): clinical notes, documents
-- Orders (OR*): CPRS order entry, order actions
-- Vitals (GMR*): vital measurements, templates
-- Mental Health (YS*, YTT*): assessments, instruments
-- Integrated Billing (IB*): claims, insurance, billing events
+| Property | Value |
+|---|---|
+| Entries | 1,551 |
+| Fields | 203 |
+| Inbound pointers | 1,244 (3.3x more than PATIENT) |
+| PIKS | **I** (Institution) — was S, reclassified per RF-008 |
+| Sensitivity | **Protected** — 1,462 SSNs, 1,151 DOBs |
+| Contains patients? | **No** — staff/providers only |
 
-Characteristics:
-- Sensitivity: `protected` (contains PHI)
-- Volatility: `dynamic` (changes with every clinical encounter)
-- Portability: `site-specific` (records belong to this facility)
-- Volume: `high-volume` (largest tables have millions of records)
+```
+  Staff roles in File 200:
+  Providers      323  ██████████████████████
+  Other          654  ███████████████████████████████████████████
+  Clerks         218  ██████████████▎
+  Technicians    127  ████████▍
+  Nurses          81  █████▍
+  Pharmacists     56  ███▋
+  Programmers     37  ██▍
+```
 
-### 4.2 Institution (I) — 1,539 files (18.6%)
-
-Facility and organizational structure.
-
-Top subdomains:
-- Facilities (File 4, 40.8): institution, division, station
-- Locations (File 44, 42): clinic, ward, bed
-- Scheduling (SD*): appointments, availability
-- Procurement (PRC*): purchase orders, contracts
-- Engineering (EN*): work orders, equipment
-- Personnel (PRS*): payroll, time & attendance
-- PCMM teams (SCT*): team assignments
-
-Characteristics:
-- Sensitivity: `operational` (some provider PII)
-- Volatility: `slow` (changes on administrative cycles)
-- Portability: `site-specific`
-- Volume: `moderate`
-
-### 4.3 Knowledge (K) — 1,096 files (13.3%)
-
-Terminologies, templates, workflows, clinical rules.
-
-Top subdomains:
-- ICD/CPT coding (ICD*, ICPT*): diagnosis and procedure codes
-- Lexicon (LEX*): clinical terms, concept maps
-- Drug knowledge (PSD*, PSN*): drug classes, ingredients, formulary
-- RxNorm (ETSRXN*): medication concept names
-- Lab definitions (LAM*, LAB*): test definitions, instruments
-- Order dialogs (ORD*): order entry templates
-- Reminders (PXR*): clinical reminder rules
-- Health factors (AUTTHF*): PCE health factors
-
-Characteristics:
-- Sensitivity: `public` (generally not PHI; some licensed content)
-- Volatility: `static` to `slow`
-- Portability: `universal` to `national`
-- Volume: `reference` to `high-volume` (Lexicon/RxNorm are large)
-
-### 4.4 System (S) — 2,671 files (32.3%)
-
-Configuration, operations, VistA infrastructure.
-
-Top subdomains:
-- FileMan meta (DD, DI*, 0.x, 1.x): data dictionary, file definitions
-- Kernel (XU*, XT*): parameters, options, security keys
-- MailMan (XM*): messages, baskets
-- HL7 (HL*): link configurations, message protocols
-- Protocols (ORD 101): event-driven actions
-- VistALink (XOB*): J2SE connections
-- Web services (XWB*): RPC broker
-- Package management (XPD*, 9.4): patches, builds
-- Local/test (ZZ*): site-specific artifacts
-
-Characteristics:
-- Sensitivity: `operational` (may contain credentials)
-- Volatility: `slow` to `ephemeral`
-- Portability: `site-specific`
-- Volume: `reference` to `moderate`
+**Impact of reclassification**: S category dropped from 32% to 10%.
+Cross-PIKS S→P dropped from 461 to 36. The original S classification
+inflated System's apparent size because 1,244 files pointing to
+File 200 were classified S by H-09.
 
 ---
 
@@ -240,48 +263,64 @@ Characteristics:
 
 All data is in `vista/export/normalized/`:
 
-| File | Rows | Description |
-|---|---|---|
-| `files.tsv` | 8,261 | File inventory: number, name, global root, field count, pointer counts, record count |
-| `piks.tsv` | 7,904 | Automated PIKS classifications with method + evidence |
-| `piks-triage.tsv` | 217 | Manual triage classifications |
-| `field-piks.tsv` | 69,809 | Field-level PIKS: file_piks, ref_piks, cross_piks, sensitivity_flag |
-| `RESEARCH.md` | — | Research log with RF-001 through RF-007 |
+| File | Rows | Size | Description |
+|---|---|---|---|
+| `vista-fileman-piks-comprehensive.csv` | 69,840 | 9.2 MB | **Primary output**: every file + field with all PIKS annotations (22 columns) |
+| `files.tsv` | 8,261 | 1.2 MB | File inventory from ^DD/^DIC |
+| `piks.tsv` | 7,904 | 450 KB | Automated PIKS classifications |
+| `piks-triage.tsv` | 217 | 12 KB | Manual triage classifications |
+| `field-piks.tsv` | 69,809 | 4.2 MB | Field-level PIKS with cross-PIKS flags |
+| `RESEARCH.md` | — | — | Research log (RF-001 through RF-009) |
+
+### Comprehensive CSV column order
+
+| # | Column | Example | Description |
+|---|---|---|---|
+| 1 | file_number | 2 | FileMan file number |
+| 2 | field_number | .104 | Field number within file |
+| 3 | field_name | PROVIDER | Field name from ^DD |
+| 4 | data_type | POINTER | FREE-TEXT, SET, POINTER, NUMERIC, DATE, etc. |
+| 5 | field_piks | P | PIKS of this field (inherited from file) |
+| 6 | file_piks | P | PIKS of the containing file |
+| 7 | file_piks_method | H-01 | Which heuristic classified the file |
+| 8 | file_piks_confidence | certain | certain / high / moderate / low |
+| 9 | ref_piks | I | For pointer fields: PIKS of the target file |
+| 10 | cross_piks | Y | Y if field_piks != ref_piks |
+| 11-22 | | | file_name, global_root, parent_file, counts, evidence, pointer target, sensitivity |
 
 ---
 
 ## 6. How to use this data
 
-### Explore the cross-PIKS matrix
+### Query the comprehensive CSV
+
 ```bash
-# All Patient→Knowledge pointer fields (FHIR terminology bindings)
-grep "P.*K.*Y" vista/export/normalized/field-piks.tsv
+# All cross-PIKS pointer fields
+head -1 vista/export/normalized/vista-fileman-piks-comprehensive.csv && \
+  grep ",Y," vista/export/normalized/vista-fileman-piks-comprehensive.csv
 
-# System files referencing patient data (security review)
-grep "S.*P.*Y" vista/export/normalized/field-piks.tsv
+# Patient→Knowledge fields (FHIR terminology bindings)
+awk -F',' '$5=="P" && $9=="K" && $10=="Y"' \
+  vista/export/normalized/vista-fileman-piks-comprehensive.csv
 
-# Knowledge files pointing to patient data (should be rare)
-grep "K.*P.*Y" vista/export/normalized/field-piks.tsv
+# All fields in File 2 (PATIENT)
+awk -F',' '$1=="2"' vista/export/normalized/vista-fileman-piks-comprehensive.csv
+
+# Files with sensitivity flags
+awk -F',' '$22=="Y"' vista/export/normalized/vista-fileman-piks-comprehensive.csv
+
+# System→Patient fields (security review)
+awk -F',' '$5=="S" && $9=="P" && $10=="Y"' \
+  vista/export/normalized/vista-fileman-piks-comprehensive.csv
 ```
 
-### Find files by PIKS category
-```bash
-# All Patient files sorted by record count
-grep "	P	" vista/export/normalized/piks.tsv | cut -f1 | while read f; do
-  grep "^$f	" vista/export/normalized/files.tsv
-done | sort -t$'\t' -k8 -rn | head -20
+### Run the classifier on a fresh VistA system
 
-# All unclassified files
-comm -23 <(tail -n +2 vista/export/normalized/files.tsv | cut -f1 | sort) \
-         <(tail -n +2 vista/export/normalized/piks.tsv | cut -f1 | sort)
-```
-
-### Run the classifier on a fresh system
 ```bash
 # Inside the container:
-D RUN^VMFILES         # extract file inventory
-D RUN^VMPIKS          # classify files
-D RUN^VMFPIKS         # classify fields
+D RUN^VMFILES         # extract file inventory → files.tsv
+D RUN^VMPIKS          # classify files → piks.tsv
+D RUN^VMFPIKS         # classify fields → field-piks.tsv
 ```
 
 The heuristic rules are VistA-universal — they work on any
@@ -289,30 +328,39 @@ VistA/FileMan system (VEHU, FOIA, production, RPMS).
 
 ---
 
-## 7. Known limitations
+## 7. Research findings summary
 
-1. **141 subfiles unclassified** — awaiting inheritance propagation
-   from triage-classified parents. Will resolve on next VMPIKS run
-   with triage integration.
+| # | Finding | Status |
+|---|---|---|
+| RF-001 | mupip load silently fails on paths with spaces — 94% of globals not loaded | verified, fix applied |
+| RF-002 | 86% of VEHU globals are FileMan-described; non-FM is minimal | verified |
+| RF-003 | 8,261 files, widest = 2,603 fields, 1:1.8 top:sub ratio | verified |
+| RF-004 | File 200 most-referenced (1,244 ptrs), 3.3x more than PATIENT | verified |
+| RF-005 | H-05 (inheritance) classifies 59% of files; Tier 2 is strongest signal | verified |
+| RF-006 | 98.3% PIKS classification achieved (auto 95.7% + triage 2.6%) | verified |
+| RF-007 | Cross-PIKS matrix: 3,868 cross-category pointer fields | verified (updated RF-009) |
+| RF-008 | File 200 is staff/provider PII, not system data → reclassified S to I | verified |
+| RF-009 | Cross-PIKS matrix recalculated: S→P dropped 461→36, S dropped 32%→10% | verified |
+
+---
+
+## 8. Known limitations
+
+1. **141 subfiles unclassified** — awaiting inheritance from triage parents.
 
 2. **Sensitivity flags over-report** — .01 NAME fields in System files
-   (template names, file names) are flagged as protected person data.
-   Needs refinement to distinguish person names from entity names.
+   flag entity names (templates, files) as person names.
 
-3. **VEHU-specific record counts** — file sizes reflect synthetic VEHU
-   data, not production volumes. PIKS category assignments are
-   structural (from DD metadata) and portable; record counts are not.
+3. **VEHU-specific record counts** — PIKS category assignments are structural
+   (from DD metadata) and portable; record counts reflect synthetic VEHU data.
 
-4. **Non-FM globals minimal in VEHU** — only 67 non-FM globals found.
-   Production systems likely have more (runtime pharmacy/lab data).
-   The G-01 through G-06 heuristics exist but weren't heavily exercised.
+4. **Simple pointers only** — variable pointers (171 fields) and computed
+   pointers not yet analyzed for cross-PIKS patterns.
 
-5. **Package namespace lists are manually maintained** — Tier 4 prefix
-   lists (H-14 through H-17) were expanded iteratively during this
-   session. New packages or unusual prefixes may not be covered.
-   The triage process catches these and feeds improvements back.
+5. **Package namespace lists manually maintained** — Tier 4 prefix lists
+   were expanded iteratively. New packages may not be covered.
 
-6. **Pointer analysis covers simple pointers only** — variable pointers
-   (V type) and computed pointers (C type) are not yet extracted.
-   These represent additional cross-PIKS relationships not captured
-   in the current field-piks analysis.
+6. **File 200 cascade** — reclassifying File 200 from S to I changed
+   the entire distribution. Any file with >1,000 inbound pointers has
+   outsized classification influence. Future anchor reclassifications
+   should be tested for cascade impact before committing.
