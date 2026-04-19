@@ -14,6 +14,61 @@ Status: provisional | verified | superseded by RF-NNN.
 
 ## 2026-04-19 — First analytical session
 
+### RF-014: Per-package PIKS distribution — code↔data bridge realized
+
+- **Date**: 2026-04-19
+- **Scope**: 2,899 distinct FileMan file numbers shipped by 120
+  packages (from `package-data.tsv`, kind=file rows), joined on
+  `file_number` against `piks.tsv` + `piks-triage.tsv` (manual triage
+  overrides automated). Phase 2d of ADR-045.
+- **Method**: `host/scripts/build_package_piks_summary.py`. Deduplicates
+  sharded chunks by collapsing to distinct file_numbers per package,
+  then buckets by PIKS letter. Run via `make package-piks`.
+- **Finding**:
+  - **Distribution across 2,899 shipped files**:
+    P=1,287 (44.4%), I=822 (28.4%), K=393 (13.6%), S=377 (13.0%),
+    unclassified=20 (0.7%).
+  - P is **over-represented among shipped files** vs the whole-corpus
+    distribution (P=37.2% of all 8,261 files, RF-006). Clinical
+    packages ship their own files; I-files are concentrated in a
+    few large structural anchors (File 200, 44, etc.) that aren't
+    shipped by many packages.
+  - **Top shippers line up with known VistA domains** — the
+    mechanical join produces domain profiles without any
+    interpretation:
+    - **P-dominant**: Integrated Billing (203 P / 224 total = 91%),
+      Imaging (79%), Mental Health (79%), Scheduling (68%),
+      Registration (45%, mixed with I and S for enrollment plumbing).
+    - **K-dominant**: Oncology (94%), Lexicon Utility (97%),
+      DRG Grouper (96%), Lab Service (57%), OE/RR (56%).
+    - **I-dominant**: IFCAP (98%, Fund Control Point / procurement),
+      PAID (100%, payroll), Engineering (82%), Imaging I-slice (21%).
+    - **S-dominant**: Kernel (57%), Health Level Seven (85%),
+      VA FileMan (56%), Toolkit (80%).
+  - **5 packages ship data but not FileMan files** — they ship only
+    non-FileMan globals (125 with Globals/ per RF-013 minus 120 with
+    kind=file rows here). Examples from package-data.tsv include
+    VA-DOD Sharing, which ships one file plus globals only, and
+    Altoona VA, which is globals-only.
+- **Evidence**: `vista/export/normalized/package-piks-summary.tsv`
+  (120 rows, 7 columns). Sum of P+I+K+S+unclassified across all
+  rows = 2,899, matches distinct FileMan files shipped from RF-013.
+- **Implications**:
+  - The **code↔data bridge at the package level (ADR-045 Phase 4) is
+    partially delivered** — via filename extraction + a simple join,
+    no routine-side MUMPS parsing required. We now know each
+    package's PIKS profile for the data it owns.
+  - Packages' PIKS profile can drive management decisions: which
+    teams own which packages, which packages need HIPAA/PHI
+    controls (P-heavy), which are candidates for centralization
+    (K-heavy — terminology is inherently shared), which are
+    site-specific (I-heavy).
+  - The 5 globals-only shippers are a well-defined cohort — they
+    carry operational or site-specific state without a corresponding
+    FileMan DD. Worth investigating in Phase 3 when we know which
+    routines touch those globals.
+- **Status**: verified
+
 ### RF-013: Package-shipped data inventory — 3,138 ZWR exports
 
 - **Date**: 2026-04-19

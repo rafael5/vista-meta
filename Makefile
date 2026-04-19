@@ -176,6 +176,14 @@ package-data: ## Inventory Globals/*.zwr exports → package-data.tsv (ADR-045)
 		{ echo "No snapshot found. Run 'make sync-routines' first."; exit 1; }
 	/usr/bin/python3 host/scripts/build_package_data_inventory.py
 
+.PHONY: package-piks
+package-piks: ## Join package-data × files.tsv → per-package PIKS distribution (ADR-045)
+	@[ -f vista/export/normalized/package-data.tsv ] || \
+		{ echo "Run 'make package-data' first."; exit 1; }
+	@[ -f vista/export/normalized/files.tsv ] || \
+		{ echo "files.tsv missing (from PIKS work)."; exit 1; }
+	/usr/bin/python3 host/scripts/build_package_piks_summary.py
+
 # ── Verify ────────────────────────────────────────────────────────────
 
 .PHONY: smoke
