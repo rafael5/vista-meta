@@ -142,9 +142,11 @@ ENV ydb_routines="/opt/VistA-M/o /opt/VistA-M/r $ydb_dist/libyottadbutil.so"
 RUN set -e \
     && echo "=== Importing globals ===" \
     && find /opt/VistA-M/Packages -name '*.zwr' | sort | while read -r f; do \
-        $ydb_dist/mupip load -ignorechset "$f" 2>&1 \
+        ln -sf "$f" /tmp/_load.zwr \
+        && $ydb_dist/mupip load -ignorechset /tmp/_load.zwr 2>&1 \
             || echo "WARN: failed to load $f"; \
     done \
+    && rm -f /tmp/_load.zwr \
     && echo "=== Compiling routines → /opt/VistA-M/o/ ===" \
     && cd /opt/VistA-M/o \
     && find /opt/VistA-M/r -name '*.m' -print0 \

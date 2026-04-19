@@ -11,6 +11,50 @@ This log records what went wrong (or right) when those decisions met reality.
 
 ## 2026-04-18 — First build attempt
 
+### BL-013: VEHU-M manifest quality check — 92.8% file coverage
+
+- **Date**: 2026-04-19
+- **Scope**: Comparison of `Packages.csv` (WorldVistA manifest) vs. installed `^DD`/`^DIC`
+- **Method**: Downloaded `Packages.csv` from WorldVistA GitHub repo. Parsed all
+  declared file numbers. Compared against `$O(^DIC(F))` walk in running container.
+- **Results**:
+  - Packages.csv declares: 3,103 unique FileMan file numbers across 204 packages
+  - `^DIC` has: 2,896 top-level files (2,880 match CSV, 16 are system/internal)
+  - `^DD` has: 8,275 entries (2,896 top-level + 5,379 subfiles)
+  - Coverage: 92.8% of CSV-declared files present in `^DIC`
+  - Missing: 223 files — 35 from 29 packages not in VEHU (expected), 188 from
+    installed packages (ZWR files exist but globals may not have loaded correctly,
+    or files are defined in DD but not DIC)
+  - Extra: 16 files in `^DIC` not in CSV (YDB/system-internal files)
+- **Installed packages**: 176 of 204 CSV directories present (175 match + 1 "Uncategorized" extra)
+- **Assessment**: Good coverage for a VEHU sandbox. The 188 missing files from
+  installed packages warrant investigation but are not blocking — they may be
+  optional or deprecated files within those packages.
+- **File**: `docs/Packages.csv` (manifest stored for reference)
+
+### BL-012: mupip load fails on paths with spaces — 94% of globals not loaded
+
+- **Layer**: Dockerfile layer 7 (VEHU-M import)
+- **Error**: 2,962 out of 3,138 .zwr files failed to load. `mupip load`
+  interprets spaces in file paths as parameter separators, even when quoted.
+  `%YDB-E-CLIERR, Too many parameters` for any path containing a space.
+  This includes ALL of VA FileMan, Registration, Scheduling, Lab, etc.
+  Most critically, `^DD` (Data Dictionary) was empty — no file structure
+  metadata was available despite FileMan routines working.
+- **Root cause**: `mupip load -ignorechset "$f"` with `$f` containing spaces
+  (e.g., `/opt/VistA-M/Packages/VA FileMan/Globals/DD.zwr`) — `mupip` on
+  YottaDB r2.02 does not handle quoted paths correctly.
+- **Discovery**: Quality check comparing Packages.csv manifest against
+  installed data revealed `^DD` had 0 entries. Investigation showed 94% of
+  ZWR files failed silently (the `|| echo WARN` caught it but the build
+  continued per ADR-023 continue-on-error).
+- **Fix**: Symlink each ZWR file to `/tmp/_load.zwr` before calling
+  `mupip load`. Symlinks work because the path given to mupip has no spaces.
+- **Impact**: Critical — without this fix, the database had almost no data.
+  FileMan appeared to work because routines loaded but `^DD`, `^DIC`, and
+  most clinical globals were missing.
+- **File**: `docker/Dockerfile` layer 7
+
 ### BL-011: First successful build — VistA sandbox functional
 
 - **Date**: 2026-04-19
