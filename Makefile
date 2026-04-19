@@ -198,6 +198,14 @@ dump-file-9-8: ## Dump File 9.8 (ROUTINE) via VMDUMP98 → vista-file-9-8.tsv (A
 	@echo "Written: vista/export/normalized/vista-file-9-8.tsv"
 	@wc -l vista/export/normalized/vista-file-9-8.tsv
 
+.PHONY: dump-file-8994
+dump-file-8994: ## Dump File 8994 (REMOTE PROCEDURE) via VMDUMP8994 → rpcs.tsv (ADR-045 Phase 4b)
+	$(DOCKER) exec -u vehu $(CONTAINER) bash -lc 'echo "D RUN^VMDUMP8994 H" | $$ydb_dist/mumps -direct'
+	$(DOCKER) cp $(CONTAINER):/tmp/rpcs.tsv vista/export/normalized/rpcs.tsv
+	$(DOCKER) exec -u vehu $(CONTAINER) rm -f /tmp/rpcs.tsv
+	@echo "Written: vista/export/normalized/rpcs.tsv"
+	@wc -l vista/export/normalized/rpcs.tsv
+
 # ── Verify ────────────────────────────────────────────────────────────
 
 .PHONY: smoke

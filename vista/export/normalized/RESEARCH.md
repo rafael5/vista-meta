@@ -14,6 +14,62 @@ Status: provisional | verified | superseded by RF-NNN.
 
 ## 2026-04-19 — First analytical session
 
+### RF-017: VistA File 8994 (REMOTE PROCEDURE) extraction — 4,501 RPCs
+
+- **Date**: 2026-04-19
+- **Scope**: Every entry in VEHU's File 8994 (REMOTE PROCEDURE) — the
+  RPC Broker's authoritative registry of callable procedures.
+  Phase 4b of ADR-045.
+- **Method**: New MUMPS routine `vista/dev-r/VMDUMP8994.m` walks
+  `^XWB(8994,IEN,0)` via `$ORDER`. Extracts .01 NAME, .02 TAG,
+  .03 ROUTINE, .04 RETURN VALUE TYPE, .05 AVAILABILITY,
+  .06 INACTIVE, .09 VERSION — all in the 0-node, pieces 1-9.
+  Same `/tmp` + `docker cp` pattern as Phase 4a. Run via
+  `make dump-file-8994`.
+- **Finding**:
+  - **4,501 RPCs registered** (max IEN 4,689 — 188 gaps from
+    deletions). 4,467 active, 34 inactive.
+  - **1,526 distinct routines** back those 4,501 RPCs (average ~3
+    RPCs per routine; biggest hubs are SDEC with 124 RPCs, ORWTPP
+    with 46, OREVNTX1 with 39 — typical VistA dispatch-routine
+    pattern where one routine exposes many tag entry points).
+  - **Cross-reference against MANIFEST**: 1,446 of 1,526
+    (**94.8%**) of RPC-referenced routines are in MANIFEST. The
+    80 (5.2%) not in MANIFEST include DENTVRF (Dental), DSIFBAT*
+    (Document Storage Systems — third-party commercial), which
+    appear in File 9.8 but not the shipped `Packages/*/Routines/`
+    tree (T-002 cohort).
+  - **Top packages by RPC exposure** (joined via MANIFEST):
+    Scheduling (261 distinct RPC-routines), Imaging (209),
+    Order Entry Results Reporting (185 — CPRS), Vendor - Document
+    Storage Systems (62), Automated Medical Information Exchange
+    (57), Mental Health (43), Prosthetics (38), VA Certified
+    Components - DSSI (31), Clinical Case Registries (31), Dental
+    (30). All expected — these are the CPRS/client-facing packages.
+  - **Availability distribution**: Public=395, Subscription=606,
+    Agreement=456, Restricted=1,608, empty/other=1,436. Empty
+    availability is most common on older RPCs that predate the
+    classification.
+  - **5 RPCs have no ROUTINE value** — presumably malformed or
+    in-progress entries. Ignorable minority.
+- **Evidence**: `vista/export/normalized/rpcs.tsv` — 4,501 rows, 8
+  columns.
+- **Implications**:
+  - **Authoritative role signal**: a routine in `rpcs.tsv`.`routine`
+    IS definitively an RPC entry point. This is the authoritative
+    data that Phase 2b would have guessed at badly from source
+    alone. ADR-045's decision to defer role classification until
+    Phase 4 is vindicated.
+  - The 1,526 RPC-backing routines are the CPRS/client-facing API
+    surface of VistA. Cross-referencing against PIKS of data
+    touched (Phase 3 + package-piks-summary) will give the true
+    "what data does the RPC surface expose" picture — a key
+    security/exchange consideration.
+  - Big-dispatch-routines (SDEC 124, ORWTPP 46) are hotspots —
+    many entry points in one file. Natural candidates for
+    decomposition/refactoring in any modernization plan.
+- **Status**: verified
+
 ### RF-016: VistA File 9.8 (ROUTINE) extraction — 30,665 entries, compared to MANIFEST
 
 - **Date**: 2026-04-19
