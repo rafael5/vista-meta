@@ -14,6 +14,81 @@ Status: provisional | verified | superseded by RF-NNN.
 
 ## 2026-04-19 — First analytical session
 
+### RF-021: Package manifest — code↔data bridge in full form
+
+- **Date**: 2026-04-19
+- **Scope**: All 175 packages with either routines or shipped data.
+  One row per package joining every prior phase into a single
+  analytical artifact. Phase 6a of ADR-045.
+- **Method**: `host/scripts/build_package_manifest.py` loads seven
+  normalized TSVs and emits `package-manifest.tsv`:
+  - packages.tsv          → routine_count, total_lines
+  - package-piks-summary  → files_shipped + P/I/K/S per-package
+  - rpcs.tsv              → rpc_routines (joined via routines.tsv)
+  - options.tsv (TYPE=R)  → option_routines
+  - routine-globals.tsv   → distinct_globals_touched per package
+  - routine-calls.tsv     → outbound_edges, outbound_cross_pkg
+  Canonical "package" = filesystem directory name (title case).
+  For rpcs/options whose own PACKAGE field is uppercase
+  (RF-018 mismatch), we join through the ROUTINE field via
+  `routines.tsv` to get the canonical name.
+- **Finding**:
+  - **175 packages** total (174 with routines + 1 data-only
+    participant from package-piks-summary: VA-DOD Sharing).
+  - **Cross-validation vs prior RFs** (all match exactly):
+    - PIKS totals: P=1,287, I=822, K=393, S=377 (RF-014)
+    - RPC-routines total: 1,446 (RF-017)
+    - Outbound edges: 241,309 (RF-020)
+  - **43.8% of all call edges cross package boundaries** — VistA
+    is not package-encapsulated. Large packages regularly call
+    into Kernel, FileMan, List Manager, MailMan, and each other.
+    This is the dominant architectural characteristic.
+- **Architectural observations surfaced by the manifest**:
+  - **Lexicon Utility is 63.3% cross-package outbound** — a
+    terminology service with heavy outbound coupling to its
+    consumers. Highest external-coupling ratio in the top-N.
+  - **Integrated Billing (51.1%)** and **Registration (53.4%)**
+    are the most broadly interconnected core clinical-admin
+    packages.
+  - **Scheduling tops RPC exposure** (261 RPCs, 218 options) —
+    the largest CPRS surface of any package. Confirmed by SDEC
+    being both the top RPC routine (124 RPCs, RF-017) and the top
+    call-graph out-degree routine (65 distinct callees, RF-020).
+  - **Lab Service has 0 RPCs, 366 options, 45 K-files** — purely
+    terminal-menu driven with heavy terminology ownership. Uses
+    protocols (1,354 — RF-019) rather than options as its
+    primary workflow mechanism.
+  - **IFCAP: 4 RPCs, 318 options, 134 I-files** — classic
+    back-office. Menu-driven, Institution-scoped data, minimal
+    CPRS surface.
+  - **Kernel**: 19 RPCs, 143 options, 44 S-files, touches 70
+    distinct globals — VistA's plumbing with the expected System
+    profile.
+  - **Integrated Billing** is 91% P-files but only 16 RPCs —
+    billing holds enormous patient data volume but exposes little
+    to CPRS directly; external systems consume it via other
+    integration paths.
+- **Evidence**: `vista/export/normalized/package-manifest.tsv` —
+  175 rows × 13 columns.
+- **The ADR-045 bridge is now concrete**. A question like "which
+  packages would need to travel together in a migration wave?" is
+  now a direct query over the manifest joined with the call graph.
+  The package-level view is the primary unit of VistA analysis going
+  forward.
+- **Implications**:
+  - Phase 6a answers per-package questions directly (shape, mix,
+    roles, coupling). Phase 6b (per-routine comprehensive view)
+    and Phase 6c (cross-package edge matrix) are natural
+    extensions if the user wants drill-down.
+  - Cross-package coupling ratios are the primary candidate metric
+    for identifying decomposition/modernization candidates. A
+    package with >60% outbound cross-package is an integration
+    surface; a package with <30% is self-contained.
+  - The 175-row manifest is the right size for human review — a
+    page or two. This is the "package card" ADR-045 § 1.3
+    described.
+- **Status**: verified
+
 ### RF-020: Routine → routine call graph — 241,309 edges
 
 - **Date**: 2026-04-19

@@ -1,0 +1,176 @@
+package	routine_count	total_lines	files_shipped	p_files	i_files	k_files	s_files	rpc_routines	option_routines	distinct_globals_touched	outbound_edges	outbound_cross_pkg
+A1BF Response Time	26	1235	0	0	0	0	0	0	3	10	78	17
+A4AR Registration	18	1076	0	0	0	0	0	0	0	3	77	19
+Accounts Receivable	776	102686	61	9	27	11	14	0	122	47	6650	2990
+Advanced Medication Platform	2	302	0	0	0	0	0	0	1	4	20	15
+Adverse Reaction Tracking	171	12366	8	8	0	0	0	0	28	18	1220	715
+Albany OIFO	85	3711	0	0	0	0	0	0	4	37	309	164
+Asists	89	10397	32	0	32	0	0	15	2	10	546	297
+Authorization Subscription	36	2199	7	0	1	0	6	0	0	10	162	97
+Auto Replenishment Ward Stock	105	3560	18	2	4	9	3	0	59	12	457	140
+Automated Information Collection System	3147	410451	40	39	1	0	0	7	20	37	2820	1676
+Automated Lab Instruments	396	38526	11	0	2	7	2	0	43	24	2418	969
+Automated Medical Information Exchange	977	86888	22	21	1	0	0	57	57	37	2538	1159
+Barcode Medication Administration	132	20583	8	5	1	0	2	23	22	23	1341	616
+Beneficiary Travel	67	6920	14	4	10	0	0	1	17	15	518	300
+Birmingham CIOFO	20	624	0	0	0	0	0	0	13	12	61	33
+CMOP	143	11305	3	0	2	0	1	0	17	20	1176	575
+CORBA Services	2	805	0	0	0	0	0	0	0	2	11	5
+CPT HCPCS Codes	55	10243	2	0	0	1	1	0	1	7	105	71
+CW GUIMAIL	16	1351	0	0	0	0	0	1	0	6	142	79
+Capacity Management	103	14500	10	0	3	0	7	8	27	29	740	304
+Care Management	3	254	3	1	2	0	0	2	0	9	22	21
+Clinical Case Registries	247	46386	20	16	4	0	0	31	7	27	2916	995
+Clinical Information Resource Network	125	11068	7	1	1	0	5	3	16	41	950	674
+Clinical Monitoring System	79	3264	9	1	0	0	8	0	24	21	289	126
+Clinical Procedures	141	15187	43	29	7	3	4	18	11	29	1117	738
+Clinical Reminders	519	75285	32	27	5	0	0	6	39	67	4335	1848
+Consult Request Tracking	225	26609	8	4	4	0	0	3	36	27	1829	1061
+Controlled Substances	299	15553	7	2	2	3	0	0	122	22	1825	964
+Credentials Tracking	2	25	0	0	0	0	0	0	0	0	1	1
+DRG Grouper	507	66341	27	0	0	26	1	0	2	30	1394	645
+DSS Extracts	306	31206	37	22	7	3	5	0	100	59	2259	1084
+Dental	147	12561	27	11	3	5	8	30	25	19	941	483
+Dietetics	635	64650	47	40	7	0	0	0	164	27	2408	585
+Drug Accountability	202	14781	7	1	0	6	0	1	59	18	1006	421
+E Claims Management Engine	217	35571	44	40	4	0	0	4	16	24	2061	674
+EEO Complaint Tracking	29	1743	7	0	7	0	0	0	0	10	129	47
+Electronic Health Modernization	2	201	2	0	0	0	2	0	1	3	14	13
+Electronic Signature	1	204	0	0	0	0	0	1	0	0	7	7
+Emergency Department Integration Software	81	8533	20	15	5	0	0	3	1	29	669	267
+Engineering	419	29332	60	1	49	5	5	0	125	26	2336	1036
+Enrollment Application System	195	22863	15	5	10	0	0	1	12	22	1400	798
+Enterprise Health Management Platform	128	18191	10	6	1	0	3	27	3	49	1250	614
+Enterprise Support Solution	2	405	1	1	0	0	0	0	1	6	11	8
+Enterprise Terminology Services	10	2070	10	0	2	7	1	0	0	4	44	20
+Equipment Turn-In Request	61	3260	7	0	7	0	0	0	27	12	220	116
+Event Capture	353	39018	10	9	1	0	0	13	32	26	2354	1306
+Event Driven Reporting	8	267	0	0	0	0	0	0	1	8	11	4
+Ext Rev Track	64	2470	0	0	0	0	0	0	0	8	146	53
+Fee Basis	469	42871	50	44	6	0	0	0	171	35	3712	1621
+Foundations	8	1155	1	0	1	0	0	0	0	7	69	49
+Functional Independence	7	709	2	1	1	0	0	2	2	12	44	34
+General Medical Record - Generator	44	1847	4	4	0	0	0	0	1	8	189	54
+General Medical Record - IO	49	1956	11	11	0	0	0	0	4	11	314	76
+General Medical Record - Vitals	286	16637	6	6	0	0	0	20	9	20	1227	527
+Generic Code Sheet	50	2877	9	0	4	5	0	0	13	10	238	59
+Graphics	29	1390	0	0	0	0	0	0	0	10	139	106
+HINQ	136	11510	8	7	0	0	1	4	8	19	803	584
+Health Data and Informatics	71	9438	10	0	6	1	3	0	2	11	382	188
+Health Level Seven	267	42090	39	0	6	0	33	0	29	29	2002	738
+Health Summary	294	27175	5	0	3	1	1	0	15	51	1625	794
+HealtheVet Desktop	13	1150	0	0	0	0	0	9	0	8	67	46
+Hines OIFO	38	4231	0	0	0	0	0	0	0	15	276	30
+Hospital Based Home Care	81	5501	22	10	5	2	5	0	43	15	524	160
+Houston VAMC	23	1947	8	0	0	0	8	0	6	14	91	24
+IFCAP	1640	118642	137	3	134	0	0	4	318	43	12324	4375
+Imaging	576	85414	165	130	35	0	0	209	54	50	3698	1571
+Incident Reporting	4	136	0	0	0	0	0	0	0	4	10	9
+Income Verification Match	197	22590	12	9	1	0	2	0	14	30	1399	849
+Incomplete Records Tracking	78	5029	5	1	2	2	0	0	7	16	657	474
+Inpatient Medications	581	56380	25	1	3	21	0	0	62	30	5469	1556
+Insurance Capture Buffer	41	5467	5	4	1	0	0	27	3	16	252	187
+Integrated Billing	2451	296913	224	203	18	2	1	16	274	89	20743	10591
+Integrated Patient Fund	46	2758	8	1	7	0	0	2	20	12	267	72
+Interim Management Support	49	1305	4	1	1	0	2	0	37	20	154	73
+Joint Legacy Viewer	1	13	0	0	0	0	0	0	0	0	2	2
+Kernel	934	89707	77	1	25	7	44	19	143	70	5303	1588
+Lab Service	1369	121199	79	9	22	45	3	0	366	54	9701	3554
+Lexicon Utility	539	83383	29	1	0	28	0	0	19	27	3752	2375
+Library	1	84	0	0	0	0	0	0	0	2	9	8
+Lighthouse	1	38	0	0	0	0	0	1	0	0	1	1
+List Manager	48	3064	1	1	0	0	0	0	0	13	219	101
+M XML Parser	6	998	0	0	0	0	0	0	0	2	36	4
+MASH Utilities	13	2540	0	0	0	0	0	0	0	2	9	7
+MCCR Backbilling	2	92	0	0	0	0	0	0	0	10	9	6
+MailMan	252	26932	18	0	7	0	11	0	57	24	2480	782
+Master Patient Index VistA	72	8130	4	2	0	0	2	11	4	17	819	539
+Medical Health E-Screening	1	48	0	0	0	0	0	0	0	0	3	3
+Medicine	361	23652	71	39	19	3	10	0	28	32	1509	752
+Mental Health	642	56471	73	58	4	3	8	43	39	35	2500	1230
+Methicillin Resistant Staph Aurerus Initiative Reports	16	3397	4	1	1	1	1	0	7	11	137	97
+Micom	11	143	7	0	0	1	6	0	0	4	28	14
+Mobile Mental Health Program	1	33	0	0	0	0	0	0	0	0	2	2
+Mobile Scheduling Applications Suite	29	4192	0	0	0	0	0	7	0	11	196	82
+My HealtheVet	98	12001	7	3	0	0	4	2	8	24	600	270
+NDBI	3	211	0	0	0	0	0	0	0	5	13	6
+National Drug File	139	11752	21	0	1	20	0	1	39	21	707	363
+National Health Information Network	20	2551	0	0	0	0	0	1	0	12	177	122
+National Laboratory Test	4	174	0	0	0	0	0	0	0	6	7	7
+National Online Information Sharing	217	13616	0	0	0	0	0	1	1	13	1046	299
+National VistA Support	2	266	0	0	0	0	0	0	0	5	6	4
+Network Health Exchange	19	1200	4	1	2	1	0	0	5	9	106	86
+New Mexico HCS	1	23	0	0	0	0	0	0	0	2	3	0
+Nursing Service	922	76940	32	24	4	3	1	0	71	23	2064	563
+ODS	30	1548	9	1	8	0	0	0	9	19	136	78
+Occurrence Screen	90	4884	14	1	2	0	11	0	32	17	464	295
+Old DMMS	21	765	0	0	0	0	0	0	11	8	45	13
+Oncology	496	55281	66	1	3	62	0	1	28	28	2373	924
+Order Entry Results Reporting	1394	189083	64	14	9	36	5	185	69	81	9512	4414
+Outpatient Pharmacy	905	119530	39	15	5	17	2	13	135	57	10040	4337
+PAID	462	43339	43	0	43	0	0	2	138	20	2786	800
+PCE Patient Care Encounter	475	55603	47	17	20	9	1	11	32	73	3051	1408
+Palo Alto HCS	10	1148	0	0	0	0	0	0	0	15	79	70
+Patient Assessment Documentation	8	1607	14	12	2	0	0	3	1	14	60	38
+Patient Data Exchange	188	16372	18	11	5	0	2	0	7	21	871	228
+Patient Representative	1	119	0	0	0	0	0	0	0	2	10	9
+Pharmacy Benefits Management	121	14288	1	1	0	0	0	0	4	35	549	171
+Pharmacy Data Management	381	42250	28	4	1	21	2	3	52	32	2096	1100
+Pharmacy Prescription Practice	1	79	0	0	0	0	0	0	0	2	9	8
+Phoenix VAMC	12	1415	0	0	0	0	0	0	0	38	38	10
+Police and Security	106	5733	18	5	5	5	3	0	32	11	413	212
+Problem List	94	10514	7	5	2	0	0	0	13	26	754	414
+Progress Notes	8	248	0	0	0	0	0	0	0	3	7	7
+Prosthetics	488	47943	38	4	34	0	0	38	101	28	3418	1457
+Providence VAMC	5	507	0	0	0	0	0	0	0	17	35	26
+Quality Assurance Integration	22	1174	3	0	1	0	2	0	2	7	65	33
+Quasar	110	13937	10	3	3	3	1	4	19	18	935	513
+RPC Broker	40	5230	2	0	1	0	1	8	2	11	308	78
+Radiology Nuclear Medicine	515	55638	40	35	4	0	1	2	100	41	4303	1930
+Real Time Location System	12	1172	0	0	0	0	0	10	1	9	32	28
+Record Tracking	154	8189	14	1	5	0	8	0	0	23	1189	476
+Registration	2179	217933	153	69	47	0	37	22	215	106	15594	8329
+Release Of Information	29	5761	28	17	11	0	0	23	1	8	207	118
+Remote Order Entry System	140	8332	14	1	13	0	0	1	25	12	657	151
+Richmond VAMC	2	106	0	0	0	0	0	0	0	0	4	0
+Run Time Library	30	2462	0	0	0	0	0	0	0	12	147	57
+Salt Lake OIFO	5	375	0	0	0	0	0	0	0	9	26	22
+Scheduling	1798	218981	99	67	25	2	5	261	218	95	13933	6160
+Screen Handler for Fileman	20	741	2	0	0	0	2	0	1	9	119	26
+Shift Handoff Tool	19	2102	4	1	0	0	3	16	0	11	146	106
+Silver Sprint OIFO Applications	6	337	1	0	0	0	1	0	0	10	19	10
+Social Work	1	84	0	0	0	0	0	0	0	2	9	8
+Spinal Cord Dysfunction	4	172	0	0	0	0	0	0	0	5	7	2
+Suicide Hotline	4	235	0	0	0	0	0	0	0	7	32	8
+Surgery	692	37501	40	37	2	0	1	0	134	39	4398	1621
+Survey Generator	39	1611	4	0	1	0	3	0	17	8	215	103
+Text Integration Utility	548	58846	34	24	10	0	0	26	34	49	5220	2013
+Toolkit	286	28542	25	1	4	0	20	7	68	35	1671	610
+Uncategorized	702	40920	4	0	0	0	4	6	60	151	2303	1180
+Utilization Management Rollup	39	2169	1	1	0	0	0	0	7	13	179	63
+Utilization Review	38	1729	2	1	1	0	0	0	0	8	292	249
+VA Certified Components - DSSI	66	8276	0	0	0	0	0	31	0	14	406	232
+VA FileMan	861	95215	45	0	0	0	25	5	31	39	4595	107
+VA Point of Service	48	8503	9	2	7	0	0	22	0	15	436	189
+VA-DOD Sharing	0	0	1	0	0	0	1	0	0	0	0	0
+VBECS	63	7629	7	7	0	0	0	10	11	20	406	237
+VDEF	12	1300	7	5	0	1	1	0	2	4	95	43
+VPE Shell	339	27782	5	0	0	0	5	0	0	21	1039	114
+Vendor - Audiofax Inc	1	177	0	0	0	0	0	0	0	6	15	14
+Vendor - Document Storage Systems	128	12324	0	0	0	0	0	62	1	76	656	491
+Vendor - ISI	61	7615	4	0	2	1	1	11	1	34	337	208
+Vendor - Pioneer	30	1129	0	0	0	0	0	0	0	6	13	1
+Veterans Data Integration and Federation	1	55	0	0	0	0	0	0	0	0	6	6
+Virtual Patient Record	104	13320	2	2	0	0	0	3	8	37	1059	654
+VistA Integration Adapter	16	2778	0	0	0	0	0	9	0	19	129	104
+VistA Web	1	71	0	0	0	0	0	0	0	0	4	4
+VistALink	17	2442	3	0	1	1	1	3	0	5	152	58
+VistALink Security	7	1081	0	0	0	0	0	0	0	7	94	61
+Visual Impairment Service Team	32	1964	12	3	4	3	2	3	17	9	179	104
+Voluntary Timekeeping	1	105	0	0	0	0	0	0	0	2	11	10
+WEBVRAM	7	575	0	0	0	0	0	2	0	2	20	20
+Washington VAMC	2	118	0	0	0	0	0	0	0	9	10	3
+Web Services Client	19	3317	3	0	1	0	2	0	0	6	159	105
+West Palm Beach VAMC	21	2448	5	3	2	0	0	3	3	21	107	63
+Womens Health	128	15967	25	18	7	0	0	5	33	19	1117	395
+Wounded Injured and Ill Warriors	10	708	2	2	0	0	0	1	2	5	56	50

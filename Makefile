@@ -196,6 +196,15 @@ routine-calls: ## Scan each routine for DO/GOTO/JOB and $$ calls → routine-cal
 		{ echo "Run 'make sync-routines' first."; exit 1; }
 	/usr/bin/python3 host/scripts/build_routine_calls.py
 
+.PHONY: package-manifest
+package-manifest: ## Join everything into per-package manifest (ADR-045 Phase 6a)
+	@for f in packages.tsv routines.tsv package-piks-summary.tsv rpcs.tsv \
+	          options.tsv routine-globals.tsv routine-calls.tsv; do \
+		[ -f vista/export/normalized/$$f ] || \
+			{ echo "Missing: vista/export/normalized/$$f"; exit 1; }; \
+	done
+	/usr/bin/python3 host/scripts/build_package_manifest.py
+
 .PHONY: dump-file-9-8
 dump-file-9-8: ## Dump File 9.8 (ROUTINE) via VMDUMP98 → vista-file-9-8.tsv (ADR-045 Phase 4a)
 	$(DOCKER) exec -u vehu $(CONTAINER) bash -lc 'echo "D RUN^VMDUMP98 H" | $$ydb_dist/mumps -direct'
