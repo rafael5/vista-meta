@@ -14,6 +14,67 @@ Status: provisional | verified | superseded by RF-NNN.
 
 ## 2026-04-19 — First analytical session
 
+### RF-019: VistA File 101 (PROTOCOL) extraction — 6,556 protocols
+
+- **Date**: 2026-04-19
+- **Scope**: Every entry in VEHU's File 101 (PROTOCOL) — VistA's
+  event/protocol system used by CPRS, Order Entry, HL7, and
+  ScreenMan. Phase 4d of ADR-045.
+- **Method**: New MUMPS routine `vista/dev-r/VMDUMP101.m` walks
+  `^ORD(101,IEN,...)`. Extracts NAME, ITEM TEXT, TYPE, and PACKAGE
+  from the 0-node (pieces 1/2/4/12), resolves PACKAGE through
+  `^DIC(9.4)`, and reads ENTRY ACTION + EXIT ACTION from sub-nodes
+  20 and 15 (MUMPS-code strings, 245 char max). Same `/tmp` +
+  `docker cp` pattern. Run via `make dump-file-101`.
+- **Finding**:
+  - **6,556 protocols** total (max IEN 7,053 — 497 gaps from
+    deletions).
+  - **TYPE distribution** — File 101's type codes differ from
+    File 19's:
+    - A (action) — **3,409** (52%)
+    - L (limited protocol) — **1,208**
+    - M (menu) — **800** (CPRS right-click menus, OE/RR context)
+    - S (subscriber) — **363** — HL7 event subscribers
+    - E (event driver) — **321** — HL7/OE/RR event sources
+    - O (protocol) — 252
+    - X (extended action) — 145
+    - Q (protocol menu) — 48
+    - D (dialog) — 6, empty — 4
+  - **684 event-driven pairs** (321 drivers + 363 subscribers)
+    constitute VistA's event integration fabric — this is how HL7
+    messages, order events, and consult notifications propagate.
+  - **4,976 protocols have ENTRY ACTION** populated (76%) — the
+    MUMPS code that runs when the protocol fires. **4,861 have a
+    PACKAGE** (74%).
+  - **Top packages by protocol count**: LAB SERVICE (**1,354** —
+    every lab test is configured as a protocol), INTEGRATED BILLING
+    (787), TIU (261), REGISTRATION (230), SCHEDULING (197),
+    OUTPATIENT PHARMACY (194), CLINICAL REMINDERS (184), AR (176),
+    CONSULT/REQUEST TRACKING (148), AICS (144).
+- **Evidence**: `vista/export/normalized/protocols.tsv` — 6,556
+  rows, 7 columns (ien, name, item_text, type, package,
+  entry_action, exit_action).
+- **Implications**:
+  - Third authoritative role signal, and the one with the richest
+    semantics because File 101's TYPE codes distinguish event
+    drivers from subscribers — letting us map the pub/sub fabric
+    directly.
+  - Unlike File 19, File 101 has NO dedicated ROUTINE field —
+    routines are invoked via MUMPS code embedded in ENTRY ACTION.
+    Extracting those routine references (e.g., parsing `D EN^LRXO0`
+    out of ENTRY ACTION text) is deferred to Phase 5 (call graph)
+    where it belongs with the general MUMPS-code-parsing work.
+  - Quick exploratory scan (not stored) suggests ~1,155 distinct
+    routines are invoked from protocol ENTRY ACTIONs, with LRXO0
+    (Lab protocol handler) alone referenced in ~1,195 protocols —
+    a single routine driving the bulk of Lab's protocol-defined
+    workflows. Concrete figure to be produced in Phase 5.
+  - LAB SERVICE protocol count (1,354) is 2.2× larger than File 19
+    option count for Lab (627). Labs are far more
+    protocol-configured than menu-configured — a meaningful
+    architectural observation about how that domain is built.
+- **Status**: verified
+
 ### RF-018: VistA File 19 (OPTION) extraction — 13,163 menu options
 
 - **Date**: 2026-04-19

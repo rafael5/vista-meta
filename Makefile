@@ -214,6 +214,14 @@ dump-file-19: ## Dump File 19 (OPTION) via VMDUMP19 → options.tsv (ADR-045 Pha
 	@echo "Written: vista/export/normalized/options.tsv"
 	@wc -l vista/export/normalized/options.tsv
 
+.PHONY: dump-file-101
+dump-file-101: ## Dump File 101 (PROTOCOL) via VMDUMP101 → protocols.tsv (ADR-045 Phase 4d)
+	$(DOCKER) exec -u vehu $(CONTAINER) bash -lc 'echo "D RUN^VMDUMP101 H" | $$ydb_dist/mumps -direct'
+	$(DOCKER) cp $(CONTAINER):/tmp/protocols.tsv vista/export/normalized/protocols.tsv
+	$(DOCKER) exec -u vehu $(CONTAINER) rm -f /tmp/protocols.tsv
+	@echo "Written: vista/export/normalized/protocols.tsv"
+	@wc -l vista/export/normalized/protocols.tsv
+
 # ── Verify ────────────────────────────────────────────────────────────
 
 .PHONY: smoke
