@@ -524,6 +524,144 @@ def cmd_callers(args: argparse.Namespace) -> int:
     return 0
 
 
+# ── new-test (M-Unit skeleton generator) ─────────────────────────────
+
+import re
+
+
+def _public_tags(src: Path) -> list[str]:
+    """Return column-0 alphabetic labels after line 1 (the routine header)."""
+    tags: list[str] = []
+    try:
+        with src.open(encoding="utf-8", errors="replace") as f:
+            for i, line in enumerate(f, start=1):
+                if i == 1:
+                    continue
+                if not line or line[0] in (" ", "\t", ";"):
+                    continue
+                m = re.match(r"^([A-Za-z%][A-Za-z0-9]*)", line)
+                if m:
+                    tags.append(m.group(1))
+    except OSError:
+        pass
+    seen: set[str] = set()
+    return [t for t in tags if not (t in seen or seen.add(t))]
+
+
+def cmd_new_test(args: argparse.Namespace) -> int:
+    target = args.routine
+    pkg, src = _routine_source(target)
+    if not src or not src.exists():
+        sys.exit(f"Routine {target!r} not found in synced corpus. "
+                 f"Run `make sync-routines`.")
+
+    tags = _public_tags(src)
+    # Truncate test routine name to 8 chars (MUMPS limit)
+    test_name = ("T" + target)[:8]
+
+    from datetime import date
+    out: list[str] = []
+    pkg_u = (pkg or "UNKNOWN").upper()
+    out.append(f"{test_name} ;SITE/AUTHOR - M-Unit tests for {target} "
+               f";{date.today().isoformat()}")
+    out.append(f" ;;1.0;{pkg_u};;")
+    out.append(" Q")
+    out.append(" ;")
+    out.append("STARTUP Q")
+    out.append(" ;")
+    out.append("SHUTDOWN Q")
+    out.append(" ;")
+
+    if not tags:
+        out.append(f"T1 ; @TEST {target} has no public tags — edit this stub")
+        out.append(" D SUCCEED^%ut")
+        out.append(" Q")
+        out.append(" ;")
+    else:
+        for idx, tag in enumerate(tags, start=1):
+            # Test tag is T<N>; description names the target tag.
+            out.append(f"T{idx} ; @TEST exercise {tag}^{target}")
+            out.append(" ; TODO: set up fixture / inputs")
+            out.append(f" ; D {tag}^{target}")
+            out.append(" D SUCCEED^%ut")
+            out.append(" Q")
+            out.append(" ;")
+
+    text = "\n".join(out) + "\n"
+    if args.output:
+        Path(args.output).write_text(text, encoding="utf-8")
+        print(f"Wrote {args.output}  ({len(tags)} test stub(s))")
+    else:
+        sys.stdout.write(text)
+    return 0
+
+
+# ── lint (doc-comment discipline) ────────────────────────────────────
+
+DOC_TAG_RE = re.compile(r";\s*@(summary|param|returns|deprecated|test)\b",
+                        re.IGNORECASE)
+
+
+def lint_file(path: Path) -> list[str]:
+    """Return list of lint issues. Empty list = clean."""
+    issues: list[str] = []
+    try:
+        lines = path.read_text(encoding="utf-8",
+                               errors="replace").splitlines()
+    except OSError as e:
+        return [f"{path}: read error: {e}"]
+
+    for i, raw in enumerate(lines):
+        if i == 0:
+            continue
+        if not raw or raw[0] in (" ", "\t", ";"):
+            continue
+        m = re.match(r"^([A-Za-z%][A-Za-z0-9]*)", raw)
+        if not m:
+            continue
+        tag = m.group(1)
+
+        # STARTUP/SHUTDOWN and purely numeric labels are structural,
+        # not user-facing — skip doc-comment requirement.
+        if tag in ("STARTUP", "SHUTDOWN"):
+            continue
+
+        # Walk backwards collecting contiguous comment lines
+        docs: list[str] = []
+        j = i - 1
+        while j >= 0 and lines[j].lstrip().startswith(";"):
+            docs.append(lines[j])
+            j -= 1
+        # Trailing ';' marker comments after a tag also count
+        trailing = raw.split(";", 1)[1] if ";" in raw else ""
+        if trailing:
+            docs.append(";" + trailing)
+
+        has_summary = any(DOC_TAG_RE.search(d) for d in docs)
+        if not has_summary:
+            issues.append(f"{path}:{i + 1}: tag {tag!r} has no "
+                          f"@summary/@test doc block")
+    return issues
+
+
+def cmd_lint(args: argparse.Namespace) -> int:
+    any_issue = False
+    for a in args.paths:
+        p = Path(a)
+        if p.is_dir():
+            files = list(p.rglob("*.m"))
+        elif p.is_file():
+            files = [p]
+        else:
+            print(f"skip: {p}", file=sys.stderr)
+            continue
+        for f in files:
+            for issue in lint_file(f):
+                print(issue)
+                any_issue = True
+    return 1 if any_issue else 0
+
+
 # ── CLI entry ────────────────────────────────────────────────────────
 
 def main(argv: list[str] | None = None) -> int:
@@ -556,6 +694,18 @@ def main(argv: list[str] | None = None) -> int:
     pcl.add_argument("--limit", type=int, default=30,
                      help="Max callers to show (default 30)")
     pcl.set_defaults(func=cmd_callers)
+
+    pnt = sub.add_parser("new-test",
+                         help="Generate an M-Unit test skeleton for ROUTINE")
+    pnt.add_argument("routine", help="Target routine name (e.g. PSOVCC1)")
+    pnt.add_argument("-o", "--output",
+                     help="Write to file (default: stdout)")
+    pnt.set_defaults(func=cmd_new_test)
+
+    pl = sub.add_parser("lint",
+                        help="Check public tags for @summary doc blocks")
+    pl.add_argument("paths", nargs="+", help="Files or directories")
+    pl.set_defaults(func=cmd_lint)
 
     args = p.parse_args(argv)
     return args.func(args)

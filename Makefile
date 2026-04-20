@@ -328,6 +328,66 @@ kids-vc-pip-install: ## Install kids-vc as a pip package in a venv at /tmp/kidsv
 	/tmp/kidsvc-venv/bin/pip install --quiet -e kids_vc_pkg/
 	@echo "Installed. Try: /tmp/kidsvc-venv/bin/kids-vc --help"
 
+# ── Decomposed-on-disk patch workflow (Tier 2 #7) ─────────────────────
+
+PATCHES_DIR := patches
+
+.PHONY: patch-new
+patch-new: ## Scaffold a new patch tree: NAME=MYPKG_1_0_1001
+	@[ -n "$(NAME)" ] || { echo "Usage: make patch-new NAME=MYPKG_1_0_1001"; exit 1; }
+	@for d in routines files options protocols rpcs keys hooks; do \
+		mkdir -p "$(PATCHES_DIR)/$(NAME)/$$d"; \
+	done
+	@printf 'Patch %s\n\nDescribe the patch, its purpose, and reversibility here.\n' \
+		"$(NAME)" > $(PATCHES_DIR)/$(NAME)/README.md
+	@echo "Created $(PATCHES_DIR)/$(NAME)/"
+	@find $(PATCHES_DIR)/$(NAME) -maxdepth 2 | sort
+
+.PHONY: patch-decompose
+patch-decompose: ## Decompose a .KID into on-disk form: KID=path/to/patch.KID
+	@[ -n "$(KID)" ] || { echo "Usage: make patch-decompose KID=path/to/patch.KID"; exit 1; }
+	@mkdir -p $(PATCHES_DIR)
+	@name=$$(basename "$(KID)" | sed -E 's/\.[Kk][Ii][Dd]$$//'); \
+		dst=$(PATCHES_DIR)/$$name; \
+		/usr/bin/python3 host/scripts/kids_vc.py decompose "$(KID)" "$$dst" && \
+		echo "Decomposed -> $$dst"
+
+.PHONY: patch-assemble
+patch-assemble: ## Assemble an on-disk patch tree into a .KID: DIR=patches/NAME
+	@[ -n "$(DIR)" ] || { echo "Usage: make patch-assemble DIR=patches/MYPKG_1_0_1001"; exit 1; }
+	@name=$$(basename "$(DIR)"); \
+		out=$(PATCHES_DIR)/$$name.KID; \
+		/usr/bin/python3 host/scripts/kids_vc.py assemble "$(DIR)" "$$out" && \
+		echo "Assembled -> $$out"
+
+.PHONY: patch-roundtrip
+patch-roundtrip: ## Round-trip a .KID (decompose + re-assemble + diff): KID=path
+	@[ -n "$(KID)" ] || { echo "Usage: make patch-roundtrip KID=path/to/patch.KID"; exit 1; }
+	@/usr/bin/python3 host/scripts/kids_vc.py roundtrip "$(KID)"
+
+# ── More developer tools (Tier 2 #5, #6, #8) ──────────────────────────
+
+.PHONY: fmt
+fmt: ## Format .m files in-place: FILES="path1 path2" or FILES=vista/dev-r
+	@[ -n "$(FILES)" ] || { echo "Usage: make fmt FILES=\"vista/dev-r PATH2\""; exit 1; }
+	@/usr/bin/python3 host/scripts/mfmt.py $(FILES)
+
+.PHONY: fmt-check
+fmt-check: ## Report files that would be reformatted: FILES="..."
+	@[ -n "$(FILES)" ] || { echo "Usage: make fmt-check FILES=\"vista/dev-r PATH2\""; exit 1; }
+	@/usr/bin/python3 host/scripts/mfmt.py --check $(FILES)
+
+.PHONY: new-test
+new-test: ## Generate an M-Unit test skeleton: ROUTINE=PSOVCC1 [OUT=path]
+	@[ -n "$(ROUTINE)" ] || { echo "Usage: make new-test ROUTINE=PSOVCC1 [OUT=TPSOVCC1.m]"; exit 1; }
+	@/usr/bin/python3 host/scripts/vista_meta_cli.py new-test "$(ROUTINE)" \
+		$(if $(OUT),-o $(OUT),)
+
+.PHONY: lint
+lint: ## Doc-comment lint for public tags: FILES="..."
+	@[ -n "$(FILES)" ] || { echo "Usage: make lint FILES=\"vista/dev-r PATH2\""; exit 1; }
+	@/usr/bin/python3 host/scripts/vista_meta_cli.py lint $(FILES)
+
 # ── Developer workflow (vista-developers-guide.md §Tier 1) ───────────
 
 .PHONY: install-hooks

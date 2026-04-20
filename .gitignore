@@ -28,3 +28,4 @@ host/.venv/
 Thumbs.db
 __pycache__/
 *.egg-info/
+patches/

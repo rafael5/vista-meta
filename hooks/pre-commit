@@ -144,6 +144,21 @@ for f in "${STAGED_M_A[@]}"; do
         lno=$((lno + 1))
         check_line "$f" "$lno" "$ln"
     done <<<"$content"
+
+    # Doc-comment lint on newly-added files only (legacy code exempt).
+    if [ -f host/scripts/vista_meta_cli.py ]; then
+        tmp_new="$(mktemp)"
+        printf '%s' "$content" > "$tmp_new"
+        # Run lint; prefix issues with the real staged path
+        while IFS= read -r issue; do
+            # Replace tmp path with the staged file path in the message
+            msg="${issue#$tmp_new:}"
+            FAILS+=("$f:$msg")
+            STATUS=1
+        done < <(/usr/bin/python3 host/scripts/vista_meta_cli.py \
+                     lint "$tmp_new" 2>/dev/null || true)
+        rm -f "$tmp_new"
+    fi
 done
 
 for f in "${STAGED_M_M[@]}"; do
