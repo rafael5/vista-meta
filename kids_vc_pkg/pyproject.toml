@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kids-vc"
+version = "0.1.0"
+description = "Version-control tool for VistA KIDS distribution files"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "Apache-2.0"}
+authors = [
+    {name = "vista-meta project"},
+]
+keywords = ["vista", "mumps", "kids", "fileman", "version-control", "git"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Version Control",
+    "Topic :: Software Development :: Libraries",
+]
+
+[project.scripts]
+kids-vc = "kids_vc.cli:main"
+kids-vc-merge = "kids_vc.merge:main"
+
+[project.urls]
+Homepage = "https://github.com/rafael5/vista-meta"
+Repository = "https://github.com/rafael5/vista-meta"
+Issues = "https://github.com/rafael5/vista-meta/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+kids_vc = ["fixtures/*.kid"]

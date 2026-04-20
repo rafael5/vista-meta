@@ -318,6 +318,16 @@ kids-vc-corpus: ## Corpus round-trip harness: fetch + test every .KID in WorldVi
 kids-vc-corpus-cached: ## Re-run corpus round-trip using cached downloads (Phase 8f)
 	/usr/bin/python3 host/scripts/fetch_kids_corpus.py --no-fetch
 
+.PHONY: kids-vc-xpdk2vc-compat
+kids-vc-xpdk2vc-compat: ## Run XPDK2VC behavioral-contract compatibility tests (Phase 8g)
+	/usr/bin/python3 host/scripts/test_xpdk2vc_compat.py
+
+.PHONY: kids-vc-pip-install
+kids-vc-pip-install: ## Install kids-vc as a pip package in a venv at /tmp/kidsvc-venv (Phase 8h)
+	@python3 -m venv /tmp/kidsvc-venv
+	/tmp/kidsvc-venv/bin/pip install --quiet -e kids_vc_pkg/
+	@echo "Installed. Try: /tmp/kidsvc-venv/bin/kids-vc --help"
+
 # ── Verify ────────────────────────────────────────────────────────────
 
 .PHONY: smoke

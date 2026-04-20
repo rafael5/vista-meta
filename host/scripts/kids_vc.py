@@ -233,6 +233,58 @@ def _patch_descriptor_to_dir(desc: str) -> str:
     return desc.replace("*", "_")
 
 
+def canonicalize_iens(decomp_dir: Path) -> dict[str, int]:
+    """Rewrite all .zwr files under `decomp_dir` to substitute integer IENs
+    at known positions with the literal string "IEN".
+
+    Use case: cross-instance diffing. Site A and site B both install patch
+    123; IEN values assigned by KIDS differ across installs (site-specific
+    sequence). Without IEN substitution, a diff of decomposed output shows
+    every IEN position as changed even when the semantic content matches.
+    After canonicalization, two sites' decomposed patches are byte-identical
+    when semantically identical.
+
+    Substitution positions (hardcoded per-section knowledge):
+      ("BLD", <int>, ...)             → position 1 (build IEN)
+      ("KRN", <numeric>, <int>, ...)  → position 2 (entry IEN per file)
+
+    NOTE: canonicalization is LOSSY — it discards the original IEN values.
+    Assembly from a canonicalized tree will produce a .KID file with fresh
+    sequentially-assigned IENs, not the originals. That's acceptable because
+    KIDS install itself reassigns IENs on the target system.
+
+    Returns a dict with counts of substitutions per section.
+    """
+    stats = {"BLD": 0, "KRN": 0}
+    for zwr_path in decomp_dir.rglob("*.zwr"):
+        new_lines: list[str] = []
+        modified = False
+        for line in zwr_path.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                new_lines.append(line)
+                continue
+            try:
+                subs, value = _parse_zwr_line(line)
+            except Exception:
+                new_lines.append(line)
+                continue
+            new_subs = subs
+            if len(subs) >= 2 and subs[0] == "BLD" and isinstance(subs[1], int):
+                new_subs = ("BLD", "IEN") + subs[2:]
+                stats["BLD"] += 1
+                modified = True
+            elif (len(subs) >= 3 and subs[0] == "KRN"
+                  and isinstance(subs[1], (int, float))
+                  and isinstance(subs[2], int) and subs[2] != 0):
+                new_subs = ("KRN", subs[1], "IEN") + subs[3:]
+                stats["KRN"] += 1
+                modified = True
+            new_lines.append(_zwr_line(new_subs, value))
+        if modified:
+            zwr_path.write_text("\n".join(new_lines) + "\n", encoding="utf-8")
+    return stats
+
+
 def canonicalize_routine_line2(line2: str) -> str:
     """Apply diff-stability transforms to a routine's ;; version line.
 
@@ -956,6 +1008,15 @@ def _cmd_roundtrip(args: argparse.Namespace) -> int:
     return roundtrip(Path(args.kid_file))
 
 
+def _cmd_canonicalize(args: argparse.Namespace) -> int:
+    stats = canonicalize_iens(Path(args.decomp_dir))
+    total = sum(stats.values())
+    print(f"canonicalize_iens: {total} substitutions")
+    for section, count in stats.items():
+        print(f"  {section}: {count}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description="kids-vc — KIDS version control tool")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -977,6 +1038,12 @@ def main(argv: list[str] | None = None) -> int:
     sr = sub.add_parser("roundtrip", help="decompose → assemble → compare")
     sr.add_argument("kid_file")
     sr.set_defaults(fn=_cmd_roundtrip)
+
+    sc = sub.add_parser("canonicalize",
+        help="Rewrite .zwr files in a decomposed tree to substitute IENs "
+             "with 'IEN' placeholder (for cross-instance diffing; LOSSY)")
+    sc.add_argument("decomp_dir")
+    sc.set_defaults(fn=_cmd_canonicalize)
 
     args = p.parse_args(argv)
     return args.fn(args)

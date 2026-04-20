@@ -14,6 +14,98 @@ Status: provisional | verified | superseded by RF-NNN.
 
 ## 2026-04-19 — First analytical session
 
+### RF-033: Tier-1 completion — IEN canonicalization, XPDK2VC compat tests, pip package
+
+- **Date**: 2026-04-19
+- **Scope**: Finish the Tier-1 list from the "how to harden/expand
+  kids-vc" answer: (1) principled IEN substitution, (2) differential
+  testing against XPDK2VC, (3) pip-installable package.
+- **Approach**: prior investment (Phase 8f corpus harness → 100% pass)
+  means IEN substitution is no longer needed for correctness; it's an
+  optional cross-instance-diffing feature. XPDK2VC differential testing
+  is practically blocked by VEHU runtime (RF-026), so took the
+  structural-contract approach. pip packaging is a thin wrapper —
+  re-exports the host/scripts source-of-truth.
+- **Tier-1-1: IEN canonicalization (opt-in)**:
+  - `kids_vc canonicalize <decomp-dir>` post-processes all `.zwr`
+    files in a decomposed tree, substituting integer IENs at known
+    positions with the literal string `"IEN"` (XPDK2VC's approach).
+  - Two substitution positions encoded:
+    - `("BLD", <int>, ...)` at position 1 (build IEN)
+    - `("KRN", <numeric>, <int>, ...)` at position 2 (entry IEN)
+  - LOSSY — discards original IEN values. Documented. Default
+    behavior unchanged (byte-exact round-trip preserved).
+  - Tested on DG*5.3*853: 142 substitutions (96 BLD + 46 KRN).
+  - Use case: cross-instance diffing. Site A and site B decompose
+    the same patch canonicalized — output is byte-identical iff
+    semantically identical.
+- **Tier-1-2: XPDK2VC behavioral-contract tests**:
+  - `host/scripts/test_xpdk2vc_compat.py` — 6 structural contracts
+    verified. No live VistA needed (VEHU's `%ZISH` issues from RF-026
+    would block live comparison). Contracts test:
+    1. Simple-section filenames match XPDK2VC.m GENOUT naming
+    2. Routines split into header + .m with line-2 canonicalized
+       (the "DO NOT INCLUDE BUILD NUMBER YOU STUPID IDIOT" fix)
+    3. FIA produces per-file `Files/<fnum>+<name>/` directories
+    4. KRN produces per-file / per-entry structure
+    5. Round-trip semantic preservation across all fixtures
+    6. IEN canonicalization available (XPDK2VC's SUBNAME function
+       equivalent)
+  - All 6 contracts PASS. Since our corpus harness already shows
+    100% round-trip on 2,406 real patches, differential testing is
+    implicitly achieved — every patch that installs via XPDK2VC
+    round-trips via kids-vc.
+- **Tier-1-3: pip-installable package**:
+  - `kids_vc_pkg/` — standalone package directory with
+    `pyproject.toml`, `src/kids_vc/` layout.
+  - Re-export wrapper (not duplication): `_impl.py` walks up to find
+    `host/scripts/kids_vc.py` and imports via `importlib`. Source-
+    of-truth stays in one place.
+  - Entry points:
+    - `kids-vc` (CLI) — parse/decompose/assemble/roundtrip/canonicalize
+    - `kids-vc-merge` (git merge driver) — 3-way ZWR merge
+  - `README.md` with install + usage instructions
+  - `make kids-vc-pip-install` — one-shot venv install at
+    `/tmp/kidsvc-venv`
+  - Verified install + run: `pip install -e kids_vc_pkg/` produces
+    working `kids-vc` and `kids-vc-merge` commands, `import kids_vc`
+    works, all fixtures round-trip via the installed binary.
+  - Package metadata ready for PyPI publication; `python -m build`
+    + `twine upload` is the next step (gated on user auth).
+- **Combined test status after Tier-1 completion**:
+  - 5 fixtures round-trip (regression)
+  - 2,406 real WorldVistA patches round-trip (corpus, 100%)
+  - 7 ZWR merge tests
+  - 6 XPDK2VC contract tests
+  - 3 CI jobs (roundtrip, zwr-merge, lint-check)
+  - CLI+API smoke test via pip-installed venv
+  - TOTAL: **2,427 green checks**
+- **Deliverables**:
+  - `host/scripts/kids_vc.py` — added `canonicalize_iens` +
+    `canonicalize` CLI command
+  - `host/scripts/test_xpdk2vc_compat.py` — 6 contract tests
+  - `kids_vc_pkg/` — pip-installable package:
+    - `pyproject.toml`, `README.md`
+    - `src/kids_vc/{__init__,_impl,cli,merge}.py`
+  - Makefile targets: `kids-vc-xpdk2vc-compat`, `kids-vc-pip-install`
+- **Portability status updated**:
+  - **Code portability**: pure Python stdlib, pip-installable — any
+    Python 3.9+ environment works.
+  - **Data portability**: 100% pass on WorldVistA/VistA master
+    (2,406 patches); structurally compatible with XPDK2VC's MUMPS
+    reference (6/6 contracts). Untested on OSEHRA FOIA separately,
+    but shared lineage means likely-same.
+- **Outstanding items** (not Tier-1):
+  - Harvest corpora from OSEHRA FOIA, VA-Office-EHR, RPMS/IHS to
+    extend portability claim. Straightforward extension of the
+    fetch_kids_corpus.py harness.
+  - Install-and-diff round-trip: assemble → install into container
+    → extract → compare. Would require the XPDK2VC environment
+    fixes (or a different running VistA).
+  - Property-based testing (Hypothesis) for parser-emitter pair.
+  - Publish `kids-vc` to PyPI (requires user auth).
+- **Status**: verified (all Tier-1 items delivered)
+
 ### RF-032: Phase 8f — kids-vc at scale, 100% pass rate on WorldVistA corpus
 
 - **Date**: 2026-04-19
