@@ -14,6 +14,125 @@ Status: provisional | verified | superseded by RF-NNN.
 
 ## 2026-04-19 — First analytical session
 
+### RF-026: XINDEX batch run and ad-hoc parser validation
+
+- **Date**: 2026-04-19
+- **Scope**: Run XINDEX (Toolkit XT*7.3*158) on the full VEHU
+  routine corpus to produce an authoritative reference dataset,
+  then validate all our regex-based extractions (Phases 1b, 2a, 5)
+  against that dataset.
+- **Method**:
+  - New MUMPS wrapper `vista/dev-r/VMXIDX.m` drives XINDEX
+    non-interactively. Follows the `XINDX7` programmatic contract:
+    pre-loads each routine's source into `^UTILITY($J,1,RTN,0,...)`
+    via `ZLINK @(""""_RTN_"""")` + `$TEXT(+N^RTN)`, then calls
+    `BEG^XINDEX` per routine. Bypasses `LOAD1^XINDEX`'s native ZL
+    which has YDB indirection quirks.
+  - Four non-trivial YDB/VEHU issues worked around in the wrapper:
+    (a) missing `^%ZIS` (device handler) — set IO/IOM/IOSL/IOF
+    manually; (b) `@IOF` indirection needs IOF to be a MUMPS
+    expression string, not a literal char (use `"!"` for a
+    newline); (c) YDB's `ZL @RTN` with RTN as variable triggers
+    LVUNDEF (evaluates @RTN as expression looking up the named
+    local); use quoted-string indirection `@(""""_RTN_"""")`
+    instead; (d) `^%ZOSF("TEST")` / `^%ZOSV2` partial — skip the
+    native LOAD path entirely.
+  - Extraction layer `EXTRACT` walks `^UTILITY($J,1,...)` after
+    the run, writing four TSVs to `/tmp` before job exit (scratch
+    global is job-scoped).
+  - Makefile target `make xindex` runs the bake, docker-cp's the
+    four TSVs to `vista/export/normalized/`.
+  - Makefile target `make validate-xindex` runs
+    `host/scripts/validate_against_xindex.py` to join our data
+    against XINDEX output.
+- **XINDEX run performance**:
+  - **30,255 type=R routines seeded from File 9.8.**
+  - **29,098 processed successfully** (96.2%).
+  - **1,157 failed** — T-002 cohort (File 9.8-only routines whose
+    source isn't in `$ydb_routines` — ABS*, A1A*, %A1*, A7R*, etc.).
+  - **Elapsed: 92 seconds.** 3.0 ms/routine.
+  - Output TSVs:
+    - `xindex-routines.tsv` — 29,098 rows × 6 cols
+    - `xindex-errors.tsv` — 6,918 rows × 5 cols (errors by line)
+    - `xindex-xrefs.tsv` — 214,011 rows × 3 cols (call graph)
+    - `xindex-tags.tsv` — 292,148 rows × 3 cols (labels/entry points)
+- **Validation results — static features (our regex vs XINDEX parser)**:
+  - **line_count: 100.00% match** (29,098 / 29,098)
+  - **tag_count: 100.00% match** (29,098 / 29,098)
+  - Our Phase 1b line-counting (`\n` count) and Phase 2a
+    tag-counting (column-0 alphanumeric-start detection) are
+    **byte-for-byte identical** to XINDEX's MUMPS parser. Zero
+    errors in our mechanical extraction.
+- **Validation results — call graph (Phase 5 vs XINDEX)**:
+  - Our callee edges summed:        **155,911**
+  - XINDEX callee edges summed:     **158,486**
+  - Matched (both agree):           **155,892**
+  - Our-only (false positives):     **19** (0.012%)
+  - XINDEX-only (we missed):        **2,594** (1.66%)
+  - Average per-routine agreement ratio: **0.9875** (98.75%)
+  - Distribution of per-routine XINDEX-only misses:
+    - 27,082 routines (93.1%): perfect match
+    - 1,644 routines (5.6%): miss 1 callee
+    - 258 routines (0.9%): miss 2 callees
+    - Long tail with 3-15 misses on a few hundred routines
+- **Nature of the gap (why we miss 2,594 edges)**: traced to a
+  specific pattern class — `$TEXT(+N^ROUTINE)` / `$T(+N^ROUTINE)`
+  calls, used commonly for patch-version checks (e.g.,
+  `$T(+2^IBCF2P)` reads the ;;version line of routine IBCF2P).
+  Example: IBYPENV (Integrated Billing patch environment check) —
+  our regex found 0 callees, XINDEX found 15. Every one was a
+  `$T(+2^ROU)` patch check. Secondary gap class: comma-continuation
+  in DO commands (`D A^R1,B^R2`), already documented as a Phase 5
+  MVP limitation in RF-020.
+- **Nature of our false positives (19 routines, 1 each)**: all in
+  Kernel-namespace networking code (ZTM5, ZOSVGUT2, ZISTCPS,
+  XMRINETD, XWBTCPL, etc.). Likely XINDEX's parser correctly
+  excludes some construct we include.
+- **Population coverage**:
+  - MANIFEST routines XINDEX couldn't process: **10,232** (T-002
+    A-cohort — shipped .m files whose names aren't ZLINK-able in
+    this VEHU runtime).
+  - XINDEX routines not in MANIFEST: **0** (XINDEX only succeeded
+    where ZLINK did, and ZLINK needs source in `$ydb_routines`
+    which covers MANIFEST).
+- **Per-package agreement observations** (lowest first):
+  - MASH Utilities: 0.20 agreement (13 routines, many failures)
+  - Patient Assessment Documentation: 0.80
+  - Most clinical packages: 0.93-0.97+
+- **Outstanding XINDEX output NOT in our extraction**:
+  The `xindex-errors.tsv` contains **6,918 errors** — the code-
+  quality dataset we didn't previously have. 66 error types
+  (F/S/W/I severity, per RF-025). This is authoritative VistA code
+  quality data not available from any other source and genuinely
+  novel to our project.
+- **Evidence**:
+  - `vista/dev-r/VMXIDX.m` (wrapper)
+  - `vista/export/normalized/xindex-routines.tsv` (29,098)
+  - `vista/export/normalized/xindex-errors.tsv` (6,918)
+  - `vista/export/normalized/xindex-xrefs.tsv` (214,011)
+  - `vista/export/normalized/xindex-tags.tsv` (292,148)
+  - `vista/export/normalized/xindex-validation.tsv` (29,098)
+- **Implications**:
+  - **Our Phase 1b/2a static feature extraction is validated as
+    perfectly accurate** against XINDEX ground truth — zero
+    discrepancies across 29,098 routines. The mechanical
+    extraction approach is sound.
+  - **Our Phase 5 call graph is 98.75% accurate.** The 1.66% gap
+    is concentrated in the `$TEXT()` pattern class, which a small
+    regex addition (single new pattern) could address. Phase 5b
+    (protocol ENTRY ACTION) similarly benefits.
+  - **T-003 (14,658 truly-unreferenced) reduction potential** —
+    the XINDEX xref data provides authoritative callers that our
+    regex missed. Joining xindex-xrefs.tsv into
+    routines-comprehensive.tsv would reduce the orphan cohort by
+    the count of routines that appear as XINDEX-xref targets.
+  - The **xindex-errors.tsv code-quality surface** is a new
+    deliverable worth a dedicated analysis — which packages have
+    the most SAC violations, which routines most Fatal errors, etc.
+    This was the primary value XINDEX offers that we couldn't
+    produce ourselves.
+- **Status**: verified (cross-checked against XINDEX batch run)
+
 ### RF-025: XINDEX reference — comprehensive catalog of its metrics and outputs
 
 - **Date**: 2026-04-19

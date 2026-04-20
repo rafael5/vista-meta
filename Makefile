@@ -260,6 +260,23 @@ dump-file-101: ## Dump File 101 (PROTOCOL) via VMDUMP101 → protocols.tsv (ADR-
 	@echo "Written: vista/export/normalized/protocols.tsv"
 	@wc -l vista/export/normalized/protocols.tsv
 
+.PHONY: xindex
+xindex: ## Run XINDEX on full corpus via VMXIDX → xindex-{routines,errors,xrefs,tags}.tsv
+	$(DOCKER) exec -u vehu $(CONTAINER) bash -lc 'echo "D ALL^VMXIDX H" | $$ydb_dist/mumps -direct' | tail -5
+	@for f in routines errors xrefs tags; do \
+		$(DOCKER) cp $(CONTAINER):/tmp/xindex-$$f.tsv vista/export/normalized/xindex-$$f.tsv; \
+		$(DOCKER) exec -u vehu $(CONTAINER) rm -f /tmp/xindex-$$f.tsv; \
+	done
+	@wc -l vista/export/normalized/xindex-*.tsv
+
+.PHONY: validate-xindex
+validate-xindex: ## Validate our regex extractions against XINDEX (ADR-045 post-Phase-6)
+	@for f in routines.tsv routine-calls.tsv xindex-routines.tsv xindex-xrefs.tsv; do \
+		[ -f vista/export/normalized/$$f ] || \
+			{ echo "Missing: vista/export/normalized/$$f"; exit 1; }; \
+	done
+	/usr/bin/python3 host/scripts/validate_against_xindex.py
+
 # ── Verify ────────────────────────────────────────────────────────────
 
 .PHONY: smoke
