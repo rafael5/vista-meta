@@ -291,6 +291,25 @@ kids-vc-demo: ## Decompose the kids-vc fixture to /tmp/kidsvc-demo for inspectio
 		host/scripts/kids_vc_fixtures/VMTEST_1_0_1.kid /tmp/kidsvc-demo
 	@/usr/bin/find /tmp/kidsvc-demo -print | sort
 
+.PHONY: kids-vc-all
+kids-vc-all: ## Round-trip every fixture in host/scripts/kids_vc_fixtures/
+	@for f in host/scripts/kids_vc_fixtures/*.kid; do \
+		/usr/bin/python3 host/scripts/kids_vc.py roundtrip "$$f" | head -1; \
+	done
+
+.PHONY: zwr-merge-test
+zwr-merge-test: ## Run the ZWR 3-way merge driver test suite (Phase 8d)
+	/usr/bin/python3 host/scripts/test_zwr_merge.py
+
+.PHONY: zwr-merge-install
+zwr-merge-install: ## Install zwr_merge.py as a git merge driver for *.zwr files (Phase 8d)
+	@echo "Installing ZWR merge driver for the current repo..."
+	@touch .gitattributes
+	@grep -q "^\*\.zwr merge=zwr" .gitattributes || echo "*.zwr merge=zwr" >> .gitattributes
+	git config merge.zwr.name "ZWR entry-level 3-way merge"
+	git config merge.zwr.driver "/usr/bin/python3 $(PWD)/host/scripts/zwr_merge.py %O %A %B"
+	@echo "Done. .gitattributes has *.zwr merge=zwr; .git/config has merge.zwr driver."
+
 # ── Verify ────────────────────────────────────────────────────────────
 
 .PHONY: smoke
