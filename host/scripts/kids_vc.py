@@ -46,9 +46,11 @@ from typing import Any
 # Parser — port of XPDK2V1's state machine
 # ---------------------------------------------------------------------------
 
-# Matches a subscript line like `"BLD",1,0)` or `"KRN",19,12345,0)`.
-# The line is the TAIL of a $NA reference (no leading global root).
-SUBSCRIPT_RE = re.compile(r'^"[A-Z]')
+# Matches a subscript line like `"BLD",1,0)` or `"KRN",19,12345,0)` or
+# `"^DD",999,.01,0)`. The line is the TAIL of a $NA reference (no leading
+# global root). KIDS uses caret-prefixed section names like ^DD, ^DIC for
+# FileMan DD/DIC data.
+SUBSCRIPT_RE = re.compile(r'^"\^?[A-Z]')
 
 
 def _strip_cr(line: str) -> str:
@@ -420,6 +422,10 @@ def decompose_build(build: dict, out_dir: Path) -> None:
                 with (file_dir / "DD.zwr").open("w", encoding="utf-8") as fh:
                     for s, v in sorted(dd_pairs, key=lambda kv: _sort_key(kv[0])):
                         fh.write(_zwr_line(s, v) + "\n")
+                # Extract DD-embedded MUMPS code as human-diffable annotations.
+                # DD.zwr remains authoritative for round-trip; .m files are
+                # informational. Phase 8c.
+                _extract_dd_code(dd_pairs, file_dir / "DD-code")
             if data_pairs:
                 with (file_dir / "Data.zwr").open("w", encoding="utf-8") as fh:
                     for s, v in sorted(data_pairs, key=lambda kv: _sort_key(kv[0])):
@@ -528,6 +534,111 @@ WELL_KNOWN_FILES: dict[float | int, str] = {
     8993: "RPC-BROKER-SUBSCRIBER",
     8994: "REMOTE-PROCEDURE",
 }
+
+
+def _extract_dd_code(dd_pairs: list[tuple[tuple, str]], out_dir: Path) -> None:
+    """Extract MUMPS code embedded in ^DD nodes as per-field .m annotation files.
+
+    DD-embedded MUMPS lives in four places:
+    - `^DD(file, field, 0)` piece 5   → input transform
+    - `^DD(file, field, 9)`           → computed-field expression
+    - `^DD(file, field, 1, xref, 1)`  → cross-reference SET logic
+    - `^DD(file, field, 1, xref, 2)`  → cross-reference KILL logic
+
+    Emits `<field>.<kind>.m` files — one per non-trivial code piece.
+    These are informational; DD.zwr remains authoritative for round-trip.
+
+    A code piece is "trivial" if it's empty, bare "Q", bare ";", or
+    a single-char noop — we skip those to avoid noise.
+    """
+    emitted: list[Path] = []
+    out_dir_created = False
+
+    def _is_trivial(code: str) -> bool:
+        c = code.strip()
+        return c in ("", "Q", "K", "D", ";") or (len(c) <= 2 and not any(ch in c for ch in "=<>+-_"))
+
+    def _emit(field: Any, kind: str, code: str) -> None:
+        nonlocal out_dir_created
+        if _is_trivial(code):
+            return
+        if not out_dir_created:
+            out_dir.mkdir(parents=True, exist_ok=True)
+            out_dir_created = True
+        safe_field = _sanitize(str(field)) or "unnamed"
+        path = out_dir / f"{safe_field}.{kind}.m"
+        path.write_text(code + "\n", encoding="utf-8")
+        emitted.append(path)
+
+    # FileMan DD piece-2 type codes that identify a field 0-node.
+    # Includes compound codes (RF = required free text, RFX = required free
+    # text with MUMPS transform, FJ5 = free text justified 5, etc.).
+    FIELD_TYPE_RE = re.compile(r'^[A-Z][A-Z0-9]*$')
+
+    def _is_field_zero_node(subs: tuple, value: str) -> bool:
+        """A field 0-node has subs[-1]==0 and its value starts with
+        NAME^TYPE^... where TYPE is an uppercase type code."""
+        if subs[-1] != 0 or len(subs) < 4:
+            return False
+        pieces = value.split("^")
+        if len(pieces) < 5:
+            return False
+        type_code = pieces[1]
+        # strip trailing quote-rule marker like ' and suffix digits
+        type_clean = re.match(r"^[A-Z]+", type_code)
+        return bool(type_clean)
+
+    for subs, value in dd_pairs:
+        if len(subs) < 2 or subs[0] != "^DD":
+            continue
+
+        # Field zero-node (definition). Works for both top-level and subfile.
+        if _is_field_zero_node(subs, value):
+            field_pretty = ".".join(str(s) for s in subs[2:-1])
+            pieces = value.split("^")
+            field_type = pieces[1]
+            if field_type.startswith("C"):
+                # Computed field — join pieces 5+ to preserve caret-refs.
+                code = "^".join(pieces[4:])
+                _emit(field_pretty, "computed", code)
+            elif pieces[4]:
+                _emit(field_pretty, "input-transform", pieces[4])
+            continue
+
+        # Cross-reference code: (^DD, ..., field, 1, xref_ien, {1,2})
+        # Last 3 subscripts are (1, xref_ien, code_kind).
+        if (len(subs) >= 6 and subs[-1] in (1, 2)
+                and isinstance(subs[-2], int) and subs[-2] > 0
+                and subs[-3] == 1):
+            kind = "xref-set" if subs[-1] == 1 else "xref-kill"
+            xref_ien = subs[-2]
+            field_pretty = ".".join(str(s) for s in subs[2:-3])
+            _emit(f"{field_pretty}.xref-{xref_ien}", kind, value)
+            continue
+
+        # Computed-field word-processing code: (^DD, ..., field, 9, N, 0)
+        if (len(subs) >= 6 and subs[-1] == 0 and isinstance(subs[-2], int)
+                and subs[-3] == 9):
+            field_pretty = ".".join(str(s) for s in subs[2:-3])
+            _emit(field_pretty, "computed-wp", value)
+            continue
+
+    # Write an index so readers know what was extracted
+    if emitted:
+        index = out_dir / "_README.md"
+        index.write_text(
+            "# DD-embedded MUMPS code annotations\n\n"
+            "These `.m` files are EXTRACTIONS of MUMPS code found inside the\n"
+            "FileMan ^DD nodes in `../DD.zwr`. They are **informational** —\n"
+            "`DD.zwr` is authoritative for KIDS round-trip.\n\n"
+            "Use these files to diff / blame / review the embedded code in a\n"
+            "human-readable form. Any change you want reflected in the KIDS\n"
+            "build must be made in the DD.zwr source (the assembler only\n"
+            "reads DD.zwr).\n\n"
+            "Filename convention: `<field>.<kind>.m` where kind ∈\n"
+            "{input-transform, computed, xref-set, xref-kill}.\n",
+            encoding="utf-8"
+        )
 
 
 def _resolve_kernel_file_name(fnum: Any, krn_section: dict[tuple, str] | None = None) -> str:
