@@ -384,8 +384,49 @@ def decompose_build(build: dict, out_dir: Path) -> None:
                     for s in sorted(entry_contents, key=_sort_key):
                         fh.write(_zwr_line(s, entry_contents[s]) + "\n")
 
+    # FIA (FileMan file DD) — one DD.zwr per file, in Files/<num>+<name>/
+    # Co-locate ^DD, ^DIC security, IX (indexes), KEY/KEYPTR, and PGL when present.
+    # DATA + FRV* (seed data + reverse-value nodes) go to Data.zwr alongside.
+    fia_files: dict[Any, str] = {}  # fnum → file name
+    for subs, value in sections.get("FIA", {}).items():
+        # The `("FIA", fnum)` bare node carries the name as its value.
+        if len(subs) == 2:
+            fia_files[subs[1]] = value
+
+    fileman_sections = {"FIA", "^DD", "^DIC", "SEC", "UP", "IX", "KEY", "KEYPTR",
+                         "PGL", "DATA", "FRV1", "FRVL", "FRV1K"}
+    if fia_files:
+        files_root = out_dir / "Files"
+        files_root.mkdir(exist_ok=True)
+        for fnum, fname in fia_files.items():
+            safe_name = _sanitize(fname) or f"file-{fnum}"
+            file_dir = files_root / f"{fnum}+{safe_name}"
+            file_dir.mkdir(exist_ok=True)
+            dd_pairs: list[tuple[tuple, str]] = []
+            data_pairs: list[tuple[tuple, str]] = []
+            for section in fileman_sections:
+                sec_data = sections.get(section, {})
+                for subs in list(sec_data.keys()):
+                    # Match subs referring to this file number
+                    if len(subs) < 2:
+                        continue
+                    # For FIA/UP/IX/KEY/KEYPTR/SEC: second subscript is fnum
+                    # For ^DD/^DIC: also second subscript is fnum
+                    # For DATA/FRV*: second subscript is fnum
+                    if subs[1] == fnum:
+                        target = data_pairs if section in ("DATA", "FRV1", "FRVL", "FRV1K") else dd_pairs
+                        target.append((subs, sec_data[subs]))
+            if dd_pairs:
+                with (file_dir / "DD.zwr").open("w", encoding="utf-8") as fh:
+                    for s, v in sorted(dd_pairs, key=lambda kv: _sort_key(kv[0])):
+                        fh.write(_zwr_line(s, v) + "\n")
+            if data_pairs:
+                with (file_dir / "Data.zwr").open("w", encoding="utf-8") as fh:
+                    for s, v in sorted(data_pairs, key=lambda kv: _sort_key(kv[0])):
+                        fh.write(_zwr_line(s, v) + "\n")
+
     # Catch-all: any subscript whose top-level section isn't handled above
-    known = set(SIMPLE_SECTIONS.keys()) | {"RTN", "ORD", "KRN"}
+    known = set(SIMPLE_SECTIONS.keys()) | {"RTN", "ORD", "KRN"} | fileman_sections
     unknown_sections = set(sections.keys()) - known
     if unknown_sections:
         misc = out_dir / "_misc.zwr"
@@ -446,25 +487,58 @@ def _krn_file_headers(krn_section: dict[tuple, str]) -> dict[Any, dict[tuple, st
     return out
 
 
-def _resolve_kernel_file_name(fnum: Any, krn_section: dict[tuple, str]) -> str:
-    """Heuristic: look for the "B" cross-ref entry that names this file.
-    Fallback to string form of fnum."""
-    # KIDS convention: the header node at ("KRN", fnum, 0) carries a descriptor.
-    header = krn_section.get(("KRN", fnum, 0), "")
-    # descriptor like "^9.1I^1^1"
-    # we have no direct name — use a known-name lookup
-    well_known = {
-        19: "OPTION",
-        101: "PROTOCOL",
-        8994: "REMOTE-PROCEDURE",
-        9.8: "ROUTINE",
-        19.1: "SECURITY-KEY",
-        .403: "SCREEN-FORM",
-        8989.51: "PARAMETER-DEFINITION",
-        8989.52: "PARAMETER-TEMPLATE",
-    }
-    if fnum in well_known:
-        return well_known[fnum]
+# Well-known FileMan file-number → presentable name map.
+# Covers the files commonly referenced in KIDS KRN/FIA sections.
+# Source: FileMan DD conventions + VistA package namespaces.
+WELL_KNOWN_FILES: dict[float | int, str] = {
+    # Kernel UI
+    0.4: "PRINT-TEMPLATE",
+    0.401: "SORT-TEMPLATE",
+    0.402: "INPUT-TEMPLATE",
+    0.403: "FORM",
+    0.404: "BLOCK",
+    # Kernel core
+    3.7: "DEVICE",
+    3.8: "MAIL-GROUP",
+    3.9: "MAIL-MESSAGE",
+    9.2: "HELP-FRAME",
+    9.4: "PACKAGE",
+    9.6: "KIDS-BUILD",
+    9.7: "KIDS-INSTALL",
+    9.8: "ROUTINE",
+    19: "OPTION",
+    19.1: "SECURITY-KEY",
+    19.2: "OPTION-SCHEDULING",
+    # OE/RR / CPRS
+    100: "ORDER",
+    101: "PROTOCOL",
+    101.41: "DIALOG",
+    # Person / registration
+    200: "NEW-PERSON",
+    2: "PATIENT",
+    # HL7
+    771: "HL7-APPLICATION",
+    870: "HL-LOGICAL-LINK",
+    871: "HL-FILE-EVENT",
+    872: "HL-LOWER-LEVEL-PROTOCOL",
+    # Parameters
+    8989.51: "PARAMETER-DEFINITION",
+    8989.52: "PARAMETER-TEMPLATE",
+    # RPCs
+    8993: "RPC-BROKER-SUBSCRIBER",
+    8994: "REMOTE-PROCEDURE",
+}
+
+
+def _resolve_kernel_file_name(fnum: Any, krn_section: dict[tuple, str] | None = None) -> str:
+    """Map a file number to a presentable directory name.
+
+    Exact match against WELL_KNOWN_FILES. Falls back to `file-<n>`.
+    KIDS sections don't ship the FileMan file name; we'd have to look it
+    up in the real FileMan DD, which isn't in the KIDS file itself.
+    """
+    if fnum in WELL_KNOWN_FILES:
+        return WELL_KNOWN_FILES[fnum]
     return f"file-{fnum}"
 
 
@@ -530,6 +604,19 @@ def assemble_build(in_dir: Path, install_name: str) -> list[tuple[tuple, str]]:
                 if entry_path.name in ("FileHeader.zwr",):
                     continue
                 pairs.extend(_read_zwr(entry_path))
+
+    # FIA (FileMan files) — Files/<num>+<name>/DD.zwr + Data.zwr
+    files_root = in_dir / "Files"
+    if files_root.exists():
+        for file_dir in sorted(files_root.iterdir()):
+            if not file_dir.is_dir():
+                continue
+            dd = file_dir / "DD.zwr"
+            if dd.exists():
+                pairs.extend(_read_zwr(dd))
+            data = file_dir / "Data.zwr"
+            if data.exists():
+                pairs.extend(_read_zwr(data))
 
     # Catch-all misc
     misc_path = in_dir / "_misc.zwr"
