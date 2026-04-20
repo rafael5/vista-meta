@@ -20,6 +20,7 @@ on:
       - 'host/scripts/kids_vc.py'
       - 'host/scripts/zwr_merge.py'
       - 'host/scripts/test_zwr_merge.py'
+      - 'host/scripts/test_xpdk2vc_compat.py'
       - 'host/scripts/kids_vc_fixtures/**'
       - '.github/workflows/kids-vc-ci.yml'
   pull_request:
@@ -27,6 +28,7 @@ on:
       - 'host/scripts/kids_vc.py'
       - 'host/scripts/zwr_merge.py'
       - 'host/scripts/test_zwr_merge.py'
+      - 'host/scripts/test_xpdk2vc_compat.py'
       - 'host/scripts/kids_vc_fixtures/**'
 
 jobs:
@@ -75,6 +77,18 @@ jobs:
           python-version: '3.12'
       - name: Run zwr_merge test suite
         run: python3 host/scripts/test_zwr_merge.py
+
+  xpdk2vc-compat:
+    name: XPDK2VC behavioral-contract tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run XPDK2VC compat suite
+        run: python3 host/scripts/test_xpdk2vc_compat.py
 
   lint-check:
     name: Lint & import check

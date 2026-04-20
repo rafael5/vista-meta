@@ -1,0 +1,97 @@
+name: dev-tools CI
+
+# Tier 3C of vista-developers-guide.md: take the local hook and enforce
+# it on PRs. Runs the same checks hooks/pre-commit runs — mfmt --check,
+# vista-meta lint — but against the PR diff relative to the base branch.
+#
+# Three jobs:
+#   - fmt-check : mfmt must be a noop on changed .m files
+#   - lint      : new .m files must have @summary doc comments
+#   - syntax    : vista_meta_cli.py + mfmt.py compile clean
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'host/scripts/vista_meta_cli.py'
+      - 'host/scripts/mfmt.py'
+      - 'hooks/pre-commit'
+      - '.github/workflows/dev-tools-ci.yml'
+      - '**/*.m'
+  pull_request:
+    paths:
+      - 'host/scripts/vista_meta_cli.py'
+      - 'host/scripts/mfmt.py'
+      - 'hooks/pre-commit'
+      - '**/*.m'
+
+jobs:
+  fmt-check:
+    name: mfmt --check on changed .m files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Determine changed .m files
+        id: changed
+        run: |
+          # For PRs: base..head. For pushes to main: compare to previous commit.
+          if [ -n "${{ github.base_ref }}" ]; then
+            base="origin/${{ github.base_ref }}"
+          else
+            base="${{ github.event.before }}"
+          fi
+          echo "Base: $base"
+          git diff --name-only --diff-filter=ACM "$base"...HEAD -- '*.m' > /tmp/changed.txt
+          cat /tmp/changed.txt
+          echo "count=$(wc -l < /tmp/changed.txt)" >> "$GITHUB_OUTPUT"
+      - name: mfmt --check
+        if: steps.changed.outputs.count != '0'
+        run: |
+          xargs -a /tmp/changed.txt -r python3 host/scripts/mfmt.py --check
+
+  lint:
+    name: vista-meta lint on newly added .m files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Determine newly-added .m files
+        id: added
+        run: |
+          if [ -n "${{ github.base_ref }}" ]; then
+            base="origin/${{ github.base_ref }}"
+          else
+            base="${{ github.event.before }}"
+          fi
+          git diff --name-only --diff-filter=A "$base"...HEAD -- '*.m' > /tmp/added.txt
+          cat /tmp/added.txt
+          echo "count=$(wc -l < /tmp/added.txt)" >> "$GITHUB_OUTPUT"
+      - name: vista-meta lint
+        if: steps.added.outputs.count != '0'
+        run: |
+          xargs -a /tmp/added.txt -r python3 host/scripts/vista_meta_cli.py lint
+
+  syntax:
+    name: Syntax check — compile dev tool scripts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: py_compile the CLI scripts
+        run: |
+          for f in host/scripts/vista_meta_cli.py host/scripts/mfmt.py; do
+            python3 -m py_compile "$f"
+            echo "OK: $f"
+          done
