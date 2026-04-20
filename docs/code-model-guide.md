@@ -181,12 +181,30 @@ These are the T-001/T-002/T-003 TODOs.
 
 **Modern practice** (2015+, OSEHRA/WorldVistA):
 - Git-based development against a forked VistA source tree.
-- WorldVistA, OSEHRA, and Open Source EHR Alliance maintain GitHub repositories (github.com/OSEHRA, github.com/WorldVistA).
+- WorldVistA, OSEHRA, and Open Source EHR Alliance maintain GitHub repositories ([github.com/OSEHRA](https://github.com/OSEHRA), [github.com/WorldVistA](https://github.com/WorldVistA)).
 - Developer edits `.m` files in a normal editor (VSCode with MUMPS extensions, EmEditor, vim).
 - Commits go to a branch; PR merged to master; releases tagged.
 - Install into a running system still uses KIDS — the git repo is source-of-truth, the KIDS build is the deployment artifact.
+- This project's own Dockerfile pulls from [WorldVistA/VistA-M](https://github.com/WorldVistA/VistA-M) (ADR-002) — which stores M routines as individual `.m` files under `Packages/<pkg>/Routines/`. That structure is what makes our Phase 1+ extractions possible.
 
 The VA's internal development still uses the traditional model; the community model is overlaid on top. Our VEHU XINDEX blend (RF-027) shows this: VA-trunk patches 148–158 coexist with WorldVistA patches 10001/10003 in the same routines.
+
+**Prior attempts at tighter git↔KIDS integration** (RF-028):
+
+The community tried two independent approaches to marry KIDS with version control. Both predate — and were effectively superseded by — the simpler "just put `.m` files in git" approach that WorldVistA/VistA-M took.
+
+1. **SKIDS** (Source KIDS) — [github.com/WorldVistA/SKIDS](https://github.com/WorldVistA/SKIDS).
+   Born from OSEHRA's 2011 VistA-version-control push (O'Reilly Radar, Oct 2011).
+   Approach: `ParseKIDS.py` (Python) decomposes `.KID` distribution files into per-component text files (one per routine, DD, RPC, security key, option); `ZDIOUT1.m` is the in-VistA companion that exports components to disk. Premise: keep KIDS for deployment, use decomposed components as the git-tracked source.
+   **Status**: dormant prototype — 14 commits, 0 releases, never production-adopted.
+
+2. **XPDK2VC** (KIDS to Version Control) — already present in our VEHU corpus at [code-model/routines.tsv:37028](../vista/export/code-model/routines.tsv).
+   Authored by Sam Habiel (`VEN/SMH`, OSEHRA Product Management — [github.com/shabiel](https://github.com/shabiel)) as KERNEL 8.0\*11310, March 2014.
+   Companion routines: `XPDK2V0`, `XPDK2V1`, `XPDK2VG`.
+   Approach: **in-VistA Kernel-integrated** KIDS→VCS export. Runs inside VistA, walks KIDS builds, writes components to disk. Designed for ongoing round-trip rather than one-shot parsing.
+   **Status**: shipped in VEHU, ready to run — this project has not exercised it. Candidate for Phase 8+ if "track KIDS patches as git commits" ever becomes a goal.
+
+Neither SKIDS nor XPDK2VC's component-decomposition premise was needed in the end. The community converged on the simpler "treat `.m` files as source, keep KIDS as deployment" path — the one we benefit from in this project.
 
 ### 3.2 Test
 
