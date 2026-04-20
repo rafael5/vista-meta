@@ -1,0 +1,89 @@
+{
+  "name": "vista-meta",
+  "displayName": "vista-meta — VistA Sidebar",
+  "description": "Sidebar that surfaces vista-meta code-model TSVs when you open a VistA .m routine. No language server; just the data you already have.",
+  "version": "0.1.0",
+  "publisher": "vista-meta",
+  "license": "UNLICENSED",
+  "private": true,
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Other"],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "workspaceContains:**/*.m"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "mumps",
+        "aliases": ["MUMPS", "M", "mumps"],
+        "extensions": [".m"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "vistaMetaRoutine",
+          "name": "VistA Routine",
+          "when": "resourceExtname == .m"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "vistaMeta.refresh",
+        "title": "vista-meta: Refresh Routine Sidebar",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "vistaMeta.reloadTsvs",
+        "title": "vista-meta: Reload Code-Model TSVs"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "vistaMeta.refresh",
+          "when": "view == vistaMetaRoutine",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "vista-meta",
+      "properties": {
+        "vistaMeta.codeModelPath": {
+          "type": "string",
+          "default": "vista/export/code-model",
+          "description": "Workspace-relative path to the code-model TSV directory."
+        },
+        "vistaMeta.vistaMHostPath": {
+          "type": "string",
+          "default": "vista/vista-m-host",
+          "description": "Workspace-relative path to the synced VistA-M host tree."
+        },
+        "vistaMeta.topN": {
+          "type": "number",
+          "default": 15,
+          "description": "Maximum entries to show in each section (callers, callees, etc.)."
+        }
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rafael5/vista-meta"
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -w -p ./",
+    "package": "vsce package --no-dependencies --skip-license"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.24.0",
+    "typescript": "^5.3.3"
+  }
+}
