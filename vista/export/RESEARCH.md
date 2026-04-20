@@ -14,6 +14,81 @@ Status: provisional | verified | superseded by RF-NNN.
 
 ## 2026-04-19 — First analytical session
 
+### RF-030: Phase 8a.1 — kids-vc MVP validated against a real VistA .KID file
+
+- **Date**: 2026-04-19
+- **Scope**: Validate the Phase 8a MVP (RF-029) against a real
+  production VistA patch distribution to confirm it handles the
+  real-world KIDS text format, not just the hand-constructed
+  synthetic fixture.
+- **Test fixture**: **OR\*3.0\*484** — Order Entry / Results
+  Reporting, Sequence #414, Patch 484. Sets the `OR MOB DLL
+  VERSION` parameter. 3,650 bytes, single-build.
+  Source: `github.com/WorldVistA/VistA` master at
+  `Packages/Order Entry Results Reporting/Patches/OR_3.0_484/
+  OR-3_SEQ-414_PAT-484.kids`. Now checked in as
+  `host/scripts/kids_vc_fixtures/OR_3_0_484.kid`.
+- **Method**:
+  1. `python3 kids_vc.py parse OR_3_0_484.kid` — enumerate
+     sections and counts
+  2. `python3 kids_vc.py roundtrip OR_3_0_484.kid` — decompose →
+     assemble → canonicalized equality check
+  3. `python3 kids_vc.py decompose OR_3_0_484.kid /tmp/or484` —
+     inspect the per-component file layout
+- **Finding**: **Round-trip PASSES on first attempt.** No MVP
+  limitation was hit.
+  - **104 subscripts** across 7 section types: BLD (51), QUES
+    (35), RTN (9), PKG (6), INIT (1), MBREQ (1), VER (1).
+  - **Canonicalization verified in real-world form**:
+    `;;3.0;ORDER ENTRY/RESULTS REPORTING;**484**;Dec 17, 1997;Build 4`
+    → `;;3.0;ORDER ENTRY/RESULTS REPORTING;;` — patch list, build
+    date, and Build N all stripped.
+  - **Decimal-file-number subscripts** handled correctly — `0.4`,
+    `0.401`, `0.402`, `0.403` surface as float subscript keys
+    (FileMan uses these decimal numbers for Kernel files — DIALOG,
+    INPUT TEMPLATE, SORT TEMPLATE, FORM, etc.).
+  - **FORUM-mail header preamble** (`Released OR*3*484 SEQ #414` +
+    `Extracted from mail message`) parsed correctly — XPDK2V1's
+    BEGIN state skips first two lines, matches our port.
+  - **INIT section** (post-install reference `POST^ORY484`)
+    correctly routed to `PostInstall.zwr`.
+  - **Decomposed layout** produced 8 files:
+    `Build.zwr` (51 BLD subscripts),
+    `InstallQuestions.zwr` (35),
+    `KernelFMVersion.zwr` (1 VER),
+    `Package.zwr` (6 PKG),
+    `PostInstall.zwr` (1 INIT),
+    `RequiredBuild.zwr` (1 MBREQ),
+    `Routines/_index.zwr` (RTN count),
+    `Routines/ORY484.header` + `Routines/ORY484.m` (7 lines of
+    canonicalized MUMPS code).
+- **Evidence**:
+  - `host/scripts/kids_vc_fixtures/OR_3_0_484.kid` (3,650 bytes)
+  - `make kids-vc-test` passes on both fixtures
+  - Decomposed output verified against original content
+- **Implications**:
+  - **The Python port works on real production VistA distributions
+    out of the box.** No edge cases surfaced by OR\*3.0\*484 that
+    weren't handled by the synthetic fixture.
+  - XPDK2V1's documented KIDS format is accurate and stable —
+    porting from the MUMPS reference produces working code against
+    real patches.
+  - Phase 8a complete. Phase 8b (principled IEN substitution,
+    multi-line WP values, FIA decomposition) remains the natural
+    next step when KRN-heavy patches are the test target (this
+    patch had no KRN section).
+  - We can now confidently:
+    - Decompose WorldVistA patches to git-trackable per-component
+      files
+    - Reassemble back to valid `.KID` distribution format
+    - Detect content drift across patch versions via diff-stable
+      per-routine `.m` files
+  - Not yet tested: multi-build patches, patches with KRN entries
+    (options/protocols), patches with FIA (FileMan file changes),
+    patches with DATA (seed data). Each may surface new edge cases
+    — Phase 8b scope.
+- **Status**: verified (real-world round-trip)
+
 ### RF-029: Phase 8a — kids-vc MVP (Python successor to XPDK2VC)
 
 - **Date**: 2026-04-19
