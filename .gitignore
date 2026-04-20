@@ -29,3 +29,7 @@ Thumbs.db
 __pycache__/
 *.egg-info/
 patches/
+
+# Claude Code personal settings
+.claude/settings.json
+.claude/settings.local.json
