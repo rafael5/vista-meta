@@ -426,6 +426,11 @@ file: ## FileMan file overview: N=<file number> [FIELDS=N]
 	@/usr/bin/python3 host/scripts/vista_meta_cli.py file "$(N)" \
 		$(if $(FIELDS),--fields $(FIELDS),)
 
+.PHONY: xindex-file
+xindex-file: ## Run XINDEX in the container on a host .m: FILE=path/to/R.m
+	@[ -n "$(FILE)" ] || { echo "Usage: make xindex-file FILE=/tmp/MYNEW.m"; exit 1; }
+	@/usr/bin/python3 host/scripts/vista_meta_cli.py xindex "$(FILE)"
+
 # ── Verify ────────────────────────────────────────────────────────────
 
 .PHONY: smoke

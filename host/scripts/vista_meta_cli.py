@@ -958,6 +958,127 @@ def cmd_file(args: argparse.Namespace) -> int:
     return 0
 
 
+# ── xindex bridge (live XINDEX via container) ───────────────────────
+
+XINDEX_DRIVER_CMDS = """K ^UTILITY($J)
+D SETUP^VMXIDX
+N OK S OK=$$PROC^VMXIDX("{rtn}")
+D EXTRACT^VMXIDX
+H
+"""
+
+
+def _container_name() -> str:
+    import os
+    return os.environ.get("VISTA_META_CONTAINER", "vista-meta")
+
+
+def _container_running(name: str) -> bool:
+    import subprocess
+    try:
+        r = subprocess.run(
+            ["docker", "ps", "--filter", f"name=^{name}$",
+             "--format", "{{.Names}}"],
+            capture_output=True, text=True, timeout=5)
+        return name in r.stdout.splitlines()
+    except (OSError, subprocess.TimeoutExpired):
+        return False
+
+
+def cmd_xindex(args: argparse.Namespace) -> int:
+    import subprocess
+    import tempfile
+
+    src = Path(args.file).resolve()
+    if not src.exists() or not src.is_file():
+        sys.exit(f"File not found: {src}")
+    if src.suffix != ".m":
+        sys.exit(f"Not a .m file: {src}")
+
+    routine = src.stem
+    if not re.match(r"^[A-Za-z%][A-Za-z0-9]{0,7}$", routine):
+        sys.exit(f"Filename {src.name!r} doesn't map to a valid MUMPS "
+                 f"routine name (≤8 chars, [A-Za-z%][A-Za-z0-9]*)")
+
+    container = _container_name()
+    if not _container_running(container):
+        sys.exit(f"Container {container!r} is not running. Run `make run`.")
+
+    dest = f"/home/vehu/dev/r/{routine}.m"
+
+    # 1. Copy the file in
+    r = subprocess.run(
+        ["docker", "cp", str(src), f"{container}:{dest}"],
+        capture_output=True, text=True)
+    if r.returncode != 0:
+        sys.exit(f"docker cp failed: {r.stderr}")
+
+    try:
+        # 2. Drive XINDEX via VMXIDX entry points over stdin
+        cmd = XINDEX_DRIVER_CMDS.format(rtn=routine)
+        r = subprocess.run(
+            ["docker", "exec", "-i", "-u", "vehu", container,
+             "bash", "-lc", "$ydb_dist/mumps -direct"],
+            input=cmd, capture_output=True, text=True, timeout=60)
+        if r.returncode != 0:
+            print("XINDEX driver stderr:", file=sys.stderr)
+            print(r.stderr, file=sys.stderr)
+            sys.exit(f"XINDEX driver exited {r.returncode}")
+
+        # 3. Read /tmp/xindex-errors.tsv out of the container
+        with tempfile.NamedTemporaryFile(mode="w+", suffix=".tsv",
+                                         delete=False) as tf:
+            local_tsv = Path(tf.name)
+        r = subprocess.run(
+            ["docker", "cp",
+             f"{container}:/tmp/xindex-errors.tsv", str(local_tsv)],
+            capture_output=True, text=True)
+        if r.returncode != 0:
+            sys.exit(f"could not read errors TSV: {r.stderr}")
+
+        # 4. Parse + emit
+        errors = []
+        with local_tsv.open(encoding="utf-8", errors="replace") as f:
+            reader = csv.DictReader(f, delimiter="\t")
+            for row in reader:
+                if row["routine"] != routine:
+                    continue
+                errors.append(row)
+        local_tsv.unlink(missing_ok=True)
+
+        # Host-relative path if inside the repo
+        try:
+            host_path = src.relative_to(ROOT)
+        except ValueError:
+            host_path = src
+
+        if not errors:
+            print(f"{host_path}: no XINDEX errors")
+            return 0
+
+        # Severity counts: F/W/I/S prefixes
+        sev_counts: Counter[str] = Counter()
+        for e in errors:
+            t = e["error_text"]
+            sev = t[0] if t and t[0] in "FWISE" else "?"
+            sev_counts[sev] += 1
+            print(f"{host_path}:{e['line_text']}  [{e['tag_offset']}]  "
+                  f"{e['error_text']}")
+
+        print(f"\n{len(errors)} issue(s) "
+              f"(F={sev_counts.get('F', 0)}, "
+              f"W={sev_counts.get('W', 0)}, "
+              f"I={sev_counts.get('I', 0)}, "
+              f"S={sev_counts.get('S', 0)})")
+        # Non-zero exit if any Fatal
+        return 1 if sev_counts.get("F", 0) else 0
+
+    finally:
+        subprocess.run(
+            ["docker", "exec", container, "rm", "-f", dest],
+            capture_output=True)
+
+
 # ── CLI entry ────────────────────────────────────────────────────────
 
 def main(argv: list[str] | None = None) -> int:
@@ -1024,6 +1145,11 @@ def main(argv: list[str] | None = None) -> int:
     pf.add_argument("--fields", type=int, default=0,
                     help="Also list first N fields (default 0 = skip)")
     pf.set_defaults(func=cmd_file)
+
+    px = sub.add_parser("xindex",
+                        help="Run XINDEX on a .m file via the container")
+    px.add_argument("file", help="Path to a .m file")
+    px.set_defaults(func=cmd_xindex)
 
     args = p.parse_args(argv)
     return args.func(args)

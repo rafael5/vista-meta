@@ -169,6 +169,46 @@ for f in "${STAGED_M_M[@]}"; do
     done < <(emit_added_lines "$f")
 done
 
+# ── XINDEX bridge (opt-in: VISTA_META_XINDEX=1) ─────────────────────
+#
+# Runs XINDEX in the container for every staged .m and treats any
+# Fatal finding as a commit-blocker. Off by default because it
+# requires the container to be running; enable with:
+#   export VISTA_META_XINDEX=1
+
+if [ "${VISTA_META_XINDEX:-0}" = "1" ] && \
+   [ -f host/scripts/vista_meta_cli.py ]; then
+    CONTAINER="${VISTA_META_CONTAINER:-vista-meta}"
+    if docker ps --filter "name=^${CONTAINER}$" --format '{{.Names}}' \
+            2>/dev/null | grep -qx "$CONTAINER"; then
+        XTMP="$(mktemp -d)"
+        trap 'rm -rf "$XTMP"' EXIT
+        for f in "${STAGED_M_A[@]}" "${STAGED_M_M[@]}"; do
+            [ -n "$f" ] || continue
+            # Check staged content, not working tree
+            local_m="$XTMP/$(basename "$f")"
+            git show ":$f" > "$local_m" 2>/dev/null || continue
+            out="$(/usr/bin/python3 host/scripts/vista_meta_cli.py \
+                       xindex "$local_m" 2>/dev/null || true)"
+            # Fatal = any line containing "F - " (XINDEX severity prefix).
+            # Use process substitution so FAILS++ runs in the parent shell
+            # (not a `cmd | while` subshell, where array updates are lost).
+            while IFS= read -r line; do
+                case "$line" in
+                    *" F - "*)
+                        msg="${line#*:}"
+                        FAILS+=("$f:$msg")
+                        STATUS=1
+                        ;;
+                esac
+            done < <(printf '%s\n' "$out")
+        done
+    else
+        echo "[vista-meta pre-commit] warn: VISTA_META_XINDEX=1 but "\
+"container $CONTAINER is not running; skipping XINDEX"
+    fi
+fi
+
 # ── .kid round-trip ──────────────────────────────────────────────────
 
 if [ $n_kid -gt 0 ] && [ -f host/scripts/kids_vc.py ]; then
