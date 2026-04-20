@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git commit -m ' *)",
+      "Bash(bin/vista-meta new-test *)",
+      "Bash(make patch-new *)",
+      "Bash(make patch-roundtrip *)"
+    ]
+  }
+}

@@ -409,6 +409,23 @@ context: ## Context pack for AI: NAME=... [SOURCE=1] [BYTES=200000]
 		$(if $(SOURCE),--with-source,) \
 		$(if $(BYTES),--bytes $(BYTES),)
 
+.PHONY: doctor
+doctor: ## Environment health check (TSVs, hook, container, round-trip)
+	@/usr/bin/python3 host/scripts/vista_meta_cli.py doctor
+
+.PHONY: search
+search: ## Annotated corpus grep: PATTERN=... [PACKAGE=...] [TAGS=1]
+	@[ -n "$(PATTERN)" ] || { echo "Usage: make search PATTERN=regex [PACKAGE=PSO] [TAGS=1]"; exit 1; }
+	@/usr/bin/python3 host/scripts/vista_meta_cli.py search "$(PATTERN)" \
+		$(if $(PACKAGE),--package "$(PACKAGE)",) \
+		$(if $(TAGS),--tags-only,)
+
+.PHONY: file
+file: ## FileMan file overview: N=<file number> [FIELDS=N]
+	@[ -n "$(N)" ] || { echo "Usage: make file N=2 [FIELDS=20]"; exit 1; }
+	@/usr/bin/python3 host/scripts/vista_meta_cli.py file "$(N)" \
+		$(if $(FIELDS),--fields $(FIELDS),)
+
 # ── Verify ────────────────────────────────────────────────────────────
 
 .PHONY: smoke

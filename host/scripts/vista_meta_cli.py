@@ -662,6 +662,302 @@ def cmd_lint(args: argparse.Namespace) -> int:
     return 1 if any_issue else 0
 
 
+# ── doctor (environment health check) ────────────────────────────────
+
+def _check(label: str, ok: bool, detail: str = "") -> bool:
+    mark = "[ok]" if ok else "[!!]"
+    line = f"  {mark}  {label}"
+    if detail:
+        line += f"    — {detail}"
+    print(line)
+    return ok
+
+
+def cmd_doctor(args: argparse.Namespace) -> int:
+    import shutil
+    import subprocess
+    import time
+
+    print("vista-meta doctor — environment health check\n")
+    all_ok = True
+
+    # 1. Python 3
+    all_ok &= _check("python3 available",
+                     shutil.which("/usr/bin/python3") is not None,
+                     "/usr/bin/python3")
+
+    # 2. CLI binaries executable
+    for bn in ("vista-meta", "mfmt"):
+        p = ROOT / "bin" / bn
+        all_ok &= _check(f"bin/{bn} executable",
+                         p.exists() and p.stat().st_mode & 0o111 != 0,
+                         str(p.relative_to(ROOT)))
+
+    # 3. Pre-commit hook installed
+    hook = ROOT / ".git/hooks/pre-commit"
+    hook_target = ROOT / "hooks/pre-commit"
+    installed = hook.is_symlink() or (hook.exists() and hook.samefile(hook_target))
+    all_ok &= _check("pre-commit hook installed", installed,
+                     "run `make install-hooks` if missing")
+
+    # 4. Code-model freshness vs sync-routines snapshot
+    manifest = ROOT / "vista/vista-m-host/MANIFEST.tsv"
+    model = CODE_MODEL / "routines-comprehensive.tsv"
+    if manifest.exists() and model.exists():
+        m_t = manifest.stat().st_mtime
+        c_t = model.stat().st_mtime
+        fresh = c_t >= m_t - 1
+        all_ok &= _check("routines-comprehensive.tsv up-to-date",
+                         fresh,
+                         f"sync {time.strftime('%F %T', time.localtime(m_t))}, "
+                         f"model {time.strftime('%F %T', time.localtime(c_t))}")
+    else:
+        all_ok &= _check("code-model TSVs exist",
+                         False, "run `make sync-routines && make inventory ...`")
+
+    # 5. Key TSVs present
+    critical = [
+        "routines-comprehensive.tsv", "routine-calls.tsv",
+        "routine-globals.tsv", "package-manifest.tsv",
+        "package-edge-matrix.tsv", "options.tsv", "rpcs.tsv",
+        "protocols.tsv", "vista-file-9-8.tsv",
+    ]
+    missing = [n for n in critical if not (CODE_MODEL / n).exists()]
+    all_ok &= _check(f"{len(critical)} critical TSVs present",
+                     not missing,
+                     ", ".join(missing) or "all present")
+
+    # 6. Data-model TSVs
+    dm_tsvs = ["files.tsv", "piks.tsv", "field-piks.tsv"]
+    dm_missing = [n for n in dm_tsvs if not (DATA_MODEL / n).exists()]
+    all_ok &= _check("data-model TSVs present",
+                     not dm_missing,
+                     ", ".join(dm_missing) or "all present")
+
+    # 7. kids-vc fixture round-trip
+    fixture = ROOT / "host/scripts/kids_vc_fixtures/VMTEST_1_0_1.kid"
+    if fixture.exists():
+        try:
+            r = subprocess.run(
+                ["/usr/bin/python3",
+                 str(ROOT / "host/scripts/kids_vc.py"),
+                 "roundtrip", str(fixture)],
+                capture_output=True, text=True, timeout=30)
+            all_ok &= _check("kids-vc fixture round-trip",
+                             r.returncode == 0,
+                             r.stdout.split('\n', 1)[0] if r.stdout else "")
+        except (OSError, subprocess.TimeoutExpired) as e:
+            all_ok &= _check("kids-vc fixture round-trip", False, str(e))
+    else:
+        all_ok &= _check("kids-vc fixture present", False, str(fixture))
+
+    # 8. Container state (informational — not a hard fail)
+    try:
+        r = subprocess.run(
+            ["docker", "ps", "--filter", "name=vista-meta", "--format",
+             "{{.Status}}"],
+            capture_output=True, text=True, timeout=5)
+        running = bool(r.stdout.strip())
+        _check("container vista-meta running",
+               running,
+               r.stdout.strip() or "down — run `make run` if you want live checks")
+    except (OSError, subprocess.TimeoutExpired):
+        _check("docker available", False, "not on PATH")
+
+    print()
+    print("healthy." if all_ok else "problems above — fix and re-run.")
+    return 0 if all_ok else 1
+
+
+# ── search (annotated corpus grep) ───────────────────────────────────
+
+def _package_index() -> dict[str, str]:
+    """routine_name -> package mapping from routines-comprehensive.tsv."""
+    idx: dict[str, str] = {}
+    path = CODE_MODEL / "routines-comprehensive.tsv"
+    if not path.exists():
+        return idx
+    with path.open(encoding="utf-8") as f:
+        for row in csv.DictReader(f, delimiter="\t"):
+            idx[row["routine_name"]] = row.get("package") or ""
+    return idx
+
+
+def cmd_search(args: argparse.Namespace) -> int:
+    pattern = args.pattern
+    try:
+        rx = re.compile(pattern, re.IGNORECASE if args.ignore_case else 0)
+    except re.error as e:
+        sys.exit(f"bad regex: {e}")
+
+    # Filter corpus
+    if not VISTA_M.exists():
+        sys.exit(f"No synced corpus at {VISTA_M}. Run `make sync-routines`.")
+
+    pkg_idx = _package_index()
+    scope: list[Path]
+    if args.package:
+        pkg = resolve_package(args.package)
+        scope_dir = VISTA_M / pkg / "Routines"
+        scope = list(scope_dir.rglob("*.m")) if scope_dir.exists() else []
+    else:
+        scope = list(VISTA_M.rglob("*.m"))
+
+    matches = 0
+    for p in scope:
+        if matches >= args.limit:
+            break
+        routine = p.stem
+        pkg = pkg_idx.get(routine, "?")
+        try:
+            with p.open(encoding="utf-8", errors="replace") as f:
+                for lno, line in enumerate(f, start=1):
+                    if matches >= args.limit:
+                        break
+                    if args.tags_only:
+                        # Only match column-0 alphabetic labels
+                        if not line or line[0] in (" ", "\t", ";"):
+                            continue
+                    if rx.search(line):
+                        rel = p.relative_to(ROOT)
+                        snippet = line.rstrip()[:120]
+                        print(f"{rel}:{lno}  [{pkg[:24]}]  {snippet}")
+                        matches += 1
+        except OSError:
+            continue
+
+    if matches >= args.limit:
+        print(f"... capped at {args.limit}. Use --limit N to widen.")
+    elif matches == 0:
+        print("no matches")
+    return 0 if matches else 1
+
+
+# ── file (FileMan file overview) ─────────────────────────────────────
+
+def cmd_file(args: argparse.Namespace) -> int:
+    target = args.number
+    files_tsv = DATA_MODEL / "files.tsv"
+    if not files_tsv.exists():
+        sys.exit(f"{files_tsv} missing.")
+
+    row = None
+    with files_tsv.open(encoding="utf-8") as f:
+        for r in csv.DictReader(f, delimiter="\t"):
+            if r["file_number"] == target:
+                row = r
+                break
+    if not row:
+        sys.exit(f"File #{target} not found in files.tsv")
+
+    # PIKS lives in piks.tsv; files.tsv's piks column is usually empty
+    piks_path = DATA_MODEL / "piks.tsv"
+    if piks_path.exists():
+        with piks_path.open(encoding="utf-8") as f:
+            for r in csv.DictReader(f, delimiter="\t"):
+                if r["file_number"] == target:
+                    for k in ("piks", "piks_method", "piks_confidence",
+                              "piks_evidence"):
+                        if r.get(k) and not row.get(k):
+                            row[k] = r[k]
+                    break
+
+    print(f"FILE  #{row['file_number']}  {row['file_name']}")
+    print(f"Global root   {row.get('global_root') or '(none)'}")
+    if row.get("parent_file"):
+        print(f"Parent file   #{row['parent_file']}  (sub-file)")
+    print(f"Fields        {row.get('field_count') or '0'}")
+    print(f"Records       {row.get('record_count') or '0'}")
+    print(f"DINUM         {row.get('is_dinum') or 'N'}")
+    print(f"Pointer IN    {row.get('pointer_in') or '0'}   "
+          f"(files with fields pointing to this one)")
+    print(f"Pointer OUT   {row.get('pointer_out') or '0'}   "
+          f"(fields here pointing to other files)")
+
+    print()
+    print("PIKS")
+    print(f"  Class        {row.get('piks') or '?'}    "
+          f"method={row.get('piks_method') or '-'}    "
+          f"confidence={row.get('piks_confidence') or '-'}")
+    if row.get("piks_secondary"):
+        print(f"  Secondary    {row['piks_secondary']}")
+    if row.get("piks_evidence"):
+        print(f"  Evidence     {row['piks_evidence'][:80]}")
+
+    props = [("Volatility", row.get("volatility")),
+             ("Sensitivity", row.get("sensitivity")),
+             ("Portability", row.get("portability")),
+             ("Volume", row.get("volume")),
+             ("Subdomain", row.get("subdomain"))]
+    shown = [(k, v) for k, v in props if v]
+    if shown:
+        print()
+        print("PROPERTIES")
+        for k, v in shown:
+            print(f"  {k:<12} {v}")
+
+    # Pointer OUT detail — which files this one points to
+    fp = DATA_MODEL / "field-piks.tsv"
+    if fp.exists():
+        pointers: Counter[str] = Counter()
+        with fp.open(encoding="utf-8") as f:
+            for r in csv.DictReader(f, delimiter="\t"):
+                if r["file_number"] == target and r.get("pointer_target"):
+                    pointers[r["pointer_target"]] += 1
+        if pointers:
+            print()
+            print("POINTS OUT TO (top 15)")
+            # Build file_number -> name map (only for hit set)
+            hits = set(pointers)
+            names: dict[str, str] = {}
+            with files_tsv.open(encoding="utf-8") as f:
+                for r in csv.DictReader(f, delimiter="\t"):
+                    if r["file_number"] in hits:
+                        names[r["file_number"]] = r["file_name"]
+            for fnum, n in pointers.most_common(15):
+                fname = names.get(fnum, "(unknown)")
+                print(f"  #{fnum:<8}  ×{n:<4}  {fname}")
+
+        # Pointer IN — who points to us
+        inbound: Counter[str] = Counter()
+        with fp.open(encoding="utf-8") as f:
+            for r in csv.DictReader(f, delimiter="\t"):
+                if r.get("pointer_target") == target:
+                    inbound[r["file_number"]] += 1
+        if inbound:
+            print()
+            print("POINTED TO BY (top 15)")
+            hits = set(inbound)
+            names2: dict[str, str] = {}
+            with files_tsv.open(encoding="utf-8") as f:
+                for r in csv.DictReader(f, delimiter="\t"):
+                    if r["file_number"] in hits:
+                        names2[r["file_number"]] = r["file_name"]
+            for fnum, n in inbound.most_common(15):
+                fname = names2.get(fnum, "(unknown)")
+                print(f"  #{fnum:<8}  ×{n:<4}  {fname}")
+
+    # Field listing (sample)
+    if args.fields and fp.exists():
+        print()
+        print(f"FIELDS (first {args.fields})")
+        count = 0
+        with fp.open(encoding="utf-8") as f:
+            for r in csv.DictReader(f, delimiter="\t"):
+                if r["file_number"] != target:
+                    continue
+                if count >= args.fields:
+                    print(f"  ... more fields available ({row.get('field_count')} total)")
+                    break
+                dtype = r.get("data_type") or ""
+                ptgt = r.get("pointer_target") or ""
+                suffix = f" -> #{ptgt}" if ptgt else ""
+                print(f"  {r['field_number']:<8}  {r['field_name'][:38]:<38}  "
+                      f"{dtype}{suffix}")
+                count += 1
+    return 0
+
+
 # ── CLI entry ────────────────────────────────────────────────────────
 
 def main(argv: list[str] | None = None) -> int:
@@ -706,6 +1002,28 @@ def main(argv: list[str] | None = None) -> int:
                         help="Check public tags for @summary doc blocks")
     pl.add_argument("paths", nargs="+", help="Files or directories")
     pl.set_defaults(func=cmd_lint)
+
+    pd = sub.add_parser("doctor",
+                        help="Environment health check: TSVs, hook, container")
+    pd.set_defaults(func=cmd_doctor)
+
+    ps = sub.add_parser("search",
+                        help="Annotated regex search across the VistA corpus")
+    ps.add_argument("pattern", help="Regex pattern")
+    ps.add_argument("--package",
+                    help="Restrict to a single package (name/substring/prefix)")
+    ps.add_argument("--tags-only", action="store_true",
+                    help="Match only column-0 label lines")
+    ps.add_argument("-i", "--ignore-case", action="store_true")
+    ps.add_argument("--limit", type=int, default=100)
+    ps.set_defaults(func=cmd_search)
+
+    pf = sub.add_parser("file",
+                        help="FileMan file overview: #N + PIKS + pointers")
+    pf.add_argument("number", help="FileMan file number, e.g. 2 or 52.41")
+    pf.add_argument("--fields", type=int, default=0,
+                    help="Also list first N fields (default 0 = skip)")
+    pf.set_defaults(func=cmd_file)
 
     args = p.parse_args(argv)
     return args.func(args)
