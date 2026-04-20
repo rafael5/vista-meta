@@ -315,7 +315,12 @@ def decompose_build(build: dict, out_dir: Path) -> None:
                 if line_no == 2:
                     content = canonicalize_routine_line2(content)
                 m_lines.append(content)
-            (rtn_dir / f"{name}.m").write_text("\n".join(m_lines) + "\n", encoding="utf-8")
+            # Use "line\n" per line (empty file if no lines) so 0-line
+            # routines round-trip correctly (don't phantom-produce an
+            # empty line 1 on read-back).
+            (rtn_dir / f"{name}.m").write_text(
+                "".join(line + "\n" for line in m_lines), encoding="utf-8"
+            )
 
     # ORD — ORD.zwr at top level (not per-file; ORD's structure is
     # ORD,<precedence>,<filenum>,0 and KIDS expects them together).
@@ -370,18 +375,50 @@ def decompose_build(build: dict, out_dir: Path) -> None:
                     continue
                 by_ien.setdefault(ien, {})[subs] = value
 
+            # Names-first pass: derive an entry name per IEN, then detect
+            # collisions and suffix with IEN for disambiguation. File 8989.5
+            # (PARAMETER) is the canonical collision case — its zero-node
+            # piece 1 is a storage spec (e.g. "516;DIC(9.4,") shared across
+            # entries; the meaningful name lives in piece 2 (parameter name)
+            # plus piece 3 (instance #). Collision fallback covers all such.
+            def _entry_zero_node(ec: dict[tuple, str]) -> str:
+                first_subs = next(iter(ec))
+                zn = ec.get((*first_subs[:3], 0), "")
+                if zn:
+                    return zn
+                for s, v in ec.items():
+                    if len(s) == 4 and s[3] == 0:
+                        return v
+                return ""
+
+            def _derive_name(ien: int, ec: dict[tuple, str]) -> str:
+                zn = _entry_zero_node(ec)
+                if not zn:
+                    return f"ien-{ien}"
+                # Heuristic: if piece 1 looks like a storage spec
+                # (contains ";" and "(" and ends with ","), prefer piece 2.
+                p = zn.split("^")
+                if p and (";" in p[0] and "(" in p[0] and p[0].endswith(",")):
+                    return p[1] if len(p) > 1 else p[0]
+                return p[0]
+
+            # Derive name per IEN, then check collisions on the SANITIZED
+            # form (which is what becomes the filename). Two entries like
+            # "LBRY FUNDING" and "LBRY FUNDING ??" both sanitize to
+            # "LBRY-FUNDING" — would overwrite without this.
+            sanitized_names: dict[int, str] = {
+                ien: _sanitize(_derive_name(ien, ec))
+                for ien, ec in by_ien.items()
+            }
+            name_counts: dict[str, int] = {}
+            for n in sanitized_names.values():
+                name_counts[n] = name_counts.get(n, 0) + 1
+
             for ien, entry_contents in by_ien.items():
-                zero_node = entry_contents.get((*list(entry_contents)[0][:3], 0), "")
-                if zero_node:
-                    pass
-                else:
-                    # find any zero-node among this entry's subs
-                    for s, v in entry_contents.items():
-                        if len(s) == 4 and s[3] == 0:
-                            zero_node = v
-                            break
-                entry_name = zero_node.split("^")[0] if zero_node else f"ien-{ien}"
-                entry_file = file_dir / f"{_sanitize(entry_name)}.zwr"
+                name = sanitized_names[ien]
+                if name_counts[name] > 1:
+                    name = f"{name}__ien{ien}"
+                entry_file = file_dir / f"{name}.zwr"
                 with entry_file.open("w", encoding="utf-8") as fh:
                     for s in sorted(entry_contents, key=_sort_key):
                         fh.write(_zwr_line(s, entry_contents[s]) + "\n")
@@ -397,6 +434,26 @@ def decompose_build(build: dict, out_dir: Path) -> None:
 
     fileman_sections = {"FIA", "^DD", "^DIC", "SEC", "UP", "IX", "KEY", "KEYPTR",
                          "PGL", "DATA", "FRV1", "FRVL", "FRV1K"}
+
+    # Track which fileman-section subscripts we've consumed; unclaimed ones
+    # must still be emitted (bug found at scale — some real patches have
+    # SEC entries keyed by ("SEC","^DIC",fnum,...) where subs[1] is a
+    # string, not a file number). Anything not consumed by per-file
+    # decomposition gets written to a dedicated fallback file per section.
+    consumed: set[tuple] = set()
+
+    def _matches_file(subs: tuple, fnum: Any) -> bool:
+        """Does this subs belong to file `fnum`? Scan positions 1 and 2 so
+        we catch both `(SEC, fnum, ...)` and `(SEC, "^DIC", fnum, ...)`
+        shapes commonly seen in real WorldVistA patches."""
+        if len(subs) < 2:
+            return False
+        if subs[1] == fnum:
+            return True
+        if len(subs) >= 3 and subs[2] == fnum:
+            return True
+        return False
+
     if fia_files:
         files_root = out_dir / "Files"
         files_root.mkdir(exist_ok=True)
@@ -409,29 +466,37 @@ def decompose_build(build: dict, out_dir: Path) -> None:
             for section in fileman_sections:
                 sec_data = sections.get(section, {})
                 for subs in list(sec_data.keys()):
-                    # Match subs referring to this file number
-                    if len(subs) < 2:
+                    if not _matches_file(subs, fnum):
                         continue
-                    # For FIA/UP/IX/KEY/KEYPTR/SEC: second subscript is fnum
-                    # For ^DD/^DIC: also second subscript is fnum
-                    # For DATA/FRV*: second subscript is fnum
-                    if subs[1] == fnum:
-                        target = data_pairs if section in ("DATA", "FRV1", "FRVL", "FRV1K") else dd_pairs
-                        target.append((subs, sec_data[subs]))
+                    target = data_pairs if section in ("DATA", "FRV1", "FRVL", "FRV1K") else dd_pairs
+                    target.append((subs, sec_data[subs]))
+                    consumed.add(subs)
             if dd_pairs:
                 with (file_dir / "DD.zwr").open("w", encoding="utf-8") as fh:
                     for s, v in sorted(dd_pairs, key=lambda kv: _sort_key(kv[0])):
                         fh.write(_zwr_line(s, v) + "\n")
-                # Extract DD-embedded MUMPS code as human-diffable annotations.
-                # DD.zwr remains authoritative for round-trip; .m files are
-                # informational. Phase 8c.
                 _extract_dd_code(dd_pairs, file_dir / "DD-code")
             if data_pairs:
                 with (file_dir / "Data.zwr").open("w", encoding="utf-8") as fh:
                     for s, v in sorted(data_pairs, key=lambda kv: _sort_key(kv[0])):
                         fh.write(_zwr_line(s, v) + "\n")
 
-    # Catch-all: any subscript whose top-level section isn't handled above
+    # Unclaimed fileman-section entries — patches reference files not
+    # in their own FIA set (common when patching another package's file
+    # shared-ownership). Emit under Files/_unclaimed.zwr so nothing is lost.
+    unclaimed_fm: list[tuple[tuple, str]] = []
+    for section in fileman_sections:
+        for subs, value in sections.get(section, {}).items():
+            if subs not in consumed:
+                unclaimed_fm.append((subs, value))
+    if unclaimed_fm:
+        files_root = out_dir / "Files"
+        files_root.mkdir(exist_ok=True)
+        with (files_root / "_unclaimed.zwr").open("w", encoding="utf-8") as fh:
+            for s, v in sorted(unclaimed_fm, key=lambda kv: _sort_key(kv[0])):
+                fh.write(_zwr_line(s, v) + "\n")
+
+    # Catch-all for any TOP-LEVEL section we don't recognize at all.
     known = set(SIMPLE_SECTIONS.keys()) | {"RTN", "ORD", "KRN"} | fileman_sections
     unknown_sections = set(sections.keys()) - known
     if unknown_sections:
@@ -717,8 +782,12 @@ def assemble_build(in_dir: Path, install_name: str) -> list[tuple[tuple, str]]:
                 pairs.extend(_read_zwr(entry_path))
 
     # FIA (FileMan files) — Files/<num>+<name>/DD.zwr + Data.zwr
+    # Plus Files/_unclaimed.zwr for entries not assignable to any file.
     files_root = in_dir / "Files"
     if files_root.exists():
+        unclaimed = files_root / "_unclaimed.zwr"
+        if unclaimed.exists():
+            pairs.extend(_read_zwr(unclaimed))
         for file_dir in sorted(files_root.iterdir()):
             if not file_dir.is_dir():
                 continue

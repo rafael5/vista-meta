@@ -310,6 +310,14 @@ zwr-merge-install: ## Install zwr_merge.py as a git merge driver for *.zwr files
 	git config merge.zwr.driver "/usr/bin/python3 $(PWD)/host/scripts/zwr_merge.py %O %A %B"
 	@echo "Done. .gitattributes has *.zwr merge=zwr; .git/config has merge.zwr driver."
 
+.PHONY: kids-vc-corpus
+kids-vc-corpus: ## Corpus round-trip harness: fetch + test every .KID in WorldVistA/VistA master (Phase 8f)
+	/usr/bin/python3 host/scripts/fetch_kids_corpus.py
+
+.PHONY: kids-vc-corpus-cached
+kids-vc-corpus-cached: ## Re-run corpus round-trip using cached downloads (Phase 8f)
+	/usr/bin/python3 host/scripts/fetch_kids_corpus.py --no-fetch
+
 # ── Verify ────────────────────────────────────────────────────────────
 
 .PHONY: smoke

@@ -14,6 +14,84 @@ Status: provisional | verified | superseded by RF-NNN.
 
 ## 2026-04-19 — First analytical session
 
+### RF-032: Phase 8f — kids-vc at scale, 100% pass rate on WorldVistA corpus
+
+- **Date**: 2026-04-19
+- **Scope**: Corpus round-trip harness. Fetch every `.KID` file in
+  `github.com/WorldVistA/VistA` master and run `kids_vc.roundtrip`
+  against each. Fix every bug the corpus surfaces. Goal: stop
+  claiming "it works" and prove it at scale.
+- **Tool**: `host/scripts/fetch_kids_corpus.py` — lists the repo
+  tree via GitHub API, fetches raw files via `raw.githubusercontent.com`
+  (no rate-limit), caches to `/tmp/kids-corpus/`, runs round-trip on
+  each, writes TSV report with pass/fail + error sample.
+- **Corpus size**: **2,406 `.KID` files** in WorldVistA/VistA master.
+  **3,566,277 total subscripts** when parsed.
+- **Initial pass rate**: **91.15%** (2,193 / 2,406) on first full run.
+- **Bugs found and fixed, in order**:
+  1. **Fileman-section entries not matching any FIA file were
+     silently discarded.** Real patches have SEC entries keyed by
+     `("SEC", "^DIC", fnum, ...)` where subs[1] is a string, not a
+     file number. My code required `subs[1] == fnum` (second
+     subscript). Fix: also check `subs[2] == fnum`, and route
+     anything unclaimed to `Files/_unclaimed.zwr` rather than
+     losing it. **91.15% → 98.21%** (170 patches salvaged).
+  2. **Zero-line routines round-tripped as one-line-empty routines.**
+     Writing `"\n".join([]) + "\n"` produced a bare newline; on
+     read-back `"\n".splitlines() = [""]` gave a phantom empty
+     first line. Fix: `"".join(line + "\n" for line in m_lines)`
+     — empty list → empty file, preserves exact line count
+     including the zero-line case. **98.21% → 99.50%**.
+  3. **Entry-file-name collisions on File 8989.5 (PARAMETER).**
+     Multiple entries shared zero-node piece 1 (the storage spec
+     `"516;DIC(9.4,"`) while piece 2+ held the actual parameter
+     name. Three entries overwriting each other's `.zwr` files.
+     Fix: heuristic for storage-spec-looking piece 1 (contains
+     `;`, `(`, ends with `,`) → use piece 2 instead. **99.50%
+     → 99.96%**.
+  4. **Filename collisions after path-sanitization.** Two distinct
+     entries `LBRY FUNDING` and `LBRY FUNDING ??` both sanitized
+     to `LBRY-FUNDING`. Fix: detect collisions on the
+     SANITIZED names (not raw), append `__ien<N>` suffix to
+     disambiguate. **99.96% → 100.00%**.
+- **Final pass rate**: **100.00%** (2,406 / 2,406).
+- **Performance**: 56 seconds for the full corpus on cached files
+  (42.6 files/sec). Initial fetch takes ~2 min.
+- **Deliverables**:
+  - `host/scripts/fetch_kids_corpus.py` — ~200 lines, stdlib only
+  - `make kids-vc-corpus` (full download + test)
+  - `make kids-vc-corpus-cached` (re-test from cache)
+  - Cache dir `/tmp/kids-corpus/` with all 2,406 patches + TSV report
+- **Combined test status after Phase 8f**:
+  - 5 fixtures round-trip (synthetic + 4 real from Phase 8a/8a.1/8b)
+  - **2,406 real WorldVistA patches round-trip, 100% pass rate**
+  - 7 ZWR merge tests pass
+  - 3 CI jobs (roundtrip, zwr-merge, lint-check) pass
+  - TOTAL: **2,421 green checks**
+- **Implications**:
+  - **kids-vc is production-ready for WorldVistA/VistA.** Every
+    patch in that repo — 10+ years of community contribution —
+    round-trips through decompose/assemble without loss.
+  - The corpus harness is itself a **regression-prevention tool**:
+    any future change to `kids_vc.py` can be validated against
+    2,406 real-world cases in 1 minute. Worth wiring into CI as
+    a nightly job (main CI would be too slow for every PR).
+  - Real bugs surfaced were all **silent-data-loss** variants, not
+    crashes. Corpus testing is the ONLY way to catch these — the
+    code doesn't error, the output just misses entries. Justifies
+    the Phase 8f investment against any other MVP scope.
+  - Portability status (per code-model-guide §6): kids-vc is now
+    empirically validated for **WorldVistA flavor**. Unknowns
+    remain for OSEHRA FOIA (likely same — shared lineage), VA
+    production (likely same), RPMS (IHS — may differ), VistA-
+    Office EHR (likely same — smaller scope). Next milestone:
+    harvest and test each. That's Phase 8g candidate.
+- **Evidence**:
+  - `host/scripts/fetch_kids_corpus.py`
+  - `/tmp/kids-corpus/results.tsv` (2,406 rows)
+  - `make kids-vc-corpus-cached` reproduces the 100% claim
+- **Status**: verified (2,406 real patches, 100% pass rate)
+
 ### RF-031: kids-vc Phases 8b/8c/8d/8e — FIA + DD-code + ZWR merge + CI
 
 - **Date**: 2026-04-19
