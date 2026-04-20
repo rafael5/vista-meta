@@ -401,6 +401,129 @@ def cmd_context(args: argparse.Namespace) -> int:
     return 0
 
 
+# ── where / callers (symbol jumping) ─────────────────────────────────
+
+def _parse_ref(ref: str) -> tuple[str, str]:
+    """Parse TAG^ROUTINE / ^ROUTINE / ROUTINE into (tag, routine)."""
+    ref = ref.strip()
+    if "^" in ref:
+        tag, routine = ref.split("^", 1)
+        return tag, routine
+    return "", ref
+
+
+def _routine_source(routine: str) -> tuple[str, Path] | tuple[None, None]:
+    path = CODE_MODEL / "routines-comprehensive.tsv"
+    if not path.exists():
+        return None, None
+    with path.open(encoding="utf-8") as f:
+        for row in csv.DictReader(f, delimiter="\t"):
+            if row["routine_name"] == routine:
+                src = row.get("source_path") or ""
+                pkg = row.get("package") or ""
+                if src:
+                    # source_path is the in-container path; map to host
+                    host = src.replace("/opt/VistA-M/", "vista/vista-m-host/")
+                    return pkg, ROOT / host
+    return None, None
+
+
+def _tag_line(path: Path, tag: str) -> int | None:
+    """Return 1-based line number of `tag` at column 0, else None."""
+    if not path.exists():
+        return None
+    try:
+        with path.open(encoding="utf-8", errors="replace") as f:
+            for i, line in enumerate(f, start=1):
+                if not line or line[0] in (" ", "\t", ";"):
+                    continue
+                head = line.rstrip("\n")
+                name = head.split("(")[0].split(" ")[0].split("\t")[0]
+                if name == tag:
+                    return i
+    except OSError:
+        return None
+    return None
+
+
+def cmd_where(args: argparse.Namespace) -> int:
+    tag, routine = _parse_ref(args.ref)
+    pkg, src = _routine_source(routine)
+    if not src:
+        sys.exit(f"Routine {routine!r} not found in routines-comprehensive.tsv")
+    if not src.exists():
+        sys.exit(f"Source not synced: {src}\n  Run `make sync-routines`.")
+
+    lineno = 1
+    if tag:
+        found = _tag_line(src, tag)
+        if found is None:
+            sys.exit(f"Tag {tag!r} not found in {src}")
+        lineno = found
+
+    # Emit a clickable path:line and a quick snippet
+    rel = src.relative_to(ROOT)
+    print(f"{rel}:{lineno}   (package: {pkg})")
+    try:
+        with src.open(encoding="utf-8", errors="replace") as f:
+            lines = f.readlines()
+        start = max(0, lineno - 1)
+        end = min(len(lines), lineno + 5)
+        for i in range(start, end):
+            marker = ">" if i == lineno - 1 else " "
+            print(f"{marker} {i + 1:>5}  {lines[i].rstrip()}")
+    except OSError:
+        pass
+    return 0
+
+
+def cmd_callers(args: argparse.Namespace) -> int:
+    tag, routine = _parse_ref(args.ref)
+    path = CODE_MODEL / "routine-calls.tsv"
+    if not path.exists():
+        sys.exit(f"{path} missing. Run `make routine-calls`.")
+
+    matches: list[dict] = []
+    with path.open(encoding="utf-8") as f:
+        for row in csv.DictReader(f, delimiter="\t"):
+            if row["callee_routine"] != routine:
+                continue
+            if tag and row["callee_tag"] != tag:
+                continue
+            matches.append(row)
+
+    if not matches:
+        print(f"No callers found for {args.ref}")
+        return 0
+
+    # Group by caller_routine
+    callers: dict[str, dict] = {}
+    for r in matches:
+        key = r["caller_name"]
+        agg = callers.setdefault(key, {"package": r["caller_package"],
+                                       "tags": Counter(), "total": 0})
+        agg["tags"][r["callee_tag"]] += int(r["ref_count"])
+        agg["total"] += int(r["ref_count"])
+
+    # Sort by total ref count desc
+    ordered = sorted(callers.items(), key=lambda kv: kv[1]["total"],
+                     reverse=True)
+
+    print(f"Callers of {args.ref}: {len(ordered)} routines, "
+          f"{sum(r['total'] for _, r in ordered)} total refs")
+    limit = args.limit
+    shown = 0
+    for name, agg in ordered:
+        if shown >= limit:
+            print(f"  ... and {len(ordered) - shown} more (use --limit to see more)")
+            break
+        tag_summary = ", ".join(
+            f"{t}×{n}" for t, n in agg["tags"].most_common())
+        print(f"  {name:<14} [{agg['package'][:28]:<28}]  {tag_summary}")
+        shown += 1
+    return 0
+
+
 # ── CLI entry ────────────────────────────────────────────────────────
 
 def main(argv: list[str] | None = None) -> int:
@@ -422,6 +545,17 @@ def main(argv: list[str] | None = None) -> int:
     pc.add_argument("--bytes", type=int, default=200_000,
                     help="Byte budget for the source section (default 200000)")
     pc.set_defaults(func=cmd_context)
+
+    pw = sub.add_parser("where", help="Jump to a tag: TAG^ROUTINE or ROUTINE")
+    pw.add_argument("ref", help="TAG^ROUTINE, ^ROUTINE, or just ROUTINE")
+    pw.set_defaults(func=cmd_where)
+
+    pcl = sub.add_parser("callers",
+                         help="List callers of TAG^ROUTINE (or all tags if TAG omitted)")
+    pcl.add_argument("ref", help="TAG^ROUTINE, ^ROUTINE, or just ROUTINE")
+    pcl.add_argument("--limit", type=int, default=30,
+                     help="Max callers to show (default 30)")
+    pcl.set_defaults(func=cmd_callers)
 
     args = p.parse_args(argv)
     return args.func(args)
