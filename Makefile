@@ -277,6 +277,20 @@ validate-xindex: ## Validate our regex extractions against XINDEX (ADR-045 post-
 	done
 	/usr/bin/python3 host/scripts/validate_against_xindex.py
 
+# ── KIDS version control (Phase 8+) ───────────────────────────────────
+
+.PHONY: kids-vc-test
+kids-vc-test: ## Round-trip test of kids-vc against the synthetic fixture (Phase 8a)
+	/usr/bin/python3 host/scripts/kids_vc.py roundtrip \
+		host/scripts/kids_vc_fixtures/VMTEST_1_0_1.kid
+
+.PHONY: kids-vc-demo
+kids-vc-demo: ## Decompose the kids-vc fixture to /tmp/kidsvc-demo for inspection
+	@rm -rf /tmp/kidsvc-demo
+	/usr/bin/python3 host/scripts/kids_vc.py decompose \
+		host/scripts/kids_vc_fixtures/VMTEST_1_0_1.kid /tmp/kidsvc-demo
+	@/usr/bin/find /tmp/kidsvc-demo -print | sort
+
 # ── Verify ────────────────────────────────────────────────────────────
 
 .PHONY: smoke

@@ -14,6 +14,93 @@ Status: provisional | verified | superseded by RF-NNN.
 
 ## 2026-04-19 — First analytical session
 
+### RF-029: Phase 8a — kids-vc MVP (Python successor to XPDK2VC)
+
+- **Date**: 2026-04-19
+- **Scope**: Phase 8a of the KIDS version-control initiative per
+  `docs/kids-vc-guide.md` §6.3. Minimum viable Python port of
+  XPDK2VC's decomposition architecture, with round-trip verification.
+- **Approach pivot**: originally planned to run XPDK2VC in-container
+  against real KIDS builds. Hit blocking operational friction:
+  `PCK^XPDT` needs session init (tractable), `KRN^XPDTC` fails
+  against VEHU's drift from stored builds ("ORF2 not found"),
+  `OPEN^%ZISH` silently returns `POP=1` even though `_ZISH.o`
+  exists — same class of partial-runtime issue as missing `^%ZIS`
+  (Phase 7). Pivoted to treating XPDK2VC as the authoritative
+  specification and reimplementing in Python. Rationale: Python
+  portability, stdlib-only, easier git/test integration, ports the
+  design (not the runtime dependency) of XPDK2VC.
+- **Deliverables**:
+  - `host/scripts/kids_vc.py` — single-file tool, stdlib only,
+    ~450 lines. Commands: `parse`, `decompose`, `assemble`,
+    `roundtrip`.
+  - `host/scripts/kids_vc_fixtures/VMTEST_1_0_1.kid` — synthetic
+    KIDS file covering BLD, PKG, VER, QUES, RTN, KRN, ORD sections.
+    23 subscript-value pairs. Written to XPDK2V1's documented
+    format.
+  - `make kids-vc-test` — round-trip test against fixture
+  - `make kids-vc-demo` — decompose fixture to /tmp for inspection
+- **Architecture** (ports XPDK2VC's structure):
+  - **Parser**: state machine matching `XPDK2V1.m` (BEGIN → KIDSSS
+    → INSTLNM → CONTENT). Handles install-name lists, multi-build,
+    `**END**` termination. Skips FORUM-mail header preamble.
+  - **Decomposer**: per-component dispatcher matching `XPDK2VC.m`
+    GENOUT pattern.
+    - Simple sections (BLD, PKG, VER, PRE, INI, INIT, MBREQ, QUES,
+      TEMP) → single `.zwr` each
+    - Routines → `.header` + `.m` pair per routine, plus
+      `_index.zwr` for the count line
+    - ORD → single `ORD.zwr` at KIDComponents level
+    - KRN → `KRN/<FileName>/FileHeader.zwr` +
+      `KRN/<FileName>/<EntryName>.zwr` per integer-IEN entry
+    - Catch-all `_misc.zwr` for unrecognized sections
+  - **Assembler**: inverse — walks per-component files, reconstructs
+    ordered (subscripts, value) pairs, emits KIDS text format.
+  - **Round-trip verification**: parse → decompose → assemble →
+    re-parse → canonical equality comparison.
+- **Diff-stability — Phase 8a scope**:
+  - ✅ **Routine line-2 canonicalization**: pieces 5 (patch list) and
+    6 (build date) stripped, piece 7+ (Build N) dropped.
+    XPDK2VC only drops piece 7; kids-vc also drops 5 and 6.
+    Example: `;;1.0;VMTEST;;Apr 19, 2026;Build 1` →
+    `;;1.0;VMTEST;;`.
+  - ❌ **IEN substitution deferred to Phase 8b**. Initial MVP
+    attempted to port XPDK2VC's `_ien_substitute` at position 1 of
+    simple sections, but this broke round-trip for string-keyed
+    entries (PKG keyed by "VMTEST" rather than integer IEN). Safer
+    MVP: preserve subscripts exactly; revisit IEN stability when
+    it can be done with per-section knowledge of which positions
+    are IENs.
+- **Round-trip result against fixture**: **PASS**. 23 pairs preserved
+  across parse → decompose → assemble → re-parse. Canonicalized
+  equality verified.
+- **Evidence**:
+  - `host/scripts/kids_vc.py`
+  - `host/scripts/kids_vc_fixtures/VMTEST_1_0_1.kid`
+  - `make kids-vc-test` → OK
+- **Implications**:
+  - The Python port works against a hand-constructed KIDS file. Real
+    VA/WorldVistA `.KID` files are the next validation step —
+    Phase 8a.1 candidate: run `kids_vc.py parse` against a sample
+    real `.KID` to see what KIDS subscript shapes our MVP doesn't
+    yet handle.
+  - **XPDK2VC as specification worked**. Reading ~870 lines of MUMPS
+    and porting to ~450 lines of Python took one focused session.
+    The design translates cleanly.
+  - Phase 8b scope is clear: principled IEN substitution (per-section
+    knowledge of which subscript positions carry IENs), real-KIDS
+    validation, DD-embedded MUMPS extraction.
+  - Phase 8c (git wrapper), Phase 8d (ZWR merge driver), Phase 8e
+    (CI integration) remain as planned.
+- **MVP limitations documented**:
+  - Multi-line word-processing values not handled (value must fit on
+    one line). Phase 8b.
+  - FIA (FileMan files), DATA, GLO sections recognized but emitted
+    as single flat `.zwr` (no per-file decomposition). Phase 8b/c.
+  - No IEN substitution (Phase 8b).
+  - Real KIDS file testing (Phase 8a.1 candidate).
+- **Status**: verified (synthetic round-trip)
+
 ### RF-028: SKIDS (Source KIDS) — abandoned VistA-on-git prior art, plus XPDK2VC in our own VEHU
 
 - **Date**: 2026-04-19
