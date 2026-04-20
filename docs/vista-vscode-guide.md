@@ -1,16 +1,41 @@
 # VistA VSCode & CLI Developer Tools Guide
 
 Technical reference for every developer-productivity tool this repo
-ships. Covers installation, the full CLI surface, the pre-commit
-hook, the VSCode extension, the patch workflow, CI, and the
+ships. Opens with the **VSCode extension** you'll use constantly,
+then covers the **CLI** that powers the rest of the workflow: the
+formatter, the pre-commit hook, patch assembly, CI, and the
 recommended daily loop.
 
-For the architectural "why VistA is hard and how to approach it"
-background, see [vista-developers-guide.md](vista-developers-guide.md).
+> For the architectural "why VistA is hard and how to approach it"
+> background, see [vista-developers-guide.md](vista-developers-guide.md).
 
 ---
 
-## 0. Quick reference
+## Table of contents
+
+- [Quick reference](#quick-reference)
+- [1. Installation](#1-installation)
+- [2. The VSCode extension](#2-the-vscode-extension)
+  - [2.1 Where the sidebar lives on screen](#21-where-the-sidebar-lives-on-screen)
+  - [2.2 Reading the sidebar — VistA terminology primer](#22-reading-the-sidebar--vista-terminology-primer)
+  - [2.3 Click behaviors](#23-click-behaviors)
+  - [2.4 Commands](#24-commands)
+  - [2.5 Settings](#25-settings)
+  - [2.6 When the sidebar is empty](#26-when-the-sidebar-is-empty)
+  - [2.7 Rebuilding the extension](#27-rebuilding-the-extension)
+- [3. The CLI — `vista-meta`](#3-the-cli--vista-meta)
+- [4. `mfmt` — canonical formatter](#4-mfmt--canonical-formatter)
+- [5. The pre-commit hook](#5-the-pre-commit-hook)
+- [6. Patch workflow (decomposed-on-disk)](#6-patch-workflow-decomposed-on-disk)
+- [7. CI — enforce the same checks on PRs](#7-ci--enforce-the-same-checks-on-prs)
+- [8. Recommended daily loop](#8-recommended-daily-loop)
+- [9. Optimizing productivity](#9-optimizing-productivity)
+- [10. Troubleshooting](#10-troubleshooting)
+- [11. Reference](#11-reference)
+
+---
+
+## Quick reference
 
 ```
 bin/vista-meta doctor                   Environment health
@@ -29,8 +54,8 @@ bin/mfmt --check FILES...               Dry-run formatter
 
 make install-hooks                      Install pre-commit hook
 make patch-new NAME=...                 Scaffold a new on-disk patch
-make patch-decompose KID=...            .KID -> on-disk form
-make patch-assemble DIR=...             on-disk form -> .KID
+make patch-decompose KID=...            .KID → on-disk form
+make patch-assemble DIR=...             on-disk form → .KID
 make patch-roundtrip KID=...            decompose + re-assemble + diff
 ```
 
@@ -45,7 +70,7 @@ make patch-roundtrip KID=...            decompose + re-assemble + diff
 - Docker with the `vista-meta` container built (`make build && make run`)
 - bash 5.x
 
-The CLI tools have zero external Python dependencies — standard
+The CLI tools have **zero external Python dependencies** — standard
 library only.
 
 ### 1.2 Put `bin/` on your PATH
@@ -66,10 +91,9 @@ cd ~/vista-meta
 make install-hooks
 ```
 
-This creates a symlink `.git/hooks/pre-commit ->
-../../hooks/pre-commit`. Every future `git commit` runs the hook.
-Bypass with `git commit --no-verify` (rare; the hook is usually
-right).
+Creates a symlink `.git/hooks/pre-commit → ../../hooks/pre-commit`.
+Every future `git commit` runs the hook. Bypass with
+`git commit --no-verify` (rare; the hook is usually right).
 
 ### 1.4 Build and install the VSCode extension
 
@@ -83,7 +107,7 @@ code --install-extension vista-meta-0.1.0.vsix
 ```
 
 Reload VSCode. Open any `.m` file in the `vista-meta` workspace —
-the "VistA Routine" panel appears under the Explorer view.
+the **VISTA ROUTINE** panel appears in the Explorer sidebar.
 
 ### 1.5 Verify
 
@@ -96,12 +120,221 @@ after the `—` marker.
 
 ---
 
-## 2. The CLI — `vista-meta`
+## 2. The VSCode extension
+
+[vscode-extension/](../vscode-extension/). No language server, no
+MCP, no container calls — pure reads of the code-model TSVs. That
+means the extension is instant, works offline, and has no way to
+break your workspace.
+
+### 2.1 Where the sidebar lives on screen
+
+When any `.m` file is the active editor, a **VISTA ROUTINE** panel
+appears in the **Explorer** view. To reach it: click the Explorer
+icon at the top of the Activity Bar (the two-documents glyph, or
+press `Ctrl+Shift+E`). VISTA ROUTINE is the last collapsible panel
+in the Explorer, below Open Editors, the workspace file tree,
+Outline, and Timeline.
+
+Opening
+[vista/vista-m-host/Packages/Accounts Receivable/Routines/PRCA45PT.m](../vista/vista-m-host/Packages/Accounts%20Receivable/Routines/PRCA45PT.m)
+renders this, with every section expanded:
+
+```
+# wireframe
+ Activity Bar   Explorer sidebar  (Ctrl+Shift+E)
+ ┌─────┐        ┌────────────────────────────────────────────────────┐
+ │     │        │ EXPLORER                                     · · · │
+ │  ≡  │        ├────────────────────────────────────────────────────┤
+ │     │        │ ▸ OPEN EDITORS                                     │
+ │ [▭] │❶       │                                                    │
+ │     │        ├────────────────────────────────────────────────────┤
+ │  ⌕  │        │ ▾ VISTA-META                                       │
+ │     │        │    ▸ bin/                                          │
+ │  ⎇  │        │    ▸ docs/                                         │
+ │     │        │    ▸ vista/                                        │
+ │  ▶  │        │    …                                               │
+ │     │        ├────────────────────────────────────────────────────┤
+ │  ▦  │        │ ▸ OUTLINE                                          │
+ │     │        ├────────────────────────────────────────────────────┤
+ └─────┘        │ ▸ TIMELINE                                         │
+                ├────────────────────────────────────────────────────┤
+                │ ▾ VISTA ROUTINE                              ⟳     │❷
+                │                                                    │
+                │   ▣ PRCA45PT  [Accounts Receivable]                │❸
+                │     74 lines · in=0 · out=5                        │
+                │                                                    │
+                │   ▾ Tags (5)                                       │❹
+                │      ƒ V          line 2                           │
+                │      ƒ EN         line 24                          │
+                │      ƒ 430        line 36                          │
+                │      ƒ 433        line 48                          │
+                │      ƒ XCLN       line 59                          │
+                │                                                    │
+                │   ▾ Callees (5)                                    │❺
+                │      ← BMES^XPDUTL      do  ×7                     │
+                │      ← MES^XPDUTL       do  ×6                     │
+                │      ← HOME^%ZIS        do  ×1                     │
+                │      ← ^%ZTLOAD         do  ×1                     │
+                │      ← ^DIK             do  ×1                     │
+                │                                                    │
+                │   ▾ Globals (1)                                    │❻
+                │      ⊡ ^PRCA            ×18                        │
+                │                                                    │
+                │   ▾ XINDEX (2)                                     │❼
+                │      ⓘ [S] Lock missing Timeout.                   │
+                │           430+5   line 41                          │
+                │      ⓘ [S] Lock missing Timeout.                   │
+                │           433+5   line 53                          │
+                └────────────────────────────────────────────────────┘
+```
+
+**Key**
+
+| | Pointing to | What it is |
+|---|---|---|
+| **❶** | Activity Bar Explorer icon | Click to open the file sidebar. Keyboard: `Ctrl+Shift+E`. |
+| **❷** | VISTA ROUTINE panel title | Contributed by the vista-meta extension; the `⟳` icon runs `vista-meta: Refresh Routine Sidebar` (use after regenerating TSVs or switching branches). |
+| **❸** | Header node | Routine name, package in brackets, stats pulled from `routines-comprehensive.tsv` (line count, in-degree, out-degree, plus `RPC×N` / `OPT×N` when nonzero). |
+| **❹** | Tags (N) | Labels parsed from the file on disk. Click a tag → reveal its line. |
+| **❺** | Callees (N) | Routines this one calls, aggregated from `routine-calls.tsv`, sorted by ref-count. Click → open the target routine. |
+| **❻** | Globals (N) | Distinct globals touched, with ref-counts. Read-only — no click target. |
+| **❼** | XINDEX (N) | Findings from `xindex-errors.tsv`. **Auto-expanded** so Fatals can't be missed; severity `F` → error icon, `W` → warning, rest → info. Numeric-line findings click → reveal that line. |
+
+Sections with zero entries are hidden entirely. PRCA45PT has
+`in_degree=0`, so no **Callers** section renders — it's not a bug.
+All sections except XINDEX start collapsed; click the `▸` twisty to
+open. Top-N per section is 15 (configurable via `vistaMeta.topN`).
+
+### 2.2 Reading the sidebar — VistA terminology primer
+
+VistA carries 40 years of medical-informatics jargon that can feel
+opaque if you're coming from modern web or enterprise stacks. Here's
+what the sidebar actually shows, in terms you already know.
+
+#### 2.2.1 The core concepts (translation table)
+
+| VistA term | Mainstream equivalent | Where it appears in the sidebar |
+|---|---|---|
+| **Routine** | Source file / module | The `.m` file you opened; rows in Callers/Callees |
+| **Tag** | Function / method entry point | Rows in the **Tags** section |
+| **Package** | Module / subsystem | Bracketed `[Accounts Receivable]` next to the routine name |
+| **Global** | Database table / persistent key-value store | `^PRCA` in the **Globals** section — the data this code reads or writes |
+| **FileMan file** | SQL table (with soft schema) | Not in the sidebar — see `vista-meta file N` |
+| **RPC** | Remote procedure / API endpoint | `RPC×N` badge in the routine header |
+| **Option** | Menu item (roll-and-scroll UI) | `OPT×N` badge in the routine header |
+| **Protocol** | Event handler / menu action | Shown on package pages |
+| **XINDEX** | Static analyzer / linter | The **XINDEX** section |
+| **KIDS** | Package installer / patch system | `.KID` files — see §6 |
+| **SAC** | Style / coding standard | Enforced by the pre-commit hook (§5) |
+| **IEN** | Primary key (auto-increment integer) | `Internal Entry Number` — embedded in global subscripts |
+| **Cross-reference** / **X-ref** | Index | Secondary indexes on global fields |
+| **Namespace prefix** | Package identifier | First 2–4 chars of a routine name (e.g. `PRCA*` = Accounts Receivable) |
+
+#### 2.2.2 The mental model
+
+**Globals = data.** The native MUMPS persistent array. Every byte of
+VistA data — patients, medications, appointments — is stored in a
+tree-shaped global like `^DPT(patient_id, 0)="SMITH,JOHN^M^..."`.
+Think "a filesystem of typed key-value pairs, with built-in indexes."
+
+**Routines = code.** A `.m` file with callable **tags** at column
+zero. Think "a Python module of functions, but the module name is
+8 chars max and functions live in a flat namespace."
+
+**Packages = subsystems.** Logical groupings — Pharmacy, Lab,
+Accounts Receivable — identified by a 2–4 char namespace prefix.
+The `PRCA45PT` routine is in the Accounts Receivable package because
+`PRCA*` routines are conventionally that package's namespace.
+
+**FileMan = the relational layer.** FileMan sits *on top of* globals
+and imposes a schema: **files** (tables), **fields** (columns),
+**records** (rows), and **cross-references** (indexes). Mental
+shorthand: "ORM invented in 1982, still running."
+
+**Three UI surfaces:**
+
+- **RPCs** — modern clients (CPRS, JLV, FHIR gateways) call these.
+- **Options** — the roll-and-scroll terminal menus that VA clerks use.
+- **Protocols** — event hooks and menu actions.
+
+#### 2.2.3 What each sidebar section answers
+
+| Section | Question it answers |
+|---|---|
+| **Tags** | "What are this file's functions?" (file TOC) |
+| **Callers** | "Who calls into this file?" (reverse call graph) |
+| **Callees** | "What does this file call?" (forward call graph) |
+| **Globals** | "What data does this file touch?" |
+| **XINDEX** | "What does the VA's official linter say about this file?" |
+
+When you open a routine, your first three questions are usually
+**"what does it do?"**, **"who depends on it?"**, and **"what data
+is involved?"** — the sidebar puts all three one click away without
+leaving the editor.
+
+### 2.3 Click behaviors
+
+Every clickable sidebar item acts as go-to-definition:
+
+- **Tags** → reveal the tag's line in the current editor.
+- **Callers** → open the caller routine at its header.
+- **Callees** → open the target routine.
+- **XINDEX** findings with a numeric line → reveal that line.
+  Severity maps to icon: `F` → error, `W` → warning, `S`/`I` → info.
+
+### 2.4 Commands
+
+Run from the command palette (`Ctrl+Shift+P`):
+
+- **`vista-meta: Refresh Routine Sidebar`** — re-analyze the active
+  file. Use after regenerating TSVs or switching branches.
+- **`vista-meta: Reload Code-Model TSVs`** — invalidate the
+  in-memory TSV cache. Run after `make sync-routines && make
+  routines-comprehensive`.
+
+### 2.5 Settings
+
+`Preferences → Settings → Extensions → vista-meta`:
+
+| Key | Default | Purpose |
+|---|---|---|
+| `vistaMeta.codeModelPath` | `vista/export/code-model` | Workspace-relative TSV dir |
+| `vistaMeta.vistaMHostPath` | `vista/vista-m-host` | Synced VistA-M source tree |
+| `vistaMeta.topN` | `15` | Max entries per section |
+
+All paths resolve relative to the first workspace folder.
+
+### 2.6 When the sidebar is empty
+
+The extension surfaces a message instead of silently showing nothing:
+
+- *"Open a VistA .m file to see its context."* — active editor isn't
+  a `.m` file.
+- *"Routine not found in code-model TSVs. Run `make sync-routines &&
+  make routines-comprehensive`."* — the active file isn't in the
+  synced corpus (e.g., a brand-new dev-r file).
+
+### 2.7 Rebuilding the extension
+
+```bash
+cd vscode-extension
+npx tsc -p .
+npx vsce package --no-dependencies --skip-license \
+                 --allow-missing-repository
+code --install-extension vista-meta-0.1.0.vsix --force
+```
+
+Reload VSCode to pick up the new version.
+
+---
+
+## 3. The CLI — `vista-meta`
 
 A single Python CLI with subcommands, implemented in
 [host/scripts/vista_meta_cli.py](../host/scripts/vista_meta_cli.py).
 
-### 2.1 `doctor` — environment health
+### 3.1 `doctor` — environment health
 
 ```bash
 vista-meta doctor
@@ -122,7 +355,7 @@ Reports:
 Exit 0 if every hard check passes, 1 otherwise. Run this any time
 something feels off.
 
-### 2.2 `pkg NAME` — package overview
+### 3.2 `pkg NAME` — package overview
 
 ```bash
 vista-meta pkg PSO
@@ -147,7 +380,7 @@ Prints:
 - Top 10 inbound/outbound package edges
 - Top 10 entry-point candidates (by in-degree)
 
-### 2.3 `context NAME` — AI context pack
+### 3.3 `context NAME` — AI context pack
 
 ```bash
 vista-meta context PSO                                    # headers only
@@ -160,11 +393,11 @@ prompt: package summary, FM files, RPCs, top edges, routines
 inventory, and optionally full source. `--with-source` budgets the
 source section at `--bytes` (default 200 KB).
 
-### 2.4 `where TAG^ROUTINE` — jump to source
+### 3.4 `where TAG^ROUTINE` — jump to source
 
 ```bash
 vista-meta where BYE^XUSCLEAN
-vista-meta where PSOVCC1         # no tag -> routine header
+vista-meta where PSOVCC1         # no tag → routine header
 vista-meta where ^XUSCLEAN       # same
 ```
 
@@ -172,7 +405,7 @@ Emits `path:line` with a 6-line source snippet, using a host-relative
 path so VSCode can make it clickable in terminals that support OSC 8
 or editor integrations.
 
-### 2.5 `callers TAG^ROUTINE` — caller graph
+### 3.5 `callers TAG^ROUTINE` — caller graph
 
 ```bash
 vista-meta callers BYE^XUSCLEAN
@@ -184,7 +417,7 @@ Aggregates callers by `caller_routine`, sums `ref_count`, sorts
 descending. Each line shows caller + caller package + per-tag
 breakdown.
 
-### 2.6 `search PATTERN` — annotated corpus grep
+### 3.6 `search PATTERN` — annotated corpus grep
 
 ```bash
 vista-meta search "HALT"                           # everywhere
@@ -199,7 +432,7 @@ each match with the owning package. `--tags-only` restricts to
 column-0 label lines — useful when you want definitions rather than
 every textual mention.
 
-### 2.7 `file N` — FileMan file overview
+### 3.7 `file N` — FileMan file overview
 
 ```bash
 vista-meta file 2                   # PATIENT
@@ -209,11 +442,12 @@ vista-meta file 200                 # NEW PERSON
 
 The data-model counterpart to `pkg`. Prints global root, record
 count, field count, DINUM flag, pointer-in / pointer-out counts,
-PIKS (joined from `piks.tsv`), properties (volatility/sensitivity/
-portability/volume/subdomain), top 15 "points out to" target files,
-top 15 "pointed to by" source files, and optionally a field preview.
+PIKS (joined from `piks.tsv`), properties (volatility / sensitivity /
+portability / volume / subdomain), top 15 "points out to" target
+files, top 15 "pointed to by" source files, and optionally a field
+preview.
 
-### 2.8 `new-test ROUTINE` — M-Unit test skeleton
+### 3.8 `new-test ROUTINE` — M-Unit test skeleton
 
 ```bash
 vista-meta new-test PSOVCC1                      # stdout
@@ -230,7 +464,7 @@ Reads the target's source, enumerates public tags, emits a
 
 You fill in the fixture setup and assertions.
 
-### 2.9 `lint FILES...` — doc-comment lint
+### 3.9 `lint FILES...` — doc-comment lint
 
 ```bash
 vista-meta lint vista/dev-r/VMPIKS.m
@@ -244,7 +478,7 @@ applies it automatically to newly-added files.
 
 Exit 0 if clean, 1 if issues found.
 
-### 2.10 `xindex FILE` — live XINDEX via the container
+### 3.10 `xindex FILE` — live XINDEX via the container
 
 ```bash
 vista-meta xindex /tmp/MYNEW.m
@@ -267,14 +501,14 @@ Exit 1 if any Fatal. Container identity is overridable via
 
 ---
 
-## 3. `mfmt` — canonical formatter
+## 4. `mfmt` — canonical formatter
 
 Deterministic, idempotent, minimal MUMPS formatter.
 [host/scripts/mfmt.py](../host/scripts/mfmt.py).
 
 ```bash
 bin/mfmt vista/dev-r/MYNEW.m              # rewrite in place
-bin/mfmt --check vista/dev-r/MYNEW.m      # dry run, exit 1 if changes needed
+bin/mfmt --check vista/dev-r/MYNEW.m      # dry run; exit 1 if changes needed
 bin/mfmt vista/dev-r                      # recurse into a directory
 ```
 
@@ -282,13 +516,13 @@ Rules applied:
 
 | Rule | Transformation |
 |---|---|
-| R1  | Strip trailing whitespace |
-| R2  | Leading tabs → spaces (1 tab = 1 space) |
-| R3  | File ends with exactly one LF |
-| R4  | Normalize `\r\n` / `\r` → `\n` |
+| R1 | Strip trailing whitespace |
+| R2 | Leading tabs → spaces (1 tab = 1 space) |
+| R3 | File ends with exactly one LF |
+| R4 | Normalize `\r\n` / `\r` → `\n` |
 
-Rules deliberately NOT applied (would require parsing MUMPS — string
-literals, DO-block `.` depth, command case in user code):
+Rules deliberately **not** applied (would require parsing MUMPS —
+string literals, DO-block `.` depth, command case in user code):
 
 - Command-case normalization
 - Body indent normalization
@@ -300,17 +534,17 @@ running it once. Clean corpus routines are a noop.
 
 ---
 
-## 4. The pre-commit hook
+## 5. The pre-commit hook
 
 [hooks/pre-commit](../hooks/pre-commit). Installed via
 `make install-hooks` → symlink `.git/hooks/pre-commit`.
 
-### 4.1 What it checks, per staged file type
+### 5.1 What it checks, per staged file type
 
 **`.m` files — newly added** (all rules apply to every line):
 
 - Line 1 must start at column 0 and contain `;`
-- Line 2 must start with `;;` (with optional single-space leading indent)
+- Line 2 must start with `;;` (optional single-space leading indent)
 - Every column-0 content must be a valid MUMPS label
   (`[%A-Za-z][A-Za-z0-9]*` or `[0-9]+`, optionally followed by
   `(...)` and then whitespace or `;`)
@@ -330,14 +564,14 @@ running it once. Clean corpus routines are a noop.
 This distinction matters: legacy VistA code doesn't follow every SAC
 rule, and the hook must not block edits to existing files just
 because a pre-existing line somewhere has a tab. It only cares about
-lines *you* added.
+lines **you** added.
 
 **`.kid` / `.KID` files:**
 
 - `kids_vc.py roundtrip` must pass (parse + re-assemble must be
   byte-semantically identical)
 
-### 4.2 Opt-in XINDEX gating
+### 5.2 Opt-in XINDEX gating
 
 Off by default because it needs the container. Enable per session:
 
@@ -350,7 +584,7 @@ Every staged `.m` is piped through the live XINDEX. Any Fatal blocks
 the commit. Container name overridable via
 `VISTA_META_CONTAINER=<name>`.
 
-### 4.3 Bypass (rare)
+### 5.3 Bypass (rare)
 
 ```bash
 git commit --no-verify -m "emergency fix, pre-merge cleanup follows"
@@ -358,7 +592,7 @@ git commit --no-verify -m "emergency fix, pre-merge cleanup follows"
 
 Use sparingly. The hook is usually right.
 
-### 4.4 Verification
+### 5.4 Verification
 
 Smoke-tested against a random 200-routine sample of the real
 WorldVistA corpus: zero false positives on modified files. Newly
@@ -366,90 +600,7 @@ added malformed files correctly flagged.
 
 ---
 
-## 5. The VSCode extension
-
-[vscode-extension/](../vscode-extension/). No language server, no
-MCP, no container calls — pure reads of the code-model TSVs.
-
-### 5.1 The sidebar
-
-When any `.m` file is the active editor, a "VistA Routine" panel
-appears under the Explorer view. Hierarchy:
-
-```
-<ROUTINE>  [<Package>]           in=… out=… RPC×… OPT×… · N lines
-├─ Tags (N)
-│   ├─ TAG1  (line X)
-│   └─ …
-├─ Callers (N)
-│   ├─ CALLER1  [package]  ×refcount
-│   └─ …
-├─ Callees (N)
-│   ├─ TAG^ROUTINE  kind  ×refcount
-│   └─ …
-├─ Globals (N)
-│   ├─ ^GLB  ×refcount
-│   └─ …
-└─ XINDEX (N)             # auto-expanded
-    ├─ [F] error text  (tag+offset  line N)
-    └─ …
-```
-
-Every clickable child acts as go-to-definition:
-
-- **Tags** reveal the tag's line in the open file
-- **Callers** open the caller routine at top (resolved via
-  `routines-comprehensive.tsv`)
-- **Callees** open the target routine
-- **XINDEX** findings reveal the offending line
-
-### 5.2 Commands
-
-Run from the command palette:
-
-- `vista-meta: Refresh Routine Sidebar` — re-analyze the active file.
-  Useful if you regenerated TSVs after starting VSCode.
-- `vista-meta: Reload Code-Model TSVs` — invalidate the in-memory
-  TSV cache. Run this after `make sync-routines && make
-  routines-comprehensive`.
-
-### 5.3 Settings
-
-`Preferences → Settings → Extensions → vista-meta`:
-
-| Key | Default | Purpose |
-|---|---|---|
-| `vistaMeta.codeModelPath` | `vista/export/code-model` | Workspace-relative TSV dir |
-| `vistaMeta.vistaMHostPath` | `vista/vista-m-host` | Synced VistA-M source tree |
-| `vistaMeta.topN` | 15 | Max entries per section |
-
-All paths are resolved relative to the first workspace folder.
-
-### 5.4 When the sidebar is empty
-
-The extension surfaces a message instead of silently showing nothing:
-
-- *"Open a VistA .m file to see its context."* — active editor isn't
-  a `.m` file
-- *"Routine not found in code-model TSVs. Run `make sync-routines &&
-  make routines-comprehensive`."* — the active file isn't in the
-  synced corpus (e.g., brand-new dev-r file)
-
-### 5.5 Rebuilding the extension after a source change
-
-```bash
-cd vscode-extension
-npx tsc -p .
-npx vsce package --no-dependencies --skip-license \
-                 --allow-missing-repository
-code --install-extension vista-meta-0.1.0.vsix --force
-```
-
-Reload VSCode to pick up the new version.
-
----
-
-## 6. Decomposed-on-disk patch workflow
+## 6. Patch workflow (decomposed-on-disk)
 
 Edit patches as trees of files, not `.KID` bundles. Assembly happens
 at build time via [host/scripts/kids_vc.py](../host/scripts/kids_vc.py).
@@ -478,14 +629,14 @@ patches/MYPKG_1_0_1001/
 
 ```bash
 make patch-decompose KID=downloaded/XU_8_0_1234.KID
-# -> patches/XU_8_0_1234/ tree you can git-add and edit
+# → patches/XU_8_0_1234/ tree you can git-add and edit
 ```
 
 ### 6.3 Assemble
 
 ```bash
 make patch-assemble DIR=patches/MYPKG_1_0_1001
-# -> patches/MYPKG_1_0_1001.KID
+# → patches/MYPKG_1_0_1001.KID
 ```
 
 ### 6.4 Validate round-trip
@@ -637,7 +788,7 @@ Before "why is my change not taking effect?" — run `doctor`. Most
 unexpected behavior has a root cause in "TSVs are stale" or
 "container is down".
 
-### 9.4 Turn XINDEX on once you're confident the container is stable
+### 9.4 Turn XINDEX on once the container is stable
 
 ```bash
 echo 'export VISTA_META_XINDEX=1' >> ~/.bashrc
@@ -676,8 +827,9 @@ If still empty, `bin/vista-meta doctor` — you likely need to sync.
 
 Try a narrower query. `vista-meta pkg foo` does substring matches;
 if nothing matches, it falls back to namespace-prefix inference. If
-that also fails, check `awk -F'\t' '{print $1}' vista/export/
-code-model/packages.tsv` for the exact list.
+that also fails, check
+`awk -F'\t' '{print $1}' vista/export/code-model/packages.tsv` for
+the exact list.
 
 ### `vista-meta xindex` errors with "container is not running"
 
@@ -699,8 +851,8 @@ Read the exact complaint. Usually:
   line at column 0; indent it with a single space
 - Line length — either shorten the line or break it into continuations
 
-If you're genuinely blocked: `git commit --no-verify` once and
-fix in the next commit.
+If you're genuinely blocked: `git commit --no-verify` once and fix
+in the next commit.
 
 ### `mfmt` won't idempotent
 
@@ -729,7 +881,7 @@ multi-folder workspace, set `vistaMeta.codeModelPath` absolutely
 
 ## 11. Reference
 
-- [host/scripts/vista_meta_cli.py](../host/scripts/vista_meta_cli.py) — every subcommand
+- [host/scripts/vista_meta_cli.py](../host/scripts/vista_meta_cli.py) — every CLI subcommand
 - [host/scripts/mfmt.py](../host/scripts/mfmt.py) — formatter
 - [hooks/pre-commit](../hooks/pre-commit) — the pre-commit hook
 - [vscode-extension/](../vscode-extension/) — extension source
