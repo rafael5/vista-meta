@@ -14,6 +14,104 @@ Status: provisional | verified | superseded by RF-NNN.
 
 ## 2026-04-19 — First analytical session
 
+### RF-028: SKIDS (Source KIDS) — abandoned VistA-on-git prior art, plus XPDK2VC in our own VEHU
+
+- **Date**: 2026-04-19
+- **Scope**: Investigate whether a project known as "SKIDS" (Source
+  KIDS) existed in VistA history — an attempt to bridge KIDS
+  (Kernel Installation & Distribution System) with git-based source
+  control. Prompted by a user question during code-model-guide
+  review. This RF captures the verified history to avoid future
+  ambiguity / misattribution.
+- **Method**: Web search against WorldVistA/OSEHRA GitHub orgs,
+  Hardhats mailing archives, O'Reilly Radar archive, and direct
+  grep of our own routines.tsv + source tree.
+- **Verified findings**:
+  - **SKIDS = Source KIDS**, confirmed real. Repository:
+    `github.com/WorldVistA/SKIDS`. Apache 2.0 license. Tagline:
+    *"Source KIDS to integrate KIDS distribution with traditional
+    revision control systems."*
+  - **Historical context**: born from OSEHRA's 2011 initiative to
+    put VistA under version control. O'Reilly Radar framed the
+    problem in *"OSEHRA's first challenge: VistA version control"*
+    (October 2011).
+  - **Approach**: hybrid KIDS-format-as-source-tree.
+    - `ParseKIDS.py` (Python, ~41% of repo) — parses `.KID`
+      distribution text files into per-component artifacts (one
+      file per routine, DD, RPC, security key, option, etc.),
+      suitable for git diff/merge.
+    - `ZDIOUT1.m` (MUMPS, ~59% of repo) — in-VistA companion that
+      exports components directly to filesystem.
+    - **Premise**: keep KIDS as the *deployment* format, but
+      decompose every KIDS build into per-component text files so
+      git can track individual items independently.
+  - **Status**: **dormant / abandoned prototype.** 14 total commits
+    on master, 0 releases, 0 open issues, 0 open PRs. Labeled
+    experimental; never reached production adoption.
+  - **What actually succeeded**: a much simpler path —
+    `github.com/WorldVistA/VistA-M` (the repo this project's
+    Dockerfile pulls from per ADR-002) just stores M routines as
+    individual `.m` files under `Packages/<pkg>/Routines/*.m`,
+    sidestepping SKIDS's per-component-decomposition premise
+    entirely. The SKIDS dream was realized by a simpler engineering
+    path. This is the approach documented in
+    `docs/code-model-guide.md` §3.1 as "modern practice (2015+,
+    OSEHRA/WorldVistA)".
+- **Independent second bridge — found in our VEHU**:
+  - The search surfaced **`XPDK2VC.m`** (plus companions
+    `XPDK2V0`, `XPDK2V1`, `XPDK2VG`) in our VEHU routine corpus.
+  - Header: `VEN/SMH - KIDS to Version Control Main Routine`.
+  - **Author**: Sam Habiel (`SMH`, OSEHRA Product Management).
+    GitHub: `github.com/shabiel`.
+  - **Patch**: KERNEL 8.0 \*11310, released March 2014.
+  - **Approach**: opposite of SKIDS — **in-VistA Kernel-integrated
+    KIDS→VCS export tool**. Runs inside VistA, walks KIDS builds,
+    writes components to disk. Designed for ongoing round-trip,
+    not one-shot parsing.
+  - **Location in our corpus**:
+    `/opt/VistA-M/Packages/Kernel/Routines/XPDK2VC.m`;
+    indexed in `vista/export/code-model/routines.tsv` at line
+    37028.
+  - **Unrelated to SKIDS** — different team, different approach,
+    parallel solution to the same problem from the in-VistA side.
+    Both predate the simpler "just put `.m` files in git" outcome.
+- **Evidence**:
+  - [github.com/WorldVistA/SKIDS](https://github.com/WorldVistA/SKIDS)
+    (14 commits, abandoned)
+  - O'Reilly Radar, "OSEHRA's first challenge: VistA version
+    control" (2011):
+    http://radar.oreilly.com/2011/10/osehra-vista-version-control.html
+  - Cracking VistA Version Control, Nikolay Topalov (2014):
+    https://nikolaytopalov.wordpress.com/2014/01/30/cracking-vista-version-control/
+  - [github.com/WorldVistA/VistA-M](https://github.com/WorldVistA/VistA-M)
+    (the successor approach we actually use)
+  - [github.com/shabiel](https://github.com/shabiel) — Sam Habiel,
+    XPDK2VC author
+  - Local: `vista/vista-m-host/Packages/Kernel/Routines/XPDK2VC.m`
+- **Attribution corrections** (relative to my earlier guess):
+  - **Christopher Edwards** — is the M-Unit fork maintainer
+    (ADR-015, Dockerfile:185). Not tied to SKIDS.
+  - **David Whitten** — credited in XINDEX commit history
+    (RF-027) but no SKIDS attribution surfaced.
+  - **Rick Marshall** — my earlier guess; no hits. Likely a name
+    partially remembered from a different VistA-adjacent context.
+- **Implications**:
+  - The SKIDS approach (decompose KIDS builds into per-component
+    files) was over-engineered for the actual need. The community
+    converged on "`.m` files in git + KIDS for deployment" which is
+    what we use.
+  - **We have a working KIDS→VCS tool (`XPDK2VC`) already in our
+    VEHU** that we haven't exercised. If future analytical work
+    wants to capture current-VistA KIDS manifests as version-
+    controlled artifacts, XPDK2VC is the ready-made in-VistA path.
+    Worth recording as a candidate Phase 8+ if "track KIDS patches
+    as commits" ever becomes a goal.
+  - `docs/code-model-guide.md` §3.1 (Develop — Traditional VA
+    model vs Modern OSEHRA/WorldVistA) is the natural place to
+    cite SKIDS and XPDK2VC. Optional follow-up: fold a short
+    mention + these references into that section.
+- **Status**: verified (external sources + in-corpus verification)
+
 ### RF-027: XINDEX provenance clarification — VEHU blend, not WorldVistA/XINDEX master
 
 - **Date**: 2026-04-19
