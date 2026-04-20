@@ -14,6 +14,119 @@ Status: provisional | verified | superseded by RF-NNN.
 
 ## 2026-04-19 — First analytical session
 
+### RF-031: kids-vc Phases 8b/8c/8d/8e — FIA + DD-code + ZWR merge + CI
+
+- **Date**: 2026-04-19
+- **Scope**: Complete the four remaining kids-vc phases (8b FIA
+  decomposition, 8c DD-embedded MUMPS extraction, 8d ZWR git
+  merge driver, 8e CI pipeline) in one unattended session per
+  kids-vc-guide §6.3.
+- **Phase 8b — FIA decomposition + expanded well-known file map**:
+  - Two new real fixtures: `DG_5_3_853.kid` (Veterans
+    Transportation System — OPTION/PROTOCOL/SECURITY-KEY/HL7
+    KRN entries + File 2 FIA) and `XU_8_0_504.kid` (KAAJEE —
+    OPTION/REMOTE-PROCEDURE/SECURITY-KEY).
+  - Both round-trip on first try without code changes. 566 +
+    257 subscripts across 7 section types each.
+  - `WELL_KNOWN_FILES` expanded from 8 to 24 entries covering
+    Kernel UI (.4/.401/.402/.403/.404), Kernel core (3.7/3.8/
+    9.2/9.4/9.6/9.7/9.8/19/19.1/19.2), OE/RR (100/101/101.41),
+    person (2/200), HL7 (771/870/871/872), parameters (8989.51/
+    8989.52), RPCs (8993/8994).
+  - FIA → `Files/<fnum>+<name>/DD.zwr` + `Data.zwr` per file.
+- **Phase 8c — DD-embedded MUMPS extraction**:
+  - New synthetic fixture `VMDD_1_0_1.kid` with file 999,
+    field .01 NAME (input transform + B-xref set/kill), field 2
+    COMPUTED AGE (type-C with caret-bearing MUMPS).
+  - `_extract_dd_code` walks `^DD` pairs and emits per-field
+    `.m` annotation files under `DD-code/`:
+    - `<field>.input-transform.m` (0-node piece 5)
+    - `<field>.computed.m` (type-C, pieces 5+ joined)
+    - `<field>.computed-wp.m` (from `,9,N,0` word-proc code)
+    - `<field>.xref-<ien>.xref-set.m`
+    - `<field>.xref-<ien>.xref-kill.m`
+    - `_README.md` explaining DD.zwr stays authoritative
+  - **SUBSCRIPT_RE bug caught and fixed**: original regex
+    `^"[A-Z]` rejected `"^DD"` lines (caret prefix). All ^DD
+    content was silently discarded across phases 8a/8a.1/8b.
+    Fixed to `^"\^?[A-Z]`. All prior fixtures re-verified round-
+    trip after the fix.
+  - Subfile field support: field path now joins all subscripts
+    between file number and 0-node (e.g., `sub2.3000` for
+    `^DD,2,2,3000,0`).
+  - Trivial snippets (`""`, `"Q"`, `"K"`, etc.) skipped.
+  - Computed-field caret-in-MUMPS handled: for type-C fields,
+    pieces 5+ are rejoined to preserve `$$NOW^XLFDT()` style
+    references.
+- **Phase 8d — ZWR git merge driver + test suite**:
+  - `host/scripts/zwr_merge.py` — entry-level 3-way merge for
+    ZWR files. Line-based git merge is destructive for ZWR
+    because adjacent entries are semantically independent.
+  - Standard 3-way semantics: non-overlapping edits clean,
+    identical edits clean, conflicting modify-modify gets
+    `<<<<<<< ours / ======= / >>>>>>> theirs` markers, add-on
+    clean, delete clean when paired with no-op, delete-vs-modify
+    conflicts.
+  - `host/scripts/test_zwr_merge.py` — 7-case test suite. All pass:
+    - non-overlapping edits → clean
+    - identical edits → clean
+    - conflicting modify-modify → conflict
+    - addition by one side → clean
+    - deletion by one side → clean
+    - delete-vs-modify → conflict
+    - add-add different values → conflict
+  - Installed via `make zwr-merge-install`: writes
+    `*.zwr merge=zwr` to `.gitattributes` + sets
+    `merge.zwr.driver` in `.git/config`. Installed in this repo
+    already.
+- **Phase 8e — CI pipeline**:
+  - `.github/workflows/kids-vc-ci.yml` with 3 jobs:
+    - `roundtrip` — round-trip every `.kid` fixture +
+      decompose sanity (non-empty output)
+    - `zwr-merge` — run the 7-case zwr_merge test suite
+    - `lint-check` — `py_compile` + module import for all three
+      Python scripts
+  - Triggers: push to `main` or `kids-vc/**` branches, plus PRs,
+    when kids-vc-related paths change.
+  - Python 3.12 on Ubuntu latest. No Docker required — all
+    pure-Python tests.
+  - All 3 jobs pass locally in equivalent run.
+- **Deferred to future work** (not required by kids-vc-guide MVP):
+  - Principled IEN substitution — MVP preserves IENs; only matters
+    for cross-instance diffs, not single-source-of-truth repos.
+  - Multi-line WP values in KIDS text format — no real fixture
+    has surfaced any yet.
+  - Container-based CI integrating XINDEX validation (would need
+    VEHU image in the runner — heavier setup).
+  - FileMan DATA section (seed data) deep decomposition — current
+    Data.zwr is flat.
+- **Combined test status**: **5 fixtures round-trip, 7 merge
+  tests pass, 3 lint/import checks pass, 15 total green CI-equivalent checks.**
+- **Evidence**:
+  - `host/scripts/kids_vc.py` (Phases 8a/8b/8c)
+  - `host/scripts/zwr_merge.py` (Phase 8d)
+  - `host/scripts/test_zwr_merge.py` (Phase 8d test suite)
+  - `host/scripts/kids_vc_fixtures/` (5 fixtures: VMTEST, OR,
+    DG, XU, VMDD)
+  - `.gitattributes` (ZWR merge routing)
+  - `.github/workflows/kids-vc-ci.yml` (CI)
+  - `make kids-vc-all` / `make zwr-merge-test` / `make
+    zwr-merge-install` (Makefile targets)
+- **Phase 8 complete.** kids-vc successor per kids-vc-guide
+  §6.3 minimum viable scope is delivered:
+  1. Decomposition — XPDK2VC's component dispatch, ported ✓
+  2. Diff-stable output — line-2 canonicalization ✓ (IEN
+     substitution deferred; not needed for single-repo workflow)
+  3. Round-trip verified — automated across 5 fixtures ✓
+  4. DD-embedded MUMPS extraction — new capability, annotation
+     model ✓
+  5. ZWR merge driver — 3-way entry-level, 7-case tested ✓
+  6. Git wrapper — explicit `zwr-merge-install` + `.gitattributes`
+     integration ✓
+  7. CI — GitHub Actions workflow with 3 jobs ✓ (bonus; not
+     required by guide)
+- **Status**: verified (all automated tests green)
+
 ### RF-030: Phase 8a.1 — kids-vc MVP validated against a real VistA .KID file
 
 - **Date**: 2026-04-19

@@ -1,0 +1,98 @@
+name: kids-vc CI
+
+# Phase 8e of kids-vc: validate kids-vc tool + ZWR merge driver on every
+# push and PR. Pure-Python tests only — no VistA container required.
+#
+# Runs:
+#   - Round-trip every .kid fixture in host/scripts/kids_vc_fixtures/
+#   - ZWR 3-way merge driver test suite (7 cases)
+#
+# Deferred to future CI: XINDEX validation (needs VEHU container), PIKS
+# extraction (needs YottaDB runtime). Those belong in a heavier
+# container-based workflow.
+
+on:
+  push:
+    branches:
+      - main
+      - 'kids-vc/**'
+    paths:
+      - 'host/scripts/kids_vc.py'
+      - 'host/scripts/zwr_merge.py'
+      - 'host/scripts/test_zwr_merge.py'
+      - 'host/scripts/kids_vc_fixtures/**'
+      - '.github/workflows/kids-vc-ci.yml'
+  pull_request:
+    paths:
+      - 'host/scripts/kids_vc.py'
+      - 'host/scripts/zwr_merge.py'
+      - 'host/scripts/test_zwr_merge.py'
+      - 'host/scripts/kids_vc_fixtures/**'
+
+jobs:
+  roundtrip:
+    name: Round-trip every .kid fixture
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Round-trip all fixtures
+        run: |
+          fail=0
+          for f in host/scripts/kids_vc_fixtures/*.kid; do
+            echo "--- $(basename "$f") ---"
+            if ! python3 host/scripts/kids_vc.py roundtrip "$f"; then
+              fail=1
+            fi
+          done
+          exit $fail
+      - name: Decompose sanity (every fixture produces non-empty output)
+        run: |
+          for f in host/scripts/kids_vc_fixtures/*.kid; do
+            name=$(basename "$f" .kid)
+            outdir="/tmp/ci-decompose-$name"
+            rm -rf "$outdir"
+            python3 host/scripts/kids_vc.py decompose "$f" "$outdir"
+            file_count=$(find "$outdir" -type f | wc -l)
+            if [ "$file_count" -lt 2 ]; then
+              echo "FAIL: $name decompose produced only $file_count files" >&2
+              exit 1
+            fi
+            echo "OK: $name → $file_count files"
+          done
+
+  zwr-merge:
+    name: ZWR merge driver tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run zwr_merge test suite
+        run: python3 host/scripts/test_zwr_merge.py
+
+  lint-check:
+    name: Lint & import check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Syntax check — compile each script
+        run: |
+          for f in host/scripts/kids_vc.py host/scripts/zwr_merge.py host/scripts/test_zwr_merge.py; do
+            python3 -m py_compile "$f"
+            echo "OK: $f"
+          done
+      - name: Import kids_vc — ensure module loads clean
+        run: |
+          cd host/scripts
+          python3 -c "import kids_vc; print('kids_vc imported')"
+          python3 -c "import zwr_merge; print('zwr_merge imported')"
