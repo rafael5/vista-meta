@@ -12,7 +12,7 @@ uppercase convention (RF-018), we join via the ROUTINE field through
 routines.tsv to get the canonical package — sidestepping the
 case-mismatch.
 
-Reads (all from vista/export/normalized/):
+Reads (all from vista/export/code-model/):
   - packages.tsv            (routine counts, total lines)
   - routines.tsv            (routine → package mapping)
   - package-piks-summary.tsv (PIKS distribution of shipped files)
@@ -22,7 +22,7 @@ Reads (all from vista/export/normalized/):
   - routine-calls.tsv       (routine → routine edges)
 
 Writes:
-  - vista/export/normalized/package-manifest.tsv  (~176 rows × 13 cols)
+  - vista/export/code-model/package-manifest.tsv  (~176 rows × 13 cols)
 """
 
 from __future__ import annotations
@@ -32,7 +32,7 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-NORM = Path(__file__).resolve().parents[2] / "vista/export/normalized"
+NORM = Path(__file__).resolve().parents[2] / "vista/export/code-model"
 OUT_TSV = NORM / "package-manifest.tsv"
 
 FIELDS = [

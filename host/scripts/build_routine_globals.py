@@ -22,7 +22,7 @@ Reads:
   - Each .m file under vista/vista-m-host/Packages/.../Routines/
 
 Writes:
-  - vista/export/normalized/routine-globals.tsv
+  - vista/export/code-model/routine-globals.tsv
     columns: routine_name, package, global_name, ref_count
     one row per (routine, global) pair
 """
@@ -38,7 +38,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 HOST_SNAPSHOT = PROJECT_ROOT / "vista/vista-m-host"
 MANIFEST = HOST_SNAPSHOT / "MANIFEST.tsv"
-OUT_TSV = PROJECT_ROOT / "vista/export/normalized/routine-globals.tsv"
+OUT_TSV = PROJECT_ROOT / "vista/export/code-model/routine-globals.tsv"
 
 CONTAINER_PREFIX = "/opt/VistA-M/"
 HOST_PREFIX = str(HOST_SNAPSHOT) + "/"

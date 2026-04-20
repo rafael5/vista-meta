@@ -21,7 +21,7 @@ VMDUMP98 ;vista-meta — extract File 9.8 (ROUTINE) to TSV
  ;
  ;Output path is /tmp because vehu doesn't own the bind-mounted
  ;/home/vehu/export tree (it's ubuntu-owned from the host side). The
- ;Makefile target docker-cps the file out to the normalized directory.
+ ;Makefile target docker-cps the file out to vista/export/code-model/.
  ;
  Q
  ;

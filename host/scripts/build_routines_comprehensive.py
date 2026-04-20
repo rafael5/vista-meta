@@ -4,7 +4,7 @@
 
 """Build routines-comprehensive.tsv — one row per routine, all signals joined.
 
-Reads (all from vista/export/normalized/):
+Reads (all from vista/export/code-model/):
   - routines.tsv           (base inventory + static features)
   - vista-file-9-8.tsv     (VistA Kernel's view of the routine)
   - rpcs.tsv               (is-RPC signal from File 8994)
@@ -14,7 +14,7 @@ Reads (all from vista/export/normalized/):
   - protocol-calls.tsv     (invocations from File 101 ENTRY/EXIT ACTION)
 
 Writes:
-  - vista/export/normalized/routines-comprehensive.tsv  (39,330 rows × 20 cols)
+  - vista/export/code-model/routines-comprehensive.tsv  (39,330 rows × 20 cols)
 
 protocol_invoked_count column captures the Phase 5b result: how many
 distinct protocols invoke this routine via ENTRY or EXIT ACTION.
@@ -27,7 +27,7 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-NORM = Path(__file__).resolve().parents[2] / "vista/export/normalized"
+NORM = Path(__file__).resolve().parents[2] / "vista/export/code-model"
 OUT_TSV = NORM / "routines-comprehensive.tsv"
 
 FIELDS = [

@@ -16,11 +16,11 @@ edges are omitted (sparse). Callees not in MANIFEST (T-002 cohort) are
 skipped — they have no canonical package assignment.
 
 Reads:
-  - vista/export/normalized/routines.tsv       (routine → package)
-  - vista/export/normalized/routine-calls.tsv  (edges)
+  - vista/export/code-model/routines.tsv       (routine → package)
+  - vista/export/code-model/routine-calls.tsv  (edges)
 
 Writes:
-  - vista/export/normalized/package-edge-matrix.tsv
+  - vista/export/code-model/package-edge-matrix.tsv
 """
 
 from __future__ import annotations
@@ -30,7 +30,7 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-NORM = Path(__file__).resolve().parents[2] / "vista/export/normalized"
+NORM = Path(__file__).resolve().parents[2] / "vista/export/code-model"
 OUT_TSV = NORM / "package-edge-matrix.tsv"
 
 FIELDS = [

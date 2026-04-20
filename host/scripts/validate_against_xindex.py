@@ -5,14 +5,14 @@
 
 """Validate our regex extractions against XINDEX ground truth.
 
-Reads (all from vista/export/normalized/):
+Reads (all from vista/export/code-model/):
   - routines.tsv             (our Phase 1b/2a — line_count, tag_count)
   - routine-calls.tsv        (our Phase 5 — routine→routine edges)
   - xindex-routines.tsv      (XINDEX — line_count, tag_count, xref_count)
   - xindex-xrefs.tsv         (XINDEX — routine → external refs)
 
 Writes:
-  - vista/export/normalized/xindex-validation.tsv
+  - vista/export/code-model/xindex-validation.tsv
     one row per routine (joined inner on the ones XINDEX processed)
     columns:
       routine, package,
@@ -32,7 +32,7 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-NORM = Path(__file__).resolve().parents[2] / "vista/export/normalized"
+NORM = Path(__file__).resolve().parents[2] / "vista/export/code-model"
 OUT_TSV = NORM / "xindex-validation.tsv"
 
 FIELDS = [

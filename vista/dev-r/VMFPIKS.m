@@ -23,7 +23,7 @@ RUN ;Classify fields and write TSV
  W "Loaded ",$O(FPIKS(""),-1)," file PIKS classifications",!
  ;
  ; Write output
- N PATH S PATH="/home/vehu/export/normalized/field-piks.tsv"
+ N PATH S PATH="/home/vehu/export/data-model/field-piks.tsv"
  O PATH:NEWVERSION U PATH
  ;
  ; Header
@@ -111,7 +111,7 @@ LOADPIKS(FPIKS) ;Load PIKS from piks.tsv + piks-triage.tsv
  ; Use ZSYSTEM to read files via shell — avoids YDB device I/O complexity
  N CMD,LINE,IO S IO=$I
  ; Read piks.tsv
- S CMD="cat /home/vehu/export/normalized/piks.tsv | tail -n +2"
+ S CMD="cat /home/vehu/export/data-model/piks.tsv | tail -n +2"
  O "pipe":(COMMAND=CMD:READONLY)::"PIPE" U "pipe"
  F  R LINE:5 Q:$T=0  Q:LINE=""  D
  . N FN,PK S FN=$P(LINE,$C(9),1),PK=$P(LINE,$C(9),2)
@@ -119,7 +119,7 @@ LOADPIKS(FPIKS) ;Load PIKS from piks.tsv + piks-triage.tsv
  . S FPIKS(FN)=PK
  C "pipe" U IO
  ; Read triage supplement
- S CMD="cat /home/vehu/export/normalized/piks-triage.tsv 2>/dev/null | tail -n +2"
+ S CMD="cat /home/vehu/export/data-model/piks-triage.tsv 2>/dev/null | tail -n +2"
  O "pipe2":(COMMAND=CMD:READONLY)::"PIPE" U "pipe2"
  F  R LINE:5 Q:$T=0  Q:LINE=""  D
  . N FN,PK S FN=$P(LINE,$C(9),1),PK=$P(LINE,$C(9),2)

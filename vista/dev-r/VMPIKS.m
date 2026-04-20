@@ -95,7 +95,7 @@ RUN ;Full classification run
  S INHCOUNT=INHCOUNT+INHCOUNT2
  ;
  ; === Write piks.tsv ===
- N PATH S PATH="/home/vehu/export/normalized/piks.tsv"
+ N PATH S PATH="/home/vehu/export/data-model/piks.tsv"
  O PATH:NEWVERSION U PATH
  W "file_number",$C(9),"piks",$C(9),"piks_method",$C(9),"piks_confidence",$C(9),"piks_evidence",!
  S FILE=""

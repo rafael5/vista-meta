@@ -28,7 +28,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 HOST_SNAPSHOT = PROJECT_ROOT / "vista/vista-m-host"
 PACKAGES_DIR = HOST_SNAPSHOT / "Packages"
-OUT_DIR = PROJECT_ROOT / "vista/export/normalized"
+OUT_DIR = PROJECT_ROOT / "vista/export/code-model"
 OUT_TSV = OUT_DIR / "package-data.tsv"
 
 CONTAINER_PREFIX = str(HOST_SNAPSHOT) + "/"

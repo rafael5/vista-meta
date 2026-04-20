@@ -10,10 +10,10 @@ to Phase 5 because it only parses .m source — protocol ENTRY ACTIONs
 live in FileMan data, not in routine source.
 
 Reads:
-  - vista/export/normalized/protocols.tsv
+  - vista/export/code-model/protocols.tsv
 
 Writes:
-  - vista/export/normalized/protocol-calls.tsv
+  - vista/export/code-model/protocol-calls.tsv
     columns: protocol_name, protocol_package, action_kind (entry|exit),
              callee_tag, callee_routine, call_kind (do/goto/job/func),
              ref_count
@@ -27,7 +27,7 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-NORM = Path(__file__).resolve().parents[2] / "vista/export/normalized"
+NORM = Path(__file__).resolve().parents[2] / "vista/export/code-model"
 IN_TSV = NORM / "protocols.tsv"
 OUT_TSV = NORM / "protocol-calls.tsv"
 

@@ -11,9 +11,17 @@ Hybrid tracking:
 - `vista/export/<exporter>/raw/` — gitignored (regenerable via bake).
 - `vista/export/<exporter>/INDEX.tsv` — tracked (small manifest, diffable).
 - `vista/export/<exporter>/summary.md` — tracked (human summary, diffable).
-- `vista/export/normalized/` — tracked entirely (your conceptual layer, the project's actual output).
+- `vista/export/data-model/` — tracked entirely (FileMan + PIKS slice, the project's actual output).
+- `vista/export/code-model/` — tracked entirely (routines/packages/XINDEX slice, the project's actual output).
+- `vista/export/RESEARCH.md` — tracked (research log, cross-cutting across both slices).
 - `vista/export/logs/` — gitignored.
 - `vista/export/.vista-meta-initialized` — tracked (sentinel JSON is small and meaningful).
+
+*(Note: original wording was `vista/export/normalized/` — tracked entirely.
+The normalized/ folder was split into `data-model/` and `code-model/` after
+ADR-045 established the separate-data-and-code classification. RESEARCH.md
+moved up one level to avoid being in either slice. The tracking intent is
+unchanged.)*
 
 `.gitignore` rules:
 ```
@@ -24,7 +32,7 @@ vista/export/logs/
 ## Consequences
 - Positive: Repo stays small; only meaningful diffs are tracked.
 - Positive: INDEX.tsv diffs show what VEHU-M updates changed (new files, renamed fields).
-- Positive: `normalized/` is the project's IP — tracked everywhere it lives.
+- Positive: `data-model/` + `code-model/` are the project's IP — tracked everywhere they live.
 - Negative: Raw dumps not in history; if you want to compare raw outputs from two dates, snapshot manually.
 - Neutral: Clear mental model — "raw is regenerable, curated is versioned."
 

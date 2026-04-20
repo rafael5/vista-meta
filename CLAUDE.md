@@ -25,7 +25,9 @@ Code is **edited on the host**, **executed in the container**. The boundary matt
 | `vista/dev-r/` | container (bind mount) | Your M routines — shadows VEHU via $ZRO |
 | `vista/scripts/` | container (bind mount) | Python + shell analysis scripts |
 | `vista/export/` | container (bind mount) | Bake output, logs, sentinel JSON, research log |
-| `vista/export/normalized/` | container (bind mount) | Curated analytical output (git-tracked) |
+| `vista/export/data-model/` | container (bind mount) | FileMan + PIKS extracted model (git-tracked) |
+| `vista/export/code-model/` | container (bind mount) | Routines + packages + XINDEX extracted model (git-tracked) |
+| `vista/export/RESEARCH.md` | container (bind mount) | Cross-cutting research log (RF-NNN, git-tracked) |
 | `docs/` | host only | Spec, ADRs, build log, dependency manifest |
 | `host/` | host only | Host-side Python venv for post-hoc analysis |
 | `tests/smoke/` | host (against container) | Post-build verification |
@@ -85,14 +87,15 @@ Every element traces down to `^DD` source. Coverage tracked in `coverage.json`.
 | Architecture + contracts | `docs/vista-meta-spec-v0.4.md` | What to build |
 | Decision rationale | `docs/adr/NNN-*.md` | Why we chose X over Y |
 | Implementation errors/fixes | `docs/build-log.md` | What went wrong and how it was fixed |
-| VistA metadata discoveries | `vista/export/normalized/RESEARCH.md` | What we learned about VistA |
+| VistA metadata discoveries | `vista/export/RESEARCH.md` | What we learned about VistA |
+| XINDEX reference | `docs/xindex-reference.md` | What XINDEX extracts vs our ad-hoc tools |
 | Upstream pinning | `docs/dependencies.md` | Exact versions of everything in the image |
 
 ## Session start checklist (analytical work)
 
 1. Read this file (automatic)
-2. Read `vista/export/normalized/RESEARCH.md` — prior findings
-3. Read `vista/export/normalized/coverage.json` — PIKS classification progress
+2. Read `vista/export/RESEARCH.md` — prior findings (RF-001 through latest)
+3. Scan `vista/export/data-model/` + `vista/export/code-model/` — extracted model state
 4. Read `vista/export/.vista-meta-initialized` — bake status
 5. Check `docs/build-log.md` tail — recent issues (if doing infra work)
 

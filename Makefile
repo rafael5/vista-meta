@@ -178,9 +178,9 @@ package-data: ## Inventory Globals/*.zwr exports → package-data.tsv (ADR-045)
 
 .PHONY: package-piks
 package-piks: ## Join package-data × files.tsv → per-package PIKS distribution (ADR-045)
-	@[ -f vista/export/normalized/package-data.tsv ] || \
+	@[ -f vista/export/code-model/package-data.tsv ] || \
 		{ echo "Run 'make package-data' first."; exit 1; }
-	@[ -f vista/export/normalized/files.tsv ] || \
+	@[ -f vista/export/data-model/files.tsv ] || \
 		{ echo "files.tsv missing (from PIKS work)."; exit 1; }
 	/usr/bin/python3 host/scripts/build_package_piks_summary.py
 
@@ -198,7 +198,7 @@ routine-calls: ## Scan each routine for DO/GOTO/JOB and $$ calls → routine-cal
 
 .PHONY: protocol-calls
 protocol-calls: ## Scan protocol ENTRY/EXIT ACTION for routine calls (ADR-045 Phase 5b)
-	@[ -f vista/export/normalized/protocols.tsv ] || \
+	@[ -f vista/export/code-model/protocols.tsv ] || \
 		{ echo "Run 'make dump-file-101' first."; exit 1; }
 	/usr/bin/python3 host/scripts/build_protocol_calls.py
 
@@ -206,8 +206,8 @@ protocol-calls: ## Scan protocol ENTRY/EXIT ACTION for routine calls (ADR-045 Ph
 package-manifest: ## Join everything into per-package manifest (ADR-045 Phase 6a)
 	@for f in packages.tsv routines.tsv package-piks-summary.tsv rpcs.tsv \
 	          options.tsv routine-globals.tsv routine-calls.tsv; do \
-		[ -f vista/export/normalized/$$f ] || \
-			{ echo "Missing: vista/export/normalized/$$f"; exit 1; }; \
+		[ -f vista/export/code-model/$$f ] || \
+			{ echo "Missing: vista/export/code-model/$$f"; exit 1; }; \
 	done
 	/usr/bin/python3 host/scripts/build_package_manifest.py
 
@@ -215,65 +215,65 @@ package-manifest: ## Join everything into per-package manifest (ADR-045 Phase 6a
 routines-comprehensive: ## Per-routine comprehensive view joining all signals (ADR-045 Phase 6b)
 	@for f in routines.tsv vista-file-9-8.tsv rpcs.tsv options.tsv \
 	          routine-calls.tsv routine-globals.tsv; do \
-		[ -f vista/export/normalized/$$f ] || \
-			{ echo "Missing: vista/export/normalized/$$f"; exit 1; }; \
+		[ -f vista/export/code-model/$$f ] || \
+			{ echo "Missing: vista/export/code-model/$$f"; exit 1; }; \
 	done
 	/usr/bin/python3 host/scripts/build_routines_comprehensive.py
 
 .PHONY: package-edge-matrix
 package-edge-matrix: ## Package-to-package call edge matrix (ADR-045 Phase 6c)
-	@[ -f vista/export/normalized/routines.tsv ] || \
+	@[ -f vista/export/code-model/routines.tsv ] || \
 		{ echo "Missing routines.tsv"; exit 1; }
-	@[ -f vista/export/normalized/routine-calls.tsv ] || \
+	@[ -f vista/export/code-model/routine-calls.tsv ] || \
 		{ echo "Missing routine-calls.tsv"; exit 1; }
 	/usr/bin/python3 host/scripts/build_package_edge_matrix.py
 
 .PHONY: dump-file-9-8
 dump-file-9-8: ## Dump File 9.8 (ROUTINE) via VMDUMP98 → vista-file-9-8.tsv (ADR-045 Phase 4a)
 	$(DOCKER) exec -u vehu $(CONTAINER) bash -lc 'echo "D RUN^VMDUMP98 H" | $$ydb_dist/mumps -direct'
-	$(DOCKER) cp $(CONTAINER):/tmp/vista-file-9-8.tsv vista/export/normalized/vista-file-9-8.tsv
+	$(DOCKER) cp $(CONTAINER):/tmp/vista-file-9-8.tsv vista/export/code-model/vista-file-9-8.tsv
 	$(DOCKER) exec -u vehu $(CONTAINER) rm -f /tmp/vista-file-9-8.tsv
-	@echo "Written: vista/export/normalized/vista-file-9-8.tsv"
-	@wc -l vista/export/normalized/vista-file-9-8.tsv
+	@echo "Written: vista/export/code-model/vista-file-9-8.tsv"
+	@wc -l vista/export/code-model/vista-file-9-8.tsv
 
 .PHONY: dump-file-8994
 dump-file-8994: ## Dump File 8994 (REMOTE PROCEDURE) via VMDUMP8994 → rpcs.tsv (ADR-045 Phase 4b)
 	$(DOCKER) exec -u vehu $(CONTAINER) bash -lc 'echo "D RUN^VMDUMP8994 H" | $$ydb_dist/mumps -direct'
-	$(DOCKER) cp $(CONTAINER):/tmp/rpcs.tsv vista/export/normalized/rpcs.tsv
+	$(DOCKER) cp $(CONTAINER):/tmp/rpcs.tsv vista/export/code-model/rpcs.tsv
 	$(DOCKER) exec -u vehu $(CONTAINER) rm -f /tmp/rpcs.tsv
-	@echo "Written: vista/export/normalized/rpcs.tsv"
-	@wc -l vista/export/normalized/rpcs.tsv
+	@echo "Written: vista/export/code-model/rpcs.tsv"
+	@wc -l vista/export/code-model/rpcs.tsv
 
 .PHONY: dump-file-19
 dump-file-19: ## Dump File 19 (OPTION) via VMDUMP19 → options.tsv (ADR-045 Phase 4c)
 	$(DOCKER) exec -u vehu $(CONTAINER) bash -lc 'echo "D RUN^VMDUMP19 H" | $$ydb_dist/mumps -direct'
-	$(DOCKER) cp $(CONTAINER):/tmp/options.tsv vista/export/normalized/options.tsv
+	$(DOCKER) cp $(CONTAINER):/tmp/options.tsv vista/export/code-model/options.tsv
 	$(DOCKER) exec -u vehu $(CONTAINER) rm -f /tmp/options.tsv
-	@echo "Written: vista/export/normalized/options.tsv"
-	@wc -l vista/export/normalized/options.tsv
+	@echo "Written: vista/export/code-model/options.tsv"
+	@wc -l vista/export/code-model/options.tsv
 
 .PHONY: dump-file-101
 dump-file-101: ## Dump File 101 (PROTOCOL) via VMDUMP101 → protocols.tsv (ADR-045 Phase 4d)
 	$(DOCKER) exec -u vehu $(CONTAINER) bash -lc 'echo "D RUN^VMDUMP101 H" | $$ydb_dist/mumps -direct'
-	$(DOCKER) cp $(CONTAINER):/tmp/protocols.tsv vista/export/normalized/protocols.tsv
+	$(DOCKER) cp $(CONTAINER):/tmp/protocols.tsv vista/export/code-model/protocols.tsv
 	$(DOCKER) exec -u vehu $(CONTAINER) rm -f /tmp/protocols.tsv
-	@echo "Written: vista/export/normalized/protocols.tsv"
-	@wc -l vista/export/normalized/protocols.tsv
+	@echo "Written: vista/export/code-model/protocols.tsv"
+	@wc -l vista/export/code-model/protocols.tsv
 
 .PHONY: xindex
 xindex: ## Run XINDEX on full corpus via VMXIDX → xindex-{routines,errors,xrefs,tags}.tsv
 	$(DOCKER) exec -u vehu $(CONTAINER) bash -lc 'echo "D ALL^VMXIDX H" | $$ydb_dist/mumps -direct' | tail -5
 	@for f in routines errors xrefs tags; do \
-		$(DOCKER) cp $(CONTAINER):/tmp/xindex-$$f.tsv vista/export/normalized/xindex-$$f.tsv; \
+		$(DOCKER) cp $(CONTAINER):/tmp/xindex-$$f.tsv vista/export/code-model/xindex-$$f.tsv; \
 		$(DOCKER) exec -u vehu $(CONTAINER) rm -f /tmp/xindex-$$f.tsv; \
 	done
-	@wc -l vista/export/normalized/xindex-*.tsv
+	@wc -l vista/export/code-model/xindex-*.tsv
 
 .PHONY: validate-xindex
 validate-xindex: ## Validate our regex extractions against XINDEX (ADR-045 post-Phase-6)
 	@for f in routines.tsv routine-calls.tsv xindex-routines.tsv xindex-xrefs.tsv; do \
-		[ -f vista/export/normalized/$$f ] || \
-			{ echo "Missing: vista/export/normalized/$$f"; exit 1; }; \
+		[ -f vista/export/code-model/$$f ] || \
+			{ echo "Missing: vista/export/code-model/$$f"; exit 1; }; \
 	done
 	/usr/bin/python3 host/scripts/validate_against_xindex.py
 

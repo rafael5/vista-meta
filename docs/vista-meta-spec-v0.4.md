@@ -194,7 +194,7 @@ Not a wrapper over FileMan via gRPC. Not a production VistA. A laboratory.
 
 | # | Decision | Value |
 |---|---|---|
-| —  | Git tracking for `export/` | Hybrid: raw dumps gitignored, manifests + `normalized/` tracked |
+| —  | Git tracking for `export/` | Hybrid: raw dumps gitignored, manifests + `data-model/` + `code-model/` tracked |
 | —  | Host Python venv | Yes, at `host/` |
 | —  | Tests | Smoke only (no BATS) |
 | —  | ADR discipline | Adopted from start; backfill deferred |
@@ -274,19 +274,28 @@ Not a wrapper over FileMan via gRPC. Not a production VistA. A laboratory.
 │       ├── dd-text/           {INDEX.tsv, summary.md, raw/ (ignored)}
 │       ├── dd-fmql/           {INDEX.tsv, summary.md, raw/ (ignored)}
 │       ├── dd-template/       {INDEX.tsv, summary.md, raw/ (ignored)}
-│       ├── normalized/            PIKS classification + research (tracked)
-│       │   ├── RESEARCH.md       research findings journal (RF-NNN)
-│       │   ├── files.tsv         FileMan file inventory + PIKS classification
-│       │   ├── fields.tsv        all fields in all files
-│       │   ├── pointers.tsv      pointer map + cross-PIKS flags
-│       │   ├── xrefs.tsv         cross-reference inventory
-│       │   ├── globals.tsv       physical global statistics
-│       │   ├── global-census.tsv ALL globals: FM + non-FM (from VMCENSUS)
-│       │   ├── global-recon.txt  fast recon report (VMCENSUS Phase 1)
-│       │   ├── domains.tsv       subdomain assignments (second pass)
-│       │   ├── coverage.json     PIKS + property + FM completeness
-│       │   ├── vmpiks-runs.log   classifier run history (monotonic)
-│       │   └── ...               see §11.3 – §11.5
+│       ├── RESEARCH.md            research findings journal (RF-NNN, both slices)
+│       ├── data-model/             FileMan + PIKS slice (tracked)
+│       │   ├── files.tsv           FileMan file inventory
+│       │   ├── piks.tsv            automated PIKS classifications (VMPIKS)
+│       │   ├── piks-triage.tsv     manual triage overrides
+│       │   ├── field-piks.tsv      field-level PIKS (VMFPIKS)
+│       │   ├── vista-fileman-piks-comprehensive.csv  joined 69k-row output
+│       │   └── ...                 (future: fields.tsv, pointers.tsv, xrefs.tsv, globals.tsv, global-census.tsv)
+│       ├── code-model/             routines + packages + XINDEX slice (ADR-045, tracked)
+│       │   ├── routines.tsv        per-routine inventory + static features
+│       │   ├── packages.tsv        per-package aggregates
+│       │   ├── package-manifest.tsv         Phase 6a bridge
+│       │   ├── routines-comprehensive.tsv   Phase 6b bridge
+│       │   ├── package-edge-matrix.tsv      Phase 6c cross-package edges
+│       │   ├── routine-calls.tsv   routine→routine edges (regex)
+│       │   ├── routine-globals.tsv routine→global edges (regex)
+│       │   ├── protocol-calls.tsv  protocol ENTRY ACTION → routine
+│       │   ├── package-data.tsv    ZWR shipment inventory
+│       │   ├── package-piks-summary.tsv  per-package PIKS distribution
+│       │   ├── {vista-file-9-8,rpcs,options,protocols}.tsv  FileMan metadata dumps
+│       │   ├── xindex-{routines,errors,xrefs,tags}.tsv  XINDEX authoritative output
+│       │   └── xindex-validation.tsv  regex-vs-XINDEX validation join
 │       ├── logs/              gitignored
 │       └── .vista-meta-initialized  sentinel JSON (tracked)
 │
@@ -535,7 +544,7 @@ exactly what we built it from.
 | Specification | `docs/vista-meta-spec-v*.md` | What to build: architecture, contracts, schemas | Versioned snapshots; append changelog |
 | ADRs | `docs/adr/NNN-title.md` | Why we chose X over Y | Immutable once accepted; supersede via new ADR |
 | Build log | `docs/build-log.md` | What happened during implementation | Append-only; reverse-chronological |
-| Research log | `vista/export/normalized/RESEARCH.md` | What was discovered about VistA metadata | Append-only; RF-NNN entries |
+| Research log | `vista/export/RESEARCH.md` | What was discovered about VistA metadata | Append-only; RF-NNN entries |
 | Dependency manifest | `docs/dependencies.md` | Pinned versions + provenance for every upstream | Updated on version bumps |
 
 ### 10.2 Build log (`docs/build-log.md`)
@@ -716,21 +725,39 @@ docs/                                 project-level documentation
     ├── 000-index.md
     └── ...
 
-vista/export/normalized/              conceptual model (git-tracked)
-├── RESEARCH.md                       research log (RF-NNN entries)
-├── files.tsv                         FileMan files (machine-generated)
-├── fields.tsv                        all fields (machine-generated)
-├── pointers.tsv                      pointer relationships (machine + annotated)
-├── xrefs.tsv                         cross-references (machine-generated)
-├── globals.tsv                       physical global stats (machine-generated)
-├── packages.tsv                      package inventory (machine-generated)
-├── domains.tsv                       domain assignments (human-annotated)
-├── semantic-types.tsv                field types (human-annotated)
-├── entity-groups.tsv                 logical entity clusters (human-annotated)
-├── anomalies.tsv                     inconsistencies found
-├── coverage.json                     completeness metrics
-└── *.py                              coverage + analysis scripts
+vista/export/                         project's structured output (git-tracked)
+├── RESEARCH.md                       research log (RF-NNN entries — covers both slices)
+├── data-model/                       FileMan DD + PIKS slice (data-side)
+│   ├── files.tsv                     FileMan file inventory (^DD/^DIC walk)
+│   ├── piks.tsv                      automated PIKS classifications
+│   ├── piks-triage.tsv               manual triage classifications
+│   ├── field-piks.tsv                field-level PIKS
+│   └── vista-fileman-piks-comprehensive.csv   joined 69k-row output
+└── code-model/                       routines, packages, XINDEX slice (code-side, ADR-045)
+    ├── routines.tsv                  per-routine inventory + static features
+    ├── packages.tsv                  per-package aggregates
+    ├── package-manifest.tsv          Phase 6a bridge (per-package)
+    ├── routines-comprehensive.tsv    Phase 6b bridge (per-routine)
+    ├── package-edge-matrix.tsv       Phase 6c cross-package edges
+    ├── package-data.tsv              ZWR shipment inventory
+    ├── package-piks-summary.tsv      per-package PIKS distribution
+    ├── routine-calls.tsv             routine→routine edges (regex)
+    ├── routine-globals.tsv           routine→global edges (regex)
+    ├── protocol-calls.tsv            protocol ENTRY ACTION → routine edges
+    ├── vista-file-9-8.tsv            File 9.8 ROUTINE dump
+    ├── rpcs.tsv                      File 8994 REMOTE PROCEDURE dump
+    ├── options.tsv                   File 19 OPTION dump
+    ├── protocols.tsv                 File 101 PROTOCOL dump
+    ├── xindex-routines.tsv           XINDEX per-routine summary
+    ├── xindex-errors.tsv             XINDEX diagnostic errors (66 classes)
+    ├── xindex-xrefs.tsv              XINDEX call-graph (authoritative)
+    ├── xindex-tags.tsv               XINDEX tag/label inventory
+    └── xindex-validation.tsv         regex-vs-XINDEX validation join
 ```
+
+Extractor code lives in `vista/dev-r/` (MUMPS) and `host/scripts/`
+(Python). See `docs/xindex-reference.md` §8 for the coverage matrix
+of what each side produces.
 
 ---
 
@@ -749,7 +776,7 @@ naming conventions. Without a defined home for these findings, each session
 errors; ADRs record design decisions. Neither captures "FileMan file 200 has
 847 fields, 23 of which are computed pointers to file 8989.5."
 
-### 11.2 Research log (`vista/export/normalized/RESEARCH.md`)
+### 11.2 Research log (`vista/export/RESEARCH.md`)
 
 Append-only journal of analytical discoveries about VistA metadata. This is
 the project's primary intellectual output — a growing body of verified
@@ -787,52 +814,58 @@ knowledge about how VistA's data structures actually work.
 
 Entries are numbered `RF-NNN` with a monotonically increasing counter.
 
-### 11.3 Normalized output (`vista/export/normalized/`)
+### 11.3 Structured output (`vista/export/data-model/` + `vista/export/code-model/`)
 
-The research log is prose. The normalized directory holds structured output —
-machine-readable artifacts that encode the conceptual model being built.
-Files are organized by layer (see §11.5.1):
+The research log is prose. The structured-output directories hold machine-
+readable artifacts — the as-is extracted models of VistA's data and code.
+Two sibling folders reflect the ADR-045 separation of concerns: PIKS
+classification stays on the data side, routine/package/XINDEX analysis
+stays on the code side, and the package is the native bridge.
 
-**Logical layer** (machine-generated by extraction routines):
+**Data-model slice — `vista/export/data-model/`** (FileMan DD + PIKS):
 
 | File | Generated by | Contents |
 |---|---|---|
 | `files.tsv` | `VMFILES` | FileMan file inventory — schema in §11.5.4 |
-| `fields.tsv` | `VMFIELDS` | All fields in all files — schema in §11.5.4 |
-| `pointers.tsv` | `VMPTRS` | All pointer relationships — schema in §11.5.4 |
-| `xrefs.tsv` | `VMXREFS` | All cross-references — schema in §11.5.4 |
-| `globals.tsv` | `VMGSTAT` | Physical global statistics — schema in §11.5.4 |
-| `global-census.tsv` | `VMCENSUS` | ALL globals: FM coverage, undocumented branches, package ownership — schema in §11.4.4 |
-| `packages.tsv` | `VMPKGS` | Package inventory — schema in §11.5.4 |
+| `piks.tsv` | `VMPIKS` | Automated PIKS classifications |
+| `piks-triage.tsv` | (manual) | Manual triage overrides |
+| `field-piks.tsv` | `VMFPIKS` | Field-level PIKS with cross-PIKS flags |
+| `vista-fileman-piks-comprehensive.csv` | (host script) | Joined comprehensive output |
 
-**Conceptual layer** (human-annotated, each entry has RF-NNN provenance):
+**Code-model slice — `vista/export/code-model/`** (ADR-045 + XINDEX):
 
-| File | Contents |
-|---|---|
-| `domains.tsv` | File-to-domain assignment — schema in §11.5.4 |
-| `semantic-types.tsv` | Field semantic annotations — schema in §11.5.4 |
-| `entity-groups.tsv` | Logical entity clusters — schema in §11.5.4 |
-| `anomalies.tsv` | Inconsistencies found during analysis |
-| `coverage.json` | Completeness metrics — schema in §11.6.2 |
+| File | Generated by | Contents |
+|---|---|---|
+| `routines.tsv` | `build_routine_inventory.py` | Per-routine inventory + static features |
+| `packages.tsv` | `build_routine_inventory.py` | Per-package aggregates |
+| `routine-calls.tsv` | `build_routine_calls.py` | Routine→routine edges (regex) |
+| `routine-globals.tsv` | `build_routine_globals.py` | Routine→global edges (regex) |
+| `package-data.tsv` | `build_package_data_inventory.py` | ZWR shipment inventory |
+| `package-piks-summary.tsv` | `build_package_piks_summary.py` | Per-package PIKS distribution |
+| `package-manifest.tsv` | `build_package_manifest.py` | Phase 6a bridge |
+| `routines-comprehensive.tsv` | `build_routines_comprehensive.py` | Phase 6b bridge |
+| `package-edge-matrix.tsv` | `build_package_edge_matrix.py` | Phase 6c cross-package edges |
+| `vista-file-9-8.tsv` | `VMDUMP98` | File 9.8 ROUTINE dump |
+| `rpcs.tsv` | `VMDUMP8994` | File 8994 REMOTE PROCEDURE |
+| `options.tsv` | `VMDUMP19` | File 19 OPTION |
+| `protocols.tsv` | `VMDUMP101` | File 101 PROTOCOL |
+| `protocol-calls.tsv` | `build_protocol_calls.py` | Protocol ENTRY ACTION → routine |
+| `xindex-{routines,errors,xrefs,tags}.tsv` | `VMXIDX` | XINDEX authoritative output |
+| `xindex-validation.tsv` | `validate_against_xindex.py` | Regex-vs-XINDEX join |
 
-**Process artifacts**:
+**Project-level**: `RESEARCH.md` lives at `vista/export/RESEARCH.md`
+(cross-cutting — RF-NNN entries cover both slices).
 
-| File | Contents |
-|---|---|
-| `RESEARCH.md` | Research log (append-only, RF-NNN entries) |
-| `VM*.m` | M extraction routines (also in `vista/dev-r/`) |
-| `*.py` | Python scripts for coverage metrics, graph analysis, TSV generation |
-
-All files are git-tracked. Raw bake output in `export/dd-text/raw/`,
-`export/dd-fmql/raw/`, etc. is gitignored. The normalized directory is the
-curated, verified distillation.
+All listed files are git-tracked. Raw bake output in `export/dd-text/raw/`,
+`export/dd-fmql/raw/`, etc. is gitignored. The two structured folders are
+the curated, verified distillation.
 
 ### 11.4 Extraction pipeline
 
 The bake pipeline (§6) produces raw dumps. The extraction pipeline turns
 those raw dumps — plus direct DD interrogation — into the structured TSVs
-in `normalized/`. This is the bridge between "we ran the exporters" and
-"we have a queryable model."
+in `data-model/` and `code-model/`. This is the bridge between "we ran
+the exporters" and "we have a queryable model."
 
 #### 11.4.1 Three-pass methodology
 
@@ -842,13 +875,13 @@ complete, machine-generated inventories. These are exhaustive but unclassified.
 
 | Routine | Reads | Writes | What it extracts |
 |---|---|---|---|
-| `VMFILES` | `^DIC`, `^DD` | `normalized/files.tsv` | All FileMan files: number, name, global root, field count, top-level vs. multiple, DINUM flag |
-| `VMFIELDS` | `^DD(file,field,...)` | `normalized/fields.tsv` | All fields in all files: file, field#, name, type, pointer target, required flag, computed flag |
-| `VMPTRS` | `^DD(file,field,0)`, `^DD(file,field,"V",...)` | `normalized/pointers.tsv` | All pointer relationships: source file.field → target file, pointer type (simple/variable/computed/implicit) |
-| `VMXREFS` | `^DD(file,field,1,...)`, `^DD("IX",...)` | `normalized/xrefs.tsv` | All cross-references: file, field, xref name, type (regular/MUMPS/new-style/compound), kill logic |
-| `VMGSTAT` | Actual globals (`^DPT`, `^DIC(200,`, etc.) | `normalized/globals.tsv` | Record counts, global size, subscript depth, first/last IEN per global |
-| `VMPKGS` | `^DIC(9.4,...)`, MANIFEST.tsv | `normalized/packages.tsv` | Packages: namespace, name, routine count, file list, version |
-| `VMCENSUS` | Global directory (`$ORDER`), `^DIC`, XINDEX output | `normalized/global-census.tsv` | ALL globals: FileMan coverage status, undocumented branches, referencing routines, package ownership. See §11.4.4 |
+| `VMFILES` | `^DIC`, `^DD` | `data-model/files.tsv` | All FileMan files: number, name, global root, field count, top-level vs. multiple, DINUM flag |
+| `VMFIELDS` | `^DD(file,field,...)` | `data-model/fields.tsv` | All fields in all files: file, field#, name, type, pointer target, required flag, computed flag |
+| `VMPTRS` | `^DD(file,field,0)`, `^DD(file,field,"V",...)` | `data-model/pointers.tsv` | All pointer relationships: source file.field → target file, pointer type (simple/variable/computed/implicit) |
+| `VMXREFS` | `^DD(file,field,1,...)`, `^DD("IX",...)` | `data-model/xrefs.tsv` | All cross-references: file, field, xref name, type (regular/MUMPS/new-style/compound), kill logic |
+| `VMGSTAT` | Actual globals (`^DPT`, `^DIC(200,`, etc.) | `data-model/globals.tsv` | Record counts, global size, subscript depth, first/last IEN per global |
+| `VMPKGS` | `^DIC(9.4,...)`, MANIFEST.tsv | `code-model/packages.tsv` | Packages: namespace, name, routine count, file list, version |
+| `VMCENSUS` | Global directory (`$ORDER`), `^DIC`, XINDEX output | `data-model/global-census.tsv` | ALL globals: FileMan coverage status, undocumented branches, referencing routines, package ownership. See §11.4.4 |
 
 These routines are idempotent — rerun them anytime to refresh the baseline.
 They produce TSV (not JSON) for grep/awk/sort friendliness and git-diff
@@ -1102,7 +1135,7 @@ classification in seconds by checking `^DD(file,.02,0)`.
 
 **Pipeline state management**
 
-The TSV files in `normalized/` are not just output — they are the
+The TSV files in `data-model/` + `code-model/` are not just output — they are the
 **working state** of the classification pipeline. Each tool reads them,
 updates its owned columns, and writes them back. The pipeline is
 designed for repeated runs where unknowns decrease monotonically and
@@ -1152,7 +1185,7 @@ stay the same). Specifically:
 
 *Run log:*
 
-Each `VMPIKS` run appends to `normalized/vmpiks-runs.log`:
+Each `VMPIKS` run appends to `data-model/vmpiks-runs.log`:
 
 ```
 2026-04-20T14:30:00Z  mode=incremental  total=9247  newly_classified=142  re_evaluated=0  unchanged=9105  unresolved=48
@@ -1383,7 +1416,7 @@ count first-level entries. No deep subscript walking. Goal: answer
 | 5 | Group unmatched by prefix | First 2–3 chars of global name → package cluster (PS=Pharmacy, LR=Lab, etc.) | String ops |
 | 6 | DFN spot-check | For top 20 unmatched by size: check if first-level subscripts are sequential integers matching `^DPT` IEN range | `$ORDER` first 10 subscripts + `$DATA(^DPT(sub))` |
 
-**Recon output: `normalized/global-recon.txt`** (human-readable report,
+**Recon output: `data-model/global-recon.txt`** (human-readable report,
 not a TSV — this is a scoping decision, not data):
 
 ```
@@ -1770,7 +1803,7 @@ skip to subdomains before every file has a PIKS assignment.
 
 #### 11.5.4 Output file schemas
 
-Complete column definitions for every TSV in `normalized/`.
+Complete column definitions for every TSV in `data-model/` and `code-model/`.
 
 **`files.tsv`** — one row per FileMan file
 
@@ -1909,7 +1942,7 @@ with a complete chain is **verified**.
 #### 11.6.2 Coverage metrics
 
 Track completeness at each level. These metrics are generated by a
-Python script in `normalized/` and written to `normalized/coverage.json`.
+Python script in `host/scripts/` and written to `data-model/coverage.json`.
 
 ```json
 {
@@ -1975,9 +2008,10 @@ failures get RF-NNN entries in the research log.
 At the start of an analytical session, read:
 
 1. `CLAUDE.md` — project orientation
-2. `vista/export/normalized/RESEARCH.md` — prior findings
-3. `vista/export/normalized/coverage.json` — what % of the schema is annotated
-4. `vista/export/.vista-meta-initialized` — what bake phases have completed
+2. `vista/export/RESEARCH.md` — prior findings (both slices)
+3. `vista/export/data-model/coverage.json` — FileMan PIKS schema coverage
+4. `vista/export/code-model/package-manifest.tsv` — routine/package state
+5. `vista/export/.vista-meta-initialized` — what bake phases have completed
 5. `docs/build-log.md` — recent implementation issues (if doing infra work)
 
 During an analytical session:

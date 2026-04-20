@@ -20,7 +20,7 @@ Reads:
   - Each .m file under vista/vista-m-host/Packages/.../Routines/
 
 Writes:
-  - vista/export/normalized/routine-calls.tsv
+  - vista/export/code-model/routine-calls.tsv
     columns: caller_name, caller_package, callee_tag, callee_routine,
              kind (do/goto/job/func), ref_count
     one row per unique (caller, tag, callee, kind) tuple
@@ -37,7 +37,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 HOST_SNAPSHOT = PROJECT_ROOT / "vista/vista-m-host"
 MANIFEST = HOST_SNAPSHOT / "MANIFEST.tsv"
-OUT_TSV = PROJECT_ROOT / "vista/export/normalized/routine-calls.tsv"
+OUT_TSV = PROJECT_ROOT / "vista/export/code-model/routine-calls.tsv"
 
 CONTAINER_PREFIX = "/opt/VistA-M/"
 HOST_PREFIX = str(HOST_SNAPSHOT) + "/"

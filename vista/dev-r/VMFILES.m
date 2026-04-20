@@ -5,14 +5,14 @@ VMFILES ;vista-meta — extract FileMan file inventory to TSV
  ;Walks ^DD and ^DIC to produce a complete file inventory.
  ;Output: TSV to stdout (redirect to files.tsv)
  ;
- ;Usage: D RUN^VMFILES          (writes to /home/vehu/export/normalized/files.tsv)
+ ;Usage: D RUN^VMFILES          (writes to /home/vehu/export/data-model/files.tsv)
  ;       D TSV^VMFILES          (TSV to stdout)
  ;       D STATS^VMFILES        (summary stats only)
  ;
  Q
  ;
-RUN ;Write files.tsv to normalized directory
- N PATH S PATH="/home/vehu/export/normalized/files.tsv"
+RUN ;Write files.tsv to data-model directory
+ N PATH S PATH="/home/vehu/export/data-model/files.tsv"
  O PATH:NEWVERSION U PATH
  D TSV
  C PATH

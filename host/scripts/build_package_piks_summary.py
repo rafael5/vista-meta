@@ -6,12 +6,12 @@
 """Aggregate per-package PIKS distribution of shipped FileMan files.
 
 Reads:
-  - vista/export/normalized/package-data.tsv  (Phase 2c inventory)
-  - vista/export/normalized/piks.tsv          (automated PIKS from heuristics)
-  - vista/export/normalized/piks-triage.tsv   (manual triage — takes precedence)
+  - vista/export/code-model/package-data.tsv  (Phase 2c inventory)
+  - vista/export/data-model/piks.tsv          (automated PIKS from heuristics)
+  - vista/export/data-model/piks-triage.tsv   (manual triage — takes precedence)
 
 Writes:
-  - vista/export/normalized/package-piks-summary.tsv
+  - vista/export/code-model/package-piks-summary.tsv
 
 One row per package. Counts distinct file_numbers that the package
 ships (sharded chunks collapse to a single file), bucketed by PIKS.
@@ -32,11 +32,12 @@ from collections import defaultdict
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-NORM = PROJECT_ROOT / "vista/export/normalized"
-PACKAGE_DATA = NORM / "package-data.tsv"
-PIKS_AUTO = NORM / "piks.tsv"
-PIKS_MANUAL = NORM / "piks-triage.tsv"
-OUT_TSV = NORM / "package-piks-summary.tsv"
+CODE_MODEL = PROJECT_ROOT / "vista/export/code-model"
+DATA_MODEL = PROJECT_ROOT / "vista/export/data-model"
+PACKAGE_DATA = CODE_MODEL / "package-data.tsv"
+PIKS_AUTO = DATA_MODEL / "piks.tsv"
+PIKS_MANUAL = DATA_MODEL / "piks-triage.tsv"
+OUT_TSV = CODE_MODEL / "package-piks-summary.tsv"
 
 FIELDS = [
     "package",

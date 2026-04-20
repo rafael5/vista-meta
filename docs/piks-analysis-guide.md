@@ -5,7 +5,7 @@ PIKS classification of VEHU's FileMan data structures.
 
 Last updated: 2026-04-19
 Spec: docs/vista-meta-spec-v0.4.md § 11
-Research log: vista/export/normalized/RESEARCH.md (RF-001 through RF-009)
+Research log: vista/export/RESEARCH.md (RF-001 through RF-027)
 
 ---
 
@@ -351,7 +351,7 @@ File 200 were classified S by H-09.
 
 ## 5. Data files
 
-All data is in `vista/export/normalized/`:
+All data is in `vista/export/data-model/` (the FileMan PIKS slice):
 
 | File | Rows | Size | Description |
 |---|---|---|---|
@@ -360,7 +360,8 @@ All data is in `vista/export/normalized/`:
 | `piks.tsv` | 7,904 | 450 KB | Automated PIKS classifications |
 | `piks-triage.tsv` | 217 | 12 KB | Manual triage classifications |
 | `field-piks.tsv` | 69,809 | 4.2 MB | Field-level PIKS with cross-PIKS flags |
-| `RESEARCH.md` | — | — | Research log (RF-001 through RF-009) |
+
+Project research log is one level up at `vista/export/RESEARCH.md` (RF-001 through RF-027, covering both the data-model/ PIKS work and the code-model/ routine/package/XINDEX work).
 
 ### Comprehensive CSV column order
 
@@ -386,22 +387,22 @@ All data is in `vista/export/normalized/`:
 
 ```bash
 # All cross-PIKS pointer fields
-head -1 vista/export/normalized/vista-fileman-piks-comprehensive.csv && \
-  grep ",Y," vista/export/normalized/vista-fileman-piks-comprehensive.csv
+head -1 vista/export/data-model/vista-fileman-piks-comprehensive.csv && \
+  grep ",Y," vista/export/data-model/vista-fileman-piks-comprehensive.csv
 
 # Patient→Knowledge fields (FHIR terminology bindings)
 awk -F',' '$5=="P" && $9=="K" && $10=="Y"' \
-  vista/export/normalized/vista-fileman-piks-comprehensive.csv
+  vista/export/data-model/vista-fileman-piks-comprehensive.csv
 
 # All fields in File 2 (PATIENT)
-awk -F',' '$1=="2"' vista/export/normalized/vista-fileman-piks-comprehensive.csv
+awk -F',' '$1=="2"' vista/export/data-model/vista-fileman-piks-comprehensive.csv
 
 # Files with sensitivity flags
-awk -F',' '$22=="Y"' vista/export/normalized/vista-fileman-piks-comprehensive.csv
+awk -F',' '$22=="Y"' vista/export/data-model/vista-fileman-piks-comprehensive.csv
 
 # System→Patient fields (security review)
 awk -F',' '$5=="S" && $9=="P" && $10=="Y"' \
-  vista/export/normalized/vista-fileman-piks-comprehensive.csv
+  vista/export/data-model/vista-fileman-piks-comprehensive.csv
 ```
 
 ### Run the classifier on a fresh VistA system

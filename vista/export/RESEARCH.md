@@ -143,7 +143,7 @@ Status: provisional | verified | superseded by RF-NNN.
     the run, writing four TSVs to `/tmp` before job exit (scratch
     global is job-scoped).
   - Makefile target `make xindex` runs the bake, docker-cp's the
-    four TSVs to `vista/export/normalized/`.
+    four TSVs to `vista/export/code-model/`.
   - Makefile target `make validate-xindex` runs
     `host/scripts/validate_against_xindex.py` to join our data
     against XINDEX output.
@@ -209,11 +209,11 @@ Status: provisional | verified | superseded by RF-NNN.
   novel to our project.
 - **Evidence**:
   - `vista/dev-r/VMXIDX.m` (wrapper)
-  - `vista/export/normalized/xindex-routines.tsv` (29,098)
-  - `vista/export/normalized/xindex-errors.tsv` (6,918)
-  - `vista/export/normalized/xindex-xrefs.tsv` (214,011)
-  - `vista/export/normalized/xindex-tags.tsv` (292,148)
-  - `vista/export/normalized/xindex-validation.tsv` (29,098)
+  - `vista/export/code-model/xindex-routines.tsv` (29,098)
+  - `vista/export/code-model/xindex-errors.tsv` (6,918)
+  - `vista/export/code-model/xindex-xrefs.tsv` (214,011)
+  - `vista/export/code-model/xindex-tags.tsv` (292,148)
+  - `vista/export/code-model/xindex-validation.tsv` (29,098)
 - **Implications**:
   - **Our Phase 1b/2a static feature extraction is validated as
     perfectly accurate** against XINDEX ground truth — zero
@@ -330,7 +330,7 @@ Status: provisional | verified | superseded by RF-NNN.
   - New **Phase 5b** extractor `build_protocol_calls.py` applies
     the Phase 5 call regex to the entry_action + exit_action MUMPS
     text from `protocols.tsv`. Output:
-    `vista/export/normalized/protocol-calls.tsv`.
+    `vista/export/code-model/protocol-calls.tsv`.
   - `build_routines_comprehensive.py` extended with one new column
     (`protocol_invoked_count`) that joins protocol-calls edges back
     to their callee routines.
@@ -403,7 +403,7 @@ Status: provisional | verified | superseded by RF-NNN.
   | Intra + inter + unknown-callee-pkg | 112,215 + 105,750 + 23,344 | RF-023 | = 241,309 ✓ |
 
   Every total propagates correctly across all join artifacts.
-- **Evidence**: `vista/export/normalized/protocol-calls.tsv` (5,081
+- **Evidence**: `vista/export/code-model/protocol-calls.tsv` (5,081
   rows × 7 cols). Refreshed `routines-comprehensive.tsv` now 20
   columns including `protocol_invoked_count`.
 - **Outstanding items promoted to TODO**:
@@ -486,7 +486,7 @@ Status: provisional | verified | superseded by RF-NNN.
   - Lab Service → itself: 5,132
   - These big clinical-admin packages are simultaneously
     internally cohesive AND externally broadcast-heavy.
-- **Evidence**: `vista/export/normalized/package-edge-matrix.tsv`
+- **Evidence**: `vista/export/code-model/package-edge-matrix.tsv`
   — 1,872 rows × 5 columns (source_package, dest_package,
   call_edges, distinct_caller_routines,
   distinct_callee_routines).
@@ -579,7 +579,7 @@ Status: provisional | verified | superseded by RF-NNN.
   - PSSJXR (42 out, 0 callers, 0 RPCs, 0 options) — interesting
     cases: heavy outbound coupling but no detected caller. Likely
     invoked via protocol ENTRY ACTION.
-- **Evidence**: `vista/export/normalized/routines-comprehensive.tsv`
+- **Evidence**: `vista/export/code-model/routines-comprehensive.tsv`
   — 39,330 rows × 19 columns.
 - **Implications**:
   - **Direct human-sortable view of the whole routine corpus.**
@@ -604,7 +604,7 @@ Status: provisional | verified | superseded by RF-NNN.
   One row per package joining every prior phase into a single
   analytical artifact. Phase 6a of ADR-045.
 - **Method**: `host/scripts/build_package_manifest.py` loads seven
-  normalized TSVs and emits `package-manifest.tsv`:
+  source TSVs and emits `package-manifest.tsv`:
   - packages.tsv          → routine_count, total_lines
   - package-piks-summary  → files_shipped + P/I/K/S per-package
   - rpcs.tsv              → rpc_routines (joined via routines.tsv)
@@ -651,7 +651,7 @@ Status: provisional | verified | superseded by RF-NNN.
     billing holds enormous patient data volume but exposes little
     to CPRS directly; external systems consume it via other
     integration paths.
-- **Evidence**: `vista/export/normalized/package-manifest.tsv` —
+- **Evidence**: `vista/export/code-model/package-manifest.tsv` —
   175 rows × 13 columns.
 - **The ADR-045 bridge is now concrete**. A question like "which
   packages would need to travel together in a migration wave?" is
@@ -738,7 +738,7 @@ Status: provisional | verified | superseded by RF-NNN.
     routines, not globals — Phase 3a's lookbehind fix was correct.
     Phase 5's data is the validation that those identifications
     were right.
-- **Evidence**: `vista/export/normalized/routine-calls.tsv` — 241,309
+- **Evidence**: `vista/export/code-model/routine-calls.tsv` — 241,309
   rows, 6 columns (caller_name, caller_package, callee_tag,
   callee_routine, kind, ref_count).
 - **Known MVP limitations (documented)**:
@@ -798,7 +798,7 @@ Status: provisional | verified | superseded by RF-NNN.
     (787), TIU (261), REGISTRATION (230), SCHEDULING (197),
     OUTPATIENT PHARMACY (194), CLINICAL REMINDERS (184), AR (176),
     CONSULT/REQUEST TRACKING (148), AICS (144).
-- **Evidence**: `vista/export/normalized/protocols.tsv` — 6,556
+- **Evidence**: `vista/export/code-model/protocols.tsv` — 6,556
   rows, 7 columns (ien, name, item_text, type, package,
   entry_action, exit_action).
 - **Implications**:
@@ -863,7 +863,7 @@ Status: provisional | verified | superseded by RF-NNN.
     PHARMACY (242), IFCAP (231), TEXT INTEGRATION UTILITIES (230),
     KERNEL (228). Expected shape — these are the core VistA
     domains with the most user-facing functionality.
-- **Evidence**: `vista/export/normalized/options.tsv` — 13,163 rows,
+- **Evidence**: `vista/export/code-model/options.tsv` — 13,163 rows,
   8 columns (ien, name, menu_text, type, package, routine_raw, tag,
   routine).
 - **Join-issue noted for Phase 6**: File 19's PACKAGE field
@@ -927,7 +927,7 @@ Status: provisional | verified | superseded by RF-NNN.
     classification.
   - **5 RPCs have no ROUTINE value** — presumably malformed or
     in-progress entries. Ignorable minority.
-- **Evidence**: `vista/export/normalized/rpcs.tsv` — 4,501 rows, 8
+- **Evidence**: `vista/export/code-model/rpcs.tsv` — 4,501 rows, 8
   columns.
 - **Implications**:
   - **Authoritative role signal**: a routine in `rpcs.tsv`.`routine`
@@ -955,7 +955,7 @@ Status: provisional | verified | superseded by RF-NNN.
   `1.2 SIZE (BYTES)`, `1.5 RSUM VALUE`, plus `7.2 CHECKSUM VALUE` from
   sub-node 4. Output piped to `/tmp/vista-file-9-8.tsv` inside the
   container (vehu cannot write to the ubuntu-owned export bind mount),
-  then `docker cp`-ed out to `vista/export/normalized/`. Run via
+  then `docker cp`-ed out to `vista/export/code-model/`. Run via
   `make dump-file-9-8`.
 - **Finding**:
   - **File 9.8 contains 30,665 entries**: 30,255 typed as R (routine),
@@ -978,7 +978,7 @@ Status: provisional | verified | superseded by RF-NNN.
     rows have SIZE (BYTES), 24 have CHECKSUM VALUE, 0 have RSUM
     VALUE. These fields are populated by KIDS during patch install
     cycles and VEHU is a fresh-build snapshot — expected.
-- **Evidence**: `vista/export/normalized/vista-file-9-8.tsv` (30,665
+- **Evidence**: `vista/export/code-model/vista-file-9-8.tsv` (30,665
   rows, 6 columns).
 - **Interpretation — MANIFEST and File 9.8 measure different things**:
   MANIFEST answers "what .m files ship in the FOIA distribution?"
@@ -1052,7 +1052,7 @@ Status: provisional | verified | superseded by RF-NNN.
   - Indirection (`^@X`, naked `^(subscripts)`) is undecidable statically
     and skipped entirely.
   - Extended references (`^|pkg|NAME`, `^$JOB`) are skipped.
-- **Evidence**: `vista/export/normalized/routine-globals.tsv` — 77,838
+- **Evidence**: `vista/export/code-model/routine-globals.tsv` — 77,838
   rows, 4 columns (routine_name, package, global_name, ref_count).
 - **Implications**:
   - Foundation for Phase 6 — joining routine-globals.tsv against
@@ -1104,7 +1104,7 @@ Status: provisional | verified | superseded by RF-NNN.
     kind=file rows here). Examples from package-data.tsv include
     VA-DOD Sharing, which ships one file plus globals only, and
     Altoona VA, which is globals-only.
-- **Evidence**: `vista/export/normalized/package-piks-summary.tsv`
+- **Evidence**: `vista/export/code-model/package-piks-summary.tsv`
   (120 rows, 7 columns). Sum of P+I+K+S+unclassified across all
   rows = 2,899, matches distinct FileMan files shipped from RF-013.
 - **Implications**:
@@ -1154,7 +1154,7 @@ Status: provisional | verified | superseded by RF-NNN.
     in the normal sense — this is a legacy bulk-load convention for
     `^ICDLD82` (a direct global load, not a DD-described file).
     Mechanical extraction captures it as-is.
-- **Evidence**: `vista/export/normalized/package-data.tsv` (3,138
+- **Evidence**: `vista/export/code-model/package-data.tsv` (3,138
   rows, 7 columns). Reconciles exactly with `find` count of
   `Globals/*.zwr`.
 - **Implications**:
@@ -1293,8 +1293,8 @@ Status: provisional | verified | superseded by RF-NNN.
     - Automated Medical Information Exchange — 977
     - Kernel — 934
     - Nursing Service — 922
-- **Evidence**: `vista/export/normalized/routines.tsv` (39,330 rows),
-  `vista/export/normalized/packages.tsv` (174 rows). MANIFEST row count
+- **Evidence**: `vista/export/code-model/routines.tsv` (39,330 rows),
+  `vista/export/code-model/packages.tsv` (174 rows). MANIFEST row count
   equals `routines.tsv` row count — no partial sync, no orphaned entries.
 - **Implications**:
   - Foundation for Phase 2+ of ADR-045 (role classification, globals-
@@ -1387,7 +1387,7 @@ Status: provisional | verified | superseded by RF-NNN.
   - P→K (362): Clinical data coded with terminologies (ICD, CPT, drugs)
   - I→K (340): Facility setup uses knowledge tables
   - K→P (22): Knowledge pointing to patient data — rare and worth investigating
-- **Evidence**: `normalized/field-piks.tsv` (69,810 rows)
+- **Evidence**: `data-model/field-piks.tsv` (69,810 rows)
 - **Implications**:
   - The 461 S→P fields need security review — system files holding patient references
   - The 362 P→K fields are the FHIR terminology binding points
@@ -1407,7 +1407,7 @@ Status: provisional | verified | superseded by RF-NNN.
   - I (Institution): 1,539 (18.6%) — facility/org structure
   - K (Knowledge):   1,096 (13.3%) — terminologies, templates, workflows
   - Unclassified:      141 (1.7%) — subfiles awaiting inheritance
-- **Evidence**: `normalized/piks.tsv` + `normalized/piks-triage.tsv`
+- **Evidence**: `data-model/piks.tsv` + `data-model/piks-triage.tsv`
 - **Implications**:
   - System is the second-largest category (32.3%) — VistA has massive
     infrastructure overhead relative to clinical data
@@ -1461,7 +1461,7 @@ Status: provisional | verified | superseded by RF-NNN.
   8. File 50 (DRUG): 83
   9. File 60 (LABORATORY TEST): 81
   10. File 3.5 (DEVICE): 73
-- **Evidence**: `normalized/files.tsv` pointer_in column
+- **Evidence**: `data-model/files.tsv` pointer_in column
 - **Implications**:
   - File 200 has 3.3x more inbound pointers than File 2 (PATIENT). This
     makes it VistA's structural hub — not Patient, not Institution, but
@@ -1485,7 +1485,7 @@ Status: provisional | verified | superseded by RF-NNN.
   - Largest tables by record count: Lexicon 757.x (~900K), RxNorm 129.x
     (~500K), ICD DRG 83.51 (1M)
   - Mean field count: ~8.5 fields per file (heavily skewed — median likely ~4)
-- **Evidence**: `normalized/files.tsv` (8,262 rows including header)
+- **Evidence**: `data-model/files.tsv` (8,262 rows including header)
 - **Implications**:
   - The 1:1.8 top-level to subfile ratio means VistA is deeply hierarchical.
     Subfile inheritance (H-05) is the most important PIKS heuristic because
