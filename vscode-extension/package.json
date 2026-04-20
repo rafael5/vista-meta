@@ -25,8 +25,7 @@
       "explorer": [
         {
           "id": "vistaMetaRoutine",
-          "name": "VistA Routine",
-          "when": "resourceExtname == .m"
+          "name": "VistA Routine"
         }
       ]
     },
