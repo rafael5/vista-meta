@@ -328,6 +328,27 @@ kids-vc-pip-install: ## Install kids-vc as a pip package in a venv at /tmp/kidsv
 	/tmp/kidsvc-venv/bin/pip install --quiet -e kids_vc_pkg/
 	@echo "Installed. Try: /tmp/kidsvc-venv/bin/kids-vc --help"
 
+# ── Developer workflow (vista-developers-guide.md §Tier 1) ───────────
+
+.PHONY: install-hooks
+install-hooks: ## Install hooks/pre-commit as .git/hooks/pre-commit (symlink)
+	@mkdir -p .git/hooks
+	@chmod +x hooks/pre-commit
+	@ln -sf ../../hooks/pre-commit .git/hooks/pre-commit
+	@echo "Installed. Next commit runs $(PWD)/hooks/pre-commit"
+
+.PHONY: pkg
+pkg: ## Package overview: NAME="Outpatient Pharmacy" or NAME=PSO
+	@[ -n "$(NAME)" ] || { echo "Usage: make pkg NAME=\"Outpatient Pharmacy\""; exit 1; }
+	@/usr/bin/python3 host/scripts/vista_meta_cli.py pkg "$(NAME)"
+
+.PHONY: context
+context: ## Context pack for AI: NAME=... [SOURCE=1] [BYTES=200000]
+	@[ -n "$(NAME)" ] || { echo "Usage: make context NAME=\"Outpatient Pharmacy\" [SOURCE=1]"; exit 1; }
+	@/usr/bin/python3 host/scripts/vista_meta_cli.py context "$(NAME)" \
+		$(if $(SOURCE),--with-source,) \
+		$(if $(BYTES),--bytes $(BYTES),)
+
 # ── Verify ────────────────────────────────────────────────────────────
 
 .PHONY: smoke

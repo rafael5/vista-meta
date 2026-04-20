@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Thin wrapper: resolves repo root and invokes vista_meta_cli.py.
+# Add bin/ to your PATH: export PATH="$PWD/bin:$PATH"
+set -eu
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO="$(cd "$HERE/.." && pwd)"
+exec /usr/bin/python3 "$REPO/host/scripts/vista_meta_cli.py" "$@"

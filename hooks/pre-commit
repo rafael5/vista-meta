@@ -1,0 +1,192 @@
+#!/usr/bin/env bash
+# Spec: docs/vista-developers-guide.md §Tier-1
+#
+# Deterministic pre-commit lint for staged VistA artifacts.
+#
+# Scope policy (avoids false positives on the legacy corpus):
+#   Newly-added .m files  — structural + per-line on all lines
+#   Modified .m files     — per-line checks on ADDED lines only
+#   Staged .kid/.KID files — kids-vc round-trip must pass
+#
+# Host-only, fast path. Bypass with `git commit --no-verify`.
+
+set -u
+
+REPO="$(git rev-parse --show-toplevel)"
+cd "$REPO" || exit 1
+
+STATUS=0
+FAILS=()
+
+mapfile -t STAGED_M_A < <(git diff --cached --name-only --diff-filter=A \
+    -- '*.m' 2>/dev/null)
+mapfile -t STAGED_M_M < <(git diff --cached --name-only --diff-filter=M \
+    -- '*.m' 2>/dev/null)
+mapfile -t STAGED_KID < <(git diff --cached --name-only --diff-filter=ACM \
+    -- '*.kid' '*.KID' 2>/dev/null)
+
+n_m=$(( ${#STAGED_M_A[@]} + ${#STAGED_M_M[@]} ))
+n_kid=${#STAGED_KID[@]}
+if [ $n_m -eq 0 ] && [ $n_kid -eq 0 ]; then
+    exit 0
+fi
+echo "[vista-meta pre-commit] .m=$n_m (new=${#STAGED_M_A[@]}, mod=${#STAGED_M_M[@]}) .kid=$n_kid"
+
+# ── Per-line checks (apply to added lines) ───────────────────────────
+
+check_line() {
+    local file="$1" lno="$2" ln="$3"
+
+    if [ ${#ln} -gt 245 ]; then
+        FAILS+=("$file:$lno: line length ${#ln} > 245 (SAC limit)")
+        STATUS=1
+    fi
+    if [[ "$ln" =~ [[:space:]]+$ ]]; then
+        FAILS+=("$file:$lno: trailing whitespace")
+        STATUS=1
+    fi
+    if [[ "$ln" == *$'\t'* ]]; then
+        FAILS+=("$file:$lno: tab character (use spaces)")
+        STATUS=1
+    fi
+    # Bare HALT — outside the ';' comment portion. XINDEX code 32.
+    local before_comment="${ln%%;*}"
+    if [[ "$before_comment" =~ (^|[[:space:]])[Hh][Aa][Ll][Tt]([[:space:]]|$) ]]; then
+        FAILS+=("$file:$lno: bare HALT — route through \$\$EN^XUSCLEAN")
+        STATUS=1
+    fi
+}
+
+# Parse `git diff --cached -U0 -- <file>` and emit "<lno>\t<content>"
+# for each added line (lines starting with '+' but not '+++').
+emit_added_lines() {
+    local file="$1"
+    git diff --cached --no-color --unified=0 -- "$file" 2>/dev/null \
+    | /usr/bin/awk '
+        /^@@/ {
+            split($0, a, " ");
+            plus = a[3];           # e.g. "+5,3" or "+42"
+            sub(/^\+/, "", plus);
+            n = split(plus, b, ",");
+            lno = b[1] + 0;
+            next;
+        }
+        /^\+\+\+/ { next; }
+        /^\+/ {
+            content = substr($0, 2);
+            printf "%d\t%s\n", lno, content;
+            lno++;
+        }
+    '
+}
+
+# ── Structural checks on a new file's full content ──────────────────
+
+check_structural_new() {
+    local file="$1"
+    local content
+    content="$(git show ":$file" 2>/dev/null)" || return
+
+    local -a lines
+    mapfile -t lines <<<"$content"
+    local n=${#lines[@]}
+
+    local line1="${lines[0]:-}"
+    if [ -z "$line1" ]; then
+        FAILS+=("$file:1: empty first line")
+        STATUS=1
+    else
+        case "$line1" in
+            [[:space:]]*)
+                FAILS+=("$file:1: first line must start at column 0 (routine label)")
+                STATUS=1 ;;
+            *\;*) : ;;
+            *)
+                FAILS+=("$file:1: first line missing ';' description marker")
+                STATUS=1 ;;
+        esac
+    fi
+
+    local line2="${lines[1]:-}"
+    case "$line2" in
+        \;\;*|" ;;"*) : ;;
+        *)
+            FAILS+=("$file:2: second line must start with ';;' (version line)")
+            STATUS=1 ;;
+    esac
+
+    # Column discipline: column-0 content must look like a label
+    # Label ::= [%A-Za-z][A-Za-z0-9]* | [0-9]+   (optionally followed by
+    # an arg list in parens), optionally followed by space or ';'.
+    local i
+    for ((i = 0; i < n; i++)); do
+        local ln="${lines[$i]}"
+        local lno=$((i + 1))
+        [ -z "$ln" ] && continue
+        local first="${ln:0:1}"
+        [ "$first" = " " ] || [ "$first" = $'\t' ] || [ "$first" = ";" ] && continue
+        if ! [[ "$ln" =~ ^([%A-Za-z][A-Za-z0-9]*|[0-9]+)(\([^\)]*\))?([[:space:]]|\;|$) ]]; then
+            FAILS+=("$file:$lno: column-0 content is not a valid label")
+            STATUS=1
+        fi
+    done
+}
+
+# ── Apply to staged files ────────────────────────────────────────────
+
+for f in "${STAGED_M_A[@]}"; do
+    [ -n "$f" ] || continue
+    check_structural_new "$f"
+    # New-file per-line checks: run on every line
+    content="$(git show ":$f" 2>/dev/null)"
+    lno=0
+    while IFS= read -r ln; do
+        lno=$((lno + 1))
+        check_line "$f" "$lno" "$ln"
+    done <<<"$content"
+done
+
+for f in "${STAGED_M_M[@]}"; do
+    [ -n "$f" ] || continue
+    while IFS=$'\t' read -r lno ln; do
+        [ -n "$lno" ] || continue
+        check_line "$f" "$lno" "$ln"
+    done < <(emit_added_lines "$f")
+done
+
+# ── .kid round-trip ──────────────────────────────────────────────────
+
+if [ $n_kid -gt 0 ] && [ -f host/scripts/kids_vc.py ]; then
+    TMP="$(mktemp -d)"
+    trap 'rm -rf "$TMP"' EXIT
+    for f in "${STAGED_KID[@]}"; do
+        [ -n "$f" ] || continue
+        local_kid="$TMP/$(basename "$f")"
+        git show ":$f" > "$local_kid" 2>/dev/null || {
+            FAILS+=("$f: cannot read staged content for round-trip")
+            STATUS=1
+            continue
+        }
+        if ! /usr/bin/python3 host/scripts/kids_vc.py roundtrip \
+                "$local_kid" >"$TMP/rt.log" 2>&1; then
+            FAILS+=("$f: kids-vc roundtrip FAILED (see $TMP/rt.log)")
+            STATUS=1
+        fi
+    done
+elif [ $n_kid -gt 0 ]; then
+    echo "[vista-meta pre-commit] warn: kids_vc.py not found; skipping .kid checks"
+fi
+
+# ── Report ───────────────────────────────────────────────────────────
+
+if [ $STATUS -ne 0 ]; then
+    echo
+    echo "[vista-meta pre-commit] ${#FAILS[@]} issue(s):"
+    printf '  %s\n' "${FAILS[@]}"
+    echo
+    echo "Fix and re-stage, or bypass with --no-verify."
+    exit 1
+fi
+
+echo "[vista-meta pre-commit] ok"
+exit 0
