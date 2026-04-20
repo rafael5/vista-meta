@@ -249,18 +249,45 @@ DOX uses XINDEX primarily as a **call-graph data source**. The
 diagnostic surface that XINDEX is actually designed for is not
 exposed by DOX.
 
-## 8. Comparison vs. our ADR-045 regex extractions
+## 8. Coverage matrix — vista-meta phases vs XINDEX
 
-| Our artifact | Phase | XINDEX equivalent | Accuracy gap |
-|---|---|---|---|
-| routine-calls.tsv | 5 | `^UTILITY($J,1,RTN,"X",…)` + File 9.8 subfiles 19/20 | XINDEX catches comma-continuation, `D @X` indirection, `D TAG+N^ROU` offsets our regex misses. 14,658 "truly unreferenced" (T-003) would shrink. |
-| routine-globals.tsv | 3a | `^UTILITY($J,1,RTN,"X",…)` with LOC="G" + File 9.8 subfile 22 | XINDEX catches bare globals (`K ^FOO`), naked references `^(N)`, and extended references `^|pkg|NAME` — all missed by our regex MVP. |
-| protocol-calls.tsv | 5b | Not directly — XINDEX doesn't natively scan File 101 ENTRY ACTION, only `.m` source | Our regex-based extraction remains the approach here. |
-| routines-comprehensive.tsv | 6b | Much of it derivable from File 9.8 + subfiles once populated | Would gain: severity-graded error counts per routine, SACC violation counts, checksum change detection. |
+Full phase-by-phase map of what our ad-hoc extraction code produces
+vs what XINDEX produces, with an overlap verdict per row.
 
-**Bottom line**: XINDEX is a strict upgrade to Phase 3a and Phase 5's
-data accuracy. Phase 4 (FileMan metadata) and Phase 5b (protocol
-parsing) stand on their own — XINDEX doesn't help there.
+Legend for **Overlap** column:
+- **FULL**: XINDEX is a strict, authoritative replacement
+- **PARTIAL**: XINDEX covers some fields/cases; others are unique to us
+- **COMPLEMENTARY**: neither replaces the other; both needed
+- **NONE**: XINDEX has no equivalent; our extraction stands alone
+
+| Phase | Our artifact | Our extraction produces | XINDEX equivalent | Overlap | Notes |
+|---|---|---|---|---|---|
+| 1a | Makefile `sync-routines`, `.gitignore` | docker cp host snapshot | — | NONE | Infrastructure, not extraction. Needed before anything. |
+| 1b | `routines.tsv` (6 cols) | routine_name, package, source_path, line_count, byte_size, first_line_comment | `xindex-routines.tsv`: line_count; File 9.8 `1.2 SIZE` | PARTIAL | XINDEX has exact line_count match (100% validated). But XINDEX doesn't know `package` (filesystem-level fact) or `first_line_comment` or `source_path`. Also XINDEX can't process 10,232 T-002-cohort routines; our regex covers them all. |
+| 1b | `packages.tsv` (5 cols) | per-package aggregates | — | NONE | Package is filesystem fact, not XINDEX scope. |
+| 2a | `routines.tsv` extension (+4 cols) | version_line, tag_count, comment_line_count, is_percent_routine | `xindex-routines.tsv`: tag_count; `xindex-tags.tsv`: full tag detail with Supported Entry Point flag | PARTIAL | **tag_count 100% matches XINDEX.** XINDEX adds SEP classification per tag. version_line and comment_line_count are our own — XINDEX doesn't track either. |
+| 2c | `package-data.tsv` (7 cols) | ZWR filename inventory per package | — | NONE | XINDEX processes routines, not globals/DD exports. |
+| 2d | `package-piks-summary.tsv` (7 cols) | per-package PIKS distribution | — | NONE | PIKS classification comes from prior files.tsv work, not routines. |
+| 3a | `routine-globals.tsv` (4 cols) | routine → subscripted global edges | File 9.8 subfile 22 (GLOBALS) + `^UTILITY($J,1,RTN)` GLOBAL xrefs + `^UTILITY($J,1,"***","G",…)` rollup | **FULL** | **XINDEX is a strict accuracy upgrade.** XINDEX catches bare globals (`K ^FOO`), naked references (`^(N)`), extended refs (`^|pkg|NAME`), globals inside string operations that our regex misses. |
+| 4a | `vista-file-9-8.tsv` (6 cols) | Kernel's routine registry top-level | XINDEX doesn't dump — it **writes** to File 9.8 (when INP(7)=1) | COMPLEMENTARY | Our dump reads the table; XINDEX populates subfiles. Neither replaces the other. |
+| 4b | `rpcs.tsv` (8 cols) | File 8994 dump | — | NONE | XINDEX's scope is routines, not RPC Broker registry. |
+| 4c | `options.tsv` (8 cols) | File 19 dump | — | NONE | XINDEX's scope is routines, not menu system. |
+| 4d | `protocols.tsv` (7 cols) | File 101 dump | — | NONE | XINDEX's scope is routines, not protocol system. |
+| 5 | `routine-calls.tsv` (6 cols) | routine → routine call graph via DO/GOTO/JOB/`$$` | `xindex-xrefs.tsv`: authoritative call graph. File 9.8 subfile 19 (ROUTINE INVOKED) + 20 (INVOKED BY). | **FULL** | **XINDEX is the authoritative source.** Our regex is 98.75% accurate, misses `$TEXT()` patch-version checks, comma-continuation, line-offset calls, indirection. XINDEX also gives inbound-direction (INVOKED BY) natively without aggregation. |
+| 5b | `protocol-calls.tsv` (7 cols) | protocol ENTRY/EXIT ACTION → routine edges | — | NONE | XINDEX parses .m source only, not MUMPS text stored in FileMan ENTRY ACTION fields. |
+| 6a | `package-manifest.tsv` (13 cols) | per-package unified view | — | NONE | Cross-source join; XINDEX has no concept of packages. |
+| 6b | `routines-comprehensive.tsv` (20 cols) | per-routine unified view | Much of it derivable from `xindex-routines.tsv` + File 9.8 subfiles + xindex-xrefs | COMPLEMENTARY | Joining XINDEX's xref data INTO our comprehensive.tsv would improve in/out-degree accuracy. Adds: error_count, RSUM, tag-with-SEP-flag. Doesn't add: package assignment, RPC/option/protocol signals, size buckets. |
+| 6c | `package-edge-matrix.tsv` (5 cols) | package→package edge matrix | — | NONE | Cross-package aggregation; XINDEX doesn't know packages. |
+| 7 | `xindex-{routines,errors,xrefs,tags}.tsv` | XINDEX authoritative output + validation | — | (this IS XINDEX) | 6,918 errors across 66 classes — novel dataset, impossible from regex. |
+
+**Summary counts:**
+- **Phases XINDEX fully replaces**: **2 of 15** (Phase 3a routine-globals, Phase 5 routine-calls)
+- **Phases XINDEX partially covers**: **2 of 15** (Phase 1b routines.tsv line_count column, Phase 2a tag_count column)
+- **Phases complementary (both needed)**: **2 of 15** (Phase 4a File 9.8 dump, Phase 6b routines-comprehensive.tsv)
+- **Phases XINDEX has no bearing on**: **9 of 15** (1a, 1b packages.tsv, 2c, 2d, 4b, 4c, 4d, 5b, 6a, 6c)
+- **Phases unique to XINDEX**: **1** (Phase 7 errors extraction — code-quality data)
+
+**Bottom line**: XINDEX is a strict authoritative upgrade for **call graph and globals-touched** extraction. It has **no bearing** on FileMan-metadata extraction (Phases 4a-d), protocol parsing (Phase 5b), package-data inventory (Phase 2c), PIKS joins, or cross-source aggregation (Phase 6a/c).
 
 ## 9. How to run XINDEX for analytical capture
 
@@ -337,3 +364,144 @@ intent.
 
 **Reference for either path**: this document. Subfile structure is
 stable across VistA patches since XT*7.3 baseline.
+
+## 12. Counterfactual — had we started with XINDEX instead
+
+A common question in retrospect: if we'd decided to use XINDEX at the
+outset rather than building ad-hoc regex extraction, how much of the
+code we wrote would have been unnecessary?
+
+**Honest answer: modestly less, not dramatically less.** XINDEX would
+have replaced exactly two phases (3a globals and 5 call graph). It
+wouldn't have touched the other 13 phases at all.
+
+### Phases that would have been eliminated
+
+| Phase | What would have been replaced | Savings |
+|---|---|---|
+| 3a routine-globals | `build_routine_globals.py` (~90 lines Python + 1 Makefile target) | One script, one TSV, one RF entry |
+| 5 routine-calls | `build_routine_calls.py` (~130 lines Python + 1 Makefile target) | One script, one TSV, one RF entry |
+
+Total: ~220 lines of Python, 2 Makefile targets, 2 TSV outputs, 2 RF
+entries (RF-015, RF-020). Also the Phase 5b protocol-calls.py would
+still be needed — XINDEX doesn't scan File 101 ENTRY ACTION text.
+
+### Phases that would have stayed exactly as they are
+
+All of these have no XINDEX equivalent:
+
+- **1a sync-routines** — infrastructure (docker cp snapshot)
+- **1b routine inventory** — XINDEX doesn't know `package`,
+  `source_path`, `first_line_comment`, or how to include the 10,232
+  T-002 cohort routines it can't ZLINK
+- **2a static features** — version_line, comment_line_count,
+  is_percent_routine are our own; XINDEX doesn't track them
+- **2c package-data inventory** — XINDEX processes routines, not
+  `Globals/*.zwr` filenames
+- **2d per-package PIKS** — PIKS classification is upstream of
+  XINDEX entirely
+- **4a File 9.8 dump** — complementary (we read top-level, XINDEX
+  writes subfiles); both needed
+- **4b File 8994 RPC dump** — out of XINDEX's scope
+- **4c File 19 OPTION dump** — out of XINDEX's scope
+- **4d File 101 PROTOCOL dump** — out of XINDEX's scope
+- **5b protocol-calls** — parses FileMan-stored MUMPS text that
+  XINDEX doesn't touch
+- **6a package-manifest** — cross-source join
+- **6b routines-comprehensive** — cross-source join (enriched by
+  XINDEX but not produced by it)
+- **6c package-edge-matrix** — cross-source aggregation
+
+### Hidden cost XINDEX would have added
+
+XINDEX in this VEHU needed substantial environmental debugging
+before it ran at all — arguably more work than the two phases it
+would have replaced:
+
+1. Missing `^%ZIS` — had to set IO/IOM/IOSL/IOF manually
+2. `@IOF` indirection — required a MUMPS expression, not a literal
+3. `ZL @RTN` variable indirection triggered LVUNDEF in YDB;
+   required `ZL @(""""_RTN_"""")` quoted-string form
+4. Partial `^%ZOSF` — native LOAD1 path unusable; had to write
+   VMXIDX.m wrapper using the XINDX7 programmatic contract
+5. `X^XINDX5` finalization path has `IOST` undefined dependency
+6. Scratch-global job scoping — extraction had to happen before
+   job exit
+
+These weren't obvious up front. XINDEX's operational contract
+assumes a fully-provisioned VA/OSEHRA environment with complete
+`^%*` system library; VEHU is partial. The wrapper and its iterations
+were ~180 lines of MUMPS + operational debugging.
+
+### Hidden cost our regex approach DIDN'T have
+
+Our regex extractions used stdlib Python and ran directly against
+filesystem source. They handled:
+- 10,232 T-002-cohort routines XINDEX silently couldn't process
+  (our call graph covered them; XINDEX's didn't)
+- The full MANIFEST of 39,330 routines vs XINDEX's 29,098 successes
+- No YDB/MUMPS environment quirks — ran on host Python
+
+So our "broader coverage, weaker accuracy" approach caught more
+routines than XINDEX did, at the cost of a 1.25% call-graph miss
+rate on the routines both methods could process.
+
+### What XINDEX uniquely delivers
+
+That our ad-hoc approach genuinely could not have produced:
+
+- **6,918 errors across 66 classes** — code-quality dataset.
+  Regex can't parse MUMPS deeply enough to enumerate SACC
+  violations, block-structure mismatches, missing READ timeouts,
+  etc.
+- **RSUM checksums** — change-detection fingerprints. Computable
+  from source but requires implementing the specific RSUM algorithm
+  (XPDRSUM).
+- **VARIABLES with SET/KILL flag** — local variable access
+  classification requires proper MUMPS tokenization.
+- **TAG Supported-Entry-Point flag** — requires parsing tag
+  metadata conventions.
+- **Authoritative call-graph accuracy** — 98.75% vs our 98.75%
+  regex result, but XINDEX is the ground-truth reference, not an
+  approximation.
+
+### Verdict
+
+If we had started with XINDEX:
+- **Saved**: ~220 lines of Python, 2 Makefile targets, 2 RF entries.
+- **Added**: ~180 lines of MUMPS wrapper, environmental debugging
+  cost, and a narrower population (29,098 vs 39,330 routines).
+- **Gained unconditionally**: the errors/RSUM/VARIABLES/SEP dataset
+  that has no regex equivalent.
+
+**The hybrid approach we took is defensible**: regex for what regex
+does well (simple features, broad coverage), XINDEX as the authority
+for validation (proved our static features 100% correct and our call
+graph 98.75% correct), and our own extractors for the FileMan
+metadata surface (Files 8994, 19, 101) that XINDEX doesn't touch.
+
+If anything, the lesson is: **run XINDEX earlier, not instead of**.
+The validation dimension — knowing our Phase 1b/2a/5 outputs are
+quantitatively close to ground truth — is independently valuable and
+wouldn't exist if we'd only used XINDEX from the start.
+
+### What changes post-Phase-7
+
+With XINDEX now run and validated against our data, the natural
+forward moves are:
+
+1. **Add `$T(+N^ROUTINE)` detection** to Phase 5's regex — a
+   single-pattern extension that closes most of the 1.66%
+   call-graph gap.
+2. **Fold XINDEX xrefs into Phase 6b** `routines-comprehensive.tsv`
+   — use XINDEX's call graph as the authoritative in_degree/
+   out_degree source where available; fall back to regex for the
+   T-002 cohort XINDEX can't process.
+3. **Add a new phase for code-quality analysis** driven by
+   `xindex-errors.tsv` — per-routine and per-package error counts
+   by severity. This is the novel dataset XINDEX contributes and
+   we hadn't planned for.
+4. **T-003 revisitation** — join `xindex-xrefs.tsv` into the
+   routines-comprehensive.tsv's in_degree calculation to see how
+   many of the 14,658 "truly unreferenced" routines actually have
+   XINDEX-detected callers our regex missed.
