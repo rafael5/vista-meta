@@ -964,6 +964,85 @@ Where to get help.
 
 ---
 
+## 11.5 Development log — the tooling buildout (2026-04-20)
+
+After this guide was written, a set of tools was built that directly
+closes most of the §4.2 gaps. The buildout happened in discrete
+tiers, committed as it went. For the technical reference — commands,
+flags, settings, daily loop — see
+[vista-vscode-guide.md](vista-vscode-guide.md). What follows is just
+the chronology.
+
+**Tier 1** — deterministic developer-console MVP (half a day).
+
+- `hooks/pre-commit` that runs on every `.m` / `.kid` the developer
+  stages. Diff-scoped rules on modified files, structural rules on
+  newly-added files, kids-vc round-trip on `.kid` files. Zero false
+  positives on a 200-routine sample of the real corpus.
+- `vista-meta pkg NAME` — one-shot package overview from the
+  code-model TSVs: namespace prefix, FM files, globals, options,
+  RPCs, protocols, cross-package edges, entry-point candidates.
+- `vista-meta context NAME` — AI-oriented context pack: summary
+  plus optional budgeted routine source.
+- `vista-meta where TAG^ROUTINE` and `callers TAG^ROUTINE` —
+  symbol jumping and caller graph without hand-grepping TSVs.
+
+**Tier 2** — day-to-day workflow (half a day).
+
+- `bin/mfmt` — canonical MUMPS formatter. Deterministic,
+  idempotent, minimal. Strips trailing whitespace, leading tabs
+  → spaces, CRLF → LF, single trailing newline. Rules that would
+  require parsing MUMPS (command-case, body indent, string-literal
+  aware) were deliberately not implemented.
+- `vista-meta new-test ROUTINE` — M-Unit test skeleton. Enumerates
+  public tags, emits one `; @TEST` stub per tag.
+- `vista-meta lint FILES` — doc-comment lint. Every public tag in
+  a newly-added file must carry an `@summary` or `@test` block.
+  Wired into the pre-commit hook for new files only (legacy
+  exempt).
+- `make patch-new/decompose/assemble/roundtrip` — decomposed-on-disk
+  as the default patch workflow, built on top of kids-vc. `.KID`
+  files become build artifacts; you edit the tree.
+
+**Tier 3** — close the remaining gaps from §4.2 (a day).
+
+- **A — unified console.** `vista-meta doctor` (environment health
+  check: TSVs current? hook installed? container up?
+  round-trip passes?); `search PATTERN` (annotated corpus grep
+  with package attribution); `file N` (FileMan-side counterpart to
+  `pkg`, including pointer-in / pointer-out graphs and PIKS).
+- **B — XINDEX bridge.** `vista-meta xindex FILE` copies a `.m`
+  into the running container, drives the existing VMXIDX entry
+  points over stdin, parses `/tmp/xindex-errors.tsv`, reports with
+  host-relative paths and severity counts. Opt-in hook gating via
+  `VISTA_META_XINDEX=1` — every Fatal then blocks your commit.
+- **C — GitHub Actions CI.** `dev-tools-ci.yml` runs `mfmt --check`
+  on changed `.m` files and `vista-meta lint` on newly-added ones;
+  `kids-vc-ci.yml` gains an `xpdk2vc-compat` job. Local hook and
+  remote CI enforce the same rules.
+- **D — VSCode extension.** A sidebar panel ("VistA Routine") that
+  appears under the Explorer view when a `.m` file is active. Reads
+  the code-model TSVs directly — no language server, no MCP, no
+  network. Shows package, in/out-degree, tags, aggregated callers
+  and callees, globals, and XINDEX findings. Every entry is
+  clickable for go-to-definition.
+
+**What's still open.**
+
+- **Tier 3E** — ADR-046 Phase 9 (kids-vc undo). Designed; not built.
+- **Tier 3F** — data-model patch workflow analogue. Deferred.
+- **Tier 0 hard problems** — type system, live debugger, M-Unit
+  coverage. These aren't mechanical and weren't attempted.
+
+**Time breakdown.** Tier 1 was ~2–3 hours of pairing; Tier 2
+another ~2 hours; Tier 3A–D ~4 hours end to end. Total
+developer-facing change: one CLI binary (`vista-meta`), one
+formatter (`mfmt`), one pre-commit hook, four Makefile target
+families, two CI workflows, and one VSCode extension. The 40-year
+VistA ecosystem didn't get a full modern IDE out of it — but the
+day-to-day friction dropped by about an order of magnitude, and it
+was done without touching a single line of MUMPS in VistA-M itself.
+
 ## 12. The single-paragraph summary
 
 **VistA is not hard because MUMPS is hard. It's hard because the
@@ -984,6 +1063,8 @@ and learn to work around the gaps rather than mourn them.**
 
 ## References
 
+- [vista-vscode-guide.md](vista-vscode-guide.md) — technical
+  reference for the CLI + pre-commit hook + VSCode extension
 - [code-model-guide.md](code-model-guide.md) — the VistA code-model
   artifacts this guide references
 - [kids-vc-guide.md](kids-vc-guide.md) — using kids-vc
