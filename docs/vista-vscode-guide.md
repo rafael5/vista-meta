@@ -39,25 +39,25 @@ recommended daily loop.
 
 ```
 vista-meta [ARG..]
-    doctor                         Environment health
-    pkg NAME                       Package overview
-    context NAME [--with-source]   AI context pack
-    where TAG^ROUTINE              Jump to source
-    callers TAG^ROUTINE            Caller graph
-    search PATTERN                 Annotated corpus grep
-    file N                         FileMan file overview
-    new-test ROUTINE               M-Unit test skeleton
-    lint FILES...                  Doc-comment lint
-    xindex FILE                    Run XINDEX on one .m (live)
+    doctor                       Environment health
+    pkg NAME                     Package overview
+    context NAME [--with-source] AI context pack
+    where TAG^ROUTINE            Jump to source
+    callers TAG^ROUTINE          Caller graph
+    search PATTERN               Annotated corpus grep
+    file N                       FileMan file overview
+    new-test ROUTINE             M-Unit test skeleton
+    lint FILES...                Doc-comment lint
+    xindex FILE                  Run XINDEX on one .m (live)
 
-mfmt FILES...                      Canonical .m formatter
-mfmt --check FILES...              Dry-run formatter
+mfmt FILES...                   Canonical .m formatter
+mfmt --check FILES...           Dry-run formatter
 
-make install-hooks                 Install pre-commit hook
-make patch-new NAME=...            Scaffold a new on-disk patch
-make patch-decompose KID=...       .KID → on-disk form
-make patch-assemble DIR=...        on-disk form → .KID
-make patch-roundtrip KID=...       decompose + re-assemble + diff
+make install-hooks              Install pre-commit hook
+make patch-new NAME=...         Scaffold a new on-disk patch
+make patch-decompose KID=...    .KID → on-disk form
+make patch-assemble DIR=...     on-disk form → .KID
+make patch-roundtrip KID=...    decompose + re-assemble + diff
 ```
 
 ---
