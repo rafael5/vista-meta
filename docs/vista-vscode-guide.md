@@ -38,19 +38,19 @@ recommended daily loop.
 ## Quick reference
 
 ```
-bin/vista-meta doctor                   Environment health
-bin/vista-meta pkg NAME                 Package overview
-bin/vista-meta context NAME [--with-source]   AI context pack
-bin/vista-meta where TAG^ROUTINE        Jump to source
-bin/vista-meta callers TAG^ROUTINE      Caller graph
-bin/vista-meta search PATTERN           Annotated corpus grep
-bin/vista-meta file N                   FileMan file overview
-bin/vista-meta new-test ROUTINE         M-Unit test skeleton
-bin/vista-meta lint FILES...            Doc-comment lint
-bin/vista-meta xindex FILE              Run XINDEX on one .m (live)
+vista-meta doctor                   Environment health
+vista-meta pkg NAME                 Package overview
+vista-meta context NAME [--with-source]   AI context pack
+vista-meta where TAG^ROUTINE        Jump to source
+vista-meta callers TAG^ROUTINE      Caller graph
+vista-meta search PATTERN           Annotated corpus grep
+vista-meta file N                   FileMan file overview
+vista-meta new-test ROUTINE         M-Unit test skeleton
+vista-meta lint FILES...            Doc-comment lint
+vista-meta xindex FILE              Run XINDEX on one .m (live)
 
-bin/mfmt FILES...                       Canonical .m formatter
-bin/mfmt --check FILES...               Dry-run formatter
+mfmt FILES...                       Canonical .m formatter
+mfmt --check FILES...               Dry-run formatter
 
 make install-hooks                      Install pre-commit hook
 make patch-new NAME=...                 Scaffold a new on-disk patch
