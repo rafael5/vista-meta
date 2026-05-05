@@ -187,3 +187,62 @@ current extractors don't see.
 correct about what they measure. T-003 is about completeness of the
 call graph, which affects decomposition/modernization analysis but
 not the package manifest's basic utility.
+
+---
+
+## T-004: Execute the VistA orchestration plan (end-to-end TDD toolchain)
+
+**Flagged**: 2026-05-05, after a cross-repo survey of the M / VistA
+toolchain.
+
+**Plan document**: [docs/vista-orchestration-plan.md](docs/vista-orchestration-plan.md)
+
+**Observation**: the language layer (m-cli: parse / format / lint /
+test / coverage / LSP) is ~80% complete and KIDS round-trip
+(py-kids-vc) is production-grade, but there is no end-to-end pipeline
+from `.m` source → KIDS components → install → integration test →
+report. m-stdlib has shipped only 2 of 9 Phase 1 modules
+(STDASSERT, STDUUID); fixtures, mocks, JSON, regex, and collections
+are all missing. There is no CI wiring and no KIDS component
+manifest format.
+
+**Why it matters**: without these, modern TDD on VistA stays a
+hand-driven craft. The full chain — write a failing M unit test,
+build a per-component KIDS, install into VEHU, run integration
+smoke tests, get a coverage report — is the daily-driver workflow
+the rest of the stack was designed to enable.
+
+**Plan summary** (see linked doc for detail):
+
+| Phase | Focus | Est. |
+|---|---|---|
+| 0 | Land what's nearly done (m-stdlib v0.1, tree-sitter-m publish, m-modern-corpus seed, vista-meta README) | 3 w |
+| 1 | TDD primitives (STDFIX, STDMOCK, STDSEED in m-stdlib; --junit, --coverage-min, --changed in m-cli; branch coverage) | 10 w |
+| 2 | KIDS as components (kids-component.toml, py-kids-vc component build/assemble, round-trip gate) | 8 w |
+| 3 | End-to-end orchestrator (`vista-cli build/package/install/verify/ci`) | 4 w |
+| 4 | Integration test framework (RPC smoke harness, VistA-DataLoader-fork fixtures, mupip snapshot/restore) | 4 w |
+| 5 | CI wiring (GitHub Actions reusable workflow, pre-commit additions) | 2 w |
+| 6 | m-stdlib Phase 2 (STDJSON, STDREGEX, STDCOLL, STDHTTP, STDCRYPT) | parallel |
+| 7 | Editor/dev-loop polish (LSP defs/refs, code-lens, hot-reload) | parallel |
+| 8 | Quality gates (mutation testing, profiling, taint analysis) | later |
+
+Working end-to-end TDD loop reachable at **Phase 5 exit (~5–6 months)**.
+
+**Cross-repo deliverables**: see § 7 of the plan for the per-repo map.
+The plan calls out which work lands in m-stdlib, m-cli, py-kids-vc,
+py-kids-install, vista-cli, tree-sitter-m, vista-meta,
+VistA-DataLoader-fork, m-modern-corpus, and tree-sitter-m-vscode.
+
+**Open decisions** flagged in the plan (§ 8): vista-cli build scope,
+fixture format (TSV/JSON/YAML), STDMOCK semantics (parser-aware vs
+opt-in wrappers), snapshot granularity (TSTART vs mupip), Phase 8
+mutation-testing ROI.
+
+**Resolution criteria**: each phase has its own exit criteria in the
+plan. T-004 closes when Phase 5 exit is reached and a sample
+multi-component VistA package gets automated lint + unit +
+integration + coverage on PR.
+
+**Tracking**: per-repo TODO entries should be opened in each affected
+repo as work begins on its slice; this T-004 stays as the master
+tracker.
