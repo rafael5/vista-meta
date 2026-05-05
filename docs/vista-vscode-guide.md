@@ -128,6 +128,16 @@ MCP, no container calls — pure reads of the code-model TSVs. That
 means the extension is instant, works offline, and has no way to
 break your workspace.
 
+> Modifying the extension? See
+> [vscode-extension-internals.md](vscode-extension-internals.md) for
+> architecture, file-by-file walkthrough, and the recommended roadmap
+> (HoverProvider, DocumentSymbolProvider, XINDEX diagnostics, etc.).
+>
+> *Cold-opening* an unfamiliar `.m` file? See
+> [routine-situational-awareness.md](routine-situational-awareness.md)
+> — a prioritized 6-layer sweep that uses every VSCode surface (sidebar,
+> outline, hover, terminal CLI, git blame) to build context fast.
+
 ### 2.1 Where the sidebar lives on screen
 
 When any `.m` file is the active editor, a **VISTA ROUTINE** panel

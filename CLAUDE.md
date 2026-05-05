@@ -145,7 +145,11 @@ being callable from an Institution-scoped RPC?"* at query speed.
 | **Comprehensive project guide** | `docs/vista-meta-guide.md` | **Start here** — full scope, methodology, accomplishments |
 | Authoritative technical spec | `docs/vista-meta-spec-v0.4.md` | What to build; contracts; PIKS heuristics |
 | Developer onramp | `docs/vista-developers-guide.md` | How a Python/JS/Go dev orients in VistA |
+| Per-routine situational awareness | `docs/routine-situational-awareness.md` | Cold-opening any `.m` file: priority sweep, VSCode surfaces, cognitive traps |
+| Per-package situational awareness | `docs/package-situational-awareness.md` | Scanning a whole `Packages/X/` folder: fingerprint, automated scans, VSCode integrations |
+| `vista` CLI planning + design | `docs/vista-cli-planning.md` | Proposed unified CLI joining vista-meta TSVs with vista-docs frontmatter for cross-artifact queries |
 | VSCode + CLI reference | `docs/vista-vscode-guide.md` | Every tool the repo ships |
+| VSCode extension internals + roadmap | `docs/vscode-extension-internals.md` | Modifying or extending the extension |
 | PIKS methodology | `docs/piks-analysis-guide.md` | Data-model deep dive |
 | Code model TSVs | `docs/code-model-guide.md` | Per-TSV reference |
 | kids-vc pipeline | `docs/kids-vc-guide.md` | Decompose/assemble workflow |
