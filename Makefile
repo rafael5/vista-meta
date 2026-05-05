@@ -37,6 +37,7 @@ run: ## Start the container (creates named volume on first run)
 		-v $(PWD)/vista/dev-r:/home/vehu/dev/r \
 		-v $(PWD)/vista/scripts:/home/vehu/scripts \
 		-v $(PWD)/vista/export:/home/vehu/export \
+		-v $(PWD)/docker/etc/authorized_keys:/etc/vehu_authorized_keys:ro \
 		--stop-timeout 30 \
 		$(IMAGE):latest
 
@@ -398,6 +399,41 @@ adr-new: ## Create a new ADR (TITLE="decision title")
 	FILE="docs/adr/$${NEXT}-$${SLUG}.md"; \
 	printf "# ADR-$${NEXT}: $(TITLE)\n\nDate: $$(date +%F)\nStatus: Proposed\n\n## Context\n\n## Decision\n\n## Consequences\n\n## Alternatives considered\n" > "$$FILE"; \
 	echo "Created $$FILE"
+
+# ── SSH key provisioning ─────────────────────────────────────────────
+# Sibling projects (m-cli, m-tools, m-stdlib) SSH into vehu with
+# BatchMode=yes, which forbids password prompts. We collect the host
+# user's public keys at `make run` time, write them to a gitignored
+# file, and bind-mount it into the container. The entrypoint installs
+# it as ~vehu/.ssh/authorized_keys. New keys → next `make run` picks
+# them up; for live containers use `make install-ssh-keys`.
+
+HOST_PUB_KEYS := $(wildcard $(HOME)/.ssh/*.pub)
+AUTH_KEYS     := docker/etc/authorized_keys
+
+.PHONY: ssh-keys
+ssh-keys: $(AUTH_KEYS) ## Refresh docker/etc/authorized_keys from $HOME/.ssh/*.pub
+
+$(AUTH_KEYS): $(HOST_PUB_KEYS)
+	@[ -n "$(HOST_PUB_KEYS)" ] || { \
+	    echo "No public keys found in $(HOME)/.ssh/. Run 'ssh-keygen' first."; \
+	    exit 1; }
+	@cat $(HOST_PUB_KEYS) > $@
+	@echo "wrote $@ ($$(wc -l < $@) key(s) from $(words $(HOST_PUB_KEYS)) file(s))"
+
+.PHONY: install-ssh-keys
+install-ssh-keys: ssh-keys ## Push authorized_keys into a running container without restart
+	@$(DOCKER) ps --format '{{.Names}}' | grep -q '^$(CONTAINER)$$' || \
+	    { echo "container '$(CONTAINER)' not running"; exit 1; }
+	$(DOCKER) cp $(AUTH_KEYS) $(CONTAINER):/etc/vehu_authorized_keys
+	$(DOCKER) exec -u root $(CONTAINER) bash -c '\
+	    install -d -m 700 -o vehu -g vehu /home/vehu/.ssh && \
+	    install -m 600 -o vehu -g vehu \
+	        /etc/vehu_authorized_keys /home/vehu/.ssh/authorized_keys'
+	@echo "installed authorized_keys into running $(CONTAINER)"
+
+# Ensure the file exists before `docker run` tries to bind-mount it.
+run: ssh-keys
 
 .PHONY: help
 help: ## Show this help

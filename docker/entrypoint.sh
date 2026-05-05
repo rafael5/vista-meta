@@ -36,6 +36,19 @@ chown -R vehu:vehu /home/vehu/dev \
                    /home/vehu/export \
                    /home/vehu/g
 
+# Install host pubkeys for vehu so non-interactive SSH (BatchMode=yes,
+# used by sibling projects' `make test` and seed-vista.sh) can authenticate.
+# Source is bind-mounted from host docker/etc/authorized_keys, generated
+# by `make ssh-keys` from $HOME/.ssh/*.pub. Image stays free of personal keys.
+if [ -s /etc/vehu_authorized_keys ]; then
+    install -d -m 700 -o vehu -g vehu /home/vehu/.ssh
+    install -m 600 -o vehu -g vehu \
+        /etc/vehu_authorized_keys /home/vehu/.ssh/authorized_keys
+    log "  installed authorized_keys ($(wc -l < /home/vehu/.ssh/authorized_keys) keys)"
+else
+    log "  no /etc/vehu_authorized_keys — pubkey SSH disabled (password only)"
+fi
+
 # ── Phase 3: Service startup ─────────────────────────────────────────
 # ADR-013: sshd → xinetd → rocto → YDB GUI
 # All services listen on 0.0.0.0 inside the container.
