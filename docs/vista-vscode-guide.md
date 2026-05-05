@@ -360,7 +360,6 @@ Reports:
   `make sync-routines` run
 - 9 critical code-model TSVs present
 - 3 data-model TSVs present
-- kids-vc fixture round-trips cleanly
 - container `vista-meta` running
 
 Exit 0 if every hard check passes, 1 otherwise. Run this any time
@@ -577,11 +576,6 @@ rule, and the hook must not block edits to existing files just
 because a pre-existing line somewhere has a tab. It only cares about
 lines **you** added.
 
-**`.kid` / `.KID` files:**
-
-- `kids_vc.py roundtrip` must pass (parse + re-assemble must be
-  byte-semantically identical)
-
 ### 5.2 Opt-in XINDEX gating
 
 Off by default because it needs the container. Enable per session:
@@ -613,8 +607,10 @@ added malformed files correctly flagged.
 
 ## 6. Patch workflow (decomposed-on-disk)
 
-Edit patches as trees of files, not `.KID` bundles. Assembly happens
-at build time via [host/scripts/kids_vc.py](../host/scripts/kids_vc.py).
+Edit patches as trees of files, not `.KID` bundles. Assembly is
+done by the **`kids-vc`** CLI from `~/projects/py-kids-vc/` (install
+with `pip install kids-vc`); the `make patch-*` targets below shell
+out to it.
 
 ### 6.1 Start a new patch
 
@@ -658,13 +654,13 @@ make patch-roundtrip KID=some.KID
 ```
 
 The full kids-vc toolchain is documented in
-[kids-vc-guide.md](kids-vc-guide.md).
+`~/projects/py-kids-vc/docs/kids-vc-guide.md`.
 
 ---
 
 ## 7. CI — enforce the same checks on PRs
 
-Two workflows under `.github/workflows/`:
+One workflow under `.github/workflows/`:
 
 ### 7.1 `dev-tools-ci.yml`
 
@@ -677,18 +673,9 @@ the dev tool scripts:
 | `lint` | `vista-meta lint` on `.m` files newly added in the PR diff |
 | `syntax` | `py_compile` on `vista_meta_cli.py` + `mfmt.py` |
 
-### 7.2 `kids-vc-ci.yml`
+> kids-vc CI lives in the `~/projects/py-kids-vc/` repo.
 
-Triggers on changes to kids-vc sources or fixtures:
-
-| Job | What it runs |
-|---|---|
-| `roundtrip` | Round-trips every fixture in `host/scripts/kids_vc_fixtures/` |
-| `zwr-merge` | `test_zwr_merge.py` (7 merge scenarios) |
-| `xpdk2vc-compat` | `test_xpdk2vc_compat.py` (6 structural contracts) |
-| `lint-check` | `py_compile` + import-safety on kids-vc scripts |
-
-### 7.3 Running the same checks locally
+### 7.2 Running the same checks locally
 
 ```bash
 # What fmt-check does:
@@ -696,11 +683,6 @@ bin/mfmt --check $(git diff --name-only origin/main...HEAD -- '*.m')
 
 # What lint does:
 bin/vista-meta lint $(git diff --name-only --diff-filter=A origin/main...HEAD -- '*.m')
-
-# kids-vc:
-make kids-vc-test
-make zwr-merge-test
-make kids-vc-xpdk2vc-compat
 ```
 
 ---
@@ -899,6 +881,6 @@ multi-folder workspace, set `vistaMeta.codeModelPath` absolutely
 - [.github/workflows/](../.github/workflows/) — CI
 - [Makefile](../Makefile) — all Makefile targets (`make help` lists them)
 - [vista-developers-guide.md](vista-developers-guide.md) — architectural context
-- [kids-vc-guide.md](kids-vc-guide.md) — `.KID` decompose / assemble
+- `~/projects/py-kids-vc/` — `.KID` decompose / assemble (sibling project)
 - [code-model-guide.md](code-model-guide.md) — the TSVs these tools read
 - [piks-analysis-guide.md](piks-analysis-guide.md) — the data-model side

@@ -556,7 +556,7 @@ VistA has specific gotchas that burn time if you don't know them.
 | **Confusing `^GLOBAL` and `^ROUTINE`** | `^XUSCLEAN` could be either | The lookup is unambiguous: if it's in `routines.tsv`, it's a routine; otherwise it's a global. The proposed [hover](vscode-extension-internals.md#71-tier-a--hoverprovider-highest-leverage) decides for you. |
 | **Ignoring `in=0`** | "Dead code, skip" | Check L4 first. RPCs, Options, and Protocols invoke from outside the M call graph — `in=0` plus `RPC×N` or `OPT×N` is a live entrypoint. |
 | **Treating numeric tags as line numbers** | `D 430` looks like a typo for line 430 | Numeric tags are real label names, often historic state-machine entries. They're rarely safe to rename. |
-| **Editing line 2** | Adding a patch reference, hand-editing the version | Line 2 is parsed by the KIDS installer. Never hand-edit; use the patch tooling ([kids-vc-guide.md](kids-vc-guide.md)). |
+| **Editing line 2** | Adding a patch reference, hand-editing the version | Line 2 is parsed by the KIDS installer. Never hand-edit; use the patch tooling (`~/projects/py-kids-vc/`). |
 | **Skipping the patch list** | Missing the "this routine has been touched 47 times" signal | The `**14,79,153,...**` on line 2 is the audit trail. Long list = mature, much-tested; short list = brittle or unmaintained. |
 | **Treating XINDEX `S` (Style) as "noise"** | Shipping `LOCK ^X` without timeout because legacy does it | Legacy is grandfathered. New code must pass — the [pre-commit hook](vista-vscode-guide.md#5-the-pre-commit-hook) enforces it. |
 | **`xecute` callees in the sidebar** | Treating `XECUTE` targets as real callees | They're dynamic — string assembled at runtime. May not exist on this system. The `kind` column flags them. |
@@ -672,4 +672,4 @@ Print this and tape it next to the monitor.
 - [code-model-guide.md](code-model-guide.md) — the 19 TSVs the sidebar reads
 - [piks-analysis-guide.md](piks-analysis-guide.md) — what P/I/K/S means
 - [xindex-reference.md](xindex-reference.md) — what the XINDEX section is showing you
-- [kids-vc-guide.md](kids-vc-guide.md) — KIDS patch workflow (line-2 patch list)
+- `~/projects/py-kids-vc/docs/kids-vc-guide.md` — KIDS patch workflow (line-2 patch list)

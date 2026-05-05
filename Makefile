@@ -277,58 +277,8 @@ validate-xindex: ## Validate our regex extractions against XINDEX (ADR-045 post-
 	done
 	/usr/bin/python3 host/scripts/validate_against_xindex.py
 
-# ── KIDS version control (Phase 8+) ───────────────────────────────────
-
-.PHONY: kids-vc-test
-kids-vc-test: ## Round-trip test of kids-vc against the synthetic fixture (Phase 8a)
-	/usr/bin/python3 host/scripts/kids_vc.py roundtrip \
-		host/scripts/kids_vc_fixtures/VMTEST_1_0_1.kid
-
-.PHONY: kids-vc-demo
-kids-vc-demo: ## Decompose the kids-vc fixture to /tmp/kidsvc-demo for inspection
-	@rm -rf /tmp/kidsvc-demo
-	/usr/bin/python3 host/scripts/kids_vc.py decompose \
-		host/scripts/kids_vc_fixtures/VMTEST_1_0_1.kid /tmp/kidsvc-demo
-	@/usr/bin/find /tmp/kidsvc-demo -print | sort
-
-.PHONY: kids-vc-all
-kids-vc-all: ## Round-trip every fixture in host/scripts/kids_vc_fixtures/
-	@for f in host/scripts/kids_vc_fixtures/*.kid; do \
-		/usr/bin/python3 host/scripts/kids_vc.py roundtrip "$$f" | head -1; \
-	done
-
-.PHONY: zwr-merge-test
-zwr-merge-test: ## Run the ZWR 3-way merge driver test suite (Phase 8d)
-	/usr/bin/python3 host/scripts/test_zwr_merge.py
-
-.PHONY: zwr-merge-install
-zwr-merge-install: ## Install zwr_merge.py as a git merge driver for *.zwr files (Phase 8d)
-	@echo "Installing ZWR merge driver for the current repo..."
-	@touch .gitattributes
-	@grep -q "^\*\.zwr merge=zwr" .gitattributes || echo "*.zwr merge=zwr" >> .gitattributes
-	git config merge.zwr.name "ZWR entry-level 3-way merge"
-	git config merge.zwr.driver "/usr/bin/python3 $(PWD)/host/scripts/zwr_merge.py %O %A %B"
-	@echo "Done. .gitattributes has *.zwr merge=zwr; .git/config has merge.zwr driver."
-
-.PHONY: kids-vc-corpus
-kids-vc-corpus: ## Corpus round-trip harness: fetch + test every .KID in WorldVistA/VistA master (Phase 8f)
-	/usr/bin/python3 host/scripts/fetch_kids_corpus.py
-
-.PHONY: kids-vc-corpus-cached
-kids-vc-corpus-cached: ## Re-run corpus round-trip using cached downloads (Phase 8f)
-	/usr/bin/python3 host/scripts/fetch_kids_corpus.py --no-fetch
-
-.PHONY: kids-vc-xpdk2vc-compat
-kids-vc-xpdk2vc-compat: ## Run XPDK2VC behavioral-contract compatibility tests (Phase 8g)
-	/usr/bin/python3 host/scripts/test_xpdk2vc_compat.py
-
-.PHONY: kids-vc-pip-install
-kids-vc-pip-install: ## Install kids-vc as a pip package in a venv at /tmp/kidsvc-venv (Phase 8h)
-	@python3 -m venv /tmp/kidsvc-venv
-	/tmp/kidsvc-venv/bin/pip install --quiet -e kids_vc_pkg/
-	@echo "Installed. Try: /tmp/kidsvc-venv/bin/kids-vc --help"
-
 # ── Decomposed-on-disk patch workflow (Tier 2 #7) ─────────────────────
+# Requires the `kids-vc` CLI on $PATH (separate project at ~/projects/py-kids-vc/).
 
 PATCHES_DIR := patches
 
@@ -349,7 +299,7 @@ patch-decompose: ## Decompose a .KID into on-disk form: KID=path/to/patch.KID
 	@mkdir -p $(PATCHES_DIR)
 	@name=$$(basename "$(KID)" | sed -E 's/\.[Kk][Ii][Dd]$$//'); \
 		dst=$(PATCHES_DIR)/$$name; \
-		/usr/bin/python3 host/scripts/kids_vc.py decompose "$(KID)" "$$dst" && \
+		kids-vc decompose "$(KID)" "$$dst" && \
 		echo "Decomposed -> $$dst"
 
 .PHONY: patch-assemble
@@ -357,13 +307,13 @@ patch-assemble: ## Assemble an on-disk patch tree into a .KID: DIR=patches/NAME
 	@[ -n "$(DIR)" ] || { echo "Usage: make patch-assemble DIR=patches/MYPKG_1_0_1001"; exit 1; }
 	@name=$$(basename "$(DIR)"); \
 		out=$(PATCHES_DIR)/$$name.KID; \
-		/usr/bin/python3 host/scripts/kids_vc.py assemble "$(DIR)" "$$out" && \
+		kids-vc assemble "$(DIR)" "$$out" && \
 		echo "Assembled -> $$out"
 
 .PHONY: patch-roundtrip
 patch-roundtrip: ## Round-trip a .KID (decompose + re-assemble + diff): KID=path
 	@[ -n "$(KID)" ] || { echo "Usage: make patch-roundtrip KID=path/to/patch.KID"; exit 1; }
-	@/usr/bin/python3 host/scripts/kids_vc.py roundtrip "$(KID)"
+	@kids-vc roundtrip "$(KID)"
 
 # ── More developer tools (Tier 2 #5, #6, #8) ──────────────────────────
 

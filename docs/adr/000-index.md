@@ -73,4 +73,4 @@ What we rejected and why.
 | 043 | Drop ViViaN/DOX (deferred) | Accepted |
 | 044 | Project root = ~/vista-meta, standalone repo | Accepted |
 | 045 | Separate data and code classification; package as the bridge | Accepted |
-| 046 | kids-vc undo — pre-install snapshot for reversible declarative patches | Proposed |
+| 046 | _(moved)_ kids-vc undo — pre-install snapshot. Now lives in `~/projects/py-kids-vc/docs/adr/046-*.md` | Proposed |

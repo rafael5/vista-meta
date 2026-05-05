@@ -6,7 +6,6 @@
 # Scope policy (avoids false positives on the legacy corpus):
 #   Newly-added .m files  — structural + per-line on all lines
 #   Modified .m files     — per-line checks on ADDED lines only
-#   Staged .kid/.KID files — kids-vc round-trip must pass
 #
 # Host-only, fast path. Bypass with `git commit --no-verify`.
 
@@ -22,15 +21,12 @@ mapfile -t STAGED_M_A < <(git diff --cached --name-only --diff-filter=A \
     -- '*.m' 2>/dev/null)
 mapfile -t STAGED_M_M < <(git diff --cached --name-only --diff-filter=M \
     -- '*.m' 2>/dev/null)
-mapfile -t STAGED_KID < <(git diff --cached --name-only --diff-filter=ACM \
-    -- '*.kid' '*.KID' 2>/dev/null)
 
 n_m=$(( ${#STAGED_M_A[@]} + ${#STAGED_M_M[@]} ))
-n_kid=${#STAGED_KID[@]}
-if [ $n_m -eq 0 ] && [ $n_kid -eq 0 ]; then
+if [ $n_m -eq 0 ]; then
     exit 0
 fi
-echo "[vista-meta pre-commit] .m=$n_m (new=${#STAGED_M_A[@]}, mod=${#STAGED_M_M[@]}) .kid=$n_kid"
+echo "[vista-meta pre-commit] .m=$n_m (new=${#STAGED_M_A[@]}, mod=${#STAGED_M_M[@]})"
 
 # ── Per-line checks (apply to added lines) ───────────────────────────
 
@@ -207,29 +203,6 @@ if [ "${VISTA_META_XINDEX:-0}" = "1" ] && \
         echo "[vista-meta pre-commit] warn: VISTA_META_XINDEX=1 but "\
 "container $CONTAINER is not running; skipping XINDEX"
     fi
-fi
-
-# ── .kid round-trip ──────────────────────────────────────────────────
-
-if [ $n_kid -gt 0 ] && [ -f host/scripts/kids_vc.py ]; then
-    TMP="$(mktemp -d)"
-    trap 'rm -rf "$TMP"' EXIT
-    for f in "${STAGED_KID[@]}"; do
-        [ -n "$f" ] || continue
-        local_kid="$TMP/$(basename "$f")"
-        git show ":$f" > "$local_kid" 2>/dev/null || {
-            FAILS+=("$f: cannot read staged content for round-trip")
-            STATUS=1
-            continue
-        }
-        if ! /usr/bin/python3 host/scripts/kids_vc.py roundtrip \
-                "$local_kid" >"$TMP/rt.log" 2>&1; then
-            FAILS+=("$f: kids-vc roundtrip FAILED (see $TMP/rt.log)")
-            STATUS=1
-        fi
-    done
-elif [ $n_kid -gt 0 ]; then
-    echo "[vista-meta pre-commit] warn: kids_vc.py not found; skipping .kid checks"
 fi
 
 # ── Report ───────────────────────────────────────────────────────────

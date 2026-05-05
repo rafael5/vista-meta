@@ -3,8 +3,7 @@
 A comprehensive, deterministic, machine-readable model of VistA — both
 the data it stores and the code that manipulates it — running on a
 VEHU-on-YottaDB container. On top of that model the project ships
-operational tooling: **kids-vc** (decompose/assemble pipeline for the
-`.KID` patch format), a **VSCode extension** with per-routine
+operational tooling: a **VSCode extension** with per-routine
 situational awareness, and a **CLI** for package overviews, caller
 graphs, file metadata, AI context packs, linting, and formatting.
 
@@ -19,15 +18,14 @@ artifact viewed from two sides. vista-meta is the first project to
 extract, reduce, and interlink both in the same deterministic
 artifact set.
 
-## Two models + three operational products
+## Two models + two operational products
 
 | | Artifact | Produces |
 |---|---|---|
 | **A. Data model** | `vista/export/data-model/` (5 TSVs, ~170k rows) | PIKS classification of 8,261 FileMan files at 98.3% coverage; 69,810 field-level annotations; cross-PIKS pointer matrix |
 | **B. Code model** | `vista/export/code-model/` (19 TSVs, ~1.0M rows) | Per-routine intelligence: calls, callers, globals, RPCs, options, protocols, XINDEX findings, package topology |
-| **1. kids-vc** | `host/scripts/kids_vc.py` | Decompose/assemble `.KID` ↔ on-disk tree. 100% round-trip on 2,406 real patches. Unblocks VistA's longest-standing patch-management roadblock |
-| **2. VSCode extension** | `vscode-extension/` | VISTA ROUTINE sidebar: tags, callers, callees, globals, XINDEX — all from TSV reads, no runtime dependency |
-| **3. CLI + hook + formatter** | `bin/vista-meta`, `bin/mfmt`, `hooks/pre-commit` | doctor, pkg, context, where, callers, search, file, new-test, lint, xindex; SAC-compliant pre-commit gate |
+| **1. VSCode extension** | `vscode-extension/` | VISTA ROUTINE sidebar: tags, callers, callees, globals, XINDEX — all from TSV reads, no runtime dependency |
+| **2. CLI + hook + formatter** | `bin/vista-meta`, `bin/mfmt`, `hooks/pre-commit` | doctor, pkg, context, where, callers, search, file, new-test, lint, xindex; SAC-compliant pre-commit gate |
 
 ## Quick reference
 
@@ -58,7 +56,7 @@ boundary matters.
 | `vista/export/code-model/` | container (bind mount) | Routines + calls + globals + XINDEX (git-tracked) |
 | `vista/export/RESEARCH.md` | container (bind mount) | Cross-cutting research log (RF-NNN, git-tracked) |
 | `vista/vista-m-host/` | host (snapshot) | Host-visible copy of the VistA-M source tree (synced from container) |
-| `host/scripts/` | host | All host-side Python (CLI, model builders, kids-vc, mfmt) |
+| `host/scripts/` | host | All host-side Python (CLI, model builders, mfmt) |
 | `docs/` | host only | Spec, ADRs, build log, dependency manifest, per-area guides |
 | `hooks/` | host | Pre-commit hook (linked into `.git/hooks/` by `make install-hooks`) |
 | `vscode-extension/` | host | The VSCode extension source + built `.vsix` |
@@ -152,8 +150,6 @@ being callable from an Institution-scoped RPC?"* at query speed.
 | VSCode extension internals + roadmap | `docs/vscode-extension-internals.md` | Modifying or extending the extension |
 | PIKS methodology | `docs/piks-analysis-guide.md` | Data-model deep dive |
 | Code model TSVs | `docs/code-model-guide.md` | Per-TSV reference |
-| kids-vc pipeline | `docs/kids-vc-guide.md` | Decompose/assemble workflow |
-| kids-vc design history | `docs/kids-vc-background-dev.md` | Why the format looks the way it does |
 | XINDEX reference | `docs/xindex-reference.md` | What XINDEX extracts vs our tools |
 | Decision rationale | `docs/adr/NNN-*.md` | Why we chose X over Y |
 | Implementation errors/fixes | `docs/build-log.md` | What went wrong (BL-NNN) |
@@ -189,3 +185,12 @@ being callable from an Institution-scoped RPC?"* at query speed.
 Wireframe tooling that used to live here was extracted to
 `~/projects/gui-spec/` in April 2026. It is completely orthogonal
 to VistA modeling and has no dependency on this repo.
+
+## Orthogonal: py-kids-vc
+
+The KIDS decompose/assemble/round-trip toolchain that used to live
+here (as `kids_vc_pkg/` + `host/scripts/kids_vc*.py`) was extracted
+to `~/projects/py-kids-vc/` in May 2026. It is a standalone
+pip-installable package (`pip install kids-vc`) with its own CI;
+vista-meta no longer ships or tests it. Its companion runtime
+installer is `~/projects/py-kids-install/`.

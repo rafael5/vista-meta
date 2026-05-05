@@ -734,24 +734,7 @@ def cmd_doctor(args: argparse.Namespace) -> int:
                      not dm_missing,
                      ", ".join(dm_missing) or "all present")
 
-    # 7. kids-vc fixture round-trip
-    fixture = ROOT / "host/scripts/kids_vc_fixtures/VMTEST_1_0_1.kid"
-    if fixture.exists():
-        try:
-            r = subprocess.run(
-                ["/usr/bin/python3",
-                 str(ROOT / "host/scripts/kids_vc.py"),
-                 "roundtrip", str(fixture)],
-                capture_output=True, text=True, timeout=30)
-            all_ok &= _check("kids-vc fixture round-trip",
-                             r.returncode == 0,
-                             r.stdout.split('\n', 1)[0] if r.stdout else "")
-        except (OSError, subprocess.TimeoutExpired) as e:
-            all_ok &= _check("kids-vc fixture round-trip", False, str(e))
-    else:
-        all_ok &= _check("kids-vc fixture present", False, str(fixture))
-
-    # 8. Container state (informational — not a hard fail)
+    # 7. Container state (informational — not a hard fail)
     try:
         r = subprocess.run(
             ["docker", "ps", "--filter", "name=vista-meta", "--format",

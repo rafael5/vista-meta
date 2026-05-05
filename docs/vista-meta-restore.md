@@ -8,7 +8,7 @@ A single guide covering three related operations:
    KIDS patches, the extracted data + code model) but **does not** push the
    ~40k upstream VistA-M routines.
 3. **Recover** when a KIDS install or a hand-rolled routine breaks VistA.
-   Because KIDS is forward-only ([ADR-046](adr/046-kids-vc-undo-pre-install-snapshot.md)),
+   Because KIDS is forward-only (ADR-046 (in `~/projects/py-kids-vc/docs/adr/046-*.md`)),
    "restore" here means rolling globals + dev routines back to a known-good
    state, not surgical patch removal.
 
@@ -193,7 +193,7 @@ sed -i '/^patches\/$/d' .gitignore
 # vista/dev-r/ or a new top-level dir like my-patches/
 ```
 
-The kids-vc round-trip on real corpus is 100% (per [docs/kids-vc-guide.md](docs/kids-vc-guide.md)),
+The kids-vc round-trip on real corpus is 100% (per `~/projects/py-kids-vc/docs/kids-vc-guide.md`),
 so committing decomposed patch trees is a reasonable workflow — you get
 diffable patch authoring with a deterministic re-assembly path.
 
@@ -268,7 +268,7 @@ Two follow-ups worth doing alongside the first push:
 
 ## Part C — Pre-install discipline (do this **before** every KIDS install)
 
-KIDS is forward-only. Per [ADR-046](adr/046-kids-vc-undo-pre-install-snapshot.md):
+KIDS is forward-only. Per ADR-046 (in `~/projects/py-kids-vc/docs/adr/046-*.md`):
 
 > KIDS install is an imperative sequence that overwrites routine source,
 > merges DD changes directly into `^DD`, adds entries in File 19/101/8994,
@@ -430,7 +430,7 @@ want to selectively restore individual routines).
 
 ## Future: surgical per-patch undo (Phase 9, proposed)
 
-[ADR-046](adr/046-kids-vc-undo-pre-install-snapshot.md) outlines a planned
+ADR-046 (in `~/projects/py-kids-vc/docs/adr/046-*.md`) outlines a planned
 **kids-vc undo** feature: a pre-install MUMPS hook (`VMKVCUNDO`) that
 captures pre-state into `^XTMP("KVC-UNDO",<patch>,...)` and a Python tool
 that re-emits it as a reverse `.KID`. Per the ADR, that scope covers
@@ -480,5 +480,5 @@ make doctor              # health check
 - [.gitignore](.gitignore) — what's pushed and what's ignored
 - [ADR-029](docs/adr/029-symlink-farm.md) — flat routine namespace (now hard copies per BL-009)
 - [ADR-045](docs/adr/045-data-code-separation-package-bridge.md) — host-side `vista/vista-m-host/` snapshot
-- [ADR-046](docs/adr/046-kids-vc-undo-pre-install-snapshot.md) — why KIDS undo is hard
-- [docs/kids-vc-guide.md](docs/kids-vc-guide.md) — patch decompose/assemble workflow
+- ADR-046 (in `~/projects/py-kids-vc/docs/adr/046-*.md`) — why KIDS undo is hard
+- `~/projects/py-kids-vc/docs/kids-vc-guide.md` — patch decompose/assemble workflow

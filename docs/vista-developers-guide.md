@@ -22,6 +22,13 @@ Where possible this guide cites code and data already in the vista-meta
 project. You can produce most of the referenced artifacts yourself by
 running `make` targets in this repo.
 
+> **Note (May 2026).** All references below to `kids-vc`,
+> `host/scripts/kids_vc.py`, `kids-vc-guide.md`, `kids-vc-background-dev.md`,
+> `make kids-vc-*` targets, and `ADR-046` now refer to the standalone
+> sibling project at `~/projects/py-kids-vc/` (pip-installable as
+> `kids-vc`). It was extracted from this repo in May 2026; the
+> narrative below predates the extraction.
+
 ---
 
 ## 1. The first 24 hours — orientation for Python programmers
@@ -334,7 +341,7 @@ that calls it actually runs.
 
 Minimum:
 1. A **VistA container** — this project's Docker setup (VEHU on YottaDB)
-2. **kids-vc** — `make kids-vc-pip-install`
+2. **kids-vc** — `pip install kids-vc` (sibling project, `~/projects/py-kids-vc/`)
 3. A **MUMPS syntax highlighter** — VSCode's `mumps` extensions
 4. **XINDEX** in your container — ships with Toolkit
 5. **M-Unit** — clone Christopher Edwards's fork and install via KIDS

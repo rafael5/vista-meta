@@ -11,15 +11,17 @@ data does this routine touch? who calls into this file? what kind of
 data (clinical, administrative, terminology, system) lives in this
 global?"*
 
-On top of that model the project ships two operational products:
+On top of that model the project ships an operational product:
 
-1. **kids-vc** — a decompose/assemble pipeline that turns monolithic
-   `.KID` patch bundles into git-diffable on-disk trees, removing the
-   single longest-standing roadblock to VistA's codebase evolution.
-2. **VSCode extension + CLI** — an offline, instant developer
+1. **VSCode extension + CLI** — an offline, instant developer
    surface that lets you browse a 40,000-routine corpus with full
    situational awareness of every call, pointer, cross-reference,
    and global each routine touches.
+
+A separate sibling project, **[py-kids-vc](https://github.com/rafael5/py-kids-vc)**
+(`~/projects/py-kids-vc/`), provides a decompose/assemble/round-trip
+pipeline for `.KID` patch bundles. It was extracted from this repo
+in May 2026 and now ships independently.
 
 This guide is the authoritative map of the whole thing.
 
@@ -45,9 +47,8 @@ This guide is the authoritative map of the whole thing.
   - [5.4 Extraction methodology](#54-extraction-methodology)
 - [6. How the two models interlink](#6-how-the-two-models-interlink)
 - [7. Operational products built on the models](#7-operational-products-built-on-the-models)
-  - [7.1 kids-vc — unblocking VistA's patch-management era](#71-kids-vc--unblocking-vistas-patch-management-era)
-  - [7.2 The VSCode extension — situational awareness for 40,000 routines](#72-the-vscode-extension--situational-awareness-for-40000-routines)
-  - [7.3 The vista-meta CLI — everything else](#73-the-vista-meta-cli--everything-else)
+  - [7.1 The VSCode extension — situational awareness for 40,000 routines](#71-the-vscode-extension--situational-awareness-for-40000-routines)
+  - [7.2 The vista-meta CLI — everything else](#72-the-vista-meta-cli--everything-else)
 - [8. Methodology and reproducibility](#8-methodology-and-reproducibility)
 - [9. What this unlocks](#9-what-this-unlocks)
 - [10. Further reading](#10-further-reading)
@@ -114,7 +115,7 @@ and get an answer in one query. That is the value proposition.
 - PIKS classification of every FileMan file and every non-FM global.
 - Code-model extraction: calls, pointers, cross-references, globals,
   XINDEX findings, package topology.
-- Operational tooling: kids-vc, VSCode extension, CLI, formatter,
+- Operational tooling: VSCode extension, CLI, formatter,
   pre-commit hook.
 - Documentation: spec, ADRs, research log, per-area guides.
 
@@ -158,7 +159,6 @@ vista/export/
      │
      ▼
 Operational tooling built on the model:
-    ├── kids-vc          ◀── unblocks VistA patch evolution
     ├── VSCode extension ◀── per-routine situational awareness
     ├── vista-meta CLI   ◀── pkg / context / where / callers / search / file
     └── pre-commit hook  ◀── mfmt + lint + optional XINDEX gate
@@ -454,86 +454,13 @@ has, historically, required weeks of manual review.
 
 ## 7. Operational products built on the models
 
-### 7.1 kids-vc — unblocking VistA's patch-management era
+> **Note.** The decompose/assemble pipeline for `.KID` files
+> (formerly §7.1 of this guide as `kids-vc`) was extracted in
+> May 2026 to a standalone project at `~/projects/py-kids-vc/`
+> (pip-installable as `kids-vc`). Its full guide, history, and
+> ADR-046 (pre-install snapshot for undo) live there now.
 
-**The problem.** KIDS (Kernel Installation & Distribution System)
-is VistA's package manager. It produces `.KID` files — monolithic
-text dumps containing routines, FileMan DD fragments, options,
-protocols, RPCs, pre/post-install MUMPS, and ZWR data exports.
-A `.KID` patch is the unit of distribution between sites.
-
-`.KID` is architecturally incompatible with git: one 50 KB blob
-per patch, no decomposition, line-2 patch-list mutations on every
-build, IENs that vary per site. You cannot `git diff` two
-`.KID` files meaningfully; you cannot merge them; you cannot
-cherry-pick a routine out of one and into another. This is the
-longest-standing roadblock to VistA's codebase evolution and the
-reason patch maintenance at VA sites is, in practice, an expert
-craft with zero tooling affordance.
-
-**The solution.** The kids-vc toolchain, implemented in
-[`host/scripts/kids_vc.py`](../host/scripts/kids_vc.py), decomposes
-any `.KID` file into a directory tree:
-
-```
-<PATCH>/KIDComponents/
-├── Build.zwr              (^XPD(9.6) entry — version, dependencies, environment)
-├── Package.zwr            (^XPD(9.7) — what this patch is part of)
-├── EnvironmentCheck.zwr   (pre-install MUMPS)
-├── PreInstall.zwr
-├── PostInstall.zwr
-├── InstallQuestions.zwr
-├── Routines/
-│   ├── PSOVCC1.m          (one file per routine, line-2 canonicalized)
-│   ├── PSOVCC1.header
-│   └── ...
-├── Files/
-│   └── 50+DRUG/
-│       ├── DD.zwr         (FileMan data-dictionary entry)
-│       ├── Data.zwr       (optional initial data)
-│       └── DD-code/       (MUMPS embedded in the DD, extracted to .m files)
-│           ├── AIXREF.m
-│           └── ...
-└── KRN/
-    ├── OPTION/<name>.zwr
-    ├── PROTOCOL/<name>.zwr
-    └── REMOTE-PROCEDURE/<name>.zwr
-```
-
-Subcommands:
-- `kids_vc.py decompose FILE.KID DIR/` — reverse
-- `kids_vc.py assemble DIR/ OUT.KID` — forward
-- `kids_vc.py roundtrip FILE.KID` — decompose + re-assemble + byte-semantic diff
-- `kids_vc.py canonicalize` — IEN substitution for cross-site
-  diff stability
-
-**Canonicalizations applied automatically:**
-- Line-2 patch-list strip: `;;VERSION;PACKAGE;**patches**;DATE;…`
-  → `;;VERSION;PACKAGE;;` (removes volatile patch list + build date)
-- Line-2 Build-N strip (XPDK2VC-compatible inheritance)
-- IEN substitution (opt-in)
-
-**Validation.** 100% round-trip pass on a corpus of 2,406 real
-WorldVistA patches (3,566,277 ZWR subscripts processed). The
-pre-2406-corpus regression suite of 5 fixtures gave 91.15% round-
-trip; expanding to corpus-scale testing surfaced four bugs and
-pushed the pass rate to 100%. All six structural contracts that
-XPDK2VC (VA's 2014 prior art) established are verified in
-[`test_xpdk2vc_compat.py`](../host/scripts/test_xpdk2vc_compat.py).
-The 7-scenario 3-way ZWR merge driver in
-[`zwr_merge.py`](../host/scripts/zwr_merge.py) is verified by
-[`test_zwr_merge.py`](../host/scripts/test_zwr_merge.py).
-
-**Beyond XPDK2VC.** kids-vc adds DD-embedded-MUMPS extraction — the
-MUMPS code embedded in FileMan data dictionaries (cross-reference
-logic, computed fields, triggers) gets extracted to individual `.m`
-files in `DD-code/`. Neither SKIDS nor XPDK2VC provided this surface.
-DD-embedded code is now git-diffable alongside the routines that
-call into it.
-
-Full reference: [docs/kids-vc-guide.md](kids-vc-guide.md).
-
-### 7.2 The VSCode extension — situational awareness for 40,000 routines
+### 7.1 The VSCode extension — situational awareness for 40,000 routines
 
 **The problem.** Opening `PRCA45PT.m` in any modern editor shows
 you 74 lines of MUMPS. It shows you nothing about: who calls this
@@ -584,7 +511,7 @@ time saved compounds.
 Full reference: [docs/vista-vscode-guide.md](vista-vscode-guide.md)
 §2.
 
-### 7.3 The vista-meta CLI — everything else
+### 7.2 The vista-meta CLI — everything else
 
 The CLI ([`host/scripts/vista_meta_cli.py`](../host/scripts/vista_meta_cli.py))
 provides ten subcommands for everything the sidebar doesn't cover:
@@ -694,9 +621,10 @@ Four classes of product now plausible on this base:
   triage history.
 - [code-model-guide.md](code-model-guide.md) — per-TSV reference
   for the code-model artifacts.
-- [kids-vc-guide.md](kids-vc-guide.md) — the full kids-vc
-  decompose/assemble/roundtrip toolchain, including the XPDK2VC
-  compatibility story.
+- `~/projects/py-kids-vc/` — the decompose/assemble/roundtrip
+  toolchain (formerly `kids-vc` in this repo), now a standalone
+  pip-installable project. See its `docs/kids-vc-guide.md` for
+  the full pipeline and XPDK2VC compatibility story.
 - [xindex-reference.md](xindex-reference.md) — what XINDEX extracts
   vs what the vista-meta regex-based tools extract.
 - [build-log.md](build-log.md) — chronological error + fix log
