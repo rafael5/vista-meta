@@ -28,6 +28,25 @@ ssh-keygen -A 2>/dev/null || true
 
 mkdir -p /tmp/ydb /run/sshd "$ydb_log"
 
+# ── Phase 1b: YDB rundown (idempotent recovery from prior crashes) ──
+# After a non-graceful prior shutdown (SIGKILL, container OOM, host
+# panic) YDB leaves its database files marked "in use", and the next
+# YDB process attempting to attach raises:
+#   %YDB-E-REQRUNDOWN, Error accessing database <db>. Must be rundown
+#   on cluster node <host>
+# The fix is `mupip rundown -region "*"`. We do it unconditionally
+# here because rundown is idempotent — on a clean DB it is a no-op
+# (just emits MUFILRNDWNSUC for the file and exits). Cost is ~10ms
+# per region; benefit is that the container always boots into a
+# usable YDB regardless of how the previous instance ended.
+# Filed against TOOLCHAIN-FINDINGS row 2026-05-06 P2 in m-stdlib.
+if [ -e /home/vehu/g/mumps.dat ]; then
+    log "phase 1b: YDB rundown (idempotent)"
+    su -s /bin/bash vehu -c \
+        "source /etc/profile.d/ydb_env.sh && \$ydb_dist/mupip rundown -region '*' 2>&1" \
+        | sed 's/^/  /' || log "  rundown returned non-zero (non-fatal)"
+fi
+
 # ── Phase 2: UID reconciliation ──────────────────────────────────────
 # ADR-009: chown bind mounts so vehu can write regardless of host UID
 log "phase 2: UID reconciliation"
@@ -40,13 +59,23 @@ chown -R vehu:vehu /home/vehu/dev \
 # used by sibling projects' `make test` and seed-vista.sh) can authenticate.
 # Source is bind-mounted from host docker/etc/authorized_keys, generated
 # by `make ssh-keys` from $HOME/.ssh/*.pub. Image stays free of personal keys.
+#
+# Re-installs unconditionally on every container start (not just first
+# run). Filed against m-stdlib TOOLCHAIN-FINDINGS row 2026-05-06 P2: a
+# `make restart` that brings the container back up after a crash
+# previously left `/home/vehu/.ssh/authorized_keys` empty if the
+# /home/vehu volume had been wiped or the image-baked entrypoint
+# predated this block — sibling projects' `m test` then SSH-rejected.
+# The install is cheap (single 191-byte file, mode 600) and idempotent.
 if [ -s /etc/vehu_authorized_keys ]; then
     install -d -m 700 -o vehu -g vehu /home/vehu/.ssh
     install -m 600 -o vehu -g vehu \
         /etc/vehu_authorized_keys /home/vehu/.ssh/authorized_keys
     log "  installed authorized_keys ($(wc -l < /home/vehu/.ssh/authorized_keys) keys)"
+elif [ -e /etc/vehu_authorized_keys ]; then
+    log "  /etc/vehu_authorized_keys is empty — pubkey SSH disabled (password only)"
 else
-    log "  no /etc/vehu_authorized_keys — pubkey SSH disabled (password only)"
+    log "  no /etc/vehu_authorized_keys mounted — pubkey SSH disabled (password only)"
 fi
 
 # ── Phase 3: Service startup ─────────────────────────────────────────
