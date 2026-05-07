@@ -734,18 +734,123 @@ def cmd_doctor(args: argparse.Namespace) -> int:
                      not dm_missing,
                      ", ".join(dm_missing) or "all present")
 
-    # 7. Container state (informational — not a hard fail)
+    # 7. Container state — informational unless docker itself is missing
+    name = _container_name()
     try:
         r = subprocess.run(
-            ["docker", "ps", "--filter", "name=vista-meta", "--format",
+            ["docker", "ps", "--filter", f"name=^{name}$", "--format",
              "{{.Status}}"],
             capture_output=True, text=True, timeout=5)
+        docker_ok = True
         running = bool(r.stdout.strip())
-        _check("container vista-meta running",
+        _check(f"container {name} running",
                running,
                r.stdout.strip() or "down — run `make run` if you want live checks")
     except (OSError, subprocess.TimeoutExpired):
-        _check("docker available", False, "not on PATH")
+        docker_ok = False
+        running = False
+        all_ok &= _check("docker available", False, "not on PATH")
+
+    # 8–11. In-container probes — only if running. Container healthcheck and
+    # YDB round-trip gate the overall verdict; ports + bake sentinel are
+    # diagnostic detail (dev/stub images have legitimate variation).
+    if docker_ok and running:
+        # Docker's own HEALTHCHECK verdict
+        try:
+            r = subprocess.run(
+                ["docker", "inspect", name, "--format",
+                 "{{.State.Health.Status}}"],
+                capture_output=True, text=True, timeout=5)
+            hc = r.stdout.strip()
+        except (OSError, subprocess.TimeoutExpired):
+            hc = ""
+        if hc and hc != "<no value>":
+            # "starting" is a transient state (inside Dockerfile's
+            # --start-period); only "unhealthy" should gate the verdict.
+            if hc == "starting":
+                _check("docker healthcheck", True, "starting (transient)")
+            else:
+                all_ok &= _check("docker healthcheck", hc == "healthy", hc)
+
+        # Listening ports (informational)
+        ports = [
+            (22, "sshd"), (1338, "rocto/Octo"), (8001, "VistALink"),
+            (8089, "YDB GUI"), (9430, "RPC Broker"),
+        ]
+        probe = "; ".join(
+            f'(echo > /dev/tcp/127.0.0.1/{p}) 2>/dev/null '
+            f'&& echo {p}=OPEN || echo {p}=closed'
+            for p, _ in ports
+        )
+        try:
+            r = subprocess.run(
+                ["docker", "exec", name, "bash", "-lc", probe],
+                capture_output=True, text=True, timeout=10)
+            state = dict(
+                line.split("=", 1)
+                for line in r.stdout.splitlines() if "=" in line
+            )
+        except (OSError, subprocess.TimeoutExpired):
+            state = {}
+        if state:
+            opened = [str(p) for p, _ in ports if state.get(str(p)) == "OPEN"]
+            closed = [f"{p} ({n})" for p, n in ports
+                      if state.get(str(p)) == "closed"]
+            detail = f"open: {','.join(opened) or 'none'}"
+            if closed:
+                detail += f"; closed: {', '.join(closed)}"
+            _check("service ports", True, detail)
+        else:
+            _check("service ports", False, "could not probe inside container")
+
+        # YDB engine round-trip — proves mumps -direct works, not just listening
+        mumps_cmd = (
+            'source /etc/profile.d/ydb_env.sh 2>/dev/null && '
+            "printf 'set ^HCK($J)=\"ok\"\\n"
+            "write ^HCK($J)\\nkill ^HCK($J)\\nhalt\\n' "
+            '| mumps -direct 2>/dev/null'
+        )
+        try:
+            r = subprocess.run(
+                ["docker", "exec", "-u", "vehu", name, "bash", "-lc",
+                 mumps_cmd],
+                capture_output=True, text=True, timeout=15)
+            mumps_ok = "ok" in r.stdout
+        except (OSError, subprocess.TimeoutExpired):
+            mumps_ok = False
+        all_ok &= _check(
+            "YDB round-trip (set/write/kill)",
+            mumps_ok,
+            "mumps -direct ok" if mumps_ok else "engine not responding")
+
+        # Bake sentinel — informational; surfaces stub-image / pending phases
+        try:
+            r = subprocess.run(
+                ["docker", "exec", name, "cat",
+                 "/home/vehu/export/.vista-meta-initialized"],
+                capture_output=True, text=True, timeout=5)
+            import json as _json
+            sentinel = _json.loads(r.stdout) if r.stdout.strip() else None
+        except (OSError, subprocess.TimeoutExpired, ValueError):
+            sentinel = None
+        if sentinel is None:
+            _check("bake sentinel", False, "no sentinel JSON yet")
+        else:
+            phases = sentinel.get("phases", {}) or {}
+            done = sum(1 for m in phases.values() if m.get("status") == "ok")
+            pending = [ph for ph, m in phases.items()
+                       if m.get("status") not in ("ok", "skipped")]
+            tag = sentinel.get("image_tag", "?")
+            is_stub = "stub" in tag.lower()
+            detail = f"image_tag={tag}; phases {done}/{len(phases) or 0} ok"
+            if pending:
+                detail += f"; pending: {','.join(sorted(pending))}"
+            # Stub image is dev-only; phases-pending is expected, not a fail.
+            # On a real bake image, phases-pending = something broke.
+            if is_stub:
+                _check("bake sentinel", True, detail + " (stub — expected)")
+            else:
+                all_ok &= _check("bake sentinel", not pending, detail)
 
     print()
     print("healthy." if all_ok else "problems above — fix and re-run.")
@@ -953,7 +1058,7 @@ H
 
 def _container_name() -> str:
     import os
-    return os.environ.get("VISTA_META_CONTAINER", "vista-meta")
+    return os.environ.get("VISTA_META_CONTAINER", "vista-vehu")
 
 
 def _container_running(name: str) -> bool:

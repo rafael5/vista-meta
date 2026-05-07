@@ -5,10 +5,20 @@
 include .env
 
 IMAGE     := vista-meta
-CONTAINER := vista-meta
+CONTAINER := vista-vehu
 VOLUME    := vehu-globals
+COMPOSE   := docker/compose.yml
+PROJECT   := vista-vehu
 BUILD_DATE := $(shell date +%F)
 DOCKER    := docker
+
+# Single source of truth for the container is docker/compose.yml. Lifecycle
+# targets shell out to `docker compose`; one-off targets (exec/cp/logs)
+# still use plain docker by container name for terseness. The --env-file
+# pin makes compose pick up TAILSCALE_IP from this Makefile's .env even
+# though compose.yml lives one level down (compose's default lookup is
+# next to the compose file, which would miss our .env at repo root).
+COMPOSE_CMD := $(DOCKER) compose --env-file .env -f $(COMPOSE) -p $(PROJECT)
 
 .DEFAULT_GOAL := help
 
@@ -24,45 +34,73 @@ build: ## Build the Docker image
 		docker/
 
 .PHONY: run
-run: ## Start the container (creates named volume on first run)
-	$(DOCKER) run -d \
-		--name $(CONTAINER) \
-		--hostname vista-meta \
-		-p $(TAILSCALE_IP):2222:22 \
-		-p $(TAILSCALE_IP):9430:9430 \
-		-p $(TAILSCALE_IP):8001:8001 \
-		-p $(TAILSCALE_IP):1338:1338 \
-		-p $(TAILSCALE_IP):8089:8089 \
-		-v $(VOLUME):/home/vehu/g \
-		-v $(PWD)/vista/dev-r:/home/vehu/dev/r \
-		-v $(PWD)/vista/scripts:/home/vehu/scripts \
-		-v $(PWD)/vista/export:/home/vehu/export \
-		-v $(PWD)/docker/etc/authorized_keys:/etc/vehu_authorized_keys:ro \
-		--stop-timeout 30 \
-		$(IMAGE):latest
+run: ## Start the container via docker compose (creates volume on first run)
+	$(COMPOSE_CMD) up -d
 
 .PHONY: stop
-stop: ## Stop the container gracefully
-	$(DOCKER) stop $(CONTAINER) 2>/dev/null || true
+stop: ## Stop the container gracefully (keeps container + volume)
+	$(COMPOSE_CMD) stop 2>/dev/null || true
 
 .PHONY: restart
-restart: stop ## Restart the container
-	@sleep 2
-	$(DOCKER) rm $(CONTAINER) 2>/dev/null || true
-	@$(MAKE) run
+restart: ## Restart the container (in-place)
+	$(COMPOSE_CMD) restart
 
 .PHONY: rm
-rm: stop ## Remove the container (keeps volume and image)
-	$(DOCKER) rm $(CONTAINER) 2>/dev/null || true
+rm: ## Stop + remove the container (keeps volume and image)
+	$(COMPOSE_CMD) down --remove-orphans 2>/dev/null || true
 
 .PHONY: clean
-clean: ## Remove container + volume + image (DESTRUCTIVE — prompts)
+clean: ## Remove container + volume + image (DESTRUCTIVE — prompts; FORCE=1 skips prompt)
 	@echo "This will destroy the container, named volume (globals), and image."
 	@echo "Snapshots in snapshots/ are not affected."
-	@read -p "Are you sure? [y/N] " confirm && [ "$$confirm" = "y" ] || exit 1
-	$(DOCKER) rm -f $(CONTAINER) 2>/dev/null || true
-	$(DOCKER) volume rm $(VOLUME) 2>/dev/null || true
+	@if [ "$(FORCE)" != "1" ]; then \
+		read -p "Are you sure? [y/N] " confirm && [ "$$confirm" = "y" ] || exit 1; \
+	fi
+	$(COMPOSE_CMD) down -v --remove-orphans 2>/dev/null || true
 	$(DOCKER) rmi $(IMAGE):latest $(IMAGE):$(BUILD_DATE) 2>/dev/null || true
+
+.PHONY: reset
+reset: ## Recreate container from current image (preserves volume + image; ~30s)
+	@echo "==> reset: down → up → wait → doctor"
+	@$(MAKE) -s rm
+	@$(MAKE) -s run
+	@$(MAKE) -s wait-healthy
+	@$(MAKE) -s doctor || true
+	@echo "==> reset complete"
+
+.PHONY: rebuild
+rebuild: ## Rebuild image + recreate container (preserves volume; longer)
+	@echo "==> rebuild: down → build → up → wait → doctor"
+	@$(MAKE) -s rm
+	@$(MAKE) -s build
+	@$(MAKE) -s run
+	@$(MAKE) -s wait-healthy
+	@$(MAKE) -s doctor || true
+	@echo "==> rebuild complete"
+
+.PHONY: nuke
+nuke: ## Full teardown + rebuild (DESTROYS VOLUME — bake re-runs from scratch)
+	@echo "==> nuke: clean (FORCE) → build → up → wait → doctor"
+	@$(MAKE) -s clean FORCE=1
+	@$(MAKE) -s build
+	@$(MAKE) -s run
+	@$(MAKE) -s wait-healthy
+	@$(MAKE) -s doctor || true
+	@echo "==> nuke complete"
+
+.PHONY: wait-healthy
+wait-healthy: ## Block until container healthcheck resolves (120s timeout — covers Dockerfile's 60s start-period)
+	@echo -n "waiting for healthy"; \
+	for i in $$(seq 1 60); do \
+		status=$$($(DOCKER) inspect $(CONTAINER) --format '{{.State.Health.Status}}' 2>/dev/null || echo missing); \
+		case "$$status" in \
+			healthy) echo " — ok"; exit 0 ;; \
+			unhealthy) echo " — UNHEALTHY (continuing — see \`make logs\`)"; exit 0 ;; \
+			missing) echo " — container not found"; exit 1 ;; \
+			*) echo -n "."; sleep 2 ;; \
+		esac; \
+	done; \
+	echo " — timeout (still $$status — see \`make logs\`)"; exit 0
 
 # ── Interactive ───────────────────────────────────────────────────────
 
@@ -475,6 +513,7 @@ reseed-all: ## Run every sibling project's scripts/seed-vista.sh
 	@for d in $(PROJECTS_DIR)/*/; do \
 	    name=$$(basename $$d); \
 	    [ "$$name" = "vista-meta" ] && continue; \
+	    [ "$$name" = "vista-vehu" ] && continue; \
 	    [ "$$name" = "archive" ] && continue; \
 	    seed="$${d}scripts/seed-vista.sh"; \
 	    [ -x "$$seed" ] || continue; \

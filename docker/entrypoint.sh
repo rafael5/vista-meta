@@ -110,6 +110,33 @@ else
     YDBGUI_PID=""
 fi
 
+# ── Phase 3b: Post-start service verification ────────────────────────
+# Background-launched services can fail silently (e.g. rocto exiting on
+# %YDB-E-ZLINKFILE because its plugin path isn't in $ZRO; ydbgui exiting
+# after binding the socket). Without this check the only signal is a
+# closed port at healthcheck time, with no log line tying it to a
+# specific service. We sleep briefly to let services either bind or
+# crash, then verify each PID is still alive. Failures are logged but
+# never fatal: the developer-critical services are sshd + xinetd, both
+# checked explicitly. rocto/ydbgui failures in the stub image are
+# expected and surfaced (not hidden).
+sleep 2
+log "phase 3b: verifying services"
+verify() {
+    local name=$1 pid=$2
+    if [ -z "$pid" ]; then
+        log "  $name: skipped (not launched)"
+    elif kill -0 "$pid" 2>/dev/null; then
+        log "  $name: alive (pid=$pid)"
+    else
+        log "  $name: DIED — see preceding stderr"
+    fi
+}
+verify sshd    "$SSHD_PID"
+verify xinetd  "$XINETD_PID"
+verify rocto   "$ROCTO_PID"
+verify ydbgui  "${YDBGUI_PID:-}"
+
 # ── Phase 4: First-run bake (background) ─────────────────────────────
 # ADR-022: bake runs in background after services are up
 # ADR-023: continue-on-error within bake phases

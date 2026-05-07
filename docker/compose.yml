@@ -1,0 +1,44 @@
+# vista-vehu — master compose stack for the shared YDB dev container.
+#
+# Single source of truth for container, ports, volumes, and bind mounts.
+# Owned by the vista-meta project; consumed by vista-meta's Makefile and
+# by every M client project's devcontainer (m-stdlib, m-cli, m-tools, ...)
+# via `extends:`. Image name stays `vista-meta:latest` (project identity);
+# container/service name is `vista-vehu` (the running engine).
+#
+# Why one container: the shared-engine model (memory: project_m_shared_engine).
+# All M dev/test for ~/projects/* targets the SAME running container so
+# patient data, plugins, and globals stay consistent across clients.
+#
+# Path conventions: bind sources are relative to THIS file (docker/), so
+# `../vista/...` resolves to ~/projects/vista-meta/vista/... regardless
+# of which client compose `extends:` this file.
+
+name: vista-vehu
+
+services:
+  vista-vehu:
+    image: vista-meta:latest
+    container_name: vista-vehu
+    hostname: vista-vehu
+    stop_grace_period: 30s
+
+    ports:
+      # TAILSCALE_IP defaults to 127.0.0.1 for devcontainer/local-only use.
+      # Override in vista-meta/.env for Tailscale-wide exposure.
+      - "${TAILSCALE_IP:-127.0.0.1}:2222:22"     # SSH (clients use this)
+      - "${TAILSCALE_IP:-127.0.0.1}:9430:9430"   # RPC Broker
+      - "${TAILSCALE_IP:-127.0.0.1}:8001:8001"   # VistALink
+      - "${TAILSCALE_IP:-127.0.0.1}:1338:1338"   # Octo SQL (rocto)
+      - "${TAILSCALE_IP:-127.0.0.1}:8089:8089"   # YDB GUI
+
+    volumes:
+      - vehu-globals:/home/vehu/g
+      - ../vista/dev-r:/home/vehu/dev/r
+      - ../vista/scripts:/home/vehu/scripts
+      - ../vista/export:/home/vehu/export
+      - ./etc/authorized_keys:/etc/vehu_authorized_keys:ro
+
+volumes:
+  vehu-globals:
+    name: vehu-globals
