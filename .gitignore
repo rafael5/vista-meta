@@ -10,6 +10,10 @@ vista/export/**/raw/
 # Bake logs
 vista/export/logs/
 
+# Sibling-project seed staging — populated by each project's
+# `scripts/seed-vista.sh` (uid 1001, regenerable via `make reseed-all`)
+vista/export/seed/
+
 # Host-side routine snapshot — synced from image via `make sync-routines` (ADR-045)
 vista/vista-m-host/
 
