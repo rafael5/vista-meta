@@ -1,3 +1,65 @@
+---
+# Machine-readable project descriptor — schema v1 (2026-05-05).
+# Fields populated for the projects-index aggregator (~/claude/memory/projects-index.md).
+# Prose narrative starts below the closing `---`.
+
+name: vista-meta
+kind: [platform, cli, vscode-extension, data]
+status: active
+languages: [python, mumps, typescript, bash, dockerfile]
+
+runtime:
+  needs: [linux, docker, python>=3.10]
+  optional: [vscode]                       # for the extension
+  excludes: [iris, gtm-only-hosts, windows] # YDB-specific; not portable to IRIS
+
+distribution:
+  pypi: null
+  github: rafael5/vista-meta                # private; not yet pushed
+
+location: ~/projects/vista-meta
+
+exposes:
+  cli:
+    - bin/vista-meta                       # doctor, pkg, context, where, callers, search, file, lint, xindex, new-test
+    - bin/mfmt                             # M-language formatter
+  vscode_extension: vscode-extension/      # VISTA ROUTINE sidebar
+  hooks: [hooks/pre-commit]                # SAC-compliant lint gate
+  python_api: []                           # not packaged; host/scripts/ is internal
+  formats_produced:
+    - "TSV/data-model/*.tsv"               # 5 TSVs, ~170k rows — PIKS-classified FileMan files
+    - "TSV/code-model/*.tsv"               # 19 TSVs, ~1.0M rows — calls/globals/RPCs/options/protocols/XINDEX
+    - "vista/export/RESEARCH.md"           # RF-NNN findings log
+
+consumes:
+  formats: [".m", ".zwr", "$ZRO chains", "VistA-M source tree"]
+  services: ["YottaDB r2.02 in docker", "xinetd RPC Broker", "VistALink"]
+  companions_required: []                  # standalone
+
+companions:
+  - project: py-kids-vc
+    relation: "vista-meta's `make patch-decompose|patch-assemble|patch-roundtrip` shells out to the kids-vc CLI"
+  - project: py-kids-install
+    relation: "siblings; py-kids-install drives KIDS installs into the same VEHU container vista-meta builds"
+  - project: vista-cli
+    relation: "downstream consumer — joins vista-meta TSVs with vista-docs SQLite for cross-artifact queries"
+  - project: vista-docs
+    relation: "vista-cli is the join layer; vista-meta supplies code/data models, vista-docs supplies VDL frontmatter"
+  - project: tree-sitter-m
+    relation: "potential consumer of mfmt output for VSCode highlighting; not yet wired"
+
+incompatibilities:
+  - "MUMPS engine: YottaDB-only. IRIS/Caché will not run the bake (uses `mupip`, `$ZRO`, ydb-specific GDE syntax)."
+  - "Host OS: Linux. Dockerfile uses bash 5 features in RUN steps; macOS Docker should work but untested."
+  - "vista/export/ files are owned by uid 1001 (in-container vehu). Host edits need sudo or in-container write."
+
+docs:
+  primary: README.md                       # missing — see TODO.md
+  full_guide: docs/vista-meta-guide.md
+  spec: docs/vista-meta-spec-v0.4.md
+  research_log: vista/export/RESEARCH.md
+---
+
 # vista-meta
 
 A comprehensive, deterministic, machine-readable model of VistA — both

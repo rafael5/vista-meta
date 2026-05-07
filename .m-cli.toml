@@ -1,0 +1,6 @@
+[lint]
+target_engine = "yottadb"
+
+[lint.vista]
+kernel_locals = "default"
+trusted_routines = "default"
