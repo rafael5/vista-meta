@@ -3,6 +3,7 @@
 // parse MUMPS, never hit the container, never depend on the internet.
 
 import * as vscode from 'vscode';
+import { VistaMetaHoverProvider } from './hover';
 import { RoutineTreeProvider } from './treeProvider';
 import { clearIndexes, reloadAll } from './tsv';
 
@@ -14,6 +15,16 @@ export function activate(ctx: vscode.ExtensionContext): void {
     showCollapseAll: true,
   });
   ctx.subscriptions.push(view);
+
+  ctx.subscriptions.push(
+    vscode.languages.registerHoverProvider(
+      [
+        { language: 'mumps', scheme: 'file' },
+        { pattern: '**/*.m', scheme: 'file' },
+      ],
+      new VistaMetaHoverProvider(),
+    ),
+  );
 
   // Update the sidebar whenever the active editor changes to a .m file
   const updateFromActiveEditor = (): void => {
