@@ -1,7 +1,7 @@
 # ADR-008: Tailscale IP as network perimeter
 
 Date: 2026-04-17
-Status: Accepted
+Status: Superseded by ADR-047
 
 ## Context
 Services (sshd, RPC Broker, VistALink, Octo, YDB GUI) need to be reachable from Rafael's Tailnet nodes (mac-rmr, pixel-8, pi5, glnet) but not from minty's home LAN or the public internet. Options: localhost-only with SSH tunnels, bind to Tailscale IPv4, bind to all interfaces with firewall, bind to all interfaces unrestricted.

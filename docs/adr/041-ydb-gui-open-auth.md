@@ -1,7 +1,7 @@
 # ADR-041: YDB GUI — open (no authentication)
 
 Date: 2026-04-18
-Status: Accepted
+Status: Superseded by ADR-047
 
 ## Context
 YDB Web Server supports JSON-file authentication (`--auth-file users.json`) with hashed passwords and login token workflow. Services are bound to minty's Tailscale IP only (ADR-008), so network-layer access is already restricted to Tailnet members.
