@@ -24,13 +24,13 @@ services:
     stop_grace_period: 30s
 
     ports:
-      # TAILSCALE_IP defaults to 127.0.0.1 for devcontainer/local-only use.
-      # Override in vista-meta/.env for Tailscale-wide exposure.
-      - "${TAILSCALE_IP:-127.0.0.1}:2222:22"     # SSH (clients use this)
-      - "${TAILSCALE_IP:-127.0.0.1}:9430:9430"   # RPC Broker
-      - "${TAILSCALE_IP:-127.0.0.1}:8001:8001"   # VistALink
-      - "${TAILSCALE_IP:-127.0.0.1}:1338:1338"   # Octo SQL (rocto)
-      - "${TAILSCALE_IP:-127.0.0.1}:8089:8089"   # YDB GUI
+      # Host bind address. Defaults to 127.0.0.1 (local-only) — no
+      # configuration required. To expose the engine to other machines
+      # (e.g. a private overlay network), set HOST_BIND_IP in the
+      # environment or vista-meta/.env to that interface's IP.
+      - "${HOST_BIND_IP:-127.0.0.1}:2222:22"     # SSH (clients use this)
+      - "${HOST_BIND_IP:-127.0.0.1}:9430:9430"   # RPC Broker
+      - "${HOST_BIND_IP:-127.0.0.1}:8001:8001"   # VistALink
 
     volumes:
       - vehu-globals:/home/vehu/g

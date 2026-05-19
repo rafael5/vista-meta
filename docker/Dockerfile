@@ -59,13 +59,15 @@ RUN groupadd -g ${VEHU_UID} vehu \
 # ── Layer 4: YottaDB install ─────────────────────────────────────────
 # ADR-004: ydbinstall.sh with pinned version
 # ADR-005: ASCII only (no --utf8)
-# Installs: YDB core + YDB Web Server (--webserver) + Octo SQL (--octo)
+# Installs: YDB core only. Octo SQL (--octo) and the YDB Web Server
+# (--webserver) are intentionally NOT installed — VistA does not use
+# them, and Octo's plugin preflight is what dragged in the clang
+# build dependency.
 RUN mkdir -p /tmp/ydb-install && cd /tmp/ydb-install \
     && wget -q https://gitlab.com/YottaDB/DB/YDB/-/raw/master/sr_unix/ydbinstall.sh \
     && chmod +x ydbinstall.sh \
     && ./ydbinstall.sh \
         --installdir /usr/local/lib/yottadb/${YDB_VERSION} \
-        --webserver --octo \
         --force-install \
         ${YDB_VERSION} \
     && rm -rf /tmp/ydb-install
@@ -164,23 +166,7 @@ RUN set -e \
 
 USER root
 
-# ── Layer 8: Octo DDL mapping ────────────────────────────────────────
-# Octo binary was installed in layer 4. YDBOctoVistA is a separate project
-# that generates DDL from FileMan's SQLI tables. Fetch it, compile, then
-# run MAPALL with DUZ set so FileMan utilities work.
-# DUZ=.5 = Postmaster user; DIQUIET=1 = suppress FileMan prompts;
-# DUZ(0)="@" = programmer access; DT^DICRW = initialize FileMan date vars.
-RUN mkdir -p /opt/VistA-M/ddl \
-    && curl -fSsL https://gitlab.com/YottaDB/DBMS/YDBOctoVistA/-/raw/master/_YDBOCTOVISTAM.m \
-        -o /opt/VistA-M/r/_YDBOCTOVISTAM.m \
-    && cd /opt/VistA-M/o && $ydb_dist/mumps /opt/VistA-M/r/_YDBOCTOVISTAM.m \
-    && su -s /bin/bash vehu -c "\
-        source /etc/profile.d/ydb_env.sh \
-        && \$ydb_dist/mumps -r %XCMD \
-            'S DUZ=.5,DIQUIET=1,DUZ(0)=\"@\" D DT^DICRW,MAPALL^%YDBOCTOVISTAM(\"/opt/VistA-M/ddl/vista.sql\")' \
-    " || echo "WARN: Octo MAPALL failed — DDL generation may need manual run"
-
-# ── Layer 9: M-Unit install ──────────────────────────────────────────
+# ── Layer 8: M-Unit install ──────────────────────────────────────────
 # ADR-015: ChristopherEdwards/M-Unit via cmake (YDB plugin)
 RUN git clone --depth 1 https://github.com/ChristopherEdwards/M-Unit.git /tmp/m-unit \
     && cd /tmp/m-unit \
@@ -190,19 +176,7 @@ RUN git clone --depth 1 https://github.com/ChristopherEdwards/M-Unit.git /tmp/m-
     && make install \
     && rm -rf /tmp/m-unit
 
-# ── Layer 10: YDBGUI install ─────────────────────────────────────────
-# YDB Web Server was installed in layer 4 (--webserver).
-# YDBGUI provides the Angular frontend served by it.
-# cmake auto-fetches missing plugin deps (YDB-Web-Server, YDBCurl, YDBPosix).
-RUN git clone --depth 1 https://gitlab.com/YottaDB/UI/YDBGUI.git /tmp/ydbgui \
-    && cd /tmp/ydbgui \
-    && mkdir build && cd build \
-    && cmake -DYDB_DIST=$ydb_dist .. \
-    && make -j"$(nproc)" \
-    && make install \
-    && rm -rf /tmp/ydbgui
-
-# ── Layer 11: FMQL install ───────────────────────────────────────────
+# ── Layer 9: FMQL install ────────────────────────────────────────────
 # ADR-016: FMQL as one of three DD exporter baselines
 RUN git clone --depth 1 https://github.com/caregraf/FMQL.git /tmp/fmql \
     && cp /tmp/fmql/MUMPS/*.m /opt/VistA-M/r/ \
@@ -210,29 +184,29 @@ RUN git clone --depth 1 https://github.com/caregraf/FMQL.git /tmp/fmql \
     && $ydb_dist/mumps /opt/VistA-M/r/CG*.m 2>&1 || true \
     && rm -rf /tmp/fmql
 
-# ── Layer 12: Python tooling ─────────────────────────────────────────
+# ── Layer 10: Python tooling ─────────────────────────────────────────
 # ADR-014: baked Python tooling for analytics scripting
 # --break-system-packages: no venv inside the container; these are system tools
 RUN pip3 install --no-cache-dir --break-system-packages \
         yottadb click pyyaml requests
 
-# ── Layer 13: Service configs ────────────────────────────────────────
+# ── Layer 11: Service configs ────────────────────────────────────────
 COPY etc/xinetd.d/xwb   /etc/xinetd.d/xwb
 COPY etc/xinetd.d/vlink  /etc/xinetd.d/vlink
 COPY etc/sshd_config     /etc/ssh/sshd_config
 
-# ── Layer 14: Entrypoint + bake + healthcheck ────────────────────────
+# ── Layer 12: Entrypoint + bake + healthcheck ────────────────────────
 COPY entrypoint.sh   /usr/local/bin/entrypoint.sh
 COPY bake.sh         /usr/local/bin/bake.sh
 COPY healthcheck.sh  /usr/local/bin/healthcheck.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh /usr/local/bin/bake.sh /usr/local/bin/healthcheck.sh
 
-# ── Layer 15: Metadata ───────────────────────────────────────────────
+# ── Layer 13: Metadata ───────────────────────────────────────────────
 # Runtime ZRO: dev dirs first (shadow VEHU), then VEHU, then YDB libs (ADR-012)
 # BL-009: flat dirs, no parenthesized source(object) syntax
 ENV ydb_routines="/home/vehu/dev/o /home/vehu/dev/r /opt/VistA-M/o /opt/VistA-M/r $ydb_dist/libyottadbutil.so"
 
-EXPOSE 22 9430 8001 1338 8089
+EXPOSE 22 9430 8001
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
     CMD ["/usr/local/bin/healthcheck.sh"]
