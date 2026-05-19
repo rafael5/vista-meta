@@ -1,7 +1,7 @@
 # ADR-040: YDB GUI on port 8089
 
 Date: 2026-04-18
-Status: Accepted
+Status: Superseded by ADR-047
 
 ## Context
 YDBGUI (`gitlab.com/YottaDB/UI/YDBGUI`) runs behind YDB Web Server. Two port conventions exist:

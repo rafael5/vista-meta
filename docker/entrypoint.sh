@@ -9,7 +9,7 @@
 # Phases:
 #   1. Pre-flight     (root)  — validate env, generate SSH host keys
 #   2. UID reconcile  (root)  — chown bind mounts for vehu
-#   3. Service start  (mixed) — sshd, xinetd, rocto, YDB GUI
+#   3. Service start  (mixed) — sshd, xinetd
 #   4. First-run bake (vehu)  — background, sentinel-gated
 #   5. Supervise      (wait)  — SIGTERM trap for graceful shutdown
 set -euo pipefail
@@ -79,9 +79,10 @@ else
 fi
 
 # ── Phase 3: Service startup ─────────────────────────────────────────
-# ADR-013: sshd → xinetd → rocto → YDB GUI
+# ADR-013: sshd → xinetd
 # All services listen on 0.0.0.0 inside the container.
-# Tailscale IP binding enforced at Docker -p level (ADR-008).
+# Host port-binding is controlled at the Docker -p level (compose.yml);
+# defaults to 127.0.0.1 (local-only).
 log "phase 3: starting services"
 
 # -D / -dontfork: keep services in foreground so they remain direct children
@@ -94,32 +95,13 @@ log "  xinetd (RPC Broker :9430, VistALink :8001)"
 /usr/sbin/xinetd -dontfork &
 XINETD_PID=$!
 
-# exec replaces the su/bash shell with the actual service process,
-# so the PID we capture is the service itself, not a wrapper shell.
-log "  rocto (Octo SQL :1338)"
-su -s /bin/bash vehu -c "source /etc/profile.d/ydb_env.sh && exec \$ydb_dist/plugin/bin/rocto -p 1338" &
-ROCTO_PID=$!
-
-# YDBGUI uses a Node.js WebSocket server. Start only if node is available.
-if command -v node >/dev/null 2>&1; then
-    log "  YDB GUI (:8089)"
-    su -s /bin/bash vehu -c "exec node \$ydb_dist/plugin/etc/ydbgui/node/startup.js --port=8089 --ydb_dist=\$ydb_dist" &
-    YDBGUI_PID=$!
-else
-    log "  YDB GUI (:8089) — SKIPPED (node not installed)"
-    YDBGUI_PID=""
-fi
-
 # ── Phase 3b: Post-start service verification ────────────────────────
-# Background-launched services can fail silently (e.g. rocto exiting on
-# %YDB-E-ZLINKFILE because its plugin path isn't in $ZRO; ydbgui exiting
-# after binding the socket). Without this check the only signal is a
-# closed port at healthcheck time, with no log line tying it to a
-# specific service. We sleep briefly to let services either bind or
-# crash, then verify each PID is still alive. Failures are logged but
-# never fatal: the developer-critical services are sshd + xinetd, both
-# checked explicitly. rocto/ydbgui failures in the stub image are
-# expected and surfaced (not hidden).
+# Background-launched services can fail silently. Without this check the
+# only signal is a closed port at healthcheck time, with no log line
+# tying it to a specific service. We sleep briefly to let services
+# either bind or crash, then verify each PID is still alive. Failures
+# are logged but never fatal: the developer-critical services are
+# sshd + xinetd, both checked explicitly.
 sleep 2
 log "phase 3b: verifying services"
 verify() {
@@ -134,8 +116,6 @@ verify() {
 }
 verify sshd    "$SSHD_PID"
 verify xinetd  "$XINETD_PID"
-verify rocto   "$ROCTO_PID"
-verify ydbgui  "${YDBGUI_PID:-}"
 
 # ── Phase 4: First-run bake (background) ─────────────────────────────
 # ADR-022: bake runs in background after services are up
@@ -160,15 +140,8 @@ fi
 cleanup() {
     log "SIGTERM received — shutting down"
 
-    # Stop rocto
-    su -s /bin/bash vehu -c \
-        "source /etc/profile.d/ydb_env.sh && rocto -stop" 2>/dev/null || true
-
     # Stop xinetd
     kill "$XINETD_PID" 2>/dev/null || true
-
-    # Stop YDB GUI
-    [ -n "$YDBGUI_PID" ] && kill "$YDBGUI_PID" 2>/dev/null || true
 
     # Stop sshd
     kill "$SSHD_PID" 2>/dev/null || true

@@ -1,7 +1,7 @@
 # ADR-013: Services — RPC Broker, VistALink, sshd, Octo, YDB GUI
 
 Date: 2026-04-17
-Status: Accepted
+Status: Superseded by ADR-047
 
 ## Context
 Baseline VistA containers run many services: RPC Broker (CPRS, DDR), VistALink, sshd, xinetd, MailMan, TaskMan, optionally QEWD, Panorama, Octo SQL, YDB GUI, M Web Server. Which to include depends on use case.

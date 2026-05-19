@@ -35,12 +35,12 @@ What we rejected and why.
 | 005 | ASCII-only, no UTF-8 | Accepted |
 | 006 | Skip VistA bootstrap | Accepted |
 | 007 | No post-install hook | Accepted |
-| 008 | Tailscale IP as network perimeter | Accepted |
+| 008 | Tailscale IP as network perimeter | Superseded by ADR-047 |
 | 009 | Entrypoint chowns bind mounts | Accepted |
 | 010 | Hybrid persistence: bind mounts + named volume + baked VEHU-M | Accepted |
 | 011 | Image tag = latest + date tag | Accepted |
 | 012 | $ZRO layering: dev-r first, VEHU-M fallback | Accepted |
-| 013 | Services: RPC Broker, VistALink, sshd, Octo, YDB GUI | Accepted |
+| 013 | Services: RPC Broker, VistALink, sshd, Octo, YDB GUI | Superseded by ADR-047 |
 | 014 | Python tooling baked in (yottadb bindings, git) | Accepted |
 | 015 | M-Unit — ChristopherEdwards fork | Accepted |
 | 016 | DD exporters: FileMan utilities + FMQL + Print Templates | Accepted |
@@ -67,10 +67,11 @@ What we rejected and why.
 | 037 | bake.sh: configurable parallelism, default serial | Accepted |
 | 038 | bake.sh: phase-level resume | Accepted |
 | 039 | bake.sh: item-level error granularity | Accepted |
-| 040 | YDB GUI on port 8089 | Accepted |
-| 041 | YDB GUI open (no auth) | Accepted |
+| 040 | YDB GUI on port 8089 | Superseded by ADR-047 |
+| 041 | YDB GUI open (no auth) | Superseded by ADR-047 |
 | 042 | Skip M Web Server (port 9080) | Accepted |
 | 043 | Drop ViViaN/DOX (deferred) | Accepted |
 | 044 | Project root = ~/vista-meta, standalone repo | Accepted |
 | 045 | Separate data and code classification; package as the bridge | Accepted |
 | 046 | _(moved)_ kids-vc undo — pre-install snapshot. Now lives in `~/projects/py-kids-vc/docs/adr/046-*.md` | Proposed |
+| 047 | Drop Octo SQL + YDB Web Server; localhost-default binding (no Tailscale requirement) | Accepted |
