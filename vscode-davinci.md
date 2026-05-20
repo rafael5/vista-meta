@@ -9,6 +9,25 @@ Companion to [vscode-screencast.md](vscode-screencast.md). That doc
 is the zero-install fast path (no zoom). This doc adds Resolve to the
 loop when you want cursor-tracking zoom for emphasis.
 
+> ### ⚠️ Linux GPU requirement
+>
+> DaVinci Resolve on Linux **requires a discrete Nvidia GPU (CUDA)
+> or discrete AMD GPU (ROCm)**. **Integrated APU graphics — Intel
+> iGPUs, AMD Radeon 780M / 760M / Phoenix — are unsupported**:
+> Resolve crashes inside its OpenCL backend (`libRusticlOpenCL.so`
+> or `libamdocl64.so`, signal 11) the first time it tries to
+> dispatch a compute workload.
+>
+> Check before you invest in the install:
+> ```bash
+> lspci | grep -iE 'vga|3d|display'
+> nvidia-smi 2>/dev/null   # any output = Nvidia present
+> ```
+> No discrete GPU? Use **[vscode-kdenlive.md](vscode-kdenlive.md)**
+> instead — same workflow, no GPU compute dependency, no codec
+> gotchas. The Resolve ease-curves are marginally smoother; for a
+> 15-second README hero clip the difference is invisible.
+
 ## Table of contents
 
 - [Why DaVinci Resolve](#why-davinci-resolve)
@@ -49,13 +68,19 @@ and forget.
    `.zip` (~3 GB) starts downloading.
    - Product overview / marketing: https://www.blackmagicdesign.com/products/davinciresolve
    - Direct downloads: https://www.blackmagicdesign.com/support/family/davinci-resolve-and-fusion
-2. Unzip and run:
+2. Unzip and run (version string varies; the zip includes the exact
+   command in `DaVinci-Resolve-Linux_Installation_Instructions.html`):
    ```bash
    cd ~/Downloads
-   unzip DaVinci_Resolve_19.*_Linux.zip
-   chmod +x DaVinci_Resolve_19.*_Linux.run
-   sudo ./DaVinci_Resolve_19.*_Linux.run
+   unzip DaVinci_Resolve_*_Linux.zip
+   chmod +x DaVinci_Resolve_*_Linux.run
+   sudo ./DaVinci_Resolve_*_Linux.run -i
    ```
+   **On Linux Mint 22 / Ubuntu 24.04 (Noble):** the installer's
+   package check fails on the `t64` library rename, and Resolve's
+   bundled GLib 2.68 conflicts with system pango. See
+   [Appendix A](#appendix-a--linux-mint-22--ubuntu-noble-install-gotchas)
+   before you `sudo ./...`.
 3. Confirm GPU is usable:
    ```bash
    # Nvidia: needs proprietary driver + CUDA
@@ -301,10 +326,93 @@ You now have:
 | Add keyframe on selected param | `Ctrl+[` |
 | Switch page (Edit / Color / Deliver / …) | `Shift+1` through `Shift+8` |
 
+## Appendix A — Linux Mint 22 / Ubuntu Noble install gotchas
+
+Discovered the hard way 2026-05-19 on Mint 22 / kernel 6.17. Three
+distinct snags chained between "downloaded the installer" and
+"Resolve actually launches." Each fix is one command; the discovery
+took an hour.
+
+### A.1 — Installer's package check fails on `t64` rename
+
+The installer is hard-coded to pre-`t64` library names (`libapr1`,
+`libaprutil1`, `libasound2`, `libglib2.0-0`). Ubuntu Noble renamed
+these as part of the 64-bit `time_t` transition. The `.so` files
+themselves still exist and are ABI-compatible — only the **package
+names** changed.
+
+```bash
+sudo apt install -y libapr1t64 libaprutil1t64
+# (libasound2t64 and libglib2.0-0t64 are pre-installed on a stock Mint 22)
+sudo SKIP_PACKAGE_CHECK=1 ./DaVinci_Resolve_*_Linux.run -i
+```
+
+`SKIP_PACKAGE_CHECK=1` bypasses the broken dpkg-name check. The
+dynamic linker still finds the actual `.so` files at runtime.
+
+### A.2 — Bundled GLib 2.68 conflicts with system pango
+
+After install, first launch crashes with:
+
+```
+/opt/resolve/bin/resolve: symbol lookup error:
+  /lib/x86_64-linux-gnu/libpango-1.0.so.0:
+  undefined symbol: g_once_init_leave_pointer
+```
+
+`g_once_init_leave_pointer` is a GLib 2.80 symbol. Resolve bundles
+GLib 2.68 (`/opt/resolve/libs/libglib-2.0.so.0.6800.4`). Noble ships
+GLib 2.80, and the system `libpango` was built against 2.80. When
+the dynamic linker loads Resolve's bundled (older) GLib first,
+pango can't find the new symbol.
+
+Fix: move Resolve's bundled GLib stack out of the way so the dynamic
+linker falls through to the system GLib (which is API/ABI compatible
+upward — every 2.68 symbol still exists in 2.80):
+
+```bash
+sudo mkdir -p /opt/resolve/libs/disabled
+sudo mv /opt/resolve/libs/libglib-2.0.so*    /opt/resolve/libs/disabled/
+sudo mv /opt/resolve/libs/libgio-2.0.so*     /opt/resolve/libs/disabled/
+sudo mv /opt/resolve/libs/libgmodule-2.0.so* /opt/resolve/libs/disabled/
+sudo mv /opt/resolve/libs/libgobject-2.0.so* /opt/resolve/libs/disabled/
+```
+
+Moving (vs deleting) keeps the change reversible:
+`sudo mv /opt/resolve/libs/disabled/* /opt/resolve/libs/`.
+
+### A.3 — AMD APU iGPUs (Phoenix / 780M / 760M) crash in OpenCL
+
+After A.1 and A.2, Resolve launches and shows the EULA / setup
+screens. Then it crashes inside its OpenCL backend:
+
+```
+Signal 11 (SIGSEGV) in libRusticlOpenCL.so.1
+  called from libProResRAW.so (codec init)
+```
+
+**This is the dead-end on AMD iGPUs.** `clinfo` shows the GPU
+fine — rusticl can enumerate the Radeon 780M (Phoenix gfx1103) —
+but rusticl SEGVs on the first real compute workload. Same root
+cause whether you reach for ROCm OpenCL or AMDGPU-PRO: Blackmagic
+designed Resolve's compute kernels against CUDA and discrete-AMD
+production stacks, and APU iGPU support across all three Linux
+OpenCL implementations is not production-ready.
+
+**No clean fix exists today.** Either:
+
+- **Plug in a discrete GPU** (Nvidia for CUDA path, RX 7000-series
+  AMD for ROCm).
+- **Use [vscode-kdenlive.md](vscode-kdenlive.md) instead** — Kdenlive
+  has no GPU compute dependency. For a 15-second clip with two zoom
+  beats, the visual quality gap vs Resolve is essentially invisible.
+
 ---
 
 **See also:**
 
 - [vscode-screencast.md](vscode-screencast.md) — zero-install fast path
+- [vscode-kdenlive.md](vscode-kdenlive.md) — Kdenlive workflow
+  (no GPU compute requirement; recommended on iGPU machines)
 - [screen-recording-how-to.md](screen-recording-how-to.md) — full
   reference (OBS, VirtualBox, ffmpeg cheatsheet, troubleshooting)
