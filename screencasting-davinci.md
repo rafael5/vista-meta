@@ -5,7 +5,7 @@ polished MP4 + GIF + poster with two cursor-tracking zoom beats, in
 **DaVinci Resolve (free)** on Linux Mint. ~30 minutes start-to-finish,
 of which Resolve work is ~10 minutes.
 
-Companion to [vscode-screencast.md](vscode-screencast.md). That doc
+Companion to [screencasting-simple.md](screencasting-simple.md). That doc
 is the zero-install fast path (no zoom). This doc adds Resolve to the
 loop when you want cursor-tracking zoom for emphasis.
 
@@ -23,7 +23,7 @@ loop when you want cursor-tracking zoom for emphasis.
 > lspci | grep -iE 'vga|3d|display'
 > nvidia-smi 2>/dev/null   # any output = Nvidia present
 > ```
-> No discrete GPU? Use **[vscode-kdenlive.md](vscode-kdenlive.md)**
+> No discrete GPU? Use **[screencasting-kdenlive.md](screencasting-kdenlive.md)**
 > instead — same workflow, no GPU compute dependency, no codec
 > gotchas. The Resolve ease-curves are marginally smoother; for a
 > 15-second README hero clip the difference is invisible.
@@ -292,7 +292,7 @@ mv media/_demo.mp4 media/demo.mp4
 ## 10. Generate GIF + poster + AI frames
 
 Re-use `scripts/make-demo-assets.sh` from
-[vscode-screencast.md](vscode-screencast.md), pointed at the Resolve
+[screencasting-simple.md](screencasting-simple.md), pointed at the Resolve
 export:
 
 ```bash
@@ -403,7 +403,7 @@ OpenCL implementations is not production-ready.
 
 - **Plug in a discrete GPU** (Nvidia for CUDA path, RX 7000-series
   AMD for ROCm).
-- **Use [vscode-kdenlive.md](vscode-kdenlive.md) instead** — Kdenlive
+- **Use [screencasting-kdenlive.md](screencasting-kdenlive.md) instead** — Kdenlive
   has no GPU compute dependency. For a 15-second clip with two zoom
   beats, the visual quality gap vs Resolve is essentially invisible.
 
@@ -411,8 +411,8 @@ OpenCL implementations is not production-ready.
 
 **See also:**
 
-- [vscode-screencast.md](vscode-screencast.md) — zero-install fast path
-- [vscode-kdenlive.md](vscode-kdenlive.md) — Kdenlive workflow
+- [screencasting-simple.md](screencasting-simple.md) — zero-install fast path
+- [screencasting-kdenlive.md](screencasting-kdenlive.md) — Kdenlive workflow
   (no GPU compute requirement; recommended on iGPU machines)
 - [screen-recording-how-to.md](screen-recording-how-to.md) — full
   reference (OBS, VirtualBox, ffmpeg cheatsheet, troubleshooting)

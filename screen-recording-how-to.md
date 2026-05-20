@@ -11,7 +11,7 @@ on github.com (and, where required, on package registries that don't
 support video).
 
 > **Just want a VSCode extension demo?** See
-> [vscode-screencast.md](vscode-screencast.md) for the zero-install
+> [screencasting-simple.md](screencasting-simple.md) for the zero-install
 > fast path (Cinnamon's built-in recorder → MP4 + GIF + AI-friendly
 > PNG frames). This document is the full reference for everything
 > else: OBS, VirtualBox Windows guests, multi-source compositing,

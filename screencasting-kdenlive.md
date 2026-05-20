@@ -5,11 +5,11 @@ End-to-end recipe: from Cinnamon's screen recorder to a polished MP4
 on Linux Mint. ~25 minutes start-to-finish, of which Kdenlive work
 is ~8 minutes.
 
-Companion to [vscode-screencast.md](vscode-screencast.md). That doc
+Companion to [screencasting-simple.md](screencasting-simple.md). That doc
 is the zero-install fast path (no zoom). This doc adds Kdenlive to
 the loop when you want cursor-tracking zoom for emphasis.
 
-**See also:** [vscode-davinci.md](vscode-davinci.md) — same workflow
+**See also:** [screencasting-davinci.md](screencasting-davinci.md) — same workflow
 in DaVinci Resolve. Resolve's ease curves are slightly more polished,
 but Resolve on Linux **requires a discrete Nvidia or AMD GPU** — AMD
 APU iGPUs (Phoenix / 780M / 760M, Intel iGPUs) crash inside the
@@ -231,7 +231,7 @@ mv media/_demo.mp4 media/demo.mp4
 ## 10. Generate GIF + poster + AI frames
 
 Re-use `scripts/make-demo-assets.sh` from
-[vscode-screencast.md](vscode-screencast.md):
+[screencasting-simple.md](screencasting-simple.md):
 
 ```bash
 scripts/make-demo-assets.sh media/demo.mp4
@@ -270,8 +270,8 @@ You now have:
 
 **See also:**
 
-- [vscode-screencast.md](vscode-screencast.md) — zero-install fast path
-- [vscode-davinci.md](vscode-davinci.md) — DaVinci Resolve workflow
+- [screencasting-simple.md](screencasting-simple.md) — zero-install fast path
+- [screencasting-davinci.md](screencasting-davinci.md) — DaVinci Resolve workflow
   (requires discrete Nvidia / AMD GPU)
 - [screen-recording-how-to.md](screen-recording-how-to.md) — full
   reference (OBS, VirtualBox, ffmpeg cheatsheet, troubleshooting)
