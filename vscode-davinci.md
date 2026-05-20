@@ -42,8 +42,13 @@ and forget.
 
 ## 1. Install DaVinci Resolve free
 
-1. **blackmagicdesign.com/products/davinciresolve** → **Download** →
-   **DaVinci Resolve 19** (free) → **Linux**. Fill the form.
+1. Go to the **[Blackmagic Design DaVinci Resolve download page](https://www.blackmagicdesign.com/support/family/davinci-resolve-and-fusion)**.
+   Under the latest **DaVinci Resolve 19** entry, click **Linux**
+   (the **free** download, *not* "DaVinci Resolve Studio"). Fill the
+   registration form — name, email, country, phone — and the
+   `.zip` (~3 GB) starts downloading.
+   - Product overview / marketing: https://www.blackmagicdesign.com/products/davinciresolve
+   - Direct downloads: https://www.blackmagicdesign.com/support/family/davinci-resolve-and-fusion
 2. Unzip and run:
    ```bash
    cd ~/Downloads
