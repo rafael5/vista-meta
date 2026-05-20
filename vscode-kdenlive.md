@@ -16,6 +16,12 @@ APU iGPUs (Phoenix / 780M / 760M, Intel iGPUs) crash inside the
 OpenCL backend on the first compute workload. Kdenlive has no GPU
 compute dependency and runs on any hardware.
 
+> **Zoom is added in post** — the recording itself is a flat wide
+> shot of full-screen VSCode. Cinnamon's recorder has no zoom
+> feature; the zoom-in / hold / zoom-out is layered on top in
+> Kdenlive via Transform-effect keyframes (§6–§8). Change anchors,
+> timings, or number of zooms any time without re-recording.
+
 ## Table of contents
 
 - [Why Kdenlive](#why-kdenlive)
