@@ -267,6 +267,22 @@ package-edge-matrix: ## Package-to-package call edge matrix (ADR-045 Phase 6c)
 		{ echo "Missing routine-calls.tsv"; exit 1; }
 	/usr/bin/python3 host/scripts/build_package_edge_matrix.py
 
+.PHONY: package-namespace
+package-namespace: ## Per-package namespace + VDL app_code from docs/Packages.csv (P3/P4)
+	@[ -f vista/export/code-model/packages.tsv ] || \
+		{ echo "Run 'make inventory' first."; exit 1; }
+	@[ -f docs/Packages.csv ] || { echo "Missing docs/Packages.csv"; exit 1; }
+	/usr/bin/python3 host/scripts/build_package_namespace.py
+
+.PHONY: augment-registries
+augment-registries: ## Add package/package_dir to rpcs|options|protocols.tsv (P1/P2)
+	@for f in routines.tsv rpcs.tsv options.tsv protocols.tsv; do \
+		[ -f vista/export/code-model/$$f ] || \
+			{ echo "Missing: vista/export/code-model/$$f"; exit 1; }; \
+	done
+	@[ -f docs/Packages.csv ] || { echo "Missing docs/Packages.csv"; exit 1; }
+	/usr/bin/python3 host/scripts/augment_registries.py
+
 .PHONY: dump-file-9-8
 dump-file-9-8: ## Dump File 9.8 (ROUTINE) via VMDUMP98 → vista-file-9-8.tsv (ADR-045 Phase 4a)
 	$(DOCKER) exec -u vehu $(CONTAINER) bash -lc 'echo "D RUN^VMDUMP98 H" | $$ydb_dist/mumps -direct'

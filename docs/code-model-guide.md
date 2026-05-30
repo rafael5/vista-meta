@@ -465,6 +465,18 @@ Per the TODOs and closure RFs:
 
 ---
 
+## 7b. Package association columns (P1–P4, additive)
+
+Three registries carry an appended canonical `package_dir` (directory name,
+byte-identical to `packages.tsv`); `rpcs.tsv` also gains a `package` (upper
+PACKAGE-file #9.4 NAME). A new `package-namespace.tsv` (joined by `package`)
+supplies `namespace`, `prefixes`, `app_code`, and `vdl_id` for all 174
+packages, sourced from `docs/Packages.csv`. Full schema, coverage,
+regeneration commands, and the downstream `vista-info-hub` migration list are
+in [upstream-data-fixes.md](upstream-data-fixes.md).
+
+---
+
 ## 8. Related documents
 
 - [ADR-045](adr/045-data-code-separation-package-bridge.md) — the architecture decision this guide operates under
