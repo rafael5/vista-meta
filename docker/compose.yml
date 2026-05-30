@@ -27,7 +27,7 @@ services:
       # TAILSCALE_IP defaults to 127.0.0.1 for devcontainer/local-only use.
       # Override in vista-meta/.env for Tailscale-wide exposure.
       - "${TAILSCALE_IP:-127.0.0.1}:2222:22"     # SSH (clients use this)
-      - "${TAILSCALE_IP:-127.0.0.1}:9430:9430"   # RPC Broker
+      - "${TAILSCALE_IP:-127.0.0.1}:${RPC_PORT:-9430}:9430"   # RPC Broker (host port override: RPC_PORT)
       - "${TAILSCALE_IP:-127.0.0.1}:8001:8001"   # VistALink
       - "${TAILSCALE_IP:-127.0.0.1}:1338:1338"   # Octo SQL (rocto)
       - "${TAILSCALE_IP:-127.0.0.1}:8089:8089"   # YDB GUI
