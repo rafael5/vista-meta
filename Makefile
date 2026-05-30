@@ -5,6 +5,7 @@
 include .env
 
 IMAGE     := vista-meta
+RPC_PORT  ?= 9430          # RPC Broker host port; overridable in .env
 CONTAINER := vista-vehu
 VOLUME    := vehu-globals
 COMPOSE   := docker/compose.yml
@@ -475,7 +476,7 @@ write-conn: ## Publish connection contract for client M projects
 	  'VISTA_HOST=$(TAILSCALE_IP)' \
 	  'VISTA_SSH_PORT=2222' \
 	  'VISTA_SSH_USER=vehu' \
-	  'VISTA_HTTP_RPC_PORT=9430' \
+	  'VISTA_HTTP_RPC_PORT=$(RPC_PORT)' \
 	  'VISTA_HTTP_FMQL_PORT=8001' \
 	  'VISTA_HTTP_ROCTO_PORT=1338' \
 	  'VISTA_HTTP_YDBGUI_PORT=8089' \
