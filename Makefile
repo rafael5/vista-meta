@@ -320,6 +320,10 @@ fidelity: ## Emit + verify the fidelity declarations (V4/R2+F9)
 	/usr/bin/python3 host/scripts/build_fidelity.py
 	/usr/bin/python3 host/scripts/build_fidelity.py --check
 
+.PHONY: content-hash
+content-hash: ## Print the V5 data fingerprint (24 TSVs, normative recipe)
+	/usr/bin/python3 host/scripts/content_hash.py
+
 .PHONY: emit-all
 emit-all: ## Single-run emission of all 24 finals from one engine state (F7)
 	@$(DOCKER) ps --format '{{.Names}}' | grep -q '^$(CONTAINER)$$' || \
