@@ -328,6 +328,14 @@ validate: ## Validate the emitted tree against the full v1 contract (V6)
 content-hash: ## Print the V5 data fingerprint (24 TSVs, normative recipe)
 	/usr/bin/python3 host/scripts/content_hash.py
 
+.PHONY: release
+release: ## Assemble the data-v1 release assets into dist/ (V7; no publish)
+	/usr/bin/python3 host/scripts/build_release.py
+
+.PHONY: release-publish
+release-publish: ## Assemble + publish the data-v1 GitHub Release (V7)
+	/usr/bin/python3 host/scripts/build_release.py --publish
+
 .PHONY: emit-all
 emit-all: ## Single-run emission of all 24 finals from one engine state (F7)
 	@$(DOCKER) ps --format '{{.Names}}' | grep -q '^$(CONTAINER)$$' || \

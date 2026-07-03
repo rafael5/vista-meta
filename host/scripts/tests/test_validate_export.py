@@ -281,5 +281,32 @@ class TestEnumWarnings(unittest.TestCase):
             [w for w in report.warnings if "piks_confidence" in w])
 
 
+class TestR3SourceManifest(unittest.TestCase):
+    """A consumer tree (unpacked bundle) has no raw/ sidecar — the R3
+    fields live in the bundle's manifest.json instead (V7)."""
+
+    def setUp(self):
+        self.root = make_tree()
+        (self.root / "raw/extraction.json").unlink()
+
+    def test_manifest_json_satisfies_r3(self):
+        doc = dict(SIDE_CAR)
+        (self.root / "manifest.json").write_text(json.dumps(doc))
+        self.assertFalse([e for e in errs(self.root)
+                          if "extraction.json" in e or "R3" in e])
+
+    def test_manifest_json_missing_field_fails(self):
+        doc = dict(SIDE_CAR)
+        del doc["db_state_fingerprint"]
+        (self.root / "manifest.json").write_text(json.dumps(doc))
+        self.assertTrue([e for e in errs(self.root)
+                         if "db_state_fingerprint" in e])
+
+    def test_neither_source_fails(self):
+        self.assertTrue([e for e in errs(self.root)
+                         if "extraction.json" in e])
+
+
+
 if __name__ == "__main__":
     unittest.main()

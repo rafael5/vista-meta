@@ -200,17 +200,29 @@ def _meta_checks(export_dir: Path, report: Report) -> None:
     except Exception as exc:  # unreadable tree already reported above
         report.errors.append(f"fidelity.json: could not re-measure ({exc})")
 
+    # R3 source: a producer tree carries raw/extraction.json; a
+    # consumer tree (unpacked V7 bundle) carries manifest.json, which
+    # holds the same engine-pinning fields (extraction_source_commit
+    # aliases the sidecar's source_commit there).
+    manifest = export_dir / "manifest.json"
     sidecar = export_dir / "raw/extraction.json"
-    if not sidecar.exists():
+    if manifest.exists():
+        src, doc = "manifest.json", json.loads(
+            manifest.read_text(encoding="utf-8"))
+        doc.setdefault("source_commit",
+                       doc.get("extraction_source_commit"))
+    elif sidecar.exists():
+        src, doc = "raw/extraction.json", json.loads(
+            sidecar.read_text(encoding="utf-8"))
+    else:
         report.errors.append(
-            "raw/extraction.json: missing — R3 engine identity cannot be "
-            "reconstructed after the fact")
+            "raw/extraction.json: missing (and no manifest.json) — R3 "
+            "engine identity cannot be reconstructed after the fact")
         return
-    doc = json.loads(sidecar.read_text(encoding="utf-8"))
     for f in R3_FIELDS:
         if not doc.get(f):
             report.errors.append(
-                f"raw/extraction.json: R3 field {f} missing or empty")
+                f"{src}: R3 field {f} missing or empty")
 
 
 def validate(export_dir: Path) -> Report:
