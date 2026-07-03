@@ -256,13 +256,27 @@ class TestPrimaryKeys(unittest.TestCase):
         for name, pk in expect.items():
             self.assertEqual(sv.spec_for(name).pk, pk, name)
 
-    def test_piks_triage_declares_no_pk_until_v2(self):
-        # The live 107.3 conflict means uniqueness on file_number is
-        # not yet assertable; V2's red-gate resolves it. Sort is still
-        # deterministic via the declared sort key.
+    def test_piks_triage_pk_assertable_after_v2_red_gate(self):
+        # V2 resolved the live 107.3 conflict and the merge red-gates
+        # any future duplicate, so file_number uniqueness is now part
+        # of the contract.
         s = sv.spec_for("piks-triage.tsv")
-        self.assertEqual(s.pk, ())
-        self.assertTrue(s.sort)
+        self.assertEqual(s.pk, ("file_number",))
+
+
+class TestPiksMaterialized(unittest.TestCase):
+    """V2/B1 — piks.tsv is the merged, materialized classification."""
+
+    def test_piks_source_column(self):
+        s = sv.spec_for("piks.tsv")
+        self.assertEqual(
+            s.columns,
+            ("file_number", "piks", "piks_method", "piks_confidence",
+             "piks_evidence", "piks_source"),
+        )
+
+    def test_piks_source_enum(self):
+        self.assertEqual(sv.PIKS_SOURCES, ("auto", "triage", "inherited"))
 
 
 if __name__ == "__main__":

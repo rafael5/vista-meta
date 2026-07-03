@@ -62,6 +62,9 @@ RPC_INACTIVE_LABELS = {
     "3": "REMOTE-INACTIVE",
 }
 
+# V2/B1: where a piks.tsv classification came from.
+PIKS_SOURCES = ("auto", "triage", "inherited")
+
 FILES_TSV_DROPPED = (
     "piks", "piks_method", "piks_confidence", "piks_evidence",
     "piks_secondary", "volatility", "sensitivity", "portability",
@@ -88,18 +91,20 @@ _SPECS = (
         dropped=FILES_TSV_DROPPED,
     ),
     FileSpec(
-        # Hand-curated provenance input; no pk until V2's conflict
-        # red-gate makes file_number assertable (live 107.3 dup).
+        # Hand-curated provenance input. file_number became assertable
+        # at V2: the live 107.3 conflict was resolved and the merge
+        # red-gates any future duplicate.
         name="piks-triage.tsv", model="data-model", producer="host",
         columns=("file_number", "piks", "piks_method", "piks_confidence",
                  "piks_evidence"),
-        pk=(),
-        sort=("file_number",),
+        pk=("file_number",),
     ),
     FileSpec(
+        # V2/B1: materialized merge (triage > auto > inherited) —
+        # consumers read one authoritative value, never re-merge.
         name="piks.tsv", model="data-model", producer="m-dump",
         columns=("file_number", "piks", "piks_method", "piks_confidence",
-                 "piks_evidence"),
+                 "piks_evidence", "piks_source"),
         pk=("file_number",),
     ),
     # ── code-model ────────────────────────────────────────────────

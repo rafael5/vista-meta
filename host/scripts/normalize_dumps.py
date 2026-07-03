@@ -35,6 +35,7 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
+import materialize_piks
 import schema_v1
 import tsvio
 from augment_registries import (
@@ -87,11 +88,26 @@ def _augment(name: str, fields: list[str], rows: list[dict],
     return rows
 
 
+def _read_dicts(path: Path) -> list[dict]:
+    cols, rows = tsvio.read_tsv(path)
+    return [dict(zip(cols, r)) for r in rows]
+
+
 def normalize_file(name: str, raw_dir: Path, data_dir: Path,
                    code_dir: Path, parsed: dict) -> int:
     """Normalize one file; returns its row count."""
     spec = schema_v1.spec_for(name)
     out_dir = data_dir if spec.model == "data-model" else code_dir
+
+    if name == "piks.tsv":
+        # V2/B1: the final is the materialized merge, not the dump.
+        # Inputs must come from ONE extraction: raw auto dump + raw
+        # files.tsv (parent tree) + the curated triage file.
+        rows = materialize_piks.merge(
+            files_rows=_read_dicts(raw_dir / "files.tsv"),
+            auto_rows=_read_dicts(raw_dir / "piks.tsv"),
+            triage_rows=_read_dicts(data_dir / "piks-triage.tsv"))
+        return tsvio.write_spec(out_dir / name, spec, rows)
 
     # piks-triage is curated source living at its final path.
     src = out_dir / name if name == "piks-triage.tsv" else raw_dir / name

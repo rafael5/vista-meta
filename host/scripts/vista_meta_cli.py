@@ -938,7 +938,7 @@ def cmd_file(args: argparse.Namespace) -> int:
     if not row:
         sys.exit(f"File #{target} not found in files.tsv")
 
-    # PIKS lives in piks.tsv; files.tsv's piks column is usually empty
+    # PIKS lives in the materialized piks.tsv (V2/B1)
     piks_path = DATA_MODEL / "piks.tsv"
     if piks_path.exists():
         with piks_path.open(encoding="utf-8") as f:

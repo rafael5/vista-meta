@@ -145,6 +145,56 @@ class TestXindexRename(unittest.TestCase):
         self.assertEqual(rows[0][0], "ZWB")
 
 
+class TestPiksMaterialization(unittest.TestCase):
+    """V2/B1: normalize_file('piks.tsv') runs the full merge."""
+
+    def setUp(self):
+        self.env = Env()
+        write_raw(self.env.raw, "files.tsv",
+                  "file_number\tfile_name\tglobal_root\tparent_file\t"
+                  "field_count\tpointer_in\tpointer_out\trecord_count\t"
+                  "is_dinum\tpiks\tpiks_method\tpiks_confidence\t"
+                  "piks_evidence\tpiks_secondary\tvolatility\tsensitivity\t"
+                  "portability\tvolume\tsubdomain\tstatus",
+                  ["2\tPATIENT\t^DPT(\t\t594\t1\t1\t1811\t"
+                   + "\t" * 11 + "ACTIVE",
+                   "2.01\tALIAS SUB-FIELD\t\t2\t3\t0\t0\t\t"
+                   + "\t" * 11 + "ACTIVE",
+                   "107.3\tMICOM\t^MICOM(\t\t2\t0\t0\t\t"
+                   + "\t" * 11 + "ACTIVE"])
+        write_raw(self.env.raw, "piks.tsv",
+                  "file_number\tpiks\tpiks_method\tpiks_confidence\t"
+                  "piks_evidence",
+                  ["2\tP\tH-01\tcertain\tpatient file"])
+        write_raw(self.env.data, "piks-triage.tsv",
+                  "file_number\tpiks\tpiks_method\tpiks_confidence\t"
+                  "piks_evidence",
+                  ["107.3\tS\tmanual-vestigial\tlow\tMICOM PORT"])
+
+    def test_merged_output(self):
+        nd.normalize_file("piks.tsv", self.env.raw, self.env.data,
+                          self.env.code, self.env.parsed)
+        cols, rows = tsvio.read_tsv(self.env.data / "piks.tsv")
+        self.assertEqual(cols[-1], "piks_source")
+        by = {r[0]: dict(zip(cols, r)) for r in rows}
+        self.assertEqual(len(by), 3)  # coverage == files.tsv, exactly
+        self.assertEqual(by["2"]["piks_source"], "auto")
+        self.assertEqual(by["107.3"]["piks_source"], "triage")
+        self.assertEqual(by["2.01"]["piks_source"], "inherited")
+        self.assertEqual(by["2.01"]["piks"], "P")
+
+    def test_seeded_triage_conflict_fails_loudly(self):
+        write_raw(self.env.data, "piks-triage.tsv",
+                  "file_number\tpiks\tpiks_method\tpiks_confidence\t"
+                  "piks_evidence",
+                  ["107.3\tS\tmanual-a\tlow\tx",
+                   "107.3\tS\tmanual-b\tmoderate\ty"])
+        import materialize_piks as mp
+        with self.assertRaises(mp.MergeError):
+            nd.normalize_file("piks.tsv", self.env.raw, self.env.data,
+                              self.env.code, self.env.parsed)
+
+
 class TestTriage(unittest.TestCase):
     def test_triage_canonicalized_in_place_keeps_duplicates(self):
         # piks-triage is hand-curated source: sorted deterministically,

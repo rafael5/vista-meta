@@ -2,7 +2,6 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 104.1	P	manual-package	moderate	prefix=MMR batch triage
 105	S	manual-package	moderate	prefix=%ZI batch triage
 107	S	manual-package	moderate	prefix=%ZI batch triage
-107.3	S	manual-package	moderate	prefix=%ZI batch triage
 107.3	S	manual-vestigial	low	MICOM PORT — vestigial
 129.1	I	manual-package	moderate	prefix=ETS batch triage
 129.11	I	manual-package	moderate	prefix=ETS batch triage
@@ -55,11 +54,14 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 404.59	I	manual-package	moderate	prefix=SCT batch triage
 5.1	P	manual-package	moderate	prefix=VIC batch triage
 50.60699	K	manual	moderate	MASTER DOSAGE FORM — drug knowledge
+500004.01	S	manual-orphan	low	orphan subfile — parent 500004 absent from DD (local/test residue)
 509850	P	manual	moderate	CDR ACCOUNT — patient audiology
 509850.5	K	manual	moderate	A&SP PROCEDURE MODIFIER — knowledge
 548260	P	manual-package	moderate	prefix=AXA batch triage
 548260.1	P	manual-package	moderate	prefix=AXA batch triage
 548261	P	manual-package	moderate	prefix=AXA batch triage
+5555555.01	S	manual-orphan	low	orphan subfile — parent 5555555 absent from DD (WP test residue)
+5555555.02	S	manual-orphan	low	orphan subfile — parent 5555555 absent from DD (WP test residue)
 577	P	manual-package	moderate	prefix=VDE batch triage
 579.1	P	manual-package	moderate	prefix=VDE batch triage
 579.2	P	manual-package	moderate	prefix=VDE batch triage
@@ -100,6 +102,7 @@ file_number	piks	piks_method	piks_confidence	piks_evidence
 631.3	P	manual-package	moderate	prefix=HBH batch triage
 633	P	manual-package	moderate	prefix=HBH batch triage
 64.7	P	manual	moderate	CUMULATIVE — patient lab cumulative
+655.01	S	manual-orphan	low	orphan subfile — parent 655 absent from DD
 665.72	P	manual	moderate	HOME OXYGEN TRANSACTIONS — patient care
 690.2	P	manual-package	moderate	prefix=MCA batch triage
 690.5	P	manual-package	moderate	prefix=MCA batch triage

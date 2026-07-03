@@ -38,8 +38,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 CODE_MODEL = PROJECT_ROOT / "vista/export/code-model"
 DATA_MODEL = PROJECT_ROOT / "vista/export/data-model"
 PACKAGE_DATA = CODE_MODEL / "package-data.tsv"
-PIKS_AUTO = DATA_MODEL / "piks.tsv"
-PIKS_MANUAL = DATA_MODEL / "piks-triage.tsv"
+PIKS_TSV = DATA_MODEL / "piks.tsv"
 OUT_TSV = CODE_MODEL / "package-piks-summary.tsv"
 
 SPEC = schema_v1.spec_for("package-piks-summary.tsv")
@@ -47,19 +46,17 @@ FIELDS = list(SPEC.columns)
 
 
 def load_piks() -> dict[str, str]:
-    """Build file_number → PIKS map. Manual triage overrides automated."""
-    piks_of: dict[str, str] = {}
-    for src in (PIKS_AUTO, PIKS_MANUAL):
-        with src.open(newline="", encoding="utf-8") as fh:
-            for row in csv.DictReader(fh, delimiter="\t"):
-                p = row.get("piks", "").strip()
-                if p:
-                    piks_of[row["file_number"]] = p
-    return piks_of
+    """file_number → PIKS from the materialized piks.tsv (V2/B1:
+    triage/auto/inheritance precedence is the producer's job — this
+    consumer never re-merges)."""
+    with PIKS_TSV.open(newline="", encoding="utf-8") as fh:
+        return {row["file_number"]: row["piks"].strip()
+                for row in csv.DictReader(fh, delimiter="\t")
+                if row.get("piks", "").strip()}
 
 
 def main() -> int:
-    for src in (PACKAGE_DATA, PIKS_AUTO, PIKS_MANUAL):
+    for src in (PACKAGE_DATA, PIKS_TSV):
         if not src.exists():
             print(f"ERROR: {src} missing.", file=sys.stderr)
             return 1
