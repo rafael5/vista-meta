@@ -304,10 +304,16 @@ normalize-dumps: ## Normalize raw M dumps -> schema_v1 finals (V1.4)
 capture-extraction: ## Capture R3 engine identity/state sidecar (V1.6)
 	/usr/bin/python3 host/scripts/capture_extraction.py $(CONTAINER)
 
+.PHONY: finals-owner
+finals-owner: ## Reclaim finals dirs for the host (pre-V1 entrypoints chown them to vehu)
+	$(DOCKER) exec -u root $(CONTAINER) chown -R 1000:1000 \
+		/home/vehu/export/data-model /home/vehu/export/code-model
+
 .PHONY: emit-all
 emit-all: ## Single-run emission of all 24 finals from one engine state (F7)
 	@$(DOCKER) ps --format '{{.Names}}' | grep -q '^$(CONTAINER)$$' || \
 		{ echo "Container '$(CONTAINER)' is not running. Run 'make run' first."; exit 1; }
+	$(MAKE) finals-owner
 	$(MAKE) sync-routines
 	$(MAKE) dump-files dump-piks dump-field-piks
 	$(MAKE) dump-file-9-8 dump-file-8994 dump-file-19 dump-file-101
@@ -322,6 +328,10 @@ emit-all: ## Single-run emission of all 24 finals from one engine state (F7)
 	@echo "emit-all complete: 24 finals from one extraction."
 
 .PHONY: dump-files dump-piks dump-field-piks
+.PHONY: raw-dir
+raw-dir: ## Ensure the container-writable raw dump dir exists
+	$(DOCKER) exec -u vehu $(CONTAINER) mkdir -p /home/vehu/export/raw
+
 dump-files: raw-dir ## Dump FileMan inventory via VMFILES → raw/files.tsv
 	$(DOCKER) exec -u vehu $(CONTAINER) bash -lc 'echo "D RUN^VMFILES" | $$ydb_dist/mumps -direct'
 
@@ -373,7 +383,7 @@ xindex: raw-dir ## Run XINDEX on full corpus via VMXIDX → xindex-{routines,err
 	@wc -l vista/export/raw/xindex-*.tsv
 
 .PHONY: validate-xindex
-validate-xindex: raw-dir ## Validate our regex extractions against XINDEX (ADR-045 post-Phase-6)
+validate-xindex: ## Validate our regex extractions against XINDEX (ADR-045 post-Phase-6)
 	@for f in routines.tsv routine-calls.tsv xindex-routines.tsv xindex-xrefs.tsv; do \
 		[ -f vista/export/code-model/$$f ] || \
 			{ echo "Missing: vista/export/code-model/$$f"; exit 1; }; \

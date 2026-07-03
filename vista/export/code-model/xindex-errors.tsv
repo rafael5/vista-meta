@@ -1,4 +1,4 @@
-routine	entry_index	line_text	tag_offset	error_text
+routine_name	entry_index	line_text	tag_offset	error_text
 A2APATC1	1	57	PAC1+6	F - Block structure mismatch.
 A2APATCK	1	22	A3	W - Blank(s) at end of line.
 A2APCOPY	1	1	A2APCOPY	S - First line of routine violates the SAC.
@@ -165,6 +165,7 @@ DENTE0	3	7	SITE+1	S - Non-Incremental Lock.
 DENTE0	4	10	NC0	S - Non-Incremental Lock.
 DENTE0	5	12	NC1	S - Non-Incremental Lock.
 DENTE1	1	1	DENTE1	S - First line of routine violates the SAC.
+DENTE1	10	67	LOCK+1	S - Lock missing Timeout.
 DENTE1	2	10	TRT+1	S - Non-Incremental Lock.
 DENTE1	3	12	TREAT1+1	S - Non-Incremental Lock.
 DENTE1	4	16	PERS1	S - Non-Incremental Lock.
@@ -173,8 +174,13 @@ DENTE1	6	26	ADMIN1	S - Non-Incremental Lock.
 DENTE1	7	29	TR1	S - Non-Incremental Lock.
 DENTE1	8	31	TR2	S - Non-Incremental Lock.
 DENTE1	9	67	LOCK+1	S - Non-Incremental Lock.
-DENTE1	10	67	LOCK+1	S - Lock missing Timeout.
 DENTE2	1	1	DENTE2	S - First line of routine violates the SAC.
+DENTE2	10	27	PRR01	S - Non-Incremental Lock.
+DENTE2	11	29	PRR1	S - Non-Incremental Lock.
+DENTE2	12	31	PRR1+2	S - Non-Incremental Lock.
+DENTE2	13	34	ARR0	S - Non-Incremental Lock.
+DENTE2	14	36	ARR1	S - Non-Incremental Lock.
+DENTE2	15	37	ARR1+1	S - Non-Incremental Lock.
 DENTE2	2	4	TSE+1	S - Non-Incremental Lock.
 DENTE2	3	12	TDRR0	S - Non-Incremental Lock.
 DENTE2	4	14	TDRR1	S - Non-Incremental Lock.
@@ -183,12 +189,6 @@ DENTE2	6	19	FBRR0	S - Non-Incremental Lock.
 DENTE2	7	21	FBRR1	S - Non-Incremental Lock.
 DENTE2	8	22	FBRR1+1	S - Non-Incremental Lock.
 DENTE2	9	25	PRR0	S - Non-Incremental Lock.
-DENTE2	10	27	PRR01	S - Non-Incremental Lock.
-DENTE2	11	29	PRR1	S - Non-Incremental Lock.
-DENTE2	12	31	PRR1+2	S - Non-Incremental Lock.
-DENTE2	13	34	ARR0	S - Non-Incremental Lock.
-DENTE2	14	36	ARR1	S - Non-Incremental Lock.
-DENTE2	15	37	ARR1+1	S - Non-Incremental Lock.
 DENTE3	1	1	DENTE3	S - First line of routine violates the SAC.
 DENTE3	2	12	PROV+1	S - Non-Incremental Lock.
 DENTEC	1	1	DENTEC	S - First line of routine violates the SAC.
@@ -331,14 +331,6 @@ DGPZ07P	1	1	DGPZ07P	S - First line of routine violates the SAC.
 DGQEHL70	1	2	DGQEHL70+2	S - 2nd line of routine violates the SAC.
 DGQPTQ2	1	1	DGQPTQ2	S - First line of routine violates the SAC.
 DGREGEEWS	1	38	GETSUMM+4	W - Vendor specific code is restricted.]
-DGREGEEWS	2	38	GETSUMM+4	W - Vendor specific code is restricted.]
-DGREGEEWS	3	39	GETSUMM+5	W - Vendor specific code is restricted.]
-DGREGEEWS	4	40	GETSUMM+6	W - Vendor specific code is restricted.]
-DGREGEEWS	5	40	GETSUMM+6	W - Vendor specific code is restricted.]
-DGREGEEWS	6	41	GETSUMM+7	W - Vendor specific code is restricted.]
-DGREGEEWS	7	44	GETSUMM+10	W - Vendor specific code is restricted.]
-DGREGEEWS	8	49	RESULTS+3	F - Undefined Function.
-DGREGEEWS	9	49	RESULTS+3	W - Vendor specific code is restricted.]
 DGREGEEWS	10	51	RESULTS+5	W - Vendor specific code is restricted.]
 DGREGEEWS	11	52	RESULTS+6	W - Vendor specific code is restricted.]
 DGREGEEWS	12	53	RESULTS+7	W - Vendor specific code is restricted.]
@@ -347,6 +339,14 @@ DGREGEEWS	14	67	ERR+7	F - Undefined Function.
 DGREGEEWS	15	67	ERR+7	W - Vendor specific code is restricted.]
 DGREGEEWS	16	67	ERR+7	W - Vendor specific code is restricted.]
 DGREGEEWS	17	70	ERR+10	W - Vendor specific code is restricted.]
+DGREGEEWS	2	38	GETSUMM+4	W - Vendor specific code is restricted.]
+DGREGEEWS	3	39	GETSUMM+5	W - Vendor specific code is restricted.]
+DGREGEEWS	4	40	GETSUMM+6	W - Vendor specific code is restricted.]
+DGREGEEWS	5	40	GETSUMM+6	W - Vendor specific code is restricted.]
+DGREGEEWS	6	41	GETSUMM+7	W - Vendor specific code is restricted.]
+DGREGEEWS	7	44	GETSUMM+10	W - Vendor specific code is restricted.]
+DGREGEEWS	8	49	RESULTS+3	F - Undefined Function.
+DGREGEEWS	9	49	RESULTS+3	W - Vendor specific code is restricted.]
 DGREGFAC	1	1	DGREGFAC	S - First line of routine violates the SAC.
 DGRP7CC	1	1	DGRP7CC	S - First line of routine violates the SAC.
 DGRRLU	1	1	DGRRLU	S - First line of routine violates the SAC.
@@ -366,6 +366,7 @@ DGRSTBAD	1	1	DGRSTBAD	S - First line of routine violates the SAC.
 DGRTRIG	1	1	DGRTRIG	S - First line of routine violates the SAC.
 DGRUGMFU	1	49	ENGET+5	F - Block structure mismatch.
 DGUAMWS	1	41	EN+24	W - Vendor specific code is restricted.]
+DGUAMWS	10	72	ERRRSPMSG+6	W - Vendor specific code is restricted.]
 DGUAMWS	2	41	EN+24	F - Unrecognized argument in SET command.
 DGUAMWS	3	41	EN+24	F - UNDEFINED COMMAND (rest of line not checked).
 DGUAMWS	4	45	EN+28	W - Vendor specific code is restricted.]
@@ -374,7 +375,6 @@ DGUAMWS	6	50	EN+33	W - Vendor specific code is restricted.]
 DGUAMWS	7	55	EN+38	W - Vendor specific code is restricted.]
 DGUAMWS	8	56	EN+39	W - Vendor specific code is restricted.]
 DGUAMWS	9	64	EN+47	W - Vendor specific code is restricted.]
-DGUAMWS	10	72	ERRRSPMSG+6	W - Vendor specific code is restricted.]
 DGVTS00	1	1	DGVTS00	S - First line of routine violates the SAC.
 DGVTSA28	1	1	DGVTSA28	S - First line of routine violates the SAC.
 DGVTSFS	1	1	DGVTSFS	S - First line of routine violates the SAC.
@@ -1233,6 +1233,7 @@ GMRAY40	1	1	GMRAY40	S - First line of routine violates the SAC.
 GMRC123P	1	1	GMRC123P	S - First line of routine violates the SAC.
 GMRC154R	1	1	GMRC154R	S - First line of routine violates the SAC.
 GMRCCCRP200	1	34	GMRC+22	W - Vendor specific code is restricted.]
+GMRCCCRP200	10	79	CCRA+21	W - Vendor specific code is restricted.]
 GMRCCCRP200	2	41	GMRC+29	W - Vendor specific code is restricted.]
 GMRCCCRP200	3	42	GMRC+30	W - Vendor specific code is restricted.]
 GMRCCCRP200	4	44	GMRC+32	W - Vendor specific code is restricted.]
@@ -1241,7 +1242,6 @@ GMRCCCRP200	6	70	CCRA+12	W - Vendor specific code is restricted.]
 GMRCCCRP200	7	76	CCRA+18	W - Vendor specific code is restricted.]
 GMRCCCRP200	8	77	CCRA+19	W - Vendor specific code is restricted.]
 GMRCCCRP200	9	79	CCRA+21	W - Vendor specific code is restricted.]
-GMRCCCRP200	10	79	CCRA+21	W - Vendor specific code is restricted.]
 GMRCCCRPRE200	1	87	GET+12	W - Vendor specific code is restricted.]
 GMRCCCRPRE200	2	91	GET+16	W - Vendor specific code is restricted.]
 GMRCCCRPRE200	3	92	GET+17	W - Vendor specific code is restricted.]
@@ -1249,6 +1249,7 @@ GMRCCCRPRE200	4	94	GET+19	W - Vendor specific code is restricted.]
 GMRCCCRPRE200	5	94	GET+19	W - Vendor specific code is restricted.]
 GMRCCXDC	1	47	EX+5	F - Non-standard (Undefined) 'Z' command.
 GMRCDST	1	83	GETDST+22	W - Vendor specific code is restricted.]
+GMRCDST	10	106	TRYAG+20	W - Vendor specific code is restricted.]
 GMRCDST	2	84	GETDST+23	W - Vendor specific code is restricted.]
 GMRCDST	3	94	TRYAG+8	W - Vendor specific code is restricted.]
 GMRCDST	4	95	TRYAG+9	W - Vendor specific code is restricted.]
@@ -1257,7 +1258,6 @@ GMRCDST	6	96	TRYAG+10	W - Vendor specific code is restricted.]
 GMRCDST	7	102	TRYAG+16	W - Vendor specific code is restricted.]
 GMRCDST	8	103	TRYAG+17	W - Vendor specific code is restricted.]
 GMRCDST	9	106	TRYAG+20	W - Vendor specific code is restricted.]
-GMRCDST	10	106	TRYAG+20	W - Vendor specific code is restricted.]
 GMRCNOTF	1	27	INIT+2	W - Blank(s) at end of line.
 GMRCP146	1	1	GMRCP146	S - First line of routine violates the SAC.
 GMRCP85	1	1	GMRCP85	S - First line of routine violates the SAC.
@@ -1310,6 +1310,9 @@ HL47PRE	1	1	HL47PRE	S - First line of routine violates the SAC.
 HLCIRN	1	66	SETVALUE+1	S - Lock missing Timeout.
 HLCSAC	1	69	TRACE+5	S - Lock missing Timeout.
 HLCSAS	1	13	DSM+2	S - 'OPEN' command should be invoked through ^%ZIS.
+HLCSAS	10	40	LINUX+3	S - 'OPEN' command should be invoked through ^%ZIS.
+HLCSAS	11	41	LINUX+4	S - 'OPEN' command should be invoked through ^%ZIS.
+HLCSAS	12	104	CREAD+3	I - Star or pound READ used.
 HLCSAS	2	14	DSM+3	S - 'OPEN' command should be invoked through ^%ZIS.
 HLCSAS	3	19	CACHE+2	S - Non-standard $Z function used.
 HLCSAS	4	19	CACHE+2	F - Undefined Function.
@@ -1318,9 +1321,6 @@ HLCSAS	6	21	CACHE+4	S - 'OPEN' command should be invoked through ^%ZIS.
 HLCSAS	7	27	MSM+3	S - 'OPEN' command should be invoked through ^%ZIS.
 HLCSAS	8	28	MSM+4	S - 'Close' command should be invoked through 'D ^%ZISC'.
 HLCSAS	9	33	ONT+3	S - 'OPEN' command should be invoked through ^%ZIS.
-HLCSAS	10	40	LINUX+3	S - 'OPEN' command should be invoked through ^%ZIS.
-HLCSAS	11	41	LINUX+4	S - 'OPEN' command should be invoked through ^%ZIS.
-HLCSAS	12	104	CREAD+3	I - Star or pound READ used.
 HLCSAS1	1	64	LREAD+3	I - Star or pound READ used.
 HLCSFMN0	1	103	PROMPT+58	I - Star or pound READ used.
 HLCSFMN0	2	148	PROMPT+103	I - Star or pound READ used.
@@ -1343,14 +1343,6 @@ HLCSTCP4	2	35	ERROR+24	S - Non-standard $Z special variable used.
 HLCSTCP4	3	203	ERROR1+13	S - Non-standard $Z special variable used.
 HLCSTCP4	4	206	ERROR1+16	S - Non-standard $Z special variable used.
 HLCSTCPA	1	1	HLCSTCPA	S - First line of routine violates the SAC.
-HLCSTCPA	2	53	PORT+13	W - Vendor specific code is restricted.]
-HLCSTCPA	3	53	PORT+13	S - Access to SSVN's or $SYSTEM restricted to Kernel.
-HLCSTCPA	4	55	PORT+15	W - Vendor specific code is restricted.]
-HLCSTCPA	5	55	PORT+15	S - Access to SSVN's or $SYSTEM restricted to Kernel.
-HLCSTCPA	6	60	PORT+20	S - Non-standard $Z function used.
-HLCSTCPA	7	60	PORT+20	F - Undefined Function.
-HLCSTCPA	8	113	GTMUCX+8	S - 'Close' command should be invoked through 'D ^%ZISC'.
-HLCSTCPA	9	133	CACHEVMS+5	S - 'OPEN' command should be invoked through ^%ZIS.
 HLCSTCPA	10	135	CACHEVMS+7	S - 'OPEN' command should be invoked through ^%ZIS.
 HLCSTCPA	11	138	CACHEVMS+10	S - 'Close' command should be invoked through 'D ^%ZISC'.
 HLCSTCPA	12	146	LINUX+5	S - 'OPEN' command should be invoked through ^%ZIS.
@@ -1359,6 +1351,14 @@ HLCSTCPA	14	151	LINUX+10	S - 'Close' command should be invoked through 'D ^%ZISC
 HLCSTCPA	15	161	EN+7	S - 'OPEN' command should be invoked through ^%ZIS.
 HLCSTCPA	16	163	EN+9	S - 'OPEN' command should be invoked through ^%ZIS.
 HLCSTCPA	17	166	EN+12	S - 'Close' command should be invoked through 'D ^%ZISC'.
+HLCSTCPA	2	53	PORT+13	W - Vendor specific code is restricted.]
+HLCSTCPA	3	53	PORT+13	S - Access to SSVN's or $SYSTEM restricted to Kernel.
+HLCSTCPA	4	55	PORT+15	W - Vendor specific code is restricted.]
+HLCSTCPA	5	55	PORT+15	S - Access to SSVN's or $SYSTEM restricted to Kernel.
+HLCSTCPA	6	60	PORT+20	S - Non-standard $Z function used.
+HLCSTCPA	7	60	PORT+20	F - Undefined Function.
+HLCSTCPA	8	113	GTMUCX+8	S - 'Close' command should be invoked through 'D ^%ZISC'.
+HLCSTCPA	9	133	CACHEVMS+5	S - 'OPEN' command should be invoked through ^%ZIS.
 HLCSUTL	1	20	READ+13	I - Star or pound READ used.
 HLDIEDBG	1	241	LOG+33	S - Non-standard $Z special variable used.
 HLDIEDBG	2	241	LOG+33	S - Non-standard $Z special variable used.
@@ -1371,14 +1371,6 @@ HLOCLNT1	1	79	ZB1+13	S - Non-standard $Z special variable used.
 HLOFILER	1	146	ERROR2+38	S - Non-Incremental Lock.
 HLOFILER	2	147	ERROR2+39	S - Non-Incremental Lock.
 HLOPING	1	23	PING+17	F - Non-standard (Undefined) 'Z' command.
-HLOPING	2	30	PING+24	F - Non-standard (Undefined) 'Z' command.
-HLOPING	3	82	BREAKS+1	F - Non-standard (Undefined) 'Z' command.
-HLOPING	4	84	BREAKS+3	F - Non-standard (Undefined) 'Z' command.
-HLOPING	5	85	BREAKS+4	F - Non-standard (Undefined) 'Z' command.
-HLOPING	6	86	BREAKS+5	F - Non-standard (Undefined) 'Z' command.
-HLOPING	7	88	BREAKS+7	F - Non-standard (Undefined) 'Z' command.
-HLOPING	8	90	BREAKS+9	F - Non-standard (Undefined) 'Z' command.
-HLOPING	9	93	BREAKS+12	F - Non-standard (Undefined) 'Z' command.
 HLOPING	10	96	BREAKS+15	F - Non-standard (Undefined) 'Z' command.
 HLOPING	11	99	BREAKS+18	F - Non-standard (Undefined) 'Z' command.
 HLOPING	12	101	BREAKS+20	F - Non-standard (Undefined) 'Z' command.
@@ -1389,20 +1381,20 @@ HLOPING	16	112	BREAKS+31	F - Non-standard (Undefined) 'Z' command.
 HLOPING	17	114	BREAKS+33	F - Non-standard (Undefined) 'Z' command.
 HLOPING	18	115	BREAKS+34	F - Non-standard (Undefined) 'Z' command.
 HLOPING	19	118	BREAKS+37	F - Non-standard (Undefined) 'Z' command.
+HLOPING	2	30	PING+24	F - Non-standard (Undefined) 'Z' command.
 HLOPING	20	141	ZB3+2	S - Non-standard $Z special variable used.
+HLOPING	3	82	BREAKS+1	F - Non-standard (Undefined) 'Z' command.
+HLOPING	4	84	BREAKS+3	F - Non-standard (Undefined) 'Z' command.
+HLOPING	5	85	BREAKS+4	F - Non-standard (Undefined) 'Z' command.
+HLOPING	6	86	BREAKS+5	F - Non-standard (Undefined) 'Z' command.
+HLOPING	7	88	BREAKS+7	F - Non-standard (Undefined) 'Z' command.
+HLOPING	8	90	BREAKS+9	F - Non-standard (Undefined) 'Z' command.
+HLOPING	9	93	BREAKS+12	F - Non-standard (Undefined) 'Z' command.
 HLOQUE	1	275	ERROR+12	S - Non-Incremental Lock.
 HLOSRVR	1	47	LINUX1+5	W - Vendor specific code is restricted.]
 HLOSRVR	2	47	LINUX1+5	S - Access to SSVN's or $SYSTEM restricted to Kernel.
 HLOSRVR	3	0	LINUX+7	F - Call to missing label '$ZU' in this routine.
 HLOSTRAC	1	33	TRACE+23	F - Non-standard (Undefined) 'Z' command.
-HLOSTRAC	2	42	READ+6	F - Non-standard (Undefined) 'Z' command.
-HLOSTRAC	3	46	SETBREAKS+1	F - Non-standard (Undefined) 'Z' command.
-HLOSTRAC	4	47	SETBREAKS+2	F - Non-standard (Undefined) 'Z' command.
-HLOSTRAC	5	55	SETBREAKS+10	F - Non-standard (Undefined) 'Z' command.
-HLOSTRAC	6	58	SETBREAKS+13	F - Non-standard (Undefined) 'Z' command.
-HLOSTRAC	7	59	SETBREAKS+14	F - Non-standard (Undefined) 'Z' command.
-HLOSTRAC	8	60	SETBREAKS+15	F - Non-standard (Undefined) 'Z' command.
-HLOSTRAC	9	61	SETBREAKS+16	F - Non-standard (Undefined) 'Z' command.
 HLOSTRAC	10	62	SETBREAKS+17	F - Non-standard (Undefined) 'Z' command.
 HLOSTRAC	11	64	SETBREAKS+19	F - Non-standard (Undefined) 'Z' command.
 HLOSTRAC	12	66	SETBREAKS+21	F - Non-standard (Undefined) 'Z' command.
@@ -1413,6 +1405,7 @@ HLOSTRAC	16	74	SETBREAKS+29	F - Non-standard (Undefined) 'Z' command.
 HLOSTRAC	17	76	SETBREAKS+31	F - Non-standard (Undefined) 'Z' command.
 HLOSTRAC	18	78	SETBREAKS+33	F - Non-standard (Undefined) 'Z' command.
 HLOSTRAC	19	80	SETBREAKS+35	F - Non-standard (Undefined) 'Z' command.
+HLOSTRAC	2	42	READ+6	F - Non-standard (Undefined) 'Z' command.
 HLOSTRAC	20	82	SETBREAKS+37	F - Non-standard (Undefined) 'Z' command.
 HLOSTRAC	21	83	SETBREAKS+38	F - Non-standard (Undefined) 'Z' command.
 HLOSTRAC	22	84	SETBREAKS+39	F - Non-standard (Undefined) 'Z' command.
@@ -1423,7 +1416,20 @@ HLOSTRAC	26	92	SETBREAKS+47	F - Non-standard (Undefined) 'Z' command.
 HLOSTRAC	27	93	SETBREAKS+48	F - Non-standard (Undefined) 'Z' command.
 HLOSTRAC	28	94	SETBREAKS+49	F - Non-standard (Undefined) 'Z' command.
 HLOSTRAC	29	202	ZB3+4	S - Non-standard $Z special variable used.
+HLOSTRAC	3	46	SETBREAKS+1	F - Non-standard (Undefined) 'Z' command.
+HLOSTRAC	4	47	SETBREAKS+2	F - Non-standard (Undefined) 'Z' command.
+HLOSTRAC	5	55	SETBREAKS+10	F - Non-standard (Undefined) 'Z' command.
+HLOSTRAC	6	58	SETBREAKS+13	F - Non-standard (Undefined) 'Z' command.
+HLOSTRAC	7	59	SETBREAKS+14	F - Non-standard (Undefined) 'Z' command.
+HLOSTRAC	8	60	SETBREAKS+15	F - Non-standard (Undefined) 'Z' command.
+HLOSTRAC	9	61	SETBREAKS+16	F - Non-standard (Undefined) 'Z' command.
 HLOTCP	1	49	RETRY+8	S - 'OPEN' command should be invoked through ^%ZIS.
+HLOTCP	10	78	ZB28+2	S - 'OPEN' command should be invoked through ^%ZIS.
+HLOTCP	11	84	ZB28+8	S - 'OPEN' command should be invoked through ^%ZIS.
+HLOTCP	12	84	ZB28+8	F - Invalid or wrong number of arguments to a function.
+HLOTCP	13	131	FLUSH+6	S - Non-standard $Z special variable used.
+HLOTCP	14	205	READSEG+47	S - Non-standard $Z special variable used.
+HLOTCP	15	233	CLOSE+1	S - 'Close' command should be invoked through 'D ^%ZISC'.
 HLOTCP	2	49	RETRY+8	F - Invalid or wrong number of arguments to a function.
 HLOTCP	3	50	RETRY+9	S - 'OPEN' command should be invoked through ^%ZIS.
 HLOTCP	4	50	RETRY+9	F - Invalid or wrong number of arguments to a function.
@@ -1432,21 +1438,7 @@ HLOTCP	6	55	RETRY+14	F - Invalid or wrong number of arguments to a function.
 HLOTCP	7	68	ZB25+1	S - 'OPEN' command should be invoked through ^%ZIS.
 HLOTCP	8	68	ZB25+1	F - Invalid or wrong number of arguments to a function.
 HLOTCP	9	73	ZB26+2	I - Star or pound READ used.
-HLOTCP	10	78	ZB28+2	S - 'OPEN' command should be invoked through ^%ZIS.
-HLOTCP	11	84	ZB28+8	S - 'OPEN' command should be invoked through ^%ZIS.
-HLOTCP	12	84	ZB28+8	F - Invalid or wrong number of arguments to a function.
-HLOTCP	13	131	FLUSH+6	S - Non-standard $Z special variable used.
-HLOTCP	14	205	READSEG+47	S - Non-standard $Z special variable used.
-HLOTCP	15	233	CLOSE+1	S - 'Close' command should be invoked through 'D ^%ZISC'.
 HLOTRACE	1	27	START+17	F - Non-standard (Undefined) 'Z' command.
-HLOTRACE	2	42	START+32	F - Non-standard (Undefined) 'Z' command.
-HLOTRACE	3	47	SETBREAKS+1	F - Non-standard (Undefined) 'Z' command.
-HLOTRACE	4	50	SETBREAKS+4	F - Non-standard (Undefined) 'Z' command.
-HLOTRACE	5	52	SETBREAKS+6	F - Non-standard (Undefined) 'Z' command.
-HLOTRACE	6	54	SETBREAKS+8	F - Non-standard (Undefined) 'Z' command.
-HLOTRACE	7	56	SETBREAKS+10	F - Non-standard (Undefined) 'Z' command.
-HLOTRACE	8	58	SETBREAKS+12	F - Non-standard (Undefined) 'Z' command.
-HLOTRACE	9	60	SETBREAKS+14	F - Non-standard (Undefined) 'Z' command.
 HLOTRACE	10	62	SETBREAKS+16	F - Non-standard (Undefined) 'Z' command.
 HLOTRACE	11	64	SETBREAKS+18	F - Non-standard (Undefined) 'Z' command.
 HLOTRACE	12	66	SETBREAKS+20	F - Non-standard (Undefined) 'Z' command.
@@ -1457,6 +1449,7 @@ HLOTRACE	16	76	SETBREAKS+30	F - Non-standard (Undefined) 'Z' command.
 HLOTRACE	17	78	SETBREAKS+32	F - Non-standard (Undefined) 'Z' command.
 HLOTRACE	18	80	SETBREAKS+34	F - Non-standard (Undefined) 'Z' command.
 HLOTRACE	19	82	SETBREAKS+36	F - Non-standard (Undefined) 'Z' command.
+HLOTRACE	2	42	START+32	F - Non-standard (Undefined) 'Z' command.
 HLOTRACE	20	84	SETBREAKS+38	F - Non-standard (Undefined) 'Z' command.
 HLOTRACE	21	86	SETBREAKS+40	F - Non-standard (Undefined) 'Z' command.
 HLOTRACE	22	88	SETBREAKS+42	F - Non-standard (Undefined) 'Z' command.
@@ -1467,11 +1460,18 @@ HLOTRACE	26	95	SETBREAKS+49	F - Non-standard (Undefined) 'Z' command.
 HLOTRACE	27	96	SETBREAKS+50	F - Non-standard (Undefined) 'Z' command.
 HLOTRACE	28	97	SETBREAKS+51	F - Non-standard (Undefined) 'Z' command.
 HLOTRACE	29	98	SETBREAKS+52	F - Non-standard (Undefined) 'Z' command.
+HLOTRACE	3	47	SETBREAKS+1	F - Non-standard (Undefined) 'Z' command.
 HLOTRACE	30	99	SETBREAKS+53	F - Non-standard (Undefined) 'Z' command.
 HLOTRACE	31	100	SETBREAKS+54	F - Non-standard (Undefined) 'Z' command.
 HLOTRACE	32	101	SETBREAKS+55	F - Non-standard (Undefined) 'Z' command.
 HLOTRACE	33	102	SETBREAKS+56	F - Non-standard (Undefined) 'Z' command.
 HLOTRACE	34	131	ZB3+2	S - Non-standard $Z special variable used.
+HLOTRACE	4	50	SETBREAKS+4	F - Non-standard (Undefined) 'Z' command.
+HLOTRACE	5	52	SETBREAKS+6	F - Non-standard (Undefined) 'Z' command.
+HLOTRACE	6	54	SETBREAKS+8	F - Non-standard (Undefined) 'Z' command.
+HLOTRACE	7	56	SETBREAKS+10	F - Non-standard (Undefined) 'Z' command.
+HLOTRACE	8	58	SETBREAKS+12	F - Non-standard (Undefined) 'Z' command.
+HLOTRACE	9	60	SETBREAKS+14	F - Non-standard (Undefined) 'Z' command.
 HLOUSR	1	50	BRIEF+38	S - 'Close' command should be invoked through 'D ^%ZISC'.
 HLOUSR	2	215	VIEWLINK+16	I - Star or pound READ used.
 HLOUSR	3	248	TESTLINK+16	I - Star or pound READ used.
@@ -1725,14 +1725,6 @@ ICPTSR9	1	1	ICPTSR9	S - First line of routine violates the SAC.
 ISIIMP	1	2	ISIIMP+2	S - 2nd line of routine violates the SAC.
 ISIIMP02	1	2	ISIIMP02+2	S - 2nd line of routine violates the SAC.
 ISIIMP03	1	2	ISIIMP03+2	S - 2nd line of routine violates the SAC.
-ISIIMP03	2	10	VALIDATE+5	S - Read command doesn't have a timeout.
-ISIIMP03	3	22	IMPORTPT	W - Null line (no commands or comment).
-ISIIMP03	4	54	INDIVIDUAL+19	W - Blank(s) at end of line.
-ISIIMP03	5	56	INDIVIDUAL+21	W - Blank(s) at end of line.
-ISIIMP03	6	64	INDIVIDUAL+29	I - QUIT Command followed by only one space.
-ISIIMP03	7	64	INDIVIDUAL+29	F - UNDEFINED COMMAND (rest of line not checked).
-ISIIMP03	8	104	PREPVAL+9	W - Blank(s) at end of line.
-ISIIMP03	9	119	CREATEPNT+1	W - Blank(s) at end of line.
 ISIIMP03	10	121	CREATEPNT+3	W - Blank(s) at end of line.
 ISIIMP03	11	168	CREATEPNT+50	W - Blank(s) at end of line.
 ISIIMP03	12	171	CREATEPNT+53	W - Blank(s) at end of line.
@@ -1743,12 +1735,20 @@ ISIIMP03	16	193	MASK+2	W - Blank(s) at end of line.
 ISIIMP03	17	196	MASK+5	W - Blank(s) at end of line.
 ISIIMP03	18	199	MASK+8	W - Blank(s) at end of line.
 ISIIMP03	19	202	MASK+11	W - Blank(s) at end of line.
+ISIIMP03	2	10	VALIDATE+5	S - Read command doesn't have a timeout.
 ISIIMP03	20	203	MASK+12	W - Blank(s) at end of line.
 ISIIMP03	21	205	MASK+14	W - Blank(s) at end of line.
 ISIIMP03	22	221	EVALSSNMASK+2	W - Blank(s) at end of line.
 ISIIMP03	23	223	EVALSSNMASK+4	W - Blank(s) at end of line.
 ISIIMP03	24	232	DOB+3	W - Blank(s) at end of line.
 ISIIMP03	25	276	STATE	W - Null line (no commands or comment).
+ISIIMP03	3	22	IMPORTPT	W - Null line (no commands or comment).
+ISIIMP03	4	54	INDIVIDUAL+19	W - Blank(s) at end of line.
+ISIIMP03	5	56	INDIVIDUAL+21	W - Blank(s) at end of line.
+ISIIMP03	6	64	INDIVIDUAL+29	I - QUIT Command followed by only one space.
+ISIIMP03	7	64	INDIVIDUAL+29	F - UNDEFINED COMMAND (rest of line not checked).
+ISIIMP03	8	104	PREPVAL+9	W - Blank(s) at end of line.
+ISIIMP03	9	119	CREATEPNT+1	W - Blank(s) at end of line.
 ISIIMP04	1	2	ISIIMP04+2	S - 2nd line of routine violates the SAC.
 ISIIMP05	1	1	ISIIMP05	S - First line of routine violates the SAC.
 ISIIMP05	2	2	ISIIMP05+2	S - 2nd line of routine violates the SAC.
@@ -1849,6 +1849,11 @@ ISIIMPL8	5	266	PG+1	I - QUIT Command followed by only one space.
 ISIIMPL8	6	266	PG+1	F - UNDEFINED COMMAND (rest of line not checked).
 ISIIMPL9	1	2	ISIIMPL9+2	S - 2nd line of routine violates the SAC.
 ISIIMPR1	1	2	ISIIMPR1+2	S - 2nd line of routine violates the SAC.
+ISIIMPR1	10	84	VITMAKE+12	W - Blank(s) at end of line.
+ISIIMPR1	11	86	VITMAKE+14	W - Blank(s) at end of line.
+ISIIMPR1	12	98	RADOMAKE	W - Null line (no commands or comment).
+ISIIMPR1	13	110	RADOMAKE+12	W - Blank(s) at end of line.
+ISIIMPR1	14	112	RADOMAKE+14	W - Blank(s) at end of line.
 ISIIMPR1	2	4	PNTIMPRT	W - Null line (no commands or comment).
 ISIIMPR1	3	16	PNTIMPRT+12	W - Blank(s) at end of line.
 ISIIMPR1	4	25	APPMAKE	W - Null line (no commands or comment).
@@ -1857,12 +1862,11 @@ ISIIMPR1	6	39	APPMAKE+14	W - Blank(s) at end of line.
 ISIIMPR1	7	51	PROBMAKE	W - Null line (no commands or comment).
 ISIIMPR1	8	63	PROBMAKE+12	W - Blank(s) at end of line.
 ISIIMPR1	9	72	VITMAKE	W - Null line (no commands or comment).
-ISIIMPR1	10	84	VITMAKE+12	W - Blank(s) at end of line.
-ISIIMPR1	11	86	VITMAKE+14	W - Blank(s) at end of line.
-ISIIMPR1	12	98	RADOMAKE	W - Null line (no commands or comment).
-ISIIMPR1	13	110	RADOMAKE+12	W - Blank(s) at end of line.
-ISIIMPR1	14	112	RADOMAKE+14	W - Blank(s) at end of line.
 ISIIMPR2	1	2	ISIIMPR2+2	S - 2nd line of routine violates the SAC.
+ISIIMPR2	10	103	TABLEGET	W - Null line (no commands or comment).
+ISIIMPR2	11	115	CONMAKE	W - Null line (no commands or comment).
+ISIIMPR2	12	129	CONMAKE+14	W - Blank(s) at end of line.
+ISIIMPR2	13	140	ICD9GET	W - Null line (no commands or comment).
 ISIIMPR2	2	4	ALGMAKE	W - Null line (no commands or comment).
 ISIIMPR2	3	18	ALGMAKE+14	W - Blank(s) at end of line.
 ISIIMPR2	4	29	LABMAKE	W - Null line (no commands or comment).
@@ -1871,19 +1875,7 @@ ISIIMPR2	6	53	NOTEMAKE	W - Null line (no commands or comment).
 ISIIMPR2	7	67	NOTEMAKE+14	W - Blank(s) at end of line.
 ISIIMPR2	8	78	MEDMAKE	W - Null line (no commands or comment).
 ISIIMPR2	9	92	MEDMAKE+14	W - Blank(s) at end of line.
-ISIIMPR2	10	103	TABLEGET	W - Null line (no commands or comment).
-ISIIMPR2	11	115	CONMAKE	W - Null line (no commands or comment).
-ISIIMPR2	12	129	CONMAKE+14	W - Blank(s) at end of line.
-ISIIMPR2	13	140	ICD9GET	W - Null line (no commands or comment).
 ISIIMPU1	1	2	ISIIMPU1+2	S - 2nd line of routine violates the SAC.
-ISIIMPU1	2	53	PNTMISC	W - Null line (no commands or comment).
-ISIIMPU1	3	67	PNTMISC1	W - Null line (no commands or comment).
-ISIIMPU1	4	74	PNTMISC1+7	W - Blank(s) at end of line.
-ISIIMPU1	5	83	PNTMISC1+16	W - Blank(s) at end of line.
-ISIIMPU1	6	87	PNTMISC1+20	W - Blank(s) at end of line.
-ISIIMPU1	7	90	PNTMISC1+23	W - Blank(s) at end of line.
-ISIIMPU1	8	93	PNTMISC1+26	W - Blank(s) at end of line.
-ISIIMPU1	9	109	TEMPLATE	W - Null line (no commands or comment).
 ISIIMPU1	10	111	TEMPLATE+2	W - Blank(s) at end of line.
 ISIIMPU1	11	130	VALIDATE	W - Null line (no commands or comment).
 ISIIMPU1	12	151	VALIDATE+21	W - Blank(s) at end of line.
@@ -1894,6 +1886,7 @@ ISIIMPU1	16	189	VALIDATE+59	W - Blank(s) at end of line.
 ISIIMPU1	17	193	VALIDATE+63	W - Blank(s) at end of line.
 ISIIMPU1	18	199	VALIDATE+69	W - Blank(s) at end of line.
 ISIIMPU1	19	203	VALIDATE+73	W - Blank(s) at end of line.
+ISIIMPU1	2	53	PNTMISC	W - Null line (no commands or comment).
 ISIIMPU1	20	210	VALIDATE+80	W - Blank(s) at end of line.
 ISIIMPU1	21	217	VALIDATE+87	W - Blank(s) at end of line.
 ISIIMPU1	22	224	VALIDATE+94	W - Blank(s) at end of line.
@@ -1904,6 +1897,7 @@ ISIIMPU1	26	258	VALIDATE+128	W - Blank(s) at end of line.
 ISIIMPU1	27	265	VALIDATE+135	W - Blank(s) at end of line.
 ISIIMPU1	28	272	VALIDATE+142	W - Blank(s) at end of line.
 ISIIMPU1	29	279	VALIDATE+149	W - Blank(s) at end of line.
+ISIIMPU1	3	67	PNTMISC1	W - Null line (no commands or comment).
 ISIIMPU1	30	286	VALIDATE+156	W - Blank(s) at end of line.
 ISIIMPU1	31	293	VALIDATE+163	W - Blank(s) at end of line.
 ISIIMPU1	32	300	VALIDATE+170	W - Blank(s) at end of line.
@@ -1914,6 +1908,12 @@ ISIIMPU1	36	330	VALIDATE+200	W - Blank(s) at end of line.
 ISIIMPU1	37	332	VALIDATE+202	W - Blank(s) at end of line.
 ISIIMPU1	38	337	VALIDATE+207	W - Blank(s) at end of line.
 ISIIMPU1	39	340	VALIDATE+210	W - Blank(s) at end of line.
+ISIIMPU1	4	74	PNTMISC1+7	W - Blank(s) at end of line.
+ISIIMPU1	5	83	PNTMISC1+16	W - Blank(s) at end of line.
+ISIIMPU1	6	87	PNTMISC1+20	W - Blank(s) at end of line.
+ISIIMPU1	7	90	PNTMISC1+23	W - Blank(s) at end of line.
+ISIIMPU1	8	93	PNTMISC1+26	W - Blank(s) at end of line.
+ISIIMPU1	9	109	TEMPLATE	W - Null line (no commands or comment).
 ISIIMPU2	1	2	ISIIMPU2+2	S - 2nd line of routine violates the SAC.
 ISIIMPU2	2	26	APPTMISC	W - Null line (no commands or comment).
 ISIIMPU2	3	42	APPTMISC1	W - Null line (no commands or comment).
@@ -1924,6 +1924,7 @@ ISIIMPU3	1	2	ISIIMPU3+2	S - 2nd line of routine violates the SAC.
 ISIIMPU3	2	4	CHNGNAME	W - Null line (no commands or comment).
 ISIIMPU3	3	27	ADDALIAS+11	W - Null line (no commands or comment).
 ISIIMPU4	1	2	ISIIMPU4+2	S - 2nd line of routine violates the SAC.
+ISIIMPU4	10	131	VALPROB+61	W - Blank(s) at end of line.
 ISIIMPU4	2	29	PROBMISC	W - Null line (no commands or comment).
 ISIIMPU4	3	43	PROBMISC1	W - Null line (no commands or comment).
 ISIIMPU4	4	51	PROBMISC1+8	W - Blank(s) at end of line.
@@ -1932,7 +1933,6 @@ ISIIMPU4	6	86	VALPROB+16	W - Blank(s) at end of line.
 ISIIMPU4	7	105	VALPROB+35	W - Blank(s) at end of line.
 ISIIMPU4	8	112	VALPROB+42	W - Blank(s) at end of line.
 ISIIMPU4	9	116	VALPROB+46	W - Blank(s) at end of line.
-ISIIMPU4	10	131	VALPROB+61	W - Blank(s) at end of line.
 ISIIMPU5	1	2	ISIIMPU5+2	S - 2nd line of routine violates the SAC.
 ISIIMPU5	2	3	ISIIMPU5+2	W - Blank(s) at end of line.
 ISIIMPU5	3	15	VITMISC	W - Null line (no commands or comment).
@@ -1943,6 +1943,7 @@ ISIIMPU5	7	79	VALVITAL+22	W - Blank(s) at end of line.
 ISIIMPU5	8	94	VALVITAL+37	W - Blank(s) at end of line.
 ISIIMPU5	9	117	VALVITAL+60	W - Blank(s) at end of line.
 ISIIMPU6	1	1	ISIIMPU6	S - First line of routine violates the SAC.
+ISIIMPU6	10	132	VALALG+74	W - Blank(s) at end of line.
 ISIIMPU6	2	2	ISIIMPU6+2	S - 2nd line of routine violates the SAC.
 ISIIMPU6	3	3	ISIIMPU6+2	W - Blank(s) at end of line.
 ISIIMPU6	4	16	ALGMISC	W - Null line (no commands or comment).
@@ -1951,8 +1952,9 @@ ISIIMPU6	6	37	ALGMISC1+8	W - Blank(s) at end of line.
 ISIIMPU6	7	58	VALALG	W - Null line (no commands or comment).
 ISIIMPU6	8	73	VALALG+15	W - Blank(s) at end of line.
 ISIIMPU6	9	97	VALALG+39	W - Blank(s) at end of line.
-ISIIMPU6	10	132	VALALG+74	W - Blank(s) at end of line.
 ISIIMPU7	1	1	ISIIMPU7	S - First line of routine violates the SAC.
+ISIIMPU7	10	98	VALLAB+42	W - Blank(s) at end of line.
+ISIIMPU7	11	124	VALLAB+68	W - Blank(s) at end of line.
 ISIIMPU7	2	2	ISIIMPU7+2	S - 2nd line of routine violates the SAC.
 ISIIMPU7	3	3	ISIIMPU7+2	W - Blank(s) at end of line.
 ISIIMPU7	4	14	LABMISC	W - Null line (no commands or comment).
@@ -1961,17 +1963,7 @@ ISIIMPU7	6	35	LABMISC1+8	W - Blank(s) at end of line.
 ISIIMPU7	7	56	VALLAB	W - Null line (no commands or comment).
 ISIIMPU7	8	71	VALLAB+15	W - Blank(s) at end of line.
 ISIIMPU7	9	81	VALLAB+25	W - Blank(s) at end of line.
-ISIIMPU7	10	98	VALLAB+42	W - Blank(s) at end of line.
-ISIIMPU7	11	124	VALLAB+68	W - Blank(s) at end of line.
 ISIIMPU8	1	1	ISIIMPU8	S - First line of routine violates the SAC.
-ISIIMPU8	2	2	ISIIMPU8+2	S - 2nd line of routine violates the SAC.
-ISIIMPU8	3	3	ISIIMPU8+2	W - Blank(s) at end of line.
-ISIIMPU8	4	15	NOTMISC	W - Null line (no commands or comment).
-ISIIMPU8	5	28	NOTMISC1	W - Null line (no commands or comment).
-ISIIMPU8	6	36	NOTMISC1+8	W - Blank(s) at end of line.
-ISIIMPU8	7	57	VALNOTE	W - Null line (no commands or comment).
-ISIIMPU8	8	71	VALNOTE+14	W - Blank(s) at end of line.
-ISIIMPU8	9	82	VALNOTE+25	W - Blank(s) at end of line.
 ISIIMPU8	10	87	VALNOTE+30	I - QUIT Command followed by only one space.
 ISIIMPU8	11	87	VALNOTE+30	F - UNDEFINED COMMAND (rest of line not checked).
 ISIIMPU8	12	88	VALNOTE+31	I - QUIT Command followed by only one space.
@@ -1980,15 +1972,15 @@ ISIIMPU8	14	94	VALNOTE+37	W - Blank(s) at end of line.
 ISIIMPU8	15	98	VALNOTE+41	W - Blank(s) at end of line.
 ISIIMPU8	16	113	VALNOTE+56	W - Blank(s) at end of line.
 ISIIMPU8	17	128	VALNOTE+71	W - Blank(s) at end of line.
+ISIIMPU8	2	2	ISIIMPU8+2	S - 2nd line of routine violates the SAC.
+ISIIMPU8	3	3	ISIIMPU8+2	W - Blank(s) at end of line.
+ISIIMPU8	4	15	NOTMISC	W - Null line (no commands or comment).
+ISIIMPU8	5	28	NOTMISC1	W - Null line (no commands or comment).
+ISIIMPU8	6	36	NOTMISC1+8	W - Blank(s) at end of line.
+ISIIMPU8	7	57	VALNOTE	W - Null line (no commands or comment).
+ISIIMPU8	8	71	VALNOTE+14	W - Blank(s) at end of line.
+ISIIMPU8	9	82	VALNOTE+25	W - Blank(s) at end of line.
 ISIIMPU9	1	1	ISIIMPU9	S - First line of routine violates the SAC.
-ISIIMPU9	2	2	ISIIMPU9+2	S - 2nd line of routine violates the SAC.
-ISIIMPU9	3	3	ISIIMPU9+2	W - Blank(s) at end of line.
-ISIIMPU9	4	18	MEDMISC	W - Null line (no commands or comment).
-ISIIMPU9	5	31	MEDMISC1	W - Null line (no commands or comment).
-ISIIMPU9	6	39	MEDMISC1+8	W - Blank(s) at end of line.
-ISIIMPU9	7	45	MEDMISC1+14	W - Blank(s) at end of line.
-ISIIMPU9	8	65	VALMEDS	W - Null line (no commands or comment).
-ISIIMPU9	9	79	VALMEDS+14	W - Blank(s) at end of line.
 ISIIMPU9	10	89	VALMEDS+24	W - Blank(s) at end of line.
 ISIIMPU9	11	92	VALMEDS+27	I - QUIT Command followed by only one space.
 ISIIMPU9	12	92	VALMEDS+27	F - UNDEFINED COMMAND (rest of line not checked).
@@ -1999,6 +1991,7 @@ ISIIMPU9	16	94	VALMEDS+29	F - UNDEFINED COMMAND (rest of line not checked).
 ISIIMPU9	17	97	VALMEDS+32	W - Blank(s) at end of line.
 ISIIMPU9	18	101	VALMEDS+36	W - Blank(s) at end of line.
 ISIIMPU9	19	105	VALMEDS+40	W - Blank(s) at end of line.
+ISIIMPU9	2	2	ISIIMPU9+2	S - 2nd line of routine violates the SAC.
 ISIIMPU9	20	111	VALMEDS+46	I - QUIT Command followed by only one space.
 ISIIMPU9	21	111	VALMEDS+46	F - UNDEFINED COMMAND (rest of line not checked).
 ISIIMPU9	22	128	VALMEDS+63	W - Blank(s) at end of line.
@@ -2007,15 +2000,14 @@ ISIIMPU9	24	136	VALMEDS+71	I - QUIT Command followed by only one space.
 ISIIMPU9	25	136	VALMEDS+71	F - UNDEFINED COMMAND (rest of line not checked).
 ISIIMPU9	26	139	VALMEDS+74	W - Blank(s) at end of line.
 ISIIMPU9	27	141	VALMEDS+76	I - QUIT Command followed by only one space.
+ISIIMPU9	3	3	ISIIMPU9+2	W - Blank(s) at end of line.
+ISIIMPU9	4	18	MEDMISC	W - Null line (no commands or comment).
+ISIIMPU9	5	31	MEDMISC1	W - Null line (no commands or comment).
+ISIIMPU9	6	39	MEDMISC1+8	W - Blank(s) at end of line.
+ISIIMPU9	7	45	MEDMISC1+14	W - Blank(s) at end of line.
+ISIIMPU9	8	65	VALMEDS	W - Null line (no commands or comment).
+ISIIMPU9	9	79	VALMEDS+14	W - Blank(s) at end of line.
 ISIIMPUA	1	2	ISIIMPUA+2	S - 2nd line of routine violates the SAC.
-ISIIMPUA	2	7	PARAM	W - Null line (no commands or comment).
-ISIIMPUA	3	40	ENTRY	W - Null line (no commands or comment).
-ISIIMPUA	4	70	ENTRY+30	I - QUIT Command followed by only one space.
-ISIIMPUA	5	71	ENTRY+31	I - QUIT Command followed by only one space.
-ISIIMPUA	6	83	TIULIST+3	W - Blank(s) at end of line.
-ISIIMPUA	7	87	TIULIST+7	I - QUIT Command followed by only one space.
-ISIIMPUA	8	87	TIULIST+7	F - UNDEFINED COMMAND (rest of line not checked).
-ISIIMPUA	9	88	TIULIST+8	I - QUIT Command followed by only one space.
 ISIIMPUA	10	88	TIULIST+8	F - UNDEFINED COMMAND (rest of line not checked).
 ISIIMPUA	11	96	DRUGLIST+3	W - Blank(s) at end of line.
 ISIIMPUA	12	98	DRUGLIST+5	I - QUIT Command followed by only one space.
@@ -2026,6 +2018,7 @@ ISIIMPUA	16	100	DRUGLIST+7	I - QUIT Command followed by only one space.
 ISIIMPUA	17	100	DRUGLIST+7	F - UNDEFINED COMMAND (rest of line not checked).
 ISIIMPUA	18	109	SIGLIST+3	W - Blank(s) at end of line.
 ISIIMPUA	19	110	SIGLIST+4	W - Blank(s) at end of line.
+ISIIMPUA	2	7	PARAM	W - Null line (no commands or comment).
 ISIIMPUA	20	111	SIGLIST+5	I - QUIT Command followed by only one space.
 ISIIMPUA	21	111	SIGLIST+5	F - UNDEFINED COMMAND (rest of line not checked).
 ISIIMPUA	22	120	PROVLIST+3	W - Blank(s) at end of line.
@@ -2036,6 +2029,7 @@ ISIIMPUA	26	125	PROVLIST+8	I - QUIT Command followed by only one space.
 ISIIMPUA	27	125	PROVLIST+8	F - UNDEFINED COMMAND (rest of line not checked).
 ISIIMPUA	28	134	USERLIST+3	W - Blank(s) at end of line.
 ISIIMPUA	29	135	USERLIST+4	W - Blank(s) at end of line.
+ISIIMPUA	3	40	ENTRY	W - Null line (no commands or comment).
 ISIIMPUA	30	146	RACE+4	W - Blank(s) at end of line.
 ISIIMPUA	31	147	RACE+5	W - Blank(s) at end of line.
 ISIIMPUA	32	157	ETHNICITY+3	W - Blank(s) at end of line.
@@ -2046,6 +2040,7 @@ ISIIMPUA	36	180	INSURANCE+4	W - Blank(s) at end of line.
 ISIIMPUA	37	190	LOCATION+3	W - Blank(s) at end of line.
 ISIIMPUA	38	191	LOCATION+4	W - Blank(s) at end of line.
 ISIIMPUA	39	215	ICDFIND+1	W - Blank(s) at end of line.
+ISIIMPUA	4	70	ENTRY+30	I - QUIT Command followed by only one space.
 ISIIMPUA	40	226	ICDFIND1+4	W - Blank(s) at end of line.
 ISIIMPUA	41	236	ICD9CHK	W - Null line (no commands or comment).
 ISIIMPUA	42	256	VITALTYPE+3	W - Blank(s) at end of line.
@@ -2056,10 +2051,17 @@ ISIIMPUA	46	297	BOOLEEN	W - Null line (no commands or comment).
 ISIIMPUA	47	302	PROBSTAT	W - Null line (no commands or comment).
 ISIIMPUA	48	307	PROBTYPE	W - Null line (no commands or comment).
 ISIIMPUA	49	323	RAPROC+3	W - Blank(s) at end of line.
+ISIIMPUA	5	71	ENTRY+31	I - QUIT Command followed by only one space.
 ISIIMPUA	50	325	RAPROC+5	I - QUIT Command followed by only one space.
 ISIIMPUA	51	335	IMAGLOC+3	W - Blank(s) at end of line.
 ISIIMPUA	52	337	IMAGLOC+5	I - QUIT Command followed by only one space.
+ISIIMPUA	6	83	TIULIST+3	W - Blank(s) at end of line.
+ISIIMPUA	7	87	TIULIST+7	I - QUIT Command followed by only one space.
+ISIIMPUA	8	87	TIULIST+7	F - UNDEFINED COMMAND (rest of line not checked).
+ISIIMPUA	9	88	TIULIST+8	I - QUIT Command followed by only one space.
 ISIIMPUB	1	1	ISIIMPUB	S - First line of routine violates the SAC.
+ISIIMPUB	10	109	VALCONS+59	W - Blank(s) at end of line.
+ISIIMPUB	11	124	VALCONS+74	W - Blank(s) at end of line.
 ISIIMPUB	2	2	ISIIMPUB+2	S - 2nd line of routine violates the SAC.
 ISIIMPUB	3	3	ISIIMPUB+2	W - Blank(s) at end of line.
 ISIIMPUB	4	14	CONMISC	W - Null line (no commands or comment).
@@ -2068,17 +2070,7 @@ ISIIMPUB	6	50	VALCONS	W - Null line (no commands or comment).
 ISIIMPUB	7	65	VALCONS+15	W - Blank(s) at end of line.
 ISIIMPUB	8	76	VALCONS+26	W - Blank(s) at end of line.
 ISIIMPUB	9	91	VALCONS+41	W - Blank(s) at end of line.
-ISIIMPUB	10	109	VALCONS+59	W - Blank(s) at end of line.
-ISIIMPUB	11	124	VALCONS+74	W - Blank(s) at end of line.
 ISIIMPUC	1	1	ISIIMPUC	S - First line of routine violates the SAC.
-ISIIMPUC	2	2	ISIIMPUC+2	S - 2nd line of routine violates the SAC.
-ISIIMPUC	3	3	ISIIMPUC+2	W - Blank(s) at end of line.
-ISIIMPUC	4	18	RADMISC	W - Null line (no commands or comment).
-ISIIMPUC	5	31	RADMISC1	W - Null line (no commands or comment).
-ISIIMPUC	6	39	RADMISC1+8	W - Blank(s) at end of line.
-ISIIMPUC	7	58	VALRADO	W - Null line (no commands or comment).
-ISIIMPUC	8	73	VALRADO+15	W - Blank(s) at end of line.
-ISIIMPUC	9	83	VALRADO+25	W - Blank(s) at end of line.
 ISIIMPUC	10	87	VALRADO+29	I - QUIT Command followed by only one space.
 ISIIMPUC	11	94	VALRADO+36	W - Blank(s) at end of line.
 ISIIMPUC	12	96	VALRADO+38	I - QUIT Command followed by only one space.
@@ -2089,7 +2081,15 @@ ISIIMPUC	16	98	VALRADO+40	I - QUIT Command followed by only one space.
 ISIIMPUC	17	109	VALRADO+51	W - Blank(s) at end of line.
 ISIIMPUC	18	128	VALRADO+70	W - Null line (no commands or comment).
 ISIIMPUC	19	131	VALRADO+73	W - Blank(s) at end of line.
+ISIIMPUC	2	2	ISIIMPUC+2	S - 2nd line of routine violates the SAC.
 ISIIMPUC	20	138	VALRADO+80	W - Blank(s) at end of line.
+ISIIMPUC	3	3	ISIIMPUC+2	W - Blank(s) at end of line.
+ISIIMPUC	4	18	RADMISC	W - Null line (no commands or comment).
+ISIIMPUC	5	31	RADMISC1	W - Null line (no commands or comment).
+ISIIMPUC	6	39	RADMISC1+8	W - Blank(s) at end of line.
+ISIIMPUC	7	58	VALRADO	W - Null line (no commands or comment).
+ISIIMPUC	8	73	VALRADO+15	W - Blank(s) at end of line.
+ISIIMPUC	9	83	VALRADO+25	W - Blank(s) at end of line.
 IVM16PM	1	1	IVM16PM	S - First line of routine violates the SAC.
 IVM2012P	1	1	IVM2012P	S - First line of routine violates the SAC.
 IVM2071M	1	1	IVM2071M	S - First line of routine violates the SAC.
@@ -2133,8 +2133,11 @@ KMPDUT4A	1	1	KMPDUT4A	S - First line of routine violates the SAC.
 KMPDUT4B	1	1	KMPDUT4B	S - First line of routine violates the SAC.
 KMPDUT4C	1	1	KMPDUT4C	S - First line of routine violates the SAC.
 KMPDUTL4	1	1	KMPDUTL4	S - First line of routine violates the SAC.
-KMPTASK	1	8	TASK+3	F - Undefined Special Variable.
 KMPTCMRT	1	34	RUN+25	F - Undefined Special Variable.
+KMPTCMRT	10	187	DBTIMCHK+3	F - Undefined Special Variable.
+KMPTCMRT	11	188	DBTIMCHK+4	F - Undefined Special Variable.
+KMPTCMRT	12	188	DBTIMCHK+4	F - Unrecognized argument in SET command.
+KMPTCMRT	13	196	DBTIMCHK+12	S - Kill of an unsubscripted global.
 KMPTCMRT	2	94	COLLECT+45	F - Undefined Special Variable.
 KMPTCMRT	3	94	COLLECT+45	F - Unrecognized argument in SET command.
 KMPTCMRT	4	94	COLLECT+45	F - Undefined Special Variable.
@@ -2143,16 +2146,6 @@ KMPTCMRT	6	147	COLLECT+98	F - Unrecognized argument in SET command.
 KMPTCMRT	7	147	COLLECT+98	F - Undefined Special Variable.
 KMPTCMRT	8	187	DBTIMCHK+3	F - Undefined Special Variable.
 KMPTCMRT	9	187	DBTIMCHK+3	W - Invalid local variable name.
-KMPTCMRT	10	187	DBTIMCHK+3	F - Undefined Special Variable.
-KMPTCMRT	11	188	DBTIMCHK+4	F - Undefined Special Variable.
-KMPTCMRT	12	188	DBTIMCHK+4	F - Unrecognized argument in SET command.
-KMPTCMRT	13	196	DBTIMCHK+12	S - Kill of an unsubscripted global.
-KMPUTLW	1	117	CFGMSG+8	F - Undefined Special Variable.
-KMPUTLW	2	193	CPF+8	F - Undefined Special Variable.
-KMPUTLW	3	193	CPF+8	F - Undefined Special Variable.
-KMPUTLW	4	193	CPF+8	F - Unrecognized argument in SET command.
-KMPUTLW	5	200	CPF+15	F - Undefined Special Variable.
-KMPUTLW	6	200	CPF+15	F - Unrecognized argument in SET command.
 KMPVRUN	1	70	KMPWEB+3	F - Undefined Special Variable.
 KMPVRUN	2	71	KMPWEB+4	F - Undefined Special Variable.
 KMPVRUN	3	71	KMPWEB+4	F - Unrecognized argument in SET command.
@@ -2601,14 +2594,6 @@ NVSMSG	3	32	EN+19	S - Non-standard $Z function used.
 NVSMSG	4	32	EN+19	F - Undefined Function.
 NVSMSG	5	87	EN+74	W - Blank(s) at end of line.
 NVSY2K	1	1	NVSY2K	S - First line of routine violates the SAC.
-NVSY2K	2	16	NVSY2K+15	S - Non-standard $Z special variable used.
-NVSY2K	3	20	NVSY2K+19	S - Non-standard $Z function used.
-NVSY2K	4	20	NVSY2K+19	F - Undefined Function.
-NVSY2K	5	31	NVSY2K+30	S - Non-standard $Z function used.
-NVSY2K	6	31	NVSY2K+30	F - Undefined Function.
-NVSY2K	7	34	NVSY2K+33	S - 'OPEN' command should be invoked through ^%ZIS.
-NVSY2K	8	54	NVSY2K+53	S - Non-standard $Z function used.
-NVSY2K	9	54	NVSY2K+53	F - Undefined Function.
 NVSY2K	10	79	NVSY2K+78	S - Non-standard $Z special variable used.
 NVSY2K	11	96	SYSCHK+1	S - 'OPEN' command should be invoked through ^%ZIS.
 NVSY2K	12	99	SYSCHK+4	S - 'Close' command should be invoked through 'D ^%ZISC'.
@@ -2619,6 +2604,7 @@ NVSY2K	16	105	SYSCHK+10	S - 'Close' command should be invoked through 'D ^%ZISC'
 NVSY2K	17	107	SYSCHK+12	S - Non-standard $Z function used.
 NVSY2K	18	107	SYSCHK+12	F - Undefined Function.
 NVSY2K	19	108	SYSCHK+13	S - Non-standard $Z function used.
+NVSY2K	2	16	NVSY2K+15	S - Non-standard $Z special variable used.
 NVSY2K	20	108	SYSCHK+13	F - Undefined Function.
 NVSY2K	21	110	SYSCHK+15	S - Non-standard $Z function used.
 NVSY2K	22	110	SYSCHK+15	F - Undefined Function.
@@ -2629,8 +2615,15 @@ NVSY2K	26	131	FILE	F - Undefined Function.
 NVSY2K	27	132	FILE+1	S - 'OPEN' command should be invoked through ^%ZIS.
 NVSY2K	28	135	FILE+4	S - 'Close' command should be invoked through 'D ^%ZISC'.
 NVSY2K	29	136	FILE+5	S - Non-standard $Z function used.
+NVSY2K	3	20	NVSY2K+19	S - Non-standard $Z function used.
 NVSY2K	30	136	FILE+5	F - Undefined Function.
 NVSY2K	31	141	EOF+2	S - 'Close' command should be invoked through 'D ^%ZISC'.
+NVSY2K	4	20	NVSY2K+19	F - Undefined Function.
+NVSY2K	5	31	NVSY2K+30	S - Non-standard $Z function used.
+NVSY2K	6	31	NVSY2K+30	F - Undefined Function.
+NVSY2K	7	34	NVSY2K+33	S - 'OPEN' command should be invoked through ^%ZIS.
+NVSY2K	8	54	NVSY2K+53	S - Non-standard $Z function used.
+NVSY2K	9	54	NVSY2K+53	F - Undefined Function.
 OCXOCMPJ	1	49	LAST+42	I - QUIT Command followed by only one space.
 OCXOCMPJ	2	102	FIRST+40	I - QUIT Command followed by only one space.
 OCXOCMPK	1	19	RANGE+12	I - QUIT Command followed by only one space.
@@ -2841,14 +2834,6 @@ ONCTPC8	1	1	ONCTPC8	S - First line of routine violates the SAC.
 ONCUPLPR	1	1	ONCUPLPR	S - First line of routine violates the SAC.
 ONCUTX	1	1	ONCUTX	S - First line of routine violates the SAC.
 ONCWEB1	1	55	PPOST3+28	F - Unmatched Parenthesis.
-ONCWEB1	2	55	PPOST3+28	W - Vendor specific code is restricted.]
-ONCWEB1	3	55	PPOST3+28	F - Unmatched Parenthesis.
-ONCWEB1	4	78	PPOST3+51	W - Vendor specific code is restricted.]
-ONCWEB1	5	79	PPOST3+52	W - Vendor specific code is restricted.]
-ONCWEB1	6	79	PPOST3+52	W - Vendor specific code is restricted.]
-ONCWEB1	7	79	PPOST3+52	F - Invalid or wrong number of arguments to a function.
-ONCWEB1	8	79	PPOST3+52	F - Invalid or wrong number of arguments to a function.
-ONCWEB1	9	83	PPOST3+56	W - Vendor specific code is restricted.]
 ONCWEB1	10	84	PPOST3+57	W - Vendor specific code is restricted.]
 ONCWEB1	11	137	PPOSTCS+27	F - Unmatched Parenthesis.
 ONCWEB1	12	137	PPOSTCS+27	W - Vendor specific code is restricted.]
@@ -2859,10 +2844,21 @@ ONCWEB1	16	161	PPOSTCS+51	W - Vendor specific code is restricted.]
 ONCWEB1	17	161	PPOSTCS+51	F - Invalid or wrong number of arguments to a function.
 ONCWEB1	18	161	PPOSTCS+51	F - Invalid or wrong number of arguments to a function.
 ONCWEB1	19	165	PPOSTCS+55	W - Vendor specific code is restricted.]
+ONCWEB1	2	55	PPOST3+28	W - Vendor specific code is restricted.]
 ONCWEB1	20	166	PPOSTCS+56	W - Vendor specific code is restricted.]
 ONCWEB1	21	0	PPOST3+28	F - Call to missing label 'ONC' in this routine.
 ONCWEB1	22	0	PPOSTCS+27	F - Call to missing label 'ONC' in this routine.
+ONCWEB1	3	55	PPOST3+28	F - Unmatched Parenthesis.
+ONCWEB1	4	78	PPOST3+51	W - Vendor specific code is restricted.]
+ONCWEB1	5	79	PPOST3+52	W - Vendor specific code is restricted.]
+ONCWEB1	6	79	PPOST3+52	W - Vendor specific code is restricted.]
+ONCWEB1	7	79	PPOST3+52	F - Invalid or wrong number of arguments to a function.
+ONCWEB1	8	79	PPOST3+52	F - Invalid or wrong number of arguments to a function.
+ONCWEB1	9	83	PPOST3+56	W - Vendor specific code is restricted.]
 ONCWEB2	1	59	PPOST3+28	F - Unmatched Parenthesis.
+ONCWEB2	10	94	PPOST3+63	W - Vendor specific code is restricted.]
+ONCWEB2	11	95	PPOST3+64	W - Vendor specific code is restricted.]
+ONCWEB2	12	0	PPOST3+28	F - Call to missing label 'ONC' in this routine.
 ONCWEB2	2	59	PPOST3+28	W - Vendor specific code is restricted.]
 ONCWEB2	3	59	PPOST3+28	F - Unmatched Parenthesis.
 ONCWEB2	4	88	PPOST3+57	W - Vendor specific code is restricted.]
@@ -2871,9 +2867,6 @@ ONCWEB2	6	89	PPOST3+58	W - Vendor specific code is restricted.]
 ONCWEB2	7	89	PPOST3+58	F - Invalid or wrong number of arguments to a function.
 ONCWEB2	8	89	PPOST3+58	F - Invalid or wrong number of arguments to a function.
 ONCWEB2	9	93	PPOST3+62	W - Vendor specific code is restricted.]
-ONCWEB2	10	94	PPOST3+63	W - Vendor specific code is restricted.]
-ONCWEB2	11	95	PPOST3+64	W - Vendor specific code is restricted.]
-ONCWEB2	12	0	PPOST3+28	F - Call to missing label 'ONC' in this routine.
 ONCX10A	1	125	RECEIVE+21	I - Star or pound READ used.
 ONCX10A	2	150	RECEIVE+46	I - Star or pound READ used.
 OOPS2P22	1	1	OOPS2P22	S - First line of routine violates the SAC.
@@ -3020,6 +3013,12 @@ ORQQVI2	1	1	ORQQVI2	S - First line of routine violates the SAC.
 ORQQVS	1	1	ORQQVS	S - First line of routine violates the SAC.
 ORQQXQA	1	1	ORQQXQA	S - First line of routine violates the SAC.
 ORRDI1	1	68	RETRIEVE+34	S - Non-standard $Z special variable used.
+ORRDI1	10	208	PARSE+8	W - Vendor specific code is restricted.]
+ORRDI1	11	210	PARSE+10	W - Vendor specific code is restricted.]
+ORRDI1	12	210	PARSE+10	W - Vendor specific code is restricted.]
+ORRDI1	13	211	PARSE+11	W - Vendor specific code is restricted.]
+ORRDI1	14	212	PARSE+12	W - Vendor specific code is restricted.]
+ORRDI1	15	212	PARSE+12	W - Vendor specific code is restricted.]
 ORRDI1	2	73	RETRIEVE+39	S - Non-standard $Z special variable used.
 ORRDI1	3	76	RETRIEVE+42	S - Non-standard $Z special variable used.
 ORRDI1	4	77	RETRIEVE+43	W - Vendor specific code is restricted.]
@@ -3028,12 +3027,6 @@ ORRDI1	6	205	PARSE+5	W - Vendor specific code is restricted.]
 ORRDI1	7	208	PARSE+8	F - General Syntax Error.
 ORRDI1	8	208	PARSE+8	W - Vendor specific code is restricted.]
 ORRDI1	9	208	PARSE+8	F - General Syntax Error.
-ORRDI1	10	208	PARSE+8	W - Vendor specific code is restricted.]
-ORRDI1	11	210	PARSE+10	W - Vendor specific code is restricted.]
-ORRDI1	12	210	PARSE+10	W - Vendor specific code is restricted.]
-ORRDI1	13	211	PARSE+11	W - Vendor specific code is restricted.]
-ORRDI1	14	212	PARSE+12	W - Vendor specific code is restricted.]
-ORRDI1	15	212	PARSE+12	W - Vendor specific code is restricted.]
 ORRDI2	1	122	TCOLD+6	F - UNDEFINED COMMAND (rest of line not checked).
 ORRDI2	2	134	TESTCALL+9	W - Vendor specific code is restricted.]
 ORS100C	1	1	ORS100C	S - First line of routine violates the SAC.
@@ -4295,6 +4288,7 @@ PSJUTL6	1	1	PSJUTL6	S - First line of routine violates the SAC.
 PSJUTL6	2	2	PSJUTL6+2	S - 2nd line of routine violates the SAC.
 PSJVOSR	1	2	PSJVOSR+2	S - 2nd line of routine violates the SAC.
 PSJXR5	1	1	PSJXR5	S - First line of routine violates the SAC.
+PSJXR5	10	16	C	S - Lock missing Timeout.
 PSJXR5	2	2	PSJXR5+2	S - 2nd line of routine violates the SAC.
 PSJXR5	3	4	PSJXR5+3	S - Non-Incremental Lock.
 PSJXR5	4	4	PSJXR5+3	S - Lock missing Timeout.
@@ -4303,7 +4297,6 @@ PSJXR5	6	4	PSJXR5+3	S - Lock missing Timeout.
 PSJXR5	7	15	SET1+1	S - Non-Incremental Lock.
 PSJXR5	8	15	SET1+1	S - Lock missing Timeout.
 PSJXR5	9	16	C	S - Non-Incremental Lock.
-PSJXR5	10	16	C	S - Lock missing Timeout.
 PSJXR51	1	1	PSJXR51	S - First line of routine violates the SAC.
 PSJXR51	2	2	PSJXR51+2	S - 2nd line of routine violates the SAC.
 PSJXR510	1	1	PSJXR510	S - First line of routine violates the SAC.
@@ -4405,6 +4398,13 @@ PSNFTP	7	284	WINPING+14	F - Undefined Function.
 PSNFTP	8	412	LINUXDEL+9	S - Non-standard $Z function used.
 PSNFTP	9	412	LINUXDEL+9	F - Undefined Function.
 PSNFTP2	1	56	EXECUTE+2	S - Non-standard $Z function used.
+PSNFTP2	10	222	FILSIZE+12	F - Undefined Function.
+PSNFTP2	11	249	VMSDEL+9	S - Non-standard $Z function used.
+PSNFTP2	12	249	VMSDEL+9	F - Undefined Function.
+PSNFTP2	13	275	SAVEKEYS+22	S - Non-standard $Z special variable used.
+PSNFTP2	14	284	SAVEKEYS+31	S - Non-standard $Z special variable used.
+PSNFTP2	15	307	MAKEDIR+8	S - Non-standard $Z special variable used.
+PSNFTP2	16	308	MAKEDIR+9	S - Non-standard $Z special variable used.
 PSNFTP2	2	56	EXECUTE+2	F - Undefined Function.
 PSNFTP2	3	126	LINUXFTP+41	S - Non-standard $Z function used.
 PSNFTP2	4	126	LINUXFTP+41	F - Undefined Function.
@@ -4413,13 +4413,6 @@ PSNFTP2	6	188	WINFTP+37	F - Undefined Function.
 PSNFTP2	7	215	FILSIZE+5	S - Non-standard $Z function used.
 PSNFTP2	8	215	FILSIZE+5	F - Undefined Function.
 PSNFTP2	9	222	FILSIZE+12	S - Non-standard $Z function used.
-PSNFTP2	10	222	FILSIZE+12	F - Undefined Function.
-PSNFTP2	11	249	VMSDEL+9	S - Non-standard $Z function used.
-PSNFTP2	12	249	VMSDEL+9	F - Undefined Function.
-PSNFTP2	13	275	SAVEKEYS+22	S - Non-standard $Z special variable used.
-PSNFTP2	14	284	SAVEKEYS+31	S - Non-standard $Z special variable used.
-PSNFTP2	15	307	MAKEDIR+8	S - Non-standard $Z special variable used.
-PSNFTP2	16	308	MAKEDIR+9	S - Non-standard $Z special variable used.
 PSNGPN	1	2	PSNGPN+2	S - 2nd line of routine violates the SAC.
 PSNHEADR	1	2	PSNHEADR+2	S - 2nd line of routine violates the SAC.
 PSNHELP	1	2	PSNHELP+2	S - 2nd line of routine violates the SAC.
@@ -4528,6 +4521,9 @@ PSODLKP	1	1	PSODLKP	S - First line of routine violates the SAC.
 PSODOSU4	1	1	PSODOSU4	S - First line of routine violates the SAC.
 PSODP	1	1	PSODP	S - First line of routine violates the SAC.
 PSOERUT	1	41	XML2GBL+11	W - Vendor specific code is restricted.]
+PSOERUT	10	48	XML2GBL+18	W - Vendor specific code is restricted.]
+PSOERUT	11	49	XML2GBL+19	W - Vendor specific code is restricted.]
+PSOERUT	12	50	XML2GBL+20	W - Vendor specific code is restricted.]
 PSOERUT	2	43	XML2GBL+13	W - Vendor specific code is restricted.]
 PSOERUT	3	43	XML2GBL+13	W - Vendor specific code is restricted.]
 PSOERUT	4	44	XML2GBL+14	W - Vendor specific code is restricted.]
@@ -4536,18 +4532,7 @@ PSOERUT	6	45	XML2GBL+15	W - Vendor specific code is restricted.]
 PSOERUT	7	46	XML2GBL+16	W - Vendor specific code is restricted.]
 PSOERUT	8	47	XML2GBL+17	W - Vendor specific code is restricted.]
 PSOERUT	9	47	XML2GBL+17	W - Vendor specific code is restricted.]
-PSOERUT	10	48	XML2GBL+18	W - Vendor specific code is restricted.]
-PSOERUT	11	49	XML2GBL+19	W - Vendor specific code is restricted.]
-PSOERUT	12	50	XML2GBL+20	W - Vendor specific code is restricted.]
 PSOERXA1	1	104	PARSE+7	W - Vendor specific code is restricted.]
-PSOERXA1	2	105	PARSE+8	W - Vendor specific code is restricted.]
-PSOERXA1	3	108	PARSE+11	F - General Syntax Error.
-PSOERXA1	4	108	PARSE+11	W - Vendor specific code is restricted.]
-PSOERXA1	5	108	PARSE+11	F - General Syntax Error.
-PSOERXA1	6	108	PARSE+11	W - Vendor specific code is restricted.]
-PSOERXA1	7	110	PARSE+13	W - Vendor specific code is restricted.]
-PSOERXA1	8	111	PARSE+14	W - Vendor specific code is restricted.]
-PSOERXA1	9	113	PARSE+16	W - Vendor specific code is restricted.]
 PSOERXA1	10	114	PARSE+17	W - Vendor specific code is restricted.]
 PSOERXA1	11	115	PARSE+18	W - Vendor specific code is restricted.]
 PSOERXA1	12	115	PARSE+18	W - Vendor specific code is restricted.]
@@ -4558,6 +4543,7 @@ PSOERXA1	16	118	PARSE+21	W - Vendor specific code is restricted.]
 PSOERXA1	17	118	PARSE+21	W - Vendor specific code is restricted.]
 PSOERXA1	18	119	PARSE+22	W - Vendor specific code is restricted.]
 PSOERXA1	19	120	PARSE+23	W - Vendor specific code is restricted.]
+PSOERXA1	2	105	PARSE+8	W - Vendor specific code is restricted.]
 PSOERXA1	20	120	PARSE+23	W - Vendor specific code is restricted.]
 PSOERXA1	21	124	PARSE+27	F - General Syntax Error.
 PSOERXA1	22	124	PARSE+27	W - Vendor specific code is restricted.]
@@ -4568,6 +4554,7 @@ PSOERXA1	26	127	PARSE+30	W - Vendor specific code is restricted.]
 PSOERXA1	27	129	PARSE+32	W - Vendor specific code is restricted.]
 PSOERXA1	28	130	PARSE+33	W - Vendor specific code is restricted.]
 PSOERXA1	29	131	PARSE+34	W - Vendor specific code is restricted.]
+PSOERXA1	3	108	PARSE+11	F - General Syntax Error.
 PSOERXA1	30	131	PARSE+34	W - Vendor specific code is restricted.]
 PSOERXA1	31	131	PARSE+34	W - Vendor specific code is restricted.]
 PSOERXA1	32	132	PARSE+35	W - Vendor specific code is restricted.]
@@ -4577,15 +4564,13 @@ PSOERXA1	35	134	PARSE+37	W - Vendor specific code is restricted.]
 PSOERXA1	36	135	PARSE+38	W - Vendor specific code is restricted.]
 PSOERXA1	37	136	PARSE+39	W - Vendor specific code is restricted.]
 PSOERXA1	38	136	PARSE+39	W - Vendor specific code is restricted.]
+PSOERXA1	4	108	PARSE+11	W - Vendor specific code is restricted.]
+PSOERXA1	5	108	PARSE+11	F - General Syntax Error.
+PSOERXA1	6	108	PARSE+11	W - Vendor specific code is restricted.]
+PSOERXA1	7	110	PARSE+13	W - Vendor specific code is restricted.]
+PSOERXA1	8	111	PARSE+14	W - Vendor specific code is restricted.]
+PSOERXA1	9	113	PARSE+16	W - Vendor specific code is restricted.]
 PSOERXI2	1	13	PARSE+8	W - Vendor specific code is restricted.]
-PSOERXI2	2	14	PARSE+9	W - Vendor specific code is restricted.]
-PSOERXI2	3	15	PARSE+10	W - Vendor specific code is restricted.]
-PSOERXI2	4	18	PARSE+13	F - General Syntax Error.
-PSOERXI2	5	18	PARSE+13	W - Vendor specific code is restricted.]
-PSOERXI2	6	18	PARSE+13	F - General Syntax Error.
-PSOERXI2	7	18	PARSE+13	W - Vendor specific code is restricted.]
-PSOERXI2	8	20	PARSE+15	W - Vendor specific code is restricted.]
-PSOERXI2	9	21	PARSE+16	W - Vendor specific code is restricted.]
 PSOERXI2	10	23	PARSE+18	W - Vendor specific code is restricted.]
 PSOERXI2	11	24	PARSE+19	W - Vendor specific code is restricted.]
 PSOERXI2	12	25	PARSE+20	W - Vendor specific code is restricted.]
@@ -4596,6 +4581,7 @@ PSOERXI2	16	26	PARSE+21	W - Vendor specific code is restricted.]
 PSOERXI2	17	28	PARSE+23	W - Vendor specific code is restricted.]
 PSOERXI2	18	28	PARSE+23	W - Vendor specific code is restricted.]
 PSOERXI2	19	29	PARSE+24	W - Vendor specific code is restricted.]
+PSOERXI2	2	14	PARSE+9	W - Vendor specific code is restricted.]
 PSOERXI2	20	30	PARSE+25	W - Vendor specific code is restricted.]
 PSOERXI2	21	30	PARSE+25	W - Vendor specific code is restricted.]
 PSOERXI2	22	34	PARSE+29	F - General Syntax Error.
@@ -4606,6 +4592,7 @@ PSOERXI2	26	36	PARSE+31	W - Vendor specific code is restricted.]
 PSOERXI2	27	37	PARSE+32	W - Vendor specific code is restricted.]
 PSOERXI2	28	39	PARSE+34	W - Vendor specific code is restricted.]
 PSOERXI2	29	40	PARSE+35	W - Vendor specific code is restricted.]
+PSOERXI2	3	15	PARSE+10	W - Vendor specific code is restricted.]
 PSOERXI2	30	41	PARSE+36	W - Vendor specific code is restricted.]
 PSOERXI2	31	41	PARSE+36	W - Vendor specific code is restricted.]
 PSOERXI2	32	41	PARSE+36	W - Vendor specific code is restricted.]
@@ -4616,6 +4603,7 @@ PSOERXI2	36	44	PARSE+39	W - Vendor specific code is restricted.]
 PSOERXI2	37	45	PARSE+40	W - Vendor specific code is restricted.]
 PSOERXI2	38	46	PARSE+41	W - Vendor specific code is restricted.]
 PSOERXI2	39	46	PARSE+41	W - Vendor specific code is restricted.]
+PSOERXI2	4	18	PARSE+13	F - General Syntax Error.
 PSOERXI2	40	51	PARSE+46	F - General Syntax Error.
 PSOERXI2	41	51	PARSE+46	W - Vendor specific code is restricted.]
 PSOERXI2	42	51	PARSE+46	F - General Syntax Error.
@@ -4626,6 +4614,7 @@ PSOERXI2	46	56	PARSE+51	W - Vendor specific code is restricted.]
 PSOERXI2	47	57	PARSE+52	W - Vendor specific code is restricted.]
 PSOERXI2	48	58	PARSE+53	W - Vendor specific code is restricted.]
 PSOERXI2	49	58	PARSE+53	W - Vendor specific code is restricted.]
+PSOERXI2	5	18	PARSE+13	W - Vendor specific code is restricted.]
 PSOERXI2	50	58	PARSE+53	W - Vendor specific code is restricted.]
 PSOERXI2	51	59	PARSE+54	W - Vendor specific code is restricted.]
 PSOERXI2	52	59	PARSE+54	W - Vendor specific code is restricted.]
@@ -4634,15 +4623,11 @@ PSOERXI2	54	61	PARSE+56	W - Vendor specific code is restricted.]
 PSOERXI2	55	62	PARSE+57	W - Vendor specific code is restricted.]
 PSOERXI2	56	63	PARSE+58	W - Vendor specific code is restricted.]
 PSOERXI2	57	63	PARSE+58	W - Vendor specific code is restricted.]
+PSOERXI2	6	18	PARSE+13	F - General Syntax Error.
+PSOERXI2	7	18	PARSE+13	W - Vendor specific code is restricted.]
+PSOERXI2	8	20	PARSE+15	W - Vendor specific code is restricted.]
+PSOERXI2	9	21	PARSE+16	W - Vendor specific code is restricted.]
 PSOERXO1	1	135	RESTPOST+19	F - Unmatched Parenthesis.
-PSOERXO1	2	135	RESTPOST+19	W - Vendor specific code is restricted.]
-PSOERXO1	3	135	RESTPOST+19	F - Unmatched Parenthesis.
-PSOERXO1	4	179	PARSXML+5	W - Vendor specific code is restricted.]
-PSOERXO1	5	211	GETREADR+5	W - Vendor specific code is restricted.]
-PSOERXO1	6	212	GETREADR+6	W - Vendor specific code is restricted.]
-PSOERXO1	7	212	GETREADR+6	W - Vendor specific code is restricted.]
-PSOERXO1	8	242	GETTOKEN+27	W - Vendor specific code is restricted.]
-PSOERXO1	9	243	GETTOKEN+28	W - Vendor specific code is restricted.]
 PSOERXO1	10	244	GETTOKEN+29	W - Vendor specific code is restricted.]
 PSOERXO1	11	245	GETTOKEN+30	W - Vendor specific code is restricted.]
 PSOERXO1	12	246	GETTOKEN+31	W - Vendor specific code is restricted.]
@@ -4653,11 +4638,19 @@ PSOERXO1	16	251	GETTOKEN+36	W - Vendor specific code is restricted.]
 PSOERXO1	17	253	GETTOKEN+38	W - Vendor specific code is restricted.]
 PSOERXO1	18	255	GETTOKEN+40	W - Vendor specific code is restricted.]
 PSOERXO1	19	256	GETTOKEN+41	W - Vendor specific code is restricted.]
+PSOERXO1	2	135	RESTPOST+19	W - Vendor specific code is restricted.]
 PSOERXO1	20	268	GETATTS+6	W - Vendor specific code is restricted.]
 PSOERXO1	21	270	GETATTS+8	W - Vendor specific code is restricted.]
 PSOERXO1	22	271	GETATTS+9	W - Vendor specific code is restricted.]
 PSOERXO1	23	271	GETATTS+9	W - Vendor specific code is restricted.]
 PSOERXO1	24	0	RESTPOST+19	F - Call to missing label 'PSS' in this routine.
+PSOERXO1	3	135	RESTPOST+19	F - Unmatched Parenthesis.
+PSOERXO1	4	179	PARSXML+5	W - Vendor specific code is restricted.]
+PSOERXO1	5	211	GETREADR+5	W - Vendor specific code is restricted.]
+PSOERXO1	6	212	GETREADR+6	W - Vendor specific code is restricted.]
+PSOERXO1	7	212	GETREADR+6	W - Vendor specific code is restricted.]
+PSOERXO1	8	242	GETTOKEN+27	W - Vendor specific code is restricted.]
+PSOERXO1	9	243	GETTOKEN+28	W - Vendor specific code is restricted.]
 PSOHELP2	1	1	PSOHELP2	S - First line of routine violates the SAC.
 PSOP288F	1	1	PSOP288F	S - First line of routine violates the SAC.
 PSOP288R	1	1	PSOP288R	S - First line of routine violates the SAC.
@@ -4850,6 +4843,7 @@ PSUOP5	1	1	PSUOP5	S - First line of routine violates the SAC.
 PSUUD0	1	1	PSUUD0	S - First line of routine violates the SAC.
 PSUVIT0	1	1	PSUVIT0	S - First line of routine violates the SAC.
 PSXACK	1	7	SLAVE+1	I - Star or pound READ used.
+PSXACK	10	45	CHKSUM+4	I - Star or pound READ used.
 PSXACK	2	8	SLAVE+2	F - Block structure mismatch.
 PSXACK	3	10	SLAVE+4	I - Star or pound READ used.
 PSXACK	4	15	MSG	I - Star or pound READ used.
@@ -4858,7 +4852,6 @@ PSXACK	6	27	GETMSG+1	I - Star or pound READ used.
 PSXACK	7	34	GETMSG+8	I - Star or pound READ used.
 PSXACK	8	38	TEST	I - Star or pound READ used.
 PSXACK	9	41	CHKSUM	I - Star or pound READ used.
-PSXACK	10	45	CHKSUM+4	I - Star or pound READ used.
 PSXDODNT	1	1	PSXDODNT	S - First line of routine violates the SAC.
 PSXDRPT	1	47	RESET	S - Lock missing Timeout.
 PSXJOB	1	11	R1	I - Star or pound READ used.
@@ -4869,6 +4862,9 @@ PSXMST	4	13	BID2+3	I - Star or pound READ used.
 PSXMST	5	14	BID2+4	I - Star or pound READ used.
 PSXMST	6	14	BID2+4	I - Star or pound READ used.
 PSXQRY	1	42	SLAVE+1	I - Star or pound READ used.
+PSXQRY	10	69	TEST	I - Star or pound READ used.
+PSXQRY	11	72	CHKSUM	I - Star or pound READ used.
+PSXQRY	12	76	CHKSUM+4	I - Star or pound READ used.
 PSXQRY	2	43	SLAVE+2	F - Block structure mismatch.
 PSXQRY	3	45	SLAVE+4	I - Star or pound READ used.
 PSXQRY	4	48	SLAVE+7	I - Star or pound READ used.
@@ -4877,9 +4873,6 @@ PSXQRY	6	49	MSG	I - Star or pound READ used.
 PSXQRY	7	51	MSG+2	I - Star or pound READ used.
 PSXQRY	8	58	GETMSG+1	I - Star or pound READ used.
 PSXQRY	9	65	GETMSG+8	I - Star or pound READ used.
-PSXQRY	10	69	TEST	I - Star or pound READ used.
-PSXQRY	11	72	CHKSUM	I - Star or pound READ used.
-PSXQRY	12	76	CHKSUM+4	I - Star or pound READ used.
 PSXRCVRY	1	18	EN1+5	S - Non-Incremental Lock.
 PSXRTR	1	39	LOCK+6	S - Lock missing Timeout.
 PSXSND	1	46	TRY	I - Star or pound READ used.
@@ -4890,14 +4883,6 @@ PSXSND	5	49	TRY+3	I - Star or pound READ used.
 PSXSYS	1	59	DEACT+16	S - Lock missing Timeout.
 PSXUTL	1	18	FLUSH1+2	I - Star or pound READ used.
 PSXYQRY	1	47	SLAVE+1	I - Star or pound READ used.
-PSXYQRY	2	50	SLAVE+4	I - Star or pound READ used.
-PSXYQRY	3	53	SLAVE+7	I - Star or pound READ used.
-PSXYQRY	4	53	SLAVE+7	I - Star or pound READ used.
-PSXYQRY	5	54	MSG	I - Star or pound READ used.
-PSXYQRY	6	56	MSG+2	I - Star or pound READ used.
-PSXYQRY	7	63	GETMSG+1	I - Star or pound READ used.
-PSXYQRY	8	70	GETMSG+8	I - Star or pound READ used.
-PSXYQRY	9	74	TEST	I - Star or pound READ used.
 PSXYQRY	10	77	CHKSUM	I - Star or pound READ used.
 PSXYQRY	11	81	CHKSUM+4	I - Star or pound READ used.
 PSXYQRY	12	115	TRY	I - Star or pound READ used.
@@ -4908,9 +4893,17 @@ PSXYQRY	16	118	TRY+3	I - Star or pound READ used.
 PSXYQRY	17	132	BID2	I - Star or pound READ used.
 PSXYQRY	18	133	BID2+1	I - Star or pound READ used.
 PSXYQRY	19	134	BID2+2	I - Star or pound READ used.
+PSXYQRY	2	50	SLAVE+4	I - Star or pound READ used.
 PSXYQRY	20	135	BID2+3	I - Star or pound READ used.
 PSXYQRY	21	136	BID2+4	I - Star or pound READ used.
 PSXYQRY	22	136	BID2+4	I - Star or pound READ used.
+PSXYQRY	3	53	SLAVE+7	I - Star or pound READ used.
+PSXYQRY	4	53	SLAVE+7	I - Star or pound READ used.
+PSXYQRY	5	54	MSG	I - Star or pound READ used.
+PSXYQRY	6	56	MSG+2	I - Star or pound READ used.
+PSXYQRY	7	63	GETMSG+1	I - Star or pound READ used.
+PSXYQRY	8	70	GETMSG+8	I - Star or pound READ used.
+PSXYQRY	9	74	TEST	I - Star or pound READ used.
 PSXYSND	1	47	TRY	I - Star or pound READ used.
 PSXYSND	2	48	TRY+1	I - Star or pound READ used.
 PSXYSND	3	48	TRY+1	I - Star or pound READ used.
@@ -5215,14 +5208,6 @@ RGUTFTP	2	44	VMS+38	S - Violates VA programming standards.
 RGUTIN0	1	0	CVTFN+2	F - Call to missing label '$$DIRDLM' in this routine.
 RGUTIN0	2	0	OPENX+1	F - Call to missing label 'OPEN' in this routine.
 RGUTIN16	1	6	OPEN+3	S - 'OPEN' command should be invoked through ^%ZIS.
-RGUTIN16	2	10	CLOSE	S - 'Close' command should be invoked through 'D ^%ZISC'.
-RGUTIN16	3	15	CLOSEALL+2	S - 'Close' command should be invoked through 'D ^%ZISC'.
-RGUTIN16	4	20	EOFERR	S - Non-standard $Z special variable used.
-RGUTIN16	5	23	READ+2	S - Read command doesn't have a timeout.
-RGUTIN16	6	24	READ+3	S - Non-standard $Z special variable used.
-RGUTIN16	7	26	DELETE+1	S - 'OPEN' command should be invoked through ^%ZIS.
-RGUTIN16	8	27	DELETE+2	S - 'Close' command should be invoked through 'D ^%ZISC'.
-RGUTIN16	9	30	RENAME+1	S - 'OPEN' command should be invoked through ^%ZIS.
 RGUTIN16	10	31	RENAME+2	S - 'Close' command should be invoked through 'D ^%ZISC'.
 RGUTIN16	11	35	DIR+2	S - Non-standard $Z special variable used.
 RGUTIN16	12	38	DIR+5	S - Non-standard $Z function used.
@@ -5233,19 +5218,19 @@ RGUTIN16	16	43	ERR+1	S - Non-standard $Z special variable used.
 RGUTIN16	17	48	RAISE	F - Non-standard (Undefined) 'Z' command.
 RGUTIN16	18	50	SIZE	S - Non-standard $Z function used.
 RGUTIN16	19	50	SIZE	F - Undefined Function.
+RGUTIN16	2	10	CLOSE	S - 'Close' command should be invoked through 'D ^%ZISC'.
 RGUTIN16	20	50	SIZE	S - Non-standard $Z function used.
 RGUTIN16	21	50	SIZE	F - Undefined Function.
 RGUTIN16	22	51	FREE	S - Non-standard $Z function used.
 RGUTIN16	23	51	FREE	F - Undefined Function.
+RGUTIN16	3	15	CLOSEALL+2	S - 'Close' command should be invoked through 'D ^%ZISC'.
+RGUTIN16	4	20	EOFERR	S - Non-standard $Z special variable used.
+RGUTIN16	5	23	READ+2	S - Read command doesn't have a timeout.
+RGUTIN16	6	24	READ+3	S - Non-standard $Z special variable used.
+RGUTIN16	7	26	DELETE+1	S - 'OPEN' command should be invoked through ^%ZIS.
+RGUTIN16	8	27	DELETE+2	S - 'Close' command should be invoked through 'D ^%ZISC'.
+RGUTIN16	9	30	RENAME+1	S - 'OPEN' command should be invoked through ^%ZIS.
 RGUTIN18	1	4	OPEN+1	S - 'OPEN' command should be invoked through ^%ZIS.
-RGUTIN18	2	5	OPEN+2	F - Non-standard (Undefined) 'Z' command.
-RGUTIN18	3	9	CLOSE	S - 'Close' command should be invoked through 'D ^%ZISC'.
-RGUTIN18	4	14	CLOSEALL+2	S - 'Close' command should be invoked through 'D ^%ZISC'.
-RGUTIN18	5	17	EOF	F - Non-standard (Undefined) 'Z' command.
-RGUTIN18	6	17	EOF	S - Non-standard $Z special variable used.
-RGUTIN18	7	19	EOFERR	S - Non-standard $Z special variable used.
-RGUTIN18	8	21	READ+1	S - Non-standard $Z special variable used.
-RGUTIN18	9	23	READ+3	S - Read command doesn't have a timeout.
 RGUTIN18	10	27	DELETE+1	S - Non-standard $Z function used.
 RGUTIN18	11	27	DELETE+1	F - Undefined Function.
 RGUTIN18	12	30	RENAME+1	S - Non-standard $Z function used.
@@ -5255,15 +5240,15 @@ RGUTIN18	15	37	DIR+5	F - Undefined Function.
 RGUTIN18	16	47	ERR+1	S - Non-standard $Z special variable used.
 RGUTIN18	17	47	ERR+1	S - Non-standard $Z special variable used.
 RGUTIN18	18	53	RAISE	F - Non-standard (Undefined) 'Z' command.
+RGUTIN18	2	5	OPEN+2	F - Non-standard (Undefined) 'Z' command.
+RGUTIN18	3	9	CLOSE	S - 'Close' command should be invoked through 'D ^%ZISC'.
+RGUTIN18	4	14	CLOSEALL+2	S - 'Close' command should be invoked through 'D ^%ZISC'.
+RGUTIN18	5	17	EOF	F - Non-standard (Undefined) 'Z' command.
+RGUTIN18	6	17	EOF	S - Non-standard $Z special variable used.
+RGUTIN18	7	19	EOFERR	S - Non-standard $Z special variable used.
+RGUTIN18	8	21	READ+1	S - Non-standard $Z special variable used.
+RGUTIN18	9	23	READ+3	S - Read command doesn't have a timeout.
 RGUTIN8	1	7	OPEN+4	F - Non-standard (Undefined) 'Z' command.
-RGUTIN8	2	8	OPEN+5	S - 'OPEN' command should be invoked through ^%ZIS.
-RGUTIN8	3	10	OPEN+7	F - Non-standard (Undefined) 'Z' command.
-RGUTIN8	4	10	OPEN+7	S - Non-standard $Z special variable used.
-RGUTIN8	5	16	CLOSE+3	S - 'Close' command should be invoked through 'D ^%ZISC'.
-RGUTIN8	6	19	CLOSEALL+1	S - 'Close' command should be invoked through 'D ^%ZISC'.
-RGUTIN8	7	22	EOF	F - Non-standard (Undefined) 'Z' command.
-RGUTIN8	8	22	EOF	S - Non-standard $Z special variable used.
-RGUTIN8	9	24	EOFERR	S - Non-standard $Z special variable used.
 RGUTIN8	10	27	READ+2	S - Read command doesn't have a timeout.
 RGUTIN8	11	28	READ+3	S - Non-standard $Z special variable used.
 RGUTIN8	12	30	DELETE+1	S - Non-standard $Z function used.
@@ -5274,6 +5259,7 @@ RGUTIN8	16	38	DIR+2	S - Non-standard $Z function used.
 RGUTIN8	17	38	DIR+2	F - Undefined Function.
 RGUTIN8	18	40	DIR+4	S - Non-standard $Z function used.
 RGUTIN8	19	40	DIR+4	F - Undefined Function.
+RGUTIN8	2	8	OPEN+5	S - 'OPEN' command should be invoked through ^%ZIS.
 RGUTIN8	20	47	FREE	S - Non-standard $Z function used.
 RGUTIN8	21	47	FREE	F - Undefined Function.
 RGUTIN8	22	50	ERR+1	S - Non-standard $Z special variable used.
@@ -5281,6 +5267,13 @@ RGUTIN8	23	50	ERR+1	S - Non-standard $Z special variable used.
 RGUTIN8	24	56	RAISE	F - Non-standard (Undefined) 'Z' command.
 RGUTIN8	25	59	SIZE+1	S - Non-standard $Z function used.
 RGUTIN8	26	59	SIZE+1	F - Undefined Function.
+RGUTIN8	3	10	OPEN+7	F - Non-standard (Undefined) 'Z' command.
+RGUTIN8	4	10	OPEN+7	S - Non-standard $Z special variable used.
+RGUTIN8	5	16	CLOSE+3	S - 'Close' command should be invoked through 'D ^%ZISC'.
+RGUTIN8	6	19	CLOSEALL+1	S - 'Close' command should be invoked through 'D ^%ZISC'.
+RGUTIN8	7	22	EOF	F - Non-standard (Undefined) 'Z' command.
+RGUTIN8	8	22	EOF	S - Non-standard $Z special variable used.
+RGUTIN8	9	24	EOFERR	S - Non-standard $Z special variable used.
 RGUTLK2	1	16	NR2	I - Star or pound READ used.
 RGUTLK2	2	180	HELP1+15	I - Star or pound READ used.
 RGUTLK2	3	190	HELP2+7	I - Star or pound READ used.
@@ -5288,14 +5281,6 @@ RGUTLK2	4	193	PAUSE+1	I - Star or pound READ used.
 RGUTMTL	1	32	XREF+7	S - Lock missing Timeout.
 RGUTMTL	2	98	ABORT+1	I - Star or pound READ used.
 RGUTOS	1	23	OPEN+1	S - 'OPEN' command should be invoked through ^%ZIS.
-RGUTOS	2	24	OPEN+2	F - Non-standard (Undefined) 'Z' command.
-RGUTOS	3	28	CLOSE	S - 'Close' command should be invoked through 'D ^%ZISC'.
-RGUTOS	4	33	CLOSEALL+2	S - 'Close' command should be invoked through 'D ^%ZISC'.
-RGUTOS	5	36	EOF	F - Non-standard (Undefined) 'Z' command.
-RGUTOS	6	36	EOF	S - Non-standard $Z special variable used.
-RGUTOS	7	38	EOFERR	S - Non-standard $Z special variable used.
-RGUTOS	8	40	READ+1	S - Non-standard $Z special variable used.
-RGUTOS	9	42	READ+3	S - Read command doesn't have a timeout.
 RGUTOS	10	46	DELETE+1	S - Non-standard $Z function used.
 RGUTOS	11	46	DELETE+1	F - Undefined Function.
 RGUTOS	12	49	RENAME+1	S - Non-standard $Z function used.
@@ -5305,6 +5290,14 @@ RGUTOS	15	56	DIR+5	F - Undefined Function.
 RGUTOS	16	66	ERR+1	S - Non-standard $Z special variable used.
 RGUTOS	17	66	ERR+1	S - Non-standard $Z special variable used.
 RGUTOS	18	72	RAISE	F - Non-standard (Undefined) 'Z' command.
+RGUTOS	2	24	OPEN+2	F - Non-standard (Undefined) 'Z' command.
+RGUTOS	3	28	CLOSE	S - 'Close' command should be invoked through 'D ^%ZISC'.
+RGUTOS	4	33	CLOSEALL+2	S - 'Close' command should be invoked through 'D ^%ZISC'.
+RGUTOS	5	36	EOF	F - Non-standard (Undefined) 'Z' command.
+RGUTOS	6	36	EOF	S - Non-standard $Z special variable used.
+RGUTOS	7	38	EOFERR	S - Non-standard $Z special variable used.
+RGUTOS	8	40	READ+1	S - Non-standard $Z special variable used.
+RGUTOS	9	42	READ+3	S - Read command doesn't have a timeout.
 RGUTOS1	1		RGUTOS	W - First line label NOT routine name.
 RGUTOS1	2	15	RAISE	F - Non-standard (Undefined) 'Z' command.
 RGUTOS1	3	28	OPEN+3	F - Non-standard (Undefined) 'Z' command.
@@ -5444,6 +5437,7 @@ SCMCTSK9	1	1	SCMCTSK9	S - First line of routine violates the SAC.
 SCMCTSKG	1	1	SCMCTSKG	S - First line of routine violates the SAC.
 SCMCUT	1	1	SCMCUT	S - First line of routine violates the SAC.
 SCMCWS1	1	77	SCDFN+8	W - Vendor specific code is restricted.]
+SCMCWS1	10	94	SCDFN+25	W - Vendor specific code is restricted.]
 SCMCWS1	2	77	SCDFN+8	W - Vendor specific code is restricted.]
 SCMCWS1	3	77	SCDFN+8	F - Invalid or wrong number of arguments to a function.
 SCMCWS1	4	86	SCDFN+17	W - Vendor specific code is restricted.]
@@ -5452,7 +5446,6 @@ SCMCWS1	6	88	SCDFN+19	W - Vendor specific code is restricted.]
 SCMCWS1	7	89	SCDFN+20	W - Vendor specific code is restricted.]
 SCMCWS1	8	90	SCDFN+21	W - Vendor specific code is restricted.]
 SCMCWS1	9	94	SCDFN+25	W - Vendor specific code is restricted.]
-SCMCWS1	10	94	SCDFN+25	W - Vendor specific code is restricted.]
 SCMRTPM	1	1	SCMRTPM	S - First line of routine violates the SAC.
 SCMSP66	1	1	SCMSP66	S - First line of routine violates the SAC.
 SCMSPX1	1	11	EN1	S - Non-Incremental Lock.
@@ -5630,6 +5623,7 @@ SDRRTSK1	1	1	SDRRTSK1	S - First line of routine violates the SAC.
 SDRRUTL	1	1	SDRRUTL	S - First line of routine violates the SAC.
 SDRRUTL1	1	1	SDRRUTL1	S - First line of routine violates the SAC.
 SDST	1	10	RD1+3	F - Undefined Function.
+SDST	10	26	LINE+1	F - Undefined Function.
 SDST	2	10	RD1+3	F - Undefined Function.
 SDST	3	14	START+1	F - Undefined Function.
 SDST	4	14	START+1	F - Undefined Function.
@@ -5638,7 +5632,6 @@ SDST	6	14	START+1	F - Undefined Function.
 SDST	7	18	SET+2	F - Undefined Function.
 SDST	8	23	PRT+1	F - Undefined Function.
 SDST	9	23	PRT+1	F - Undefined Function.
-SDST	10	26	LINE+1	F - Undefined Function.
 SDTMP704	1	1	SDTMP704	S - First line of routine violates the SAC.
 SDV53PT	1	1	SDV53PT	S - First line of routine violates the SAC.
 SDWL120	1	1	SDWL120	S - First line of routine violates the SAC.
@@ -6060,7 +6053,6 @@ SRTPRLI	1	2	SRTPRLI+2	S - 2nd line of routine violates the SAC.
 SRTPRLU2	1	2	SRTPRLU2+2	S - 2nd line of routine violates the SAC.
 SRTPSITE	1	2	SRTPSITE+2	S - 2nd line of routine violates the SAC.
 SRTPSS	1	2	SRTPSS+2	S - 2nd line of routine violates the SAC.
-SRTPTMIT	1	2	SRTPTMIT+2	S - 2nd line of routine violates the SAC.
 SRTPTRAN	1	2	SRTPTRAN+2	S - 2nd line of routine violates the SAC.
 SRTPVAN	1	2	SRTPVAN+2	S - 2nd line of routine violates the SAC.
 SWCNHADD	1	1	SWCNHADD	S - First line of routine violates the SAC.
@@ -6092,6 +6084,7 @@ SWLOS	2	2	SWLOS+2	S - 2nd line of routine violates the SAC.
 SWNHADD	1	1	SWNHADD	S - First line of routine violates the SAC.
 SWNHADD	2	2	SWNHADD+2	S - 2nd line of routine violates the SAC.
 SWNHEDT	1	1	SWNHEDT	S - First line of routine violates the SAC.
+SWNHEDT	10	25	ED+3	F - Undefined Function.
 SWNHEDT	2	2	SWNHEDT+2	S - 2nd line of routine violates the SAC.
 SWNHEDT	3	11	LP+5	F - Undefined Function.
 SWNHEDT	4	11	LP+5	F - Unmatched Parenthesis.
@@ -6100,7 +6093,6 @@ SWNHEDT	6	11	LP+5	F - Invalid or wrong number of arguments to a function.
 SWNHEDT	7	16	MOVE	S - Non-Incremental Lock.
 SWNHEDT	8	16	MOVE	S - Lock missing Timeout.
 SWNHEDT	9	17	MOVE+1	S - Non-Incremental Lock.
-SWNHEDT	10	25	ED+3	F - Undefined Function.
 TIUCCRP363	1	32	TIU+24	W - Vendor specific code is restricted.]
 TIUCCRP363	2	38	TIU+30	W - Vendor specific code is restricted.]
 TIUCCRP363	3	39	TIU+31	W - Vendor specific code is restricted.]
@@ -6396,7 +6388,6 @@ XOBSCAV	1	1	XOBSCAV	S - First line of routine violates the SAC.
 XOBSCAV1	1	1	XOBSCAV1	S - First line of routine violates the SAC.
 XOBSCAV2	1	1	XOBSCAV2	S - First line of routine violates the SAC.
 XOBSCI	1	1	XOBSCI	S - First line of routine violates the SAC.
-XOBSRA	1	1	XOBSRA	S - First line of routine violates the SAC.
 XOBSRA1	1	1	XOBSRA1	S - First line of routine violates the SAC.
 XOBSRAKJ	1	1	XOBSRAKJ	S - First line of routine violates the SAC.
 XOBUENV	1	1	XOBUENV	S - First line of routine violates the SAC.
@@ -6414,23 +6405,13 @@ XOBVPRE	1	1	XOBVPRE	S - First line of routine violates the SAC.
 XOBVRH	1	1	XOBVRH	S - First line of routine violates the SAC.
 XOBVRM	1	1	XOBVRM	S - First line of routine violates the SAC.
 XOBVRMX	1	1	XOBVRMX	S - First line of routine violates the SAC.
-XOBVRPC	1	1	XOBVRPC	S - First line of routine violates the SAC.
 XOBVRPCI	1	1	XOBVRPCI	S - First line of routine violates the SAC.
-XOBVRPCX	1	1	XOBVRPCX	S - First line of routine violates the SAC.
 XOBVSKT	1	1	XOBVSKT	S - First line of routine violates the SAC.
 XOBVSYSI	1	1	XOBVSYSI	S - First line of routine violates the SAC.
 XOBVTCP	1	1	XOBVTCP	S - First line of routine violates the SAC.
 XOBVTCPL	1	1	XOBVTCPL	S - First line of routine violates the SAC.
 XOBVTLS	1	1	XOBVTLS	S - First line of routine violates the SAC.
 XOBWP004	1	25	CHECK+2	F - Undefined Special Variable.
-XOBWP004	2	25	CHECK+2	F - Undefined Special Variable.
-XOBWP004	3	85	EXISTS+5	F - Undefined Special Variable.
-XOBWP004	4	85	EXISTS+5	W - Invalid local variable name.
-XOBWP004	5	85	EXISTS+5	F - Undefined Special Variable.
-XOBWP004	6	86	EXISTS+6	F - Undefined Special Variable.
-XOBWP004	7	86	EXISTS+6	F - Unrecognized argument in SET command.
-XOBWP004	8	98	CRSSL+6	F - Undefined Special Variable.
-XOBWP004	9	98	CRSSL+6	W - Invalid local variable name.
 XOBWP004	10	98	CRSSL+6	F - Undefined Special Variable.
 XOBWP004	11	99	CRSSL+7	F - Undefined Special Variable.
 XOBWP004	12	99	CRSSL+7	F - Unrecognized argument in SET command.
@@ -6439,6 +6420,14 @@ XOBWP004	14	123	DELETE+5	W - Invalid local variable name.
 XOBWP004	15	123	DELETE+5	F - Undefined Special Variable.
 XOBWP004	16	124	DELETE+6	F - Undefined Special Variable.
 XOBWP004	17	124	DELETE+6	F - Unrecognized argument in SET command.
+XOBWP004	2	25	CHECK+2	F - Undefined Special Variable.
+XOBWP004	3	85	EXISTS+5	F - Undefined Special Variable.
+XOBWP004	4	85	EXISTS+5	W - Invalid local variable name.
+XOBWP004	5	85	EXISTS+5	F - Undefined Special Variable.
+XOBWP004	6	86	EXISTS+6	F - Undefined Special Variable.
+XOBWP004	7	86	EXISTS+6	F - Unrecognized argument in SET command.
+XOBWP004	8	98	CRSSL+6	F - Undefined Special Variable.
+XOBWP004	9	98	CRSSL+6	W - Invalid local variable name.
 XPDDPCK	1	29	PNT+13	W - Blank(s) at end of line.
 XQ21	1	1	XQ21	S - First line of routine violates the SAC.
 XQCS	1	1	XQCS	S - First line of routine violates the SAC.
@@ -6590,14 +6579,6 @@ ZISFVXD	2	14	H1+3	S - Violates VA programming standards.
 ZISFVXD	3	16	H2	S - Violates VA programming standards.
 ZISHGUX	1	168	CD+1	F - Unrecognized argument in SET command.
 ZISHVXD	1	64	LIST+10	S - Violates VA programming standards.
-ZISHVXD	2	65	LIST+11	S - Violates VA programming standards.
-ZISHVXD	3	80	LSTEOF+3	S - Violates VA programming standards.
-ZISHVXD	4	81	LSTEOF+4	S - Violates VA programming standards.
-ZISHVXD	5	88	LIST1+3	S - Violates VA programming standards.
-ZISHVXD	6	88	LIST1+3	F - General Syntax Error.
-ZISHVXD	7	88	LIST1+3	F - General Syntax Error.
-ZISHVXD	8	89	LIST1+4	S - Violates VA programming standards.
-ZISHVXD	9	90	LIST1+5	S - Violates VA programming standards.
 ZISHVXD	10	90	LIST1+5	F - General Syntax Error.
 ZISHVXD	11	90	LIST1+5	F - General Syntax Error.
 ZISHVXD	12	93	LSTERR+1	S - Violates VA programming standards.
@@ -6608,12 +6589,20 @@ ZISHVXD	16	115	MV+14	S - Violates VA programming standards.
 ZISHVXD	17	116	MV+15	S - Violates VA programming standards.
 ZISHVXD	18	116	MV+15	F - General Syntax Error.
 ZISHVXD	19	116	MV+15	F - General Syntax Error.
+ZISHVXD	2	65	LIST+11	S - Violates VA programming standards.
 ZISHVXD	20	123	PWD+3	S - Violates VA programming standards.
 ZISHVXD	21	123	PWD+3	F - General Syntax Error.
 ZISHVXD	22	123	PWD+3	F - General Syntax Error.
 ZISHVXD	23	123	PWD+3	S - Violates VA programming standards.
 ZISHVXD	24	123	PWD+3	F - General Syntax Error.
 ZISHVXD	25	123	PWD+3	F - General Syntax Error.
+ZISHVXD	3	80	LSTEOF+3	S - Violates VA programming standards.
+ZISHVXD	4	81	LSTEOF+4	S - Violates VA programming standards.
+ZISHVXD	5	88	LIST1+3	S - Violates VA programming standards.
+ZISHVXD	6	88	LIST1+3	F - General Syntax Error.
+ZISHVXD	7	88	LIST1+3	F - General Syntax Error.
+ZISHVXD	8	89	LIST1+4	S - Violates VA programming standards.
+ZISHVXD	9	90	LIST1+5	S - Violates VA programming standards.
 ZISTCPS	1	65	LGTM+1	F - Unrecognized argument in SET command.
 ZJFOO	1	16	ZJFOO+15	F - Unrecognized argument in SET command.
 ZORCCPAR	1	2	ZORCCPAR+2	S - 2nd line of routine violates the SAC.
@@ -6632,14 +6621,6 @@ ZOSVGUT5	2	64	BE+1	W - Line contains a CONTROL (non-graphic) character.
 ZOSVGUX	1	109	PRGMODE+7	S - Break command used.
 ZOSVGUX	2	142	LGR+1	F - Undefined Special Variable.
 ZOSVKSD	1	31	ALLOS+6	F - Undefined Special Variable.
-ZOSVKSD	2	31	ALLOS+6	F - Undefined Special Variable.
-ZOSVKSD	3	31	ALLOS+6	F - Unrecognized argument in SET command.
-ZOSVKSD	4	40	ALLOS+15	F - Undefined Special Variable.
-ZOSVKSD	5	40	ALLOS+15	F - Unrecognized argument in SET command.
-ZOSVKSD	6	52	KMPVVSTM+6	F - Undefined Special Variable.
-ZOSVKSD	7	52	KMPVVSTM+6	F - Undefined Special Variable.
-ZOSVKSD	8	52	KMPVVSTM+6	F - Unrecognized argument in SET command.
-ZOSVKSD	9	70	KMPVVSTM+24	F - UNDEFINED COMMAND (rest of line not checked).
 ZOSVKSD	10	71	KMPVVSTM+25	F - UNDEFINED COMMAND (rest of line not checked).
 ZOSVKSD	11	74	KMPVVSTM+28	F - UNDEFINED COMMAND (rest of line not checked).
 ZOSVKSD	12	77	KMPVVSTM+31	F - Undefined Special Variable.
@@ -6650,6 +6631,7 @@ ZOSVKSD	16	91	KMPVVTCM+4	F - Unrecognized argument in SET command.
 ZOSVKSD	17	99	KMPVVTCM+12	F - Undefined Special Variable.
 ZOSVKSD	18	99	KMPVVTCM+12	F - Unrecognized argument in SET command.
 ZOSVKSD	19	107	BLKCOL+5	F - Undefined Special Variable.
+ZOSVKSD	2	31	ALLOS+6	F - Undefined Special Variable.
 ZOSVKSD	20	107	BLKCOL+5	F - Undefined Special Variable.
 ZOSVKSD	21	107	BLKCOL+5	F - Unrecognized argument in SET command.
 ZOSVKSD	22	112	BLKCOL+10	F - General Syntax Error.
@@ -6658,6 +6640,13 @@ ZOSVKSD	24	121	BLKCOL+19	F - Undefined Special Variable.
 ZOSVKSD	25	121	BLKCOL+19	F - Unrecognized argument in SET command.
 ZOSVKSD	26	127	RUNERR+4	F - Undefined Special Variable.
 ZOSVKSD	27	127	RUNERR+4	F - Unrecognized argument in SET command.
+ZOSVKSD	3	31	ALLOS+6	F - Unrecognized argument in SET command.
+ZOSVKSD	4	40	ALLOS+15	F - Undefined Special Variable.
+ZOSVKSD	5	40	ALLOS+15	F - Unrecognized argument in SET command.
+ZOSVKSD	6	52	KMPVVSTM+6	F - Undefined Special Variable.
+ZOSVKSD	7	52	KMPVVSTM+6	F - Undefined Special Variable.
+ZOSVKSD	8	52	KMPVVSTM+6	F - Unrecognized argument in SET command.
+ZOSVKSD	9	70	KMPVVSTM+24	F - UNDEFINED COMMAND (rest of line not checked).
 ZOSVKSOE	1	0	ALLGLO+36	F - Call to missing label '$$CheckGlobalIntegrity' in this routine.
 ZOSVKSOE	2	0	ALLOS+5	F - Call to missing label '$$GetDirGlobals' in this routine.
 ZOSVMSM	1	136	T0+2	F - Bad Number.
@@ -6726,6 +6715,7 @@ ZZMOVDT	3	62	ENCVSIT	W - Null line (no commands or comment).
 ZZMOVDT	4	71	CLINIC	W - Null line (no commands or comment).
 ZZMOVDT	5	126	REPORT+13	W - Null line (no commands or comment).
 ZZMOVDT2	1	1	ZZMOVDT2	S - First line of routine violates the SAC.
+ZZMOVDT2	10	95	FIXSIG	W - Null line (no commands or comment).
 ZZMOVDT2	2	5	GETDATE	W - Null line (no commands or comment).
 ZZMOVDT2	3	15	LRODAY	W - Null line (no commands or comment).
 ZZMOVDT2	4	24	LROPAT	W - Null line (no commands or comment).
@@ -6734,19 +6724,10 @@ ZZMOVDT2	6	41	LROONE	W - Null line (no commands or comment).
 ZZMOVDT2	7	73	CREATLRO	W - Null line (no commands or comment).
 ZZMOVDT2	8	85	DELLRES	W - Null line (no commands or comment).
 ZZMOVDT2	9	90	DELRRPT	W - Null line (no commands or comment).
-ZZMOVDT2	10	95	FIXSIG	W - Null line (no commands or comment).
 ZZPANIDX	1	8	IDX	W - Null line (no commands or comment).
 ZZPANIDX	2	13	IDX2	W - Null line (no commands or comment).
 ZZPANIDX	3	17	IDX2+4	W - Null line (no commands or comment).
 ZZPHIL	1	1	ZZPHIL	S - First line of routine violates the SAC.
-ZZPHIL	2	61	GETPAT+3	F - UNDEFINED COMMAND (rest of line not checked).
-ZZPHIL	3	62	GETPAT+4	F - Block structure mismatch.
-ZZPHIL	4	97	MKSLOTS+12	S - Line is longer than 245 bytes.
-ZZPHIL	5	98	MKSLOTS+13	S - Line is longer than 245 bytes.
-ZZPHIL	6	99	MKSLOTS+14	S - Line is longer than 245 bytes.
-ZZPHIL	7	100	MKSLOTS+15	S - Line is longer than 245 bytes.
-ZZPHIL	8	101	MKSLOTS+16	S - Line is longer than 245 bytes.
-ZZPHIL	9	162	DETAILS+3	W - Blank(s) at end of line.
 ZZPHIL	10	166	SUMI;	F - Label is not valid.
 ZZPHIL	11	166	SUMI;	W - Null line (no commands or comment).
 ZZPHIL	12	172	ZZZ+2	S - Line is longer than 245 bytes.
@@ -6757,8 +6738,16 @@ ZZPHIL	16	226	MKSLOTS3+12	S - Line is longer than 245 bytes.
 ZZPHIL	17	227	MKSLOTS3+13	S - Line is longer than 245 bytes.
 ZZPHIL	18	228	MKSLOTS3+14	S - Line is longer than 245 bytes.
 ZZPHIL	19	229	MKSLOTS3+15	S - Line is longer than 245 bytes.
+ZZPHIL	2	61	GETPAT+3	F - UNDEFINED COMMAND (rest of line not checked).
 ZZPHIL	20	0	GETPAT+3	F - Call to missing label ';W' in this routine.
 ZZPHIL	21	0	SUMI;	S - Violates VA programming standards.
+ZZPHIL	3	62	GETPAT+4	F - Block structure mismatch.
+ZZPHIL	4	97	MKSLOTS+12	S - Line is longer than 245 bytes.
+ZZPHIL	5	98	MKSLOTS+13	S - Line is longer than 245 bytes.
+ZZPHIL	6	99	MKSLOTS+14	S - Line is longer than 245 bytes.
+ZZPHIL	7	100	MKSLOTS+15	S - Line is longer than 245 bytes.
+ZZPHIL	8	101	MKSLOTS+16	S - Line is longer than 245 bytes.
+ZZPHIL	9	162	DETAILS+3	W - Blank(s) at end of line.
 ZZSTF00	1	1	ZZSTF00	S - First line of routine violates the SAC.
 ZZSTF00	2	8	EN+1	W - Blank(s) at end of line.
 ZZSTF01	1	1	ZZSTF01	S - First line of routine violates the SAC.
@@ -6773,6 +6762,8 @@ ZZSTFDU	1	1	ZZSTFDU	S - First line of routine violates the SAC.
 ZZUTPOST	1	1	%utPOST	S - Violates VA programming standards.
 ZZUTPOST	2	0	%utPOST	S - Violates VA programming standards.
 ZZUTPRE	1	1	%utPRE	S - Violates VA programming standards.
+ZZUTPRE	10	68	CACHEMAP+42	F - UNDEFINED COMMAND (rest of line not checked).
+ZZUTPRE	11	0	%utPRE	S - Violates VA programming standards.
 ZZUTPRE	2	31	CACHEMAP+5	F - Undefined Special Variable.
 ZZUTPRE	3	52	CACHEMAP+26	F - UNDEFINED COMMAND (rest of line not checked).
 ZZUTPRE	4	54	CACHEMAP+28	F - UNDEFINED COMMAND (rest of line not checked).
@@ -6781,17 +6772,7 @@ ZZUTPRE	6	57	CACHEMAP+31	F - UNDEFINED COMMAND (rest of line not checked).
 ZZUTPRE	7	63	CACHEMAP+37	F - UNDEFINED COMMAND (rest of line not checked).
 ZZUTPRE	8	65	CACHEMAP+39	F - UNDEFINED COMMAND (rest of line not checked).
 ZZUTPRE	9	66	CACHEMAP+40	F - UNDEFINED COMMAND (rest of line not checked).
-ZZUTPRE	10	68	CACHEMAP+42	F - UNDEFINED COMMAND (rest of line not checked).
-ZZUTPRE	11	0	%utPRE	S - Violates VA programming standards.
 ut	1	1	%ut	S - Violates VA programming standards.
-ut	2	128	EN1+72	W - Vendor specific code is restricted.]
-ut	3	128	EN1+72	S - Access to SSVN's or $SYSTEM restricted to Kernel.
-ut	4	128	EN1+72	W - Vendor specific code is restricted.]
-ut	5	128	EN1+72	S - Access to SSVN's or $SYSTEM restricted to Kernel.
-ut	6	129	EN1+73	S - Non-standard $Z function used.
-ut	7	129	EN1+73	F - Undefined Function.
-ut	8	132	EN1+76	F - Undefined Function.
-ut	9	132	EN1+76	F - Invalid or wrong number of arguments to a function.
 ut	10	133	EN1+77	S - Non-standard $Z special variable used.
 ut	11	139	EN1+83	W - Vendor specific code is restricted.]
 ut	12	139	EN1+83	S - Access to SSVN's or $SYSTEM restricted to Kernel.
@@ -6802,6 +6783,7 @@ ut	16	140	EN1+84	F - Undefined Function.
 ut	17	144	EN1+88	F - Undefined Function.
 ut	18	144	EN1+88	F - Invalid or wrong number of arguments to a function.
 ut	19	145	EN1+89	S - Non-standard $Z special variable used.
+ut	2	128	EN1+72	W - Vendor specific code is restricted.]
 ut	20	212	CHKTF+12	S - Break command used.
 ut	21	241	CHKEQ+15	S - Break command used.
 ut	22	286	ERROR+9	S - Non-standard $Z special variable used.
@@ -6812,6 +6794,7 @@ ut	26	296	ERROR1+5	S - Break command used.
 ut	27	298	ERROR1+7	S - Non-standard $Z special variable used.
 ut	28	298	ERROR1+7	S - Non-standard $Z special variable used.
 ut	29	299	ERROR1+8	S - Non-standard $Z special variable used.
+ut	3	128	EN1+72	S - Access to SSVN's or $SYSTEM restricted to Kernel.
 ut	30	299	ERROR1+8	S - Non-standard $Z special variable used.
 ut	31	483	GTMVER+1	S - Non-standard $Z special variable used.
 ut	32	483	GTMVER+1	S - Non-standard $Z special variable used.
@@ -6822,15 +6805,13 @@ ut	36	0	eq	S - Violates VA programming standards.
 ut	37	0	fail	S - Violates VA programming standards.
 ut	38	0	succeed	S - Violates VA programming standards.
 ut	39	0	tf	S - Violates VA programming standards.
+ut	4	128	EN1+72	W - Vendor specific code is restricted.]
+ut	5	128	EN1+72	S - Access to SSVN's or $SYSTEM restricted to Kernel.
+ut	6	129	EN1+73	S - Non-standard $Z function used.
+ut	7	129	EN1+73	F - Undefined Function.
+ut	8	132	EN1+76	F - Undefined Function.
+ut	9	132	EN1+76	F - Invalid or wrong number of arguments to a function.
 ut1	1	1	%ut1	S - Violates VA programming standards.
-ut1	2	110	FAIL+10	S - Break command used.
-ut1	3	183	COV+35	S - View command used.
-ut1	4	188	COV+40	W - Vendor specific code is restricted.]
-ut1	5	188	COV+40	F - Undefined Function.
-ut1	6	188	COV+40	F - Undefined Function.
-ut1	7	188	COV+40	F - Undefined Function.
-ut1	8	199	COV+51	S - Exclusive or Unargumented NEW command.
-ut1	9	218	GTMCOV+2	S - View command used.
 ut1	10	225	CACHECOV+3	W - Vendor specific code is restricted.]
 ut1	11	225	CACHECOV+3	W - Vendor specific code is restricted.]
 ut1	12	229	CACHECOV+7	W - Vendor specific code is restricted.]
@@ -6841,24 +6822,24 @@ ut1	16	245	GETVALS+6	W - Vendor specific code is restricted.]
 ut1	17	246	GETVALS+7	W - Vendor specific code is restricted.]
 ut1	18	247	GETVALS+8	W - Vendor specific code is restricted.]
 ut1	19	248	GETVALS+9	F - Undefined Function.
+ut1	2	110	FAIL+10	S - Break command used.
 ut1	20	251	GETVALS+12	W - Vendor specific code is restricted.]
 ut1	21	424	GETRTNS+24	S - Access to SSVN's or $SYSTEM restricted to Kernel.
 ut1	22	425	GETRTNS+25	S - Access to SSVN's or $SYSTEM restricted to Kernel.
 ut1	23	0		S - Routine exceeds SACC maximum size of 20000 (20092).
 ut1	24	0	%ut1	S - Violates VA programming standards.
+ut1	3	183	COV+35	S - View command used.
+ut1	4	188	COV+40	W - Vendor specific code is restricted.]
+ut1	5	188	COV+40	F - Undefined Function.
+ut1	6	188	COV+40	F - Undefined Function.
+ut1	7	188	COV+40	F - Undefined Function.
+ut1	8	199	COV+51	S - Exclusive or Unargumented NEW command.
+ut1	9	218	GTMCOV+2	S - View command used.
 utcover	1	1	%utcover	S - First line of routine violates the SAC.
 utcover	2	1	%utcover	S - Violates VA programming standards.
 utcover	3	243	CHKLEAKS+21	S - Exclusive or Unargumented NEW command.
 utcover	4	0	%utcover	S - Violates VA programming standards.
 utt1	1	1	%utt1	S - Violates VA programming standards.
-utt1	2	101	T7+6	W - Vendor specific code is restricted.]
-utt1	3	101	T7+6	S - Access to SSVN's or $SYSTEM restricted to Kernel.
-utt1	4	101	T7+6	S - Non-standard $Z function used.
-utt1	5	101	T7+6	F - Undefined Function.
-utt1	6	103	T7+8	S - 'OPEN' command should be invoked through ^%ZIS.
-utt1	7	104	T7+9	S - 'OPEN' command should be invoked through ^%ZIS.
-utt1	8	108	T7+13	S - 'Close' command should be invoked through 'D ^%ZISC'.
-utt1	9	113	T7+18	S - 'OPEN' command should be invoked through ^%ZIS.
 utt1	10	114	T7+19	S - 'OPEN' command should be invoked through ^%ZIS.
 utt1	11	119	T7+24	S - 'Close' command should be invoked through 'D ^%ZISC'.
 utt1	12	120	T7+25	S - 'Close' command should be invoked through 'D ^%ZISC'.
@@ -6869,11 +6850,19 @@ utt1	16	138	T8+7	F - Undefined Function.
 utt1	17	140	T8+9	S - 'OPEN' command should be invoked through ^%ZIS.
 utt1	18	141	T8+10	S - 'OPEN' command should be invoked through ^%ZIS.
 utt1	19	145	T8+14	S - 'Close' command should be invoked through 'D ^%ZISC'.
+utt1	2	101	T7+6	W - Vendor specific code is restricted.]
 utt1	20	146	T8+15	S - 'OPEN' command should be invoked through ^%ZIS.
 utt1	21	147	T8+16	S - 'OPEN' command should be invoked through ^%ZIS.
 utt1	22	150	T8+19	S - 'Close' command should be invoked through 'D ^%ZISC'.
 utt1	23	151	T8+20	S - 'Close' command should be invoked through 'D ^%ZISC'.
 utt1	24	0	%utt1	S - Violates VA programming standards.
+utt1	3	101	T7+6	S - Access to SSVN's or $SYSTEM restricted to Kernel.
+utt1	4	101	T7+6	S - Non-standard $Z function used.
+utt1	5	101	T7+6	F - Undefined Function.
+utt1	6	103	T7+8	S - 'OPEN' command should be invoked through ^%ZIS.
+utt1	7	104	T7+9	S - 'OPEN' command should be invoked through ^%ZIS.
+utt1	8	108	T7+13	S - 'Close' command should be invoked through 'D ^%ZISC'.
+utt1	9	113	T7+18	S - 'OPEN' command should be invoked through ^%ZIS.
 utt2	1	1	%utt2	S - Violates VA programming standards.
 utt2	2	7	%ut	S - Violates VA programming standards.
 utt2	3	17	%ut1	S - Violates VA programming standards.
@@ -6892,14 +6881,6 @@ utt6	1	1	%utt6	S - First line of routine violates the SAC.
 utt6	2	1	%utt6	S - Violates VA programming standards.
 utt6	3	0	%utt6	S - Violates VA programming standards.
 utt7	1	1	%utt7	S - Violates VA programming standards.
-utt7	2	92	T7+6	W - Vendor specific code is restricted.]
-utt7	3	92	T7+6	S - Access to SSVN's or $SYSTEM restricted to Kernel.
-utt7	4	92	T7+6	S - Non-standard $Z function used.
-utt7	5	92	T7+6	F - Undefined Function.
-utt7	6	94	T7+8	S - 'OPEN' command should be invoked through ^%ZIS.
-utt7	7	95	T7+9	S - 'OPEN' command should be invoked through ^%ZIS.
-utt7	8	99	T7+13	S - 'Close' command should be invoked through 'D ^%ZISC'.
-utt7	9	104	T7+18	S - 'OPEN' command should be invoked through ^%ZIS.
 utt7	10	105	T7+19	S - 'OPEN' command should be invoked through ^%ZIS.
 utt7	11	110	T7+24	S - 'Close' command should be invoked through 'D ^%ZISC'.
 utt7	12	111	T7+25	S - 'Close' command should be invoked through 'D ^%ZISC'.
@@ -6910,10 +6891,18 @@ utt7	16	129	T8+7	F - Undefined Function.
 utt7	17	131	T8+9	S - 'OPEN' command should be invoked through ^%ZIS.
 utt7	18	132	T8+10	S - 'OPEN' command should be invoked through ^%ZIS.
 utt7	19	136	T8+14	S - 'Close' command should be invoked through 'D ^%ZISC'.
+utt7	2	92	T7+6	W - Vendor specific code is restricted.]
 utt7	20	137	T8+15	S - 'OPEN' command should be invoked through ^%ZIS.
 utt7	21	138	T8+16	S - 'OPEN' command should be invoked through ^%ZIS.
 utt7	22	141	T8+19	S - 'Close' command should be invoked through 'D ^%ZISC'.
 utt7	23	142	T8+20	S - 'Close' command should be invoked through 'D ^%ZISC'.
 utt7	24	0	%utt7	S - Violates VA programming standards.
+utt7	3	92	T7+6	S - Access to SSVN's or $SYSTEM restricted to Kernel.
+utt7	4	92	T7+6	S - Non-standard $Z function used.
+utt7	5	92	T7+6	F - Undefined Function.
+utt7	6	94	T7+8	S - 'OPEN' command should be invoked through ^%ZIS.
+utt7	7	95	T7+9	S - 'OPEN' command should be invoked through ^%ZIS.
+utt7	8	99	T7+13	S - 'Close' command should be invoked through 'D ^%ZISC'.
+utt7	9	104	T7+18	S - 'OPEN' command should be invoked through ^%ZIS.
 uttcovr	1	1	%uttcovr	S - Violates VA programming standards.
 uttcovr	2	0	%uttcovr	S - Violates VA programming standards.

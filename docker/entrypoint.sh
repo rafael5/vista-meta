@@ -48,12 +48,18 @@ if [ -e /home/vehu/g/mumps.dat ]; then
 fi
 
 # ── Phase 2: UID reconciliation ──────────────────────────────────────
-# ADR-009: chown bind mounts so vehu can write regardless of host UID
+# ADR-009: chown bind mounts so vehu can write regardless of host UID.
+# V1 raw/final split: export/{data,code}-model are HOST-emitted finals
+# (host-owned, written only by host tsvio) — the container writes raw
+# dumps + logs + sentinel only, so those two stay out of the chown.
 log "phase 2: UID reconciliation"
 chown -R vehu:vehu /home/vehu/dev \
                    /home/vehu/scripts \
-                   /home/vehu/export \
                    /home/vehu/g
+find /home/vehu/export -mindepth 1 -maxdepth 1 \
+        ! -name data-model ! -name code-model \
+        -exec chown -R vehu:vehu {} +
+chown vehu:vehu /home/vehu/export
 
 # Install host pubkeys for vehu so non-interactive SSH (BatchMode=yes,
 # used by sibling projects' `make test` and seed-vista.sh) can authenticate.

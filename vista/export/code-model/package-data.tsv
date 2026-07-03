@@ -239,7 +239,7 @@ CMOP	file	550.1		CMOP RX QUEUE	/opt/VistA-M/Packages/CMOP/Globals/550.1+CMOP RX 
 CMOP	file	550.2		CMOP TRANSMISSION	/opt/VistA-M/Packages/CMOP/Globals/550.2+CMOP TRANSMISSION.zwr	84
 CPT HCPCS Codes	file	81		CPT	/opt/VistA-M/Packages/CPT HCPCS Codes/Globals/81+CPT.zwr	4164771
 CPT HCPCS Codes	file	81.2		CPT COPYRIGHT	/opt/VistA-M/Packages/CPT HCPCS Codes/Globals/81.2+CPT COPYRIGHT.zwr	2005
-Capacity Management	file	8969		VSM CONFIGURATION	/opt/VistA-M/Packages/Capacity Management/Globals/8969+VSM CONFIGURATION.zwr	2019
+Capacity Management	file	8969		VSM CONFIGURATION	/opt/VistA-M/Packages/Capacity Management/Globals/8969+VSM CONFIGURATION.zwr	2678
 Capacity Management	file	8969.02		VSM MONITOR DEFAULTS	/opt/VistA-M/Packages/Capacity Management/Globals/8969.02+VSM MONITOR DEFAULTS.zwr	95
 Capacity Management	file	8969.03		VSM CACHE TASK LOG	/opt/VistA-M/Packages/Capacity Management/Globals/8969.03+VSM CACHE TASK LOG.zwr	91
 Capacity Management	file	8970.1		SAGG PROJECT	/opt/VistA-M/Packages/Capacity Management/Globals/8970.1+SAGG PROJECT.zwr	76
@@ -452,7 +452,7 @@ DSS Extracts	file	727.832		NUTRITION EXTRACT	/opt/VistA-M/Packages/DSS Extracts/
 DSS Extracts	file	727.833		BCMA EXTRACT	/opt/VistA-M/Packages/DSS Extracts/Globals/727.833+BCMA EXTRACT.zwr	77
 DSS Extracts	file	728		DSS EXTRACTS	/opt/VistA-M/Packages/DSS Extracts/Globals/728+DSS EXTRACTS.zwr	70
 DSS Extracts	file	728.44		CLINICS AND STOP CODES	/opt/VistA-M/Packages/DSS Extracts/Globals/728.44+CLINICS AND STOP CODES.zwr	96
-DSS Extracts	file	728.441		NATIONAL CLINIC	/opt/VistA-M/Packages/DSS Extracts/Globals/728.441+NATIONAL CLINIC.zwr	291576
+DSS Extracts	file	728.441		NATIONAL CLINIC	/opt/VistA-M/Packages/DSS Extracts/Globals/728.441+NATIONAL CLINIC.zwr	291615
 DSS Extracts	file	728.442		MCA LABOR CODE	/opt/VistA-M/Packages/DSS Extracts/Globals/728.442+MCA LABOR CODE.zwr	4378
 DSS Extracts	file	728.45		DSS NUTRITION PRODUCT WORKSHEET	/opt/VistA-M/Packages/DSS Extracts/Globals/728.45+DSS NUTRITION PRODUCT WORKSHEET.zwr	114
 DSS Extracts	file	728.46		DSS NUTRITION DIVISION WORKSHEET	/opt/VistA-M/Packages/DSS Extracts/Globals/728.46+DSS NUTRITION DIVISION WORKSHEET.zwr	116
@@ -593,6 +593,7 @@ EEO Complaint Tracking	file	787.5		EEO CENTRAL INVESTIGATORS	/opt/VistA-M/Packag
 EEO Complaint Tracking	file	789.5		EEO SERVER PARAMETERS	/opt/VistA-M/Packages/EEO Complaint Tracking/Globals/789.5+EEO SERVER PARAMETERS.zwr	165
 Electronic Health Modernization	file	1609		EHRM HL7 Message	/opt/VistA-M/Packages/Electronic Health Modernization/Globals/1609+EHRM HL7 Message.zwr	83
 Electronic Health Modernization	file	1609.1		EHRM HL7 Message Retention	/opt/VistA-M/Packages/Electronic Health Modernization/Globals/1609.1+EHRM HL7 Message Retention.zwr	229
+Electronic Health Modernization	file	1610		EHRM ACTIVE CLINIC	/opt/VistA-M/Packages/Electronic Health Modernization/Globals/1610+EHRM ACTIVE CLINIC.zwr	85
 Emergency Department Integration Software	file	230		ED LOG	/opt/VistA-M/Packages/Emergency Department Integration Software/Globals/230+ED LOG.zwr	3915
 Emergency Department Integration Software	file	230.1		ED LOG HISTORY	/opt/VistA-M/Packages/Emergency Department Integration Software/Globals/230.1+ED LOG HISTORY.zwr	828
 Emergency Department Integration Software	file	231.6		TRACKING BOARD	/opt/VistA-M/Packages/Emergency Department Integration Software/Globals/231.6+TRACKING BOARD.zwr	78
@@ -785,18 +786,18 @@ Fee Basis	file	162.92		FEE BASIS UNAUTHORIZED CLAIMS STATUS	/opt/VistA-M/Package
 Fee Basis	file	162.93		FEE BASIS UNAUTHORIZED REQUESTED INFORMATION	/opt/VistA-M/Packages/Fee Basis/Globals/162.93+FEE BASIS UNAUTHORIZED REQUESTED INFORMATION.zwr	12368
 Fee Basis	file	162.94		FEE BASIS UNAUTHORIZED DISAPPROVAL REASONS	/opt/VistA-M/Packages/Fee Basis/Globals/162.94+FEE BASIS UNAUTHORIZED DISAPPROVAL REASONS.zwr	4953
 Fee Basis	file	162.95		FEE BASIS CHECK CANCELLATION REASON	/opt/VistA-M/Packages/Fee Basis/Globals/162.95+FEE BASIS CHECK CANCELLATION REASON.zwr	1444
-Fee Basis	file	162.96	1	FEE BASIS GEOGRAPHIC INDEX	/opt/VistA-M/Packages/Fee Basis/Globals/162.96-1+FEE BASIS GEOGRAPHIC INDEX.zwr	67108845
-Fee Basis	file	162.96	2	FEE BASIS GEOGRAPHIC INDEX	/opt/VistA-M/Packages/Fee Basis/Globals/162.96-2+FEE BASIS GEOGRAPHIC INDEX.zwr	40906919
-Fee Basis	file	162.97		FEE BASIS CPT RVU	/opt/VistA-M/Packages/Fee Basis/Globals/162.97+FEE BASIS CPT RVU.zwr	38977618
-Fee Basis	file	162.98		FEE BASIS MODIFIER TABLE INDEX	/opt/VistA-M/Packages/Fee Basis/Globals/162.98+FEE BASIS MODIFIER TABLE INDEX.zwr	6545733
-Fee Basis	file	162.99		FEE BASIS HCFA CONVERSION	/opt/VistA-M/Packages/Fee Basis/Globals/162.99+FEE BASIS HCFA CONVERSION.zwr	12379
+Fee Basis	file	162.96	1	FEE BASIS GEOGRAPHIC INDEX	/opt/VistA-M/Packages/Fee Basis/Globals/162.96-1+FEE BASIS GEOGRAPHIC INDEX.zwr	67108851
+Fee Basis	file	162.96	2	FEE BASIS GEOGRAPHIC INDEX	/opt/VistA-M/Packages/Fee Basis/Globals/162.96-2+FEE BASIS GEOGRAPHIC INDEX.zwr	44581232
+Fee Basis	file	162.97		FEE BASIS CPT RVU	/opt/VistA-M/Packages/Fee Basis/Globals/162.97+FEE BASIS CPT RVU.zwr	40739078
+Fee Basis	file	162.98		FEE BASIS MODIFIER TABLE INDEX	/opt/VistA-M/Packages/Fee Basis/Globals/162.98+FEE BASIS MODIFIER TABLE INDEX.zwr	6797571
+Fee Basis	file	162.99		FEE BASIS HCFA CONVERSION	/opt/VistA-M/Packages/Fee Basis/Globals/162.99+FEE BASIS HCFA CONVERSION.zwr	12817
 Fee Basis	file	163.5		FPPS QUEUED INVOICES	/opt/VistA-M/Packages/Fee Basis/Globals/163.5+FPPS QUEUED INVOICES.zwr	91
 Fee Basis	file	163.7		FEE BASIS FPPS AUDIT	/opt/VistA-M/Packages/Fee Basis/Globals/163.7+FEE BASIS FPPS AUDIT.zwr	44
 Fee Basis	file	163.85		FEE BASIS VA TYPE OF SERVICE	/opt/VistA-M/Packages/Fee Basis/Globals/163.85+FEE BASIS VA TYPE OF SERVICE.zwr	6123
 Fee Basis	file	163.98		FEE BASIS PAYMENT METHODOLOGY	/opt/VistA-M/Packages/Fee Basis/Globals/163.98+FEE BASIS PAYMENT METHODOLOGY.zwr	1615
 Fee Basis	global			FB	/opt/VistA-M/Packages/Fee Basis/Globals/FB.zwr	34
 Fee Basis	global			FBAA	/opt/VistA-M/Packages/Fee Basis/Globals/FBAA.zwr	37
-Foundations	file	18.01		FOUNDATIONS SITE PARAMETERS	/opt/VistA-M/Packages/Foundations/Globals/18.01+FOUNDATIONS SITE PARAMETERS.zwr	266
+Foundations	file	18.01		FOUNDATIONS SITE PARAMETERS	/opt/VistA-M/Packages/Foundations/Globals/18.01+FOUNDATIONS SITE PARAMETERS.zwr	272
 Functional Independence	file	783		FUNCTIONAL INDEPENDENCE MEASUREMENT RECORD	/opt/VistA-M/Packages/Functional Independence/Globals/783+FUNCTIONAL INDEPENDENCE MEASUREMENT RECORD.zwr	130
 Functional Independence	file	783.9		FUNCTIONAL INDEPENDENCE MEASUREMENT PARAMETER	/opt/VistA-M/Packages/Functional Independence/Globals/783.9+FUNCTIONAL INDEPENDENCE MEASUREMENT PARAMETER.zwr	141
 General Medical Record - Generator	file	124.1		GMRG PARAMETERS	/opt/VistA-M/Packages/General Medical Record - Generator/Globals/124.1+GMRG PARAMETERS.zwr	342
@@ -1289,10 +1290,10 @@ Insurance Capture Buffer	file	19625.1		DSIV REPORT DATA	/opt/VistA-M/Packages/In
 Insurance Capture Buffer	file	19625.2		DSIV EXCEPTION LOCATIONS	/opt/VistA-M/Packages/Insurance Capture Buffer/Globals/19625.2+DSIV EXCEPTION LOCATIONS.zwr	102
 Insurance Capture Buffer	file	19625.3		DSIV ICB MANUAL PATIENT FLAG FILE	/opt/VistA-M/Packages/Insurance Capture Buffer/Globals/19625.3+DSIV ICB MANUAL PATIENT FLAG FILE.zwr	120
 Integrated Billing	file	350		INTEGRATED BILLING ACTION	/opt/VistA-M/Packages/Integrated Billing/Globals/350+INTEGRATED BILLING ACTION.zwr	680637
-Integrated Billing	file	350.1		IB ACTION TYPE	/opt/VistA-M/Packages/Integrated Billing/Globals/350.1+IB ACTION TYPE.zwr	58653
+Integrated Billing	file	350.1		IB ACTION TYPE	/opt/VistA-M/Packages/Integrated Billing/Globals/350.1+IB ACTION TYPE.zwr	58701
 Integrated Billing	file	350.2		IB ACTION CHARGE	/opt/VistA-M/Packages/Integrated Billing/Globals/350.2+IB ACTION CHARGE.zwr	47642
 Integrated Billing	file	350.21		IB ACTION STATUS	/opt/VistA-M/Packages/Integrated Billing/Globals/350.21+IB ACTION STATUS.zwr	1119
-Integrated Billing	file	350.3		IB CHARGE REMOVE REASONS	/opt/VistA-M/Packages/Integrated Billing/Globals/350.3+IB CHARGE REMOVE REASONS.zwr	9680
+Integrated Billing	file	350.3		IB CHARGE REMOVE REASONS	/opt/VistA-M/Packages/Integrated Billing/Globals/350.3+IB CHARGE REMOVE REASONS.zwr	9825
 Integrated Billing	file	350.4		BILLABLE AMBULATORY SURGICAL CODE	/opt/VistA-M/Packages/Integrated Billing/Globals/350.4+BILLABLE AMBULATORY SURGICAL CODE.zwr	116
 Integrated Billing	file	350.41		UPDATE BILLABLE AMBULATORY SURGICAL CODE	/opt/VistA-M/Packages/Integrated Billing/Globals/350.41+UPDATE BILLABLE AMBULATORY SURGICAL CODE.zwr	132
 Integrated Billing	file	350.5		BASC LOCALITY MODIFIER	/opt/VistA-M/Packages/Integrated Billing/Globals/350.5+BASC LOCALITY MODIFIER.zwr	641
@@ -1526,16 +1527,16 @@ Interim Management Support	file	731		VAMC MANAGEMENT	/opt/VistA-M/Packages/Inter
 Interim Management Support	file	731.5		VAMC PLANNED EQUIPMENT	/opt/VistA-M/Packages/Interim Management Support/Globals/731.5+VAMC PLANNED EQUIPMENT.zwr	1511
 Interim Management Support	file	731.7		VAMC STAFFING	/opt/VistA-M/Packages/Interim Management Support/Globals/731.7+VAMC STAFFING.zwr	1772
 Kernel	file	101		PROTOCOL	/opt/VistA-M/Packages/Kernel/Globals/101+PROTOCOL.zwr	3532806
-Kernel	file	14.4		TASKS	/opt/VistA-M/Packages/Kernel/Globals/14.4+TASKS.zwr	6991
+Kernel	file	14.4		TASKS	/opt/VistA-M/Packages/Kernel/Globals/14.4+TASKS.zwr	13852
 Kernel	file	14.5		VOLUME SET	/opt/VistA-M/Packages/Kernel/Globals/14.5+VOLUME SET.zwr	166
 Kernel	file	14.6		UCI ASSOCIATION	/opt/VistA-M/Packages/Kernel/Globals/14.6+UCI ASSOCIATION.zwr	79
 Kernel	file	14.7		TASKMAN SITE PARAMETERS	/opt/VistA-M/Packages/Kernel/Globals/14.7+TASKMAN SITE PARAMETERS.zwr	215
 Kernel	file	14.71		TASKMAN MONITOR	/opt/VistA-M/Packages/Kernel/Globals/14.71+TASKMAN MONITOR.zwr	318
 Kernel	file	14.72		TASKMAN SNAPSHOT	/opt/VistA-M/Packages/Kernel/Globals/14.72+TASKMAN SNAPSHOT.zwr	83
 Kernel	file	14.8		TASK SYNC FLAG	/opt/VistA-M/Packages/Kernel/Globals/14.8+TASK SYNC FLAG.zwr	853
-Kernel	file	19		OPTION	/opt/VistA-M/Packages/Kernel/Globals/19+OPTION.zwr	19574685
+Kernel	file	19		OPTION	/opt/VistA-M/Packages/Kernel/Globals/19+OPTION.zwr	19606791
 Kernel	file	19.081		AUDIT LOG FOR OPTIONS	/opt/VistA-M/Packages/Kernel/Globals/19.081+AUDIT LOG FOR OPTIONS.zwr	45
-Kernel	file	19.1		SECURITY KEY	/opt/VistA-M/Packages/Kernel/Globals/19.1+SECURITY KEY.zwr	226072
+Kernel	file	19.1		SECURITY KEY	/opt/VistA-M/Packages/Kernel/Globals/19.1+SECURITY KEY.zwr	226383
 Kernel	file	19.2		OPTION SCHEDULING	/opt/VistA-M/Packages/Kernel/Globals/19.2+OPTION SCHEDULING.zwr	2268
 Kernel	file	19.8		MENUMAN QUICK HELP	/opt/VistA-M/Packages/Kernel/Globals/19.8+MENUMAN QUICK HELP.zwr	33177
 Kernel	file	20		NAME COMPONENTS	/opt/VistA-M/Packages/Kernel/Globals/20+NAME COMPONENTS.zwr	1710720
@@ -1544,9 +1545,9 @@ Kernel	file	200		NEW PERSON	/opt/VistA-M/Packages/Kernel/Globals/200+NEW PERSON.
 Kernel	file	201		USER CLASS	/opt/VistA-M/Packages/Kernel/Globals/201+USER CLASS.zwr	556
 Kernel	file	3.05		FAILED ACCESS ATTEMPTS LOG	/opt/VistA-M/Packages/Kernel/Globals/3.05+FAILED ACCESS ATTEMPTS LOG.zwr	101
 Kernel	file	3.07		PROGRAMMER MODE LOG	/opt/VistA-M/Packages/Kernel/Globals/3.07+PROGRAMMER MODE LOG.zwr	101
-Kernel	file	3.075		ERROR LOG	/opt/VistA-M/Packages/Kernel/Globals/3.075+ERROR LOG.zwr	66
+Kernel	file	3.075		ERROR LOG	/opt/VistA-M/Packages/Kernel/Globals/3.075+ERROR LOG.zwr	36099
 Kernel	file	3.076		ERROR MESSAGES	/opt/VistA-M/Packages/Kernel/Globals/3.076+ERROR MESSAGES.zwr	11573
-Kernel	file	3.077		ERROR TRAP SUMMARY	/opt/VistA-M/Packages/Kernel/Globals/3.077+ERROR TRAP SUMMARY.zwr	582
+Kernel	file	3.077		ERROR TRAP SUMMARY	/opt/VistA-M/Packages/Kernel/Globals/3.077+ERROR TRAP SUMMARY.zwr	1171
 Kernel	file	3.081		SIGN-ON LOG	/opt/VistA-M/Packages/Kernel/Globals/3.081+SIGN-ON LOG.zwr	11364
 Kernel	file	3.083		LOCKED IP or DEVICE	/opt/VistA-M/Packages/Kernel/Globals/3.083+LOCKED IP or DEVICE.zwr	85
 Kernel	file	3.084		FAILED SIGNON ATTEMPTS	/opt/VistA-M/Packages/Kernel/Globals/3.084+FAILED SIGNON ATTEMPTS.zwr	92
@@ -1583,14 +1584,14 @@ Kernel	file	8935.91		XHD PARAMETER CATEGORY	/opt/VistA-M/Packages/Kernel/Globals
 Kernel	file	8980.2		PKI Digital Signatures	/opt/VistA-M/Packages/Kernel/Globals/8980.2+PKI Digital Signatures.zwr	99
 Kernel	file	8980.22		PKI CRL URLS	/opt/VistA-M/Packages/Kernel/Globals/8980.22+PKI CRL URLS.zwr	81
 Kernel	file	8989.2		KERNEL PARAMETERS	/opt/VistA-M/Packages/Kernel/Globals/8989.2+KERNEL PARAMETERS.zwr	489
-Kernel	file	8989.3		KERNEL SYSTEM PARAMETERS	/opt/VistA-M/Packages/Kernel/Globals/8989.3+KERNEL SYSTEM PARAMETERS.zwr	4376
+Kernel	file	8989.3		KERNEL SYSTEM PARAMETERS	/opt/VistA-M/Packages/Kernel/Globals/8989.3+KERNEL SYSTEM PARAMETERS.zwr	4373
 Kernel	file	8991.5		XQAB ERRORS LOGGED	/opt/VistA-M/Packages/Kernel/Globals/8991.5+XQAB ERRORS LOGGED.zwr	87
 Kernel	file	8991.6		XUEPCS DATA	/opt/VistA-M/Packages/Kernel/Globals/8991.6+XUEPCS DATA.zwr	74
 Kernel	file	8991.7		XUEPCS PSDRPH AUDIT	/opt/VistA-M/Packages/Kernel/Globals/8991.7+XUEPCS PSDRPH AUDIT.zwr	43
 Kernel	file	8991.8		DEA BUSINESS ACTIVITY CODES	/opt/VistA-M/Packages/Kernel/Globals/8991.8+DEA BUSINESS ACTIVITY CODES.zwr	9332
 Kernel	file	8991.9		DEA NUMBERS	/opt/VistA-M/Packages/Kernel/Globals/8991.9+DEA NUMBERS.zwr	73
 Kernel	file	8992		ALERT	/opt/VistA-M/Packages/Kernel/Globals/8992+ALERT.zwr	262114
-Kernel	file	8992.1		ALERT TRACKING	/opt/VistA-M/Packages/Kernel/Globals/8992.1+ALERT TRACKING.zwr	675947
+Kernel	file	8992.1		ALERT TRACKING	/opt/VistA-M/Packages/Kernel/Globals/8992.1+ALERT TRACKING.zwr	677391
 Kernel	file	8992.2		ALERT RECIPIENT TYPE	/opt/VistA-M/Packages/Kernel/Globals/8992.2+ALERT RECIPIENT TYPE.zwr	448
 Kernel	file	8992.3		ALERT CRITICAL TEXT	/opt/VistA-M/Packages/Kernel/Globals/8992.3+ALERT CRITICAL TEXT.zwr	454
 Kernel	file	8993		XULM LOCK DICTIONARY	/opt/VistA-M/Packages/Kernel/Globals/8993+XULM LOCK DICTIONARY.zwr	25840
@@ -1598,14 +1599,14 @@ Kernel	file	8993.1		XULM LOCK MANAGER PARAMETERS	/opt/VistA-M/Packages/Kernel/Gl
 Kernel	file	8993.2		XULM LOCK MANAGER LOG	/opt/VistA-M/Packages/Kernel/Globals/8993.2+XULM LOCK MANAGER LOG.zwr	95
 Kernel	file	8994.5		REMOTE APPLICATION	/opt/VistA-M/Packages/Kernel/Globals/8994.5+REMOTE APPLICATION.zwr	13322
 Kernel	file	9.2		HELP FRAME	/opt/VistA-M/Packages/Kernel/Globals/9.2+HELP FRAME.zwr	3557959
-Kernel	file	9.4		PACKAGE	/opt/VistA-M/Packages/Kernel/Globals/9.4+PACKAGE.zwr	20739574
-Kernel	file	9.6		BUILD	/opt/VistA-M/Packages/Kernel/Globals/9.6+BUILD.zwr	61634036
-Kernel	file	9.7		INSTALL	/opt/VistA-M/Packages/Kernel/Globals/9.7+INSTALL.zwr	54199353
-Kernel	file	9.8		ROUTINE	/opt/VistA-M/Packages/Kernel/Globals/9.8+ROUTINE.zwr	3207250
+Kernel	file	9.4		PACKAGE	/opt/VistA-M/Packages/Kernel/Globals/9.4+PACKAGE.zwr	20782217
+Kernel	file	9.6		BUILD	/opt/VistA-M/Packages/Kernel/Globals/9.6+BUILD.zwr	61776497
+Kernel	file	9.7		INSTALL	/opt/VistA-M/Packages/Kernel/Globals/9.7+INSTALL.zwr	54297801
+Kernel	file	9.8		ROUTINE	/opt/VistA-M/Packages/Kernel/Globals/9.8+ROUTINE.zwr	3230907
 Kernel	global			%Z	/opt/VistA-M/Packages/Kernel/Globals/%Z.zwr	17526
 Kernel	global			%ZE	/opt/VistA-M/Packages/Kernel/Globals/%ZE.zwr	41
 Kernel	global			%ZIS	/opt/VistA-M/Packages/Kernel/Globals/%ZIS.zwr	354
-Kernel	global			%ZTSCH	/opt/VistA-M/Packages/Kernel/Globals/%ZTSCH.zwr	1752
+Kernel	global			%ZTSCH	/opt/VistA-M/Packages/Kernel/Globals/%ZTSCH.zwr	2165
 Kernel	global			%ZVEMS	/opt/VistA-M/Packages/Kernel/Globals/%ZVEMS.zwr	472860
 Kernel	global			XIP	/opt/VistA-M/Packages/Kernel/Globals/XIP.zwr	39
 Kernel	global			XPD	/opt/VistA-M/Packages/Kernel/Globals/XPD.zwr	36
@@ -1699,14 +1700,6 @@ Lexicon Utility	file	757		MAJOR CONCEPT MAP	/opt/VistA-M/Packages/Lexicon Utilit
 Lexicon Utility	file	757.001	1	CONCEPT USAGE	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.001-1+CONCEPT USAGE.zwr	67108832
 Lexicon Utility	file	757.001	2	CONCEPT USAGE	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.001-2+CONCEPT USAGE.zwr	28652012
 Lexicon Utility	file	757.01	1	EXPRESSIONS	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.01-1+EXPRESSIONS.zwr	67108801
-Lexicon Utility	file	757.01	2	EXPRESSIONS	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.01-2+EXPRESSIONS.zwr	67108824
-Lexicon Utility	file	757.01	3	EXPRESSIONS	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.01-3+EXPRESSIONS.zwr	67108864
-Lexicon Utility	file	757.01	4	EXPRESSIONS	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.01-4+EXPRESSIONS.zwr	67108845
-Lexicon Utility	file	757.01	5	EXPRESSIONS	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.01-5+EXPRESSIONS.zwr	67108857
-Lexicon Utility	file	757.01	6	EXPRESSIONS	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.01-6+EXPRESSIONS.zwr	67108854
-Lexicon Utility	file	757.01	7	EXPRESSIONS	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.01-7+EXPRESSIONS.zwr	67108832
-Lexicon Utility	file	757.01	8	EXPRESSIONS	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.01-8+EXPRESSIONS.zwr	67108863
-Lexicon Utility	file	757.01	9	EXPRESSIONS	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.01-9+EXPRESSIONS.zwr	67108852
 Lexicon Utility	file	757.01	10	EXPRESSIONS	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.01-10+EXPRESSIONS.zwr	67108843
 Lexicon Utility	file	757.01	11	EXPRESSIONS	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.01-11+EXPRESSIONS.zwr	67108822
 Lexicon Utility	file	757.01	12	EXPRESSIONS	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.01-12+EXPRESSIONS.zwr	67108859
@@ -1717,7 +1710,15 @@ Lexicon Utility	file	757.01	16	EXPRESSIONS	/opt/VistA-M/Packages/Lexicon Utility
 Lexicon Utility	file	757.01	17	EXPRESSIONS	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.01-17+EXPRESSIONS.zwr	67108856
 Lexicon Utility	file	757.01	18	EXPRESSIONS	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.01-18+EXPRESSIONS.zwr	67108859
 Lexicon Utility	file	757.01	19	EXPRESSIONS	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.01-19+EXPRESSIONS.zwr	67108834
+Lexicon Utility	file	757.01	2	EXPRESSIONS	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.01-2+EXPRESSIONS.zwr	67108824
 Lexicon Utility	file	757.01	20	EXPRESSIONS	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.01-20+EXPRESSIONS.zwr	17014215
+Lexicon Utility	file	757.01	3	EXPRESSIONS	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.01-3+EXPRESSIONS.zwr	67108864
+Lexicon Utility	file	757.01	4	EXPRESSIONS	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.01-4+EXPRESSIONS.zwr	67108845
+Lexicon Utility	file	757.01	5	EXPRESSIONS	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.01-5+EXPRESSIONS.zwr	67108857
+Lexicon Utility	file	757.01	6	EXPRESSIONS	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.01-6+EXPRESSIONS.zwr	67108854
+Lexicon Utility	file	757.01	7	EXPRESSIONS	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.01-7+EXPRESSIONS.zwr	67108832
+Lexicon Utility	file	757.01	8	EXPRESSIONS	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.01-8+EXPRESSIONS.zwr	67108863
+Lexicon Utility	file	757.01	9	EXPRESSIONS	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.01-9+EXPRESSIONS.zwr	67108852
 Lexicon Utility	file	757.011		EXPRESSION TYPE	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.011+EXPRESSION TYPE.zwr	1062
 Lexicon Utility	file	757.014		EXPRESSION FORM	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.014+EXPRESSION FORM.zwr	1152
 Lexicon Utility	file	757.018		SNOMED CT HIERARCHY	/opt/VistA-M/Packages/Lexicon Utility/Globals/757.018+SNOMED CT HIERARCHY.zwr	9681
@@ -1770,11 +1771,11 @@ Lexicon Utility	global			LEXT	/opt/VistA-M/Packages/Lexicon Utility/Globals/LEXT
 Library	global			LBRY	/opt/VistA-M/Packages/Library/Globals/LBRY.zwr	37
 List Manager	file	409.61		LIST TEMPLATE	/opt/VistA-M/Packages/List Manager/Globals/409.61+LIST TEMPLATE.zwr	541031
 MailMan	file	3.6		BULLETIN	/opt/VistA-M/Packages/MailMan/Globals/3.6+BULLETIN.zwr	250965
-MailMan	file	3.7		MAILBOX	/opt/VistA-M/Packages/MailMan/Globals/3.7+MAILBOX.zwr	1186988
+MailMan	file	3.7		MAILBOX	/opt/VistA-M/Packages/MailMan/Globals/3.7+MAILBOX.zwr	780199
 MailMan	file	3.73		MESSAGES TO BE NEW AT A LATER DATE	/opt/VistA-M/Packages/MailMan/Globals/3.73+MESSAGES TO BE NEW AT A LATER DATE.zwr	120
 MailMan	file	3.8		MAIL GROUP	/opt/VistA-M/Packages/MailMan/Globals/3.8+MAIL GROUP.zwr	204464
 MailMan	file	3.816		DISTRIBUTION LIST	/opt/VistA-M/Packages/MailMan/Globals/3.816+DISTRIBUTION LIST.zwr	271
-MailMan	file	3.9		MESSAGE	/opt/VistA-M/Packages/MailMan/Globals/3.9+MESSAGE.zwr	4015951
+MailMan	file	3.9		MESSAGE	/opt/VistA-M/Packages/MailMan/Globals/3.9+MESSAGE.zwr	4363572
 MailMan	file	4.2		DOMAIN	/opt/VistA-M/Packages/MailMan/Globals/4.2+DOMAIN.zwr	17809
 MailMan	file	4.281		INTER-UCI TRANSFER	/opt/VistA-M/Packages/MailMan/Globals/4.281+INTER-UCI TRANSFER.zwr	87
 MailMan	file	4.2995		MAILMAN OUTSTANDING FTP TRANSACTIONS	/opt/VistA-M/Packages/MailMan/Globals/4.2995+MAILMAN OUTSTANDING FTP TRANSACTIONS.zwr	124
@@ -1782,7 +1783,7 @@ MailMan	file	4.2996		INTERNET SUFFIX	/opt/VistA-M/Packages/MailMan/Globals/4.299
 MailMan	file	4.2997		REMOTE USER DIRECTORY	/opt/VistA-M/Packages/MailMan/Globals/4.2997+REMOTE USER DIRECTORY.zwr	220
 MailMan	file	4.2998		MESSAGE DELIVERY STATS	/opt/VistA-M/Packages/MailMan/Globals/4.2998+MESSAGE DELIVERY STATS.zwr	97
 MailMan	file	4.2999		MESSAGE STATISTICS	/opt/VistA-M/Packages/MailMan/Globals/4.2999+MESSAGE STATISTICS.zwr	198033
-MailMan	file	4.3		MAILMAN SITE PARAMETERS	/opt/VistA-M/Packages/MailMan/Globals/4.3+MAILMAN SITE PARAMETERS.zwr	4467
+MailMan	file	4.3		MAILMAN SITE PARAMETERS	/opt/VistA-M/Packages/MailMan/Globals/4.3+MAILMAN SITE PARAMETERS.zwr	4477
 MailMan	file	4.4		MAILMAN TIME ZONE	/opt/VistA-M/Packages/MailMan/Globals/4.4+MAILMAN TIME ZONE.zwr	2012
 MailMan	file	4.5		NETWORK TRANSACTION	/opt/VistA-M/Packages/MailMan/Globals/4.5+NETWORK TRANSACTION.zwr	36931
 MailMan	file	4.501		NETWORK SENDERS REJECTED	/opt/VistA-M/Packages/MailMan/Globals/4.501+NETWORK SENDERS REJECTED.zwr	98
@@ -1966,7 +1967,7 @@ My HealtheVet	file	2276		HEALTH EVET AUDIT LOG	/opt/VistA-M/Packages/My HealtheV
 My HealtheVet	file	2276.1		HEALTH EVET DOWNLOAD SUMMARY	/opt/VistA-M/Packages/My HealtheVet/Globals/2276.1+HEALTH EVET DOWNLOAD SUMMARY.zwr	323
 My HealtheVet	file	2276.3		HEALTH EVET DOWNLOAD EVENTS	/opt/VistA-M/Packages/My HealtheVet/Globals/2276.3+HEALTH EVET DOWNLOAD EVENTS.zwr	216
 My HealtheVet	file	2276.999		EVET LOCAL CONFIG	/opt/VistA-M/Packages/My HealtheVet/Globals/2276.999+EVET LOCAL CONFIG.zwr	173
-National Drug File	file	50.6		VA GENERIC	/opt/VistA-M/Packages/National Drug File/Globals/50.6+VA GENERIC.zwr	3259025
+National Drug File	file	50.6		VA GENERIC	/opt/VistA-M/Packages/National Drug File/Globals/50.6+VA GENERIC.zwr	3262088
 National Drug File	file	50.605		VA DRUG CLASS	/opt/VistA-M/Packages/National Drug File/Globals/50.605+VA DRUG CLASS.zwr	261915
 National Drug File	file	50.60699		MASTER DOSAGE FORM	/opt/VistA-M/Packages/National Drug File/Globals/50.60699+MASTER DOSAGE FORM.zwr	524
 National Drug File	file	50.607		DRUG UNITS	/opt/VistA-M/Packages/National Drug File/Globals/50.607+DRUG UNITS.zwr	26434
@@ -1981,23 +1982,23 @@ National Drug File	file	50.625		WARNING LABEL-ENGLISH	/opt/VistA-M/Packages/Nati
 National Drug File	file	50.626		WARNING LABEL-SPANISH	/opt/VistA-M/Packages/National Drug File/Globals/50.626+WARNING LABEL-SPANISH.zwr	92
 National Drug File	file	50.627		WARNING LABEL MAP	/opt/VistA-M/Packages/National Drug File/Globals/50.627+WARNING LABEL MAP.zwr	84
 National Drug File	file	50.64		VA DISPENSE UNIT	/opt/VistA-M/Packages/National Drug File/Globals/50.64+VA DISPENSE UNIT.zwr	3959
-National Drug File	file	50.67	1	NDC-UPN	/opt/VistA-M/Packages/National Drug File/Globals/50.67-1+NDC-UPN.zwr	67108833
-National Drug File	file	50.67	2	NDC-UPN	/opt/VistA-M/Packages/National Drug File/Globals/50.67-2+NDC-UPN.zwr	20528023
-National Drug File	file	50.68		VA PRODUCT	/opt/VistA-M/Packages/National Drug File/Globals/50.68+VA PRODUCT.zwr	55500818
+National Drug File	file	50.67	1	NDC-UPN	/opt/VistA-M/Packages/National Drug File/Globals/50.67-1+NDC-UPN.zwr	67108826
+National Drug File	file	50.67	2	NDC-UPN	/opt/VistA-M/Packages/National Drug File/Globals/50.67-2+NDC-UPN.zwr	20708117
+National Drug File	file	50.68		VA PRODUCT	/opt/VistA-M/Packages/National Drug File/Globals/50.68+VA PRODUCT.zwr	55581206
 National Drug File	file	51.2		MEDICATION ROUTES	/opt/VistA-M/Packages/National Drug File/Globals/51.2+MEDICATION ROUTES.zwr	62332
-National Drug File	file	55.95		DRUG MANUFACTURER	/opt/VistA-M/Packages/National Drug File/Globals/55.95+DRUG MANUFACTURER.zwr	584550
-National Drug File	file	56	1	DRUG INTERACTION	/opt/VistA-M/Packages/National Drug File/Globals/56-1+DRUG INTERACTION.zwr	67108841
-National Drug File	file	56	2	DRUG INTERACTION	/opt/VistA-M/Packages/National Drug File/Globals/56-2+DRUG INTERACTION.zwr	67108859
-National Drug File	file	56	3	DRUG INTERACTION	/opt/VistA-M/Packages/National Drug File/Globals/56-3+DRUG INTERACTION.zwr	67108847
-National Drug File	file	56	4	DRUG INTERACTION	/opt/VistA-M/Packages/National Drug File/Globals/56-4+DRUG INTERACTION.zwr	67108827
-National Drug File	file	56	5	DRUG INTERACTION	/opt/VistA-M/Packages/National Drug File/Globals/56-5+DRUG INTERACTION.zwr	67108823
-National Drug File	file	56	6	DRUG INTERACTION	/opt/VistA-M/Packages/National Drug File/Globals/56-6+DRUG INTERACTION.zwr	67108864
+National Drug File	file	55.95		DRUG MANUFACTURER	/opt/VistA-M/Packages/National Drug File/Globals/55.95+DRUG MANUFACTURER.zwr	585689
+National Drug File	file	56	1	DRUG INTERACTION	/opt/VistA-M/Packages/National Drug File/Globals/56-1+DRUG INTERACTION.zwr	67108853
+National Drug File	file	56	10	DRUG INTERACTION	/opt/VistA-M/Packages/National Drug File/Globals/56-10+DRUG INTERACTION.zwr	67108847
+National Drug File	file	56	11	DRUG INTERACTION	/opt/VistA-M/Packages/National Drug File/Globals/56-11+DRUG INTERACTION.zwr	18180397
+National Drug File	file	56	2	DRUG INTERACTION	/opt/VistA-M/Packages/National Drug File/Globals/56-2+DRUG INTERACTION.zwr	67108823
+National Drug File	file	56	3	DRUG INTERACTION	/opt/VistA-M/Packages/National Drug File/Globals/56-3+DRUG INTERACTION.zwr	67108828
+National Drug File	file	56	4	DRUG INTERACTION	/opt/VistA-M/Packages/National Drug File/Globals/56-4+DRUG INTERACTION.zwr	67108830
+National Drug File	file	56	5	DRUG INTERACTION	/opt/VistA-M/Packages/National Drug File/Globals/56-5+DRUG INTERACTION.zwr	67108838
+National Drug File	file	56	6	DRUG INTERACTION	/opt/VistA-M/Packages/National Drug File/Globals/56-6+DRUG INTERACTION.zwr	67108825
 National Drug File	file	56	7	DRUG INTERACTION	/opt/VistA-M/Packages/National Drug File/Globals/56-7+DRUG INTERACTION.zwr	67108853
-National Drug File	file	56	8	DRUG INTERACTION	/opt/VistA-M/Packages/National Drug File/Globals/56-8+DRUG INTERACTION.zwr	67108859
-National Drug File	file	56	9	DRUG INTERACTION	/opt/VistA-M/Packages/National Drug File/Globals/56-9+DRUG INTERACTION.zwr	67108837
-National Drug File	file	56	10	DRUG INTERACTION	/opt/VistA-M/Packages/National Drug File/Globals/56-10+DRUG INTERACTION.zwr	67108843
-National Drug File	file	56	11	DRUG INTERACTION	/opt/VistA-M/Packages/National Drug File/Globals/56-11+DRUG INTERACTION.zwr	17857149
-National Drug File	file	57.23		PPS-N UPDATE CONTROL	/opt/VistA-M/Packages/National Drug File/Globals/57.23+PPS-N UPDATE CONTROL.zwr	139104
+National Drug File	file	56	8	DRUG INTERACTION	/opt/VistA-M/Packages/National Drug File/Globals/56-8+DRUG INTERACTION.zwr	67108833
+National Drug File	file	56	9	DRUG INTERACTION	/opt/VistA-M/Packages/National Drug File/Globals/56-9+DRUG INTERACTION.zwr	67108841
+National Drug File	file	57.23		PPS-N UPDATE CONTROL	/opt/VistA-M/Packages/National Drug File/Globals/57.23+PPS-N UPDATE CONTROL.zwr	140421
 National Drug File	global			PSNNDC	/opt/VistA-M/Packages/National Drug File/Globals/PSNNDC.zwr	93
 Network Health Exchange	file	537000		VAMC NETWORK HEALTH EXCHANGE	/opt/VistA-M/Packages/Network Health Exchange/Globals/537000+VAMC NETWORK HEALTH EXCHANGE.zwr	157
 Network Health Exchange	file	537010		VAMC NETWORK PATIENT	/opt/VistA-M/Packages/Network Health Exchange/Globals/537010+VAMC NETWORK PATIENT.zwr	93
@@ -2365,9 +2366,9 @@ Patient Data Exchange	file	394.86		VAQ - AUTO-NUMBERING	/opt/VistA-M/Packages/Pa
 Patient Data Exchange	file	394.87		VAQ - WORKLOAD	/opt/VistA-M/Packages/Patient Data Exchange/Globals/394.87+VAQ - WORKLOAD.zwr	81
 Patient Data Exchange	file	394.88		VAQ - WORK	/opt/VistA-M/Packages/Patient Data Exchange/Globals/394.88+VAQ - WORK.zwr	3849
 Pharmacy Benefits Management	file	59.9		PBM PATIENT DEMOGRAPHICS	/opt/VistA-M/Packages/Pharmacy Benefits Management/Globals/59.9+PBM PATIENT DEMOGRAPHICS.zwr	66082
-Pharmacy Data Management	file	50		DRUG	/opt/VistA-M/Packages/Pharmacy Data Management/Globals/50+DRUG.zwr	4172927
+Pharmacy Data Management	file	50		DRUG	/opt/VistA-M/Packages/Pharmacy Data Management/Globals/50+DRUG.zwr	4173252
 Pharmacy Data Management	file	50.4		DRUG ELECTROLYTES	/opt/VistA-M/Packages/Pharmacy Data Management/Globals/50.4+DRUG ELECTROLYTES.zwr	252
-Pharmacy Data Management	file	50.416		DRUG INGREDIENTS	/opt/VistA-M/Packages/Pharmacy Data Management/Globals/50.416+DRUG INGREDIENTS.zwr	7920041
+Pharmacy Data Management	file	50.416		DRUG INGREDIENTS	/opt/VistA-M/Packages/Pharmacy Data Management/Globals/50.416+DRUG INGREDIENTS.zwr	7925813
 Pharmacy Data Management	file	50.5		DRUG CLASSIFICATION	/opt/VistA-M/Packages/Pharmacy Data Management/Globals/50.5+DRUG CLASSIFICATION.zwr	85
 Pharmacy Data Management	file	50.606		DOSAGE FORM	/opt/VistA-M/Packages/Pharmacy Data Management/Globals/50.606+DOSAGE FORM.zwr	154202
 Pharmacy Data Management	file	50.7		PHARMACY ORDERABLE ITEM	/opt/VistA-M/Packages/Pharmacy Data Management/Globals/50.7+PHARMACY ORDERABLE ITEM.zwr	662630
@@ -2472,7 +2473,7 @@ Quasar	file	509850.6		A&SP CLINIC VISIT	/opt/VistA-M/Packages/Quasar/Globals/509
 Quasar	file	509850.7		A&SP WORKLOAD	/opt/VistA-M/Packages/Quasar/Globals/509850.7+A&SP WORKLOAD.zwr	82
 Quasar	file	509850.8		A&SP SITE PARAMETERS	/opt/VistA-M/Packages/Quasar/Globals/509850.8+A&SP SITE PARAMETERS.zwr	493
 Quasar	file	509850.9		AUDIOMETRIC EXAM DATA	/opt/VistA-M/Packages/Quasar/Globals/509850.9+AUDIOMETRIC EXAM DATA.zwr	99
-RPC Broker	file	8994		REMOTE PROCEDURE	/opt/VistA-M/Packages/RPC Broker/Globals/8994+REMOTE PROCEDURE.zwr	6510956
+RPC Broker	file	8994		REMOTE PROCEDURE	/opt/VistA-M/Packages/RPC Broker/Globals/8994+REMOTE PROCEDURE.zwr	6512697
 RPC Broker	file	8994.1		RPC BROKER SITE PARAMETERS	/opt/VistA-M/Packages/RPC Broker/Globals/8994.1+RPC BROKER SITE PARAMETERS.zwr	438
 RPC Broker	global			XWB	/opt/VistA-M/Packages/RPC Broker/Globals/XWB.zwr	149
 Radiology Nuclear Medicine	file	34		CONTRACT-SHARING AGREEMENTS	/opt/VistA-M/Packages/Radiology Nuclear Medicine/Globals/34+CONTRACT-SHARING AGREEMENTS.zwr	547
@@ -2745,7 +2746,7 @@ Remote Order Entry System	file	791812		TRANSMISSION BATCH	/opt/VistA-M/Packages/
 Remote Order Entry System	file	791813		REMOTE ORDER-ENTRY PARAMETER	/opt/VistA-M/Packages/Remote Order Entry System/Globals/791813+REMOTE ORDER-ENTRY PARAMETER.zwr	1023
 Remote Order Entry System	global			RMPF	/opt/VistA-M/Packages/Remote Order Entry System/Globals/RMPF.zwr	38
 Scheduling	file	40.6		SD TELE HEALTH STOP CODE FILE	/opt/VistA-M/Packages/Scheduling/Globals/40.6+SD TELE HEALTH STOP CODE FILE.zwr	15082
-Scheduling	file	40.7		CLINIC STOP	/opt/VistA-M/Packages/Scheduling/Globals/40.7+CLINIC STOP.zwr	73948
+Scheduling	file	40.7		CLINIC STOP	/opt/VistA-M/Packages/Scheduling/Globals/40.7+CLINIC STOP.zwr	73955
 Scheduling	file	40.9		LOCATION TYPE	/opt/VistA-M/Packages/Scheduling/Globals/40.9+LOCATION TYPE.zwr	1482
 Scheduling	file	403.35		SCHEDULING USER PREFERENCE	/opt/VistA-M/Packages/Scheduling/Globals/403.35+SCHEDULING USER PREFERENCE.zwr	105
 Scheduling	file	403.43		SCHEDULING EVENT	/opt/VistA-M/Packages/Scheduling/Globals/403.43+SCHEDULING EVENT.zwr	6335
@@ -2787,7 +2788,7 @@ Scheduling	file	404.98		SCHEDULING CONVERSION SPECIFICATION TEMPLATE	/opt/VistA-
 Scheduling	file	407.5		LETTER	/opt/VistA-M/Packages/Scheduling/Globals/407.5+LETTER.zwr	2688
 Scheduling	file	407.6		LETTER TYPE	/opt/VistA-M/Packages/Scheduling/Globals/407.6+LETTER TYPE.zwr	463
 Scheduling	file	409.1		APPOINTMENT TYPE	/opt/VistA-M/Packages/Scheduling/Globals/409.1+APPOINTMENT TYPE.zwr	3705
-Scheduling	file	409.2		CANCELLATION REASONS	/opt/VistA-M/Packages/Scheduling/Globals/409.2+CANCELLATION REASONS.zwr	1929
+Scheduling	file	409.2		CANCELLATION REASONS	/opt/VistA-M/Packages/Scheduling/Globals/409.2+CANCELLATION REASONS.zwr	2105
 Scheduling	file	409.3		SD WAIT LIST	/opt/VistA-M/Packages/Scheduling/Globals/409.3+SD WAIT LIST.zwr	380804
 Scheduling	file	409.31		SD WL SERVICE-SPECIALTY	/opt/VistA-M/Packages/Scheduling/Globals/409.31+SD WL SERVICE-SPECIALTY.zwr	932
 Scheduling	file	409.32		SD WL CLINIC LOCATION	/opt/VistA-M/Packages/Scheduling/Globals/409.32+SD WL CLINIC LOCATION.zwr	1307
@@ -2889,7 +2890,7 @@ Surgery	file	135.3		PATIENT MOOD 	/opt/VistA-M/Packages/Surgery/Globals/135.3+PA
 Surgery	file	135.4		PATIENT CONSCIOUSNESS	/opt/VistA-M/Packages/Surgery/Globals/135.4+PATIENT CONSCIOUSNESS.zwr	884
 Surgery	file	136		SURGERY PROCEDURE-DIAGNOSIS CODES	/opt/VistA-M/Packages/Surgery/Globals/136+SURGERY PROCEDURE-DIAGNOSIS CODES.zwr	872
 Surgery	file	136.5		PERIOPERATIVE OCCURRENCE CATEGORY	/opt/VistA-M/Packages/Surgery/Globals/136.5+PERIOPERATIVE OCCURRENCE CATEGORY.zwr	45485
-Surgery	file	137		CPT EXCLUSIONS	/opt/VistA-M/Packages/Surgery/Globals/137+CPT EXCLUSIONS.zwr	74955
+Surgery	file	137		CPT EXCLUSIONS	/opt/VistA-M/Packages/Surgery/Globals/137+CPT EXCLUSIONS.zwr	74938
 Surgery	file	137.45		LOCAL SURGICAL SPECIALTY	/opt/VistA-M/Packages/Surgery/Globals/137.45+LOCAL SURGICAL SPECIALTY.zwr	2200
 Surgery	file	138		ELECTROGROUND POSITIONS	/opt/VistA-M/Packages/Surgery/Globals/138+ELECTROGROUND POSITIONS.zwr	1424
 Surgery	file	139.2		RISK MODEL LAB TEST	/opt/VistA-M/Packages/Surgery/Globals/139.2+RISK MODEL LAB TEST.zwr	4087
@@ -2999,9 +3000,9 @@ Utilization Management Rollup	file	538		UTILIZATION MANAGEMENT ROLLUP	/opt/VistA
 Utilization Review	file	513.8		UTILIZATION REVIEW	/opt/VistA-M/Packages/Utilization Review/Globals/513.8+UTILIZATION REVIEW.zwr	3186
 Utilization Review	file	513.85		UTILIZATION REVIEW CONFIGURATION	/opt/VistA-M/Packages/Utilization Review/Globals/513.85+UTILIZATION REVIEW CONFIGURATION.zwr	261
 Utilization Review	global			PRMQ	/opt/VistA-M/Packages/Utilization Review/Globals/PRMQ.zwr	37
-VA FileMan	file	0.11		INDEX	/opt/VistA-M/Packages/VA FileMan/Globals/0.11+INDEX.zwr	1935448
+VA FileMan	file	0.11		INDEX	/opt/VistA-M/Packages/VA FileMan/Globals/0.11+INDEX.zwr	1935446
 VA FileMan	file	0.2		DESTINATION	/opt/VistA-M/Packages/VA FileMan/Globals/0.2+DESTINATION.zwr	345
-VA FileMan	file	0.31		KEY	/opt/VistA-M/Packages/VA FileMan/Globals/0.31+KEY.zwr	69456
+VA FileMan	file	0.31		KEY	/opt/VistA-M/Packages/VA FileMan/Globals/0.31+KEY.zwr	69455
 VA FileMan	file	0.4		PRINT TEMPLATE	/opt/VistA-M/Packages/VA FileMan/Globals/0.4+PRINT TEMPLATE.zwr	1965372
 VA FileMan	file	0.401		SORT TEMPLATE	/opt/VistA-M/Packages/VA FileMan/Globals/0.401+SORT TEMPLATE.zwr	1645612
 VA FileMan	file	0.402		INPUT TEMPLATE	/opt/VistA-M/Packages/VA FileMan/Globals/0.402+INPUT TEMPLATE.zwr	2599555
@@ -3019,8 +3020,9 @@ VA FileMan	file	0.85		LANGUAGE	/opt/VistA-M/Packages/VA FileMan/Globals/0.85+LAN
 VA FileMan	file	0.86		DATA TYPE PROPERTY	/opt/VistA-M/Packages/VA FileMan/Globals/0.86+DATA TYPE PROPERTY.zwr	3256
 VA FileMan	file	0.87		DATA TYPE METHOD	/opt/VistA-M/Packages/VA FileMan/Globals/0.87+DATA TYPE METHOD.zwr	1423
 VA FileMan	file	0.9		META DATA DICTIONARY	/opt/VistA-M/Packages/VA FileMan/Globals/0.9+META DATA DICTIONARY.zwr	36814639
-VA FileMan	file	1		FILE	/opt/VistA-M/Packages/VA FileMan/Globals/1+FILE.zwr	2802437
-VA FileMan	file	1.1		AUDIT	/opt/VistA-M/Packages/VA FileMan/Globals/1.1+AUDIT.zwr	66678622
+VA FileMan	file	1		FILE	/opt/VistA-M/Packages/VA FileMan/Globals/1+FILE.zwr	2803293
+VA FileMan	file	1.1	1	AUDIT	/opt/VistA-M/Packages/VA FileMan/Globals/1.1-1+AUDIT.zwr	67108862
+VA FileMan	file	1.1	2	AUDIT	/opt/VistA-M/Packages/VA FileMan/Globals/1.1-2+AUDIT.zwr	1703904
 VA FileMan	file	1.11		ARCHIVAL ACTIVITY	/opt/VistA-M/Packages/VA FileMan/Globals/1.11+ARCHIVAL ACTIVITY.zwr	648
 VA FileMan	file	1.12		FILEGRAM HISTORY	/opt/VistA-M/Packages/VA FileMan/Globals/1.12+FILEGRAM HISTORY.zwr	83
 VA FileMan	file	1.13		FILEGRAM ERROR LOG	/opt/VistA-M/Packages/VA FileMan/Globals/1.13+FILEGRAM ERROR LOG.zwr	82
@@ -3044,7 +3046,7 @@ VA FileMan	file	1.61		APPLICATION ACTION	/opt/VistA-M/Packages/VA FileMan/Global
 VA FileMan	file	1.62		POLICY FUNCTION	/opt/VistA-M/Packages/VA FileMan/Globals/1.62+POLICY FUNCTION.zwr	2059
 VA FileMan	file	1.71		WORLD TIMEZONES	/opt/VistA-M/Packages/VA FileMan/Globals/1.71+WORLD TIMEZONES.zwr	17095
 VA FileMan	file	1.72		WORLD DAYLIGHT SAVINGS	/opt/VistA-M/Packages/VA FileMan/Globals/1.72+WORLD DAYLIGHT SAVINGS.zwr	18084
-VA FileMan	global			DD	/opt/VistA-M/Packages/VA FileMan/Globals/DD.zwr	45634830
+VA FileMan	global			DD	/opt/VistA-M/Packages/VA FileMan/Globals/DD.zwr	45644492
 VA FileMan	global			DI	/opt/VistA-M/Packages/VA FileMan/Globals/DI.zwr	34
 VA FileMan	global			DIZ	/opt/VistA-M/Packages/VA FileMan/Globals/DIZ.zwr	35
 VA FileMan	global			DMRTRACE	/opt/VistA-M/Packages/VA FileMan/Globals/DMRTRACE.zwr	112797
@@ -3078,7 +3080,7 @@ VPE Shell	file	19200.111		VPE PERSON	/opt/VistA-M/Packages/VPE Shell/Globals/192
 VPE Shell	file	19200.112		VPE RTN VERSIONING	/opt/VistA-M/Packages/VPE Shell/Globals/19200.112+VPE RTN VERSIONING.zwr	94
 VPE Shell	file	19200.113		VPE PROGRAMMER CALL	/opt/VistA-M/Packages/VPE Shell/Globals/19200.113+VPE PROGRAMMER CALL.zwr	5247
 VPE Shell	file	19200.114		VPE PROGRAMMER PARAMETER	/opt/VistA-M/Packages/VPE Shell/Globals/19200.114+VPE PROGRAMMER PARAMETER.zwr	43142
-VPE Shell	global			XVEMS	/opt/VistA-M/Packages/VPE Shell/Globals/XVEMS.zwr	346764
+VPE Shell	global			XVEMS	/opt/VistA-M/Packages/VPE Shell/Globals/XVEMS.zwr	347070
 Vendor - ISI	file	23450		ISIJ DYNAMIC QUERY STATS	/opt/VistA-M/Packages/Vendor - ISI/Globals/23450+ISIJ DYNAMIC QUERY STATS.zwr	98
 Vendor - ISI	file	23451		ISIJ FAVORITES	/opt/VistA-M/Packages/Vendor - ISI/Globals/23451+ISIJ FAVORITES.zwr	78
 Vendor - ISI	file	23453		ISIJ EXAM NOTES	/opt/VistA-M/Packages/Vendor - ISI/Globals/23453+ISIJ EXAM NOTES.zwr	79
