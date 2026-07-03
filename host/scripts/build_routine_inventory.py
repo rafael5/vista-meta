@@ -24,6 +24,13 @@ import tsvio
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 HOST_SNAPSHOT = PROJECT_ROOT / "vista/vista-m-host"
 MANIFEST = HOST_SNAPSHOT / "MANIFEST.tsv"
+# R4: %-routines synced from the image's VistA dirs (ZTMGRSET set in
+# /opt/VistA-M/o plus /opt/VistA-M/r strays) — NEVER from $ydb_dist,
+# whose _*.m are YottaDB's own utilities, not VistA. The census
+# boundary is membership in this mini-manifest.
+PERCENT_DIR = HOST_SNAPSHOT / "PercentRoutines"
+PERCENT_MANIFEST = PERCENT_DIR / "MANIFEST.tsv"
+PACKAGES_CSV = PROJECT_ROOT / "docs/Packages.csv"
 OUT_DIR = PROJECT_ROOT / "vista/export/code-model"
 ROUTINES_TSV = OUT_DIR / "routines.tsv"
 PACKAGES_TSV = OUT_DIR / "packages.tsv"
@@ -100,6 +107,47 @@ def scan_routine(host_path: Path) -> dict:
     }
 
 
+def version_line_package(version_line: str) -> str:
+    """Extract the package name from a VistA version line.
+
+    Convention: ` ;;<version>;<PACKAGE NAME>;<patches>;<date>` — the
+    package is the 2nd `;;`-payload field. Returns "" when absent.
+    """
+    s = version_line.strip()
+    if not s.startswith(";;"):
+        return ""
+    parts = s.split(";")
+    # parts: ['', '', '<version>', '<package>', ...]
+    return parts[3].strip() if len(parts) > 3 else ""
+
+
+def percent_rows(percent_dir: Path, name_to_dir: dict[str, str]) -> list[dict]:
+    """Census rows for the %-routines listed in the mini-manifest.
+
+    Package attribution: the routine's own version line names its VA
+    package (e.g. `;;22.2;VA FileMan;…`), mapped case-insensitively
+    through docs/Packages.csv to the canonical directory name.
+    Non-VA packages (e.g. YottaDB's Octo mapper) stay blank (null).
+    """
+    manifest = percent_dir / "MANIFEST.tsv"
+    rows: list[dict] = []
+    with manifest.open(newline="", encoding="utf-8") as fh:
+        for entry in csv.DictReader(fh, delimiter="\t"):
+            name, src = entry["routine"], entry["source"]
+            host_path = percent_dir / Path(src).name
+            features = scan_routine(host_path)
+            pkg = name_to_dir.get(
+                version_line_package(features["version_line"]).upper(), "")
+            rows.append({
+                "routine_name": name,
+                "package": pkg,
+                "source_path": src,
+                "is_percent_routine": "Y",
+                **features,
+            })
+    return rows
+
+
 def main() -> int:
     if not MANIFEST.exists():
         print(
@@ -163,6 +211,29 @@ def main() -> int:
         )
         return 1
 
+    # R4: the %-namespace census. Required — a census without it is
+    # the measured pre-v1 defect (39,330 routines, zero %-routines).
+    if not PERCENT_MANIFEST.exists():
+        print(
+            f"ERROR: {PERCENT_MANIFEST} not found. "
+            "Run `make sync-routines` first (R4 %-routine census).",
+            file=sys.stderr,
+        )
+        return 1
+    from build_package_namespace import parse_packages_csv  # local import
+    name_to_dir = {
+        e.get("package_name", "").upper(): d
+        for d, e in parse_packages_csv(PACKAGES_CSV).items()
+        if e.get("package_name")
+    }
+    pct = percent_rows(PERCENT_DIR, name_to_dir)
+    dup = {r["routine_name"] for r in pct} & set(seen)
+    if dup:
+        print(f"ERROR: %-routines collide with census: {sorted(dup)}",
+              file=sys.stderr)
+        return 1
+    rows.extend(pct)
+
     tsvio.write_spec(ROUTINES_TSV, ROUTINES_SPEC, rows)
 
     pkg_stats: dict[str, dict] = defaultdict(
@@ -174,6 +245,10 @@ def main() -> int:
         }
     )
     for r in rows:
+        if not r["package"]:
+            # Unattributed %-routines (non-VA, e.g. YDBOcto) stay out
+            # of the per-package aggregate; packages.tsv PK is package.
+            continue
         s = pkg_stats[r["package"]]
         s["routine_count"] += 1
         if r["is_percent_routine"] == "Y":
