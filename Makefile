@@ -306,8 +306,14 @@ capture-extraction: ## Capture R3 engine identity/state sidecar (V1.6)
 
 .PHONY: finals-owner
 finals-owner: ## Reclaim finals dirs for the host (pre-V1 entrypoints chown them to vehu)
-	$(DOCKER) exec -u root $(CONTAINER) chown -R 1000:1000 \
-		/home/vehu/export/data-model /home/vehu/export/code-model
+	$(DOCKER) exec -u root $(CONTAINER) sh -c 'mkdir -p /home/vehu/export/meta && \
+		chown -R 1000:1000 /home/vehu/export/data-model \
+		/home/vehu/export/code-model /home/vehu/export/meta'
+
+.PHONY: column-manifest
+column-manifest: ## Emit + verify the typed column manifest (V3/R1)
+	/usr/bin/python3 host/scripts/build_column_manifest.py
+	/usr/bin/python3 host/scripts/build_column_manifest.py --check
 
 .PHONY: emit-all
 emit-all: ## Single-run emission of all 24 finals from one engine state (F7)
@@ -325,7 +331,8 @@ emit-all: ## Single-run emission of all 24 finals from one engine state (F7)
 	$(MAKE) package-data package-piks package-namespace
 	$(MAKE) package-manifest routines-comprehensive package-edge-matrix
 	$(MAKE) validate-xindex
-	@echo "emit-all complete: 24 finals from one extraction."
+	$(MAKE) column-manifest
+	@echo "emit-all complete: 24 finals + typed manifest from one extraction."
 
 .PHONY: dump-files dump-piks dump-field-piks
 .PHONY: raw-dir

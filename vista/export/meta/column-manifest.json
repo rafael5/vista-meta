@@ -1,0 +1,1363 @@
+{
+  "files": {
+    "code-model/options.tsv": {
+      "columns": [
+        {
+          "key_role": "pk",
+          "name": "ien",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "name",
+          "nullable": false,
+          "shared_vocabulary": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "menu_text",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "type",
+          "nullable": true,
+          "type": "enum"
+        },
+        {
+          "key_role": "none",
+          "name": "package",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "routine_raw",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "tag",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "fk_target": "routines.tsv:routine_name",
+          "key_role": "fk",
+          "name": "routine_name",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "fk_target": "packages.tsv:package",
+          "key_role": "fk",
+          "name": "package_dir",
+          "nullable": true,
+          "type": "str"
+        }
+      ],
+      "pk": [
+        "ien"
+      ]
+    },
+    "code-model/package-data.tsv": {
+      "columns": [
+        {
+          "fk_target": "packages.tsv:package",
+          "key_role": "pk",
+          "name": "package",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "pk",
+          "name": "kind",
+          "nullable": false,
+          "type": "enum"
+        },
+        {
+          "fk_target": "files.tsv:file_number",
+          "key_role": "pk",
+          "name": "file_number",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "key_role": "pk",
+          "name": "chunk",
+          "nullable": true,
+          "type": "int"
+        },
+        {
+          "key_role": "pk",
+          "name": "entity_name",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "source_path",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "byte_size",
+          "nullable": false,
+          "type": "int"
+        }
+      ],
+      "pk": [
+        "package",
+        "kind",
+        "file_number",
+        "chunk",
+        "entity_name"
+      ]
+    },
+    "code-model/package-edge-matrix.tsv": {
+      "columns": [
+        {
+          "fk_target": "packages.tsv:package",
+          "key_role": "pk",
+          "name": "source_package",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "fk_target": "packages.tsv:package",
+          "key_role": "pk",
+          "name": "dest_package",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "call_edges",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "distinct_caller_routines",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "distinct_callee_routines",
+          "nullable": false,
+          "type": "int"
+        }
+      ],
+      "pk": [
+        "source_package",
+        "dest_package"
+      ]
+    },
+    "code-model/package-manifest.tsv": {
+      "columns": [
+        {
+          "fk_target": "packages.tsv:package",
+          "key_role": "pk",
+          "name": "package",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "routine_count",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "total_lines",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "files_shipped",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "p_files",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "i_files",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "k_files",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "s_files",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "rpc_routines",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "option_routines",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "distinct_globals_touched",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "outbound_edges",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "outbound_cross_pkg",
+          "nullable": false,
+          "type": "int"
+        }
+      ],
+      "pk": [
+        "package"
+      ]
+    },
+    "code-model/package-namespace.tsv": {
+      "columns": [
+        {
+          "fk_target": "packages.tsv:package",
+          "key_role": "pk",
+          "name": "package",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "package_name",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "namespace",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "prefixes",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "app_code",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "vdl_id",
+          "nullable": true,
+          "type": "int"
+        }
+      ],
+      "pk": [
+        "package"
+      ]
+    },
+    "code-model/package-piks-summary.tsv": {
+      "columns": [
+        {
+          "fk_target": "packages.tsv:package",
+          "key_role": "pk",
+          "name": "package",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "p_files",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "i_files",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "k_files",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "s_files",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "unclassified",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "total_distinct_files",
+          "nullable": false,
+          "type": "int"
+        }
+      ],
+      "pk": [
+        "package"
+      ]
+    },
+    "code-model/packages.tsv": {
+      "columns": [
+        {
+          "key_role": "pk",
+          "name": "package",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "routine_count",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "percent_routine_count",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "total_lines",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "total_bytes",
+          "nullable": false,
+          "type": "int"
+        }
+      ],
+      "pk": [
+        "package"
+      ]
+    },
+    "code-model/protocol-calls.tsv": {
+      "columns": [
+        {
+          "fk_target": "protocols.tsv:name",
+          "key_role": "pk",
+          "name": "protocol_name",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "protocol_package",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "key_role": "pk",
+          "name": "action_kind",
+          "nullable": false,
+          "type": "enum"
+        },
+        {
+          "key_role": "pk",
+          "name": "callee_tag",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "fk_target": "routines.tsv:routine_name",
+          "key_role": "pk",
+          "name": "callee_routine",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "pk",
+          "name": "call_kind",
+          "nullable": false,
+          "type": "enum"
+        },
+        {
+          "key_role": "none",
+          "name": "ref_count",
+          "nullable": false,
+          "type": "int"
+        }
+      ],
+      "pk": [
+        "protocol_name",
+        "action_kind",
+        "callee_tag",
+        "callee_routine",
+        "call_kind"
+      ]
+    },
+    "code-model/protocols.tsv": {
+      "columns": [
+        {
+          "key_role": "pk",
+          "name": "ien",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "name",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "item_text",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "type",
+          "nullable": true,
+          "type": "enum"
+        },
+        {
+          "key_role": "none",
+          "name": "package",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "entry_action",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "exit_action",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "fk_target": "packages.tsv:package",
+          "key_role": "fk",
+          "name": "package_dir",
+          "nullable": true,
+          "type": "str"
+        }
+      ],
+      "pk": [
+        "ien"
+      ]
+    },
+    "code-model/routine-calls.tsv": {
+      "columns": [
+        {
+          "fk_target": "routines.tsv:routine_name",
+          "key_role": "pk",
+          "name": "caller_routine",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "fk_target": "packages.tsv:package",
+          "key_role": "fk",
+          "name": "caller_package",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "pk",
+          "name": "callee_tag",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "fk_target": "routines.tsv:routine_name",
+          "key_role": "pk",
+          "name": "callee_routine",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "pk",
+          "name": "kind",
+          "nullable": false,
+          "type": "enum"
+        },
+        {
+          "key_role": "none",
+          "name": "ref_count",
+          "nullable": false,
+          "type": "int"
+        }
+      ],
+      "pk": [
+        "caller_routine",
+        "callee_tag",
+        "callee_routine",
+        "kind"
+      ]
+    },
+    "code-model/routine-globals.tsv": {
+      "columns": [
+        {
+          "fk_target": "routines.tsv:routine_name",
+          "key_role": "pk",
+          "name": "routine_name",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "fk_target": "packages.tsv:package",
+          "key_role": "fk",
+          "name": "package",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "pk",
+          "name": "global_name",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "ref_count",
+          "nullable": false,
+          "type": "int"
+        }
+      ],
+      "pk": [
+        "routine_name",
+        "global_name"
+      ]
+    },
+    "code-model/routines-comprehensive.tsv": {
+      "columns": [
+        {
+          "fk_target": "routines.tsv:routine_name",
+          "key_role": "pk",
+          "name": "routine_name",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "fk_target": "packages.tsv:package",
+          "key_role": "fk",
+          "name": "package",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "source_path",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "line_count",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "byte_size",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "tag_count",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "comment_line_count",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "version_line",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "is_percent_routine",
+          "nullable": false,
+          "type": "bool"
+        },
+        {
+          "key_role": "none",
+          "name": "in_file_9_8",
+          "nullable": false,
+          "type": "bool"
+        },
+        {
+          "key_role": "none",
+          "name": "file_9_8_type",
+          "nullable": true,
+          "type": "enum"
+        },
+        {
+          "key_role": "none",
+          "name": "rpc_count",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "option_count",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "protocol_invoked_count",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "out_degree",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "in_degree",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "out_calls_total",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "in_calls_total",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "distinct_globals_touched",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "global_ref_total",
+          "nullable": false,
+          "type": "int"
+        }
+      ],
+      "pk": [
+        "routine_name"
+      ]
+    },
+    "code-model/routines.tsv": {
+      "columns": [
+        {
+          "key_role": "pk",
+          "name": "routine_name",
+          "nullable": false,
+          "shared_vocabulary": true,
+          "type": "str"
+        },
+        {
+          "fk_target": "packages.tsv:package",
+          "key_role": "fk",
+          "name": "package",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "source_path",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "line_count",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "byte_size",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "first_line_comment",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "version_line",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "tag_count",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "comment_line_count",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "is_percent_routine",
+          "nullable": false,
+          "type": "bool"
+        }
+      ],
+      "pk": [
+        "routine_name"
+      ]
+    },
+    "code-model/rpcs.tsv": {
+      "columns": [
+        {
+          "key_role": "pk",
+          "name": "ien",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "name",
+          "nullable": false,
+          "shared_vocabulary": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "tag",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "fk_target": "routines.tsv:routine_name",
+          "key_role": "fk",
+          "name": "routine_name",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "return_type",
+          "nullable": true,
+          "type": "enum"
+        },
+        {
+          "key_role": "none",
+          "name": "return_type_label",
+          "nullable": true,
+          "type": "enum"
+        },
+        {
+          "key_role": "none",
+          "name": "availability",
+          "nullable": true,
+          "type": "enum"
+        },
+        {
+          "key_role": "none",
+          "name": "inactive",
+          "nullable": true,
+          "type": "enum"
+        },
+        {
+          "key_role": "none",
+          "name": "inactive_label",
+          "nullable": false,
+          "type": "enum"
+        },
+        {
+          "key_role": "none",
+          "name": "version",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "package",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "fk_target": "packages.tsv:package",
+          "key_role": "fk",
+          "name": "package_dir",
+          "nullable": true,
+          "type": "str"
+        }
+      ],
+      "pk": [
+        "ien"
+      ]
+    },
+    "code-model/vista-file-9-8.tsv": {
+      "columns": [
+        {
+          "key_role": "pk",
+          "name": "ien",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "fk_target": "routines.tsv:routine_name",
+          "key_role": "fk",
+          "name": "routine_name",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "type",
+          "nullable": true,
+          "type": "enum"
+        },
+        {
+          "key_role": "none",
+          "name": "byte_size",
+          "nullable": true,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "rsum_value",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "checksum_value",
+          "nullable": true,
+          "type": "str"
+        }
+      ],
+      "pk": [
+        "ien"
+      ]
+    },
+    "code-model/xindex-errors.tsv": {
+      "columns": [
+        {
+          "fk_target": "routines.tsv:routine_name",
+          "key_role": "pk",
+          "name": "routine_name",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "pk",
+          "name": "entry_index",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "line_text",
+          "nullable": true,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "tag_offset",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "error_text",
+          "nullable": false,
+          "type": "str"
+        }
+      ],
+      "pk": [
+        "routine_name",
+        "entry_index"
+      ]
+    },
+    "code-model/xindex-routines.tsv": {
+      "columns": [
+        {
+          "fk_target": "routines.tsv:routine_name",
+          "key_role": "pk",
+          "name": "routine_name",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "line_count",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "tag_count",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "xref_count",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "error_count",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "rsum_value",
+          "nullable": false,
+          "type": "str"
+        }
+      ],
+      "pk": [
+        "routine_name"
+      ]
+    },
+    "code-model/xindex-tags.tsv": {
+      "columns": [
+        {
+          "fk_target": "routines.tsv:routine_name",
+          "key_role": "pk",
+          "name": "routine_name",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "pk",
+          "name": "tag",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "data",
+          "nullable": true,
+          "type": "str"
+        }
+      ],
+      "pk": [
+        "routine_name",
+        "tag"
+      ]
+    },
+    "code-model/xindex-validation.tsv": {
+      "columns": [
+        {
+          "fk_target": "routines.tsv:routine_name",
+          "key_role": "pk",
+          "name": "routine_name",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "fk_target": "packages.tsv:package",
+          "key_role": "fk",
+          "name": "package",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "lines_ours",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "lines_xindex",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "lines_match",
+          "nullable": false,
+          "type": "bool"
+        },
+        {
+          "key_role": "none",
+          "name": "tags_ours",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "tags_xindex",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "tags_match",
+          "nullable": false,
+          "type": "bool"
+        },
+        {
+          "key_role": "none",
+          "name": "callees_ours_count",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "callees_xindex_count",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "callees_match_count",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "callees_ours_only_count",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "callees_xindex_only_count",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "callees_agreement_ratio",
+          "nullable": false,
+          "type": "float"
+        }
+      ],
+      "pk": [
+        "routine_name"
+      ]
+    },
+    "code-model/xindex-xrefs.tsv": {
+      "columns": [
+        {
+          "fk_target": "routines.tsv:routine_name",
+          "key_role": "pk",
+          "name": "routine_name",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "pk",
+          "name": "ref",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "location_list",
+          "nullable": false,
+          "type": "str"
+        }
+      ],
+      "pk": [
+        "routine_name",
+        "ref"
+      ]
+    },
+    "data-model/field-piks.tsv": {
+      "columns": [
+        {
+          "fk_target": "files.tsv:file_number",
+          "key_role": "pk",
+          "name": "file_number",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "pk",
+          "name": "field_number",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "field_name",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "data_type",
+          "nullable": false,
+          "type": "enum"
+        },
+        {
+          "key_role": "none",
+          "name": "file_piks",
+          "nullable": true,
+          "type": "enum"
+        },
+        {
+          "fk_target": "files.tsv:file_number",
+          "key_role": "fk",
+          "name": "pointer_target",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "ref_piks",
+          "nullable": true,
+          "type": "enum"
+        },
+        {
+          "key_role": "none",
+          "name": "cross_piks",
+          "nullable": true,
+          "type": "enum"
+        },
+        {
+          "key_role": "none",
+          "name": "sensitivity_flag",
+          "nullable": true,
+          "type": "bool"
+        }
+      ],
+      "pk": [
+        "file_number",
+        "field_number"
+      ]
+    },
+    "data-model/files.tsv": {
+      "columns": [
+        {
+          "key_role": "pk",
+          "name": "file_number",
+          "nullable": false,
+          "shared_vocabulary": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "file_name",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "global_root",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "fk_target": "files.tsv:file_number",
+          "key_role": "fk",
+          "name": "parent_file",
+          "nullable": true,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "field_count",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "pointer_in",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "pointer_out",
+          "nullable": false,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "record_count",
+          "nullable": true,
+          "type": "int"
+        },
+        {
+          "key_role": "none",
+          "name": "is_dinum",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "key_role": "none",
+          "name": "status",
+          "nullable": false,
+          "type": "enum"
+        }
+      ],
+      "pk": [
+        "file_number"
+      ]
+    },
+    "data-model/piks-triage.tsv": {
+      "columns": [
+        {
+          "fk_target": "files.tsv:file_number",
+          "key_role": "pk",
+          "name": "file_number",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "piks",
+          "nullable": false,
+          "type": "enum"
+        },
+        {
+          "key_role": "none",
+          "name": "piks_method",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "piks_confidence",
+          "nullable": false,
+          "type": "enum"
+        },
+        {
+          "key_role": "none",
+          "name": "piks_evidence",
+          "nullable": false,
+          "type": "str"
+        }
+      ],
+      "pk": [
+        "file_number"
+      ]
+    },
+    "data-model/piks.tsv": {
+      "columns": [
+        {
+          "fk_target": "files.tsv:file_number",
+          "key_role": "pk",
+          "name": "file_number",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "piks",
+          "nullable": false,
+          "type": "enum"
+        },
+        {
+          "key_role": "none",
+          "name": "piks_method",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "piks_confidence",
+          "nullable": false,
+          "type": "enum"
+        },
+        {
+          "key_role": "none",
+          "name": "piks_evidence",
+          "nullable": false,
+          "type": "str"
+        },
+        {
+          "key_role": "none",
+          "name": "piks_source",
+          "nullable": false,
+          "type": "enum"
+        }
+      ],
+      "pk": [
+        "file_number"
+      ]
+    }
+  },
+  "generated_from": "host/scripts/schema_v1.py",
+  "schema_version": 1,
+  "shared_vocabularies": [
+    {
+      "column": "routine_name",
+      "file": "routines.tsv"
+    },
+    {
+      "column": "file_number",
+      "file": "files.tsv"
+    },
+    {
+      "column": "name",
+      "file": "options.tsv"
+    },
+    {
+      "column": "name",
+      "file": "rpcs.tsv"
+    }
+  ]
+}

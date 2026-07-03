@@ -279,5 +279,86 @@ class TestPiksMaterialized(unittest.TestCase):
         self.assertEqual(sv.PIKS_SOURCES, ("auto", "triage", "inherited"))
 
 
+class TestTypedColumns(unittest.TestCase):
+    """V3/R1 — per-column type, nullability, key_role."""
+
+    def test_declared_names_are_real_columns(self):
+        for s in sv.FILES.values():
+            self.assertTrue(set(s.coltypes) <= set(s.columns), s.name)
+            self.assertTrue(set(s.nullable) <= set(s.columns), s.name)
+            self.assertTrue(set(s.fks) <= set(s.columns), s.name)
+
+    def test_types_from_known_set(self):
+        for s in sv.FILES.values():
+            for t in s.coltypes.values():
+                self.assertIn(t, ("int", "float", "enum"), s.name)
+
+    def test_effective_type(self):
+        s = sv.spec_for("routines.tsv")
+        self.assertEqual(s.effective_type("routine_name"), "str")
+        self.assertEqual(s.effective_type("line_count"), "int")
+        self.assertEqual(s.effective_type("is_percent_routine"), "bool")
+        self.assertEqual(
+            sv.spec_for("rpcs.tsv").effective_type("return_type"), "enum")
+        self.assertEqual(
+            sv.spec_for("xindex-validation.tsv")
+            .effective_type("callees_agreement_ratio"), "float")
+
+    def test_identifiers_are_str_not_float(self):
+        # Decimal file numbers are identifiers: 21.09 != 21.090.
+        for name in ("files.tsv", "piks.tsv", "field-piks.tsv"):
+            self.assertEqual(
+                sv.spec_for(name).effective_type("file_number"), "str")
+
+    def test_single_column_pks_never_nullable(self):
+        # Composite keys may include nullable parts (package-data:
+        # kind=global rows carry no file_number; blank participates in
+        # the key and the tuple stays unique). A lone pk column being
+        # blank would be a meaningless row — forbidden.
+        for s in sv.FILES.values():
+            if len(s.pk) == 1:
+                self.assertFalse(set(s.pk) & set(s.nullable), s.name)
+
+    def test_fk_targets_resolve_to_real_columns(self):
+        for s in sv.FILES.values():
+            for col, target in s.fks.items():
+                tfile, tcol = target.split(":")
+                self.assertIn(tcol, sv.spec_for(tfile).columns,
+                              f"{s.name}.{col} -> {target}")
+
+    def test_key_role(self):
+        s = sv.spec_for("routine-calls.tsv")
+        self.assertEqual(s.key_role("caller_routine"), "pk")
+        self.assertEqual(s.key_role("ref_count"), "none")
+        self.assertEqual(s.key_role("caller_package"), "fk")
+        self.assertEqual(s.fks["callee_routine"],
+                         "routines.tsv:routine_name")
+
+    def test_measured_nullability_spot_checks(self):
+        self.assertIn("parent_file", sv.spec_for("files.tsv").nullable)
+        self.assertIn("package", sv.spec_for("routines.tsv").nullable)
+        # blank inactive is documented as ACTIVE, so the label is not null
+        rpcs = sv.spec_for("rpcs.tsv")
+        self.assertIn("inactive", rpcs.nullable)
+        self.assertNotIn("inactive_label", rpcs.nullable)
+
+
+class TestSharedVocabularies(unittest.TestCase):
+    """The thin, non-deferred slice of the entity-identity contract:
+    the four cross-producer join vocabularies, declared as data."""
+
+    def test_the_four_vocabularies(self):
+        self.assertEqual(sv.SHARED_VOCABULARIES, (
+            ("routines.tsv", "routine_name"),
+            ("files.tsv", "file_number"),
+            ("options.tsv", "name"),
+            ("rpcs.tsv", "name"),
+        ))
+
+    def test_each_names_a_real_column(self):
+        for f, c in sv.SHARED_VOCABULARIES:
+            self.assertIn(c, sv.spec_for(f).columns)
+
+
 if __name__ == "__main__":
     unittest.main()

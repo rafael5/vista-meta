@@ -57,7 +57,7 @@ chown -R vehu:vehu /home/vehu/dev \
                    /home/vehu/scripts \
                    /home/vehu/g
 find /home/vehu/export -mindepth 1 -maxdepth 1 \
-        ! -name data-model ! -name code-model \
+        ! -name data-model ! -name code-model ! -name meta \
         -exec chown -R vehu:vehu {} +
 chown vehu:vehu /home/vehu/export
 
