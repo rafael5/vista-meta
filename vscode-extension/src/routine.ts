@@ -105,7 +105,7 @@ export function analyze(routineName: string): RoutineInfo | null {
   const tags = sourcePath ? parseTags(sourcePath) : [];
 
   // 3. Callees — this routine calls out
-  const callsByCaller = byColumn('routine-calls.tsv', 'caller_name');
+  const callsByCaller = byColumn('routine-calls.tsv', 'caller_routine');
   const calleeRows = callsByCaller.get(routineName) ?? [];
   const callees: CalleeSummary[] = calleeRows.map(r => ({
     tag: r['callee_tag'] || '',
@@ -120,7 +120,7 @@ export function analyze(routineName: string): RoutineInfo | null {
   const callerRows = callsByCallee.get(routineName) ?? [];
   const callerAgg: Map<string, CallerSummary> = new Map();
   for (const r of callerRows) {
-    const key = r['caller_name'] || '';
+    const key = r['caller_routine'] || '';
     const existing = callerAgg.get(key);
     if (existing) {
       existing.refCount += parseInt(r['ref_count'] || '0', 10);
@@ -146,7 +146,7 @@ export function analyze(routineName: string): RoutineInfo | null {
   globals.sort((a, b) => b.refCount - a.refCount);
 
   // 6. XINDEX errors (if TSV present)
-  const errByRoutine = byColumn('xindex-errors.tsv', 'routine');
+  const errByRoutine = byColumn('xindex-errors.tsv', 'routine_name');
   const errRows = errByRoutine.get(routineName) ?? [];
   const xindexErrors: XindexError[] = errRows.map(r => ({
     line: r['line_text'] || '',

@@ -149,7 +149,7 @@ def package_rpcs(pkg: str) -> list[dict]:
     out = []
     with path.open(encoding="utf-8") as f:
         for row in csv.DictReader(f, delimiter="\t"):
-            if row.get("routine") in manifest:
+            if row.get("routine_name") in manifest:
                 out.append(row)
     return out
 
@@ -252,7 +252,7 @@ def cmd_pkg(args: argparse.Namespace) -> int:
         print("RPCs EXPOSED (top 10 by name)")
         for r in sorted(rpcs, key=lambda r: r["name"])[:10]:
             tag = r.get("tag") or ""
-            rt = r.get("routine") or ""
+            rt = r.get("routine_name") or ""
             entry = f"{tag}^{rt}" if tag else rt
             print(f"  {r['name']:<34}  {entry}")
         if len(rpcs) > 10:
@@ -342,7 +342,7 @@ def cmd_context(args: argparse.Namespace) -> int:
         w("## RPCs exposed")
         for r in sorted(rpcs, key=lambda r: r["name"]):
             tag = r.get("tag") or ""
-            rt = r.get("routine") or ""
+            rt = r.get("routine_name") or ""
             entry = f"{tag}^{rt}" if tag else rt
             w(f"- {r['name']} -> {entry}")
         w()
@@ -499,7 +499,7 @@ def cmd_callers(args: argparse.Namespace) -> int:
     # Group by caller_routine
     callers: dict[str, dict] = {}
     for r in matches:
-        key = r["caller_name"]
+        key = r["caller_routine"]
         agg = callers.setdefault(key, {"package": r["caller_package"],
                                        "tags": Counter(), "total": 0})
         agg["tags"][r["callee_tag"]] += int(r["ref_count"])
@@ -1129,6 +1129,8 @@ def cmd_xindex(args: argparse.Namespace) -> int:
         with local_tsv.open(encoding="utf-8", errors="replace") as f:
             reader = csv.DictReader(f, delimiter="\t")
             for row in reader:
+                # Raw VMXIDX dump header (`routine`) — this flow parses
+                # the ad-hoc in-container output, not the normalized final.
                 if row["routine"] != routine:
                     continue
                 errors.append(row)

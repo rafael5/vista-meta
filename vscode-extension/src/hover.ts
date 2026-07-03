@@ -94,7 +94,7 @@ function buildRoutineHover(routineName: string, tagHint: string | null): vscode.
   if (facts.length) md.appendMarkdown(facts.join(' · ') + '\n\n');
 
   if (tagHint) {
-    const tagsByRoutine = byColumn('xindex-tags.tsv', 'routine');
+    const tagsByRoutine = byColumn('xindex-tags.tsv', 'routine_name');
     const tagRows = tagsByRoutine.get(routineName) ?? [];
     const has = tagRows.some(t => t['tag'] === tagHint);
     md.appendMarkdown(
@@ -112,7 +112,7 @@ function buildRoutineHover(routineName: string, tagHint: string | null): vscode.
   if (callerRows.length) {
     const agg = new Map<string, number>();
     for (const cr of callerRows) {
-      const k = cr['caller_name'] || '';
+      const k = cr['caller_routine'] || '';
       const n = parseInt(cr['ref_count'] || '0', 10);
       agg.set(k, (agg.get(k) || 0) + n);
     }
@@ -123,7 +123,7 @@ function buildRoutineHover(routineName: string, tagHint: string | null): vscode.
   }
 
   // Top callees
-  const callsByCaller = byColumn('routine-calls.tsv', 'caller_name');
+  const callsByCaller = byColumn('routine-calls.tsv', 'caller_routine');
   const calleeRows = callsByCaller.get(routineName) ?? [];
   if (calleeRows.length) {
     const top = [...calleeRows]
@@ -190,7 +190,7 @@ function buildGlobalHover(globalName: string): vscode.MarkdownString | null {
 }
 
 function buildTagInRoutineHover(routineName: string, tag: string): vscode.MarkdownString | null {
-  const tagsByRoutine = byColumn('xindex-tags.tsv', 'routine');
+  const tagsByRoutine = byColumn('xindex-tags.tsv', 'routine_name');
   const tagRows = tagsByRoutine.get(routineName) ?? [];
   const exact = tagRows.find(t => t['tag'] === tag);
   if (!exact) return null;
@@ -210,7 +210,7 @@ function buildTagInRoutineHover(routineName: string, tag: string): vscode.Markdo
     );
     const agg = new Map<string, number>();
     for (const cr of callerRows) {
-      const k = cr['caller_name'] || '';
+      const k = cr['caller_routine'] || '';
       const n = parseInt(cr['ref_count'] || '0', 10);
       agg.set(k, (agg.get(k) || 0) + n);
     }
