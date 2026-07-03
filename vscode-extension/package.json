@@ -1,9 +1,10 @@
 {
-  "name": "vista-meta",
-  "displayName": "vista-meta — VistA Sidebar",
-  "description": "Sidebar that surfaces vista-meta code-model TSVs when you open a VistA .m routine. No language server; just the data you already have.",
+  "name": "vista-compass",
+  "displayName": "VistA Compass",
+  "description": "A compass for VistA's code. Point it at any .m routine to get your bearings, then click any reference, call-in, call-out, global, or XINDEX finding to navigate through all of VistA's interconnected web of routines, FileMan files, pointers, RPCs, options, protocols, and globals. Every row in the sidebar is a clickable jump. Drawn from vista-meta code-model TSVs. No language server, no parser, no runtime deps.",
   "version": "0.1.0",
-  "publisher": "vista-meta",
+  "publisher": "rafael5",
+  "icon": "media/icon.png",
   "license": "UNLICENSED",
   "private": true,
   "engines": { "vscode": "^1.85.0" },
@@ -24,45 +25,45 @@
     "views": {
       "explorer": [
         {
-          "id": "vistaMetaRoutine",
+          "id": "vistaCompassRoutine",
           "name": "VistA Routine"
         }
       ]
     },
     "commands": [
       {
-        "command": "vistaMeta.refresh",
-        "title": "vista-meta: Refresh Routine Sidebar",
+        "command": "vistaCompass.refresh",
+        "title": "VistA Compass: Refresh Routine Sidebar",
         "icon": "$(refresh)"
       },
       {
-        "command": "vistaMeta.reloadTsvs",
-        "title": "vista-meta: Reload Code-Model TSVs"
+        "command": "vistaCompass.reloadTsvs",
+        "title": "VistA Compass: Reload Code-Model TSVs"
       }
     ],
     "menus": {
       "view/title": [
         {
-          "command": "vistaMeta.refresh",
-          "when": "view == vistaMetaRoutine",
+          "command": "vistaCompass.refresh",
+          "when": "view == vistaCompassRoutine",
           "group": "navigation"
         }
       ]
     },
     "configuration": {
-      "title": "vista-meta",
+      "title": "VistA Compass",
       "properties": {
-        "vistaMeta.codeModelPath": {
+        "vistaCompass.codeModelPath": {
           "type": "string",
           "default": "vista/export/code-model",
           "description": "Workspace-relative path to the code-model TSV directory."
         },
-        "vistaMeta.vistaMHostPath": {
+        "vistaCompass.vistaMHostPath": {
           "type": "string",
           "default": "vista/vista-m-host",
           "description": "Workspace-relative path to the synced VistA-M host tree."
         },
-        "vistaMeta.topN": {
+        "vistaCompass.topN": {
           "type": "number",
           "default": 15,
           "description": "Maximum entries to show in each section (callers, callees, etc.)."

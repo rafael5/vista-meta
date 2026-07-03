@@ -7,3 +7,5 @@ tsconfig.json
 **/*.map
 **/*.ts
 node_modules/**
+vista-compass-*.png
+*.vsix

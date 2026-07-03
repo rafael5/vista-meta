@@ -1,16 +1,16 @@
-// vista-meta VSCode extension — activation + wiring only.
+// VistA Compass VSCode extension — activation + wiring only.
 // All data lives in TSVs under vista/export/code-model/. We never
 // parse MUMPS, never hit the container, never depend on the internet.
 
 import * as vscode from 'vscode';
-import { VistaMetaHoverProvider } from './hover';
+import { VistaCompassHoverProvider } from './hover';
 import { RoutineTreeProvider } from './treeProvider';
 import { clearIndexes, reloadAll } from './tsv';
 
 export function activate(ctx: vscode.ExtensionContext): void {
   const provider = new RoutineTreeProvider();
 
-  const view = vscode.window.createTreeView('vistaMetaRoutine', {
+  const view = vscode.window.createTreeView('vistaCompassRoutine', {
     treeDataProvider: provider,
     showCollapseAll: true,
   });
@@ -22,7 +22,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
         { language: 'mumps', scheme: 'file' },
         { pattern: '**/*.m', scheme: 'file' },
       ],
-      new VistaMetaHoverProvider(),
+      new VistaCompassHoverProvider(),
     ),
   );
 
@@ -47,14 +47,14 @@ export function activate(ctx: vscode.ExtensionContext): void {
   updateFromActiveEditor();
 
   ctx.subscriptions.push(
-    vscode.commands.registerCommand('vistaMeta.refresh', () => {
+    vscode.commands.registerCommand('vistaCompass.refresh', () => {
       provider.refresh();
     }),
-    vscode.commands.registerCommand('vistaMeta.reloadTsvs', () => {
+    vscode.commands.registerCommand('vistaCompass.reloadTsvs', () => {
       reloadAll();
       clearIndexes();
       provider.refresh();
-      vscode.window.showInformationMessage('vista-meta: TSVs reloaded');
+      vscode.window.showInformationMessage('VistA Compass: TSVs reloaded');
     }),
   );
 }

@@ -223,7 +223,7 @@ function buildTagInRoutineHover(routineName: string, tag: string): vscode.Markdo
   return md;
 }
 
-export class VistaMetaHoverProvider implements vscode.HoverProvider {
+export class VistaCompassHoverProvider implements vscode.HoverProvider {
   provideHover(
     doc: vscode.TextDocument,
     pos: vscode.Position,

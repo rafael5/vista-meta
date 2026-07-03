@@ -38,7 +38,7 @@ function findUpward(start: string, rel: string): string | null {
 }
 
 function resolveDataDir(configKey: string, defaultRel: string): string {
-  const cfg = vscode.workspace.getConfiguration('vistaMeta');
+  const cfg = vscode.workspace.getConfiguration('vistaCompass');
   const rel = cfg.get<string>(configKey, defaultRel);
 
   // (1) absolute / tilde-prefixed — use directly.
@@ -73,7 +73,7 @@ export function vistaMHostDir(): string {
 }
 
 export function topN(): number {
-  const cfg = vscode.workspace.getConfiguration('vistaMeta');
+  const cfg = vscode.workspace.getConfiguration('vistaCompass');
   return cfg.get<number>('topN', 15);
 }
 
