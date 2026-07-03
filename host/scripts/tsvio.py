@@ -79,6 +79,41 @@ def _missing(k: str):
     raise KeyError(f"sort key column not in columns: {k!r}")
 
 
+def write_spec(path: Path | str, spec, rows: Iterable[dict]) -> int:
+    """Write dict rows per a schema_v1.FileSpec. Returns the row count.
+
+    Enforces the spec on top of write_tsv's format contract:
+      - cells ordered by spec.columns; missing keys emit blank (null)
+      - unknown keys are rejected (they would be silently dropped)
+      - _label columns are derived from their code column via
+        spec.labels unless the row provides an explicit value
+      - boolean columns must be Y / N / blank
+    """
+    columns = spec.columns
+    known = set(columns)
+
+    prepared: list[list[str]] = []
+    for row in rows:
+        extra = set(row) - known
+        if extra:
+            raise TsvValueError(
+                f"{path}: keys not in {spec.name} columns: {sorted(extra)}"
+            )
+        cells = {c: _serialize(row.get(c)) for c in columns}
+        for code_col, (label_col, mapping) in spec.labels.items():
+            if label_col not in row or row.get(label_col) is None:
+                cells[label_col] = mapping.get(cells[code_col], "")
+        for col in spec.booleans:
+            if cells[col] not in ("", "Y", "N"):
+                raise TsvValueError(
+                    f"{path}: {spec.name}.{col} must be Y/N/blank, "
+                    f"got {cells[col]!r}"
+                )
+        prepared.append([cells[c] for c in columns])
+
+    return write_tsv(path, columns, prepared, key=spec.sort)
+
+
 def read_tsv(path: Path | str) -> tuple[list[str], list[list[str]]]:
     """Read a TSV; tolerates legacy CRLF input. Returns (columns, rows)."""
     with Path(path).open("r", encoding="utf-8", newline="") as f:

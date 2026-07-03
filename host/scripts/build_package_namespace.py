@@ -39,6 +39,9 @@ import os
 import sys
 from pathlib import Path
 
+import schema_v1
+import tsvio
+
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 PACKAGES_CSV = PROJECT_ROOT / "docs/Packages.csv"
 # The export tree is uid-1001-owned (in-container vehu); VM_CODE_MODEL_DIR lets
@@ -52,7 +55,7 @@ CODE_MODEL_DIR = Path(
 PACKAGES_TSV = CODE_MODEL_DIR / "packages.tsv"
 OUT_TSV = CODE_MODEL_DIR / "package-namespace.tsv"
 
-FIELDS = ["package", "package_name", "namespace", "prefixes", "app_code", "vdl_id"]
+SPEC = schema_v1.spec_for("package-namespace.tsv")
 
 
 def parse_packages_csv(path: Path) -> dict[str, dict]:
@@ -136,10 +139,7 @@ def main() -> int:
     pkg_dirs = read_package_dirs(PACKAGES_TSV)
     rows = build_rows(pkg_dirs, parsed)
 
-    with OUT_TSV.open("w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=FIELDS, delimiter="\t")
-        w.writeheader()
-        w.writerows(rows)
+    tsvio.write_spec(OUT_TSV, SPEC, rows)
 
     resolved = sum(1 for r in rows if r["namespace"])
     print(f"package-namespace.tsv: {len(rows):,} rows "

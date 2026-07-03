@@ -32,24 +32,13 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+import schema_v1
+import tsvio
+
 NORM = Path(__file__).resolve().parents[2] / "vista/export/code-model"
 OUT_TSV = NORM / "package-manifest.tsv"
 
-FIELDS = [
-    "package",
-    "routine_count",
-    "total_lines",
-    "files_shipped",
-    "p_files",
-    "i_files",
-    "k_files",
-    "s_files",
-    "rpc_routines",
-    "option_routines",
-    "distinct_globals_touched",
-    "outbound_edges",
-    "outbound_cross_pkg",
-]
+SPEC = schema_v1.spec_for("package-manifest.tsv")
 
 
 def load_tsv(path: Path) -> list[dict]:
@@ -105,7 +94,7 @@ def main() -> int:
     # routines.tsv lookup (skips routines not in MANIFEST — T-002 cohort).
     rpc_rous_per_pkg: dict[str, set[str]] = defaultdict(set)
     for r in load_tsv(NORM / "rpcs.tsv"):
-        rou = r["routine"]
+        rou = r["routine_name"]
         if rou and rou in rou_pkg:
             rpc_rous_per_pkg[rou_pkg[rou]].add(rou)
     for pkg, rous in rpc_rous_per_pkg.items():
@@ -117,7 +106,7 @@ def main() -> int:
     for r in load_tsv(NORM / "options.tsv"):
         if r["type"] != "R":
             continue
-        rou = r["routine"]
+        rou = r["routine_name"]
         if rou and rou in rou_pkg:
             opt_rous_per_pkg[rou_pkg[rou]].add(rou)
     for pkg, rous in opt_rous_per_pkg.items():
@@ -146,11 +135,8 @@ def main() -> int:
         if dst_pkg and dst_pkg != src_pkg:
             manifest[src_pkg]["outbound_cross_pkg"] += 1
 
-    rows = sorted(manifest.values(), key=lambda r: r["package"])
-    with OUT_TSV.open("w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=FIELDS, delimiter="\t")
-        w.writeheader()
-        w.writerows(rows)
+    rows = list(manifest.values())
+    tsvio.write_spec(OUT_TSV, SPEC, rows)
 
     # Summary to stdout.
     total_rpc = sum(r["rpc_routines"] for r in rows)

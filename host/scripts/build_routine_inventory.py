@@ -18,6 +18,9 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+import schema_v1
+import tsvio
+
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 HOST_SNAPSHOT = PROJECT_ROOT / "vista/vista-m-host"
 MANIFEST = HOST_SNAPSHOT / "MANIFEST.tsv"
@@ -29,25 +32,8 @@ PACKAGES_TSV = OUT_DIR / "packages.tsv"
 CONTAINER_PREFIX = "/opt/VistA-M/"
 HOST_PREFIX = str(HOST_SNAPSHOT) + "/"
 
-ROUTINE_FIELDS = [
-    "routine_name",
-    "package",
-    "source_path",
-    "line_count",
-    "byte_size",
-    "first_line_comment",
-    "version_line",
-    "tag_count",
-    "comment_line_count",
-    "is_percent_routine",
-]
-PACKAGE_FIELDS = [
-    "package",
-    "routine_count",
-    "percent_routine_count",
-    "total_lines",
-    "total_bytes",
-]
+ROUTINES_SPEC = schema_v1.spec_for("routines.tsv")
+PACKAGES_SPEC = schema_v1.spec_for("packages.tsv")
 
 # MUMPS label: line starts in column 0 with an alphanumeric char or '%'.
 # Everything else (whitespace, ';', blank) is not a label line.
@@ -177,11 +163,7 @@ def main() -> int:
         )
         return 1
 
-    rows.sort(key=lambda r: r["routine_name"])
-    with ROUTINES_TSV.open("w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=ROUTINE_FIELDS, delimiter="\t")
-        w.writeheader()
-        w.writerows(rows)
+    tsvio.write_spec(ROUTINES_TSV, ROUTINES_SPEC, rows)
 
     pkg_stats: dict[str, dict] = defaultdict(
         lambda: {
@@ -199,11 +181,8 @@ def main() -> int:
         s["total_lines"] += r["line_count"]
         s["total_bytes"] += r["byte_size"]
 
-    pkg_rows = [{"package": n, **s} for n, s in sorted(pkg_stats.items())]
-    with PACKAGES_TSV.open("w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=PACKAGE_FIELDS, delimiter="\t")
-        w.writeheader()
-        w.writerows(pkg_rows)
+    pkg_rows = [{"package": n, **s} for n, s in pkg_stats.items()]
+    tsvio.write_spec(PACKAGES_TSV, PACKAGES_SPEC, pkg_rows)
 
     total_lines = sum(r["line_count"] for r in rows)
     total_bytes = sum(r["byte_size"] for r in rows)

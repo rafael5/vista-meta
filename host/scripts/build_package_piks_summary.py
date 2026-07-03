@@ -31,6 +31,9 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+import schema_v1
+import tsvio
+
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 CODE_MODEL = PROJECT_ROOT / "vista/export/code-model"
 DATA_MODEL = PROJECT_ROOT / "vista/export/data-model"
@@ -39,15 +42,8 @@ PIKS_AUTO = DATA_MODEL / "piks.tsv"
 PIKS_MANUAL = DATA_MODEL / "piks-triage.tsv"
 OUT_TSV = CODE_MODEL / "package-piks-summary.tsv"
 
-FIELDS = [
-    "package",
-    "p_files",
-    "i_files",
-    "k_files",
-    "s_files",
-    "unclassified",
-    "total_distinct_files",
-]
+SPEC = schema_v1.spec_for("package-piks-summary.tsv")
+FIELDS = list(SPEC.columns)
 
 
 def load_piks() -> dict[str, str]:
@@ -92,10 +88,7 @@ def main() -> int:
             "total_distinct_files": len(file_numbers),
         })
 
-    with OUT_TSV.open("w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=FIELDS, delimiter="\t")
-        w.writeheader()
-        w.writerows(out_rows)
+    tsvio.write_spec(OUT_TSV, SPEC, out_rows)
 
     totals = {k: sum(r[k] for r in out_rows) for k in FIELDS if k != "package"}
     print(f"package-piks-summary.tsv: {len(out_rows)} packages")

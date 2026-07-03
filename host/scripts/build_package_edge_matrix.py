@@ -30,16 +30,13 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+import schema_v1
+import tsvio
+
 NORM = Path(__file__).resolve().parents[2] / "vista/export/code-model"
 OUT_TSV = NORM / "package-edge-matrix.tsv"
 
-FIELDS = [
-    "source_package",
-    "dest_package",
-    "call_edges",
-    "distinct_caller_routines",
-    "distinct_callee_routines",
-]
+SPEC = schema_v1.spec_for("package-edge-matrix.tsv")
 
 
 def load_tsv(path: Path) -> list[dict]:
@@ -72,7 +69,7 @@ def main() -> int:
             continue
         key = (src_pkg, dst_pkg)
         edges[key] += 1
-        callers[key].add(r["caller_name"])
+        callers[key].add(r["caller_routine"])
         callees[key].add(callee)
 
     rows = []
@@ -84,12 +81,7 @@ def main() -> int:
             "distinct_caller_routines": len(callers[(src, dst)]),
             "distinct_callee_routines": len(callees[(src, dst)]),
         })
-    rows.sort(key=lambda r: (-r["call_edges"], r["source_package"], r["dest_package"]))
-
-    with OUT_TSV.open("w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=FIELDS, delimiter="\t")
-        w.writeheader()
-        w.writerows(rows)
+    tsvio.write_spec(OUT_TSV, SPEC, rows)
 
     intra = sum(r["call_edges"] for r in rows if r["source_package"] == r["dest_package"])
     inter = sum(r["call_edges"] for r in rows if r["source_package"] != r["dest_package"])

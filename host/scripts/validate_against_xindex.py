@@ -32,18 +32,13 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+import schema_v1
+import tsvio
+
 NORM = Path(__file__).resolve().parents[2] / "vista/export/code-model"
 OUT_TSV = NORM / "xindex-validation.tsv"
 
-FIELDS = [
-    "routine", "package",
-    "lines_ours", "lines_xindex", "lines_match",
-    "tags_ours", "tags_xindex", "tags_match",
-    "callees_ours_count", "callees_xindex_count",
-    "callees_match_count",
-    "callees_ours_only_count", "callees_xindex_only_count",
-    "callees_agreement_ratio",
-]
+SPEC = schema_v1.spec_for("xindex-validation.tsv")
 
 
 def load_tsv(path: Path) -> list[dict]:
@@ -81,7 +76,7 @@ def main() -> int:
     # XINDEX per-routine data (authoritative)
     xindex_rou: dict[str, dict] = {}
     for r in load_tsv(NORM / "xindex-routines.tsv"):
-        xindex_rou[r["routine"]] = {
+        xindex_rou[r["routine_name"]] = {
             "lines": int(r["line_count"]),
             "tags": int(r["tag_count"]),
             "xref_count": int(r["xref_count"]),
@@ -90,14 +85,14 @@ def main() -> int:
     # Our call graph: routine → set of callee routine names
     our_callees: dict[str, set[str]] = defaultdict(set)
     for r in load_tsv(NORM / "routine-calls.tsv"):
-        our_callees[r["caller_name"]].add(r["callee_routine"])
+        our_callees[r["caller_routine"]].add(r["callee_routine"])
 
     # XINDEX xrefs: routine → set of callee routine names
     xindex_callees: dict[str, set[str]] = defaultdict(set)
     for r in load_tsv(NORM / "xindex-xrefs.tsv"):
         rou, _tag = parse_xref_ref(r["ref"])
         if rou:
-            xindex_callees[r["routine"]].add(rou)
+            xindex_callees[r["routine_name"]].add(rou)
 
     # Build validation rows — one per XINDEX-processed routine that also
     # appears in our inventory. (Excludes T-002 cohort that XINDEX can't
@@ -116,7 +111,7 @@ def main() -> int:
         union = oc | xc
         ratio = len(match) / len(union) if union else 1.0
         rows.append({
-            "routine": name,
+            "routine_name": name,
             "package": ours["package"],
             "lines_ours": ours["lines"],
             "lines_xindex": xi["lines"],
@@ -132,10 +127,7 @@ def main() -> int:
             "callees_agreement_ratio": f"{ratio:.4f}",
         })
 
-    with OUT_TSV.open("w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=FIELDS, delimiter="\t")
-        w.writeheader()
-        w.writerows(rows)
+    tsvio.write_spec(OUT_TSV, SPEC, rows)
 
     # ---- Summary statistics ----
     n = len(rows)

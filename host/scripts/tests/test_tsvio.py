@@ -19,6 +19,7 @@ from pathlib import Path
 SCRIPTS_DIR = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(SCRIPTS_DIR))
 
+import schema_v1  # noqa: E402
 import tsvio  # noqa: E402
 
 
@@ -125,6 +126,87 @@ class TestRead(unittest.TestCase):
         cols, rows = tsvio.read_tsv(p)
         tsvio.write_tsv(p, tuple(cols), rows, key=("a",))
         self.assertEqual(p.read_bytes(), first)
+
+
+def make_spec(**over):
+    """A small FileSpec for write_spec tests."""
+    base = dict(
+        name="t.tsv", model="code-model", producer="host",
+        columns=("k", "flag", "code", "code_label", "v"),
+        pk=("k",),
+        booleans=("flag",),
+        labels={"code": ("code_label", {"": "NONE", "1": "ONE"})},
+    )
+    base.update(over)
+    return schema_v1.FileSpec(**base)
+
+
+class TestWriteSpec(unittest.TestCase):
+    def test_orders_by_spec_columns_and_sorts_by_spec_key(self):
+        p = tmppath()
+        rows = [
+            {"k": "2", "flag": "Y", "code": "1", "v": "b"},
+            {"k": "1", "flag": "", "code": "", "v": "a"},
+        ]
+        tsvio.write_spec(p, make_spec(), rows)
+        cols, out = tsvio.read_tsv(p)
+        self.assertEqual(cols, ["k", "flag", "code", "code_label", "v"])
+        self.assertEqual(out[0][0], "1")
+
+    def test_missing_keys_become_blank(self):
+        p = tmppath()
+        tsvio.write_spec(p, make_spec(), [{"k": "1"}])
+        _, out = tsvio.read_tsv(p)
+        self.assertEqual(out, [["1", "", "", "NONE", ""]])
+
+    def test_unknown_key_rejected(self):
+        with self.assertRaises(tsvio.TsvValueError):
+            tsvio.write_spec(tmppath(), make_spec(),
+                             [{"k": "1", "bogus": "x"}])
+
+    def test_label_derived_from_code_column(self):
+        p = tmppath()
+        tsvio.write_spec(p, make_spec(),
+                         [{"k": "1", "code": "1"}, {"k": "2", "code": ""}])
+        _, out = tsvio.read_tsv(p)
+        self.assertEqual([r[3] for r in out], ["ONE", "NONE"])
+
+    def test_label_unknown_code_gets_blank_label(self):
+        # Enum open-world is tolerated (V6 warns); the label is null.
+        p = tmppath()
+        tsvio.write_spec(p, make_spec(), [{"k": "1", "code": "9"}])
+        _, out = tsvio.read_tsv(p)
+        self.assertEqual(out[0][3], "")
+
+    def test_explicit_label_value_is_not_overwritten(self):
+        p = tmppath()
+        tsvio.write_spec(p, make_spec(),
+                         [{"k": "1", "code": "1", "code_label": "CUSTOM"}])
+        _, out = tsvio.read_tsv(p)
+        self.assertEqual(out[0][3], "CUSTOM")
+
+    def test_boolean_values_enforced(self):
+        for bad in ("y", "0", "true", "YES"):
+            with self.assertRaises(tsvio.TsvValueError):
+                tsvio.write_spec(tmppath(), make_spec(),
+                                 [{"k": "1", "flag": bad}])
+        # Y / N / blank all pass.
+        tsvio.write_spec(tmppath(), make_spec(),
+                         [{"k": "1", "flag": "Y"},
+                          {"k": "2", "flag": "N"},
+                          {"k": "3", "flag": ""}])
+
+    def test_real_spec_rpcs_labels(self):
+        p = tmppath()
+        spec = schema_v1.spec_for("rpcs.tsv")
+        row = {c: "" for c in spec.columns
+               if not c.endswith("_label")}
+        row.update(ien="1", name="XWB TEST", return_type="1", inactive="")
+        tsvio.write_spec(p, spec, [row])
+        cols, out = tsvio.read_tsv(p)
+        got = dict(zip(cols, out[0]))
+        self.assertEqual(got["return_type_label"], "SINGLE VALUE")
+        self.assertEqual(got["inactive_label"], "ACTIVE")
 
 
 if __name__ == "__main__":

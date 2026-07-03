@@ -27,18 +27,13 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+import schema_v1
+import tsvio
+
 NORM = Path(__file__).resolve().parents[2] / "vista/export/code-model"
 OUT_TSV = NORM / "routines-comprehensive.tsv"
 
-FIELDS = [
-    "routine_name", "package", "source_path",
-    "line_count", "byte_size", "tag_count", "comment_line_count",
-    "version_line", "is_percent_routine",
-    "in_file_9_8", "file_9_8_type", "rpc_count", "option_count",
-    "protocol_invoked_count",
-    "out_degree", "in_degree", "out_calls_total", "in_calls_total",
-    "distinct_globals_touched", "global_ref_total",
-]
+SPEC = schema_v1.spec_for("routines-comprehensive.tsv")
 
 
 def load_tsv(path: Path) -> list[dict]:
@@ -58,20 +53,20 @@ def main() -> int:
     # File 9.8 knowledge — routine → type (may be empty)
     f98: dict[str, str] = {}
     for r in load_tsv(NORM / "vista-file-9-8.tsv"):
-        if r["name"]:
-            f98[r["name"]] = r.get("type", "")
+        if r["routine_name"]:
+            f98[r["routine_name"]] = r.get("type", "")
 
     # RPC counts per routine
     rpc_count: dict[str, int] = defaultdict(int)
     for r in load_tsv(NORM / "rpcs.tsv"):
-        if r["routine"]:
-            rpc_count[r["routine"]] += 1
+        if r["routine_name"]:
+            rpc_count[r["routine_name"]] += 1
 
     # Option TYPE=R counts per routine
     opt_count: dict[str, int] = defaultdict(int)
     for r in load_tsv(NORM / "options.tsv"):
-        if r["type"] == "R" and r["routine"]:
-            opt_count[r["routine"]] += 1
+        if r["type"] == "R" and r["routine_name"]:
+            opt_count[r["routine_name"]] += 1
 
     # Call graph aggregates. Each row in routine-calls.tsv is already a
     # unique (caller, callee_tag, callee_routine, kind) tuple — count
@@ -81,7 +76,7 @@ def main() -> int:
     out_total: dict[str, int] = defaultdict(int)
     in_total: dict[str, int] = defaultdict(int)
     for r in load_tsv(NORM / "routine-calls.tsv"):
-        caller, callee, cnt = r["caller_name"], r["callee_routine"], int(r["ref_count"])
+        caller, callee, cnt = r["caller_routine"], r["callee_routine"], int(r["ref_count"])
         out_degree[caller].add(callee)
         in_degree[callee].add(caller)
         out_total[caller] += cnt
@@ -127,11 +122,7 @@ def main() -> int:
             "global_ref_total": glob_total.get(name, 0),
         })
 
-    out_rows.sort(key=lambda r: r["routine_name"])
-    with OUT_TSV.open("w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=FIELDS, delimiter="\t")
-        w.writeheader()
-        w.writerows(out_rows)
+    tsvio.write_spec(OUT_TSV, SPEC, out_rows)
 
     total_rpc = sum(1 for r in out_rows if r["rpc_count"] > 0)
     total_opt = sum(1 for r in out_rows if r["option_count"] > 0)

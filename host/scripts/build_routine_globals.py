@@ -35,6 +35,9 @@ import sys
 from collections import Counter
 from pathlib import Path
 
+import schema_v1
+import tsvio
+
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 HOST_SNAPSHOT = PROJECT_ROOT / "vista/vista-m-host"
 MANIFEST = HOST_SNAPSHOT / "MANIFEST.tsv"
@@ -55,7 +58,7 @@ HOST_PREFIX = str(HOST_SNAPSHOT) + "/"
 # minority of false positives. Accepted trade-off for MVP simplicity.
 GLOBAL_RE = re.compile(r"(?<![A-Z0-9$])\^(%?[A-Z][A-Z0-9]*)\(")
 
-FIELDS = ["routine_name", "package", "global_name", "ref_count"]
+SPEC = schema_v1.spec_for("routine-globals.tsv")
 
 
 def translate(container_path: str) -> Path:
@@ -132,11 +135,7 @@ def main() -> int:
                 unique_globals.add(gname)
                 total_refs += cnt
 
-    out_rows.sort(key=lambda r: (r["routine_name"], r["global_name"]))
-    with OUT_TSV.open("w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=FIELDS, delimiter="\t")
-        w.writeheader()
-        w.writerows(out_rows)
+    tsvio.write_spec(OUT_TSV, SPEC, out_rows)
 
     print(f"routine-globals.tsv: {len(out_rows):,} edges")
     print(f"  routines with ≥1 global ref: {routines_with_refs:,}")

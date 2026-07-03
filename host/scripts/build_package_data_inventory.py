@@ -25,6 +25,9 @@ import re
 import sys
 from pathlib import Path
 
+import schema_v1
+import tsvio
+
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 HOST_SNAPSHOT = PROJECT_ROOT / "vista/vista-m-host"
 PACKAGES_DIR = HOST_SNAPSHOT / "Packages"
@@ -34,15 +37,7 @@ OUT_TSV = OUT_DIR / "package-data.tsv"
 CONTAINER_PREFIX = str(HOST_SNAPSHOT) + "/"
 CONTAINER_ROOT = "/opt/VistA-M/"
 
-FIELDS = [
-    "package",
-    "kind",
-    "file_number",
-    "chunk",
-    "entity_name",
-    "source_path",
-    "byte_size",
-]
+SPEC = schema_v1.spec_for("package-data.tsv")
 
 # FileMan file export: `702+CP TRANSACTION.zwr` (whole) or
 # `80-3+ICD DIAGNOSIS.zwr` (sharded — chunk 3 of a multi-part export).
@@ -92,15 +87,7 @@ def main() -> int:
             "byte_size": zwr.stat().st_size,
         })
 
-    rows.sort(key=lambda r: (
-        r["package"], r["kind"], r["file_number"], r["entity_name"],
-        int(r["chunk"]) if r["chunk"] else 0,
-    ))
-
-    with OUT_TSV.open("w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=FIELDS, delimiter="\t")
-        w.writeheader()
-        w.writerows(rows)
+    tsvio.write_spec(OUT_TSV, SPEC, rows)
 
     file_rows = sum(1 for r in rows if r["kind"] == "file")
     sharded_rows = sum(1 for r in rows if r["kind"] == "file" and r["chunk"])

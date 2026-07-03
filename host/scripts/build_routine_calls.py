@@ -21,9 +21,10 @@ Reads:
 
 Writes:
   - vista/export/code-model/routine-calls.tsv
-    columns: caller_name, caller_package, callee_tag, callee_routine,
+    columns: caller_routine, caller_package, callee_tag, callee_routine,
              kind (do/goto/job/func), ref_count
     one row per unique (caller, tag, callee, kind) tuple
+    emitted via tsvio per schema_v1 (LF, bytewise sort on the PK)
 """
 
 from __future__ import annotations
@@ -33,6 +34,9 @@ import re
 import sys
 from collections import Counter
 from pathlib import Path
+
+import schema_v1
+import tsvio
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 HOST_SNAPSHOT = PROJECT_ROOT / "vista/vista-m-host"
@@ -57,8 +61,7 @@ FUNC_RE = re.compile(
 KIND_MAP = {"D": "do", "DO": "do", "G": "goto", "GOTO": "goto",
             "J": "job", "JOB": "job"}
 
-FIELDS = ["caller_name", "caller_package", "callee_tag", "callee_routine",
-          "kind", "ref_count"]
+SPEC = schema_v1.spec_for("routine-calls.tsv")
 
 
 def translate(container_path: str) -> Path:
@@ -130,7 +133,7 @@ def main() -> int:
                 routines_with_calls += 1
             for (tag, rou, kind), cnt in counts.items():
                 out_rows.append({
-                    "caller_name": name,
+                    "caller_routine": name,
                     "caller_package": pkg,
                     "callee_tag": tag,
                     "callee_routine": rou,
@@ -139,13 +142,7 @@ def main() -> int:
                 })
                 total_calls += cnt
 
-    out_rows.sort(key=lambda r: (r["caller_name"], r["callee_routine"],
-                                  r["callee_tag"], r["kind"]))
-
-    with OUT_TSV.open("w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=FIELDS, delimiter="\t")
-        w.writeheader()
-        w.writerows(out_rows)
+    tsvio.write_spec(OUT_TSV, SPEC, out_rows)
 
     by_kind: Counter = Counter()
     for r in out_rows:

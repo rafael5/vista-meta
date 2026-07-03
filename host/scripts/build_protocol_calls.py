@@ -27,6 +27,9 @@ import sys
 from collections import Counter
 from pathlib import Path
 
+import schema_v1
+import tsvio
+
 NORM = Path(__file__).resolve().parents[2] / "vista/export/code-model"
 IN_TSV = NORM / "protocols.tsv"
 OUT_TSV = NORM / "protocol-calls.tsv"
@@ -39,8 +42,7 @@ FUNC_RE = re.compile(r"\$\$([A-Z%][A-Z0-9]*)?\^(%?[A-Z][A-Z0-9]*)")
 KIND_MAP = {"D": "do", "DO": "do", "G": "goto", "GOTO": "goto",
             "J": "job", "JOB": "job"}
 
-FIELDS = ["protocol_name", "protocol_package", "action_kind",
-          "callee_tag", "callee_routine", "call_kind", "ref_count"]
+SPEC = schema_v1.spec_for("protocol-calls.tsv")
 
 
 def strip_strings_and_comments(line: str) -> str:
@@ -100,13 +102,7 @@ def main() -> int:
          "ref_count": cnt}
         for (n, pk, ak, tg, cn, ck), cnt in agg.items()
     ]
-    rows.sort(key=lambda r: (r["protocol_name"], r["action_kind"],
-                              r["callee_routine"], r["callee_tag"]))
-
-    with OUT_TSV.open("w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=FIELDS, delimiter="\t")
-        w.writeheader()
-        w.writerows(rows)
+    tsvio.write_spec(OUT_TSV, SPEC, rows)
 
     distinct_callees = {r["callee_routine"] for r in rows}
     distinct_protocols = {r["protocol_name"] for r in rows}
