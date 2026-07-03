@@ -33,6 +33,12 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 RAW_FILES = PROJECT_ROOT / "vista/export/raw/files.tsv"
 OUT_JSON = PROJECT_ROOT / "vista/export/raw/extraction.json"
 
+# The R3 contract fields; V6 asserts presence, V7 folds them into
+# manifest.json. Keep in sync with build_sidecar below.
+R3_FIELDS = ("engine", "engine_image", "engine_image_id",
+             "container_id", "extraction_timestamp",
+             "db_state_fingerprint", "source_commit")
+
 
 def db_fingerprint(rows: list[dict]) -> str:
     """sha256 over LF-joined, bytewise-sorted file_number/record_count."""

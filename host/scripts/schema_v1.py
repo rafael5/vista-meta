@@ -98,6 +98,65 @@ RPC_INACTIVE_LABELS = {
 # V2/B1: where a piks.tsv classification came from.
 PIKS_SOURCES = ("auto", "triage", "inherited")
 
+# V6: the open/closed FK boundary is DECLARED here, not measured —
+# a closed edge that stops resolving must FAIL validate, never
+# silently become open-world. These 12 were measured open on the V4
+# emission (rates + cause notes live in meta/fidelity.json).
+OPEN_WORLD_FKS = frozenset({
+    ("field-piks.tsv", "pointer_target"),
+    ("files.tsv", "parent_file"),
+    ("options.tsv", "package_dir"),
+    ("options.tsv", "routine_name"),
+    ("package-data.tsv", "file_number"),
+    ("package-data.tsv", "package"),
+    ("package-manifest.tsv", "package"),
+    ("package-piks-summary.tsv", "package"),
+    ("protocol-calls.tsv", "callee_routine"),
+    ("routine-calls.tsv", "callee_routine"),
+    ("rpcs.tsv", "routine_name"),
+    ("vista-file-9-8.tsv", "routine_name"),
+})
+
+PIKS_CATEGORIES = ("I", "K", "P", "S")
+PIKS_CONFIDENCES = ("certain", "high", "low", "moderate")
+
+# V6: documented enum value domains, keyed (file, column). Blank is
+# null (never a domain member); out-of-domain values are tolerated
+# with a WARNING (open-world), per plan § V6. Domains were measured
+# on the V4/V5 emission and frozen as the v1 documented sets.
+ENUM_DOMAINS: dict[tuple[str, str], tuple[str, ...]] = {
+    ("field-piks.tsv", "data_type"): (
+        "COMPUTED", "DATE", "FREE-TEXT", "MUMPS", "NUMERIC", "OTHER",
+        "POINTER", "SET", "VARIABLE-POINTER", "WORD-PROCESSING"),
+    ("field-piks.tsv", "file_piks"): PIKS_CATEGORIES,
+    ("field-piks.tsv", "ref_piks"): PIKS_CATEGORIES,
+    ("field-piks.tsv", "cross_piks"): ("Y",),
+    ("files.tsv", "status"): ("extracted",),
+    ("piks-triage.tsv", "piks"): PIKS_CATEGORIES,
+    ("piks-triage.tsv", "piks_confidence"): PIKS_CONFIDENCES,
+    ("piks.tsv", "piks"): PIKS_CATEGORIES,
+    ("piks.tsv", "piks_confidence"): PIKS_CONFIDENCES,
+    ("piks.tsv", "piks_source"): PIKS_SOURCES,
+    ("options.tsv", "type"): (
+        "A", "B", "C", "E", "I", "M", "O", "P", "Q", "R", "S", "X"),
+    ("package-data.tsv", "kind"): ("file", "global"),
+    ("protocol-calls.tsv", "action_kind"): ("entry", "exit"),
+    ("protocol-calls.tsv", "call_kind"): ("do", "func", "goto"),
+    ("protocols.tsv", "type"): (
+        "A", "D", "E", "L", "M", "O", "Q", "S", "X"),
+    ("routine-calls.tsv", "kind"): ("do", "func", "goto", "job"),
+    ("routines-comprehensive.tsv", "file_9_8_type"): ("PK", "R"),
+    ("vista-file-9-8.tsv", "type"): ("PK", "R"),
+    ("rpcs.tsv", "return_type"): tuple(sorted(RPC_RETURN_TYPE_LABELS)),
+    ("rpcs.tsv", "return_type_label"):
+        tuple(sorted(set(RPC_RETURN_TYPE_LABELS.values()))),
+    ("rpcs.tsv", "inactive"):
+        tuple(sorted(k for k in RPC_INACTIVE_LABELS if k)),
+    ("rpcs.tsv", "inactive_label"):
+        tuple(sorted(set(RPC_INACTIVE_LABELS.values()))),
+    ("rpcs.tsv", "availability"): ("A", "P", "R", "S"),
+}
+
 FILES_TSV_DROPPED = (
     "piks", "piks_method", "piks_confidence", "piks_evidence",
     "piks_secondary", "volatility", "sensitivity", "portability",

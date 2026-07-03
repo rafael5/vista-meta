@@ -320,6 +320,10 @@ fidelity: ## Emit + verify the fidelity declarations (V4/R2+F9)
 	/usr/bin/python3 host/scripts/build_fidelity.py
 	/usr/bin/python3 host/scripts/build_fidelity.py --check
 
+.PHONY: validate
+validate: ## Validate the emitted tree against the full v1 contract (V6)
+	/usr/bin/python3 host/scripts/validate_export.py
+
 .PHONY: content-hash
 content-hash: ## Print the V5 data fingerprint (24 TSVs, normative recipe)
 	/usr/bin/python3 host/scripts/content_hash.py
@@ -342,7 +346,8 @@ emit-all: ## Single-run emission of all 24 finals from one engine state (F7)
 	$(MAKE) validate-xindex
 	$(MAKE) column-manifest
 	$(MAKE) fidelity
-	@echo "emit-all complete: 24 finals + typed manifest + fidelity from one extraction."
+	$(MAKE) validate
+	@echo "emit-all complete: 24 finals + typed manifest + fidelity from one extraction, validated."
 
 .PHONY: dump-files dump-piks dump-field-piks
 .PHONY: raw-dir

@@ -360,5 +360,47 @@ class TestSharedVocabularies(unittest.TestCase):
             self.assertIn(c, sv.spec_for(f).columns)
 
 
+class TestOpenWorldFks(unittest.TestCase):
+    """V6: the closed/open FK boundary is DECLARED, not measured —
+    a previously-closed edge that stops resolving must fail validate,
+    not silently become open-world."""
+
+    def test_every_open_edge_is_a_declared_fk(self):
+        for f, c in sv.OPEN_WORLD_FKS:
+            self.assertIn(c, sv.spec_for(f).fks, f"{f}.{c}")
+
+    def test_known_boundary_spot_checks(self):
+        self.assertIn(("routine-calls.tsv", "callee_routine"),
+                      sv.OPEN_WORLD_FKS)
+        self.assertIn(("vista-file-9-8.tsv", "routine_name"),
+                      sv.OPEN_WORLD_FKS)
+        # the closed side: edge/xindex identity columns (F8)
+        self.assertNotIn(("routine-calls.tsv", "caller_routine"),
+                         sv.OPEN_WORLD_FKS)
+        self.assertNotIn(("xindex-routines.tsv", "routine_name"),
+                         sv.OPEN_WORLD_FKS)
+
+
+class TestEnumDomains(unittest.TestCase):
+    """V6: documented enum value sets (out-of-set = warning)."""
+
+    def test_every_domain_names_an_enum_column(self):
+        for (f, c), dom in sv.ENUM_DOMAINS.items():
+            self.assertEqual(sv.spec_for(f).effective_type(c), "enum",
+                             f"{f}.{c}")
+            self.assertTrue(dom)
+            self.assertNotIn("", dom)  # blank is null, not a value
+
+    def test_domain_spot_checks(self):
+        self.assertEqual(sv.ENUM_DOMAINS[("piks.tsv", "piks_source")],
+                         sv.PIKS_SOURCES)
+        self.assertEqual(sv.ENUM_DOMAINS[("piks.tsv", "piks")],
+                         ("I", "K", "P", "S"))
+        self.assertEqual(
+            sv.ENUM_DOMAINS[("rpcs.tsv", "return_type")],
+            tuple(sorted(sv.RPC_RETURN_TYPE_LABELS)))
+
+
+
 if __name__ == "__main__":
     unittest.main()
