@@ -198,9 +198,21 @@ sync-routines: ## Copy /opt/VistA-M/Packages/ from container to vista/vista-m-ho
 	@mkdir -p vista/vista-m-host
 	$(DOCKER) cp $(CONTAINER):/opt/VistA-M/Packages vista/vista-m-host/Packages
 	$(DOCKER) cp $(CONTAINER):/opt/VistA-M/r/MANIFEST.tsv vista/vista-m-host/MANIFEST.tsv
+	@# R4: %-routine census sources — ZTMGRSET set in o/ plus r/ strays.
+	@# Boundary: these two VistA dirs ONLY, never $$ydb_dist (F10).
+	@mkdir -p vista/vista-m-host/PercentRoutines
+	@printf 'routine\tsource\n' > vista/vista-m-host/PercentRoutines/MANIFEST.tsv
+	@$(DOCKER) exec $(CONTAINER) bash -c \
+		'ls /opt/VistA-M/o/_*.m /opt/VistA-M/r/_*.m 2>/dev/null' | \
+	while read -r src; do \
+		$(DOCKER) cp "$(CONTAINER):$$src" vista/vista-m-host/PercentRoutines/; \
+		printf '%%%s\t%s\n' "$$(basename $$src .m | cut -c2-)" "$$src" \
+			>> vista/vista-m-host/PercentRoutines/MANIFEST.tsv; \
+	done
 	@echo "---"
 	@echo "Packages:  $$(ls vista/vista-m-host/Packages | wc -l)"
 	@echo "Routines:  $$(find vista/vista-m-host/Packages -path '*/Routines/*.m' | wc -l)"
+	@echo "%-routines: $$(( $$(wc -l < vista/vista-m-host/PercentRoutines/MANIFEST.tsv) - 1 ))"
 	@echo "MANIFEST:  $$(( $$(wc -l < vista/vista-m-host/MANIFEST.tsv) - 1 )) entries"
 	@echo "Size:      $$(du -sh vista/vista-m-host/Packages | cut -f1)"
 
@@ -276,57 +288,92 @@ package-namespace: ## Per-package namespace + VDL app_code from docs/Packages.cs
 	/usr/bin/python3 host/scripts/build_package_namespace.py
 
 .PHONY: augment-registries
-augment-registries: ## Add package/package_dir to rpcs|options|protocols.tsv (P1/P2)
-	@for f in routines.tsv rpcs.tsv options.tsv protocols.tsv; do \
-		[ -f vista/export/code-model/$$f ] || \
-			{ echo "Missing: vista/export/code-model/$$f"; exit 1; }; \
-	done
-	@[ -f docs/Packages.csv ] || { echo "Missing docs/Packages.csv"; exit 1; }
-	/usr/bin/python3 host/scripts/augment_registries.py
+augment-registries: ## (retired) package columns now land via normalize-dumps
+	@echo "Retired: augmentation is part of 'make normalize-dumps' (V1)."
+	@exit 1
+
+.PHONY: normalize-dumps
+normalize-dumps: ## Normalize raw M dumps -> schema_v1 finals (V1.4)
+	@[ -f vista/export/raw/files.tsv ] || \
+		{ echo "No raw dumps. Run the dump-* targets first."; exit 1; }
+	@[ -f vista/export/code-model/routines.tsv ] || \
+		{ echo "Run 'make inventory' first."; exit 1; }
+	/usr/bin/python3 host/scripts/normalize_dumps.py
+
+.PHONY: capture-extraction
+capture-extraction: ## Capture R3 engine identity/state sidecar (V1.6)
+	/usr/bin/python3 host/scripts/capture_extraction.py $(CONTAINER)
+
+.PHONY: emit-all
+emit-all: ## Single-run emission of all 24 finals from one engine state (F7)
+	@$(DOCKER) ps --format '{{.Names}}' | grep -q '^$(CONTAINER)$$' || \
+		{ echo "Container '$(CONTAINER)' is not running. Run 'make run' first."; exit 1; }
+	$(MAKE) sync-routines
+	$(MAKE) dump-files dump-piks dump-field-piks
+	$(MAKE) dump-file-9-8 dump-file-8994 dump-file-19 dump-file-101
+	$(MAKE) xindex
+	$(MAKE) capture-extraction
+	$(MAKE) inventory
+	$(MAKE) normalize-dumps
+	$(MAKE) routine-globals routine-calls protocol-calls
+	$(MAKE) package-data package-piks package-namespace
+	$(MAKE) package-manifest routines-comprehensive package-edge-matrix
+	$(MAKE) validate-xindex
+	@echo "emit-all complete: 24 finals from one extraction."
+
+.PHONY: dump-files dump-piks dump-field-piks
+dump-files: raw-dir ## Dump FileMan inventory via VMFILES → raw/files.tsv
+	$(DOCKER) exec -u vehu $(CONTAINER) bash -lc 'echo "D RUN^VMFILES" | $$ydb_dist/mumps -direct'
+
+dump-piks: raw-dir ## Run PIKS classifier via VMPIKS → raw/piks.tsv
+	$(DOCKER) exec -u vehu $(CONTAINER) bash -lc 'echo "D RUN^VMPIKS" | $$ydb_dist/mumps -direct'
+
+dump-field-piks: raw-dir ## Field-level PIKS via VMFPIKS → raw/field-piks.tsv
+	$(DOCKER) exec -u vehu $(CONTAINER) bash -lc 'echo "D RUN^VMFPIKS" | $$ydb_dist/mumps -direct'
 
 .PHONY: dump-file-9-8
-dump-file-9-8: ## Dump File 9.8 (ROUTINE) via VMDUMP98 → vista-file-9-8.tsv (ADR-045 Phase 4a)
+dump-file-9-8: raw-dir ## Dump File 9.8 (ROUTINE) via VMDUMP98 → raw/ (ADR-045 Phase 4a)
 	$(DOCKER) exec -u vehu $(CONTAINER) bash -lc 'echo "D RUN^VMDUMP98 H" | $$ydb_dist/mumps -direct'
-	$(DOCKER) cp $(CONTAINER):/tmp/vista-file-9-8.tsv vista/export/code-model/vista-file-9-8.tsv
+	$(DOCKER) cp $(CONTAINER):/tmp/vista-file-9-8.tsv vista/export/raw/vista-file-9-8.tsv
 	$(DOCKER) exec -u vehu $(CONTAINER) rm -f /tmp/vista-file-9-8.tsv
-	@echo "Written: vista/export/code-model/vista-file-9-8.tsv"
-	@wc -l vista/export/code-model/vista-file-9-8.tsv
+	@echo "Written: vista/export/raw/vista-file-9-8.tsv"
+	@wc -l vista/export/raw/vista-file-9-8.tsv
 
 .PHONY: dump-file-8994
-dump-file-8994: ## Dump File 8994 (REMOTE PROCEDURE) via VMDUMP8994 → rpcs.tsv (ADR-045 Phase 4b)
+dump-file-8994: raw-dir ## Dump File 8994 (REMOTE PROCEDURE) via VMDUMP8994 → rpcs.tsv (ADR-045 Phase 4b)
 	$(DOCKER) exec -u vehu $(CONTAINER) bash -lc 'echo "D RUN^VMDUMP8994 H" | $$ydb_dist/mumps -direct'
-	$(DOCKER) cp $(CONTAINER):/tmp/rpcs.tsv vista/export/code-model/rpcs.tsv
+	$(DOCKER) cp $(CONTAINER):/tmp/rpcs.tsv vista/export/raw/rpcs.tsv
 	$(DOCKER) exec -u vehu $(CONTAINER) rm -f /tmp/rpcs.tsv
-	@echo "Written: vista/export/code-model/rpcs.tsv"
-	@wc -l vista/export/code-model/rpcs.tsv
+	@echo "Written: vista/export/raw/rpcs.tsv"
+	@wc -l vista/export/raw/rpcs.tsv
 
 .PHONY: dump-file-19
-dump-file-19: ## Dump File 19 (OPTION) via VMDUMP19 → options.tsv (ADR-045 Phase 4c)
+dump-file-19: raw-dir ## Dump File 19 (OPTION) via VMDUMP19 → options.tsv (ADR-045 Phase 4c)
 	$(DOCKER) exec -u vehu $(CONTAINER) bash -lc 'echo "D RUN^VMDUMP19 H" | $$ydb_dist/mumps -direct'
-	$(DOCKER) cp $(CONTAINER):/tmp/options.tsv vista/export/code-model/options.tsv
+	$(DOCKER) cp $(CONTAINER):/tmp/options.tsv vista/export/raw/options.tsv
 	$(DOCKER) exec -u vehu $(CONTAINER) rm -f /tmp/options.tsv
-	@echo "Written: vista/export/code-model/options.tsv"
-	@wc -l vista/export/code-model/options.tsv
+	@echo "Written: vista/export/raw/options.tsv"
+	@wc -l vista/export/raw/options.tsv
 
 .PHONY: dump-file-101
-dump-file-101: ## Dump File 101 (PROTOCOL) via VMDUMP101 → protocols.tsv (ADR-045 Phase 4d)
+dump-file-101: raw-dir ## Dump File 101 (PROTOCOL) via VMDUMP101 → protocols.tsv (ADR-045 Phase 4d)
 	$(DOCKER) exec -u vehu $(CONTAINER) bash -lc 'echo "D RUN^VMDUMP101 H" | $$ydb_dist/mumps -direct'
-	$(DOCKER) cp $(CONTAINER):/tmp/protocols.tsv vista/export/code-model/protocols.tsv
+	$(DOCKER) cp $(CONTAINER):/tmp/protocols.tsv vista/export/raw/protocols.tsv
 	$(DOCKER) exec -u vehu $(CONTAINER) rm -f /tmp/protocols.tsv
-	@echo "Written: vista/export/code-model/protocols.tsv"
-	@wc -l vista/export/code-model/protocols.tsv
+	@echo "Written: vista/export/raw/protocols.tsv"
+	@wc -l vista/export/raw/protocols.tsv
 
 .PHONY: xindex
-xindex: ## Run XINDEX on full corpus via VMXIDX → xindex-{routines,errors,xrefs,tags}.tsv
+xindex: raw-dir ## Run XINDEX on full corpus via VMXIDX → xindex-{routines,errors,xrefs,tags}.tsv
 	$(DOCKER) exec -u vehu $(CONTAINER) bash -lc 'echo "D ALL^VMXIDX H" | $$ydb_dist/mumps -direct' | tail -5
 	@for f in routines errors xrefs tags; do \
-		$(DOCKER) cp $(CONTAINER):/tmp/xindex-$$f.tsv vista/export/code-model/xindex-$$f.tsv; \
+		$(DOCKER) cp $(CONTAINER):/tmp/xindex-$$f.tsv vista/export/raw/xindex-$$f.tsv; \
 		$(DOCKER) exec -u vehu $(CONTAINER) rm -f /tmp/xindex-$$f.tsv; \
 	done
-	@wc -l vista/export/code-model/xindex-*.tsv
+	@wc -l vista/export/raw/xindex-*.tsv
 
 .PHONY: validate-xindex
-validate-xindex: ## Validate our regex extractions against XINDEX (ADR-045 post-Phase-6)
+validate-xindex: raw-dir ## Validate our regex extractions against XINDEX (ADR-045 post-Phase-6)
 	@for f in routines.tsv routine-calls.tsv xindex-routines.tsv xindex-xrefs.tsv; do \
 		[ -f vista/export/code-model/$$f ] || \
 			{ echo "Missing: vista/export/code-model/$$f"; exit 1; }; \

@@ -94,8 +94,8 @@ RUN ;Full classification run
  W "  Post-propagation inheritance: ",INHCOUNT2," subfiles",!
  S INHCOUNT=INHCOUNT+INHCOUNT2
  ;
- ; === Write piks.tsv ===
- N PATH S PATH="/home/vehu/export/data-model/piks.tsv"
+ ; === Write piks.tsv raw dump (host normalize_dumps.py emits the final) ===
+ N PATH S PATH="/home/vehu/export/raw/piks.tsv"
  O PATH:NEWVERSION U PATH
  W "file_number",$C(9),"piks",$C(9),"piks_method",$C(9),"piks_confidence",$C(9),"piks_evidence",!
  S FILE=""

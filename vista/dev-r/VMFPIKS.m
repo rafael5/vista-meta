@@ -22,8 +22,8 @@ RUN ;Classify fields and write TSV
  D LOADPIKS(.FPIKS)
  W "Loaded ",$O(FPIKS(""),-1)," file PIKS classifications",!
  ;
- ; Write output
- N PATH S PATH="/home/vehu/export/data-model/field-piks.tsv"
+ ; Write output (raw dump; host normalize_dumps.py emits the final)
+ N PATH S PATH="/home/vehu/export/raw/field-piks.tsv"
  O PATH:NEWVERSION U PATH
  ;
  ; Header
@@ -111,7 +111,7 @@ LOADPIKS(FPIKS) ;Load PIKS from piks.tsv + piks-triage.tsv
  ; Use ZSYSTEM to read files via shell — avoids YDB device I/O complexity
  N CMD,LINE,IO S IO=$I
  ; Read piks.tsv
- S CMD="cat /home/vehu/export/data-model/piks.tsv | tail -n +2"
+ S CMD="cat /home/vehu/export/raw/piks.tsv | tail -n +2"
  O "pipe":(COMMAND=CMD:READONLY)::"PIPE" U "pipe"
  F  R LINE:5 Q:$T=0  Q:LINE=""  D
  . N FN,PK S FN=$P(LINE,$C(9),1),PK=$P(LINE,$C(9),2)
