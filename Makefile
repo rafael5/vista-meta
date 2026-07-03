@@ -315,6 +315,11 @@ column-manifest: ## Emit + verify the typed column manifest (V3/R1)
 	/usr/bin/python3 host/scripts/build_column_manifest.py
 	/usr/bin/python3 host/scripts/build_column_manifest.py --check
 
+.PHONY: fidelity
+fidelity: ## Emit + verify the fidelity declarations (V4/R2+F9)
+	/usr/bin/python3 host/scripts/build_fidelity.py
+	/usr/bin/python3 host/scripts/build_fidelity.py --check
+
 .PHONY: emit-all
 emit-all: ## Single-run emission of all 24 finals from one engine state (F7)
 	@$(DOCKER) ps --format '{{.Names}}' | grep -q '^$(CONTAINER)$$' || \
@@ -332,7 +337,8 @@ emit-all: ## Single-run emission of all 24 finals from one engine state (F7)
 	$(MAKE) package-manifest routines-comprehensive package-edge-matrix
 	$(MAKE) validate-xindex
 	$(MAKE) column-manifest
-	@echo "emit-all complete: 24 finals + typed manifest from one extraction."
+	$(MAKE) fidelity
+	@echo "emit-all complete: 24 finals + typed manifest + fidelity from one extraction."
 
 .PHONY: dump-files dump-piks dump-field-piks
 .PHONY: raw-dir

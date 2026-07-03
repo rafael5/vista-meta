@@ -159,18 +159,36 @@ both producers' manifests is the thin, non-deferred slice of the cross-producer
 entity-identity contract; full identity semantics remain deferred.
 
 **R2 — Declare the two measured data-fidelity facts in the schema (so consumers don't read
-them as bugs).**
-- **FK open-world:** `callee_routine` may not resolve — ~2.3% of call targets (measured: 472
-  of 20,974 distinct callees) are external/unmapped routines. Declare these FKs as open-world;
-  a failed join is expected, not an error.
+them as bugs).** *(Implemented at V4, 2026-07-03: the declarations are emitted as data in
+`vista/export/meta/fidelity.json` by `host/scripts/build_fidelity.py`, every rate re-measured
+from the emitted TSVs at build time; `--check` re-measures and fails on drift. Rates below
+are the V4 emission's — the machine-checkable copy in fidelity.json is authoritative.)*
+- **FK open-world:** `callee_routine` may not resolve — 2.19% of call targets (re-measured
+  post-R4: 459 of 20,989 distinct callees; pre-R4 it was 472 of 20,974) are external/unmapped
+  routines, including calls into the %-namespace beyond the 11 %-routines this instance ships
+  as source. Declare these FKs as open-world; a failed join is expected, not an error.
+  *(Widened at V4: fidelity.json measures **every** declared FK edge — 35 edges, 12 of them
+  open-world on this emission, each with a cause note; the largest are
+  `vista-file-9-8.routine_name` 1,564/30,665 (the T-002 File 9.8-only cohort) and
+  `field-piks.pointer_target` 85/360.)*
 - **Call-graph divergence:** vista-meta's callee set diverges from the XINDEX reference for
-  ~7% of routines (measured: 2,032 of 29,098). Declare the divergence rate and that **XINDEX
-  is the reference authority for *statically expressed* calls** (reworded 2026-07-03): XINDEX
-  is a static source cross-referencer; calls made through indirection (`DO @X`), XECUTE
-  strings, and option/protocol/RPC dispatch are invisible to it and to this export —
-  dynamic dispatch is **declared out of scope**, not covered-by-authority. (Line/tag counts
-  agree 100% — divergence is callees only. Part of the open-world FK rate also stems from
-  the %-routine census gap fixed by R4.)
+  6.98% of routines (re-measured at V4: 2,032 of 29,097 xindex-validated routines). Declare
+  the divergence rate and that **XINDEX is the reference authority for *statically expressed*
+  calls** (reworded 2026-07-03): XINDEX is a static source cross-referencer; calls made
+  through indirection (`DO @X`), XECUTE strings, and option/protocol/RPC dispatch are
+  invisible to it and to this export — dynamic dispatch is **declared out of scope**, not
+  covered-by-authority. (Line/tag counts agree 100% — re-verified at V4: zero mismatches on
+  either across all 29,097 validated routines; divergence is callees only.)
+- **XINDEX coverage scope (added at V4, from plan risk F9):** the xindex-* family describes
+  **only File 9.8-registered routines** — the XINDEX driver (`VMXIDX`) iterates `^DIC(9.8)`,
+  so absence of xindex rows/findings means *not-processed*, never *clean*. Measured on this
+  emission: 29,097 of 39,373 census routines covered (73.9%). Gap decomposition: 10,272
+  census routines never registered in File 9.8 (the T-002 MANIFEST-only cohort, including
+  all 11 %-routines), 3 registered type-R routines XINDEX failed to process (KMPPS44A/B/C),
+  and 1 registered non-R-type entry. **Divergence denominator decision:** %-routines are
+  **excluded** — verified, not assumed: File 9.8 holds zero %-routines on this instance and
+  zero appear in xindex-validation.tsv; the denominator is the 29,097 XINDEX-processed
+  routines.
 
 **R3 — Pin the upstream engine identity and state (added 2026-07-03).** The export is
 derived from a live engine, and engine state drifts: measured against the org gold-master

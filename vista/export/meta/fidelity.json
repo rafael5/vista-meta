@@ -1,0 +1,365 @@
+{
+  "declarations": {
+    "fk_open_world": {
+      "edges": [
+        {
+          "column": "file_number",
+          "distinct_values": 8230,
+          "file": "field-piks.tsv",
+          "open_world": false,
+          "target": "files.tsv:file_number",
+          "unresolved": 0,
+          "unresolved_rate": 0.0
+        },
+        {
+          "column": "pointer_target",
+          "distinct_values": 360,
+          "file": "field-piks.tsv",
+          "note": "Pointer definitions may target files absent from this instance's DD.",
+          "open_world": true,
+          "target": "files.tsv:file_number",
+          "unresolved": 85,
+          "unresolved_rate": 0.2361
+        },
+        {
+          "column": "parent_file",
+          "distinct_values": 2183,
+          "file": "files.tsv",
+          "note": "Orphan subfile parents absent from the DD (triage-resolved for PIKS at V2; the extracted value stands).",
+          "open_world": true,
+          "target": "files.tsv:file_number",
+          "unresolved": 4,
+          "unresolved_rate": 0.0018
+        },
+        {
+          "column": "package_dir",
+          "distinct_values": 128,
+          "file": "options.tsv",
+          "note": "Package attributions sourced from registry/repo metadata may name packages with no Packages/ directory in the source tree.",
+          "open_world": true,
+          "target": "packages.tsv:package",
+          "unresolved": 1,
+          "unresolved_rate": 0.0078
+        },
+        {
+          "column": "routine_name",
+          "distinct_values": 5105,
+          "file": "options.tsv",
+          "note": "Option registry entries may name routines not shipped as source.",
+          "open_world": true,
+          "target": "routines.tsv:routine_name",
+          "unresolved": 195,
+          "unresolved_rate": 0.0382
+        },
+        {
+          "column": "file_number",
+          "distinct_values": 2900,
+          "file": "package-data.tsv",
+          "note": "Shipped data chunks may reference files absent from the DD.",
+          "open_world": true,
+          "target": "files.tsv:file_number",
+          "unresolved": 21,
+          "unresolved_rate": 0.0072
+        },
+        {
+          "column": "package",
+          "distinct_values": 125,
+          "file": "package-data.tsv",
+          "note": "Package attributions sourced from registry/repo metadata may name packages with no Packages/ directory in the source tree.",
+          "open_world": true,
+          "target": "packages.tsv:package",
+          "unresolved": 2,
+          "unresolved_rate": 0.016
+        },
+        {
+          "column": "dest_package",
+          "distinct_values": 144,
+          "file": "package-edge-matrix.tsv",
+          "open_world": false,
+          "target": "packages.tsv:package",
+          "unresolved": 0,
+          "unresolved_rate": 0.0
+        },
+        {
+          "column": "source_package",
+          "distinct_values": 173,
+          "file": "package-edge-matrix.tsv",
+          "open_world": false,
+          "target": "packages.tsv:package",
+          "unresolved": 0,
+          "unresolved_rate": 0.0
+        },
+        {
+          "column": "package",
+          "distinct_values": 175,
+          "file": "package-manifest.tsv",
+          "note": "Package attributions sourced from registry/repo metadata may name packages with no Packages/ directory in the source tree.",
+          "open_world": true,
+          "target": "packages.tsv:package",
+          "unresolved": 1,
+          "unresolved_rate": 0.0057
+        },
+        {
+          "column": "package",
+          "distinct_values": 174,
+          "file": "package-namespace.tsv",
+          "open_world": false,
+          "target": "packages.tsv:package",
+          "unresolved": 0,
+          "unresolved_rate": 0.0
+        },
+        {
+          "column": "package",
+          "distinct_values": 120,
+          "file": "package-piks-summary.tsv",
+          "note": "Package attributions sourced from registry/repo metadata may name packages with no Packages/ directory in the source tree.",
+          "open_world": true,
+          "target": "packages.tsv:package",
+          "unresolved": 1,
+          "unresolved_rate": 0.0083
+        },
+        {
+          "column": "file_number",
+          "distinct_values": 220,
+          "file": "piks-triage.tsv",
+          "open_world": false,
+          "target": "files.tsv:file_number",
+          "unresolved": 0,
+          "unresolved_rate": 0.0
+        },
+        {
+          "column": "file_number",
+          "distinct_values": 8261,
+          "file": "piks.tsv",
+          "open_world": false,
+          "target": "files.tsv:file_number",
+          "unresolved": 0,
+          "unresolved_rate": 0.0
+        },
+        {
+          "column": "callee_routine",
+          "distinct_values": 1189,
+          "file": "protocol-calls.tsv",
+          "note": "Protocol actions may invoke routines not shipped as source.",
+          "open_world": true,
+          "target": "routines.tsv:routine_name",
+          "unresolved": 22,
+          "unresolved_rate": 0.0185
+        },
+        {
+          "column": "protocol_name",
+          "distinct_values": 4631,
+          "file": "protocol-calls.tsv",
+          "open_world": false,
+          "target": "protocols.tsv:name",
+          "unresolved": 0,
+          "unresolved_rate": 0.0
+        },
+        {
+          "column": "package_dir",
+          "distinct_values": 57,
+          "file": "protocols.tsv",
+          "open_world": false,
+          "target": "packages.tsv:package",
+          "unresolved": 0,
+          "unresolved_rate": 0.0
+        },
+        {
+          "column": "callee_routine",
+          "distinct_values": 20989,
+          "file": "routine-calls.tsv",
+          "note": "External/unmapped call targets, incl. calls into the %-namespace beyond the %-routines shipped as source on this instance.",
+          "open_world": true,
+          "target": "routines.tsv:routine_name",
+          "unresolved": 459,
+          "unresolved_rate": 0.0219
+        },
+        {
+          "column": "caller_package",
+          "distinct_values": 174,
+          "file": "routine-calls.tsv",
+          "open_world": false,
+          "target": "packages.tsv:package",
+          "unresolved": 0,
+          "unresolved_rate": 0.0
+        },
+        {
+          "column": "caller_routine",
+          "distinct_values": 32317,
+          "file": "routine-calls.tsv",
+          "open_world": false,
+          "target": "routines.tsv:routine_name",
+          "unresolved": 0,
+          "unresolved_rate": 0.0
+        },
+        {
+          "column": "package",
+          "distinct_values": 165,
+          "file": "routine-globals.tsv",
+          "open_world": false,
+          "target": "packages.tsv:package",
+          "unresolved": 0,
+          "unresolved_rate": 0.0
+        },
+        {
+          "column": "routine_name",
+          "distinct_values": 30230,
+          "file": "routine-globals.tsv",
+          "open_world": false,
+          "target": "routines.tsv:routine_name",
+          "unresolved": 0,
+          "unresolved_rate": 0.0
+        },
+        {
+          "column": "package",
+          "distinct_values": 174,
+          "file": "routines-comprehensive.tsv",
+          "open_world": false,
+          "target": "packages.tsv:package",
+          "unresolved": 0,
+          "unresolved_rate": 0.0
+        },
+        {
+          "column": "routine_name",
+          "distinct_values": 39373,
+          "file": "routines-comprehensive.tsv",
+          "open_world": false,
+          "target": "routines.tsv:routine_name",
+          "unresolved": 0,
+          "unresolved_rate": 0.0
+        },
+        {
+          "column": "package",
+          "distinct_values": 174,
+          "file": "routines.tsv",
+          "open_world": false,
+          "target": "packages.tsv:package",
+          "unresolved": 0,
+          "unresolved_rate": 0.0
+        },
+        {
+          "column": "package_dir",
+          "distinct_values": 73,
+          "file": "rpcs.tsv",
+          "open_world": false,
+          "target": "packages.tsv:package",
+          "unresolved": 0,
+          "unresolved_rate": 0.0
+        },
+        {
+          "column": "routine_name",
+          "distinct_values": 1526,
+          "file": "rpcs.tsv",
+          "note": "RPC registry entries may name routines not shipped as source.",
+          "open_world": true,
+          "target": "routines.tsv:routine_name",
+          "unresolved": 80,
+          "unresolved_rate": 0.0524
+        },
+        {
+          "column": "routine_name",
+          "distinct_values": 30665,
+          "file": "vista-file-9-8.tsv",
+          "note": "The File 9.8-only cohort (T-002): Kernel-registered routines with no source under Packages/*/Routines/.",
+          "open_world": true,
+          "target": "routines.tsv:routine_name",
+          "unresolved": 1564,
+          "unresolved_rate": 0.051
+        },
+        {
+          "column": "routine_name",
+          "distinct_values": 4842,
+          "file": "xindex-errors.tsv",
+          "open_world": false,
+          "target": "routines.tsv:routine_name",
+          "unresolved": 0,
+          "unresolved_rate": 0.0
+        },
+        {
+          "column": "routine_name",
+          "distinct_values": 29097,
+          "file": "xindex-routines.tsv",
+          "open_world": false,
+          "target": "routines.tsv:routine_name",
+          "unresolved": 0,
+          "unresolved_rate": 0.0
+        },
+        {
+          "column": "routine_name",
+          "distinct_values": 29097,
+          "file": "xindex-tags.tsv",
+          "open_world": false,
+          "target": "routines.tsv:routine_name",
+          "unresolved": 0,
+          "unresolved_rate": 0.0
+        },
+        {
+          "column": "package",
+          "distinct_values": 144,
+          "file": "xindex-validation.tsv",
+          "open_world": false,
+          "target": "packages.tsv:package",
+          "unresolved": 0,
+          "unresolved_rate": 0.0
+        },
+        {
+          "column": "routine_name",
+          "distinct_values": 29097,
+          "file": "xindex-validation.tsv",
+          "open_world": false,
+          "target": "routines.tsv:routine_name",
+          "unresolved": 0,
+          "unresolved_rate": 0.0
+        },
+        {
+          "column": "routine_name",
+          "distinct_values": 26753,
+          "file": "xindex-xrefs.tsv",
+          "open_world": false,
+          "target": "routines.tsv:routine_name",
+          "unresolved": 0,
+          "unresolved_rate": 0.0
+        }
+      ],
+      "statement": "Declared FK edges are open-world: a value may name an entity outside this export. A failed join on an edge measured open_world=true below is expected and is not a data defect. All rates are measured on this emission at build time."
+    },
+    "xindex_coverage": {
+      "divergence_denominator": "xindex-validated routines only (File 9.8-registered and XINDEX-processed). %-routines are excluded: File 9.8 holds no %-routines on this instance and none appear in xindex-validation.tsv (verified at build time, and asserted by percent_routines_covered below).",
+      "measured": {
+        "census_routines": 39373,
+        "coverage_rate": 0.739,
+        "covered_routines": 29097,
+        "gap": {
+          "file_9_8_non_r_uncovered": 1,
+          "file_9_8_r_uncovered": 3,
+          "file_9_8_r_uncovered_routines": [
+            "KMPPS44A",
+            "KMPPS44B",
+            "KMPPS44C"
+          ],
+          "not_in_file_9_8": 10272
+        },
+        "percent_routines_covered": 0,
+        "percent_routines_in_census": 11
+      },
+      "statement": "The xindex-* family describes only routines registered in VistA File 9.8 (the Kernel ROUTINE file): the XINDEX driver (VMXIDX) iterates ^DIC(9.8), so census routines never registered there are structurally outside XINDEX's scope. Absence of xindex rows/findings for a routine means NOT-PROCESSED, not clean."
+    },
+    "xindex_static_call_authority": {
+      "measured": {
+        "callee_divergence_rate": 0.0698,
+        "callee_divergent_routines": 2032,
+        "lines_mismatch": 0,
+        "tags_mismatch": 0,
+        "validated_routines": 29097
+      },
+      "out_of_scope": [
+        "indirection (DO @X / GOTO @X)",
+        "XECUTE strings",
+        "option/protocol/RPC dispatch (registry-driven entry points)"
+      ],
+      "statement": "XINDEX is the reference authority for STATICALLY EXPRESSED calls only. Calls made through dynamic dispatch (out_of_scope below) are invisible to static cross-referencing and are declared out of scope for both XINDEX and this export's call graph \u2014 out of scope, not covered-by-authority. Line and tag counts agree exactly; divergence is confined to callee sets."
+    }
+  },
+  "generated_from": "host/scripts/build_fidelity.py",
+  "schema_version": 1
+}
