@@ -108,9 +108,12 @@ Per-column null semantics documented: e.g. `sensitivity_flag` blank = "not flagg
   that are **empty** while `piks.tsv` holds the real values (measured 2026-07-03). Drop
   them from files.tsv (preferred — one authoritative surface, per B1's principle) or
   populate them from the B1 merge; never ship half-present duplicates.
-- **Deterministic row order** → each file sorted by its primary key before emission. Makes
-  version-to-version diffs meaningful and builds byte-reproducible, which directly
-  strengthens the content-hash and the review posture. One sort at emit time; high leverage.
+- **Deterministic row order** → each file sorted by its primary key before emission,
+  **bytewise (`LC_ALL=C`) on the raw key string** (amended 2026-07-03: decimal file
+  numbers like 107.3 sort differently numeric vs bytewise — an undeclared collation is
+  nondeterministic across implementations). Makes version-to-version diffs meaningful
+  and builds byte-reproducible, which directly strengthens the content-hash and the
+  review posture. One sort at emit time; high leverage.
 - **Declare conventions in the schema doc** (documentation only, no data change): files are
   **UTF-8**, **tab-separated**, **LF**-terminated; **blank = null** (never the literal
   `null`/`NULL`); every file always carries all its columns in fixed order.
@@ -134,8 +137,12 @@ Two additions (2026-07-03, both defects measured live):
   not silently pick a winner. Resolve in `piks-triage.tsv`, re-run.
 - **Coverage rule — every file classified**: 141 of 8,261 files currently have no piks
   row, and all 141 are **subfiles**. A subfile with no explicit classification inherits
-  its parent's `piks` with `piks_source=inherited`. Post-merge invariant:
-  `piks.tsv` rows ≡ `files.tsv` rows, exactly.
+  its parent's `piks` with `piks_source=inherited`. *(Amended 2026-07-03, final pass —
+  measured: inheritance must be **transitive** (17 of the 141 have parents that are
+  themselves uncovered) and **orphans red-gate** (4 of the 141 — 500004.01,
+  5555555.01/.02, 655.01 — name parents with no files.tsv row; resolve in triage, never
+  default). Precedence per file after closure: triage > auto > inherited.)*
+  Post-merge invariant: `piks.tsv` rows ≡ `files.tsv` rows, exactly.
 
 **R1 — Ship a typed column manifest (make it a validatable schema, not a naming convention).**
 Emit a per-file column manifest as data: for every file, each column's `name`, `type`
@@ -183,6 +190,10 @@ what documentation cites most (%DT, %DTC…). Include %-routines in the census (
 `is_percent_routine` real), or — if excluded deliberately — declare the exclusion in the
 schema doc the way R2 declares open-world FKs. Inclusion is preferred: it is the largest
 single downstream-integration win available (routine join rate 57.7% → ~high-90s).
+*(Amended 2026-07-03, final pass — census boundary: on YDB, `$ZRO` also resolves
+`$ydb_dist`'s own `_*.m` utilities; the census takes %-routines from the VistA-M source
+tree / file 9.8 **only**, and each %-routine gets a declared package attribution — the
+`%` prefix is absent from today's namespace map.)*
 
 ---
 
