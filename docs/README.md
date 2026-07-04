@@ -33,13 +33,13 @@ Documentation here is classified by **lifecycle state, not topic**:
   the public **`vista-meta-data-v1`** release (mutually pinned with vdocs `data-v1`),
   the **VistA Compass** VSCode extension 0.2.0, the `vista-meta` CLI + `mfmt` + pre-commit hook.
 - **Live proposals:** [`vista-orchestration-plan.md`](proposals/vista-orchestration-plan.md)
-  (cross-repo TDD toolchain roadmap — largely about sibling repos; Status: Proposed) ·
-  [`docs-lifecycle-reorg-proposal.md`](proposals/docs-lifecycle-reorg-proposal.md) (this
-  reorganization — executing).
+  (cross-repo TDD toolchain roadmap — largely about sibling repos; Status: Proposed) — the docs-lifecycle
+  reorganization itself closed 2026-07-04 (phases 0–3 executed; its record is in
+  `historical/`, and the deferred `Packages.csv` relocation is TODO T-005).
 - **Recently closed → `historical/`:** producer-contracts implementation plan (V1–V7 + Gate R,
   all gate-PASS) · upstream data fixes P1–P5 · the vista-info-hub heads-up memo · spec v0.4
   (as-built build record; its live §11 extraction/PIKS contract was promoted to `reference/`) ·
-  the relocate-and-publish record.
+  the relocate-and-publish record · the docs-lifecycle reorg proposal (executed).
 - **Open follow-ups:** [`../TODO.md`](../TODO.md) (T-001 routine-count reconciliation,
   T-002 cohorts, T-003 unreferenced-routine reduction, T-004 orchestration execution) —
   anchored to RESEARCH.md RF numbers.

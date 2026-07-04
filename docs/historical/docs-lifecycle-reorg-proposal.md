@@ -1,6 +1,8 @@
 # Proposal: docs/ lifecycle reorganization — so it still makes sense in six months
 
-**Status:** Proposed
+**Status:** EXECUTED 2026-07-04 (phases 0–3; commits dffe514 · 16d13f3 · bc86e30 · 82212c7).
+The optional phase 4 (relocate `Packages.csv` out of `docs/` — a code change across 5 scripts
++ Makefile + fixtures) was deliberately deferred and is tracked as TODO T-005.
 **Date:** 2026-07-04
 **Basis:** full deep-read audit of all 65 files under `docs/` + root strays + `CLAUDE.md`/`README.md`/`TODO.md`,
 cross-checked against the repo state (schema-v1 TSV headers, Makefile, `vscode-extension/package.json`,

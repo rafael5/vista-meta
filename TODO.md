@@ -52,3 +52,14 @@ vista-meta.
 automated lint + unit + integration + coverage on PR. Per-phase detail and
 per-repo map: the plan §7; the original long-form tracker text is in this
 file's git history.
+
+## T-005: Relocate Packages.csv out of docs/ (deferred phase 4 of the docs reorg)
+
+`docs/Packages.csv` is build-*input* data (the FOIA build manifest), not
+documentation — read by `Makefile` (`package-namespace` target),
+`build_package_namespace.py`, `normalize_dumps.py`, `build_routine_inventory.py`,
+`augment_registries.py`, + test fixtures, all hardcoding the `docs/` path.
+Move to `vista/vendor/` (or `data/`) and update the ~5 hardcoded paths + the
+Makefile guard + fixtures in one commit. **Closes when:** the CSV lives with
+inputs, `make package-namespace augment-registries` still runs, docs-check clean.
+Origin: docs/historical/docs-lifecycle-reorg-proposal.md §3.2.
