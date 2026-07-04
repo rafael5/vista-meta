@@ -267,7 +267,7 @@ is usually "more than you thought".
 
 ### 3.3 The "shared substrate" problem
 
-Per [RF-023](../vista/export/RESEARCH.md), **VA FileMan and Kernel together
+Per [RF-023](../../vista/export/RESEARCH.md), **VA FileMan and Kernel together
 receive 75.4% of all cross-package calls.** They're VistA's shared library,
 equivalent to Python's stdlib. You will call into them from every package.
 
@@ -300,7 +300,7 @@ that calls it actually runs.
 
 | Tool | Purpose | Location | State |
 |---|---|---|---|
-| **XINDEX** | Static analysis — 66 error codes | Toolkit (XT*7.3*158) | Functional but manual; VEHU's version has runtime issues ([RF-026](../vista/export/RESEARCH.md)) |
+| **XINDEX** | Static analysis — 66 error codes | Toolkit (XT*7.3*158) | Functional but manual; VEHU's version has runtime issues ([RF-026](../../vista/export/RESEARCH.md)) |
 | **M-Unit** | Unit testing framework | `github.com/ChristopherEdwards/M-Unit` | Works; adoption sparse |
 | **KIDS** | Package manager + installer | Kernel | Production-stable, forward-only |
 | **FileMan** | Database layer + schema | Core | Production-stable |
@@ -308,9 +308,9 @@ that calls it actually runs.
 | **MailMan** | User messaging + bulletins | Kernel | Production-stable |
 | **RPC Broker** | CPRS network API | Kernel | Production-stable |
 | **VistA-M** | Source on GitHub | [github.com/WorldVistA/VistA](https://github.com/WorldVistA/VistA) | The canonical community mirror |
-| **kids-vc** | Git integration for KIDS | This project | See [kids-vc-guide.md](kids-vc-guide.md) |
+| **kids-vc** | Git integration for KIDS | This project | See `~/projects/py-kids-vc/docs/kids-vc-guide.md` |
 | **XPDK2VC** | In-VistA KIDS→VCS | Kernel 8.0*11310 | Shipped but rarely run |
-| **ViViaN/DOX** | Web cross-ref browser | `vivian.worldvista.org/dox/` | Call-graph subset only ([RF-025](../vista/export/RESEARCH.md)) |
+| **ViViaN/DOX** | Web cross-ref browser | `vivian.worldvista.org/dox/` | Call-graph subset only ([RF-025](../../vista/export/RESEARCH.md)) |
 
 ### 4.2 What doesn't exist (modern Python ecosystem equivalents missing)
 
@@ -622,7 +622,7 @@ For a real patch, this involves:
 - **Post-install monitoring** — watch `^ERROR` and user reports
 - **Document** — VDL update, patch description
 
-If something breaks: there is no uninstall (see [ADR-046](adr/046-kids-vc-undo-pre-install-snapshot.md)
+If something breaks: there is no uninstall (see ADR-046 (moved to `~/projects/py-kids-vc/docs/adr/`)
 for a proposed partial remedy). Restore backup.
 
 ---
@@ -801,7 +801,7 @@ Large language models (Claude, GPT-4, etc.) are already capable of:
 The vista-meta project itself is an existence proof: **kids-vc was built
 primarily with AI assistance**. 2,406-patch corpus validation achieved in
 a single session. ~3,000 lines of Python + MUMPS written with AI pairing.
-See [kids-vc-background-dev.md Part IV](kids-vc-background-dev.md) for
+See [kids-vc-background-dev.md Part IV] for
 the development chronology.
 
 ### 9.2 What AI can't (yet) do
@@ -1074,17 +1074,17 @@ and learn to work around the gaps rather than mourn them.**
   reference for the CLI + pre-commit hook + VSCode extension
 - [code-model-guide.md](code-model-guide.md) — the VistA code-model
   artifacts this guide references
-- [kids-vc-guide.md](kids-vc-guide.md) — using kids-vc
-- [kids-vc-background-dev.md](kids-vc-background-dev.md) — history,
+- `~/projects/py-kids-vc/docs/kids-vc-guide.md` — using kids-vc
+- `~/projects/py-kids-vc/docs/kids-vc-background-dev.md` — history,
   SKIDS/XPDK2VC prior art, development chronology
 - [xindex-reference.md](xindex-reference.md) — XINDEX catalog
 - [piks-analysis-guide.md](piks-analysis-guide.md) — data-model side
   (FileMan file PIKS classification)
 - [vista-meta-spec-v0.4.md](vista-meta-spec-v0.4.md) §11 — research
   methodology
-- [ADR-045](adr/045-data-code-separation-package-bridge.md) — why code and
+- [ADR-045](../adr/045-data-code-separation-package-bridge.md) — why code and
   data are classified separately
-- [ADR-046](adr/046-kids-vc-undo-pre-install-snapshot.md) — proposed
+- ADR-046 (moved to `~/projects/py-kids-vc/docs/adr/`) — proposed
   Phase 9 KIDS undo
-- [RESEARCH.md](../vista/export/RESEARCH.md) — research findings log
+- [RESEARCH.md](../../vista/export/RESEARCH.md) — research findings log
   (RF-001 through RF-033+)

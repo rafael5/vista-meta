@@ -123,7 +123,7 @@ after the `—` marker.
 
 ## 2. The VSCode extension
 
-[vscode-extension/](../vscode-extension/). No language server, no
+[vscode-extension/](../../vscode-extension/). No language server, no
 MCP, no container calls — pure reads of the code-model TSVs. That
 means the extension is instant, works offline, and has no way to
 break your workspace.
@@ -148,7 +148,7 @@ in the Explorer, below Open Editors, the workspace file tree,
 Outline, and Timeline.
 
 Opening
-[vista/vista-m-host/Packages/Accounts Receivable/Routines/PRCA45PT.m](../vista/vista-m-host/Packages/Accounts%20Receivable/Routines/PRCA45PT.m)
+[vista/vista-m-host/Packages/Accounts Receivable/Routines/PRCA45PT.m](../../vista/vista-m-host/Packages/Accounts%20Receivable/Routines/PRCA45PT.m)
 renders this, with every section expanded:
 
 ```
@@ -346,7 +346,7 @@ Reload VSCode to pick up the new version.
 ## 3. The CLI — `vista-meta`
 
 A single Python CLI with subcommands, implemented in
-[host/scripts/vista_meta_cli.py](../host/scripts/vista_meta_cli.py).
+[host/scripts/vista_meta_cli.py](../../host/scripts/vista_meta_cli.py).
 
 ### 3.1 `doctor` — environment health
 
@@ -517,7 +517,7 @@ Exit 1 if any Fatal. Container identity is overridable via
 ## 4. `mfmt` — canonical formatter
 
 Deterministic, idempotent, minimal MUMPS formatter.
-[host/scripts/mfmt.py](../host/scripts/mfmt.py).
+[host/scripts/mfmt.py](../../host/scripts/mfmt.py).
 
 ```bash
 bin/mfmt vista/dev-r/MYNEW.m              # rewrite in place
@@ -549,7 +549,7 @@ running it once. Clean corpus routines are a noop.
 
 ## 5. The pre-commit hook
 
-[hooks/pre-commit](../hooks/pre-commit). Installed via
+[hooks/pre-commit](../../hooks/pre-commit). Installed via
 `make install-hooks` → symlink `.git/hooks/pre-commit`.
 
 ### 5.1 What it checks, per staged file type
@@ -877,12 +877,12 @@ multi-folder workspace, set `vistaMeta.codeModelPath` absolutely
 
 ## 11. Reference
 
-- [host/scripts/vista_meta_cli.py](../host/scripts/vista_meta_cli.py) — every CLI subcommand
-- [host/scripts/mfmt.py](../host/scripts/mfmt.py) — formatter
-- [hooks/pre-commit](../hooks/pre-commit) — the pre-commit hook
-- [vscode-extension/](../vscode-extension/) — extension source
-- [.github/workflows/](../.github/workflows/) — CI
-- [Makefile](../Makefile) — all Makefile targets (`make help` lists them)
+- [host/scripts/vista_meta_cli.py](../../host/scripts/vista_meta_cli.py) — every CLI subcommand
+- [host/scripts/mfmt.py](../../host/scripts/mfmt.py) — formatter
+- [hooks/pre-commit](../../hooks/pre-commit) — the pre-commit hook
+- [vscode-extension/](../../vscode-extension/) — extension source
+- [.github/workflows/](../../.github/workflows/) — CI
+- [Makefile](../../Makefile) — all Makefile targets (`make help` lists them)
 - [vista-developers-guide.md](vista-developers-guide.md) — architectural context
 - `~/projects/py-kids-vc/` — `.KID` decompose / assemble (sibling project)
 - [code-model-guide.md](code-model-guide.md) — the TSVs these tools read

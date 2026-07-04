@@ -1,7 +1,7 @@
 # vista-meta VSCode Extension — Internals & Roadmap
 
 Architecture reference and extension roadmap for the
-[vscode-extension/](../vscode-extension/) source tree. Read
+[vscode-extension/](../../vscode-extension/) source tree. Read
 [vista-vscode-guide.md § 2](vista-vscode-guide.md#2-the-vscode-extension)
 first for the user-facing surface; this document covers the inside of
 the box and what to add next.
@@ -96,7 +96,7 @@ stays warm.
 
 ## 3. The four source files
 
-### [extension.ts](../vscode-extension/src/extension.ts)
+### [extension.ts](../../vscode-extension/src/extension.ts)
 
 Activation only. Creates the tree view, wires
 `onDidChangeActiveTextEditor` so the sidebar reacts to editor focus,
@@ -106,7 +106,7 @@ and registers two commands (`vistaMeta.refresh`,
 The activation predicate is `workspaceContains:**/*.m` — the
 extension activates the moment any `.m` file exists in the workspace.
 
-### [tsv.ts](../vscode-extension/src/tsv.ts)
+### [tsv.ts](../../vscode-extension/src/tsv.ts)
 
 The TSV layer. Two caches:
 
@@ -130,7 +130,7 @@ the dev tree's `meta/column-manifest.json`, surfaces it as the tree
 view's description, and warns if schema_version ≠ 1.
 `vistaCompass.codeModelPath` is deprecated but honored as a fallback.
 
-### [routine.ts](../vscode-extension/src/routine.ts)
+### [routine.ts](../../vscode-extension/src/routine.ts)
 
 The cross-join. `analyze(routineName)` produces a `RoutineInfo` by
 reading from four TSVs:
@@ -151,7 +151,7 @@ from a TSV — `xindex-tags.tsv` has the same data but isn't read yet
 `vista/vista-m-host/`. The bake never sees the host filesystem; this
 mapping is what bridges the two.
 
-### [treeProvider.ts](../vscode-extension/src/treeProvider.ts)
+### [treeProvider.ts](../../vscode-extension/src/treeProvider.ts)
 
 `RoutineTreeProvider` implements `vscode.TreeDataProvider`. State is
 two fields: `activeFile: string | null` and `info: RoutineInfo | null`.
@@ -519,7 +519,7 @@ extensions in adjacent ecosystems often ship them:
 - **Auto-formatting on save.** `mfmt` is the canonical formatter,
   invoked by hook and CI. The extension should not format on save —
   we already had one false-positive incident
-  ([build-log BL-007](build-log.md)) and any in-editor formatter
+  ([build-log BL-007](../build-log.md)) and any in-editor formatter
   must agree byte-for-byte with `mfmt`.
 - **Live container introspection** (running `D ^XINDEX` from the
   extension, querying globals over a broker). Violates constraint
@@ -541,4 +541,4 @@ a sibling tool. Keep the extension small.
 - [code-model-guide.md](code-model-guide.md) — every TSV the extension reads
 - [piks-analysis-guide.md](piks-analysis-guide.md) — the global → file → PIKS chain hover would expose
 - [VSCode extension API](https://code.visualstudio.com/api/references/vscode-api) — provider interfaces
-- [vscode-extension/src/](../vscode-extension/src/) — the current 4-file source tree
+- [vscode-extension/src/](../../vscode-extension/src/) — the current 4-file source tree

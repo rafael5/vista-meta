@@ -6,7 +6,7 @@ and the code that manipulates it. Plus the operational tooling
 (VSCode extension, CLI, formatter, lint hook) built on top.
 
 The single authoritative map is
-[docs/vista-meta-guide.md](docs/vista-meta-guide.md). Read that
+[docs/guides/vista-meta-guide.md](docs/guides/vista-meta-guide.md). Read that
 first for scope, thesis, and cross-references.
 
 ## The thesis
@@ -73,20 +73,20 @@ The `docs/` tree is layered. Start at the top, drill where needed.
 
 | What | Where |
 |---|---|
-| **Comprehensive project guide** | [docs/vista-meta-guide.md](docs/vista-meta-guide.md) |
-| Authoritative technical spec | [docs/vista-meta-spec-v0.4.md](docs/vista-meta-spec-v0.4.md) |
-| Developer onramp | [docs/vista-developers-guide.md](docs/vista-developers-guide.md) |
-| Per-routine situational awareness | [docs/routine-situational-awareness.md](docs/routine-situational-awareness.md) |
-| Per-package situational awareness | [docs/package-situational-awareness.md](docs/package-situational-awareness.md) |
-| VSCode + CLI reference | [docs/vista-vscode-guide.md](docs/vista-vscode-guide.md) |
-| VSCode extension internals | [docs/vscode-extension-internals.md](docs/vscode-extension-internals.md) |
-| PIKS methodology | [docs/piks-analysis-guide.md](docs/piks-analysis-guide.md) |
-| Code model TSVs | [docs/code-model-guide.md](docs/code-model-guide.md) |
-| XINDEX reference | [docs/xindex-reference.md](docs/xindex-reference.md) |
+| **Comprehensive project guide** | [docs/guides/vista-meta-guide.md](docs/guides/vista-meta-guide.md) |
+| Authoritative technical spec | [docs/guides/vista-meta-spec-v0.4.md](docs/guides/vista-meta-spec-v0.4.md) |
+| Developer onramp | [docs/guides/vista-developers-guide.md](docs/guides/vista-developers-guide.md) |
+| Per-routine situational awareness | [docs/guides/routine-situational-awareness.md](docs/guides/routine-situational-awareness.md) |
+| Per-package situational awareness | [docs/guides/package-situational-awareness.md](docs/guides/package-situational-awareness.md) |
+| VSCode + CLI reference | [docs/guides/vista-vscode-guide.md](docs/guides/vista-vscode-guide.md) |
+| VSCode extension internals | [docs/guides/vscode-extension-internals.md](docs/guides/vscode-extension-internals.md) |
+| PIKS methodology | [docs/guides/piks-analysis-guide.md](docs/guides/piks-analysis-guide.md) |
+| Code model TSVs | [docs/guides/code-model-guide.md](docs/guides/code-model-guide.md) |
+| XINDEX reference | [docs/guides/xindex-reference.md](docs/guides/xindex-reference.md) |
 | Decision rationale | [docs/adr/](docs/adr/) |
 | Implementation log | [docs/build-log.md](docs/build-log.md) |
 | Research findings | [vista/export/RESEARCH.md](vista/export/RESEARCH.md) |
-| Upstream pinning | [docs/dependencies.md](docs/dependencies.md) |
+| Upstream pinning | [docs/guides/dependencies.md](docs/guides/dependencies.md) |
 
 ## PIKS — the data-model first-pass abstraction
 
@@ -101,11 +101,11 @@ with four orthogonal properties: volatility, sensitivity,
 portability, volume. Implemented by 52 DD-based heuristics
 (H-01…H-52) across 9 tiers + 6 non-FM heuristics (G-01…G-06).
 Coverage: 98.3%. Full details in
-[docs/piks-analysis-guide.md](docs/piks-analysis-guide.md).
+[docs/guides/piks-analysis-guide.md](docs/guides/piks-analysis-guide.md).
 
 ## License
 
-See [LICENSE](LICENSE). The vendored VistA-M source under
+See [LICENSE](#license). The vendored VistA-M source under
 `vista/vista-m-host/` follows its upstream public-domain status.
 
 ## Companion projects

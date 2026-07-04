@@ -195,7 +195,7 @@ not the package manifest's basic utility.
 **Flagged**: 2026-05-05, after a cross-repo survey of the M / VistA
 toolchain.
 
-**Plan document**: [docs/vista-orchestration-plan.md](docs/vista-orchestration-plan.md)
+**Plan document**: [docs/guides/vista-orchestration-plan.md](docs/guides/vista-orchestration-plan.md)
 
 **Observation**: the language layer (m-cli: parse / format / lint /
 test / coverage / LSP) is ~80% complete and KIDS round-trip

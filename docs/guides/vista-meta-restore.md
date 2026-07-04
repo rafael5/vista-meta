@@ -25,9 +25,9 @@ categories of state, each with a different durability story:
 |---|---|---|---|---|
 | **Image baseline** (VistA-M source + baked globals + compiled `.o`) | Docker image `vista-meta:latest` | Immutable once built | No | Rebuild via `make build` |
 | **Runtime globals** (the live database — what KIDS mutates) | Named volume `vehu-globals` mounted at `/home/vehu/g/` | Mutable | No | Image baseline (first run) **or** `snapshots/globals-*.tar.gz` |
-| **Dev routines** (yours + anything KIDS writes) | Host [vista/dev-r/](vista/dev-r/) ↔ container `/home/vehu/dev/r/` | Mutable | **Yes** (`*.m` tracked, `*.o` ignored) | `git checkout -- vista/dev-r` |
-| **Extracted model** (PIKS, code-model TSVs — the analytical artifacts) | [vista/export/data-model/](vista/export/data-model/) + [vista/export/code-model/](vista/export/code-model/) | Mutable, regenerable | **Yes** | Re-run `make bake` (slow) or `git checkout` |
-| **Upstream snapshot** (40k routines, 7.1 GB) | [vista/vista-m-host/](vista/vista-m-host/) | Mutable, regenerable | **No** ([gitignore](.gitignore)) | `make sync-routines` after `make run` |
+| **Dev routines** (yours + anything KIDS writes) | Host [vista/dev-r/](../../vista/dev-r/) ↔ container `/home/vehu/dev/r/` | Mutable | **Yes** (`*.m` tracked, `*.o` ignored) | `git checkout -- vista/dev-r` |
+| **Extracted model** (PIKS, code-model TSVs — the analytical artifacts) | [vista/export/data-model/](../../vista/export/data-model/) + [vista/export/code-model/](../../vista/export/code-model/) | Mutable, regenerable | **Yes** | Re-run `make bake` (slow) or `git checkout` |
+| **Upstream snapshot** (40k routines, 7.1 GB) | [vista/vista-m-host/](../../vista/vista-m-host/) | Mutable, regenerable | **No** ([gitignore](../../.gitignore)) | `make sync-routines` after `make run` |
 
 Two design moves keep the repo small and the recovery story honest:
 
@@ -42,10 +42,10 @@ Two design moves keep the repo small and the recovery story honest:
 
 ## Part A — Relocate to `~/projects/vista-meta/`
 
-Most of this is portable already: the [Makefile](Makefile) uses `$(PWD)` for
-all bind mounts ([Makefile:37-39](Makefile#L37-L39)), and the named globals
+Most of this is portable already: the [Makefile](../../Makefile) uses `$(PWD)` for
+all bind mounts ([Makefile:37-39](../../Makefile#L37-L39)), and the named globals
 volume is referenced by name (`VOLUME := vehu-globals`,
-[Makefile:9](Makefile#L9)) — not by path. So a directory move with the
+[Makefile:9](../../Makefile#L9)) — not by path. So a directory move with the
 container stopped is safe. Five things require explicit attention.
 
 ### A.1 — Stop the container before moving
@@ -61,7 +61,7 @@ make rm            # removes the container (KEEPS volume + image)
 docker ps -a | grep vista-meta   # should be empty
 ```
 
-`make rm` is safe — [Makefile:53-55](Makefile#L53-L55) only removes the
+`make rm` is safe — [Makefile:53-55](../../Makefile#L53-L55) only removes the
 container, not the `vehu-globals` volume or the image. Your globals are
 preserved on the named volume.
 
@@ -147,7 +147,7 @@ If anything turns up under `vscode-extension/dist/`, rebuild it.
 
 ## Part B — GitHub version control
 
-### B.1 — What [.gitignore](.gitignore) already does for you
+### B.1 — What [.gitignore](../../.gitignore) already does for you
 
 Your existing `.gitignore` is doing most of the work:
 
@@ -174,9 +174,9 @@ What this means concretely for the goals you stated:
 - **The extracted model** (PIKS TSVs, code-model TSVs, ~1M rows total) →
   pushed. These are the analytical work product and are durably tracked.
 
-### B.2 — One decision to make about [`patches/`](patches/)
+### B.2 — One decision to make about `patches/` (created at runtime)
 
-[Makefile:333-345](Makefile#L333-L345) defines a `patch-new` workflow that
+[Makefile:333-345](../../Makefile#L333-L345) defines a `patch-new` workflow that
 scaffolds decomposed KIDS patches under `patches/<NAME>/`. This directory
 is **currently gitignored**, presumably because early-stage patch trees
 are noisy / experimental.
@@ -258,7 +258,7 @@ make doctor                           # green
 Two follow-ups worth doing alongside the first push:
 
 - **Add a `.env.example`** with `TAILSCALE_IP=` (no value) so a fresh
-  clone can copy it. Currently `.env` is required by [Makefile:5](Makefile#L5)
+  clone can copy it. Currently `.env` is required by [Makefile:5](../../Makefile#L5)
   (`include .env`); without it, `make build` fails immediately.
 - **Mention in the README** that `make sync-routines` is the explicit
   step to reconstitute the 7.1 GB upstream snapshot — it's not in the
@@ -277,7 +277,7 @@ KIDS is forward-only. Per ADR-046 (in `~/projects/py-kids-vc/docs/adr/046-*.md`)
 
 So your only honest pre-install line of defense is: **snapshot first, install
 second**. The Makefile already gives you both halves
-([Makefile:132-148](Makefile#L132-L148)):
+([Makefile:132-148](../../Makefile#L132-L148)):
 
 ```bash
 # 1. Snapshot globals BEFORE installing
@@ -363,9 +363,9 @@ make doctor
 You're now back to whatever globals state was baked into the image at
 `make build` time — i.e., a clean post-VEHU-import VistA. The first run
 will re-trigger the bake sentinel logic in
-[entrypoint.sh:74-87](docker/entrypoint.sh#L74-L87) only if the bake
+[entrypoint.sh:74-87](../../docker/entrypoint.sh#L74-L87) only if the bake
 sentinel was on the volume; if export is on a bind mount (it is —
-[Makefile:39](Makefile#L39)), bake state survives this. Good — you don't
+[Makefile:39](../../Makefile#L39)), bake state survives this. Good — you don't
 re-bake unless you want to.
 
 ### Tier 3 — Full rebuild: nuke everything, restore from image rebuild
@@ -474,11 +474,11 @@ make doctor              # health check
 
 ## Cross-references
 
-- [Makefile](Makefile) — all the targets above
-- [docker/Dockerfile](docker/Dockerfile) — image baseline (immutable layer)
-- [docker/entrypoint.sh](docker/entrypoint.sh) — bake sentinel logic
-- [.gitignore](.gitignore) — what's pushed and what's ignored
-- [ADR-029](docs/adr/029-symlink-farm.md) — flat routine namespace (now hard copies per BL-009)
-- [ADR-045](docs/adr/045-data-code-separation-package-bridge.md) — host-side `vista/vista-m-host/` snapshot
+- [Makefile](../../Makefile) — all the targets above
+- [docker/Dockerfile](../../docker/Dockerfile) — image baseline (immutable layer)
+- [docker/entrypoint.sh](../../docker/entrypoint.sh) — bake sentinel logic
+- [.gitignore](../../.gitignore) — what's pushed and what's ignored
+- [ADR-029](../adr/029-symlink-farm-routines.md) — flat routine namespace (now hard copies per BL-009)
+- [ADR-045](../adr/045-data-code-separation-package-bridge.md) — host-side `vista/vista-m-host/` snapshot
 - ADR-046 (in `~/projects/py-kids-vc/docs/adr/046-*.md`) — why KIDS undo is hard
 - `~/projects/py-kids-vc/docs/kids-vc-guide.md` — patch decompose/assemble workflow

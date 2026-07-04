@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Spec: docs/vista-developers-guide.md §Tier-1 — collapse toolchain friction
+# Spec: docs/guides/vista-developers-guide.md §Tier-1 — collapse toolchain friction
 #
 # vista-meta CLI: package overview (pkg) + AI context pack (context).
 # Reads only the code-model TSVs under vista/export/code-model/ and the

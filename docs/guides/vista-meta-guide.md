@@ -233,7 +233,7 @@ globals fall in this bucket; missing them loses 14% of the picture.
 Full heuristic rule set lives in
 [docs/vista-meta-spec-v0.4.md](vista-meta-spec-v0.4.md) §11.4–§11.6
 and is implemented in
-[`vista/dev-r/VMPIKS.m`](../vista/dev-r/VMPIKS.m).
+[`vista/dev-r/VMPIKS.m`](../../vista/dev-r/VMPIKS.m).
 
 ### 4.4 Four orthogonal properties
 
@@ -266,7 +266,7 @@ sites need to make site-specific decisions about.
 | Confidence: moderate | 16.1% |
 | Confidence: low | 6.4% |
 
-The triage file ([`piks-triage.tsv`](../vista/export/data-model/piks-triage.tsv),
+The triage file ([`piks-triage.tsv`](../../vista/export/data-model/piks-triage.tsv),
 218 rows) records every manual override, each tagged with a
 research-finding reference (`RF-008` etc.) so the reasoning is
 inspectable.
@@ -303,7 +303,7 @@ Five outcomes that did not exist before this project:
 
 ### 4.7 The data-model TSVs
 
-All under [`vista/export/data-model/`](../vista/export/data-model/):
+All under [`vista/export/data-model/`](../../vista/export/data-model/):
 
 | File | Rows | Purpose |
 |---|---|---|
@@ -327,7 +327,7 @@ different PIKS category.
 ### 5.1 The six extraction layers
 
 Nineteen TSVs organized in six layers, totaling ~1.0M rows, all
-under [`vista/export/code-model/`](../vista/export/code-model/):
+under [`vista/export/code-model/`](../../vista/export/code-model/):
 
 | Layer | Files | Total rows | Source |
 |---|---|---|---|
@@ -346,7 +346,7 @@ pipeline rebuild is idempotent.
 ### 5.2 Unified views
 
 The most frequently queried artifact is
-[`routines-comprehensive.tsv`](../vista/export/code-model/routines-comprehensive.tsv):
+[`routines-comprehensive.tsv`](../../vista/export/code-model/routines-comprehensive.tsv):
 
 20 columns per routine, joining every layer above:
 
@@ -364,9 +364,9 @@ With this one file you can answer:
 - "Which RPC routines touch more than 10 distinct globals?"
 - "Which percent-routines are called by non-Kernel packages?"
 
-[`package-manifest.tsv`](../vista/export/code-model/package-manifest.tsv)
+[`package-manifest.tsv`](../../vista/export/code-model/package-manifest.tsv)
 does the same at package granularity (role counts, edge counts,
-cross-package coupling). [`package-edge-matrix.tsv`](../vista/export/code-model/package-edge-matrix.tsv)
+cross-package coupling). [`package-edge-matrix.tsv`](../../vista/export/code-model/package-edge-matrix.tsv)
 is the sparse call-edge matrix between packages.
 
 ### 5.3 How the pieces interlink
@@ -399,16 +399,16 @@ conversion), shell `awk`, or plain Python.
 
 | Script | Purpose |
 |---|---|
-| [`build_routine_inventory.py`](../host/scripts/build_routine_inventory.py) | Disk scan → `routines.tsv` + `packages.tsv` |
-| [`build_routine_calls.py`](../host/scripts/build_routine_calls.py) | Regex extract `DO`, `GOTO`, `JOB`, `$$…^ROUTINE` from source |
-| [`build_routine_globals.py`](../host/scripts/build_routine_globals.py) | Regex extract `^GLOBAL(subscripts)` references with kind (read/write) |
-| [`build_protocol_calls.py`](../host/scripts/build_protocol_calls.py) | Extract protocol ENTRY/EXIT ACTION code and its outbound calls |
-| [`build_package_data_inventory.py`](../host/scripts/build_package_data_inventory.py) | Inventory ZWR data exports per package |
-| [`build_package_piks_summary.py`](../host/scripts/build_package_piks_summary.py) | Join package → files → PIKS → per-package distribution |
-| [`build_package_manifest.py`](../host/scripts/build_package_manifest.py) | Per-package joins: role counts, edge counts, coupling |
-| [`build_package_edge_matrix.py`](../host/scripts/build_package_edge_matrix.py) | Sparse source→dest package call matrix |
-| [`build_routines_comprehensive.py`](../host/scripts/build_routines_comprehensive.py) | Multi-way join over all 19 layers |
-| [`validate_against_xindex.py`](../host/scripts/validate_against_xindex.py) | Cross-check regex extraction against XINDEX — published as `xindex-validation.tsv` |
+| [`build_routine_inventory.py`](../../host/scripts/build_routine_inventory.py) | Disk scan → `routines.tsv` + `packages.tsv` |
+| [`build_routine_calls.py`](../../host/scripts/build_routine_calls.py) | Regex extract `DO`, `GOTO`, `JOB`, `$$…^ROUTINE` from source |
+| [`build_routine_globals.py`](../../host/scripts/build_routine_globals.py) | Regex extract `^GLOBAL(subscripts)` references with kind (read/write) |
+| [`build_protocol_calls.py`](../../host/scripts/build_protocol_calls.py) | Extract protocol ENTRY/EXIT ACTION code and its outbound calls |
+| [`build_package_data_inventory.py`](../../host/scripts/build_package_data_inventory.py) | Inventory ZWR data exports per package |
+| [`build_package_piks_summary.py`](../../host/scripts/build_package_piks_summary.py) | Join package → files → PIKS → per-package distribution |
+| [`build_package_manifest.py`](../../host/scripts/build_package_manifest.py) | Per-package joins: role counts, edge counts, coupling |
+| [`build_package_edge_matrix.py`](../../host/scripts/build_package_edge_matrix.py) | Sparse source→dest package call matrix |
+| [`build_routines_comprehensive.py`](../../host/scripts/build_routines_comprehensive.py) | Multi-way join over all 19 layers |
+| [`validate_against_xindex.py`](../../host/scripts/validate_against_xindex.py) | Cross-check regex extraction against XINDEX — published as `xindex-validation.tsv` |
 
 XINDEX is VA's official static analyzer (part of Kernel); we drive
 it through the container via the **VMXIDX bridge**
@@ -513,7 +513,7 @@ Full reference: [docs/vista-vscode-guide.md](vista-vscode-guide.md)
 
 ### 7.2 The vista-meta CLI — everything else
 
-The CLI ([`host/scripts/vista_meta_cli.py`](../host/scripts/vista_meta_cli.py))
+The CLI ([`host/scripts/vista_meta_cli.py`](../../host/scripts/vista_meta_cli.py))
 provides ten subcommands for everything the sidebar doesn't cover:
 
 | Subcommand | Purpose |
@@ -530,10 +530,10 @@ provides ten subcommands for everything the sidebar doesn't cover:
 | `xindex FILE` | Drive live XINDEX on a single routine via the container |
 
 Alongside the CLI:
-- [`host/scripts/mfmt.py`](../host/scripts/mfmt.py) — deterministic
+- [`host/scripts/mfmt.py`](../../host/scripts/mfmt.py) — deterministic
   idempotent MUMPS formatter (R1–R4 minimal rules, no semantic
   parsing).
-- [`hooks/pre-commit`](../hooks/pre-commit) — SAC line-length, tab
+- [`hooks/pre-commit`](../../hooks/pre-commit) — SAC line-length, tab
   check, bare-HALT check, doc-comment lint, optional live XINDEX.
 - GitHub Actions CI enforces the same checks on PRs.
 
@@ -549,19 +549,19 @@ Everything in vista-meta is governed by three interlocking documents:
 1. **[The spec](vista-meta-spec-v0.4.md)** — what to build, what
    contracts hold, what classification rules apply. Referenced
    throughout code (e.g., `# Spec: docs/vista-meta-spec-v0.4.md § 11.5`).
-2. **[The ADRs](adr/)** — why specific decisions were made. 45+
+2. **[The ADRs](../adr/)** — why specific decisions were made. 45+
    records, each immutable once accepted; supersession happens via
    a new ADR. Covers architecture (`012-zro-layering.md`,
    `010-hybrid-persistence.md`), tooling choices, PIKS
    methodology evolution.
-3. **[The research log](../vista/export/RESEARCH.md)** — discovery
+3. **[The research log](../../vista/export/RESEARCH.md)** — discovery
    findings (`RF-001` … `RF-033`), each with context, hypothesis,
    evidence, and conclusion. Findings drive spec revisions and new
    ADRs.
 
 Every pipeline step is a `make` target (`make help` lists them).
 Every TSV is regeneratable from upstream inputs. Errors and fixes
-are logged in [`docs/build-log.md`](build-log.md) with BL-NNN
+are logged in [`docs/build-log.md`](../build-log.md) with BL-NNN
 references. Dependency versions are pinned in
 [`docs/dependencies.md`](dependencies.md).
 
@@ -627,8 +627,8 @@ Four classes of product now plausible on this base:
   the full pipeline and XPDK2VC compatibility story.
 - [xindex-reference.md](xindex-reference.md) — what XINDEX extracts
   vs what the vista-meta regex-based tools extract.
-- [build-log.md](build-log.md) — chronological error + fix log
+- [build-log.md](../build-log.md) — chronological error + fix log
   (BL-NNN).
-- [adr/](adr/) — locked decisions, chronologically indexed.
-- [../vista/export/RESEARCH.md](../vista/export/RESEARCH.md) —
+- [adr/](../adr/) — locked decisions, chronologically indexed.
+- [../vista/export/RESEARCH.md](../../vista/export/RESEARCH.md) —
   discovery findings (RF-NNN).

@@ -198,7 +198,7 @@ The community tried two independent approaches to marry KIDS with version contro
    Approach: `ParseKIDS.py` (Python) decomposes `.KID` distribution files into per-component text files (one per routine, DD, RPC, security key, option); `ZDIOUT1.m` is the in-VistA companion that exports components to disk. Premise: keep KIDS for deployment, use decomposed components as the git-tracked source.
    **Status**: dormant prototype — 14 commits, 0 releases, never production-adopted.
 
-2. **XPDK2VC** (KIDS to Version Control) — already present in our VEHU corpus at [code-model/routines.tsv:37028](../vista/export/code-model/routines.tsv).
+2. **XPDK2VC** (KIDS to Version Control) — already present in our VEHU corpus at [code-model/routines.tsv:37028](../../vista/export/code-model/routines.tsv).
    Authored by Sam Habiel (`VEN/SMH`, OSEHRA Product Management — [github.com/shabiel](https://github.com/shabiel)) as KERNEL 8.0\*11310, March 2014.
    Companion routines: `XPDK2V0`, `XPDK2V1`, `XPDK2VG`.
    Approach: **in-VistA Kernel-integrated** KIDS→VCS export. Runs inside VistA, walks KIDS builds, writes components to disk. Designed for ongoing round-trip rather than one-shot parsing.
@@ -479,8 +479,8 @@ in [upstream-data-fixes.md](upstream-data-fixes.md).
 
 ## 8. Related documents
 
-- [ADR-045](adr/045-data-code-separation-package-bridge.md) — the architecture decision this guide operates under
+- [ADR-045](../adr/045-data-code-separation-package-bridge.md) — the architecture decision this guide operates under
 - [xindex-reference.md](xindex-reference.md) — detailed XINDEX catalog and coverage matrix
 - [piks-analysis-guide.md](piks-analysis-guide.md) — the data-model side companion
 - [vista-meta-spec-v0.4.md](vista-meta-spec-v0.4.md) §11 — research system, extraction pipeline
-- [vista/export/RESEARCH.md](../vista/export/RESEARCH.md) — RF-001 through RF-027 analytical findings log
+- [vista/export/RESEARCH.md](../../vista/export/RESEARCH.md) — RF-001 through RF-027 analytical findings log

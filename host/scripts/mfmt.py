@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Spec: docs/vista-developers-guide.md §Tier 2 #5 — canonical MUMPS formatter
+# Spec: docs/guides/vista-developers-guide.md §Tier 2 #5 — canonical MUMPS formatter
 #
 # Deterministic, idempotent, minimal formatter for .m routines.
 # The rules are intentionally conservative — they must never change

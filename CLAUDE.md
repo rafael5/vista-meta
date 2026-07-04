@@ -15,7 +15,7 @@ runtime:
 
 distribution:
   pypi: null
-  github: rafael5/vista-meta                # private; not yet pushed
+  github: rafael5/vista-meta                # private
 
 location: ~/projects/vista-meta
 
@@ -54,9 +54,9 @@ incompatibilities:
   - "vista/export/ files are owned by uid 1001 (in-container vehu). Host edits need sudo or in-container write."
 
 docs:
-  primary: README.md                       # missing — see TODO.md
-  full_guide: docs/vista-meta-guide.md
-  spec: docs/vista-meta-spec-v0.4.md
+  primary: README.md
+  full_guide: docs/guides/vista-meta-guide.md
+  spec: docs/guides/vista-meta-spec-v0.4.md
   research_log: vista/export/RESEARCH.md
 ---
 
@@ -69,7 +69,7 @@ operational tooling: a **VSCode extension** with per-routine
 situational awareness, and a **CLI** for package overviews, caller
 graphs, file metadata, AI context packs, linting, and formatting.
 
-The single authoritative map is [docs/vista-meta-guide.md](docs/vista-meta-guide.md).
+The single authoritative map is [docs/guides/vista-meta-guide.md](docs/guides/vista-meta-guide.md).
 Read that first for scope, thesis, and cross-references.
 
 ## The thesis in one sentence
@@ -164,7 +164,7 @@ Four orthogonal properties assigned alongside:
 Implemented by 52 DD-based heuristics (H-01…H-52) across 9 tiers +
 6 non-FM heuristics (G-01…G-06). Coverage: 98.3% (7,886 automatic +
 217 triage, 141 subfiles remaining). Full details:
-[docs/piks-analysis-guide.md](docs/piks-analysis-guide.md).
+[docs/guides/piks-analysis-guide.md](docs/guides/piks-analysis-guide.md).
 
 ## Code-model layers
 
@@ -180,7 +180,7 @@ Six extraction layers totaling ~1.0M rows across 19 TSVs:
 6. **Unified** — `routines-comprehensive.tsv` (20 cols/routine),
    `package-manifest.tsv`, `package-edge-matrix.tsv`
 
-Per-TSV reference: [docs/code-model-guide.md](docs/code-model-guide.md).
+Per-TSV reference: [docs/guides/code-model-guide.md](docs/guides/code-model-guide.md).
 
 ## Two models, one join
 
@@ -202,26 +202,25 @@ being callable from an Institution-scoped RPC?"* at query speed.
 
 | What | Where | When to use |
 |---|---|---|
-| **Comprehensive project guide** | `docs/vista-meta-guide.md` | **Start here** — full scope, methodology, accomplishments |
-| Authoritative technical spec | `docs/vista-meta-spec-v0.4.md` | What to build; contracts; PIKS heuristics |
-| Developer onramp | `docs/vista-developers-guide.md` | How a Python/JS/Go dev orients in VistA |
-| Per-routine situational awareness | `docs/routine-situational-awareness.md` | Cold-opening any `.m` file: priority sweep, VSCode surfaces, cognitive traps |
-| Per-package situational awareness | `docs/package-situational-awareness.md` | Scanning a whole `Packages/X/` folder: fingerprint, automated scans, VSCode integrations |
-| `vista` CLI planning + design | `docs/vista-cli-planning.md` | Proposed unified CLI joining vista-meta TSVs with vista-docs frontmatter for cross-artifact queries |
-| VSCode + CLI reference | `docs/vista-vscode-guide.md` | Every tool the repo ships |
-| VSCode extension internals + roadmap | `docs/vscode-extension-internals.md` | Modifying or extending the extension |
-| PIKS methodology | `docs/piks-analysis-guide.md` | Data-model deep dive |
-| Code model TSVs | `docs/code-model-guide.md` | Per-TSV reference |
-| XINDEX reference | `docs/xindex-reference.md` | What XINDEX extracts vs our tools |
+| **Comprehensive project guide** | `docs/guides/vista-meta-guide.md` | **Start here** — full scope, methodology, accomplishments |
+| Authoritative technical spec | `docs/guides/vista-meta-spec-v0.4.md` | What to build; contracts; PIKS heuristics |
+| Developer onramp | `docs/guides/vista-developers-guide.md` | How a Python/JS/Go dev orients in VistA |
+| Per-routine situational awareness | `docs/guides/routine-situational-awareness.md` | Cold-opening any `.m` file: priority sweep, VSCode surfaces, cognitive traps |
+| Per-package situational awareness | `docs/guides/package-situational-awareness.md` | Scanning a whole `Packages/X/` folder: fingerprint, automated scans, VSCode integrations |
+| VSCode + CLI reference | `docs/guides/vista-vscode-guide.md` | Every tool the repo ships |
+| VSCode extension internals + roadmap | `docs/guides/vscode-extension-internals.md` | Modifying or extending the extension |
+| PIKS methodology | `docs/guides/piks-analysis-guide.md` | Data-model deep dive |
+| Code model TSVs | `docs/guides/code-model-guide.md` | Per-TSV reference |
+| XINDEX reference | `docs/guides/xindex-reference.md` | What XINDEX extracts vs our tools |
 | Decision rationale | `docs/adr/NNN-*.md` | Why we chose X over Y |
 | Implementation errors/fixes | `docs/build-log.md` | What went wrong (BL-NNN) |
 | VistA metadata discoveries | `vista/export/RESEARCH.md` | What we learned (RF-NNN) |
-| Upstream pinning | `docs/dependencies.md` | Exact versions in the image |
+| Upstream pinning | `docs/guides/dependencies.md` | Exact versions in the image |
 
 ## Session start checklist
 
 1. Read this file (automatic)
-2. Read `docs/vista-meta-guide.md` if new to scope
+2. Read `docs/guides/vista-meta-guide.md` if new to scope
 3. Read `vista/export/RESEARCH.md` tail — prior findings
 4. Scan `vista/export/data-model/` + `vista/export/code-model/` —
    extracted model state
@@ -230,7 +229,7 @@ being callable from an Institution-scoped RPC?"* at query speed.
 
 ## Conventions
 
-- Spec cross-refs in code: `# Spec: docs/vista-meta-spec-v0.4.md § 11.5`
+- Spec cross-refs in code: `# Spec: docs/guides/vista-meta-spec-v0.4.md § 11.5`
 - ADR cross-refs in code: `# ADR-029: symlink farm for flat routine namespace`
 - Build log cross-refs in spec: `[Errata: see BL-002]`
 - Research findings: cite as `RF-008` inline
