@@ -35,6 +35,39 @@ deterministic artifact set.
 | **2. CLI + hook + formatter** | `bin/vista-meta`, `bin/mfmt`, `hooks/pre-commit` | doctor, pkg, context, where, callers, search, file, new-test, lint, xindex; SAC-compliant pre-commit gate |
 | **3. Data release** | [`data-v1`](https://github.com/rafael5/vista-meta/releases/tag/data-v1) | The models as a verifiable public bundle (`schema_version: 1`, per-file sha256, content hash) — mutually pinned with the [vdocs](https://github.com/rafael5/vdocs) corpus release |
 
+## What comes out — and who consumes it
+
+The pipeline's end product is **flat, deterministic TSV files plus JSON
+manifests** (no database, no server): the container extracts raw dumps, the
+host scripts normalize them to the frozen `schema_version: 1` shapes, and
+everything downstream is just readers of those files.
+
+```
+VEHU container (YottaDB)          host scripts                consumers
+─────────────────────────         ────────────────            ─────────────────────────────
+VM* extraction routines  ──bake──▶ normalize_dumps ──▶  vista/export/
+XINDEX (VMXIDX bridge)             build_* joins          ├─ data-model/   4 TSVs (~87k rows)
+FileMan DD walks                   materialize_piks       ├─ code-model/  20 TSVs (~1.0M rows)
+                                                          ├─ meta/  column-manifest · fidelity
+                                                          └─ RESEARCH.md  (RF-001…RF-034)
+                                                                   │
+                                          packaged + hashed as the public
+                                          data-v1 release bundle ────────▶ anyone
+```
+
+| Consumer | What it reads | What it does with it |
+|---|---|---|
+| **[VistA Compass](vscode-extension/)** (in-repo) | 5 code-model + 2 data-model TSVs | VSCode situational awareness while reading M code: sidebar (tags, callers, callees, globals, XINDEX) + hovers that join a `^GLOBAL` token → FileMan file → PIKS category |
+| **[vista-info-hub](https://github.com/VistA-Copilot/vista-info-hub)** (`vista`) | the code- and data-model TSVs + the VA Document Library | one static Go binary answering questions about routines, RPCs, options, files, globals *and their documentation* — as a CLI, TUI, REST API, web UI, and **MCP server for AI agents**. The `package-namespace.tsv` / `package_dir` / `app_code` columns exist for its package↔docs joins |
+| **[vdocs](https://github.com/rafael5/vdocs)** | `files.tsv`, `routines.tsv`, `rpcs.tsv` as authoritative vocabularies | measures its documentation-corpus entity extraction against them (entity-quality floors); the two data releases pin each other's hashes ([Gate R](docs/releases/data-v1-peers.json)) so neither can drift silently |
+| **`bin/vista-meta` CLI** (in-repo) | all 24 TSVs | terminal queries (`pkg`, `callers`, `where`, `file`, `search`) and `context` — a per-package **AI context pack** for pasting into an LLM session |
+| **Any third party** | the [data-v1 release](https://github.com/rafael5/vista-meta/releases/tag/data-v1) | hash-verified download of the whole model set — every file sha256-covered by the [manifest](docs/releases/data-v1.manifest.json), no clone or build required |
+
+The common thread: **TSV + `awk`/`join` is the API.** Anything that can read
+tab-separated text can consume the model — the per-TSV schema is documented in
+[code-model-guide.md](docs/guides/code-model-guide.md) and frozen by the
+[schema-v1 contract](docs/reference/schema-v1-normalization-spec.md).
+
 ## Use the models (no build)
 
 Everything is in the clone; the CLI is stdlib-only Python:
