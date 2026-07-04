@@ -14,7 +14,8 @@
 
 import * as path from 'path';
 import * as vscode from 'vscode';
-import { byColumn, topN } from './tsv';
+import { byColumn, byColumnIn, loadModel, Row, topN } from './tsv';
+import { globalBase } from './model';
 
 const TOKEN_RE =
   /\$?\$?[A-Za-z%][A-Za-z0-9]*(?:\^[A-Za-z%][A-Za-z0-9]*)?|\^[A-Za-z%][A-Za-z0-9]*/;
@@ -161,10 +162,13 @@ function buildRoutineHover(routineName: string, tagHint: string | null): vscode.
 }
 
 function buildGlobalHover(globalName: string): vscode.MarkdownString | null {
-  // routine-globals.tsv stores globals as e.g. "^DPT" — match exactly.
-  const key = globalName.startsWith('^') ? globalName : '^' + globalName;
+  // schema_version 1 stores BARE global names ("DPT"); the caret is
+  // display-only. (The pre-v1 data carried "^DPT" — matching on that
+  // silently killed every global hover after normalization.)
+  const bare = globalName.startsWith('^') ? globalName.slice(1) : globalName;
+  const key = '^' + bare;
   const byGlobal = byColumn('routine-globals.tsv', 'global_name');
-  const rows = byGlobal.get(key);
+  const rows = byGlobal.get(bare);
   if (!rows || rows.length === 0) return null;
 
   const md = new vscode.MarkdownString();
@@ -186,7 +190,60 @@ function buildGlobalHover(globalName: string): vscode.MarkdownString | null {
     md.appendMarkdown(`- \`${r['routine_name']}\` (${r['package'] || '?'}) × ${r['ref_count']}\n`);
   }
 
+  appendPiksBlock(md, bare);
+
   return md;
+}
+
+// The two-models join (schema_version 1): global → FileMan file(s)
+// rooted there (files.tsv global_root) → materialized PIKS category
+// (piks.tsv, B1 — one authoritative row per file, never re-merged).
+function appendPiksBlock(md: vscode.MarkdownString, bare: string): void {
+  const files = filesByGlobalBase().get(bare);
+  if (!files || files.length === 0) return;
+  const piksByFile = byColumnIn('data-model', 'piks.tsv', 'file_number');
+  const PIKS_LABEL: Record<string, string> = {
+    P: 'Patient', I: 'Institution', K: 'Knowledge', S: 'System',
+  };
+  md.appendMarkdown(`\n**FileMan / PIKS**\n\n`);
+  for (const f of files.slice(0, 5)) {
+    const piks = piksByFile.get(f['file_number'])?.[0];
+    const cat = piks
+      ? `**${piks['piks']}** (${PIKS_LABEL[piks['piks']] ?? '?'}, ${piks['piks_source']})`
+      : '*unclassified*';
+    md.appendMarkdown(
+      `- File **${f['file_number']}** ${f['file_name'] || ''} — PIKS ${cat}\n`,
+    );
+  }
+  if (files.length > 5) {
+    md.appendMarkdown(`- *… ${files.length - 5} more files rooted in this global*\n`);
+  }
+}
+
+// files.tsv: TOP-LEVEL files (parent_file empty) indexed by the base
+// name of their storage root — the join key to bare global names.
+let globalBaseIndex: Map<string, Row[]> | null = null;
+export function clearGlobalBaseIndex(): void {
+  globalBaseIndex = null;
+}
+function filesByGlobalBase(): Map<string, Row[]> {
+  if (globalBaseIndex) return globalBaseIndex;
+  const idx: Map<string, Row[]> = new Map();
+  for (const row of loadModel('data-model', 'files.tsv')) {
+    if (row['parent_file']) continue;
+    const root = row['global_root'];
+    if (!root) continue;
+    const base = globalBase(root);
+    if (!base) continue;
+    let arr = idx.get(base);
+    if (!arr) {
+      arr = [];
+      idx.set(base, arr);
+    }
+    arr.push(row);
+  }
+  globalBaseIndex = idx;
+  return idx;
 }
 
 function buildTagInRoutineHover(routineName: string, tag: string): vscode.MarkdownString | null {

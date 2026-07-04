@@ -85,9 +85,18 @@ The sidebar will redraw from fresh data on the next routine switch.
 
 ## Settings
 
-- `vistaCompass.codeModelPath` — default `vista/export/code-model`.
-  Workspace-relative path to the code-model TSV directory. Absolute
-  or `~/`-prefixed values are honored as-is.
+- `vistaCompass.dataPath` — default empty (auto-discover). Path to a
+  vista-meta **data root**: a directory holding `code-model/` and
+  `data-model/` — either the repo's `vista/export` tree or an unpacked
+  `vista-meta-data-v1` release bundle. When empty, the extension walks
+  up from the active file looking for `vista/export`, then
+  `vista-meta-data-v1`. Absolute or `~/`-prefixed values are honored
+  as-is. The sidebar's description shows the vintage of whatever it
+  found (`data-v1 · 23d037f1` from the bundle's `manifest.json`, or
+  `dev tree · schema v1` from `meta/column-manifest.json`), and a
+  schema_version other than 1 warns loudly.
+- `vistaCompass.codeModelPath` — DEPRECATED (use `dataPath`); kept as
+  a fallback. Default `vista/export/code-model`.
 - `vistaCompass.vistaMHostPath` — default `vista/vista-m-host`.
   Workspace-relative path to the host-synced VistA-M source tree —
   used to jump to source lines.

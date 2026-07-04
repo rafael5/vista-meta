@@ -8,6 +8,11 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as vscode from 'vscode';
+import {
+  DataVintage,
+  vintageFromColumnManifest,
+  vintageFromManifest,
+} from './model';
 
 export type Row = Record<string, string>;
 
@@ -64,8 +69,67 @@ function resolveDataDir(configKey: string, defaultRel: string): string {
   return path.join(root, rel);
 }
 
+export type Model = 'code-model' | 'data-model';
+
+// The data ROOT: a directory holding code-model/ + data-model/ — the
+// dev tree (vista/export) or an unpacked vista-meta-data-v1 release
+// bundle. Resolution order:
+//   1. vistaCompass.dataPath (absolute/tilde or workspace-relative,
+//      same walk-up rules as the legacy key)
+//   2. auto-discovery of `vista/export`, then `vista-meta-data-v1`
+//   3. the legacy codeModelPath's parent (back-compat)
+// Validity = <root>/code-model/routines.tsv exists.
+function isDataRoot(dir: string): boolean {
+  return fs.existsSync(path.join(dir, 'code-model', 'routines.tsv'));
+}
+
+function dataRoot(): string {
+  const cfg = vscode.workspace.getConfiguration('vistaCompass');
+  const configured = cfg.get<string>('dataPath', '');
+  const candidates = configured
+    ? [configured]
+    : ['vista/export', 'vista-meta-data-v1'];
+  for (const rel of candidates) {
+    const dir = resolveDataDir('dataPath', rel);
+    if (isDataRoot(dir)) return dir;
+  }
+  // legacy fallback: the old code-model key names the child directly
+  return path.dirname(resolveDataDir('codeModelPath', 'vista/export/code-model'));
+}
+
+export function modelDir(model: Model): string {
+  return path.join(dataRoot(), model);
+}
+
 function codeModelDir(): string {
-  return resolveDataDir('codeModelPath', 'vista/export/code-model');
+  return modelDir('code-model');
+}
+
+// The vintage of the data being read (V7 manifest.json in a bundle,
+// V3 meta/column-manifest.json in the dev tree). Cached with the TSVs.
+let vintageCache: DataVintage | null | undefined;
+
+export function dataVintage(): DataVintage | null {
+  if (vintageCache !== undefined) return vintageCache;
+  const root = dataRoot();
+  try {
+    const manifest = path.join(root, 'manifest.json');
+    if (fs.existsSync(manifest)) {
+      vintageCache = vintageFromManifest(JSON.parse(fs.readFileSync(manifest, 'utf-8')));
+      return vintageCache;
+    }
+    const colManifest = path.join(root, 'meta', 'column-manifest.json');
+    if (fs.existsSync(colManifest)) {
+      vintageCache = vintageFromColumnManifest(
+        JSON.parse(fs.readFileSync(colManifest, 'utf-8')),
+      );
+      return vintageCache;
+    }
+  } catch {
+    // fall through — a broken manifest reads as "unknown", not a crash
+  }
+  vintageCache = null;
+  return vintageCache;
 }
 
 export function vistaMHostDir(): string {
@@ -79,12 +143,17 @@ export function topN(): number {
 
 export function reloadAll(): void {
   cache.clear();
+  vintageCache = undefined;
 }
 
 export function load(name: string): Row[] {
-  // Cache keyed by absolute path: codeModelDir() can change as the
+  return loadModel('code-model', name);
+}
+
+export function loadModel(model: Model, name: string): Row[] {
+  // Cache keyed by absolute path: the data root can change as the
   // active file moves across projects, so name alone isn't enough.
-  const file = path.join(codeModelDir(), name);
+  const file = path.join(modelDir(model), name);
   const cached = cache.get(file);
   if (cached) return cached;
 
@@ -120,13 +189,17 @@ export function load(name: string): Row[] {
 const indexCache: Map<string, Map<string, Row[]>> = new Map();
 
 export function byColumn(name: string, col: string): Map<string, Row[]> {
-  // Key by absolute path so a code-model dir change invalidates indexes.
-  const file = path.join(codeModelDir(), name);
+  return byColumnIn('code-model', name, col);
+}
+
+export function byColumnIn(model: Model, name: string, col: string): Map<string, Row[]> {
+  // Key by absolute path so a data-root change invalidates indexes.
+  const file = path.join(modelDir(model), name);
   const key = `${file}::${col}`;
   const cached = indexCache.get(key);
   if (cached) return cached;
   const idx: Map<string, Row[]> = new Map();
-  for (const row of load(name)) {
+  for (const row of loadModel(model, name)) {
     const k = row[col];
     if (!k) continue;
     let arr = idx.get(k);

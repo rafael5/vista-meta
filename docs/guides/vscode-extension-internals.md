@@ -118,10 +118,17 @@ Both cleared by `reloadAll()` / `clearIndexes()` (the `Reload TSVs`
 command). Cells are split on `\t`; no quoting, no escapes — the bake
 guarantees clean TSVs.
 
-Workspace path resolution: paths are read from the
-`vistaMeta.codeModelPath` and `vistaMeta.vistaMHostPath` settings,
-joined to the first workspace folder. There is no support for
-multi-root workspaces — see [§10 of vista-vscode-guide.md](vista-vscode-guide.md#10-troubleshooting).
+Workspace path resolution: the extension resolves a **data root** — a
+directory holding `code-model/` + `data-model/` — from
+`vistaCompass.dataPath`, or by auto-discovery (walking up from the
+active file for `vista/export`, then an unpacked `vista-meta-data-v1`
+release bundle). `loadModel(model, name)` / `byColumnIn(model, …)`
+read either model; the legacy `load`/`byColumn` are code-model
+wrappers. `dataVintage()` reads the bundle's `manifest.json`
+(schema_version, content_hash, engine — the V7 producer contract) or
+the dev tree's `meta/column-manifest.json`, surfaces it as the tree
+view's description, and warns if schema_version ≠ 1.
+`vistaCompass.codeModelPath` is deprecated but honored as a fallback.
 
 ### [routine.ts](../vscode-extension/src/routine.ts)
 

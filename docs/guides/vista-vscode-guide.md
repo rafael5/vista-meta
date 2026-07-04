@@ -310,11 +310,14 @@ Run from the command palette (`Ctrl+Shift+P`):
 
 | Key | Default | Purpose |
 |---|---|---|
-| `vistaMeta.codeModelPath` | `vista/export/code-model` | Workspace-relative TSV dir |
-| `vistaMeta.vistaMHostPath` | `vista/vista-m-host` | Synced VistA-M source tree |
-| `vistaMeta.topN` | `15` | Max entries per section |
+| `vistaCompass.dataPath` | *(empty = auto)* | vista-meta **data root** (`code-model/` + `data-model/`): the repo's `vista/export` or an unpacked `vista-meta-data-v1` bundle |
+| `vistaCompass.codeModelPath` | `vista/export/code-model` | DEPRECATED fallback (pre-0.2.0) |
+| `vistaCompass.vistaMHostPath` | `vista/vista-m-host` | Synced VistA-M source tree |
+| `vistaCompass.topN` | `15` | Max entries per section |
 
-All paths resolve relative to the first workspace folder.
+When `dataPath` is empty the extension auto-discovers the data root by
+walking up from the active file. The sidebar shows the data vintage
+(e.g. `data-v1 · 23d037f1`) read from the bundle manifest.
 
 ### 2.6 When the sidebar is empty
 

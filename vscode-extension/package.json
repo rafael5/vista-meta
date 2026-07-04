@@ -2,13 +2,17 @@
   "name": "vista-compass",
   "displayName": "VistA Compass",
   "description": "A compass for VistA's code. Point it at any .m routine to get your bearings, then click any reference, call-in, call-out, global, or XINDEX finding to navigate through all of VistA's interconnected web of routines, FileMan files, pointers, RPCs, options, protocols, and globals. Every row in the sidebar is a clickable jump. Drawn from vista-meta code-model TSVs. No language server, no parser, no runtime deps.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publisher": "rafael5",
   "icon": "media/icon.png",
   "license": "UNLICENSED",
   "private": true,
-  "engines": { "vscode": "^1.85.0" },
-  "categories": ["Other"],
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
   "main": "./out/extension.js",
   "activationEvents": [
     "workspaceContains:**/*.m"
@@ -17,8 +21,14 @@
     "languages": [
       {
         "id": "mumps",
-        "aliases": ["MUMPS", "M", "mumps"],
-        "extensions": [".m"],
+        "aliases": [
+          "MUMPS",
+          "M",
+          "mumps"
+        ],
+        "extensions": [
+          ".m"
+        ],
         "configuration": "./language-configuration.json"
       }
     ],
@@ -53,10 +63,15 @@
     "configuration": {
       "title": "VistA Compass",
       "properties": {
+        "vistaCompass.dataPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to a vista-meta data ROOT: a directory holding code-model/ and data-model/ \u2014 the repo's vista/export tree or an unpacked vista-meta-data-v1 release bundle. Absolute, ~-prefixed, or workspace-relative. Empty = auto-discover (vista/export, then vista-meta-data-v1, walking up from the active file)."
+        },
         "vistaCompass.codeModelPath": {
           "type": "string",
           "default": "vista/export/code-model",
-          "description": "Workspace-relative path to the code-model TSV directory."
+          "description": "DEPRECATED \u2014 use vistaCompass.dataPath (a data root) instead. Workspace-relative path to the code-model TSV directory; kept as a fallback."
         },
         "vistaCompass.vistaMHostPath": {
           "type": "string",
