@@ -29,6 +29,9 @@ Documentation here is classified by **lifecycle state, not topic**:
 
 ## Current state (2026-07-04)
 
+- **Public (2026-07-04):** the repository is public under MIT; the `data-v1` release
+  downloads anonymously (verified), so the vdocs ↔ vista-meta mutual pin chain is now
+  fully third-party-verifiable. Clean-clone path: [`guides/DE-NOVO.md`](guides/DE-NOVO.md).
 - **Shipped and stable:** the two models (data-model 4 TSVs · code-model 20 TSVs, `schema_version: 1`),
   the public **`vista-meta-data-v1`** release (mutually pinned with vdocs `data-v1`),
   the **VistA Compass** VSCode extension 0.2.0, the `vista-meta` CLI + `mfmt` + pre-commit hook.

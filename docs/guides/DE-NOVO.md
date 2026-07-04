@@ -26,7 +26,7 @@ Two distinct goals — pick yours:
 Clone, then let the CLI check the environment for you:
 
 ```bash
-git clone git@github.com:rafael5/vista-meta.git && cd vista-meta
+git clone https://github.com/rafael5/vista-meta.git && cd vista-meta
 bin/vista-meta doctor        # host-side health: tools, hooks, TSV presence
 ```
 

@@ -1,5 +1,7 @@
 # vista-meta
 
+[![ci](https://github.com/rafael5/vista-meta/actions/workflows/ci.yml/badge.svg)](https://github.com/rafael5/vista-meta/actions/workflows/ci.yml)
+
 A deterministic, machine-readable model of **VistA** — the VA's
 electronic health record system — covering both the data it stores
 and the code that manipulates it. Plus the operational tooling

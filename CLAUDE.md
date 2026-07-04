@@ -15,7 +15,7 @@ runtime:
 
 distribution:
   pypi: null
-  github: rafael5/vista-meta                # private
+  github: rafael5/vista-meta                # PUBLIC (MIT) since 2026-07-04
 
 location: ~/projects/vista-meta
 
