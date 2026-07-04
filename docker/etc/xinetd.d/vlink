@@ -1,6 +1,7 @@
 # VistALink — port 8001
 # M-side listener for VistALink J2SE connections.
 # ydb-run wrapper sources YDB env before exec'ing mumps.
+# GTMLNX^ is the Linux-xinetd entry label (routine-top exits immediately — BL-014).
 
 service vlink
 {
@@ -11,5 +12,5 @@ service vlink
     wait        = no
     user        = vehu
     server      = /usr/local/bin/ydb-run
-    server_args = -run XOBVTCP
+    server_args = -run GTMLNX^XOBVTCP
 }

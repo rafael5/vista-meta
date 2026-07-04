@@ -1,6 +1,7 @@
 # VistA RPC Broker — port 9430
 # Serves CPRS, DDR, and host analytics scripts.
 # ydb-run wrapper sources YDB env before exec'ing mumps.
+# GTMLNX^ is the Linux-xinetd entry label (routine-top exits immediately — BL-014).
 
 service xwb
 {
@@ -11,5 +12,5 @@ service xwb
     wait        = no
     user        = vehu
     server      = /usr/local/bin/ydb-run
-    server_args = -run XWBTCPM
+    server_args = -run GTMLNX^XWBTCPM
 }

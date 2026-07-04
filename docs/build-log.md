@@ -5,7 +5,7 @@
 > (producer-contracts, Compass) were recorded in commit messages and
 > RESEARCH.md instead, which carried the load fine at this project's scale.
 > The file stays at this path because README/guides/spec-errata cite BL-NNN.
-> If the discipline is ever resumed, continue at BL-014 below this banner.
+> Resumed once: BL-014 (2026-07-04, networking audit). Continue at BL-015 if needed.
 
 Append-only record of errors, warnings, corrections, and verification
 outcomes encountered during implementation. Entries are reverse-chronological.
@@ -15,6 +15,35 @@ This is **not** an ADR. ADRs record design decisions and their rationale.
 This log records what went wrong (or right) when those decisions met reality.
 
 ---
+
+## 2026-07-04 — Networking audit (discipline resumed for this entry)
+
+### BL-014: RPC Broker + VistALink crashed on every connection — wrong xinetd entry label
+
+- **Date**: 2026-07-04
+- **Layer**: docker/etc/xinetd.d/{xwb,vlink} (baked at build; hot-patched live to verify)
+- **Found by**: the networking smoke pass — port probes PASSED while the actual
+  handler died: xinetd accepts the TCP connection, spawns `ydb-run -run XWBTCPM`,
+  and the M process exits immediately (exit 218, no output), closing the socket.
+  A silent connect to the container's bridge IP closed in 0.01s; the known-dead
+  rocto port refused outright — that asymmetry exposed it.
+- **Cause**: `server_args = -run XWBTCPM` / `-run XOBVTCP` run the ROUTINE TOP.
+  Both routines require the Linux-xinetd entry label **`GTMLNX`**
+  (`GTMLNX^XWBTCPM`, `GTMLNX^XOBVTCP` — XWBTCPM's own change-history comment
+  says "GTMLNUX", a typo; the real label is GTMLNX at line 68/70). The broker
+  has therefore never served a real RPC from this image.
+- **Fix**: `server_args = -run GTMLNX^XWBTCPM` and `-run GTMLNX^XOBVTCP`
+  (committed to docker/etc; hot-patched into the running container + `pkill
+  -HUP xinetd` to verify without a 20-min rebuild — the live fix persists
+  across stop/start but a `make rm` + recreate reverts to the image copy
+  until the next `make build`).
+- **Evidence**: post-fix, a silent connect to 127.0.0.1:9530 is HELD open and a
+  real XWB `TCPConnect` frame returns `\x00\x00accept\x04`. Smoke S-07 was
+  upgraded from a port probe to this protocol-level check so the failure mode
+  can't hide again. VistALink's xinetd layer now spawns correctly and
+  `$$NEWOK^XOBVTCPL()`=0 (connections allowed, File 18.01 configured), but the
+  handler still closes idle connections instantly — app-level behavior, no
+  consumer today, left as-is (S-08 checks the xinetd layer only).
 
 ## 2026-04-18 — First build attempt
 

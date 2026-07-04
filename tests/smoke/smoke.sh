@@ -95,8 +95,22 @@ port_check() { # <id> <label> <port>
     check "$1" "$2" docker exec "$CONTAINER" \
         timeout 2 bash -c "echo >/dev/tcp/127.0.0.1/$3"
 }
-port_check S-07 "RPC Broker port 9430" 9430
-port_check S-08 "VistALink port 8001" 8001
+# S-07 is protocol-level, not just a port probe: xinetd accepts even when the
+# spawned M handler crashes (BL-014 — the pre-fix broker died on every
+# connection while the port probe passed). A real XWB TCPConnect frame must
+# come back 'accept'.
+out=$(docker exec "$CONTAINER" timeout 5 bash -c '
+    exec 3<>/dev/tcp/127.0.0.1/9430 || exit 1
+    printf "[XWB]10304\nTCPConnect50010127.0.0.1f00010f0009localhostf\x04" >&3
+    IFS= read -r -t 4 -d $'"'"'\x04'"'"' reply <&3
+    printf "%s" "$reply"' 2>&1)
+case "$out" in
+    *accept*) report S-07 "RPC Broker answers XWB connect" PASS ;;
+    *)        report S-07 "RPC Broker answers XWB connect" FAIL "reply: '$out'" ;;
+esac
+# S-08 checks the xinetd layer only — the VistALink app handler closes idle
+# connections immediately and has no consumer today (see BL-014).
+port_check S-08 "VistALink port 8001 (xinetd layer)" 8001
 # S-09/S-10: baked (ADR-013) but UNCONSUMED services — WARN, never FAIL (ADR-051).
 warn_check S-09 "Rocto SQL port 1338 (no consumers)" docker exec "$CONTAINER" \
     timeout 2 bash -c "echo >/dev/tcp/127.0.0.1/1338"

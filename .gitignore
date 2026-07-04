@@ -1,7 +1,7 @@
 # vista-meta .gitignore
 # Spec: docs/historical/vista-meta-spec-v0.4.md § 3
 
-# Runtime config (contains Tailscale IP)
+# Runtime config (host-port overrides; machine-local)
 .env
 
 # Bake raw output — regenerated, large

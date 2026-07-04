@@ -1,6 +1,6 @@
 # vista-meta sshd configuration
 # Docker maps host :2222 -> container :22
-# Tailscale IP binding handled via docker -p flag (ADR-008)
+# Loopback-only binding handled via docker -p flag (ADR-050)
 
 Port 22
 ListenAddress 0.0.0.0
