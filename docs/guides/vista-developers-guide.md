@@ -22,12 +22,13 @@ Where possible this guide cites code and data already in the vista-meta
 project. You can produce most of the referenced artifacts yourself by
 running `make` targets in this repo.
 
-> **Note (May 2026).** All references below to `kids-vc`,
-> `host/scripts/kids_vc.py`, `kids-vc-guide.md`, `kids-vc-background-dev.md`,
-> `make kids-vc-*` targets, and `ADR-046` now refer to the standalone
-> sibling project at `~/projects/py-kids-vc/` (pip-installable as
-> `kids-vc`). It was extracted from this repo in May 2026; the
-> narrative below predates the extraction.
+> **Note (updated 2026-07-04).** The KIDS git-integration tool referenced
+> below was extracted from this repo in May 2026 as `py-kids-vc`, then
+> superseded by its Go port **v-pkg** (`~/vista-forge/v-pkg`, on `$PATH`;
+> same verbs) and retired — archived at `~/projects/archive/py-kids-vc`.
+> Remaining `kids-vc` mentions in the narrative are historical; for the
+> live tool read them as `v-pkg`. Its design history now lives in the
+> vista-forge docs repo (`background/kids-vc-background-dev.md`).
 
 ---
 
@@ -308,7 +309,7 @@ that calls it actually runs.
 | **MailMan** | User messaging + bulletins | Kernel | Production-stable |
 | **RPC Broker** | CPRS network API | Kernel | Production-stable |
 | **VistA-M** | Source on GitHub | [github.com/WorldVistA/VistA](https://github.com/WorldVistA/VistA) | The canonical community mirror |
-| **kids-vc** | Git integration for KIDS | This project | See `~/projects/py-kids-vc/docs/kids-vc-guide.md` |
+| **v-pkg** | Git integration + package mgmt for KIDS | `~/vista-forge/v-pkg` | Supersedes the retired kids-vc/py-kids-vc |
 | **XPDK2VC** | In-VistA KIDS→VCS | Kernel 8.0*11310 | Shipped but rarely run |
 | **ViViaN/DOX** | Web cross-ref browser | `vivian.worldvista.org/dox/` | Call-graph subset only ([RF-025](../../vista/export/RESEARCH.md)) |
 
@@ -331,7 +332,7 @@ that calls it actually runs.
 
 ### 4.3 What's emerging (worth knowing about)
 
-- **kids-vc** (this project) — fills the git-native KIDS slot
+- **v-pkg** (sibling project, `~/vista-forge/v-pkg`) — fills the git-native KIDS slot
 - **YottaDB Python API** — lets you script VistA from Python (see §7)
 - **IRIS Python gateway** — same idea on the closed-source side
 - **OSEHRA's test infrastructure** — growing, container-based
@@ -341,7 +342,7 @@ that calls it actually runs.
 
 Minimum:
 1. A **VistA container** — this project's Docker setup (VEHU on YottaDB)
-2. **kids-vc** — `pip install kids-vc` (sibling project, `~/projects/py-kids-vc/`)
+2. **v-pkg** — single static binary (sibling project, `~/vista-forge/v-pkg`; on `$PATH`)
 3. A **MUMPS syntax highlighter** — VSCode's `mumps` extensions
 4. **XINDEX** in your container — ships with Toolkit
 5. **M-Unit** — clone Christopher Edwards's fork and install via KIDS
@@ -350,8 +351,7 @@ Minimum:
    documented anywhere
 
 Recommended:
-8. **Python 3.10+** — for running kids-vc, corpus harness, and writing
-   analytical scripts
+8. **Python 3.10+** — for writing analytical scripts
 9. **YottaDB Python bindings** — `pip install yottadb` — if you plan to
    script against live VistA
 10. **Claude / Copilot / similar** — AI assistant that can read MUMPS; see §9
@@ -448,14 +448,14 @@ would want", it would cover:
   annotation.
 - **Commit discipline** — one patch = one semantic change. Mass
   refactors are separate patches.
-- **Pre-commit hook** — runs XINDEX + kids-vc roundtrip + M-Unit before
+- **Pre-commit hook** — runs XINDEX + v-pkg roundtrip + M-Unit before
   allowing a commit. Rejection with machine-readable output.
 - **Security checklist** — PHI access logged; no site-local secrets in
   source; parameters stored via `^XTV(8989.3)`, not hardcoded.
 
 None of this exists today as a single document. But every bullet could be
 implemented with small tooling additions — and several (M-Unit, XINDEX
-checks, kids-vc) already exist; they just aren't mandatory.
+checks, v-pkg) already exist; they just aren't mandatory.
 
 **Opportunity for the community**: write SAC v2 as a live linter
 (`msac`), not a PDF. Rules expressed as Python check functions that run
@@ -605,9 +605,9 @@ D ^XPDB   (Build Edit Menu)
   → export .KID file via D ^XPDTS
 ```
 
-**Option B** — decompose-first via kids-vc (newer workflow):
-1. Develop in a git repo with kids-vc layout
-2. `kids-vc assemble patches/PSO_1_0_1001/ PSO_1_0_1001.KID`
+**Option B** — decompose-first via v-pkg (newer workflow; supersedes the retired kids-vc):
+1. Develop in a git repo with the decomposed KIDComponents/ layout
+2. `v-pkg assemble patches/PSO_1_0_1001/ PSO_1_0_1001.KID`
 3. Install the `.KID` into VEHU
 
 Verify installation produces expected result.
@@ -921,7 +921,7 @@ Pick a small task: add an option to display some existing data.
       to fix what the AI got wrong.
 - [ ] **Day 8**: Test (§6.5). Write M-Unit tests. Run XINDEX. Fix every
       Fatal error.
-- [ ] **Day 9**: Package via kids-vc (§6.6). `kids-vc assemble` → .KID.
+- [ ] **Day 9**: Package via v-pkg (§6.6). `v-pkg assemble` → .KID.
 - [ ] **Day 10**: Install into VEHU, run your option end-to-end, verify
       output. Iterate.
 
