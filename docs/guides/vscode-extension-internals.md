@@ -1,13 +1,15 @@
-# vista-meta VSCode Extension — Internals & Roadmap
+# VistA Compass (vista-meta VSCode Extension) — Internals & Roadmap
 
 Architecture reference and extension roadmap for the
-[vscode-extension/](../../vscode-extension/) source tree. Read
+[vscode-extension/](../../vscode-extension/) source tree — shipped as
+**VistA Compass 0.2.0** (`vista-compass-0.2.0.vsix`). Read
 [vista-vscode-guide.md § 2](vista-vscode-guide.md#2-the-vscode-extension)
 first for the user-facing surface; this document covers the inside of
 the box and what to add next.
 
-> Audience: anyone modifying the extension. The current code is ~500
-> lines across 4 TypeScript files — keep additions in that spirit.
+> Audience: anyone modifying the extension. The current code is
+> ~1,200 lines across 6 TypeScript files — keep additions in that
+> spirit.
 
 ---
 
@@ -15,12 +17,12 @@ the box and what to add next.
 
 - [1. Scope and design constraints](#1-scope-and-design-constraints)
 - [2. Architecture at a glance](#2-architecture-at-a-glance)
-- [3. The four source files](#3-the-four-source-files)
+- [3. The six source files](#3-the-six-source-files)
 - [4. Data flow on routine open](#4-data-flow-on-routine-open)
 - [5. Current feature inventory](#5-current-feature-inventory)
 - [6. Code-model data not yet surfaced](#6-code-model-data-not-yet-surfaced)
 - [7. Recommended extensions, by tier](#7-recommended-extensions-by-tier)
-  - [7.1 Tier A — HoverProvider (highest leverage)](#71-tier-a--hoverprovider-highest-leverage)
+  - [7.1 Tier A — HoverProvider (SHIPPED in 0.2.0)](#71-tier-a--hoverprovider-shipped-in-020)
   - [7.2 Tier B — DocumentSymbolProvider + DefinitionProvider](#72-tier-b--documentsymbolprovider--definitionprovider)
   - [7.3 Tier C — Diagnostics, workspace symbols, CodeLens](#73-tier-c--diagnostics-workspace-symbols-codelens)
   - [7.4 Tier D — Completion, status bar, semantic tokens](#74-tier-d--completion-status-bar-semantic-tokens)
@@ -41,9 +43,10 @@ without leaving the editor. Three constraints, in priority order:
 2. **No MUMPS parser.** Tag detection is a regex scan of column-0
    labels. Anything that requires real parsing (expression types,
    variable scope, control flow) belongs in a separate tool.
-3. **TSVs are the single source of truth.** If the data isn't in
-   `vista/export/code-model/*.tsv`, the extension does not invent
-   it. Add it to the bake first, surface it in the UI second.
+3. **TSVs are the single source of truth.** If the data isn't in the
+   schema_v1 data root (`code-model/*.tsv` + `data-model/*.tsv`), the
+   extension does not invent it. Add it to the bake first, surface it
+   in the UI second.
 
 If a feature can't be implemented within those constraints, it goes
 into the CLI or stays out.
@@ -57,51 +60,71 @@ into the CLI or stays out.
   active editor ───► │  extension.ts (activation)       │
   (.m file path)     │  - wires onDidChangeActiveEditor │
                      │  - registers commands            │
-                     └──────────────┬───────────────────┘
-                                    │ setActiveFile(path)
-                                    ▼
-                     ┌──────────────────────────────────┐
-                     │  treeProvider.ts                 │
-                     │  - maps RoutineInfo → Tree nodes │
-                     │  - HeaderNode / SectionNode /    │
-                     │    TagNode / CallerNode /        │
-                     │    CalleeNode / GlobalNode /     │
-                     │    XindexNode                    │
-                     └──────────────┬───────────────────┘
-                                    │ analyze(routineName)
-                                    ▼
-                     ┌──────────────────────────────────┐
-                     │  routine.ts                      │
-                     │  - parseTags(filePath)           │
-                     │  - resolveSourcePath(row)        │
-                     │  - cross-joins 4 TSVs into one   │
-                     │    RoutineInfo                   │
-                     └──────────────┬───────────────────┘
-                                    │ load(name) / byColumn(...)
-                                    ▼
-                     ┌──────────────────────────────────┐
-                     │  tsv.ts                          │
-                     │  - lazy file load + cache        │
-                     │  - per-(file, column) index cache│
-                     │  - workspace path resolution     │
-                     └──────────────────────────────────┘
+                     │  - registers HoverProvider       │
+                     │  - shows data vintage / warning  │
+                     └───────┬───────────────┬──────────┘
+                             │ setActiveFile │ provideHover(doc, pos)
+                             ▼               ▼
+     ┌──────────────────────────────┐  ┌──────────────────────────────┐
+     │  treeProvider.ts             │  │  hover.ts                    │
+     │  - maps RoutineInfo →        │  │  - VistaCompassHoverProvider │
+     │    Tree nodes                │  │  - token parse + classify    │
+     │  - HeaderNode / SectionNode /│  │    (routine / TAG^RTN / tag  │
+     │    TagNode / CallerNode /    │  │    at col 0 / ^GLOBAL)       │
+     │    CalleeNode / GlobalNode / │  │  - global → files.tsv →      │
+     │    XindexNode                │  │    piks.tsv join             │
+     └──────────────┬───────────────┘  └──────┬──────────────┬────────┘
+                    │ analyze(routineName)    │              │
+                    ▼                         │              │ globalBase()
+     ┌──────────────────────────────┐         │              ▼
+     │  routine.ts                  │         │  ┌────────────────────────┐
+     │  - parseTags(filePath)       │         │  │  model.ts (pure)       │
+     │  - resolveSourcePath(row)    │         │  │  - globalBase()        │
+     │  - cross-joins 4 TSVs into   │         │  │  - vintageFrom…()      │
+     │    one RoutineInfo           │         │  │  no vscode imports —   │
+     └──────────────┬───────────────┘         │  │  node-testable         │
+                    │ load / byColumn         │  └───────────▲────────────┘
+                    ▼                         │              │ vintage parse
+     ┌────────────────────────────────────────▼──────────────┴───────────┐
+     │  tsv.ts                                                           │
+     │  - data-root resolution (dataPath → auto-discover → legacy)       │
+     │  - lazy file load + cache; per-(file, column) index cache         │
+     │  - loadModel()/byColumnIn() for code-model AND data-model         │
+     │  - dataVintage() from manifest.json / meta/column-manifest.json   │
+     └───────────────────────────────────────────────────────────────────┘
 ```
 
-The flow is one-directional: editor event → tree refresh → routine
-analysis → TSV reads. There is no async work; the largest TSV
+The flow is one-directional: editor event (focus change or hover) →
+routine/token analysis → TSV reads. `model.ts` is deliberately pure
+(no `vscode` imports) so the schema_v1 contract helpers — `globalBase`
+and the vintage parsers — are node-testable against the real
+artifacts. There is no async work; the largest TSV
 (`routine-calls.tsv`, ~20 MB) reads in ~200 ms on first access and
 stays warm.
 
 ---
 
-## 3. The four source files
+## 3. The six source files
 
 ### [extension.ts](../../vscode-extension/src/extension.ts)
 
-Activation only. Creates the tree view, wires
+Activation and wiring only. Creates the tree view
+(`vistaCompassRoutine`, shown as **VistA Routine**), registers the
+`VistaCompassHoverProvider` for `mumps`/`**/*.m` files, wires
 `onDidChangeActiveTextEditor` so the sidebar reacts to editor focus,
-and registers two commands (`vistaMeta.refresh`,
-`vistaMeta.reloadTsvs`). 51 lines.
+and registers two commands (`vistaCompass.refresh`,
+`vistaCompass.reloadTsvs`). On activation (and again on every
+`Reload TSVs`) it reads `dataVintage()` and:
+
+- sets the tree view's **description** to the vintage label —
+  `data-v1 · 23d037f1` (release bundle) or `dev tree · schema v1`
+  (repo tree);
+- pops a warning if the data root declares a `schema_version` ≠ 1
+  ("columns may not line up").
+
+`vistaCompass.reloadTsvs` clears all three caches (row cache, column
+indexes, the hover's global-base index), refreshes the tree, and
+re-reads the vintage.
 
 The activation predicate is `workspaceContains:**/*.m` — the
 extension activates the moment any `.m` file exists in the workspace.
@@ -115,20 +138,41 @@ The TSV layer. Two caches:
   multi-value index
 
 Both cleared by `reloadAll()` / `clearIndexes()` (the `Reload TSVs`
-command). Cells are split on `\t`; no quoting, no escapes — the bake
+command). Caches are keyed by **absolute file path**, not bare
+filename — the data root can change as the active file moves across
+projects. Cells are split on `\t`; no quoting, no escapes — the bake
 guarantees clean TSVs.
 
-Workspace path resolution: the extension resolves a **data root** — a
-directory holding `code-model/` + `data-model/` — from
-`vistaCompass.dataPath`, or by auto-discovery (walking up from the
-active file for `vista/export`, then an unpacked `vista-meta-data-v1`
-release bundle). `loadModel(model, name)` / `byColumnIn(model, …)`
-read either model; the legacy `load`/`byColumn` are code-model
-wrappers. `dataVintage()` reads the bundle's `manifest.json`
-(schema_version, content_hash, engine — the V7 producer contract) or
-the dev tree's `meta/column-manifest.json`, surfaces it as the tree
-view's description, and warns if schema_version ≠ 1.
-`vistaCompass.codeModelPath` is deprecated but honored as a fallback.
+**Data-root resolution (0.2.0).** The extension resolves a **data
+root** — a directory holding `code-model/` + `data-model/` — in this
+order (`dataRoot()`):
+
+1. `vistaCompass.dataPath`, if set. Absolute / `~`-prefixed values
+   are used as-is; workspace-relative values are resolved by walking
+   **up** from the active file, then from each workspace folder, then
+   `workspaceFolders[0]/<rel>` (the walk-up is what makes the sidebar
+   work when vista-meta is opened from a parent workspace like
+   `~/projects`).
+2. Auto-discovery, same walk-up rules: `vista/export` (the repo's dev
+   tree) first, then `vista-meta-data-v1` (an unpacked release
+   bundle).
+3. Legacy fallback: the parent of `vistaCompass.codeModelPath`
+   (deprecated, kept for pre-0.2.0 configs).
+
+A candidate counts as a data root only if
+`<root>/code-model/routines.tsv` exists (`isDataRoot()`).
+
+`loadModel(model, name)` / `byColumnIn(model, …)` read either model
+(`code-model` | `data-model`); the legacy `load`/`byColumn` are
+code-model wrappers.
+
+**Data vintage.** `dataVintage()` reads the bundle's `manifest.json`
+(`tag`, `schema_version`, `content_hash`, `engine` — the V7 producer
+contract) or, failing that, the dev tree's
+`meta/column-manifest.json` (V3 — pins `schema_version` only, no data
+identity). The result is cached with the TSVs, surfaced as the tree
+view's description, and drives the schema_version ≠ 1 warning. A
+broken manifest reads as "unknown", never a crash.
 
 ### [routine.ts](../../vscode-extension/src/routine.ts)
 
@@ -138,13 +182,14 @@ reading from four TSVs:
 | Source | Purpose |
 |---|---|
 | `routines-comprehensive.tsv` | header (package, line count, in/out-degree, RPC/Option counts, `source_path`) |
-| `routine-calls.tsv` (× 2 indexes) | callees (caller_name → rows) and callers (callee_routine → rows) |
+| `routine-calls.tsv` (× 2 indexes) | callees (`caller_routine` → rows) and callers (`callee_routine` → rows) |
 | `routine-globals.tsv` | globals touched by this routine |
 | `xindex-errors.tsv` | static-analyzer findings |
 
-Tags come from a regex scan of the on-disk file (`parseTags`), not
-from a TSV — `xindex-tags.tsv` has the same data but isn't read yet
-([§6](#6-code-model-data-not-yet-surfaced)).
+Sidebar tags come from a regex scan of the on-disk file
+(`parseTags`), not from a TSV — the hover provider does read
+`xindex-tags.tsv`, but only to confirm a tag exists
+([§7.1](#71-tier-a--hoverprovider-shipped-in-020)).
 
 `resolveSourcePath` rewrites the container-side path
 (`/opt/VistA-M/...`) to the host-visible path under
@@ -164,6 +209,35 @@ and fires the change event. All node types are local classes
 Click commands all use `vscode.open` with an optional `selection`
 range — there is no custom command for navigation, just the built-in
 opener.
+
+### [model.ts](../../vscode-extension/src/model.ts)
+
+Pure helpers over the schema_version 1 data contract — **no `vscode`
+imports**, so everything here is node-testable against the real
+artifacts. Two responsibilities:
+
+- **Vintage parsing.** `vintageFromManifest()` (the bundle's
+  `manifest.json`: tag, schema_version, content_hash, engine,
+  extraction timestamp) and `vintageFromColumnManifest()` (the dev
+  tree's `meta/column-manifest.json`: schema_version only) both
+  return a `DataVintage` — a short UI label plus a tooltip-sized
+  provenance line.
+- **`globalBase(globalRoot)`.** `files.tsv` `global_root` is a
+  storage root like `^DPT(` or `^DD("IX",`; `routine-globals.tsv`
+  `global_name` is the bare name (`DPT`). `globalBase` strips the
+  caret and everything from the first `(` — the join key between the
+  two models.
+
+### [hover.ts](../../vscode-extension/src/hover.ts)
+
+`VistaCompassHoverProvider` — the Tier A hover, shipped in 0.2.0.
+Registered for `{ language: 'mumps' }` and `**/*.m`. All facts come
+from the same TSVs the sidebar uses; no parsing, no container. See
+[§7.1](#71-tier-a--hoverprovider-shipped-in-020) for token
+classification, hover cards, and the global → FileMan → PIKS join.
+Owns one extra cache — the `files.tsv` global-base index
+(`filesByGlobalBase()`), cleared by `clearGlobalBaseIndex()` on
+`Reload TSVs`.
 
 ---
 
@@ -188,46 +262,75 @@ opener.
 Worst-case first-open cost (cold caches): ~250 ms dominated by the
 `routine-calls.tsv` read. Every subsequent open is < 5 ms.
 
+And on hover (the 0.2.0 path):
+
+```
+1. User hovers a token in a .m file.
+2. VistaCompassHoverProvider matches TOKEN_RE at the cursor,
+   parseToken() splits it ($$ prefix, ^ position).
+3. Classification:
+     TAG^RTN / $$TAG^RTN → routine card + tag badge
+     ^X                  → routine if X is in
+                           routines-comprehensive.tsv AND not
+                           followed by '(' ; else global card
+     bare ident at col 0 → tag-in-this-routine card
+     bare ident after D/DO/G/GOTO/J/JOB, or a known routine
+                         → routine card
+4. Card builders read the already-cached column indexes; the global
+   card additionally joins files.tsv (global_root base) → piks.tsv.
+5. Return a vscode.Hover (markdown), or null → no popup.
+```
+
 ---
 
 ## 5. Current feature inventory
 
 | Feature | Implementation | Source |
 |---|---|---|
-| Sidebar tree view (`VISTA ROUTINE`) | `RoutineTreeProvider` in Explorer container | `treeProvider.ts` |
-| Routine header (package, lines, in/out, RPC×, OPT×) | `HeaderNode` from `routines-comprehensive.tsv` | `treeProvider.ts:119` |
-| Tags section (file TOC) | Regex scan of column-0 labels | `routine.ts:67` |
-| Callers section (with package, ref-count) | Aggregated from `routine-calls.tsv` indexed on `callee_routine` | `routine.ts:119` |
-| Callees section (with kind, ref-count) | `routine-calls.tsv` indexed on `caller_name` | `routine.ts:108` |
-| Globals section (with ref-count) | `routine-globals.tsv` indexed on `routine_name` | `routine.ts:140` |
-| XINDEX section (severity icons, line jump) | `xindex-errors.tsv` indexed on `routine` | `routine.ts:149` |
+| Sidebar tree view (`vistaCompassRoutine`, shown as **VistA Routine**) | `RoutineTreeProvider` in Explorer container | `treeProvider.ts` |
+| Routine header (package, lines, in/out, RPC×, OPT×) | `HeaderNode` from `routines-comprehensive.tsv` | `treeProvider.ts` |
+| Tags section (file TOC) | Regex scan of column-0 labels | `routine.ts` |
+| Callers section (with package, ref-count) | Aggregated from `routine-calls.tsv` indexed on `callee_routine` | `routine.ts` |
+| Callees section (with kind, ref-count) | `routine-calls.tsv` indexed on `caller_routine` | `routine.ts` |
+| Globals section (with ref-count) | `routine-globals.tsv` indexed on `routine_name` | `routine.ts` |
+| XINDEX section (severity icons, line jump) | `xindex-errors.tsv` indexed on `routine_name` | `routine.ts` |
 | Click-to-open (tags / callers / callees / XINDEX line) | `vscode.open` command with selection range | `treeProvider.ts` |
-| MUMPS language id (`.m`) + bracket / comment config | `language-configuration.json` | `package.json:16` |
-| Refresh + Reload TSVs commands | Command palette entries | `extension.ts:38` |
-| Configurable code-model / vista-m-host paths + topN | `vistaMeta.*` settings | `package.json:52` |
-| Empty-state messaging | `MessageNode` distinguishing "no .m open" vs "not in TSVs" | `treeProvider.ts:48` |
+| **Hover: routine card** (`RTN`, `^RTN`, bare name, `D RTN`) | package, size, in/out-degree, top callers/callees/globals | `hover.ts` |
+| **Hover: `TAG^RTN` / `$$TAG^RTN`** | routine card + tag-exists badge from `xindex-tags.tsv` | `hover.ts` |
+| **Hover: tag at column 0** | tag location + external callers of `TAG^RTN` | `hover.ts` |
+| **Hover: `^GLOBAL` with FileMan + PIKS** | who-references summary + `files.tsv` (global_root base) → `piks.tsv` join — e.g. `^DPT` → File 2 PATIENT — PIKS **P** (Patient, auto) | `hover.ts`, `model.ts` |
+| Data-root resolution (`dataPath` → auto-discover → legacy fallback) | walk-up search for `vista/export` / `vista-meta-data-v1` | `tsv.ts` |
+| Data-vintage badge (sidebar description) + schema warning | `manifest.json` / `meta/column-manifest.json` → `DataVintage`; warns if schema_version ≠ 1 | `extension.ts`, `tsv.ts`, `model.ts` |
+| MUMPS language id (`.m`) + bracket / comment config | `language-configuration.json` | `package.json` |
+| Refresh + Reload TSVs commands (`vistaCompass.refresh`, `vistaCompass.reloadTsvs`) | Command palette entries | `extension.ts` |
+| Configurable data root / vista-m-host path + topN | `vistaCompass.{dataPath, codeModelPath (deprecated), vistaMHostPath, topN}` | `package.json` |
+| Empty-state messaging | `MessageNode` distinguishing "no .m open" vs "not in TSVs" | `treeProvider.ts` |
 
-That is the complete current surface. Everything below is **not yet
-implemented**.
+That is the complete current surface as of 0.2.0. Everything below is
+**not yet implemented**.
 
 ---
 
 ## 6. Code-model data not yet surfaced
 
-The bake produces 19 TSVs. The extension reads 4. Unused payload:
+The bake produces 20 code-model TSVs plus the data-model TSVs. As of
+0.2.0 the extension reads five of the code-model TSVs
+(`routines-comprehensive`, `routine-calls`, `routine-globals`,
+`xindex-errors`, `xindex-tags`) and two data-model TSVs (`files.tsv`,
+`piks.tsv` — the hover's PIKS join). Unused payload:
 
 | TSV | Carries | Useful for |
 |---|---|---|
-| `xindex-tags.tsv` | per-tag metadata: kind, line, parameters, formal-list, doc-comment summary | Hover for tag entrypoints; outline; signature help |
+| `xindex-tags.tsv` (partially used) | per-tag rows: `routine_name`, `tag`, `data` — the hover only checks tag *existence* | Outline / DocumentSymbol backing; workspace symbols |
 | `xindex-routines.tsv` | per-routine roll-up: line counts, MUMPS-vs-comment ratio, complexity | Status bar; hover header |
 | `xindex-xrefs.tsv` | every variable / global / tag reference with line + offset | Reference provider; hover for any identifier under cursor |
 | `xindex-validation.tsv` | secondary lint findings | Diagnostics |
-| `rpcs.tsv` | RPC name, tag, routine, return type, doc | Hover when cursor is on an RPC entrypoint |
-| `options.tsv` | option name, type, description, entry routine | Hover on option entrypoints |
+| `rpcs.tsv` | RPC name, tag, routine, return type, availability, package | Hover when cursor is on an RPC entrypoint |
+| `options.tsv` | option name, menu text, type, entry routine, package | Hover on option entrypoints |
 | `protocols.tsv`, `protocol-calls.tsv` | protocol type (event / menu / extended), invokers | Hover; callers section enrichment |
 | `vista-file-9-8.tsv` | File 9.8 (Routine) — VistA's own description, package owner, compile flag | Hover header |
 | `package-manifest.tsv`, `package-edge-matrix.tsv` | per-package roll-up + cross-package edges | Workspace-level views |
-| `package-piks-summary.tsv` + data-model TSVs | global → FileMan file → PIKS classification | Hover for `^GLOBAL` references — "this is Patient data" |
+| `package-piks-summary.tsv` | per-package PIKS distribution (the per-*global* PIKS join shipped in the 0.2.0 hover) | Package-level views |
 
 Most recommendations below are "read TSV X, render in surface Y."
 
@@ -238,44 +341,57 @@ Most recommendations below are "read TSV X, render in surface Y."
 Ordered by leverage-to-effort ratio. Each tier is independent — pick
 any subset.
 
-### 7.1 Tier A — HoverProvider (highest leverage)
+### 7.1 Tier A — HoverProvider (SHIPPED in 0.2.0)
 
-**The headline addition.** When the cursor is over an identifier in
-a `.m` file, show a markdown popup pulled from the code model. Six
-hover targets, one provider:
+**Shipped** as [src/hover.ts](../../vscode-extension/src/hover.ts)
+(`VistaCompassHoverProvider`), registered from `extension.ts` for
+`{ language: 'mumps' }` and `**/*.m`. Zero new dependencies. Four
+hover targets are live:
 
 | Cursor on | Hover shows | Source TSV |
 |---|---|---|
-| Routine name (file header, or `^ROUTINE` reference) | Package, line count, in/out-degree, RPC×/OPT×, File 9.8 description, top callers/callees | `routines-comprehensive.tsv`, `vista-file-9-8.tsv` |
-| Tag at column 0 (the entrypoint) | Tag kind, line, formal parameters, ref-count from callers, doc-comment summary | `xindex-tags.tsv`, `routine-calls.tsv` |
-| `TAG^ROUTINE` call site | Same as routine + tag, shown as a single card | `xindex-tags.tsv`, `routine-calls.tsv` |
-| `^GLOBAL` reference | Global root, FileMan file (if any) + file number + name, **PIKS class** (P/I/K/S), record count, top routines that touch it | `routine-globals.tsv`, `vista-file-9-8.tsv`, data-model `files.tsv` + `piks.tsv` |
-| RPC name in code | RPC display name, return type, doc, broker entrypoint | `rpcs.tsv` |
-| Option / protocol name | Type, description, entry routine | `options.tsv`, `protocols.tsv` |
+| Routine name (`RTN`, `^RTN`, bare name after a `D`/`DO`/`G`/`GOTO`/`J`/`JOB` verb, or any bare identifier that resolves to a routine) | Package, lines, tags, in/out-degree, RPC×/OPT×, globals count, top callers / callees / globals, source basename | `routines-comprehensive.tsv`, `routine-calls.tsv`, `routine-globals.tsv` |
+| `TAG^ROUTINE` / `$$TAG^ROUTINE` call site | Routine card + a tag badge (found / not found in `xindex-tags.tsv`) | above + `xindex-tags.tsv` |
+| Tag at column 0 (the entrypoint) | External callers of `TAG^ROUTINE` with ref-counts, or "no external callers — likely private" | `xindex-tags.tsv`, `routine-calls.tsv` |
+| `^GLOBAL` reference | Who-references summary (routine count, total refs, top consumers) **plus the two-models join**: `files.tsv` rows whose `global_root` base matches → `piks.tsv` PIKS class — e.g. `^DPT` → File **2** PATIENT — PIKS **P** (Patient, auto) | `routine-globals.tsv`, data-model `files.tsv` + `piks.tsv` |
 
-Why this is highest-value: every other surface in VSCode is
-navigation. Hover is **comprehension** — the developer's eyes never
-leave the code. For VistA specifically, the global → FileMan file →
-PIKS class chain is what newcomers can't reconstruct from the source
-alone, and what makes vista-meta uniquely useful.
+Mechanics worth knowing before touching it:
 
-Implementation lives in a new `src/hoverProvider.ts`. Wire from
-`extension.ts`:
+- **`^X` disambiguation:** if `X` exists in
+  `routines-comprehensive.tsv` it's a routine — *unless* the very
+  next character is `(`, which forces the global reading. Routines
+  and FileMan globals don't collide in practice (`^DPT` is a global;
+  `^DGRP` is a routine).
+- **The bare-name join fix.** schema_v1 stores **bare** global names
+  in `routine-globals.tsv` (`DPT`, not `^DPT`); the caret is
+  display-only. The original lookup matched on the caret-prefixed
+  form, which silently returned zero rows after the V1.7
+  normalization — the global hover was dead until 0.2.0 fixed the
+  lookup to strip the caret.
+- **The PIKS join** (`appendPiksBlock`): top-level `files.tsv` rows
+  (`parent_file` empty) are indexed by `globalBase(global_root)` —
+  `^DD("IX",` → `DD` — then `file_number` → `piks.tsv` (B1: one
+  authoritative row per file). Capped at 5 files per global, with a
+  "… N more" overflow line. The index is a module-level cache cleared
+  on `Reload TSVs`.
+- **Noise control:** a bare identifier that is neither at column 0,
+  nor after a call verb, nor a known routine name gets **no** hover —
+  local variables stay quiet.
 
-```ts
-ctx.subscriptions.push(
-  vscode.languages.registerHoverProvider(
-    { language: 'mumps', scheme: 'file' },
-    new VistaMetaHoverProvider(),
-  ),
-);
-```
+Why this was the headline 0.2.0 addition: every other surface in
+VSCode is navigation. Hover is **comprehension** — the developer's
+eyes never leave the code. For VistA specifically, the global →
+FileMan file → PIKS class chain is what newcomers can't reconstruct
+from the source alone, and what makes vista-meta uniquely useful.
 
-The provider takes a `Position`, runs a small lexer to classify the
-token (routine name vs tag vs global vs call ref), then calls into
-existing TSV indexes. Total add: ~250 lines, zero new dependencies.
+**Still open from the original Tier A list** (genuinely unshipped):
 
-Sketch in [§8.1](#81-hoverprovider-sketch).
+| Cursor on | Hover would show | Source TSV |
+|---|---|---|
+| RPC name in code | RPC display name, return type, availability, broker entrypoint | `rpcs.tsv` |
+| Option / protocol name | Type, menu text, entry routine | `options.tsv`, `protocols.tsv` |
+| (enrichment) routine card | File 9.8 description / package owner | `vista-file-9-8.tsv` |
+| (enrichment) global card | record count from `files.tsv` | data-model `files.tsv` |
 
 ### 7.2 Tier B — DocumentSymbolProvider + DefinitionProvider
 
@@ -305,7 +421,7 @@ reuse for both.
 file-line-severity-message tuples. Push them through
 `vscode.languages.createDiagnosticCollection('vista-meta-xindex')`
 and findings light up in the Problems panel and inline in the gutter.
-Add a setting `vistaMeta.xindexAsDiagnostics: boolean` — default off
+Add a setting `vistaCompass.xindexAsDiagnostics: boolean` — default off
 until the bake is stable enough to avoid noise.
 
 **WorkspaceSymbolProvider.** Powers `Ctrl+T` ("Go to Symbol in
@@ -329,7 +445,7 @@ cover most of the navigation need.
 
 **Status bar item.** Right-aligned segment showing
 `PRCA45PT · AR · 74L · in=0 out=5`. One line of code, constant value
-to the user. Click → command palette for `vista-meta:` commands.
+to the user. Click → command palette for `VistA Compass:` commands.
 
 **Semantic tokens.** Custom highlighting for global references
 colored by PIKS class (Patient = red, Institution = blue, Knowledge
@@ -354,103 +470,22 @@ is fine, and an LSP adds installation complexity.
 Concrete enough to start coding from. None of these are committed
 yet — they are recommendations.
 
-### 8.1 HoverProvider sketch
+### 8.1 HoverProvider — shipped; sketch retired
 
-`src/hoverProvider.ts`:
+The Tier A hover shipped in 0.2.0 as
+[src/hover.ts](../../vscode-extension/src/hover.ts) — see
+[§7.1](#71-tier-a--hoverprovider-shipped-in-020). The old sketch here
+predates the implementation; the real code differs in two ways worth
+noting if you extend it:
 
-```ts
-import * as vscode from 'vscode';
-import { byColumn } from './tsv';
-
-const ROUTINE_RE = /[A-Z%][A-Z0-9]{0,7}/;
-const TAG_AT_ROUTINE_RE = /([A-Z%][A-Z0-9]*)\^([A-Z%][A-Z0-9]{0,7})/;
-const GLOBAL_RE = /\^([A-Z%][A-Z0-9]*)/;
-
-export class VistaMetaHoverProvider implements vscode.HoverProvider {
-  provideHover(
-    doc: vscode.TextDocument,
-    pos: vscode.Position,
-  ): vscode.ProviderResult<vscode.Hover> {
-    const line = doc.lineAt(pos.line).text;
-    const wordRange = doc.getWordRangeAtPosition(pos, /[A-Z%][A-Z0-9]*/);
-    if (!wordRange) return null;
-    const word = doc.getText(wordRange);
-
-    // Classify by surrounding context
-    const before = line.slice(0, wordRange.start.character);
-    const after  = line.slice(wordRange.end.character);
-
-    if (after.startsWith('^')) {
-      // TAG^ROUTINE — left side is a tag
-      const routineMatch = after.match(/^\^([A-Z%][A-Z0-9]{0,7})/);
-      if (routineMatch) {
-        return this.hoverTagInRoutine(word, routineMatch[1]);
-      }
-    }
-    if (before.endsWith('^')) {
-      // ^ROUTINE or ^GLOBAL — disambiguate by uppercase + length
-      // (globals tend to be ≤4 chars; routines ≤8). Fall back to
-      // checking routines.tsv membership.
-      return this.hoverRoutineOrGlobal(word);
-    }
-    if (pos.character < 8 && wordRange.start.character === 0) {
-      // Column-0 — this is a tag definition in the current routine
-      const routineName = routineNameFromDoc(doc);
-      if (routineName) return this.hoverTagInRoutine(word, routineName);
-    }
-    // Bare identifier — try as a routine
-    return this.hoverRoutineOrGlobal(word);
-  }
-
-  private hoverTagInRoutine(tag: string, routine: string): vscode.Hover | null {
-    const tagRows = byColumn('xindex-tags.tsv', 'routine').get(routine) ?? [];
-    const tagRow = tagRows.find(r => r['tag'] === tag);
-    if (!tagRow) return null;
-
-    const callers = byColumn('routine-calls.tsv', 'callee_routine').get(routine) ?? [];
-    const tagCallers = callers.filter(r => r['callee_tag'] === tag);
-    const totalRefs = tagCallers.reduce(
-      (n, r) => n + parseInt(r['ref_count'] || '0', 10), 0);
-
-    const md = new vscode.MarkdownString();
-    md.appendMarkdown(`**${tag}^${routine}**  \n`);
-    md.appendMarkdown(`kind: \`${tagRow['kind'] || '?'}\`  \n`);
-    if (tagRow['formal_list']) {
-      md.appendCodeblock(`${tag}(${tagRow['formal_list']})`, 'mumps');
-    }
-    if (tagRow['summary']) {
-      md.appendMarkdown(`\n${tagRow['summary']}\n`);
-    }
-    md.appendMarkdown(`\n${tagCallers.length} callers · ${totalRefs} refs`);
-    return new vscode.Hover(md);
-  }
-
-  private hoverRoutineOrGlobal(name: string): vscode.Hover | null {
-    // Try routine first
-    const rRow = byColumn('routines-comprehensive.tsv', 'routine_name').get(name)?.[0];
-    if (rRow) {
-      const md = new vscode.MarkdownString();
-      md.appendMarkdown(`**${name}** \`[${rRow['package']}]\`  \n`);
-      md.appendMarkdown(
-        `${rRow['line_count']} lines · in=${rRow['in_degree']} · ` +
-        `out=${rRow['out_degree']}  \n`,
-      );
-      const desc = rRow['description_98'];
-      if (desc) md.appendMarkdown(`\n${desc}\n`);
-      return new vscode.Hover(md);
-    }
-
-    // Fall back to global lookup — needs data-model TSVs
-    // (left as exercise; pattern identical to routine lookup)
-    return null;
-  }
-}
-```
-
-The disambiguation between routine references and globals is the
-fiddly part. A cheap rule: if the token appears in
-`routines-comprehensive.tsv`, treat it as a routine; otherwise as a
-global. The lookup is O(1) on the cached index.
+- `xindex-tags.tsv` carries only `routine_name` / `tag` / `data` —
+  there is no `kind`, `formal_list`, or `summary` column, so the
+  shipped tag card shows callers, not signatures. Signature help
+  needs the bake to extract formals first.
+- Routine-vs-global disambiguation is membership in
+  `routines-comprehensive.tsv` (O(1) on the cached index), with one
+  refinement: a `(` immediately after the token forces the global
+  reading even when a same-named routine exists.
 
 ### 8.2 DocumentSymbolProvider sketch
 
@@ -480,14 +515,14 @@ to a shared helper to avoid duplication.
 ### 8.3 Diagnostics from XINDEX sketch
 
 ```ts
-const collection = vscode.languages.createDiagnosticCollection('vista-meta-xindex');
+const collection = vscode.languages.createDiagnosticCollection('vista-compass-xindex');
 ctx.subscriptions.push(collection);
 
 function refreshDiagnostics(doc: vscode.TextDocument) {
   if (!doc.fileName.endsWith('.m')) return;
   const routine = routineNameFromPath(doc.fileName);
   if (!routine) return;
-  const errs = byColumn('xindex-errors.tsv', 'routine').get(routine) ?? [];
+  const errs = byColumn('xindex-errors.tsv', 'routine_name').get(routine) ?? [];
   const diags = errs
     .filter(e => /^\d+$/.test(e['line_text'] || ''))
     .map(e => {
@@ -524,9 +559,12 @@ extensions in adjacent ecosystems often ship them:
 - **Live container introspection** (running `D ^XINDEX` from the
   extension, querying globals over a broker). Violates constraint
   #1; the CLI does this when needed.
-- **Multi-root workspace support.** The bake assumes one workspace
-  root; supporting more is a non-trivial path-resolution refactor.
-  Document the limitation, don't paper over it.
+- **Multiple simultaneous data roots.** 0.2.0's walk-up resolution
+  (from the active file, then each workspace folder) already makes
+  multi-root workspaces *work* — but only one data root is resolved
+  at a time, following the active file. Merging several data roots
+  into one view is out of scope; document the semantics, don't paper
+  over them.
 - **Telemetry.** The extension is a single-user dev tool; no usage
   collection.
 
@@ -539,6 +577,6 @@ a sibling tool. Keep the extension small.
 
 - [vista-vscode-guide.md § 2](vista-vscode-guide.md#2-the-vscode-extension) — user-facing surface
 - [code-model-guide.md](code-model-guide.md) — every TSV the extension reads
-- [piks-analysis-guide.md](piks-analysis-guide.md) — the global → file → PIKS chain hover would expose
+- [piks-analysis-guide.md](piks-analysis-guide.md) — the global → file → PIKS chain the 0.2.0 hover exposes
 - [VSCode extension API](https://code.visualstudio.com/api/references/vscode-api) — provider interfaces
-- [vscode-extension/src/](../../vscode-extension/src/) — the current 4-file source tree
+- [vscode-extension/src/](../../vscode-extension/src/) — the current 6-file source tree

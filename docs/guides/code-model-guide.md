@@ -14,17 +14,26 @@ the XINDEX tool specifically.
 
 ## 1. What's in `code-model/`
 
-19 TSV files organized in six logical layers. Each layer builds on the
+20 TSV files organized in six logical layers. Each layer builds on the
 ones above it.
+
+Shapes are `schema_version: 1` — the normalization contract is
+[../reference/schema-v1-normalization-spec.md](../reference/schema-v1-normalization-spec.md);
+per-release integrity in [../releases/data-v1.manifest.json](../releases/data-v1.manifest.json).
 
 ### 1.1 Inventory layer — "what exists"
 
 | File | Rows | Columns | Contents |
 |---|---|---|---|
-| `routines.tsv` | 39,330 | 10 | Every `.m` routine in `Packages/*/Routines/`: name, package, source_path, line_count, byte_size, first_line_comment, version_line, tag_count, comment_line_count, is_percent_routine |
-| `packages.tsv` | 174 | 5 | Per-package aggregates: routine_count, percent_routine_count, total_lines, total_bytes |
+| `routines.tsv` | 39,373 | 10 | Every `.m` routine in `Packages/*/Routines/`: routine_name, package, source_path, line_count, byte_size, first_line_comment, version_line, tag_count, comment_line_count, is_percent_routine |
+| `packages.tsv` | 174 | 5 | Per-package aggregates: package, routine_count, percent_routine_count, total_lines, total_bytes |
+| `package-namespace.tsv` | 174 | 6 | Package → namespace/VDL identity map: package, package_name, namespace, prefixes, app_code, vdl_id — full column semantics in §7b |
 
 Source: host-side Python extraction against the docker-cp'd `vista/vista-m-host/` snapshot of the VEHU image. Authority for *what ships* in the FOIA distribution.
+
+Row-count note: earlier revisions of this guide said 39,330 routines; the
+current 39,373 came from a re-extraction (+43 routines). Residual questions
+about the exact count are tracked as T-001 (§7).
 
 ### 1.2 Authoritative metadata layer — "what VistA itself knows"
 
@@ -32,12 +41,17 @@ Extracted from four FileMan files via MUMPS `VMDUMP*.m` routines.
 
 | File | Source | Rows | Columns | Contents |
 |---|---|---|---|---|
-| `vista-file-9-8.tsv` | File 9.8 (ROUTINE) | 30,665 | 6 | Kernel's routine registry — name, type, size, rsum, checksum |
-| `rpcs.tsv` | File 8994 (REMOTE PROCEDURE) | 4,501 | 8 | RPC Broker registry — name, tag, routine, return_type, availability, inactive, version |
-| `options.tsv` | File 19 (OPTION) | 13,163 | 8 | Menu options — name, menu_text, type (R/M/A/B/...), package, routine_raw, tag, routine |
-| `protocols.tsv` | File 101 (PROTOCOL) | 6,556 | 7 | Order Entry protocols — name, item_text, type (A/M/E/S/L/...), package, entry_action, exit_action |
+| `vista-file-9-8.tsv` | File 9.8 (ROUTINE) | 30,665 | 6 | Kernel's routine registry — ien, routine_name, type, byte_size, rsum_value, checksum_value |
+| `rpcs.tsv` | File 8994 (REMOTE PROCEDURE) | 4,501 | 12 | RPC Broker registry — ien, name, tag, routine_name, return_type, return_type_label, availability, inactive, inactive_label, version, package, package_dir |
+| `options.tsv` | File 19 (OPTION) | 13,163 | 9 | Menu options — ien, name, menu_text, type (R/M/A/B/...), package, routine_raw, tag, routine_name, package_dir |
+| `protocols.tsv` | File 101 (PROTOCOL) | 6,556 | 8 | Order Entry protocols — ien, name, item_text, type (A/M/E/S/L/...), package, entry_action, exit_action, package_dir |
 
-These four are the *authoritative role signals* for routines. A routine listed in `rpcs.tsv.routine` IS an RPC entry point. A routine listed in `options.tsv.routine` with `type=R` IS a menu-invokable action. No heuristic interpretation needed.
+Registry conventions (schema_v1): every registry dump leads with the FileMan
+`ien`; coded fields get a decoded `*_label` companion (e.g. `return_type` "1"
+↔ `return_type_label` "SINGLE VALUE"); the P1–P4 package-association columns
+(`package`, `package_dir`) are described in §7b.
+
+These four are the *authoritative role signals* for routines. A routine listed in `rpcs.tsv.routine_name` IS an RPC entry point. A routine listed in `options.tsv.routine_name` with `type=R` IS a menu-invokable action. No heuristic interpretation needed.
 
 ### 1.3 Relationships layer — "how things connect"
 
@@ -45,9 +59,9 @@ Regex-based extraction from `.m` source and FileMan-stored MUMPS text.
 
 | File | Rows | Columns | Contents |
 |---|---|---|---|
-| `routine-calls.tsv` | 241,309 | 6 | Routine → routine edges (DO/GOTO/JOB/$$): caller_name, caller_package, callee_tag, callee_routine, kind, ref_count |
-| `routine-globals.tsv` | 77,838 | 4 | Routine → subscripted-global edges: routine_name, package, global_name, ref_count |
-| `protocol-calls.tsv` | 5,081 | 7 | Protocol ENTRY/EXIT ACTION → routine invocations |
+| `routine-calls.tsv` | 241,781 | 6 | Routine → routine edges (DO/GOTO/JOB/$$): caller_routine, caller_package, callee_tag, callee_routine, kind, ref_count |
+| `routine-globals.tsv` | 77,939 | 4 | Routine → subscripted-global edges: routine_name, package, global_name, ref_count |
+| `protocol-calls.tsv` | 5,081 | 7 | Protocol ENTRY/EXIT ACTION → routine invocations: protocol_name, protocol_package, action_kind, callee_tag, callee_routine, call_kind, ref_count |
 
 These are approximate (regex, not parsed MUMPS) but broad-coverage — they include routines that XINDEX can't process (the T-002 cohort of ~10,000 routines not in `$ydb_routines` paths).
 
@@ -57,11 +71,11 @@ From XINDEX, VistA's own static analyzer (Toolkit XT*7.3*158, VEHU blend per RF-
 
 | File | Rows | Columns | Contents |
 |---|---|---|---|
-| `xindex-routines.tsv` | 29,098 | 6 | Per-routine: line_count, tag_count, xref_count, error_count, rsum_value |
-| `xindex-errors.tsv` | 6,918 | 5 | One row per error instance across 66 error classes (F/S/W/I severity) |
-| `xindex-xrefs.tsv` | 214,011 | 3 | Authoritative call graph (MUMPS parser, not regex) |
-| `xindex-tags.tsv` | 292,148 | 3 | Tag/label inventory with Supported Entry Point classification |
-| `xindex-validation.tsv` | 29,098 | 14 | Per-routine join of regex vs XINDEX — line/tag/callee agreement |
+| `xindex-routines.tsv` | 29,097 | 6 | Per-routine: routine_name, line_count, tag_count, xref_count, error_count, rsum_value |
+| `xindex-errors.tsv` | 6,907 | 5 | One row per error instance across 66 error classes (F/S/W/I severity): routine_name, entry_index, line_text, tag_offset, error_text |
+| `xindex-xrefs.tsv` | 214,101 | 3 | Authoritative call graph (MUMPS parser, not regex): routine_name, ref, location_list |
+| `xindex-tags.tsv` | 292,138 | 3 | Tag/label inventory with Supported Entry Point classification: routine_name, tag, data |
+| `xindex-validation.tsv` | 29,097 | 14 | Per-routine join of regex vs XINDEX — routine_name, package, lines_ours, lines_xindex, lines_match, tags_ours, tags_xindex, tags_match, callees_ours_count, callees_xindex_count, callees_match_count, callees_ours_only_count, callees_xindex_only_count, callees_agreement_ratio |
 
 XINDEX is the ground-truth reference. Our regex extractions validated at 100% for static features and 98.75% for call graph.
 
@@ -69,8 +83,8 @@ XINDEX is the ground-truth reference. Our regex extractions validated at 100% fo
 
 | File | Rows | Columns | Contents |
 |---|---|---|---|
-| `package-data.tsv` | 3,138 | 7 | ZWR exports under `Packages/*/Globals/`: package, kind (file/global), file_number, chunk, entity_name, source_path, byte_size |
-| `package-piks-summary.tsv` | 120 | 7 | Per-package PIKS distribution of shipped files (joins against `data-model/piks.tsv`) |
+| `package-data.tsv` | 3,140 | 7 | ZWR exports under `Packages/*/Globals/`: package, kind (file/global), file_number, chunk, entity_name, source_path, byte_size |
+| `package-piks-summary.tsv` | 120 | 7 | Per-package PIKS distribution of shipped files (joins against `data-model/piks.tsv`): package, p_files, i_files, k_files, s_files, unclassified, total_distinct_files |
 
 This is the code↔data bridge at the package level (ADR-045 Phase 2c/2d).
 
@@ -78,9 +92,9 @@ This is the code↔data bridge at the package level (ADR-045 Phase 2c/2d).
 
 | File | Rows | Columns | Contents |
 |---|---|---|---|
-| `routines-comprehensive.tsv` | 39,330 | 20 | Per-routine join of all prior layers: identity + static features + role signals + call graph + globals |
-| `package-manifest.tsv` | 175 | 13 | Per-package join: counts, shipped-data PIKS, role counts, edge counts, cross-package coupling |
-| `package-edge-matrix.tsv` | 1,872 | 5 | Sparse (source_package, dest_package) matrix of call edges |
+| `routines-comprehensive.tsv` | 39,373 | 20 | Per-routine join of all prior layers: routine_name, package, source_path, line_count, byte_size, tag_count, comment_line_count, version_line, is_percent_routine, in_file_9_8, file_9_8_type, rpc_count, option_count, protocol_invoked_count, out_degree, in_degree, out_calls_total, in_calls_total, distinct_globals_touched, global_ref_total |
+| `package-manifest.tsv` | 175 | 13 | Per-package join: package, routine_count, total_lines, files_shipped, p_files, i_files, k_files, s_files, rpc_routines, option_routines, distinct_globals_touched, outbound_edges, outbound_cross_pkg |
+| `package-edge-matrix.tsv` | 1,875 | 5 | Sparse call-edge matrix: source_package, dest_package, call_edges, distinct_caller_routines, distinct_callee_routines |
 
 These are the **primary analytical artifacts**. Everything else feeds these. Answering questions like "which routines are RPCs in Lab Service that touch patient data" is a direct query over these three files.
 
@@ -140,7 +154,7 @@ Every touched routine has its patch list appended: `;;7.3;KERNEL;**20,27,48,...,
 
 ### 2.5 How our artifacts reflect the framework
 
-Mapping the 19 code-model files back to VistA's framework:
+Mapping the 20 code-model files back to VistA's framework:
 
 | VistA concept | Primary artifact | Secondary |
 |---|---|---|
@@ -407,13 +421,13 @@ Several of these "gaps" are now *recoverable* from the artifacts we built:
 
 - **Call graph** (`routine-calls.tsv` + `xindex-xrefs.tsv`) — VistA developers don't have this visualized; we do.
 - **Package coupling matrix** (`package-edge-matrix.tsv`) — reveals the architecture.
-- **Code-quality hotspots** (`xindex-errors.tsv`) — 6,918 ranked issues across 66 classes.
+- **Code-quality hotspots** (`xindex-errors.tsv`) — 6,907 ranked issues across 66 classes.
 - **Role intersection** (RF-024's 7-cell matrix) — which routines back RPC + option + protocol surfaces.
 - **Cross-package PIKS flow** — `package-manifest.tsv` tells you which packages own which PIKS of data.
 - **Dead-code candidates** (T-003's 14,658 "truly unreferenced" cohort) — something a conventional IDE's "unused function" linter would give for free.
 - **Dependency DAG** (derived from `package-edge-matrix.tsv`) — not declared by VistA itself.
 
-**Our code-model is, in effect, the metadata layer a full-stack developer assumes the language ecosystem provides for free.** We had to build it by scanning 39,330 `.m` files and correlating against FileMan's own metadata files. That this was necessary is itself evidence of the framework gap.
+**Our code-model is, in effect, the metadata layer a full-stack developer assumes the language ecosystem provides for free.** We had to build it by scanning 39,373 `.m` files and correlating against FileMan's own metadata files. That this was necessary is itself evidence of the framework gap.
 
 ---
 
@@ -421,9 +435,12 @@ Several of these "gaps" are now *recoverable* from the artifacts we built:
 
 Quick patterns for common questions.
 
-### "Which routines does the Lab Service package expose to CPRS via RPC?"
+### "Which routines does a package expose to CPRS via RPC?"
 ```bash
-awk -F'\t' 'NR>1 && $2=="Lab Service" && $12+0>0 {print $1, $12}' \
+# $2=package, $12=rpc_count. Note: pick a package that actually registers
+# RPCs — clinical RPCs mostly live under Order Entry Results Reporting
+# (ORW*), not the clinical package itself (Lab Service registers none).
+awk -F'\t' 'NR>1 && $2=="Order Entry Results Reporting" && $12+0>0 {print $1, $12}' \
   vista/export/code-model/routines-comprehensive.tsv
 ```
 

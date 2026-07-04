@@ -252,9 +252,12 @@ Two heuristics:
 - **One real global with high ref-count = a domain operator.** That
   global is what the routine is *about*.
 
-Once a hover provider lands ([Tier A in extension internals](vscode-extension-internals.md#71-tier-a--hoverprovider-highest-leverage)),
-hovering a global will surface its FileMan file number, file name,
-and **PIKS class** (P/I/K/S). Until then, look up by hand:
+Since extension 0.2.0
+([Tier A in extension internals](vscode-extension-internals.md#71-tier-a--hoverprovider-shipped-in-020), shipped),
+hovering a `^GLOBAL` surfaces who references it plus its FileMan file
+number, file name, and **PIKS class** — e.g. `^DPT` → File 2 PATIENT
+— PIKS **P** (Patient, auto). The CLI equivalent, when you're already
+in the terminal:
 
 ```bash
 vista-meta file 2          # ^DPT → File 2 (PATIENT)
@@ -275,9 +278,10 @@ vista-meta where EN^PSOVCC1     # is this tag an RPC entrypoint?
 vista-meta search "PSOVCC1" --tags-only
 ```
 
-(A future
-[hover provider](vscode-extension-internals.md#71-tier-a--hoverprovider-highest-leverage)
-will do this inline — for now use the terminal.)
+(The shipped
+[hover provider](vscode-extension-internals.md#71-tier-a--hoverprovider-shipped-in-020)
+shows a tag's external callers inline; RPC / Option exposure hover is
+still on the roadmap — for that, use the terminal.)
 
 The three exposure surfaces:
 
@@ -307,12 +311,12 @@ Severity icons:
 If the sidebar shows a Fatal, **stop and read it before changing
 anything else**. Fatals are rare and almost always real.
 
-**PIKS classification of touched globals** — once hover lands. Until
-then, the rule of thumb: any routine that touches `^DPT`, `^PS(...)`
-clinical, `^OR(...)`, or any patient-keyed global needs more care
-than one that touches only system globals. The data-model TSVs
-(`vista/export/data-model/files.tsv`, `piks.tsv`) have the full
-classification.
+**PIKS classification of touched globals** — hover any `^GLOBAL` in
+the source (0.2.0). The rule of thumb it enforces: any routine that
+touches `^DPT`, `^PS(...)` clinical, `^OR(...)`, or any patient-keyed
+global needs more care than one that touches only system globals. The
+data-model TSVs (`vista/export/data-model/files.tsv`, `piks.tsv`)
+have the full classification the hover reads.
 
 **Git history** — VSCode's source control panel and inline blame
 (enable `git.blame.editorDecoration.enabled`):
@@ -341,7 +345,7 @@ to which layer it serves and whether it's available today.
 | **Outline view** | L2 | proposed (Tier B) | `Ctrl+Shift+E` → Outline; or `Ctrl+Shift+O` |
 | **Workspace symbol search** | L2 cross-routine | proposed (Tier C) | `Ctrl+T` |
 | **VISTA ROUTINE Callers / Callees / Globals** | L3 | available | Explorer sidebar |
-| **Hover (routine, tag, ^GLOBAL with PIKS)** | L1, L3, L4 | proposed (Tier A) | hover the cursor over an identifier |
+| **Hover (routine, TAG^RTN, tag, ^GLOBAL with PIKS)** | L1, L3, L4 | **available (0.2.0)** | hover the cursor over an identifier |
 | **Go to Definition (`Ctrl+Click`)** | L3 | proposed (Tier B) | `Ctrl+Click` on `TAG^ROUTINE` |
 | **References / Find All** | L3 | partly: workspace search works today | `Ctrl+Shift+F` for now |
 | **VISTA ROUTINE XINDEX section** | L5 | available | Explorer sidebar (auto-expanded) |
@@ -356,10 +360,11 @@ to which layer it serves and whether it's available today.
 | **Workspace search with regex** | layer-agnostic | available | `Ctrl+Shift+F`, regex on |
 | **File search (`Ctrl+P`)** | navigation | available | type partial routine name |
 
-The sidebar covers L1–L3 + L5 today. The proposed
-[hover provider](vscode-extension-internals.md#71-tier-a--hoverprovider-highest-leverage)
-brings that information **into the editor itself** — the
-single highest-leverage addition for cognitive-load reduction.
+The sidebar covers L1–L3 + L5 today, and since 0.2.0 the
+[hover provider](vscode-extension-internals.md#71-tier-a--hoverprovider-shipped-in-020)
+brings that information **into the editor itself** — routine cards,
+tag callers, and the `^GLOBAL` → FileMan → PIKS join, without leaving
+the code.
 
 ### 4.1 Built-in features worth turning on for VistA reading
 
@@ -425,7 +430,7 @@ VSCode keybindings (`Ctrl+K Ctrl+S` → search command):
 | Toggle terminal | `Ctrl+\`` | (default) gets the CLI in front of you in 1 keystroke |
 | Reveal active file in Explorer | `Ctrl+K R` | lets you eyeball the package directory |
 | Go to Symbol | `Ctrl+Shift+O` | once Outline lands (Tier B) |
-| Reload TSVs | bind `vistaMeta.reloadTsvs` | useful right after `make routines-comprehensive` |
+| Reload TSVs | bind `vistaCompass.reloadTsvs` | useful right after `make routines-comprehensive` |
 
 Half of VistA reading is shell work. Make the shell one keystroke
 away.
@@ -553,7 +558,7 @@ VistA has specific gotchas that burn time if you don't know them.
 |---|---|---|
 | **Reading top-to-bottom** | You spend 20 minutes on a 500-line routine and still don't know what it does | Always do the fingerprint (§2) first. The body is the last thing to read, not the first. |
 | **Trusting names** | "PSOZZZ — must be a placeholder?" Actually a real Pharmacy utility. | Names are 8 chars and historically encoded. Treat them as opaque tokens until L1–L3 give them meaning. |
-| **Confusing `^GLOBAL` and `^ROUTINE`** | `^XUSCLEAN` could be either | The lookup is unambiguous: if it's in `routines.tsv`, it's a routine; otherwise it's a global. The proposed [hover](vscode-extension-internals.md#71-tier-a--hoverprovider-highest-leverage) decides for you. |
+| **Confusing `^GLOBAL` and `^ROUTINE`** | `^XUSCLEAN` could be either | The lookup is unambiguous: if it's in the routine inventory, it's a routine; otherwise it's a global. The 0.2.0 [hover](vscode-extension-internals.md#71-tier-a--hoverprovider-shipped-in-020) decides for you — hover the token and it renders a routine card or a global card. |
 | **Ignoring `in=0`** | "Dead code, skip" | Check L4 first. RPCs, Options, and Protocols invoke from outside the M call graph — `in=0` plus `RPC×N` or `OPT×N` is a live entrypoint. |
 | **Treating numeric tags as line numbers** | `D 430` looks like a typo for line 430 | Numeric tags are real label names, often historic state-machine entries. They're rarely safe to rename. |
 | **Editing line 2** | Adding a patch reference, hand-editing the version | Line 2 is parsed by the KIDS installer. Never hand-edit; use the patch tooling (`~/projects/py-kids-vc/`). |
@@ -561,7 +566,7 @@ VistA has specific gotchas that burn time if you don't know them.
 | **Treating XINDEX `S` (Style) as "noise"** | Shipping `LOCK ^X` without timeout because legacy does it | Legacy is grandfathered. New code must pass — the [pre-commit hook](vista-vscode-guide.md#5-the-pre-commit-hook) enforces it. |
 | **`xecute` callees in the sidebar** | Treating `XECUTE` targets as real callees | They're dynamic — string assembled at runtime. May not exist on this system. The `kind` column flags them. |
 | **Ignoring the `^TMP` / `^XTMP` distinction** | Worrying about state in scratch globals | `^TMP` is per-job, dies with the process; `^XTMP` is system-temp with explicit expiration. Neither is "real" data. |
-| **Multi-root workspace** | Sidebar inexplicably empty | Extension reads from the first workspace folder only. Open `vista-meta` as the sole folder. |
+| **Multi-root workspace** | Sidebar inexplicably empty | Since 0.2.0 the extension walks up from the active file (then each workspace folder) to find the data root, so this is rare. If it still happens, set `vistaCompass.dataPath` to an absolute data-root path. |
 
 ---
 
@@ -584,7 +589,7 @@ cd vscode-extension
 npm install --ignore-scripts
 npx tsc -p .
 npx vsce package --no-dependencies --skip-license --allow-missing-repository
-code --install-extension vista-meta-0.1.0.vsix
+code --install-extension vista-compass-0.2.0.vsix
 
 # 4. Sanity
 vista-meta doctor          # all [ok]
@@ -599,7 +604,7 @@ vista-meta doctor          # all [ok]
   "editor.occurrencesHighlight": "singleFile",
   "editor.wordWrap": "on",
   "editor.wordWrapColumn": 132,
-  "vistaMeta.topN": 25,
+  "vistaCompass.topN": 25,
   "files.associations": { "*.m": "mumps" }
 }
 ```
@@ -611,8 +616,8 @@ vista-meta doctor          # all [ok]
 | `workbench.action.terminal.toggleTerminal` | `Ctrl+\`` (default) | one-keystroke shell |
 | `workbench.action.gotoSymbol` | `Ctrl+Shift+O` (default) | tag jump (Tier B) |
 | `workbench.action.showAllSymbols` | `Ctrl+T` (default) | workspace tag search (Tier C) |
-| `vistaMeta.reloadTsvs` | unbound — bind to `Ctrl+Alt+R` | after a TSV regen |
-| `vistaMeta.refresh` | unbound — bind to `Ctrl+Alt+F5` | after switching branches |
+| `vistaCompass.reloadTsvs` | unbound — bind to `Ctrl+Alt+R` | after a TSV regen |
+| `vistaCompass.refresh` | unbound — bind to `Ctrl+Alt+F5` | after switching branches |
 
 **Optional but high-payoff extensions** from the marketplace
 (orthogonal to vista-meta — none required):

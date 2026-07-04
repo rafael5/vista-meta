@@ -216,21 +216,33 @@ PSOVCC1 and PSOVCC2 — they're the same conversation continued.
 
 "This routine calls into other packages — how heavily?"
 
+`routine-calls.tsv` has **no callee-package column** — its six
+columns are `caller_routine`, `caller_package`, `callee_tag`,
+`callee_routine`, `kind`, `ref_count`. The callee's package has to be
+joined in from `routines-comprehensive.tsv` (routine → package),
+which is what the first file in this two-file awk does:
+
 ```bash
 awk -F'\t' -v p="Outpatient Pharmacy" '
-  NR==1 { next }
-  $2==p && $2 != $7 { ext[$1]++ }
-  $2==p             { tot[$1]++ }
+  NR==FNR { if (FNR>1) pkg[$1]=$2; next }
+  FNR==1 { next }
+  $2==p {
+    tot[$1]++
+    if (pkg[$4] != p) ext[$1]++
+  }
   END { for (r in tot) printf "%s\t%d\t%d\t%.0f%%\n",
         r, tot[r], ext[r]+0, (ext[r]+0)*100/tot[r] }
-' vista/export/code-model/routine-calls.tsv \
+' vista/export/code-model/routines-comprehensive.tsv \
+  vista/export/code-model/routine-calls.tsv \
   | sort -t$'\t' -k4,4 -n -r \
   | head -20
 ```
 
 (Columns: routine, total calls, external calls, % external.) Routines
 near 100% external are interfaces / shims; near 0% are pure
-internals.
+internals. Callees missing from the inventory (uninstalled or
+dynamically named) count as external — acceptable for a coupling
+scan.
 
 ### 5.4 Test coverage check
 
@@ -284,13 +296,18 @@ The top of this list is where lint debt lives.
 
 ### 5.7 Render the top-N intra-package call graph as Mermaid
 
+Same callee-package join as §5.3 (there is no callee-package column
+in `routine-calls.tsv`):
+
 ```bash
 awk -F'\t' -v p="Outpatient Pharmacy" '
-  NR==1 { next }
-  $2==p && $7==p && $6+0 >= 5 {
+  NR==FNR { if (FNR>1) pkg[$1]=$2; next }
+  FNR==1 { next }
+  $2==p && pkg[$4]==p && $6+0 >= 5 {
     print "  " $1 " --> " $4
   }
-' vista/export/code-model/routine-calls.tsv \
+' vista/export/code-model/routines-comprehensive.tsv \
+  vista/export/code-model/routine-calls.tsv \
   | sort -u | head -100 \
   | awk 'BEGIN{print "```mermaid"; print "graph LR"} {print} END{print "```"}'
 ```
@@ -337,7 +354,11 @@ routine + tag, grouped by surface:
 
 **Implementation:** Filter `rpcs.tsv`, `options.tsv`, `protocols.tsv`
 where `package = $PKG`. Group by routine, sort alphabetically. ~50
-lines of Python.
+lines of Python. Two schema_v1 gotchas: `package` is **column 11** in
+`rpcs.tsv` (column 5 in `options.tsv` / `protocols.tsv`), and its
+values are the FileMan package name in **UPPERCASE**
+(`OUTPATIENT PHARMACY`) — not the title-case directory name
+(`Outpatient Pharmacy`) used by `routines-comprehensive.tsv`.
 
 ### 6.2 `vista-meta package-graph PKG [--top N] [--scope intra|all]` — Mermaid call graph
 
@@ -420,8 +441,9 @@ dependencies on other packages' data.
 ```
 
 **Implementation:** Filter `routine-calls.tsv` on `caller_package`
-(outbound) and `caller_routine`'s package (inbound, via
-`routines-comprehensive.tsv`). Aggregate by package + top tags.
+(outbound) and on the `callee_routine`'s package (inbound — joined
+via `routines-comprehensive.tsv`, since `routine-calls.tsv` carries
+no callee-package column). Aggregate by package + top tags.
 
 ### 6.6 `vista-meta package-health PKG` — maintenance dashboard
 
@@ -536,7 +558,7 @@ Above line 1 of every `.m` file:
 ```
 
 Clickable to open the relevant scan output. Setting-gated
-(`vistaMeta.codeLens.packageContext: boolean`) — off by default since
+(proposed `vistaCompass.codeLens.packageContext: boolean`) — off by default since
 CodeLens is visually noisy.
 
 ### 7.4 Status bar segment
@@ -547,7 +569,7 @@ context.
 
 ### 7.5 Quick-open within package
 
-Custom command `vistaMeta.quickOpenPackage`:
+Custom command `vistaCompass.quickOpenPackage` (proposed):
 
 1. Determine the package of the active editor's file.
 2. List every routine in that package (from `routines-comprehensive.tsv`).
@@ -614,14 +636,16 @@ PSORX*   18 routines  — prescription operations
 
 Now I know the package decomposes into ~10 features.
 
-**1:00 — public surface.** Until `package-map` lands:
+**1:00 — public surface.** Until `package-map` lands (note: in
+`rpcs.tsv` the `package` column is **11**, and the value is the
+UPPERCASE FileMan package name — see §6.1):
 
 ```bash
-awk -F'\t' '$5=="Outpatient Pharmacy"' \
+awk -F'\t' '$11=="OUTPATIENT PHARMACY"' \
   vista/export/code-model/rpcs.tsv | head
 ```
 
-The 38 RPCs cluster heavily under PSOORNE, PSOLMALL, PSORX*.
+The RPCs cluster heavily under PSOORNE, PSOLMALL, PSORX*.
 Confirms the cluster picture.
 
 **2:00 — coupling.** §5.3:

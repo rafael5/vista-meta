@@ -1,10 +1,16 @@
 # vista-meta — Dependency Manifest
 
-Pinned versions and provenance for every upstream component baked into the
-Docker image. This file always reflects the **current** image; old versions
-are visible in git history.
+Pinned versions for every upstream component baked into the Docker image.
 
-Last updated: 2026-04-18
+**Scope note (2026-07-04):** this manifest records the *declared pins* (versions,
+source URLs, install methods) — those match `docker/Dockerfile` and are kept in
+step with it. The per-build provenance fields (image digest, tarball SHA256s,
+upstream commit hashes) marked "(pin after first successful build)" were never
+back-filled and should be treated as absent, not stale; fill them from a built
+image (`docker inspect`, `pip freeze`, layer logs) if build provenance ever
+matters. Old versions are visible in git history.
+
+Last updated: 2026-07-04 (scope note; pins unchanged since 2026-04-18)
 
 ---
 

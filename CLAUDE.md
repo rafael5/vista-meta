@@ -27,8 +27,8 @@ exposes:
   hooks: [hooks/pre-commit]                # SAC-compliant lint gate
   python_api: []                           # not packaged; host/scripts/ is internal
   formats_produced:
-    - "TSV/data-model/*.tsv"               # 5 TSVs, ~170k rows — PIKS-classified FileMan files
-    - "TSV/code-model/*.tsv"               # 19 TSVs, ~1.0M rows — calls/globals/RPCs/options/protocols/XINDEX
+    - "TSV/data-model/*.tsv"               # 4 TSVs — PIKS-classified FileMan files (schema_version 1)
+    - "TSV/code-model/*.tsv"               # 20 TSVs, ~1.0M rows — calls/globals/RPCs/options/protocols/XINDEX (schema_version 1)
     - "vista/export/RESEARCH.md"           # RF-NNN findings log
 
 consumes:
@@ -84,8 +84,8 @@ artifact set.
 
 | | Artifact | Produces |
 |---|---|---|
-| **A. Data model** | `vista/export/data-model/` (5 TSVs, ~170k rows) | PIKS classification of 8,261 FileMan files at 98.3% coverage; 69,810 field-level annotations; cross-PIKS pointer matrix |
-| **B. Code model** | `vista/export/code-model/` (19 TSVs, ~1.0M rows) | Per-routine intelligence: calls, callers, globals, RPCs, options, protocols, XINDEX findings, package topology |
+| **A. Data model** | `vista/export/data-model/` (4 TSVs) | PIKS classification of every FileMan file (100% coverage via auto + triage + subfile inheritance); field-level annotations; cross-PIKS pointer matrix — counts in the [guide](docs/guides/vista-meta-guide.md) §4 |
+| **B. Code model** | `vista/export/code-model/` (20 TSVs, ~1.0M rows) | Per-routine intelligence: calls, callers, globals, RPCs, options, protocols, XINDEX findings, package topology — per-TSV schema in [code-model-guide](docs/guides/code-model-guide.md) |
 | **1. VSCode extension** | `vscode-extension/` | VISTA ROUTINE sidebar: tags, callers, callees, globals, XINDEX — all from TSV reads, no runtime dependency |
 | **2. CLI + hook + formatter** | `bin/vista-meta`, `bin/mfmt`, `hooks/pre-commit` | doctor, pkg, context, where, callers, search, file, new-test, lint, xindex; SAC-compliant pre-commit gate |
 
@@ -162,23 +162,28 @@ Four orthogonal properties assigned alongside:
 - **Volume**: reference / moderate / high-volume
 
 Implemented by 52 DD-based heuristics (H-01…H-52) across 9 tiers +
-6 non-FM heuristics (G-01…G-06). Coverage: 98.3% (7,886 automatic +
-217 triage, 141 subfiles remaining). Full details:
+6 non-FM heuristics (G-01…G-06). Coverage: 100% of 8,261 files
+(7,904 automatic + 220 triage + 137 subfile-inherited — the
+`piks_source` column distinguishes them). Full details:
 [docs/guides/piks-analysis-guide.md](docs/guides/piks-analysis-guide.md).
 
 ## Code-model layers
 
-Six extraction layers totaling ~1.0M rows across 19 TSVs:
+Six extraction layers totaling ~1.0M rows across 20 TSVs:
 
-1. **Inventory** — `routines.tsv`, `packages.tsv` (39,505 rows)
+1. **Inventory** — `routines.tsv`, `packages.tsv`
 2. **Authoritative metadata** — `vista-file-9-8.tsv`, `rpcs.tsv`,
-   `options.tsv`, `protocols.tsv` (54,885 rows)
+   `options.tsv`, `protocols.tsv`
 3. **Relationships** — `routine-calls.tsv`, `routine-globals.tsv`,
-   `protocol-calls.tsv` (324,228 rows)
-4. **Code quality** — 5 `xindex-*.tsv` files (571,273 rows)
-5. **Data integration** — `package-data.tsv`, `package-piks-summary.tsv`
+   `protocol-calls.tsv`
+4. **Code quality** — 5 `xindex-*.tsv` files
+5. **Data integration** — `package-data.tsv`, `package-piks-summary.tsv`,
+   `package-namespace.tsv`
 6. **Unified** — `routines-comprehensive.tsv` (20 cols/routine),
    `package-manifest.tsv`, `package-edge-matrix.tsv`
+
+(Row counts live in the guide §5.1 and the per-TSV reference —
+they drift with re-extraction; this list is the stable shape.)
 
 Per-TSV reference: [docs/guides/code-model-guide.md](docs/guides/code-model-guide.md).
 

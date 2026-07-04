@@ -151,9 +151,9 @@ CLI + extensions                   globals (named volume)
      │  bake.sh extraction pipeline
      ▼
 vista/export/
-├── data-model/        (5 TSVs, ~170k rows)      ◀── Part A
-├── code-model/        (19 TSVs, ~1.0M rows)     ◀── Part B
-├── RESEARCH.md        (findings RF-001 … RF-033)
+├── data-model/        (4 TSVs, ~87k rows)       ◀── Part A
+├── code-model/        (20 TSVs, ~1.0M rows)     ◀── Part B
+├── RESEARCH.md        (findings RF-001 … RF-034)
 └── .vista-meta-initialized  (bake sentinel)
 
      │
@@ -257,17 +257,19 @@ sites need to make site-specific decisions about.
 
 | Metric | Value |
 |---|---|
-| Files classified automatically (H-01…H-52) | 7,886 (95.7%) |
-| Files classified via manual triage | 217 (2.6%) |
-| **Total coverage** | **8,103 / 8,261 (98.3%)** |
-| Files unclassified (subfiles pending parent) | 141 (1.7%) |
-| Confidence: certain | 61.4% |
-| Confidence: high | 15.9% |
-| Confidence: moderate | 16.1% |
-| Confidence: low | 6.4% |
+| Files classified automatically (H-01…H-52) | 7,904 (95.7%) |
+| Files classified via manual triage | 220 (2.7%) |
+| Subfiles inheriting the parent classification | 137 (1.7%) |
+| **Total coverage** | **8,261 / 8,261 (100%)** |
+
+The `piks_source` column in `piks.tsv` distinguishes the three
+(`auto` / `triage` / `inherited`). Coverage reached 100% when subfile
+inheritance closed the residual gap the earlier 98.3% snapshot carried
+(141 subfiles then awaiting parent triage). Per-file confidence still
+rides in `piks_confidence`.
 
 The triage file ([`piks-triage.tsv`](../../vista/export/data-model/piks-triage.tsv),
-218 rows) records every manual override, each tagged with a
+220 rows) records every manual override, each tagged with a
 research-finding reference (`RF-008` etc.) so the reasoning is
 inspectable.
 
@@ -293,9 +295,10 @@ Five outcomes that did not exist before this project:
    are FileMan-described; 14% are directly-written non-FM (Pharmacy
    PS, Lab LR). First VistA analysis to treat both as first-class.
 
-4. **98.3% classification coverage.** Heuristics alone achieve
-   95.7% with structural evidence; triage closes another 2.6%.
-   Remaining 1.7% is subfiles awaiting parent triage.
+4. **100% classification coverage.** Heuristics alone achieve
+   95.7% with structural evidence; triage closes another 2.7%; the
+   final 1.7% of subfiles inherit their parent's classification
+   (tracked as `piks_source=inherited`).
 
 5. **Site-universal heuristics.** All 58 rules are structural —
    they read `^DD`, global names, package prefixes. No site-specific
@@ -307,11 +310,15 @@ All under [`vista/export/data-model/`](../../vista/export/data-model/):
 
 | File | Rows | Purpose |
 |---|---|---|
-| `files.tsv` | 8,262 | File inventory: #, name, global_root, field_count, pointer topology, PIKS, confidence, evidence |
-| `piks.tsv` | 8,122 | Auto-classified files (VMPIKS output): #, PIKS, method (H-01…H-40), confidence, evidence |
-| `piks-triage.tsv` | 218 | Manual overrides: #, PIKS, method (`manual`/`manual-package`), confidence, RF-NNN |
-| `field-piks.tsv` | 69,810 | Field-level PIKS: file#, field#, data type, pointer target, cross-PIKS flag, sensitivity |
-| `vista-fileman-piks-comprehensive.csv` | 69,840 | Joined 22-column export — every field with every PIKS annotation |
+| `files.tsv` | 8,261 | File inventory: #, name, global_root, parent, field_count, pointer topology, record_count, status |
+| `piks.tsv` | 8,261 | Classification source of truth: #, PIKS, method (H-01…H-52), confidence, evidence, `piks_source` (auto/triage/inherited) |
+| `piks-triage.tsv` | 220 | Manual overrides: #, PIKS, method (`manual`/`manual-package`), confidence, RF-NNN |
+| `field-piks.tsv` | 69,809 | Field-level PIKS: file#, field#, data type, file/ref/cross PIKS, sensitivity flag |
+
+(Shapes are `schema_version: 1` — see
+[`../reference/schema-v1-normalization-spec.md`](../reference/schema-v1-normalization-spec.md).
+The former joined `vista-fileman-piks-comprehensive.csv` was retired by the
+normalization; its annotations live across `piks.tsv` + `field-piks.tsv`.)
 
 Composition: `piks.tsv` + `piks-triage.tsv` = the classification
 source of truth. They merge into `files.tsv` as the `piks`,
@@ -326,17 +333,17 @@ different PIKS category.
 
 ### 5.1 The six extraction layers
 
-Nineteen TSVs organized in six layers, totaling ~1.0M rows, all
+Twenty TSVs organized in six layers, totaling ~1.0M rows, all
 under [`vista/export/code-model/`](../../vista/export/code-model/):
 
 | Layer | Files | Total rows | Source |
 |---|---|---|---|
-| **Inventory** | `routines.tsv`, `packages.tsv` | 39,505 | Disk scan of `vista/vista-m-host/` |
+| **Inventory** | `routines.tsv`, `packages.tsv` | 39,547 | Disk scan of `vista/vista-m-host/` |
 | **Authoritative metadata** | `vista-file-9-8.tsv`, `rpcs.tsv`, `options.tsv`, `protocols.tsv` | 54,885 | FileMan extraction of Files 9.8, 8994, 19, 101 |
-| **Relationships** | `routine-calls.tsv`, `routine-globals.tsv`, `protocol-calls.tsv` | 324,228 | Regex scan of routine source |
-| **Code quality** | `xindex-routines.tsv`, `xindex-errors.tsv`, `xindex-xrefs.tsv`, `xindex-tags.tsv`, `xindex-validation.tsv` | 571,273 | XINDEX (VA's official MUMPS analyzer) via VMXIDX bridge |
-| **Data integration** | `package-data.tsv`, `package-piks-summary.tsv` | 3,258 | ZWR scans + PIKS joins |
-| **Unified** | `routines-comprehensive.tsv`, `package-manifest.tsv`, `package-edge-matrix.tsv` | 41,377 | Multi-way joins over the preceding layers |
+| **Relationships** | `routine-calls.tsv`, `routine-globals.tsv`, `protocol-calls.tsv` | 324,801 | Regex scan of routine source |
+| **Code quality** | `xindex-routines.tsv`, `xindex-errors.tsv`, `xindex-xrefs.tsv`, `xindex-tags.tsv`, `xindex-validation.tsv` | 571,340 | XINDEX (VA's official MUMPS analyzer) via VMXIDX bridge |
+| **Data integration** | `package-data.tsv`, `package-piks-summary.tsv`, `package-namespace.tsv` | 3,434 | ZWR scans + PIKS joins + the Packages.csv namespace/VDL bridge |
+| **Unified** | `routines-comprehensive.tsv`, `package-manifest.tsv`, `package-edge-matrix.tsv` | 41,423 | Multi-way joins over the preceding layers |
 
 Each layer is individually reproducible from `make` targets:
 `make sync-routines`, `make inventory`, `make xindex`,
@@ -460,7 +467,7 @@ has, historically, required weeks of manual review.
 > (pip-installable as `kids-vc`). Its full guide, history, and
 > ADR-046 (pre-install snapshot for undo) live there now.
 
-### 7.1 The VSCode extension — situational awareness for 40,000 routines
+### 7.1 The VSCode extension (VistA Compass) — situational awareness for 40,000 routines
 
 **The problem.** Opening `PRCA45PT.m` in any modern editor shows
 you 74 lines of MUMPS. It shows you nothing about: who calls this
@@ -539,6 +546,27 @@ Alongside the CLI:
 
 Full reference: [docs/vista-vscode-guide.md](vista-vscode-guide.md)
 §§3–5.
+
+### 7.3 The data release — `vista-meta-data-v1` (schema_version 1)
+
+The two models ship as a **public, verifiable data release**, produced by the
+producer-contracts workstream (2026-07-03):
+
+- **Contract:** every TSV shape is frozen as `schema_version: 1` —
+  [`../reference/schema-v1-normalization-spec.md`](../reference/schema-v1-normalization-spec.md)
+  (canonical `routine_name` keys, `_label` enum companions, leading `ien`,
+  `Y/N` booleans, the P1–P4 `package`/`package_dir` columns). Column
+  drift from here is a v2 break, red-gated by `make validate`.
+- **Release:** GitHub Release `data-v1` on `rafael5/vista-meta` — bundle +
+  standalone manifest with per-file sha256, a normative `content_hash`
+  data fingerprint, and the engine identity. Record:
+  [`../releases/data-v1.manifest.json`](../releases/data-v1.manifest.json).
+- **Peer pin (Gate R):** the vdocs corpus release (`vdocs-data:data-v1`)
+  measured its entity-quality floors against this data and the two releases
+  pin each other — [`../releases/data-v1-peers.json`](../releases/data-v1-peers.json).
+- **Consumers:** the Compass extension (§7.1) auto-discovers either the live
+  `vista/export/` tree or an unpacked `vista-meta-data-v1` bundle and shows
+  the data vintage (`data-v1 · content_hash…`) in its sidebar.
 
 ---
 

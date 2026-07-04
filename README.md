@@ -21,8 +21,8 @@ artifact set.
 
 | | Artifact | Produces |
 |---|---|---|
-| **A. Data model** | `vista/export/data-model/` (5 TSVs, ~170k rows) | PIKS classification of 8,261 FileMan files at 98.3% coverage; 69,810 field-level annotations; cross-PIKS pointer matrix |
-| **B. Code model** | `vista/export/code-model/` (19 TSVs, ~1.0M rows) | Per-routine intelligence: calls, callers, globals, RPCs, options, protocols, XINDEX findings, package topology |
+| **A. Data model** | `vista/export/data-model/` (4 TSVs) | PIKS classification of every FileMan file (100% coverage via auto + triage + subfile inheritance); field-level annotations; cross-PIKS pointer matrix — counts in the [guide](docs/guides/vista-meta-guide.md) §4 |
+| **B. Code model** | `vista/export/code-model/` (20 TSVs, ~1.0M rows) | Per-routine intelligence: calls, callers, globals, RPCs, options, protocols, XINDEX findings, package topology — per-TSV schema in [code-model-guide](docs/guides/code-model-guide.md) |
 | **1. VSCode extension** | `vscode-extension/` | VISTA ROUTINE sidebar: tags, callers, callees, globals, XINDEX — all from TSV reads, no runtime dependency |
 | **2. CLI + hook + formatter** | `bin/vista-meta`, `bin/mfmt`, `hooks/pre-commit` | doctor, pkg, context, where, callers, search, file, new-test, lint, xindex; SAC-compliant pre-commit gate |
 
@@ -100,7 +100,7 @@ Every FileMan file and non-FM global is classified into:
 with four orthogonal properties: volatility, sensitivity,
 portability, volume. Implemented by 52 DD-based heuristics
 (H-01…H-52) across 9 tiers + 6 non-FM heuristics (G-01…G-06).
-Coverage: 98.3%. Full details in
+Coverage: 100% (auto + triage + subfile inheritance). Full details in
 [docs/guides/piks-analysis-guide.md](docs/guides/piks-analysis-guide.md).
 
 ## License

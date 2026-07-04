@@ -104,7 +104,7 @@ npm install --ignore-scripts
 npx tsc -p .
 npx vsce package --no-dependencies --skip-license \
                  --allow-missing-repository
-code --install-extension vista-meta-0.1.0.vsix
+code --install-extension vista-compass-0.2.0.vsix
 ```
 
 Reload VSCode. Open any `.m` file in the `vista-meta` workspace —
@@ -205,7 +205,7 @@ renders this, with every section expanded:
 | | Pointing to | What it is |
 |---|---|---|
 | **❶** | Activity Bar Explorer icon | Click to open the file sidebar. Keyboard: `Ctrl+Shift+E`. |
-| **❷** | VISTA ROUTINE panel title | Contributed by the vista-meta extension; the `⟳` icon runs `vista-meta: Refresh Routine Sidebar` (use after regenerating TSVs or switching branches). |
+| **❷** | VISTA ROUTINE panel title | Contributed by the VistA Compass extension; the `⟳` icon runs `VistA Compass: Refresh Routine Sidebar` (use after regenerating TSVs or switching branches). |
 | **❸** | Header node | Routine name, package in brackets, stats pulled from `routines-comprehensive.tsv` (line count, in-degree, out-degree, plus `RPC×N` / `OPT×N` when nonzero). |
 | **❹** | Tags (N) | Labels parsed from the file on disk. Click a tag → reveal its line. |
 | **❺** | Callees (N) | Routines this one calls, aggregated from `routine-calls.tsv`, sorted by ref-count. Click → open the target routine. |
@@ -215,7 +215,7 @@ renders this, with every section expanded:
 Sections with zero entries are hidden entirely. PRCA45PT has
 `in_degree=0`, so no **Callers** section renders — it's not a bug.
 All sections except XINDEX start collapsed; click the `▸` twisty to
-open. Top-N per section is 15 (configurable via `vistaMeta.topN`).
+open. Top-N per section is 15 (configurable via `vistaCompass.topN`).
 
 ### 2.2 Reading the sidebar — VistA terminology primer
 
@@ -298,15 +298,15 @@ Every clickable sidebar item acts as go-to-definition:
 
 Run from the command palette (`Ctrl+Shift+P`):
 
-- **`vista-meta: Refresh Routine Sidebar`** — re-analyze the active
-  file. Use after regenerating TSVs or switching branches.
-- **`vista-meta: Reload Code-Model TSVs`** — invalidate the
+- **`VistA Compass: Refresh Routine Sidebar`** — re-analyze the
+  active file. Use after regenerating TSVs or switching branches.
+- **`VistA Compass: Reload Code-Model TSVs`** — invalidate the
   in-memory TSV cache. Run after `make sync-routines && make
   routines-comprehensive`.
 
 ### 2.5 Settings
 
-`Preferences → Settings → Extensions → vista-meta`:
+`Preferences → Settings → Extensions → VistA Compass`:
 
 | Key | Default | Purpose |
 |---|---|---|
@@ -336,7 +336,7 @@ cd vscode-extension
 npx tsc -p .
 npx vsce package --no-dependencies --skip-license \
                  --allow-missing-repository
-code --install-extension vista-meta-0.1.0.vsix --force
+code --install-extension vista-compass-0.2.0.vsix --force
 ```
 
 Reload VSCode to pick up the new version.
@@ -868,10 +868,13 @@ git add <files>
 
 ### Extension not finding the workspace TSVs
 
-Extension reads from the first workspace folder only. If you have a
-multi-folder workspace, set `vistaMeta.codeModelPath` absolutely
-(though the option isn't designed for that — easier to open
-`vista-meta` as the sole folder).
+Since 0.2.0 the extension auto-discovers the data root by walking up
+from the active file (then from each workspace folder), so
+multi-folder workspaces and parent workspaces like `~/projects`
+normally just work. If discovery still fails, set
+`vistaCompass.dataPath` to an absolute path to a data root — a
+directory holding `code-model/` + `data-model/` (the repo's
+`vista/export`, or an unpacked `vista-meta-data-v1` bundle).
 
 ---
 

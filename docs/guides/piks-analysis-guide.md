@@ -3,9 +3,15 @@
 Classification results and analytical findings from the vista-meta
 PIKS classification of VEHU's FileMan data structures.
 
-Last updated: 2026-04-19
-Spec: docs/vista-meta-spec-v0.4.md § 11
-Research log: vista/export/RESEARCH.md (RF-001 through RF-027)
+Last updated: 2026-07-04
+Research log: [vista/export/RESEARCH.md](../../vista/export/RESEARCH.md) (RF-001 through RF-027)
+
+> **Data provenance.** The data described here is `schema_version: 1` —
+> contract: [schema-v1-normalization-spec.md](../reference/schema-v1-normalization-spec.md);
+> shipped as the vista-meta-data-v1 release
+> ([data-v1.manifest.json](../releases/data-v1.manifest.json)).
+> The heuristic catalog (H-01 … H-52) lives in
+> [model-extraction-contract.md](../reference/model-extraction-contract.md) § 11.4–11.6.
 
 ---
 
@@ -118,14 +124,24 @@ logical, physical) inherits from it.
 ### 2.1 By file count (8,261 files)
 
 ```
-  P (Patient)      3,203  37.2%  ████████████████████████▌
-  I (Institution)  2,896  34.9%  ██████████████████████▊
-  K (Knowledge)    1,140  13.3%  ████████▋
-  S (System)         881  10.2%  ██████▋
-  (unclassified)     141   1.7%  █▏
+  P (Patient)      3,277  39.7%  █████████████████████████
+  I (Institution)  2,906  35.2%  ██████████████████████▏
+  K (Knowledge)    1,165  14.1%  ████████▉
+  S (System)         913  11.1%  ███████
                    ─────
                    8,261
 ```
+
+Coverage is 100%: all 8,261 files carry a classification — 7,904
+automatic (H-heuristics), 220 human triage, and 137 inherited from
+their parent file's classification. The `piks_source` column in
+`piks.tsv` (`auto` / `triage` / `inherited`) distinguishes the three.
+
+> **History**: earlier revisions of this guide reported 98.3% coverage
+> (8,120 classified, 141 subfiles remaining). That gap was closed by
+> subfile inheritance — the remaining subfiles now inherit their
+> parent file's classification (`piks_source = inherited`, 137 files),
+> with the rest resolved in triage — not by new heuristics.
 
 ### 2.2 By field count (69,809 fields)
 
@@ -141,6 +157,8 @@ logical, physical) inherits from it.
 Institution dominates by field count because File 200 (NEW PERSON)
 has 203 fields and 1,551 entries, with many subfiles — the
 provider/staff data structure is wider than most clinical files.
+(10 of the 69,809 fields belong to local/test files outside the
+classified inventory and carry no file PIKS.)
 
 ### 2.3 By record count (top 10 largest tables)
 
@@ -164,7 +182,7 @@ RxNorm, ICD) account for the bulk of the database by row volume.
 
 ## 3. Classification methodology
 
-### 3.1 Automated heuristics (95.7% of files)
+### 3.1 Automated heuristics (7,904 files, 95.7%)
 
 ```
   H-05  (subfile inherit)     4,869  ████████████████████████████████████████
@@ -187,29 +205,38 @@ RxNorm, ICD) account for the bulk of the database by row volume.
 ### 3.2 By confidence level
 
 ```
-  Certain    4,999  61.4%  ████████████████████████████████████████
-  Moderate   1,311  16.1%  ██████████▌
-  High       1,293  15.9%  ██████████▍
-  Low          517   6.4%  ███▍
+  Certain    4,999  60.5%  ████████████████████████████████████████
+  Moderate   1,446  17.5%  ███████████▌
+  High       1,293  15.7%  ██████████▎
+  Low          523   6.3%  ████▏
              ─────
-             8,120  classified
+             8,261  classified (100%)
 ```
 
-### 3.3 Manual triage (4.3% of files)
+### 3.3 Manual triage (220 files, 2.7%)
 
-| Triage category | Count | Method |
+| `piks_method` | Count | Method |
 |---|---|---|
-| B (package batch) | 174 | Global prefix → known package → PIKS |
-| C (individual) | 42 | Domain knowledge, file name, pointer analysis |
-| A (vestigial) | 1 | Empty file, no pointers → S |
+| `manual-package` | 176 | Global prefix → known package → PIKS (batch) |
+| `manual` | 36 | Individual: domain knowledge, file name, pointer analysis |
+| `manual-orphan` | 4 | Orphan files — no pointers, no package |
+| `manual-vestigial` | 4 | Empty/vestigial files → S |
+
+A further 137 subfiles (1.7%) carry `piks_method = inherited-parent`:
+they take their parent file's classification directly rather than
+being triaged or heuristic-matched.
 
 ### 3.4 Traceability
 
-Every classification records:
-- `piks_method`: which heuristic (H-01 to H-40) or `manual`/`manual-package`
+Every classification in `piks.tsv` records:
+- `piks_method`: which heuristic (H-01 … H-52, catalog in the
+  contract § 11.4–11.6; this VEHU run fired H-01 through H-40) or
+  `manual` / `manual-package` / `manual-orphan` / `manual-vestigial`
+  / `inherited-parent`
 - `piks_evidence`: the specific data that triggered it
+- `piks_source`: `auto` / `triage` / `inherited`
 
-Example: File 52 (PRESCRIPTION) → `piks=P, method=H-06, evidence=field=.02 PATIENT points to file 2`
+Example: File 52 (PRESCRIPTION) → `piks=P, method=H-06, confidence=high, evidence=field=2 PATIENT points to file 2, source=auto`
 
 ---
 
@@ -342,8 +369,9 @@ File 200 is VistA's most-referenced file and a critical PIKS finding.
   Programmers     37  ██▍
 ```
 
-**Impact of reclassification**: S category dropped from 32% to 10%.
-Cross-PIKS S→P dropped from 461 to 36. The original S classification
+**Impact of reclassification**: S category dropped from 32% to ~11%
+(913 files today). Cross-PIKS S→P dropped from 461 to 36. The
+original S classification
 inflated System's apparent size because 1,244 files pointing to
 File 200 were classified S by H-09.
 
@@ -351,58 +379,88 @@ File 200 were classified S by H-09.
 
 ## 5. Data files
 
-All data is in `vista/export/data-model/` (the FileMan PIKS slice):
+All data is in `vista/export/data-model/` (the FileMan PIKS slice) —
+exactly four tab-separated files. There is no CSV: the old
+denormalized `vista-fileman-piks-comprehensive.csv` was retired by
+the schema_v1 normalization (see note at the end of this section).
 
 | File | Rows | Size | Description |
 |---|---|---|---|
-| `vista-fileman-piks-comprehensive.csv` | 69,840 | 9.2 MB | **Primary output**: every file + field with all PIKS annotations (22 columns) |
-| `files.tsv` | 8,261 | 1.2 MB | File inventory from ^DD/^DIC |
-| `piks.tsv` | 7,904 | 450 KB | Automated PIKS classifications |
-| `piks-triage.tsv` | 217 | 12 KB | Manual triage classifications |
-| `field-piks.tsv` | 69,809 | 4.2 MB | Field-level PIKS with cross-PIKS flags |
+| `files.tsv` | 8,261 | 534 KB | File inventory from ^DD/^DIC |
+| `piks.tsv` | 8,261 | 409 KB | PIKS classification of every file — 100% coverage |
+| `piks-triage.tsv` | 220 | 13 KB | Human triage worksheet (its rows also appear in piks.tsv with `piks_source=triage`) |
+| `field-piks.tsv` | 69,809 | 2.7 MB | Field-level PIKS with cross-PIKS and sensitivity flags |
 
 Project research log is one level up at `vista/export/RESEARCH.md` (RF-001 through RF-027, covering both the data-model/ PIKS work and the code-model/ routine/package/XINDEX work).
 
-### Comprehensive CSV column order
+### Columns
 
-| # | Column | Example | Description |
-|---|---|---|---|
-| 1 | file_number | 2 | FileMan file number |
-| 2 | field_number | .104 | Field number within file |
-| 3 | field_name | PROVIDER | Field name from ^DD |
-| 4 | data_type | POINTER | FREE-TEXT, SET, POINTER, NUMERIC, DATE, etc. |
-| 5 | field_piks | P | PIKS of this field (inherited from file) |
-| 6 | file_piks | P | PIKS of the containing file |
-| 7 | file_piks_method | H-01 | Which heuristic classified the file |
-| 8 | file_piks_confidence | certain | certain / high / moderate / low |
-| 9 | ref_piks | I | For pointer fields: PIKS of the target file |
-| 10 | cross_piks | Y | Y if field_piks != ref_piks |
-| 11-22 | | | file_name, global_root, parent_file, counts, evidence, pointer target, sensitivity |
+**`files.tsv`** (10 cols): `file_number`, `file_name`, `global_root`,
+`parent_file`, `field_count`, `pointer_in`, `pointer_out`,
+`record_count`, `is_dinum`, `status`
+
+**`piks.tsv`** (6 cols): `file_number`, `piks`, `piks_method`,
+`piks_confidence`, `piks_evidence`, `piks_source`
+(`auto` / `triage` / `inherited`)
+
+**`piks-triage.tsv`** (5 cols): same as piks.tsv minus `piks_source`
+
+**`field-piks.tsv`** (9 cols): `file_number`, `field_number`,
+`field_name`, `data_type`, `file_piks`, `pointer_target`, `ref_piks`,
+`cross_piks`, `sensitivity_flag`. Note this is a 9-column TSV —
+method and confidence live in `piks.tsv` (per file, not per field);
+join on `file_number` when you need them.
+
+### The retired comprehensive CSV
+
+`vista-fileman-piks-comprehensive.csv` (one 22-column row per field)
+**no longer exists**. The schema_v1 normalization
+([spec](../reference/schema-v1-normalization-spec.md)) replaced it
+with the four normalized TSVs above; everything it held is reachable
+by joining `field-piks.tsv` ⋈ `piks.tsv` ⋈ `files.tsv` on
+`file_number`. Old queries written against the CSV (comma-separated,
+columns 5/9/10/22) are dead — use the §6 recipes instead.
 
 ---
 
 ## 6. How to use this data
 
-### Query the comprehensive CSV
+### Query the TSVs
+
+All four files are tab-separated with a header row. In `field-piks.tsv`
+the columns are `$1`=file_number, `$4`=data_type, `$5`=file_piks,
+`$7`=ref_piks, `$8`=cross_piks, `$9`=sensitivity_flag; in `piks.tsv`,
+`$2`=piks, `$6`=piks_source. Run from `vista/export/data-model/`:
 
 ```bash
-# All cross-PIKS pointer fields
-head -1 vista/export/data-model/vista-fileman-piks-comprehensive.csv && \
-  grep ",Y," vista/export/data-model/vista-fileman-piks-comprehensive.csv
+# All cross-PIKS pointer fields (3,868)
+awk -F'\t' '$8=="Y"' field-piks.tsv
 
-# Patient→Knowledge fields (FHIR terminology bindings)
-awk -F',' '$5=="P" && $9=="K" && $10=="Y"' \
-  vista/export/data-model/vista-fileman-piks-comprehensive.csv
+# Patient→Knowledge fields (FHIR terminology bindings, 433)
+awk -F'\t' '$5=="P" && $7=="K" && $8=="Y"' field-piks.tsv
 
-# All fields in File 2 (PATIENT)
-awk -F',' '$1=="2"' vista/export/data-model/vista-fileman-piks-comprehensive.csv
+# ...or just the 217 distinct Patient files that point at Knowledge files
+awk -F'\t' '$5=="P" && $7=="K" && $8=="Y" {print $1}' field-piks.tsv | sort -u
 
-# Files with sensitivity flags
-awk -F',' '$22=="Y"' vista/export/data-model/vista-fileman-piks-comprehensive.csv
+# All fields in File 2 (PATIENT) — 594 fields
+awk -F'\t' '$1=="2"' field-piks.tsv
 
-# System→Patient fields (security review)
-awk -F',' '$5=="S" && $9=="P" && $10=="Y"' \
-  vista/export/data-model/vista-fileman-piks-comprehensive.csv
+# Fields with sensitivity flags (851)
+awk -F'\t' '$9=="Y"' field-piks.tsv
+
+# System→Patient fields (security review set, 36)
+awk -F'\t' '$5=="S" && $7=="P" && $8=="Y"' field-piks.tsv
+
+# How was a file classified? method + confidence + evidence + source
+awk -F'\t' '$1=="52"' piks.tsv
+# → 52  P  H-06  high  field=2 PATIENT points to file 2  auto
+
+# All files classified by human triage (220)
+awk -F'\t' '$6=="triage"' piks.tsv
+
+# Largest Patient files by VEHU record count (files ⋈ piks join)
+join -t$'\t' <(sort -t$'\t' -k1,1 files.tsv) <(sort -t$'\t' -k1,1 piks.tsv) \
+  | awk -F'\t' '$11=="P" && $8!="" {print $8"\t"$1"\t"$2}' | sort -rn | head
 ```
 
 ### Run the classifier on a fresh VistA system
@@ -428,7 +486,7 @@ VistA/FileMan system (VEHU, FOIA, production, RPMS).
 | RF-003 | 8,261 files, widest = 2,603 fields, 1:1.8 top:sub ratio | verified |
 | RF-004 | File 200 most-referenced (1,244 ptrs), 3.3x more than PATIENT | verified |
 | RF-005 | H-05 (inheritance) classifies 59% of files; Tier 2 is strongest signal | verified |
-| RF-006 | 98.3% PIKS classification achieved (auto 95.7% + triage 2.6%) | verified |
+| RF-006 | 98.3% PIKS classification achieved (auto 95.7% + triage 2.6%) | verified; superseded — now 100% via subfile inheritance (§2.1) |
 | RF-007 | Cross-PIKS matrix: 3,868 cross-category pointer fields | verified (updated RF-009) |
 | RF-008 | File 200 is staff/provider PII, not system data → reclassified S to I | verified |
 | RF-009 | Cross-PIKS matrix recalculated: S→P dropped 461→36, S dropped 32%→10% | verified |
@@ -437,21 +495,19 @@ VistA/FileMan system (VEHU, FOIA, production, RPMS).
 
 ## 8. Known limitations
 
-1. **141 subfiles unclassified** — awaiting inheritance from triage parents.
-
-2. **Sensitivity flags over-report** — .01 NAME fields in System files
+1. **Sensitivity flags over-report** — .01 NAME fields in System files
    flag entity names (templates, files) as person names.
 
-3. **VEHU-specific record counts** — PIKS category assignments are structural
+2. **VEHU-specific record counts** — PIKS category assignments are structural
    (from DD metadata) and portable; record counts reflect synthetic VEHU data.
 
-4. **Simple pointers only** — variable pointers (171 fields) and computed
+3. **Simple pointers only** — variable pointers (171 fields) and computed
    pointers not yet analyzed for cross-PIKS patterns.
 
-5. **Package namespace lists manually maintained** — Tier 4 prefix lists
+4. **Package namespace lists manually maintained** — Tier 4 prefix lists
    were expanded iteratively. New packages may not be covered.
 
-6. **File 200 cascade** — reclassifying File 200 from S to I changed
+5. **File 200 cascade** — reclassifying File 200 from S to I changed
    the entire distribution. Any file with >1,000 inbound pointers has
    outsized classification influence. Future anchor reclassifications
    should be tested for cascade impact before committing.

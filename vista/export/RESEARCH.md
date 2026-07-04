@@ -2091,3 +2091,30 @@ Status: provisional | verified | superseded by RF-NNN.
     the build "succeeded" but the database was essentially empty.
     Quality checks (like the Packages.csv comparison) are essential.
 - **Status**: verified; fix confirmed working
+
+## RF-034 — Packages.csv is the authoritative package→namespace/app_code bridge
+
+Date: 2026-05-30 (recorded 2026-07-04) · Spec: docs/reference/model-extraction-contract.md § 11
+
+- `docs/Packages.csv` (the FOIA build manifest) carries, per package:
+  `Package Name` (upper #9.4 NAME), `Directory Name` (export directory),
+  `Prefixes` (namespace), and numeric `VDL ID`. **173/174** export
+  directories match `Directory Name` exactly; the one miss is the synthetic
+  `Uncategorized` bucket. This makes a live `VMDUMP9_4.m` unnecessary for the
+  namespace bridge — the CSV resolves all 174 packages with no running
+  container.
+- **app_code == primary namespace** = the first prefix that is not `!`-excluded.
+  It equals the VDL documentation app_code for every export-present package we
+  cross-checked (16/16 vs the curated vista-info-hub map). Caveat: the curated
+  map listed `Inpatient Pharmacy` as ns=`PSI`/app_code=`PSJ` (a genuine
+  divergence), but that package is not present in this VEHU export. If such a
+  package ever enters the export, app_code may need an editorial override from
+  vista-docs' frontmatter.db.
+- Multi-row packages in the CSV use the **blank-continuation** form (a row that
+  blanks both Package/Directory Name to add prefixes); no package repeats a
+  non-blank Directory Name (verified: 0). The parser appends prefixes from
+  blank-continuation rows in first-seen order.
+
+See `docs/historical/upstream-data-fixes.md` for schema, coverage, and the
+downstream workaround-retirement list. (Recorded late: the appendix text sat in
+that doc from 2026-05-30 until this docs reorg noticed it was never appended.)
