@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # V4/R2+F9 of the producer-contracts plan: fidelity declarations.
-# Spec: docs/proposals/schema-v1-normalization-spec.md § 6 R2
-# Plan: docs/proposals/producer-contracts-implementation-plan.md § V4
+# Spec: docs/reference/schema-v1-normalization-spec.md § 6 R2
+# Plan: docs/historical/producer-contracts-implementation-plan.md § V4
 
 """Emit the three schema_version 1 fidelity declarations as data.
 

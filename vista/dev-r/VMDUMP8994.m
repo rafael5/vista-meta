@@ -1,5 +1,5 @@
 VMDUMP8994 ;vista-meta — extract File 8994 (REMOTE PROCEDURE) to TSV
- ;Spec: docs/vista-meta-spec-v0.4.md § 11
+ ;Spec: docs/reference/model-extraction-contract.md § 11
  ;ADR-045 Phase 4b: authoritative RPC registry.
  ;RUNS IN: container, as vehu
  ;

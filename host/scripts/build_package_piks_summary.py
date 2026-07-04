@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Phase 2d of ADR-045: join package-data.tsv × files.tsv on file_number.
 # Produces per-package PIKS distribution of the data each package ships.
-# Spec: docs/vista-meta-spec-v0.4.md § 11
+# Spec: docs/reference/model-extraction-contract.md § 11
 
 """Aggregate per-package PIKS distribution of shipped FileMan files.
 

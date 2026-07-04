@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Canonical schema_version 1 TSV emission.
-# Spec: docs/proposals/schema-v1-normalization-spec.md § 5
+# Spec: docs/reference/schema-v1-normalization-spec.md § 5
 
 """The one writer every final export artifact flows through.
 

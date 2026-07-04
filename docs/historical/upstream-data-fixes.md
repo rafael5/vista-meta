@@ -1,4 +1,10 @@
-# Upstream data-quality fixes (P1–P5)
+# Upstream data-quality fixes (P1–P5) — executed record
+
+> **EXECUTED (2026-05-30; filed historical 2026-07-04).** All fixes shipped and the
+> downstream consumer was notified. The *live* schema for `package-namespace.tsv` and the
+> appended `package`/`package_dir` columns now lives in
+> [`../guides/code-model-guide.md`](../guides/code-model-guide.md) §7b — consult that, not
+> this record. RF-034 was appended to RESEARCH.md as planned.
 
 Implements the data-quality gaps recorded in `upstream-data-fixes-prompt.md`,
 which forced brittle workarounds in the downstream `vista-info-hub` consumer.

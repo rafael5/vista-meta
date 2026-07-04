@@ -1,5 +1,5 @@
 VMFPIKS ;vista-meta — PIKS classification at field level
- ;Spec: docs/vista-meta-spec-v0.4.md § 11
+ ;Spec: docs/reference/model-extraction-contract.md § 11
  ;RUNS IN: container, as vehu
  ;
  ;Classifies every field with:

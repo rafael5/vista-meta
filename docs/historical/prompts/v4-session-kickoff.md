@@ -1,5 +1,9 @@
 # V4 session kickoff — fidelity declarations (R2 + F9)
 
+> **SPENT (closed 2026-07-04).** One-shot session handoff prompt; its work landed as
+> Track V4 (b119bd1, fidelity declarations, gate PASS).
+
+
 Handoff prompt for the next session. Paste the block below verbatim into a
 fresh Claude session opened in `~/projects/vista-meta`. Written 2026-07-03,
 after V1–V3 completed (`main` through `f73b2d4`).

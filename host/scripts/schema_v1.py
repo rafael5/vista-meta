@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # The declarative schema_version 1 registry — single source of truth
 # for the 24-TSV export contract.
-# Spec: docs/proposals/schema-v1-normalization-spec.md
-# Plan: docs/proposals/producer-contracts-implementation-plan.md § V1
+# Spec: docs/reference/schema-v1-normalization-spec.md
+# Plan: docs/historical/producer-contracts-implementation-plan.md § V1
 
 """Final column order, primary keys, renames, booleans and enum labels
 for every schema_version 1 file.

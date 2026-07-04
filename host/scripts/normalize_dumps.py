@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # V1.4 of the producer-contracts plan: host-side normalization of the
 # M-dump-origin TSVs into their schema_version 1 final form.
-# Spec: docs/proposals/schema-v1-normalization-spec.md § 2/§ 3/§ 5
+# Spec: docs/reference/schema-v1-normalization-spec.md § 2/§ 3/§ 5
 
 """Normalize raw M-dump TSVs into schema_version 1 finals.
 

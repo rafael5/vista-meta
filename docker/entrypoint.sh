@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # vista-meta entrypoint — container startup, invoked by tini as PID 1 child.
-# Spec: docs/vista-meta-spec-v0.4.md § 5
+# Spec: docs/historical/vista-meta-spec-v0.4.md § 5
 # ADR-021: tini as PID 1, bash entrypoint
 #
 # RUNS IN: container, initially as root (tini -> this script)

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # P3/P4 of upstream-data-fixes: per-package namespace + VDL app_code.
-# Spec: docs/vista-meta-spec-v0.4.md § 11 (PACKAGE-file linkage)
+# Spec: docs/reference/model-extraction-contract.md § 11 (PACKAGE-file linkage)
 # ADR-045 companion: package → namespace/app_code bridge for vista-info-hub.
 
 """Emit package-namespace.tsv — namespace/app_code per code-model package.

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # V6 of the producer-contracts plan: the validate step.
-# Plan: docs/proposals/producer-contracts-implementation-plan.md § V6
+# Plan: docs/historical/producer-contracts-implementation-plan.md § V6
 
 """Pre-release validation of the full schema_version 1 contract.
 

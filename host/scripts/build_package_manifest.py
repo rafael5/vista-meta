@@ -2,7 +2,7 @@
 # Phase 6a of ADR-045: the code↔data bridge in its full per-package form.
 # Joins routines, packages, data-shipments, PIKS distribution, RPC roles,
 # option roles, global touches, and call-graph fan-out into one TSV.
-# Spec: docs/vista-meta-spec-v0.4.md § 11
+# Spec: docs/reference/model-extraction-contract.md § 11
 
 """Build packages-manifest.tsv — one row per package, all sources joined.
 

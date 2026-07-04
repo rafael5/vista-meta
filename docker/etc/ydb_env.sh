@@ -9,7 +9,7 @@
 #
 # This is the RUNTIME source of truth for YDB env vars. The Dockerfile
 # also sets these as ENV directives for build-time RUN commands.
-# Spec: docs/vista-meta-spec-v0.4.md § 7
+# Spec: docs/historical/vista-meta-spec-v0.4.md § 7
 
 export ydb_dist="__YDB_DIST__"
 export ydb_gbldir="/home/vehu/g/mumps.gld"

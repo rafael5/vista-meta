@@ -683,4 +683,4 @@ read line-by-line.
 - [code-model-guide.md](code-model-guide.md) — schema for every TSV the recipes use
 - [vscode-extension-internals.md § 7](vscode-extension-internals.md#7-recommended-extensions-by-tier) — extension roadmap that the §7 integrations slot into
 - [piks-analysis-guide.md](piks-analysis-guide.md) — what P/I/K/S means for owned globals
-- [docs/vista-meta-spec-v0.4.md § 11](vista-meta-spec-v0.4.md) — bake contracts the new scans should respect
+- [docs/vista-meta-spec-v0.4.md § 11](../historical/vista-meta-spec-v0.4.md) — bake contracts the new scans should respect

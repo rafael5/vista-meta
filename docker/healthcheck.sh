@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # HEALTHCHECK — validates services the entrypoint is actually expected to
-# start, and that the YDB engine itself responds. Spec: docs/vista-meta-spec-v0.4.md § 5
+# start, and that the YDB engine itself responds. Spec: docs/historical/vista-meta-spec-v0.4.md § 5
 # ADR-024: bake status is NOT a health criterion.
 #
 # RUNS IN: container, called by Docker HEALTHCHECK directive every 30s.

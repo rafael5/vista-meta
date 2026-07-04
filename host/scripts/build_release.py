@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # V7 of the producer-contracts plan: the release step → data-v1.
-# Plan: docs/proposals/producer-contracts-implementation-plan.md § V7
+# Plan: docs/historical/producer-contracts-implementation-plan.md § V7
 
 """Assemble (and publish) the vista-meta data-v1 release bundle.
 

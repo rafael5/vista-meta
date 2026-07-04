@@ -1,5 +1,12 @@
 # Producer Contracts — Implementation Plan
 
+> **EXECUTED (closed 2026-07-04).** Every vista-meta step landed with a gate-PASS commit —
+> V1 f1e9d33 · V2 6e7b5c5 · V3 f73b2d4 · V4 b119bd1 · V5 a13070b · V6 5631e8c ·
+> V7 8e9b447/f04b36b · Gate-R a27e04a. The vdocs-side Track D closed in the vdocs repo;
+> the mutual pin is recorded in `../releases/data-v1-peers.json`. The living contract this
+> plan produced is `../reference/schema-v1-normalization-spec.md`. Do not execute.
+
+
 Sequenced plan to make **vista-meta** and **vdocs** emit pinned, versioned, review-passing
 artifacts per the finalized specs (normalization spec incl. B1/R1–R4, publication contract,
 adversarial review). Scope: **producers only** (the consumer build — Compass/Atlas — is a

@@ -1,5 +1,5 @@
 VMPIKS ;vista-meta — PIKS heuristic classifier
- ;Spec: docs/vista-meta-spec-v0.4.md § 11.4.1
+ ;Spec: docs/reference/model-extraction-contract.md § 11.4.1
  ;RUNS IN: container, as vehu
  ;
  ;Applies deterministic heuristics to classify every FileMan file

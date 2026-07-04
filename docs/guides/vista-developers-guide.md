@@ -1080,7 +1080,7 @@ and learn to work around the gaps rather than mourn them.**
 - [xindex-reference.md](xindex-reference.md) — XINDEX catalog
 - [piks-analysis-guide.md](piks-analysis-guide.md) — data-model side
   (FileMan file PIKS classification)
-- [vista-meta-spec-v0.4.md](vista-meta-spec-v0.4.md) §11 — research
+- [vista-meta-spec-v0.4.md](../historical/vista-meta-spec-v0.4.md) §11 — research
   methodology
 - [ADR-045](../adr/045-data-code-separation-package-bridge.md) — why code and
   data are classified separately

@@ -74,7 +74,7 @@ The `docs/` tree is layered. Start at the top, drill where needed.
 | What | Where |
 |---|---|
 | **Comprehensive project guide** | [docs/guides/vista-meta-guide.md](docs/guides/vista-meta-guide.md) |
-| Authoritative technical spec | [docs/guides/vista-meta-spec-v0.4.md](docs/guides/vista-meta-spec-v0.4.md) |
+| Authoritative technical spec | [docs/historical/vista-meta-spec-v0.4.md](docs/historical/vista-meta-spec-v0.4.md) |
 | Developer onramp | [docs/guides/vista-developers-guide.md](docs/guides/vista-developers-guide.md) |
 | Per-routine situational awareness | [docs/guides/routine-situational-awareness.md](docs/guides/routine-situational-awareness.md) |
 | Per-package situational awareness | [docs/guides/package-situational-awareness.md](docs/guides/package-situational-awareness.md) |

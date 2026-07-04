@@ -1,5 +1,5 @@
 VMCENSUS ;vista-meta global census — Phase 1 recon
- ;Spec: docs/vista-meta-spec-v0.4.md § 11.4.4
+ ;Spec: docs/reference/model-extraction-contract.md § 11.4.4
  ;RUNS IN: container, as vehu
  ;
  ;Phase 1 recon: enumerate all globals, match against ^DIC,

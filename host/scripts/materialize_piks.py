@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # V2/B1 of the producer-contracts plan: materialize the PIKS merge.
-# Spec: docs/proposals/schema-v1-normalization-spec.md § 6 B1 (amended)
+# Spec: docs/reference/schema-v1-normalization-spec.md § 6 B1 (amended)
 
 """Merge auto + triage + inheritance into the one authoritative
 piks.tsv, so consumers never reimplement the precedence rule.

@@ -469,11 +469,40 @@ Per the TODOs and closure RFs:
 
 Three registries carry an appended canonical `package_dir` (directory name,
 byte-identical to `packages.tsv`); `rpcs.tsv` also gains a `package` (upper
-PACKAGE-file #9.4 NAME). A new `package-namespace.tsv` (joined by `package`)
-supplies `namespace`, `prefixes`, `app_code`, and `vdl_id` for all 174
-packages, sourced from `docs/Packages.csv`. Full schema, coverage,
-regeneration commands, and the downstream `vista-info-hub` migration list are
-in [upstream-data-fixes.md](upstream-data-fixes.md).
+PACKAGE-file #9.4 NAME). Authoritative source: `docs/Packages.csv` (the FOIA
+build manifest that created the source-tree directory names). The executed
+fix record is [../historical/upstream-data-fixes.md](../historical/upstream-data-fixes.md).
+
+### `package-namespace.tsv` (joined by `package`)
+
+| column | meaning | example |
+|---|---|---|
+| `package` | export directory name (byte-identical to `packages.tsv`) | `VA FileMan` |
+| `package_name` | upper-case PACKAGE-file (#9.4) NAME | `VA FILEMAN` |
+| `namespace` | primary namespace (first non-`!` prefix) | `DI` |
+| `prefixes` | all prefixes, first-seen order; `!`=excluded namespace | `DI,DD,DM` |
+| `app_code` | VDL documentation app_code (== primary namespace) | `DI` |
+| `vdl_id` | numeric VistA Document Library application id | `5` |
+
+Coverage: **174/174** packages have a row; **173** have a namespace (the
+synthetic `Uncategorized` bucket has none — it is not a real package).
+
+### Appended columns (existing files, byte-safe)
+
+- `rpcs.tsv`       → `package` (upper #9.4 NAME) + `package_dir` (directory)
+- `options.tsv`    → `package_dir`
+- `protocols.tsv`  → `package_dir`
+
+`package_dir` is the **canonical directory name** — byte-identical across
+`packages.tsv`, `routines-comprehensive.tsv`, `package-namespace.tsv`,
+`rpcs.tsv`, `options.tsv`, `protocols.tsv` — so consumers can join on it
+without case-folding. Uncovered rows (rpcs 96%, options 79%, protocols 73%)
+are registry entries whose #9.4 package is blank or unmapped — genuinely
+unresolvable, not silent drops.
+
+Regenerate: `make package-namespace` (P3/P4) + `make augment-registries`
+(P1/P2) — pure host-side post-processing; idempotent; needs write access to
+the uid-1001 `vista/export/code-model/` tree.
 
 ---
 
@@ -482,5 +511,5 @@ in [upstream-data-fixes.md](upstream-data-fixes.md).
 - [ADR-045](../adr/045-data-code-separation-package-bridge.md) — the architecture decision this guide operates under
 - [xindex-reference.md](xindex-reference.md) — detailed XINDEX catalog and coverage matrix
 - [piks-analysis-guide.md](piks-analysis-guide.md) — the data-model side companion
-- [vista-meta-spec-v0.4.md](vista-meta-spec-v0.4.md) §11 — research system, extraction pipeline
+- [vista-meta-spec-v0.4.md](../historical/vista-meta-spec-v0.4.md) §11 — research system, extraction pipeline
 - [vista/export/RESEARCH.md](../../vista/export/RESEARCH.md) — RF-001 through RF-027 analytical findings log

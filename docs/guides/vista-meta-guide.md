@@ -231,7 +231,7 @@ VistA analysis treated non-FM data as first-class. 14% of VEHU's
 globals fall in this bucket; missing them loses 14% of the picture.
 
 Full heuristic rule set lives in
-[docs/vista-meta-spec-v0.4.md](vista-meta-spec-v0.4.md) §11.4–§11.6
+[docs/vista-meta-spec-v0.4.md](../historical/vista-meta-spec-v0.4.md) §11.4–§11.6
 and is implemented in
 [`vista/dev-r/VMPIKS.m`](../../vista/dev-r/VMPIKS.m).
 
@@ -546,7 +546,7 @@ Full reference: [docs/vista-vscode-guide.md](vista-vscode-guide.md)
 
 Everything in vista-meta is governed by three interlocking documents:
 
-1. **[The spec](vista-meta-spec-v0.4.md)** — what to build, what
+1. **[The spec](../historical/vista-meta-spec-v0.4.md)** — what to build, what
    contracts hold, what classification rules apply. Referenced
    throughout code (e.g., `# Spec: docs/vista-meta-spec-v0.4.md § 11.5`).
 2. **[The ADRs](../adr/)** — why specific decisions were made. 45+
@@ -608,7 +608,7 @@ Four classes of product now plausible on this base:
 
 ## 10. Further reading
 
-- [vista-meta-spec-v0.4.md](vista-meta-spec-v0.4.md) — the
+- [vista-meta-spec-v0.4.md](../historical/vista-meta-spec-v0.4.md) — the
   authoritative technical spec. Start at §11 for the analytical
   methodology.
 - [vista-developers-guide.md](vista-developers-guide.md) — how a

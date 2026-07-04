@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Phase 1b of ADR-045: base routine inventory.
 # Inventory only — no role, no globals-touched, no call graph. Phase 2+.
-# Spec: docs/vista-meta-spec-v0.4.md § 11
+# Spec: docs/reference/model-extraction-contract.md § 11
 
 """Build host-side routine inventory from the vista-m-host snapshot.
 

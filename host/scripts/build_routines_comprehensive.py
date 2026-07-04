@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Phase 6b of ADR-045: per-routine comprehensive view.
-# Spec: docs/vista-meta-spec-v0.4.md § 11
+# Spec: docs/reference/model-extraction-contract.md § 11
 
 """Build routines-comprehensive.tsv — one row per routine, all signals joined.
 

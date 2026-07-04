@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # vmcensus.sh — Phase 1 global recon
-# Spec: docs/vista-meta-spec-v0.4.md § 11.4.4
+# Spec: docs/reference/model-extraction-contract.md § 11.4.4
 # RUNS IN: container, as vehu
 set -euo pipefail
 source /etc/profile.d/ydb_env.sh

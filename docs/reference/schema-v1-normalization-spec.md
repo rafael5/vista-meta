@@ -1,11 +1,15 @@
 # vista-meta — schema_version 1 Normalization Spec
 
-Defines the normalization applied **before freezing** `schema_version 1`, making the
-export internally consistent for consumers. We are pre-first-release (no consumer pinned),
-so these changes fold into v1 rather than deferring to a v2 break.
+**Status: SHIPPED — the `schema_version: 1` contract of record** (promoted from
+`proposals/` 2026-07-04). The normalization below is implemented (`host/scripts/schema_v1.py`,
+`normalize_dumps.py`, `tsvio.py`, …), released as **`vista-meta-data-v1`**
+([`../releases/data-v1.manifest.json`](../releases/data-v1.manifest.json)), and pinned by
+consumers: the VistA Compass extension (0.2.0 reads the v1 data root) and the vdocs
+entity-quality gate ([`../releases/data-v1-peers.json`](../releases/data-v1-peers.json)).
+Column-shape changes from here on are a **v2 break**, not an amendment to this document.
 
 Scope: vista-meta internal consistency only (cross-producer entity linking is out of scope,
-except the R1 key-vocabulary declaration added 2026-07-03). Planning/specification only; no code.
+except the R1 key-vocabulary declaration added 2026-07-03).
 
 > **Amended 2026-07-03** per the measured adversarial review
 > (vista-cloud-dev `docs/proposals/considering/vista-meta-hardening-adversarial-review.md`):

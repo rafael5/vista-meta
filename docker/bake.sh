@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # bake.sh — first-run + manual analytics pipeline (STUB).
-# Spec: docs/vista-meta-spec-v0.4.md § 6
+# Spec: docs/historical/vista-meta-spec-v0.4.md § 6
 #
 # RUNS IN: container, as vehu user
 # INVOKED BY: entrypoint.sh (first run) or `make bake*` (manual)

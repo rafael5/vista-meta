@@ -1,5 +1,5 @@
 # vista-meta .gitignore
-# Spec: docs/vista-meta-spec-v0.4.md § 3
+# Spec: docs/historical/vista-meta-spec-v0.4.md § 3
 
 # Runtime config (contains Tailscale IP)
 .env

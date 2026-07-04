@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # V5 of the producer-contracts plan: the data fingerprint.
-# Plan: docs/proposals/producer-contracts-implementation-plan.md § V5
+# Plan: docs/historical/producer-contracts-implementation-plan.md § V5
 
 """Compute the schema_version 1 content_hash (data identity).
 

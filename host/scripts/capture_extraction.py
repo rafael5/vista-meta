@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # V1.6 of the producer-contracts plan: R3 engine identity/state capture.
-# Spec: docs/proposals/schema-v1-normalization-spec.md § 6 R3
+# Spec: docs/reference/schema-v1-normalization-spec.md § 6 R3
 
 """Capture the R3 sidecar at extraction time.
 

@@ -56,7 +56,7 @@ incompatibilities:
 docs:
   primary: README.md
   full_guide: docs/guides/vista-meta-guide.md
-  spec: docs/guides/vista-meta-spec-v0.4.md
+  spec: docs/reference/model-extraction-contract.md          # live §11 extraction/PIKS contract; build spec is historical
   research_log: vista/export/RESEARCH.md
 ---
 
@@ -203,7 +203,7 @@ being callable from an Institution-scoped RPC?"* at query speed.
 | What | Where | When to use |
 |---|---|---|
 | **Comprehensive project guide** | `docs/guides/vista-meta-guide.md` | **Start here** — full scope, methodology, accomplishments |
-| Authoritative technical spec | `docs/guides/vista-meta-spec-v0.4.md` | What to build; contracts; PIKS heuristics |
+| Authoritative technical spec | `docs/historical/vista-meta-spec-v0.4.md` | What to build; contracts; PIKS heuristics |
 | Developer onramp | `docs/guides/vista-developers-guide.md` | How a Python/JS/Go dev orients in VistA |
 | Per-routine situational awareness | `docs/guides/routine-situational-awareness.md` | Cold-opening any `.m` file: priority sweep, VSCode surfaces, cognitive traps |
 | Per-package situational awareness | `docs/guides/package-situational-awareness.md` | Scanning a whole `Packages/X/` folder: fingerprint, automated scans, VSCode integrations |
@@ -229,7 +229,7 @@ being callable from an Institution-scoped RPC?"* at query speed.
 
 ## Conventions
 
-- Spec cross-refs in code: `# Spec: docs/guides/vista-meta-spec-v0.4.md § 11.5`
+- Spec cross-refs in code: `# Spec: docs/historical/vista-meta-spec-v0.4.md § 11.5`
 - ADR cross-refs in code: `# ADR-029: symlink farm for flat routine namespace`
 - Build log cross-refs in spec: `[Errata: see BL-002]`
 - Research findings: cite as `RF-008` inline

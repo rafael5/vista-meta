@@ -1,5 +1,5 @@
 VMFILES ;vista-meta — extract FileMan file inventory to TSV
- ;Spec: docs/vista-meta-spec-v0.4.md § 11.4.1
+ ;Spec: docs/reference/model-extraction-contract.md § 11.4.1
  ;RUNS IN: container, as vehu
  ;
  ;Walks ^DD and ^DIC to produce a complete file inventory.

@@ -1,5 +1,5 @@
 VMDUMP19 ;vista-meta — extract File 19 (OPTION) to TSV
- ;Spec: docs/vista-meta-spec-v0.4.md § 11
+ ;Spec: docs/reference/model-extraction-contract.md § 11
  ;ADR-045 Phase 4c: authoritative menu/option registry.
  ;RUNS IN: container, as vehu
  ;

@@ -1,5 +1,10 @@
 # Heads-up: vista-info-hub workarounds retired by P1–P4 export changes
 
+> **DELIVERED (closed 2026-07-04).** Cross-org coordination memo — the columns it announces
+> shipped (P1–P4, see `../guides/code-model-guide.md` §7b) and the consumer was notified.
+> Kept as the record of what vista-info-hub was told it could retire.
+
+
 **To:** vista-info-hub owner
 **Re:** vista-meta export now ships package→namespace/app_code data — workarounds can be retired
 **PR:** [rafael5/vista-meta#2](https://github.com/rafael5/vista-meta/pull/2) (`package-namespace-bridge`)

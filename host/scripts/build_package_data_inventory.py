@@ -3,7 +3,7 @@
 # Strictly mechanical extraction from Globals/*.zwr filenames.
 # Companion to build_routine_inventory.py; together they give the
 # code+data shipping manifest per package.
-# Spec: docs/vista-meta-spec-v0.4.md § 11
+# Spec: docs/reference/model-extraction-contract.md § 11
 
 """Inventory ZWR data exports shipped under each package's Globals/ dir.
 

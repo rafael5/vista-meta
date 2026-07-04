@@ -1,5 +1,5 @@
 # vista-meta — VEHU on YottaDB analytics sandbox
-# Spec: docs/vista-meta-spec-v0.4.md § 4
+# Spec: docs/historical/vista-meta-spec-v0.4.md § 4
 # Single-stage build (ADR-020) on Ubuntu 24.04 (ADR-003)
 #
 # RUNS ON: host (docker build)

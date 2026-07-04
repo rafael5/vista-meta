@@ -1,5 +1,5 @@
 VMXIDX ;vista-meta — XINDEX driver per XINDX7 programmatic contract
- ;Spec: docs/vista-meta-spec-v0.4.md § 11
+ ;Spec: docs/reference/model-extraction-contract.md § 11
  ;Reference: docs/xindex-reference.md
  ;RUNS IN: container, as vehu
  ;

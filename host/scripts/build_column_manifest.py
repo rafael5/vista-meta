@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # V3/R1 of the producer-contracts plan: the typed column manifest.
-# Spec: docs/proposals/schema-v1-normalization-spec.md § 6 R1
+# Spec: docs/reference/schema-v1-normalization-spec.md § 6 R1
 
 """Emit the machine-checkable typed column manifest as data.
 

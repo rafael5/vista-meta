@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Phase 6c of ADR-045: package-to-package call edge matrix.
-# Spec: docs/vista-meta-spec-v0.4.md § 11
+# Spec: docs/reference/model-extraction-contract.md § 11
 
 """Build package-edge-matrix.tsv — sparse (src_pkg → dst_pkg) matrix.
 
