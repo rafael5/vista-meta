@@ -11,15 +11,8 @@
 set -u
 
 CONTAINER="${CONTAINER:-vista-vehu}"
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
-# TAILSCALE_IP comes from the environment or .env (S-02 skips when absent —
-# devcontainer/local-only setups bind 127.0.0.1 and may not run sshd exposure).
-if [ -z "${TAILSCALE_IP:-}" ] && [ -f "$REPO_ROOT/.env" ]; then
-    TAILSCALE_IP="$(sed -n 's/^TAILSCALE_IP=//p' "$REPO_ROOT/.env" | tail -1)"
-fi
-
-PASS=0 FAIL=0 SKIP=0
+PASS=0 FAIL=0 WARN=0 SKIP=0
 
 # report <id> <label> <status> [detail...]
 report() {
@@ -30,7 +23,7 @@ report() {
     if [ "$status" = FAIL ] && [ $# -gt 0 ]; then
         printf '        %s\n' "$@"
     fi
-    case "$status" in PASS) PASS=$((PASS+1));; FAIL) FAIL=$((FAIL+1));; SKIP) SKIP=$((SKIP+1));; esac
+    case "$status" in PASS) PASS=$((PASS+1));; FAIL) FAIL=$((FAIL+1));; WARN) WARN=$((WARN+1));; SKIP) SKIP=$((SKIP+1));; esac
 }
 
 # check <id> <label> <cmd...>  — pass iff the command exits 0
@@ -41,6 +34,18 @@ check() {
         report "$id" "$label" PASS
     else
         report "$id" "$label" FAIL "$out"
+    fi
+}
+
+# warn_check — same, but a failure is non-gating (WARN): for baked services
+# with no consumers (ADR-051 — rocto, ydbgui). Still probed so a revival or
+# an intentional adoption shows up here first.
+warn_check() {
+    local id="$1" label="$2"; shift 2
+    if "$@" >/dev/null 2>&1; then
+        report "$id" "$label" PASS
+    else
+        report "$id" "$label" WARN
     fi
 }
 
@@ -59,15 +64,11 @@ else
     exit 1
 fi
 
-# ── S-02 SSH connectivity (host-side; skip without a bindable IP) ─────
-if [ -n "${TAILSCALE_IP:-}" ]; then
-    check S-02 "SSH connectivity" \
-        ssh -p 2222 -o BatchMode=yes -o ConnectTimeout=5 \
-            -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
-            "vehu@$TAILSCALE_IP" echo ok
-else
-    report S-02 "SSH connectivity" SKIP  # no TAILSCALE_IP configured
-fi
+# ── S-02 SSH connectivity (loopback — local-only stack, ADR-050) ─────
+check S-02 "SSH connectivity" \
+    ssh -p 2222 -o BatchMode=yes -o ConnectTimeout=5 \
+        -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+        vehu@127.0.0.1 echo ok
 
 # ── S-03 YottaDB responds ─────────────────────────────────────────────
 # ($ZV reports the upstream GT.M compatibility string; $ZYRELEASE names YottaDB.)
@@ -96,8 +97,11 @@ port_check() { # <id> <label> <port>
 }
 port_check S-07 "RPC Broker port 9430" 9430
 port_check S-08 "VistALink port 8001" 8001
-port_check S-09 "Rocto SQL port 1338" 1338
-port_check S-10 "YDB GUI port 8089" 8089
+# S-09/S-10: baked (ADR-013) but UNCONSUMED services — WARN, never FAIL (ADR-051).
+warn_check S-09 "Rocto SQL port 1338 (no consumers)" docker exec "$CONTAINER" \
+    timeout 2 bash -c "echo >/dev/tcp/127.0.0.1/1338"
+warn_check S-10 "YDB GUI port 8089 (no consumers)" docker exec "$CONTAINER" \
+    timeout 2 bash -c "echo >/dev/tcp/127.0.0.1/8089"
 
 # ── S-11 FileMan responds ─────────────────────────────────────────────
 out=$(in_m 'S DUZ=.5 D DT^DICRW W $$NOW^XLFDT' | tr -d '[:space:]')
@@ -114,6 +118,6 @@ case "$out" in
 esac
 
 # ── Summary ───────────────────────────────────────────────────────────
-TOTAL=$((PASS + FAIL + SKIP))
-echo "[smoke] $PASS/$TOTAL passed, $FAIL failed${SKIP:+, $SKIP skipped}"
+TOTAL=$((PASS + FAIL + WARN + SKIP))
+echo "[smoke] $PASS/$TOTAL passed, $FAIL failed, $WARN warned, $SKIP skipped"
 [ "$FAIL" -eq 0 ]

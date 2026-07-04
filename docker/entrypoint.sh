@@ -87,7 +87,7 @@ fi
 # ── Phase 3: Service startup ─────────────────────────────────────────
 # ADR-013: sshd → xinetd → rocto → YDB GUI
 # All services listen on 0.0.0.0 inside the container.
-# Tailscale IP binding enforced at Docker -p level (ADR-008).
+# Loopback-only binding enforced at the Docker -p level (ADR-050).
 log "phase 3: starting services"
 
 # -D / -dontfork: keep services in foreground so they remain direct children

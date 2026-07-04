@@ -141,8 +141,9 @@ boundary matters.
   visible immediately).
 - **ydb-run wrapper**: xinetd can't expand env vars, so
   `/usr/local/bin/ydb-run` sources the YDB env then execs mumps.
-- **Services bind 0.0.0.0 inside container**; Tailscale IP
-  restriction is at the Docker `-p` level, not in service configs.
+- **Services bind 0.0.0.0 inside the container**; the host side binds
+  **loopback only** (`127.0.0.1` at the Docker `-p` level, ADR-050) —
+  this stack is single-machine, local-only.
 
 ## PIKS — the data-model first-pass abstraction
 

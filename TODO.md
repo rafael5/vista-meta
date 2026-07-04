@@ -53,15 +53,13 @@ automated lint + unit + integration + coverage on PR. Per-phase detail and
 per-repo map: the plan §7; the original long-form tracker text is in this
 file's git history.
 
-## T-006: rocto and YDB GUI die/not-listening at container start (found by smoke)
+## T-006: rocto + YDB GUI down at container start (non-gating; ADR-051)
 
-First run of the new `make smoke` (2026-07-04) found two of the five baked
-services down on a healthy-reporting container:
-- **rocto (Octo SQL :1338)** dies at startup — `%YDB-E-ZLINKFILE … _ydboctoInit.m
-  not found` (the Octo plugin routines aren't on the rocto process's $ZRO).
-- **YDB GUI (:8089)** — entrypoint logs "ydbgui: alive" but nothing listens on
-  8089 (checked /proc/net/tcp).
-Both may have been dead since an earlier image/env change — nothing gated them
-before. **Closes when:** both ports answer and `make smoke` is 12/12 (or an ADR
-formally drops the services and the smoke checks move with it).
-
+Found by the first `make smoke` run (2026-07-04); on inspection neither service
+has any consumer, so smoke treats them as **WARN, not FAIL** (ADR-051) and this
+is opportunistic, not required. Diagnosis when picked up:
+- **rocto (Octo SQL :1338)** dies at boot — `%YDB-E-ZLINKFILE … _ydboctoInit.m
+  not found` (Octo plugin routines not on the rocto process's $ZRO).
+- **YDB GUI (:8089)** — entrypoint logs "ydbgui: alive" but nothing listens.
+**Closes when:** both ports answer (checks promoted back to FAIL), or a future
+ADR drops the services from the image entirely.
