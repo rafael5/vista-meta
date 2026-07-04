@@ -215,7 +215,7 @@ being callable from an Institution-scoped RPC?"* at query speed.
 | VSCode extension internals + roadmap | `docs/guides/vscode-extension-internals.md` | Modifying or extending the extension |
 | PIKS methodology | `docs/guides/piks-analysis-guide.md` | Data-model deep dive |
 | Code model TSVs | `docs/guides/code-model-guide.md` | Per-TSV reference |
-| XINDEX reference | `docs/guides/xindex-reference.md` | What XINDEX extracts vs our tools |
+| XINDEX reference | `docs/reference/xindex-reference.md` | What XINDEX extracts vs our tools |
 | Decision rationale | `docs/adr/NNN-*.md` | Why we chose X over Y |
 | Implementation errors/fixes | `docs/build-log.md` | What went wrong (BL-NNN) |
 | VistA metadata discoveries | `vista/export/RESEARCH.md` | What we learned (RF-NNN) |

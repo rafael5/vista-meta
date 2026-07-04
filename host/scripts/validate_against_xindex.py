@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Phase 7 (post-Phase-6 validation): compare our regex-based extractions
 # against XINDEX's authoritative output. ADR-045 validation pass.
-# Spec: docs/guides/xindex-reference.md
+# Spec: docs/reference/xindex-reference.md
 
 """Validate our regex extractions against XINDEX ground truth.
 

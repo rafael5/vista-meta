@@ -4,7 +4,7 @@ Classification results and analytical findings from the vista-meta
 PIKS classification of VEHU's FileMan data structures.
 
 Last updated: 2026-07-04
-Research log: [vista/export/RESEARCH.md](../../vista/export/RESEARCH.md) (RF-001 through RF-027)
+Research log: [vista/export/RESEARCH.md](../../vista/export/RESEARCH.md) (RF-001 through RF-034)
 
 > **Data provenance.** The data described here is `schema_version: 1` —
 > contract: [schema-v1-normalization-spec.md](../reference/schema-v1-normalization-spec.md);
@@ -391,7 +391,7 @@ the schema_v1 normalization (see note at the end of this section).
 | `piks-triage.tsv` | 220 | 13 KB | Human triage worksheet (its rows also appear in piks.tsv with `piks_source=triage`) |
 | `field-piks.tsv` | 69,809 | 2.7 MB | Field-level PIKS with cross-PIKS and sensitivity flags |
 
-Project research log is one level up at `vista/export/RESEARCH.md` (RF-001 through RF-027, covering both the data-model/ PIKS work and the code-model/ routine/package/XINDEX work).
+Project research log is one level up at `vista/export/RESEARCH.md` (RF-001 through RF-034, covering the data-model/ PIKS work, the code-model/ routine/package/XINDEX work, and later follow-ups).
 
 ### Columns
 

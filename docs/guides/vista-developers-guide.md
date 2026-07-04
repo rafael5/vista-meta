@@ -48,7 +48,7 @@ Multiple distributions exist:
 - VA production (closed, internal)
 - **VistA-M** — WorldVistA's GitHub mirror — the canonical community source
 - **OSEHRA FOIA VistA** — the open-source baseline
-- **VEHU** — VistA Enterprise Health University — a synthetic test instance
+- **VEHU** — VistA eHealth University — a synthetic training/test instance
   this project uses
 - **RPMS** — Indian Health Service's fork
 - **vxVistA**, **VistA-Office EHR** — smaller derivatives
@@ -380,7 +380,7 @@ It's about 30-40 pages depending on version.
 ### 5.2 Why it's insufficient
 
 **Zero automated enforcement.** SAC is document-only. XINDEX catches some
-violations (the 66 error codes — see [xindex-reference.md §3](xindex-reference.md#3--errorwarning-codes--the-full-catalog))
+violations (the 66 error codes — see [xindex-reference.md §3](../reference/xindex-reference.md#3--errorwarning-codes--the-full-catalog))
 — notably:
 - Exclusive kill (code 22)
 - Unargumented NEW (code 26)
@@ -622,8 +622,9 @@ For a real patch, this involves:
 - **Post-install monitoring** — watch `^ERROR` and user reports
 - **Document** — VDL update, patch description
 
-If something breaks: there is no uninstall (see ADR-046 (moved to `~/projects/py-kids-vc/docs/adr/`)
-for a proposed partial remedy). Restore backup.
+If something breaks: there is no uninstall (see ADR-046, archived at
+`~/projects/archive/py-kids-vc/docs/adr/`, for a proposed partial
+remedy — that scope now belongs to v-pkg). Restore backup.
 
 ---
 
@@ -896,7 +897,7 @@ A concrete checklist.
 
 - [ ] **Day 1**: Clone vista-meta. Run `make build && make run`. SSH
       into the container (`make shell`). You have a running VistA.
-- [ ] **Day 2**: Skim `docs/code-model-guide.md` end-to-end. Don't
+- [ ] **Day 2**: Skim `docs/guides/code-model-guide.md` end-to-end. Don't
       memorize; just get the landscape.
 - [ ] **Day 3**: Produce the code-model artifacts:
       ```bash
@@ -1036,7 +1037,8 @@ the chronology.
 
 **What's still open.**
 
-- **Tier 3E** — ADR-046 Phase 9 (kids-vc undo). Designed; not built.
+- **Tier 3E** — ADR-046 Phase 9 (kids-vc undo). Designed; not built
+  here — the KIDS back-out role now belongs to v-pkg.
 - **Tier 3F** — data-model patch workflow analogue. Deferred.
 - **Tier 0 hard problems** — type system, live debugger, M-Unit
   coverage. These aren't mechanical and weren't attempted.
@@ -1074,17 +1076,19 @@ and learn to work around the gaps rather than mourn them.**
   reference for the CLI + pre-commit hook + VSCode extension
 - [code-model-guide.md](code-model-guide.md) — the VistA code-model
   artifacts this guide references
-- `~/projects/py-kids-vc/docs/kids-vc-guide.md` — using kids-vc
-- `~/projects/py-kids-vc/docs/kids-vc-background-dev.md` — history,
-  SKIDS/XPDK2VC prior art, development chronology
-- [xindex-reference.md](xindex-reference.md) — XINDEX catalog
+- `~/vista-forge/v-pkg` — the live patch toolchain (kids-vc successor);
+  the retired kids-vc guide is archived at
+  `~/projects/archive/py-kids-vc/docs/kids-vc-guide.md`
+- `kids-vc-background-dev.md` (vista-forge docs repo, `background/`) —
+  history, SKIDS/XPDK2VC prior art, development chronology
+- [xindex-reference.md](../reference/xindex-reference.md) — XINDEX catalog
 - [piks-analysis-guide.md](piks-analysis-guide.md) — data-model side
   (FileMan file PIKS classification)
 - [vista-meta-spec-v0.4.md](../historical/vista-meta-spec-v0.4.md) §11 — research
   methodology
 - [ADR-045](../adr/045-data-code-separation-package-bridge.md) — why code and
   data are classified separately
-- ADR-046 (moved to `~/projects/py-kids-vc/docs/adr/`) — proposed
-  Phase 9 KIDS undo
+- ADR-046 (archived at `~/projects/archive/py-kids-vc/docs/adr/`) —
+  proposed Phase 9 KIDS undo
 - [RESEARCH.md](../../vista/export/RESEARCH.md) — research findings log
-  (RF-001 through RF-033+)
+  (RF-001 through RF-034)

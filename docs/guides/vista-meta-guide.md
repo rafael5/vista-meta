@@ -18,10 +18,12 @@ On top of that model the project ships an operational product:
    situational awareness of every call, pointer, cross-reference,
    and global each routine touches.
 
-A separate sibling project, **[py-kids-vc](https://github.com/rafael5/py-kids-vc)**
-(`~/projects/py-kids-vc/`), provides a decompose/assemble/round-trip
-pipeline for `.KID` patch bundles. It was extracted from this repo
-in May 2026 and now ships independently.
+The decompose/assemble/round-trip pipeline for `.KID` patch bundles
+was extracted from this repo in May 2026 as **py-kids-vc**, then
+superseded by its Go port **v-pkg** (`~/vista-forge/v-pkg`) and
+retired 2026-07-04 (read-only archive at
+`~/projects/archive/py-kids-vc`). The `make patch-*` targets here
+shell out to `v-pkg`.
 
 This guide is the authoritative map of the whole thing.
 
@@ -109,8 +111,8 @@ and get an answer in one query. That is the value proposition.
 
 **In scope:**
 
-- Static analysis of the VEHU (VA Education and Hospital Utility)
-  VistA distribution — 39,330 routines, 8,261 FileMan files,
+- Static analysis of the VEHU (VistA eHealth University)
+  VistA distribution — 39,373 routines, 8,261 FileMan files,
   486 globals, 4,501 RPCs, 13,163 options, 6,556 protocols.
 - PIKS classification of every FileMan file and every non-FM global.
 - Code-model extraction: calls, pointers, cross-references, globals,
@@ -231,7 +233,7 @@ VistA analysis treated non-FM data as first-class. 14% of VEHU's
 globals fall in this bucket; missing them loses 14% of the picture.
 
 Full heuristic rule set lives in
-[docs/vista-meta-spec-v0.4.md](../historical/vista-meta-spec-v0.4.md) §11.4–§11.6
+[docs/historical/vista-meta-spec-v0.4.md](../historical/vista-meta-spec-v0.4.md) §11.4–§11.6
 and is implemented in
 [`vista/dev-r/VMPIKS.m`](../../vista/dev-r/VMPIKS.m).
 
@@ -384,10 +386,10 @@ stable keys:
 - **Routines ↔ tags**: `xindex-tags.tsv` maps every tag back to its
   routine, with Supported-Entry-Point classification from VA docs.
 - **Routines ↔ callees**: `routine-calls.tsv` (caller, callee,
-  kind, ref_count). 241,309 edges. XINDEX call graph
-  (`xindex-xrefs.tsv`, 214,011 edges) cross-validates at 98.75%.
+  kind, ref_count). 241,781 edges. XINDEX call graph
+  (`xindex-xrefs.tsv`, 214,101 edges) cross-validates at 98.75%.
 - **Routines ↔ globals**: `routine-globals.tsv` (routine, global,
-  ref_count). 77,838 edges.
+  ref_count). 77,939 edges.
 - **Routines ↔ roles**: RPC definitions (`rpcs.tsv`), options
   (`options.tsv`), protocols (`protocols.tsv`) reference their
   implementing routine+tag.
@@ -463,9 +465,10 @@ has, historically, required weeks of manual review.
 
 > **Note.** The decompose/assemble pipeline for `.KID` files
 > (formerly §7.1 of this guide as `kids-vc`) was extracted in
-> May 2026 to a standalone project at `~/projects/py-kids-vc/`
-> (pip-installable as `kids-vc`). Its full guide, history, and
-> ADR-046 (pre-install snapshot for undo) live there now.
+> May 2026 to a standalone project (`py-kids-vc`), then superseded
+> by its Go port **v-pkg** (`~/vista-forge/v-pkg`) and retired
+> 2026-07-04. Its guide, history, and ADR-046 (pre-install snapshot
+> for undo) are archived at `~/projects/archive/py-kids-vc`.
 
 ### 7.1 The VSCode extension (VistA Compass) — situational awareness for 40,000 routines
 
@@ -505,7 +508,7 @@ editor, a VISTA ROUTINE panel appears in the Explorer sidebar:
 TSVs under `vista/export/code-model/`. No language server, no
 container calls, no MCP, no network. First render happens in
 milliseconds; the TSVs stay in memory until
-`vista-meta: Reload Code-Model TSVs` invalidates them.
+`VistA Compass: Reload Code-Model TSVs` invalidates them.
 
 **Why this matters.** Every question a developer has when opening
 a routine — *who depends on this? what does this touch? what's
@@ -515,7 +518,7 @@ this compresses a twenty-minute investigation into an eye
 movement. Over the course of maintaining any VistA package, the
 time saved compounds.
 
-Full reference: [docs/vista-vscode-guide.md](vista-vscode-guide.md)
+Full reference: [docs/guides/vista-vscode-guide.md](vista-vscode-guide.md)
 §2.
 
 ### 7.2 The vista-meta CLI — everything else
@@ -544,7 +547,7 @@ Alongside the CLI:
   check, bare-HALT check, doc-comment lint, optional live XINDEX.
 - GitHub Actions CI enforces the same checks on PRs.
 
-Full reference: [docs/vista-vscode-guide.md](vista-vscode-guide.md)
+Full reference: [docs/guides/vista-vscode-guide.md](vista-vscode-guide.md)
 §§3–5.
 
 ### 7.3 The data release — `vista-meta-data-v1` (schema_version 1)
@@ -575,15 +578,20 @@ producer-contracts workstream (2026-07-03):
 Everything in vista-meta is governed by three interlocking documents:
 
 1. **[The spec](../historical/vista-meta-spec-v0.4.md)** — what to build, what
-   contracts hold, what classification rules apply. Referenced
-   throughout code (e.g., `# Spec: docs/vista-meta-spec-v0.4.md § 11.5`).
-2. **[The ADRs](../adr/)** — why specific decisions were made. 45+
+   contracts hold, what classification rules apply. Now archived
+   under `docs/historical/`; the live contracts are
+   [docs/reference/model-extraction-contract.md](../reference/model-extraction-contract.md)
+   and
+   [docs/reference/schema-v1-normalization-spec.md](../reference/schema-v1-normalization-spec.md).
+   Referenced throughout code (e.g.,
+   `# Spec: docs/historical/vista-meta-spec-v0.4.md § 11.5`).
+2. **[The ADRs](../adr/)** — why specific decisions were made. 50+
    records, each immutable once accepted; supersession happens via
    a new ADR. Covers architecture (`012-zro-layering.md`,
    `010-hybrid-persistence.md`), tooling choices, PIKS
    methodology evolution.
 3. **[The research log](../../vista/export/RESEARCH.md)** — discovery
-   findings (`RF-001` … `RF-033`), each with context, hypothesis,
+   findings (`RF-001` … `RF-034`), each with context, hypothesis,
    evidence, and conclusion. Findings drive spec revisions and new
    ADRs.
 
@@ -591,7 +599,7 @@ Every pipeline step is a `make` target (`make help` lists them).
 Every TSV is regeneratable from upstream inputs. Errors and fixes
 are logged in [`docs/build-log.md`](../build-log.md) with BL-NNN
 references. Dependency versions are pinned in
-[`docs/dependencies.md`](dependencies.md).
+[`docs/guides/dependencies.md`](dependencies.md).
 
 The discipline is strict enough that another team could clone the
 repo, run `make build && make run && make bake`, and get the same
@@ -637,7 +645,8 @@ Four classes of product now plausible on this base:
 ## 10. Further reading
 
 - [vista-meta-spec-v0.4.md](../historical/vista-meta-spec-v0.4.md) — the
-  authoritative technical spec. Start at §11 for the analytical
+  original build spec (now historical; the live contracts are in
+  [docs/reference/](../reference/)). Start at §11 for the analytical
   methodology.
 - [vista-developers-guide.md](vista-developers-guide.md) — how a
   Python / JavaScript / Go developer orients in a VistA codebase
@@ -649,11 +658,12 @@ Four classes of product now plausible on this base:
   triage history.
 - [code-model-guide.md](code-model-guide.md) — per-TSV reference
   for the code-model artifacts.
-- `~/projects/py-kids-vc/` — the decompose/assemble/roundtrip
-  toolchain (formerly `kids-vc` in this repo), now a standalone
-  pip-installable project. See its `docs/kids-vc-guide.md` for
-  the full pipeline and XPDK2VC compatibility story.
-- [xindex-reference.md](xindex-reference.md) — what XINDEX extracts
+- `~/vista-forge/v-pkg` — the decompose/assemble/roundtrip
+  toolchain (formerly `kids-vc` in this repo, then the retired
+  `py-kids-vc`). The archived py-kids-vc docs — full pipeline and
+  XPDK2VC compatibility story — live at
+  `~/projects/archive/py-kids-vc/docs/kids-vc-guide.md`.
+- [xindex-reference.md](../reference/xindex-reference.md) — what XINDEX extracts
   vs what the vista-meta regex-based tools extract.
 - [build-log.md](../build-log.md) — chronological error + fix log
   (BL-NNN).

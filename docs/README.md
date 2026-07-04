@@ -20,8 +20,8 @@ Documentation here is classified by **lifecycle state, not topic**:
 | Location | Contents | Lifetime |
 |---|---|---|
 | `docs/` root | this index · [`build-log.md`](build-log.md) (BL-NNN build/error record) | evergreen |
-| [`guides/`](guides/) | operator/consumer docs, **kept current**: [`vista-meta-guide.md`](guides/vista-meta-guide.md) (start here) · [`DE-NOVO.md`](guides/DE-NOVO.md) (clean-clone runbook) · developer onramp · situational-awareness playbooks · per-TSV code-model reference · PIKS methodology · XINDEX reference · VSCode/CLI guide + extension internals · snapshot/restore runbook · dependency pins | evergreen, edited freely |
-| [`reference/`](reference/) | durable contracts cited from code, **path-stable**: [`schema-v1-normalization-spec.md`](reference/schema-v1-normalization-spec.md) (the shipped `schema_version: 1` contract of record) · [`model-extraction-contract.md`](reference/model-extraction-contract.md) (spec-v0.4 §11.3–11.6, the extraction/PIKS contract) | evergreen; changes = version breaks |
+| [`guides/`](guides/) | operator/consumer docs, **kept current**: [`vista-meta-guide.md`](guides/vista-meta-guide.md) (start here) · [`DE-NOVO.md`](guides/DE-NOVO.md) (clean-clone runbook) · developer onramp · situational-awareness playbooks · per-TSV code-model reference · PIKS methodology · VSCode/CLI guide + extension internals · snapshot/restore runbook · dependency pins | evergreen, edited freely |
+| [`reference/`](reference/) | durable contracts cited from code, **path-stable**: [`schema-v1-normalization-spec.md`](reference/schema-v1-normalization-spec.md) (the shipped `schema_version: 1` contract of record) · [`model-extraction-contract.md`](reference/model-extraction-contract.md) (spec-v0.4 §11.3–11.6, the extraction/PIKS contract) · [`xindex-reference.md`](reference/xindex-reference.md) (durable XINDEX catalog, code-cited) | evergreen; changes = version breaks |
 | [`adr/`](adr/) | numbered decision records, immutable once accepted; supersede via new ADR ([index](adr/000-index.md)) | permanent |
 | [`proposals/`](proposals/) | **live or parked-unfinished** workstreams only | until the workstream closes |
 | [`releases/`](releases/) | release records: [`data-v1.manifest.json`](releases/data-v1.manifest.json) (what consumers verify a download against) · [`data-v1-peers.json`](releases/data-v1-peers.json) (Gate-R mutual pin with vdocs) | permanent |
@@ -46,8 +46,11 @@ Documentation here is classified by **lifecycle state, not topic**:
 - **Open follow-ups:** [`../TODO.md`](../TODO.md) (T-001 routine-count reconciliation,
   T-002 cohorts, T-003 unreferenced-routine reduction, T-004 orchestration execution) —
   anchored to RESEARCH.md RF numbers.
-- **Governance:** ADRs through 049 (047 data-release model · 048 Compass architecture ·
-  049 root path, superseding 044); the [ADR index](adr/000-index.md) carries a Reality
-  column for decisions that diverged. `build-log.md` is frozen at BL-013 (Apr 2026).
+- **Governance:** ADRs through 051 (047 data-release model · 048 Compass architecture ·
+  049 root path, superseding 044 · 050 local-only networking, superseding 008 ·
+  051 unconsumed services WARN); the [ADR index](adr/000-index.md) carries a Reality
+  column for decisions that diverged. `build-log.md` is the frozen Phase-1 record
+  (BL-001–BL-013, Apr 2026), resumed 2026-07-04 for BL-014/BL-015 (broker xinetd fix;
+  reproducibility pins + FMQL removal).
   `make docs-check` guards links/citations (also wired into the pre-commit hook);
   `make smoke` (tests/smoke/smoke.sh, S-01…S-12) is the ADR-027 post-build gate.

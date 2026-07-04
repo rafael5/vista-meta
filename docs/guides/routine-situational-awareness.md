@@ -68,7 +68,7 @@ fields:
 
 ```
 PRCA45PT  [Accounts Receivable]
-74 lines · in=0 · out=5 · RPC×0 · OPT×1
+74 lines · in=0 · out=5 · RPC×0 · OPT×0
 ```
 
 | Field | What it tells you | Mental model |
@@ -124,7 +124,7 @@ Common prefixes worth memorizing:
 | Prefix | Package | Prefix | Package |
 |---|---|---|---|
 | `XU*` | Kernel (auth, sessions, jobs) | `PSO*` | Outpatient Pharmacy |
-| `XW*` | Kernel toolkit | `PSI*` | Inpatient Pharmacy |
+| `XT*` | Kernel Toolkit (XINDEX lives here) | `PSJ*` | Inpatient Medications |
 | `DI*` | FileMan core | `LR*` | Lab |
 | `DIC*` | FileMan dictionary | `RA*` | Radiology |
 | `DG*` | Registration | `OR*` | Order Entry / CPRS |
@@ -143,16 +143,16 @@ Two sources, same time:
 **A. The first 3 lines of the file** (VistA convention):
 
 ```
-PRCA45PT ;ALB/CMS - PURGE EXEMPT BILL FILES ;6/30/97  09:13
- ;;4.5;Accounts Receivable;**14,79,153,302,409**;Mar 20, 1995;Build 78
- ;Per VHA Directive 2004-038, this routine should not be modified.
+PRCA45PT ;W-CIOFO/MAF - FOR IFCAP PURGE ; 09-JULY-97
+V ;;4.5;Accounts Receivable;**88**;Mar 20, 1995
+ ;
 ```
 
 | Line | Format | Carries |
 |------|--------|---------|
-| 1    | `NAME ;site/author - title ;date` | Author site (`ALB` = Albany), one-line title |
-| 2    | `;;version;package;**patches**;date;build` | Patch list — the audit trail |
-| 3    | Free-form `;` comments | Often a directive or warning — read it |
+| 1    | `NAME ;site/author - title ;date` | Author site (`W-CIOFO` = Western CIO Field Office), one-line title |
+| 2    | `;;version;package;**patches**;date;build` | Patch list — the audit trail (a label like `V` may precede the `;;`) |
+| 3    | Free-form `;` comments | Sometimes a directive or warning — read it |
 
 The patch list (`**14,79,153,...**`) is the most underrated metadata
 in VistA: each number is a `.KID` patch that touched this routine.
@@ -236,7 +236,7 @@ Read the globals top-down by ref-count:
 | `^DPT` | Registration | Patient data — protected |
 | `^PS(...)` | Pharmacy | Drug / order data |
 | `^OR(...)` | CPRS / Order Entry | Clinical orders |
-| `^LAB(...)` | Lab | Lab results |
+| `^LR(...)` | Lab | Lab results (`^LAB(60,` is the test definitions) |
 | `^DIC` | FileMan | Reading the data dictionary itself |
 | `^DD` | FileMan | Reading field definitions |
 | `^DIZ` | FileMan | Local site customization tables |
@@ -446,37 +446,38 @@ You've never seen this routine. Stopwatch.
 Package = Accounts Receivable. Prefix `PRCA*` matches.
 
 **0:20 — L1.** Sidebar header: `PRCA45PT [Accounts Receivable] · 74
-lines · in=0 · out=5 · OPT×1`. Small file. No callers — entrypoint
-or dead. One Option exposure → menu-invokable, not dead.
+lines · in=0 · out=5 · RPC×0 · OPT×0`. Small file. No callers and no
+RPC/Option exposure — entrypoint of some other kind, or dead. The
+callee list (L3) will disambiguate.
 
-File line 1: `PRCA45PT ;ALB/CMS - PURGE EXEMPT BILL FILES ;6/30/97`.
-"Purge exempt bill files." Now you know what it does in plain
+File line 1: `PRCA45PT ;W-CIOFO/MAF - FOR IFCAP PURGE ; 09-JULY-97`.
+"For IFCAP purge." Now you know what it does in plain
 English, without reading any code.
 
-File line 2: `;;4.5;Accounts Receivable;**14,79,153,302,409**;Mar 20,
-1995;Build 78`. Five patches over ~25 years — moderate maintenance.
+File line 2: `V ;;4.5;Accounts Receivable;**88**;Mar 20, 1995`. One
+patch since 1995 — this routine *is* patch 88's payload.
 
-**0:50 — L2.** Tags: `V`, `EN`, `430`, `433`, `XCLN`. `EN` is the
-conventional entrypoint; `430`/`433` are numeric (probably file
-numbers, given the package); `XCLN` looks like the cleanup. Five
-tags in 74 lines = dense.
+**0:50 — L2.** Tags: `V`, `EN`, `430`, `433`, `XCLN` (plus the
+routine-name label). `EN` is the conventional entrypoint; `430`/`433`
+are numeric (they match AR file numbers 430/433, given the package);
+`XCLN` looks like the cleanup. Six tags in 74 lines = dense.
 
 **2:00 — L3.** Callees:
 `BMES^XPDUTL ×7`, `MES^XPDUTL ×6` — these are KIDS-installer message
 helpers, so this routine is wired into a patch installer.
-`HOME^%ZIS ×1`, `^%ZTLOAD ×1`, `^DIK ×1` — device, taskman, FileMan
-delete. Globals: `^PRCA ×18`. The whole routine operates on the
-Accounts Receivable global.
+`HOME^%ZIS ×1`, `^%ZTLOAD ×1`, `^DIK ×1`, `^XMD ×1` — device, taskman,
+FileMan delete, MailMan send. Globals: `^PRCA ×18`. The whole routine
+operates on the Accounts Receivable global.
 
 **2:30 — L5.** XINDEX: 2 Style findings ("Lock missing Timeout") at
-lines 41 and 53. Legacy code; not fatal.
+`430+5` and `433+5`. Legacy code; not fatal.
 
-**Synthesis (2:30):** "PRCA45PT is a 74-line cleanup utility that's
-invoked from a KIDS patch install. It iterates the AR global and
-deletes exempt bill records via FileMan. It's menu-exposed but
-mostly fires from the installer. Two old style violations, no
-fatals. Editing is low-risk if you preserve the patch-install
-contract."
+**Synthesis (2:30):** "PRCA45PT is a 74-line purge utility that's
+invoked from a KIDS patch install (patch 88). It iterates the AR
+global and deletes records via FileMan `^DIK`, mailing a report via
+`^XMD`. No RPC/Option exposure — it fires from the installer. Two
+old style violations, no fatals. Editing is low-risk if you preserve
+the patch-install contract."
 
 You haven't read the actual MUMPS yet. You don't need to, unless
 your task requires it.
@@ -490,29 +491,32 @@ Same exercise, different quadrant.
 **0:05 — L0.** Path: `Packages/Kernel/Routines/XUSCLEAN.m`. Kernel.
 Prefix `XU*`.
 
-**0:30 — L1.** Sidebar header: `XUSCLEAN [Kernel] · 180 lines ·
-in=400+ · out=20 · RPC×0 · OPT×0`. **Stop.** in=400+ means this is a
+**0:30 — L1.** Sidebar header: `XUSCLEAN [Kernel] · 89 lines ·
+in=413 · out=8 · RPC×0 · OPT×0`. **Stop.** in=413 means this is a
 framework routine. Editing it changes behavior across every package.
 
-Line 1: `XUSCLEAN ;SF-IRMFO/MVB - SIGN-ON CLEANUP ROUTINE`.
-Line 2: many patches. Line 3+: comments warning against modification.
+Line 1: `XUSCLEAN ;SF/STAFF - CLEANUP BEFORE EXIT`.
+Line 2: five patches. Line 3 is already code — tag `H`, commented
+"Exit point for all R/S applications".
 
-**1:00 — L2.** Tags include `BYE`, `MAIN`, `EXIT`, plus a host of
-internal helpers. The `BYE` tag is the conventional sign-off
-entrypoint — you've probably seen `D BYE^XUSCLEAN` everywhere in
-VistA. That's why the in-degree is huge.
+**1:00 — L2.** Tags include `H`, `BYE`, `KILL`, `LOUT`, plus a host
+of internal helpers. `KILL^XUSCLEAN` is the conventional
+variable-cleanup call (314 of the 413 inbound edges land on it), and
+`G ^XUSCLEAN` is the sanctioned sign-off — XINDEX error 32 literally
+says `HALT` "should be invoked through 'G ^XUSCLEAN'". That's why
+the in-degree is huge.
 
 **3:00 — L3.** Top callers span every package. Globals:
-`^XUSEC` (security), `^XTMP` (cross-job scratch), `^%ZIS` (devices).
-This is genuinely framework code.
+`^XUTL` (session scratch, ×13), `^XUSEC` (security), `^%ZIS`
+(devices). This is genuinely framework code.
 
 **3:30 — L5.** XINDEX clean. Pre-commit hook will reject any new
 `HALT` you add — and you'd want it to.
 
-**Synthesis:** "XUSCLEAN is the canonical sign-off routine. Every
-package's logout flow goes through `BYE^XUSCLEAN`. Don't edit it
-unless you have a Kernel-level mandate; treat it as read-only
-infrastructure."
+**Synthesis:** "XUSCLEAN is the canonical sign-off/cleanup routine.
+Every package's logout flow goes through `KILL^XUSCLEAN` or
+`G ^XUSCLEAN`. Don't edit it unless you have a Kernel-level mandate;
+treat it as read-only infrastructure."
 
 The shape of the sweep is the same; the **decision** is the
 opposite. That's the point — your reading effort calibrates to the
@@ -561,7 +565,7 @@ VistA has specific gotchas that burn time if you don't know them.
 | **Confusing `^GLOBAL` and `^ROUTINE`** | `^XUSCLEAN` could be either | The lookup is unambiguous: if it's in the routine inventory, it's a routine; otherwise it's a global. The 0.2.0 [hover](vscode-extension-internals.md#71-tier-a--hoverprovider-shipped-in-020) decides for you — hover the token and it renders a routine card or a global card. |
 | **Ignoring `in=0`** | "Dead code, skip" | Check L4 first. RPCs, Options, and Protocols invoke from outside the M call graph — `in=0` plus `RPC×N` or `OPT×N` is a live entrypoint. |
 | **Treating numeric tags as line numbers** | `D 430` looks like a typo for line 430 | Numeric tags are real label names, often historic state-machine entries. They're rarely safe to rename. |
-| **Editing line 2** | Adding a patch reference, hand-editing the version | Line 2 is parsed by the KIDS installer. Never hand-edit; use the patch tooling (`~/projects/py-kids-vc/`). |
+| **Editing line 2** | Adding a patch reference, hand-editing the version | Line 2 is parsed by the KIDS installer. Never hand-edit; use the patch tooling (the `make patch-*` targets, backed by `v-pkg`). |
 | **Skipping the patch list** | Missing the "this routine has been touched 47 times" signal | The `**14,79,153,...**` on line 2 is the audit trail. Long list = mature, much-tested; short list = brittle or unmaintained. |
 | **Treating XINDEX `S` (Style) as "noise"** | Shipping `LOCK ^X` without timeout because legacy does it | Legacy is grandfathered. New code must pass — the [pre-commit hook](vista-vscode-guide.md#5-the-pre-commit-hook) enforces it. |
 | **`xecute` callees in the sidebar** | Treating `XECUTE` targets as real callees | They're dynamic — string assembled at runtime. May not exist on this system. The `kind` column flags them. |
@@ -578,7 +582,7 @@ Run-once checklist to make the rest of this guide fast.
 
 ```bash
 # 1. Tools on PATH
-echo 'export PATH="$HOME/vista-meta/bin:$PATH"' >> ~/.bashrc
+echo 'export PATH="$HOME/projects/vista-meta/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 
 # 2. Pre-commit hook
@@ -674,7 +678,7 @@ Print this and tape it next to the monitor.
 - [vista-vscode-guide.md](vista-vscode-guide.md) — every tool this repo ships
 - [vista-developers-guide.md](vista-developers-guide.md) — VistA architectural background
 - [vscode-extension-internals.md](vscode-extension-internals.md) — internals + roadmap (HoverProvider, etc.)
-- [code-model-guide.md](code-model-guide.md) — the 19 TSVs the sidebar reads
+- [code-model-guide.md](code-model-guide.md) — the 20 TSVs the sidebar reads
 - [piks-analysis-guide.md](piks-analysis-guide.md) — what P/I/K/S means
-- [xindex-reference.md](xindex-reference.md) — what the XINDEX section is showing you
-- `~/projects/py-kids-vc/docs/kids-vc-guide.md` — KIDS patch workflow (line-2 patch list)
+- [xindex-reference.md](../reference/xindex-reference.md) — what the XINDEX section is showing you
+- `~/vista-forge/v-pkg/` — KIDS patch tooling behind the `make patch-*` targets (line-2 patch list; supersedes the retired py-kids-vc)

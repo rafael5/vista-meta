@@ -99,7 +99,7 @@ routine/token analysis → TSV reads. `model.ts` is deliberately pure
 (no `vscode` imports) so the schema_v1 contract helpers — `globalBase`
 and the vintage parsers — are node-testable against the real
 artifacts. There is no async work; the largest TSV
-(`routine-calls.tsv`, ~20 MB) reads in ~200 ms on first access and
+(`routine-calls.tsv`, ~10 MB) reads in ~200 ms on first access and
 stays warm.
 
 ---

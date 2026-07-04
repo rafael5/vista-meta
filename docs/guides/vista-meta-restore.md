@@ -8,7 +8,8 @@ A single guide covering three related operations:
    KIDS patches, the extracted data + code model) but **does not** push the
    ~40k upstream VistA-M routines.
 3. **Recover** when a KIDS install or a hand-rolled routine breaks VistA.
-   Because KIDS is forward-only (ADR-046 (in `~/projects/py-kids-vc/docs/adr/046-*.md`)),
+   Because KIDS is forward-only (ADR-046, archived at
+   `~/projects/archive/py-kids-vc/docs/adr/046-*.md`),
    "restore" here means rolling globals + dev routines back to a known-good
    state, not surgical patch removal.
 
@@ -48,7 +49,8 @@ and is archived at
 
 ## Part C — Pre-install discipline (do this **before** every KIDS install)
 
-KIDS is forward-only. Per ADR-046 (in `~/projects/py-kids-vc/docs/adr/046-*.md`):
+KIDS is forward-only. Per ADR-046 (archived at
+`~/projects/archive/py-kids-vc/docs/adr/046-*.md`):
 
 > KIDS install is an imperative sequence that overwrites routine source,
 > merges DD changes directly into `^DD`, adds entries in File 19/101/8994,
@@ -57,7 +59,8 @@ KIDS is forward-only. Per ADR-046 (in `~/projects/py-kids-vc/docs/adr/046-*.md`)
 
 So your only honest pre-install line of defense is: **snapshot first, install
 second**. The Makefile already gives you both halves
-([Makefile:132-148](../../Makefile#L132-L148)):
+(`make snapshot-globals` / `make restore-globals` in the
+[Makefile](../../Makefile)):
 
 ```bash
 # 1. Snapshot globals BEFORE installing
@@ -69,7 +72,7 @@ make snapshot-globals
 git add vista/dev-r
 git commit -m "pre-KIDS-install: ABC*1.0*42 baseline"
 
-# 3. Now install the KIDS bill — via FORUM, KIDS menu, or kids-vc
+# 3. Now install the KIDS bill — via FORUM, KIDS menu, or v-pkg
 ```
 
 Two snapshots, two layers of recovery. Globals snapshot covers the database
@@ -143,10 +146,10 @@ make doctor
 You're now back to whatever globals state was baked into the image at
 `make build` time — i.e., a clean post-VEHU-import VistA. The first run
 will re-trigger the bake sentinel logic in
-[entrypoint.sh:74-87](../../docker/entrypoint.sh#L74-L87) only if the bake
+[entrypoint.sh](../../docker/entrypoint.sh) (phase 4) only if the bake
 sentinel was on the volume; if export is on a bind mount (it is —
-[Makefile:39](../../Makefile#L39)), bake state survives this. Good — you don't
-re-bake unless you want to.
+[docker/compose.yml](../../docker/compose.yml)), bake state survives this.
+Good — you don't re-bake unless you want to.
 
 ### Tier 3 — Full rebuild: nuke everything, restore from image rebuild
 
@@ -154,10 +157,10 @@ re-bake unless you want to.
 starting point. ~20 minutes total.
 
 ```bash
-# 1. Destroy container + volume + image (with prompt, per Makefile:57-64)
+# 1. Destroy container + volume + image (with prompt; FORCE=1 skips it)
 make clean
 # This removes:
-#   - container vista-meta
+#   - container vista-vehu
 #   - volume vehu-globals
 #   - images vista-meta:latest and vista-meta:<date>
 # It does NOT touch:
@@ -210,16 +213,19 @@ want to selectively restore individual routines).
 
 ## Future: surgical per-patch undo (Phase 9, proposed)
 
-ADR-046 (in `~/projects/py-kids-vc/docs/adr/046-*.md`) outlines a planned
-**kids-vc undo** feature: a pre-install MUMPS hook (`VMKVCUNDO`) that
-captures pre-state into `^XTMP("KVC-UNDO",<patch>,...)` and a Python tool
-that re-emits it as a reverse `.KID`. Per the ADR, that scope covers
-declarative content (routines, DDs, options, protocols, RPCs, security
-keys) — but not pre/post-install MUMPS side effects, FileMan data
+ADR-046 (archived at `~/projects/archive/py-kids-vc/docs/adr/046-*.md`)
+outlined a planned **kids-vc undo** feature: a pre-install MUMPS hook
+(`VMKVCUNDO`) that captures pre-state into `^XTMP("KVC-UNDO",<patch>,...)`
+and a Python tool that re-emits it as a reverse `.KID`. Per the ADR, that
+scope covers declarative content (routines, DDs, options, protocols, RPCs,
+security keys) — but not pre/post-install MUMPS side effects, FileMan data
 mutations, or cascading data changes.
 
-Until that ships, the snapshot-first / commit-first discipline in Part C
-is the working answer.
+With py-kids-vc retired (2026-07-04), that scope passed to its Go
+successor **v-pkg** (`~/vista-forge/v-pkg`), which owns KIDS
+build/install/verify/back-out over the driver seam. Until a surgical
+per-patch undo ships there, the snapshot-first / commit-first discipline
+in Part C is the working answer.
 
 ---
 
@@ -260,5 +266,7 @@ make doctor              # health check
 - [.gitignore](../../.gitignore) — what's pushed and what's ignored
 - [ADR-029](../adr/029-symlink-farm-routines.md) — flat routine namespace (now hard copies per BL-009)
 - [ADR-045](../adr/045-data-code-separation-package-bridge.md) — host-side `vista/vista-m-host/` snapshot
-- ADR-046 (in `~/projects/py-kids-vc/docs/adr/046-*.md`) — why KIDS undo is hard
-- `~/projects/py-kids-vc/docs/kids-vc-guide.md` — patch decompose/assemble workflow
+- ADR-046 (archived at `~/projects/archive/py-kids-vc/docs/adr/046-*.md`) — why KIDS undo is hard
+- `~/vista-forge/v-pkg` — the live patch decompose/assemble toolchain
+  (successor of the retired py-kids-vc; its archived guide is at
+  `~/projects/archive/py-kids-vc/docs/kids-vc-guide.md`)

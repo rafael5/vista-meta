@@ -7,7 +7,7 @@ contemporary full-stack development practice and a list of what VistA
 is missing.
 
 Written 2026-04-19 after ADR-045 + Phase 7 (XINDEX run + validation).
-Companion to [xindex-reference.md](xindex-reference.md), which covers
+Companion to [xindex-reference.md](../reference/xindex-reference.md), which covers
 the XINDEX tool specifically.
 
 ---
@@ -67,7 +67,7 @@ These are approximate (regex, not parsed MUMPS) but broad-coverage — they incl
 
 ### 1.4 Code-quality layer — "how the code behaves"
 
-From XINDEX, VistA's own static analyzer (Toolkit XT*7.3*158, VEHU blend per RF-027). See [xindex-reference.md](xindex-reference.md) for the full catalog.
+From XINDEX, VistA's own static analyzer (Toolkit XT*7.3*158, VEHU blend per RF-027). See [xindex-reference.md](../reference/xindex-reference.md) for the full catalog.
 
 | File | Rows | Columns | Contents |
 |---|---|---|---|
@@ -199,7 +199,7 @@ These are the T-001/T-002/T-003 TODOs.
 - Developer edits `.m` files in a normal editor (VSCode with MUMPS extensions, EmEditor, vim).
 - Commits go to a branch; PR merged to master; releases tagged.
 - Install into a running system still uses KIDS — the git repo is source-of-truth, the KIDS build is the deployment artifact.
-- This project's own Dockerfile pulls from [WorldVistA/VistA-M](https://github.com/WorldVistA/VistA-M) (ADR-002) — which stores M routines as individual `.m` files under `Packages/<pkg>/Routines/`. That structure is what makes our Phase 1+ extractions possible.
+- This project's own Dockerfile pulls from [WorldVistA/VistA-VEHU-M](https://github.com/WorldVistA/VistA-VEHU-M) (ADR-002) — which stores M routines as individual `.m` files under `Packages/<pkg>/Routines/`. That structure is what makes our Phase 1+ extractions possible.
 
 The VA's internal development still uses the traditional model; the community model is overlaid on top. Our VEHU XINDEX blend (RF-027) shows this: VA-trunk patches 148–158 coexist with WorldVistA patches 10001/10003 in the same routines.
 
@@ -517,16 +517,17 @@ without case-folding. Uncovered rows (rpcs 96%, options 79%, protocols 73%)
 are registry entries whose #9.4 package is blank or unmapped — genuinely
 unresolvable, not silent drops.
 
-Regenerate: `make package-namespace` (P3/P4) + `make augment-registries`
-(P1/P2) — pure host-side post-processing; idempotent; needs write access to
-the uid-1001 `vista/export/code-model/` tree.
+Regenerate: `make package-namespace` (P3/P4); the P1/P2 registry augmentation
+now lands as part of `make normalize-dumps` (the standalone
+`make augment-registries` target is retired). Pure host-side post-processing;
+idempotent; needs write access to the uid-1001 `vista/export/code-model/` tree.
 
 ---
 
 ## 8. Related documents
 
 - [ADR-045](../adr/045-data-code-separation-package-bridge.md) — the architecture decision this guide operates under
-- [xindex-reference.md](xindex-reference.md) — detailed XINDEX catalog and coverage matrix
+- [xindex-reference.md](../reference/xindex-reference.md) — detailed XINDEX catalog and coverage matrix
 - [piks-analysis-guide.md](piks-analysis-guide.md) — the data-model side companion
 - [vista-meta-spec-v0.4.md](../historical/vista-meta-spec-v0.4.md) §11 — research system, extraction pipeline
-- [vista/export/RESEARCH.md](../../vista/export/RESEARCH.md) — RF-001 through RF-027 analytical findings log
+- [vista/export/RESEARCH.md](../../vista/export/RESEARCH.md) — RF-001 through RF-034 analytical findings log

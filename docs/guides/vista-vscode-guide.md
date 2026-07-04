@@ -67,8 +67,9 @@ make patch-roundtrip KID=...    decompose + re-assemble + diff
 ### 1.1 Prerequisites
 
 - Python 3.10+ at `/usr/bin/python3`
-- Node 18+ (for the VSCode extension build only)
-- Docker with the `vista-meta` container built (`make build && make run`)
+- Node 20+ (for the VSCode extension build only)
+- Docker with the `vista-meta` image built and the `vista-vehu`
+  container running (`make build && make run`)
 - bash 5.x
 
 The CLI tools have **zero external Python dependencies** — standard
@@ -79,7 +80,7 @@ library only.
 Add to `~/.bashrc` (or wherever you keep PATH edits):
 
 ```bash
-export PATH="$HOME/vista-meta/bin:$PATH"
+export PATH="$HOME/projects/vista-meta/bin:$PATH"
 ```
 
 Now `vista-meta pkg PSO` works from any directory inside the
@@ -88,7 +89,7 @@ workspace.
 ### 1.3 Install the pre-commit hook
 
 ```bash
-cd ~/vista-meta
+cd ~/projects/vista-meta
 make install-hooks
 ```
 
@@ -363,7 +364,8 @@ Reports:
   `make sync-routines` run
 - 9 critical code-model TSVs present
 - 3 data-model TSVs present
-- container `vista-meta` running
+- container `vista-vehu` running (and, when up: Docker healthcheck,
+  service ports, YDB round-trip)
 
 Exit 0 if every hard check passes, 1 otherwise. Run this any time
 something feels off.
@@ -498,7 +500,7 @@ vista-meta xindex /tmp/MYNEW.m
 vista-meta xindex vista/dev-r/VMPIKS.m
 ```
 
-Requires container `vista-meta` running. Copies the file into
+Requires container `vista-vehu` running. Copies the file into
 `/home/vehu/dev/r/<name>.m`, drives the existing VMXIDX routine
 (`SETUP + PROC + EXTRACT`), reads `/tmp/xindex-errors.tsv`, and
 emits one line per finding:
@@ -611,8 +613,9 @@ added malformed files correctly flagged.
 ## 6. Patch workflow (decomposed-on-disk)
 
 Edit patches as trees of files, not `.KID` bundles. Assembly is
-done by the **`kids-vc`** CLI from `~/projects/py-kids-vc/` (install
-with `pip install kids-vc`); the `make patch-*` targets below shell
+done by the **`v-pkg`** CLI (`~/vista-forge/v-pkg`, a Go binary on
+`$PATH` — the successor of the retired `kids-vc`/`py-kids-vc`; same
+verbs and argument shapes); the `make patch-*` targets below shell
 out to it.
 
 ### 6.1 Start a new patch
@@ -656,14 +659,15 @@ make patch-roundtrip KID=some.KID
 # decompose + re-assemble + diff; should be byte-identical
 ```
 
-The full kids-vc toolchain is documented in
-`~/projects/py-kids-vc/docs/kids-vc-guide.md`.
+The live patch toolchain is `v-pkg` (`~/vista-forge/v-pkg`); the
+retired kids-vc docs are archived at
+`~/projects/archive/py-kids-vc/docs/kids-vc-guide.md`.
 
 ---
 
 ## 7. CI — enforce the same checks on PRs
 
-One workflow under `.github/workflows/`:
+Two workflows under `.github/workflows/`:
 
 ### 7.1 `dev-tools-ci.yml`
 
@@ -676,9 +680,19 @@ the dev tool scripts:
 | `lint` | `vista-meta lint` on `.m` files newly added in the PR diff |
 | `syntax` | `py_compile` on `vista_meta_cli.py` + `mfmt.py` |
 
-> kids-vc CI lives in the `~/projects/py-kids-vc/` repo.
+### 7.2 `ci.yml` — the slim clean-clone gate
 
-### 7.2 Running the same checks locally
+Runs on every push/PR: the stdlib-only Python unit suites
+(`host/scripts/tests/test_*.py`), `docs_check.py` (dead links /
+dead `# Spec:` citations), a `bash -n` syntax check of
+`tests/smoke/smoke.sh`, and an `npm ci && npm run compile` of the
+VSCode extension. The full 19 GB container build deliberately stays
+local — hosted runners lack the disk (see
+[DE-NOVO.md](DE-NOVO.md)).
+
+> v-pkg's own CI lives in its repo (`~/vista-forge/v-pkg`).
+
+### 7.3 Running the same checks locally
 
 ```bash
 # What fmt-check does:
@@ -796,7 +810,7 @@ shipping SAC-violating code by accident.
 ### 9.5 Keep patches on-disk, not in `.KID`
 
 Never hand-edit a `.KID` file. The line-2 rules, patch-list format,
-and ZWR escaping are fiddly. Let `kids-vc` assemble; you edit the
+and ZWR escaping are fiddly. Let `v-pkg` assemble; you edit the
 tree.
 
 ### 9.6 Use `search` for "does this convention exist already"
@@ -816,7 +830,7 @@ are learned by imitation (§6.1 of the developer's guide).
 
 ### Sidebar is empty after opening a `.m` file
 
-Run `vista-meta: Reload Code-Model TSVs` from the command palette.
+Run `VistA Compass: Reload Code-Model TSVs` from the command palette.
 If still empty, `bin/vista-meta doctor` — you likely need to sync.
 
 ### `vista-meta pkg` says "No package matching"
@@ -831,7 +845,7 @@ the exact list.
 
 ```bash
 make run
-bin/vista-meta doctor            # confirm "container vista-meta running"
+bin/vista-meta doctor            # confirm "container vista-vehu running"
 bin/vista-meta xindex <file>
 ```
 
@@ -887,6 +901,7 @@ directory holding `code-model/` + `data-model/` (the repo's
 - [.github/workflows/](../../.github/workflows/) — CI
 - [Makefile](../../Makefile) — all Makefile targets (`make help` lists them)
 - [vista-developers-guide.md](vista-developers-guide.md) — architectural context
-- `~/projects/py-kids-vc/` — `.KID` decompose / assemble (sibling project)
+- `~/vista-forge/v-pkg` — `.KID` decompose / assemble (successor of the
+  retired `py-kids-vc`)
 - [code-model-guide.md](code-model-guide.md) — the TSVs these tools read
 - [piks-analysis-guide.md](piks-analysis-guide.md) — the data-model side

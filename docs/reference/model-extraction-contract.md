@@ -10,7 +10,9 @@ stable, citable home.
 - **Amended by [`schema-v1-normalization-spec.md`](schema-v1-normalization-spec.md)** (the
   shipped `schema_version: 1` contract): leading `ien` columns, `*_label` companions,
   `routine`→`routine_name`, and the P1–P4 `package`/`package_dir` columns supersede the raw
-  column shapes shown here. Where the two disagree, schema-v1 wins.
+  column shapes shown here; `vista-fileman-piks-comprehensive.csv` (listed in §11.3 below)
+  was dropped by schema-v1 §5, and `piks.tsv` now carries the materialized merge
+  (`piks_source`). Where the two disagree, schema-v1 wins.
 - The surrounding build spec (§1–§10, §12–§15 — container, bake, Makefile, docs system) is an
   as-built record at [`../historical/vista-meta-spec-v0.4.md`](../historical/vista-meta-spec-v0.4.md).
 

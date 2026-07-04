@@ -1,7 +1,8 @@
 # XINDEX reference — metrics, parameters, output surfaces
 
 Catalog of everything XINDEX (VistA's own static analyzer, Toolkit
-patch XT*7.3*158, Enhanced flavor via OSEHRA/WorldVistA) produces.
+through patch XT*7.3*158 — the VEHU blend per RF-027, not
+WorldVistA/XINDEX master) produces.
 Written 2026-04-19 during Phase 6 closure of ADR-045.
 
 Purpose: document what a future Phase 7+ could extract from XINDEX
@@ -206,7 +207,7 @@ File 9.8 was largely empty of XINDEX-generated data and that the bake's
 `xindex` phase was still pending. The batch XINDEX run has since happened
 and shipped the five `xindex-*.tsv` artifacts (29,097 routines processed,
 6,907 errors). See §3 for the error catalog and
-[code-model-guide.md](code-model-guide.md) §1.4 for the current shapes.
+[code-model-guide.md](../guides/code-model-guide.md) §1.4 for the current shapes.
 
 ## 7. How DOX (vivian.worldvista.org/dox/) uses XINDEX
 
@@ -244,7 +245,7 @@ Full phase-by-phase map of what our ad-hoc extraction code produces
 vs what XINDEX produces, with an overlap verdict per row.
 
 Per-TSV column lists and row counts live in
-[code-model-guide.md](code-model-guide.md) §1 — the single schema source
+[code-model-guide.md](../guides/code-model-guide.md) §1 — the single schema source
 (`schema_version: 1`). This matrix keeps only what's XINDEX-specific:
 extraction provenance and the overlap verdicts.
 
@@ -257,7 +258,7 @@ Legend for **Overlap** column:
 | Phase | Our artifact | Our extraction produces | XINDEX equivalent | Overlap | Notes |
 |---|---|---|---|---|---|
 | 1a | Makefile `sync-routines`, `.gitignore` | docker cp host snapshot | — | NONE | Infrastructure, not extraction. Needed before anything. |
-| 1b | `routines.tsv` | routine_name, package, source_path, line_count, byte_size, first_line_comment | `xindex-routines.tsv`: line_count; File 9.8 `1.2 SIZE` | PARTIAL | XINDEX has exact line_count match (100% validated). But XINDEX doesn't know `package` (filesystem-level fact) or `first_line_comment` or `source_path`. Also XINDEX can't process 10,232 T-002-cohort routines; our regex covers them all. |
+| 1b | `routines.tsv` | routine_name, package, source_path, line_count, byte_size, first_line_comment | `xindex-routines.tsv`: line_count; File 9.8 `1.2 SIZE` | PARTIAL | XINDEX has exact line_count match (100% validated). But XINDEX doesn't know `package` (filesystem-level fact) or `first_line_comment` or `source_path`. Also XINDEX can't process the ~10,000 T-002-cohort routines; our regex covers them all. |
 | 1b | `packages.tsv` | per-package aggregates | — | NONE | Package is filesystem fact, not XINDEX scope. |
 | 2a | `routines.tsv` extension | version_line, tag_count, comment_line_count, is_percent_routine | `xindex-routines.tsv`: tag_count; `xindex-tags.tsv`: full tag detail with Supported Entry Point flag | PARTIAL | **tag_count 100% matches XINDEX.** XINDEX adds SEP classification per tag. version_line and comment_line_count are our own — XINDEX doesn't track either. |
 | 2c | `package-data.tsv` | ZWR filename inventory per package | — | NONE | XINDEX processes routines, not globals/DD exports. |
@@ -326,7 +327,7 @@ hadn't happened (first-run-only bake sentinel, `make bake-xindex` never
 exercised, VMDUMP98's top-level dump being sufficient at the time). The run
 has since been executed — the shipped `xindex-*.tsv` files in `code-model/`
 are its output. §9 keeps the run mechanics;
-[code-model-guide.md](code-model-guide.md) §1.4 has the resulting schemas.
+[code-model-guide.md](../guides/code-model-guide.md) §1.4 has the resulting schemas.
 
 ## 11. Candidate next steps (if the user wants to pursue)
 
@@ -343,7 +344,7 @@ are its output. §9 keeps the run mechanics;
 
 **Longer path — errors extract**:
 Error-by-error extraction per routine (via scratch global `"E"`
-subtree) would give a code-quality heatmap across all 39,330
+subtree) would give a code-quality heatmap across all 39,373
 routines: which routines have the most Fatal/Standard violations,
 SACC size-limit breaches, missing-timeout risks, etc. Useful for any
 cleanup prioritization — per ADR-045's "code-side classification"

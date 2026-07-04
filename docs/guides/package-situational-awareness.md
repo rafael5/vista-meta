@@ -38,7 +38,7 @@ subsystem on disk.
 The single-routine sweep ([routine-situational-awareness.md](routine-situational-awareness.md))
 treats every file as an island. That's wrong at scale. In practice:
 
-- **Routines come in clusters.** `PSOVCC0`, `PSOVCC1`, `PSOVCC2` are
+- **Routines come in clusters.** `PSOVCC0`, `PSOVCC1`, `PSOVCCA` are
   the same feature split across 8-char filename limits — read
   together or not at all.
 - **Public surface is sparse.** A 421-routine package usually has
@@ -92,25 +92,42 @@ ls vista/vista-m-host/Packages/Outpatient\ Pharmacy/Routines/ | wc -l
 What to read off `pkg`:
 
 ```
-=== Outpatient Pharmacy ===
-421 routines, 142,318 lines (avg 338/routine)
-PIKS: P=4 I=12 K=8 S=3   (← what kind of data this owns)
-RPCs: 38   Options: 52   Protocols: 11   (← public surface)
-Distinct globals touched: 67
-Top FM files owned: PRESCRIPTION (52), PHARMACY PATIENT (55), ...
-Top globals: ^PSRX (8421), ^PS(52, ...) (3120), ^DPT (1842), ...
-Top inbound edges (who calls us):
-   CPRS                 4,123 calls   91 routines
-   Pharmacy Data Mgmt   2,418 calls   38 routines
-   ...
-Top outbound edges (who we call):
-   Kernel              12,841 calls
-   FileMan              8,212 calls
-   ...
-Top entry-point candidates (highest in-degree):
-   PSOORNE              312 callers
-   PSORENW              188 callers
-   ...
+PACKAGE  Outpatient Pharmacy
+PREFIX   PS  (99% of routines)
+
+Routines            905  lines     119531
+PIKS files       P=15 I=5 K=17 S=2   (of 39 FM files shipped)   ← what kind of data this owns
+FM files owned       39
+RPCs exposed         40
+Options (pkg=)      242                                          ← public surface
+Protocols (pkg=)    194
+Globals touched      57  (distinct)
+
+FILEMAN FILES OWNED
+        52  PRESCRIPTION
+      52.5  RX SUSPENSE
+  ...
+
+TOP GLOBALS (by total ref count)
+  ^PSRX                6297
+  ^TMP                 6094
+  ^PS                  5712
+  ...
+
+TOP INBOUND (other packages calling INTO this one)
+  Integrated Billing                        66 edges
+  E Claims Management Engine                62 edges
+  ...
+
+TOP OUTBOUND (this package calling OUT to others)
+  VA FileMan                              2353 edges
+  Kernel                                   984 edges
+  ...
+
+ENTRY-POINT CANDIDATES (top 10 by in-degree)
+  PSOBPSUT        in= 109  out=  14  lines=  351  -
+  PSOLSET         in=  81  out=  11  lines=   85  -
+  ...
 ```
 
 Mental shortcut for the fingerprint:
@@ -204,13 +221,13 @@ awk -F'\t' -v p="Outpatient Pharmacy" '$2==p {print $1}' \
 Output:
 
 ```
-12  PSOVC   PSOVCC0 PSOVCC1 PSOVCC2 PSOVCDF PSOVCMV ...
-8   PSOREJ  PSOREJ0 PSOREJ1 PSOREJP2 PSOREJP3 ...
+73  PSOERX  PSOERX PSOERX1 PSOERX1A PSOERX1B ...
+13  PSOREJ  PSOREJP0 PSOREJP1 PSOREJP2 PSOREJP3 ...
 ...
 ```
 
 Each cluster is "one feature." When you read PSOVCC0, also open
-PSOVCC1 and PSOVCC2 — they're the same conversation continued.
+PSOVCC1 and PSOVCCA — they're the same conversation continued.
 
 ### 5.3 Cross-package outbound coupling per routine
 
@@ -332,23 +349,23 @@ routine + tag, grouped by surface:
 ```
 ## Outpatient Pharmacy — Entry Points
 
-### RPCs (38)
+### RPCs (40)
 | RPC name                        | Tag^Routine        | Return |
 |---|---|---|
-| ORWPS COVER                     | COVER^PSOORRX      | array |
-| PSO LM ALLERGY                  | EN^PSOLMALL        | single |
+| PSO ACTIVITY LOG                | ACT^PSOVCC1        | single |
+| PSOERXA0 DRGMTCH                | DRGMTCH^PSOERXA0   | single |
 | ...
 
-### Options (52)
+### Options (242)
 | Option                          | Tag^Routine        | Type |
 |---|---|---|
-| PSO MAINTENANCE                 | EN^PSOMAIN         | menu |
+| PSO COST STAT MENU              | —                  | menu |
 | ...
 
-### Protocols (11)
+### Protocols (194)
 | Protocol                        | Type    | Action |
 |---|---|---|
-| PSO REFILL EVENT                | event   | EN^PSOREFL |
+| PSO SHOW PROFILE                | action  | D EN^PSOLMPF |
 | ...
 ```
 
@@ -382,14 +399,14 @@ listing edges 100 times.
 **Answers Q2.** The §5.2 recipe formalized. Output:
 
 ```
-PSO  (421 routines)
-├── PSOVC*  (12)   — pharmacy verify / processing
-│     PSOVCC0 PSOVCC1 PSOVCC2 PSOVCDF PSOVCMV ...
-├── PSOREJ* (8)    — rejection handling
-│     PSOREJ0 PSOREJ1 PSOREJP2 PSOREJP3 ...
-├── PSOOR*  (24)   — order entry
+PSO  (905 routines)
+├── PSOERX* (73)   — e-prescribing (eRx)
+│     PSOERX PSOERX1 PSOERX1A PSOERX1B ...
+├── PSOREJ* (13)   — rejection handling
+│     PSOREJP0 PSOREJP1 PSOREJP2 PSOREJP3 ...
+├── PSOOR*  (48)   — order entry interface
 │     ...
-└── ungrouped (47)
+└── ungrouped (...)
 ```
 
 **Implementation:** Iterate prefix lengths 3..7; pick the longest
@@ -405,9 +422,9 @@ package:
 
 | Global | FM file | PIKS | Owned by pkg? | Routines using it (n) | Total refs |
 |---|---|---|---|---|---|
-| `^PSRX` | 52 PRESCRIPTION | P | yes | 312 | 8421 |
-| `^DPT` | 2 PATIENT | P | no (Registration) | 18 | 1842 |
-| `^DIC` | 1 FILE | S | no (FileMan) | 47 | 421 |
+| `^PSRX` | 52 PRESCRIPTION | P | yes | 448 | 6297 |
+| `^DPT` | 2 PATIENT | P | no (Registration) | 148 | 305 |
+| `^DIC` | 1 FILE | S | no (FileMan) | 68 | 104 |
 | ... | | | | | |
 
 **Implementation:** Join `routine-globals.tsv` (filtered to package
@@ -426,18 +443,18 @@ dependencies on other packages' data.
 ## Outpatient Pharmacy — Coupling
 
 ### Outbound (we depend on)
-| Target package        | Edges  | Top targeted tags |
+| Target package        | Edges | Top targeted tags |
 |---|---|---|
-| Kernel                | 12,841 | DT^DICRW (842), $$EN^XUSCLEAN (412) |
-| FileMan               |  8,212 | ^DIC (1283), ^DIE (842) |
-| Registration          |    421 | DEM^VADPT (218) |
+| VA FileMan            | 2,353 | GET1^DIQ (3694 refs), ^DIR (1341) |
+| Kernel                |   984 | FMTE^XLFDT (407), BMES^XPDUTL (293) |
+| Registration          |   273 | DEM^VADPT (80), SITE^VASITE (58) |
 | ...
 
 ### Inbound (depends on us)
-| Source package        | Edges | Top called tags here |
+| Source package             | Edges | Top called tags here |
 |---|---|---|
-| CPRS                  | 4,123 | EN^PSOORNE (1841), $$RXACT^PSOORDIM (412) |
-| Pharmacy Data Mgmt    | 2,418 | ... |
+| Integrated Billing         |    66 | RX^PSO52API (34), DIC^PSODI (9) |
+| E Claims Management Engine |    62 | ... |
 ```
 
 **Implementation:** Filter `routine-calls.tsv` on `caller_package`
@@ -451,8 +468,8 @@ no callee-package column). Aggregate by package + top tags.
 
 | Routine | Lines | Patches | Last commit | Has test | XINDEX | Lint |
 |---|---|---|---|---|---|---|
-| PSOORNE | 842 | 18 | 2024-09 | yes | 2W | pass |
-| PSORENW | 412 | 12 | 2023-05 | no | clean | fail |
+| PSOBPSUT | 351 | 15 | 2024-09 | yes | 2W | pass |
+| PSOLSET | 85 | 8 | 2023-05 | no | clean | fail |
 | ... | | | | | | |
 
 Sortable by any column. Used to triage:
@@ -515,34 +532,34 @@ Layout:
 ```
 ▾ VISTA PACKAGE
   ▣ Outpatient Pharmacy (PSO)
-    421 routines · 38 RPCs · 52 OPTs · 11 protocols
+    905 routines · 40 RPCs · 242 OPTs · 194 protocols
 
-  ▾ Entry Points (101)
-    ▾ RPCs (38)
-       ORWPS COVER          → COVER^PSOORRX
-       PSO LM ALLERGY       → EN^PSOLMALL
+  ▾ Entry Points (476)
+    ▾ RPCs (40)
+       PSO ACTIVITY LOG     → ACT^PSOVCC1
+       PSOERXA0 DRGMTCH     → DRGMTCH^PSOERXA0
        ...
-    ▾ Options (52)
+    ▾ Options (242)
        ...
-    ▾ Protocols (11)
+    ▾ Protocols (194)
        ...
 
   ▾ Hub Routines (top 10)
-    PSOORNE   in=312
-    PSORENW   in=188
+    PSOBPSUT  in=109
+    PSOLSET   in=81
     ...
 
-  ▾ Owned Globals (P=4 I=12 K=8 S=3)
-    ^PSRX    [P · file 52 PRESCRIPTION]    8421 refs
-    ^PS(52)  [P · file 52]                  3120 refs
+  ▾ Owned Globals (P=15 I=5 K=17 S=2)
+    ^PSRX    [P · file 52 PRESCRIPTION]    6297 refs
+    ^PS      [P · files 52.x]              5712 refs
     ...
 
   ▾ Coupling
-    Outbound → Kernel (12,841), FileMan (8,212), ...
-    Inbound  ← CPRS (4,123), ...
+    Outbound → VA FileMan (2,353), Kernel (984), ...
+    Inbound  ← Integrated Billing (66), ...
 
-  ▾ Sub-namespaces (8)
-    PSOVC* (12), PSOREJ* (8), PSOOR* (24), ...
+  ▾ Sub-namespaces
+    PSOERX* (73), PSOOR* (48), PSOREJ* (13), ...
 ```
 
 Same TSV-only constraints as the routine sidebar. Nodes click to
@@ -563,7 +580,7 @@ CodeLens is visually noisy.
 
 ### 7.4 Status bar segment
 
-Right-aligned: `PSO · 421R · 38RPC · 52OPT`. Click → command palette
+Right-aligned: `PSO · 905R · 40RPC · 242OPT`. Click → command palette
 filtered to `vista-meta package-*`. One line of code, always-visible
 context.
 
@@ -619,22 +636,22 @@ Stopwatch from `cd vista/vista-m-host/Packages/Outpatient\ Pharmacy/`.
 vista-meta pkg "Outpatient Pharmacy"
 ```
 
-Output (abbreviated): 421 routines, 38 RPCs, 52 options, 11
-protocols, 67 globals. Top FM files: PRESCRIPTION (52), PHARMACY
-PATIENT (55). Top inbound: CPRS (4,123 calls). Top entry-point:
-`PSOORNE` (in=312).
+Output (abbreviated): 905 routines, 40 RPCs, 242 options, 194
+protocols, 57 globals. Top FM files: PRESCRIPTION (52), RX
+SUSPENSE (52.5). Top inbound: Integrated Billing (66 edges). Top
+entry-point candidate: `PSOBPSUT` (in=109).
 
 **0:30 — clusters.** Run §5.2:
 
 ```
-PSOOR*   24 routines  — order entry, including PSOORNE
-PSOVC*   12 routines  — verify / completion
-PSOREJ*   8 routines  — rejection handling
-PSORX*   18 routines  — prescription operations
+PSOERX*  73 routines  — e-prescribing (eRx holding queue)
+PSOOR*   48 routines  — order entry interface
+PSOREJ*  13 routines  — rejection handling
+PSOBPS*  10 routines  — ECME/BPS billing bridge
 ...
 ```
 
-Now I know the package decomposes into ~10 features.
+Now I know the package decomposes into ~10 big features.
 
 **1:00 — public surface.** Until `package-map` lands (note: in
 `rpcs.tsv` the `package` column is **11**, and the value is the
@@ -645,33 +662,35 @@ awk -F'\t' '$11=="OUTPATIENT PHARMACY"' \
   vista/export/code-model/rpcs.tsv | head
 ```
 
-The RPCs cluster heavily under PSOORNE, PSOLMALL, PSORX*.
-Confirms the cluster picture.
+The 40 RPCs are backed by only ~13 routines, clustered under
+PSOVCC* (patient Rx views) and PSOEP* (EPCS). The RPC surface is
+much narrower than the option surface.
 
 **2:00 — coupling.** §5.3:
 
 ```
-PSOORNE     842 calls   12 external (1.4%)   — internal hub
-PSOOR1      412 calls   58 external (14%)    — calls Kernel & CPRS
-PSOXMITQ     38 calls   38 external (100%)   — pure shim into MailMan
+PSOBPSUT     22 calls    7 external (32%)   — internal hub
+PSOHLSN1     18 calls    9 external (50%)   — half its calls leave the package
+PSOVRPT       7 calls    7 external (100%)  — pure shim into other packages
 ...
 ```
 
-PSOXMITQ at 100% external is a bridge — read it last when learning
-the package internals; first when learning how PSO talks to MailMan.
+A routine at 100% external is a bridge — read it last when learning
+the package internals; first when learning how PSO talks to its
+neighbors.
 
-**2:30 — entry hub.** Open `PSOORNE.m`. Run the routine-level sweep
+**2:30 — entry hub.** Open `PSOBPSUT.m`. Run the routine-level sweep
 from
 [routine-situational-awareness.md](routine-situational-awareness.md).
 Now the routine sidebar makes sense in package context: callers
-include CPRS, callees are mostly other PSO routines, globals
-center on `^PSRX`.
+include Integrated Billing and ECME, callees are mostly other PSO
+routines, globals center on `^PSRX`.
 
 **3:30 — handoff.**
 
 ```bash
 vista-meta context "Outpatient Pharmacy" \
-   --routines PSOORNE,PSOOR1,PSOLMALL,PSORX0 \
+   --routines PSOBPSUT,PSOLSET,PSOORRL,PSOHLSN1 \
    --with-source > /tmp/pso.md
 ```
 
@@ -689,7 +708,7 @@ read line-by-line.
 | Pattern | Why it burns time | Defense |
 |---|---|---|
 | **Reading routines in alphabetical / filesystem order** | The filesystem ordering has nothing to do with importance. You'll burn 30 minutes on `PSOABRR.m` before getting to the entry-point hub. | Sort by in-degree (§5.1). Read top-down. |
-| **Treating sub-namespaces as informal** | Newcomers assume `PSOVCC0/1/2` are arbitrary. They aren't — same feature. | Cluster first (§5.2 / §6.3); read clusters as units. |
+| **Treating sub-namespaces as informal** | Newcomers assume `PSOVCC0/1/A` are arbitrary. They aren't — same feature. | Cluster first (§5.2 / §6.3); read clusters as units. |
 | **Skipping the fingerprint** | `vista-meta pkg X` is 1 second. Most "what is this?" questions are answered there. | Always run it first. Tile against the directory listing. |
 | **Mistaking infrastructure packages for owners of the data they touch** | A routine in `Order Entry` that touches `^PSRX` doesn't *own* `^PSRX` — Pharmacy does. | Use `package-data.tsv` (or §6.4) to distinguish owned from referenced data. |
 | **Looking at one routine's external coupling without baseline** | "5% external — is that a lot?" Depends on the package. | Compare to package median (§5.3). |
@@ -707,4 +726,4 @@ read line-by-line.
 - [code-model-guide.md](code-model-guide.md) — schema for every TSV the recipes use
 - [vscode-extension-internals.md § 7](vscode-extension-internals.md#7-recommended-extensions-by-tier) — extension roadmap that the §7 integrations slot into
 - [piks-analysis-guide.md](piks-analysis-guide.md) — what P/I/K/S means for owned globals
-- [docs/vista-meta-spec-v0.4.md § 11](../historical/vista-meta-spec-v0.4.md) — bake contracts the new scans should respect
+- [model-extraction-contract.md](../reference/model-extraction-contract.md) — the live §11 extraction contract the new scans should respect (promoted from spec-v0.4)

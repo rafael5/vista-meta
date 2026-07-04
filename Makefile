@@ -534,6 +534,13 @@ smoke: ## Run post-build smoke tests
 
 # ── Docs ──────────────────────────────────────────────────────────────
 
+.PHONY: test
+test: ## Run the host-side Python unit suites (stdlib only, no installs)
+	@set -e; for t in host/scripts/tests/test_*.py; do echo "== $$t"; python3 $$t; done
+
+.PHONY: check
+check: test docs-check ## Full host-side gate: unit suites + docs link/citation gate
+
 .PHONY: docs-check
 docs-check: ## Fail on dead docs links or dead '# Spec:'/'# Plan:' code citations
 	@python3 host/scripts/docs_check.py
