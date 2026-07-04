@@ -422,7 +422,8 @@ validate-xindex: ## Validate our regex extractions against XINDEX (ADR-045 post-
 	/usr/bin/python3 host/scripts/validate_against_xindex.py
 
 # ── Decomposed-on-disk patch workflow (Tier 2 #7) ─────────────────────
-# Requires the `kids-vc` CLI on $PATH (separate project at ~/projects/py-kids-vc/).
+# Requires the `v-pkg` CLI on $PATH (~/vista-forge/v-pkg — the Go successor
+# of the retired py-kids-vc; same verbs and argument shapes).
 
 PATCHES_DIR := patches
 
@@ -441,9 +442,9 @@ patch-new: ## Scaffold a new patch tree: NAME=MYPKG_1_0_1001
 patch-decompose: ## Decompose a .KID into on-disk form: KID=path/to/patch.KID
 	@[ -n "$(KID)" ] || { echo "Usage: make patch-decompose KID=path/to/patch.KID"; exit 1; }
 	@mkdir -p $(PATCHES_DIR)
-	@name=$$(basename "$(KID)" | sed -E 's/\.[Kk][Ii][Dd]$$//'); \
+	@name=$$(basename "$(KID)" | sed -E 's/\.[Kk][Ii][Dd][Ss]?$$//'); \
 		dst=$(PATCHES_DIR)/$$name; \
-		kids-vc decompose "$(KID)" "$$dst" && \
+		v-pkg decompose "$(KID)" "$$dst" && \
 		echo "Decomposed -> $$dst"
 
 .PHONY: patch-assemble
@@ -451,13 +452,13 @@ patch-assemble: ## Assemble an on-disk patch tree into a .KID: DIR=patches/NAME
 	@[ -n "$(DIR)" ] || { echo "Usage: make patch-assemble DIR=patches/MYPKG_1_0_1001"; exit 1; }
 	@name=$$(basename "$(DIR)"); \
 		out=$(PATCHES_DIR)/$$name.KID; \
-		kids-vc assemble "$(DIR)" "$$out" && \
+		v-pkg assemble "$(DIR)" "$$out" && \
 		echo "Assembled -> $$out"
 
 .PHONY: patch-roundtrip
 patch-roundtrip: ## Round-trip a .KID (decompose + re-assemble + diff): KID=path
 	@[ -n "$(KID)" ] || { echo "Usage: make patch-roundtrip KID=path/to/patch.KID"; exit 1; }
-	@kids-vc roundtrip "$(KID)"
+	@v-pkg roundtrip "$(KID)"
 
 # ── More developer tools (Tier 2 #5, #6, #8) ──────────────────────────
 

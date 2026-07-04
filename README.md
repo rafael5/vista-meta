@@ -110,13 +110,13 @@ See [LICENSE](#license). The vendored VistA-M source under
 
 ## Companion projects
 
-- [py-kids-vc](https://github.com/rafael5/py-kids-vc) — KIDS
-  decompose / assemble / round-trip CLI; vista-meta's
+- [v-pkg](https://github.com/vista-forge/v-pkg) — modern KIDS
+  package management (decompose / assemble / round-trip plus
+  build / install / verify / back-out); vista-meta's
   `make patch-decompose|patch-assemble|patch-roundtrip` shells out
-  to it.
-- [py-kids-install](https://github.com/rafael5/py-kids-install) —
-  drives KIDS installs into the same VEHU container vista-meta
-  builds.
+  to it. Supersedes the retired
+  [py-kids-vc](https://github.com/rafael5/py-kids-vc) and
+  py-kids-install.
 - **vista-cli** — downstream consumer that joins vista-meta TSVs
   with vista-docs SQLite for cross-artifact queries.
 - [tree-sitter-m](https://github.com/rafael5/tree-sitter-m) —

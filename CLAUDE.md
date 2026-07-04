@@ -37,10 +37,8 @@ consumes:
   companions_required: []                  # standalone
 
 companions:
-  - project: py-kids-vc
-    relation: "vista-meta's `make patch-decompose|patch-assemble|patch-roundtrip` shells out to the kids-vc CLI"
-  - project: py-kids-install
-    relation: "siblings; py-kids-install drives KIDS installs into the same VEHU container vista-meta builds"
+  - project: v-pkg                         # ~/vista-forge/v-pkg (vista-forge org)
+    relation: "vista-meta's `make patch-decompose|patch-assemble|patch-roundtrip` shells out to the v-pkg CLI; v-pkg also owns KIDS build/install/verify/back-out over the driver seam (supersedes the retired py-kids-vc and py-kids-install)"
   - project: vista-cli
     relation: "downstream consumer — joins vista-meta TSVs with vista-docs SQLite for cross-artifact queries"
   - project: vista-docs
@@ -253,11 +251,13 @@ Wireframe tooling that used to live here was extracted to
 `~/projects/gui-spec/` in April 2026. It is completely orthogonal
 to VistA modeling and has no dependency on this repo.
 
-## Orthogonal: py-kids-vc
+## Orthogonal: py-kids-vc (retired — superseded by v-pkg)
 
 The KIDS decompose/assemble/round-trip toolchain that used to live
 here (as `kids_vc_pkg/` + `host/scripts/kids_vc*.py`) was extracted
-to `~/projects/py-kids-vc/` in May 2026. It is a standalone
-pip-installable package (`pip install kids-vc`) with its own CI;
-vista-meta no longer ships or tests it. Its companion runtime
-installer is `~/projects/py-kids-install/`.
+to `~/projects/py-kids-vc/` in May 2026, then fully superseded by
+its Go port **v-pkg** (`~/vista-forge/v-pkg`, vista-forge org) and
+retired 2026-07-04 (read-only copy at `~/projects/archive/py-kids-vc`;
+GitHub repo archived). v-pkg also absorbed the runtime-installer role
+of the former `py-kids-install`. The `make patch-*` targets shell out
+to `v-pkg`.
