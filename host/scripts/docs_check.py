@@ -19,6 +19,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 
+# Runtime-generated trees (gitignored; synced from the container). Docs may
+# legitimately link into them: verify the target when the tree exists locally,
+# skip when it doesn't (e.g. a clean CI checkout — the link is "pending sync",
+# not dead).
+RUNTIME_ROOTS = [ROOT / "vista" / "vista-m-host"]
+
 MD_LINK = re.compile(r"!?\[[^\]]*\]\(([^)\s]+)\)")
 CITE = re.compile(r"[#;]\s*(?:Spec|Plan):\s*(docs/[A-Za-z0-9/_.\-]+\.md)")
 
@@ -44,6 +50,7 @@ def md_files() -> list[Path]:
 
 def check_markdown() -> list[str]:
     errors = []
+    r_exists_cache: dict[int, bool] = {}
     for f in md_files():
         for n, line in enumerate(f.read_text(encoding="utf-8").splitlines(), 1):
             for target in MD_LINK.findall(line):
@@ -55,6 +62,9 @@ def check_markdown() -> list[str]:
                 if path.startswith("/"):  # container-absolute paths in ADRs — not repo files
                     continue
                 resolved = (f.parent / path).resolve()
+                if any(r in resolved.parents or resolved == r for r in RUNTIME_ROOTS):
+                    if not r_exists_cache.setdefault(0, RUNTIME_ROOTS[0].exists()):
+                        continue
                 if not resolved.exists():
                     errors.append(f"{f.relative_to(ROOT)}:{n} → {target}")
     return errors
