@@ -46,4 +46,5 @@ Documentation here is classified by **lifecycle state, not topic**:
 - **Governance:** ADRs through 049 (047 data-release model · 048 Compass architecture ·
   049 root path, superseding 044); the [ADR index](adr/000-index.md) carries a Reality
   column for decisions that diverged. `build-log.md` is frozen at BL-013 (Apr 2026).
-  `make docs-check` guards links/citations (also wired into the pre-commit hook).
+  `make docs-check` guards links/citations (also wired into the pre-commit hook);
+  `make smoke` (tests/smoke/smoke.sh, S-01…S-12) is the ADR-027 post-build gate.

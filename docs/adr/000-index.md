@@ -54,7 +54,7 @@ What we rejected and why.
 | 024 | HEALTHCHECK enabled | Accepted |  |
 | 025 | Hybrid git tracking for export/ | Accepted |  |
 | 026 | Host Python venv at host/ | Accepted |  |
-| 027 | Smoke tests only, skip BATS | Accepted | diverged — `tests/smoke/post-build-smoke.sh` absent; implement or supersede |
+| 027 | Smoke tests only, skip BATS | Accepted | implemented 2026-07-04 as `tests/smoke/smoke.sh` (`make smoke`, S-01…S-12); first run caught 2 dead services (T-006) |
 | 028 | ADR discipline adopted | Accepted |  |
 | 029 | Symlink farm for VEHU-M routines | Accepted |  |
 | 030 | Single region/segment globals topology | Accepted |  |

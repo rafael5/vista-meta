@@ -52,3 +52,16 @@ vista-meta.
 automated lint + unit + integration + coverage on PR. Per-phase detail and
 per-repo map: the plan §7; the original long-form tracker text is in this
 file's git history.
+
+## T-006: rocto and YDB GUI die/not-listening at container start (found by smoke)
+
+First run of the new `make smoke` (2026-07-04) found two of the five baked
+services down on a healthy-reporting container:
+- **rocto (Octo SQL :1338)** dies at startup — `%YDB-E-ZLINKFILE … _ydboctoInit.m
+  not found` (the Octo plugin routines aren't on the rocto process's $ZRO).
+- **YDB GUI (:8089)** — entrypoint logs "ydbgui: alive" but nothing listens on
+  8089 (checked /proc/net/tcp).
+Both may have been dead since an earlier image/env change — nothing gated them
+before. **Closes when:** both ports answer and `make smoke` is 12/12 (or an ADR
+formally drops the services and the smoke checks move with it).
+
