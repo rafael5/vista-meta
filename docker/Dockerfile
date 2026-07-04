@@ -20,7 +20,14 @@ FROM ubuntu:24.04
 SHELL ["/bin/bash", "-c"]
 
 ARG YDB_VERSION=r2.02
-ARG VEHU_M_URL=https://github.com/WorldVistA/VistA-VEHU-M/archive/master.zip
+# Upstream commit pins (reproducibility pass 2026-07-04, BL-015): every fetch
+# below resolves to an immutable ref. Bump deliberately; record in
+# docs/guides/dependencies.md in the same commit.
+ARG VEHU_M_COMMIT=62622e63fc7dffad27fc79f107fd7689c2ac4eff
+ARG VEHU_M_URL=https://github.com/WorldVistA/VistA-VEHU-M/archive/${VEHU_M_COMMIT}.zip
+ARG MUNIT_COMMIT=a31638202f9283e02e253fe59b85722ece7cfae9
+ARG YDBGUI_COMMIT=19bc88a42c0f96593be4610cc2d23e0918748205
+ARG YDBOCTOVISTAM_COMMIT=a943ff7ffc25ee94dde7e9f27a18beb73b79d89e
 ARG VEHU_UID=1001
 ARG VEHU_PASSWORD=vehu
 ARG BUILD_DATE
@@ -61,7 +68,7 @@ RUN groupadd -g ${VEHU_UID} vehu \
 # ADR-005: ASCII only (no --utf8)
 # Installs: YDB core + YDB Web Server (--webserver) + Octo SQL (--octo)
 RUN mkdir -p /tmp/ydb-install && cd /tmp/ydb-install \
-    && wget -q https://gitlab.com/YottaDB/DB/YDB/-/raw/master/sr_unix/ydbinstall.sh \
+    && wget -q https://gitlab.com/YottaDB/DB/YDB/-/raw/${YDB_VERSION}/sr_unix/ydbinstall.sh \
     && chmod +x ydbinstall.sh \
     && ./ydbinstall.sh \
         --installdir /usr/local/lib/yottadb/${YDB_VERSION} \
@@ -171,7 +178,7 @@ USER root
 # DUZ=.5 = Postmaster user; DIQUIET=1 = suppress FileMan prompts;
 # DUZ(0)="@" = programmer access; DT^DICRW = initialize FileMan date vars.
 RUN mkdir -p /opt/VistA-M/ddl \
-    && curl -fSsL https://gitlab.com/YottaDB/DBMS/YDBOctoVistA/-/raw/master/_YDBOCTOVISTAM.m \
+    && curl -fSsL https://gitlab.com/YottaDB/DBMS/YDBOctoVistA/-/raw/${YDBOCTOVISTAM_COMMIT}/_YDBOCTOVISTAM.m \
         -o /opt/VistA-M/r/_YDBOCTOVISTAM.m \
     && cd /opt/VistA-M/o && $ydb_dist/mumps /opt/VistA-M/r/_YDBOCTOVISTAM.m \
     && su -s /bin/bash vehu -c "\
@@ -182,39 +189,40 @@ RUN mkdir -p /opt/VistA-M/ddl \
 
 # ── Layer 9: M-Unit install ──────────────────────────────────────────
 # ADR-015: ChristopherEdwards/M-Unit via cmake (YDB plugin)
-RUN git clone --depth 1 https://github.com/ChristopherEdwards/M-Unit.git /tmp/m-unit \
-    && cd /tmp/m-unit \
+RUN curl -fSsL https://github.com/ChristopherEdwards/M-Unit/archive/${MUNIT_COMMIT}.zip -o /tmp/m-unit.zip \
+    && unzip -q /tmp/m-unit.zip -d /tmp \
+    && cd /tmp/M-Unit-${MUNIT_COMMIT} \
     && mkdir build && cd build \
     && cmake -DYDB_DIST=$ydb_dist .. \
     && make -j"$(nproc)" \
     && make install \
-    && rm -rf /tmp/m-unit
+    && rm -rf /tmp/M-Unit-${MUNIT_COMMIT} /tmp/m-unit.zip
 
 # ── Layer 10: YDBGUI install ─────────────────────────────────────────
 # YDB Web Server was installed in layer 4 (--webserver).
 # YDBGUI provides the Angular frontend served by it.
 # cmake auto-fetches missing plugin deps (YDB-Web-Server, YDBCurl, YDBPosix).
-RUN git clone --depth 1 https://gitlab.com/YottaDB/UI/YDBGUI.git /tmp/ydbgui \
-    && cd /tmp/ydbgui \
+RUN curl -fSsL "https://gitlab.com/YottaDB/UI/YDBGUI/-/archive/${YDBGUI_COMMIT}/YDBGUI-${YDBGUI_COMMIT}.zip" -o /tmp/ydbgui.zip \
+    && unzip -q /tmp/ydbgui.zip -d /tmp \
+    && cd /tmp/YDBGUI-${YDBGUI_COMMIT} \
     && mkdir build && cd build \
     && cmake -DYDB_DIST=$ydb_dist .. \
     && make -j"$(nproc)" \
     && make install \
-    && rm -rf /tmp/ydbgui
+    && rm -rf /tmp/YDBGUI-${YDBGUI_COMMIT} /tmp/ydbgui.zip
 
-# ── Layer 11: FMQL install ───────────────────────────────────────────
-# ADR-016: FMQL as one of three DD exporter baselines
-RUN git clone --depth 1 https://github.com/caregraf/FMQL.git /tmp/fmql \
-    && cp /tmp/fmql/MUMPS/*.m /opt/VistA-M/r/ \
-    && cd /opt/VistA-M/o \
-    && $ydb_dist/mumps /opt/VistA-M/r/CG*.m 2>&1 || true \
-    && rm -rf /tmp/fmql
+# ── Layer 11: FMQL — REMOVED (BL-015) ────────────────────────────────
+# ADR-016 named FMQL as one of three DD exporter baselines, but the upstream
+# (github.com/caregraf/FMQL) is gone (404), and the original layer's trailing
+# `|| true` rescued the whole `clone && cp && compile` chain — so FMQL was
+# never actually installed in any built image (verified: zero FMQL routines).
+# The other two baselines (FileMan utilities, Print Templates) carried ADR-016.
 
 # ── Layer 12: Python tooling ─────────────────────────────────────────
 # ADR-014: baked Python tooling for analytics scripting
 # --break-system-packages: no venv inside the container; these are system tools
 RUN pip3 install --no-cache-dir --break-system-packages \
-        yottadb click pyyaml requests
+        yottadb==2.0.1 click==8.4.0 pyyaml==6.0.3 requests==2.34.2
 
 # ── Layer 13: Service configs ────────────────────────────────────────
 COPY etc/xinetd.d/xwb   /etc/xinetd.d/xwb

@@ -43,7 +43,7 @@ What we rejected and why.
 | 013 | Services: RPC Broker, VistALink, sshd, Octo, YDB GUI | Accepted | rocto + YDB GUI have no consumers; smoke warns, not fails (ADR-051) |
 | 014 | Python tooling baked in (yottadb bindings, git) | Accepted |  |
 | 015 | M-Unit — ChristopherEdwards fork | Accepted |  |
-| 016 | DD exporters: FileMan utilities + FMQL + Print Templates | Accepted |  |
+| 016 | DD exporters: FileMan utilities + FMQL + Print Templates | Accepted | FMQL was never actually installed (dead upstream + swallowed failure, BL-015); layer removed — two baselines in practice |
 | 017 | Enhanced XINDEX via VEHU inheritance | Accepted |  |
 | 018 | First-run XINDEX baseline: auto + manual rebake | Accepted |  |
 | 019 | Interactive tools: ranger, micro, tree, btop, ncdu | Accepted |  |

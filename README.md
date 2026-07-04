@@ -49,7 +49,8 @@ bin/vista-meta pkg "Pharmacy"     # package overview
 bin/vista-meta context PSO        # AI context pack for a package
 ```
 
-`make help` lists every Make target.
+`make help` lists every Make target. From-scratch reproduction (clean
+clone → build → verify): [docs/guides/DE-NOVO.md](docs/guides/DE-NOVO.md).
 
 ## Where code runs
 
@@ -105,7 +106,7 @@ Coverage: 100% (auto + triage + subfile inheritance). Full details in
 
 ## License
 
-See [LICENSE](#license). The vendored VistA-M source under
+See [LICENSE](LICENSE) (MIT). The vendored VistA-M source under
 `vista/vista-m-host/` follows its upstream public-domain status.
 
 ## Companion projects

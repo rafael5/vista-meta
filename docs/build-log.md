@@ -5,7 +5,7 @@
 > (producer-contracts, Compass) were recorded in commit messages and
 > RESEARCH.md instead, which carried the load fine at this project's scale.
 > The file stays at this path because README/guides/spec-errata cite BL-NNN.
-> Resumed once: BL-014 (2026-07-04, networking audit). Continue at BL-015 if needed.
+> Resumed: BL-014 + BL-015 (2026-07-04). Continue at BL-016 if needed.
 
 Append-only record of errors, warnings, corrections, and verification
 outcomes encountered during implementation. Entries are reverse-chronological.
@@ -17,6 +17,31 @@ This log records what went wrong (or right) when those decisions met reality.
 ---
 
 ## 2026-07-04 — Networking audit (discipline resumed for this entry)
+
+### BL-015: Reproducibility pass — all fetches pinned; FMQL upstream dead and never installed
+
+- **Date**: 2026-07-04
+- **Scope**: docker/Dockerfile (all network fetches), docs/guides/dependencies.md
+- **Found**: (1) five build fetches tracked moving targets (master/HEAD):
+  ydbinstall.sh, VistA-VEHU-M, YDBOctoVistA, M-Unit, YDBGUI — plus unpinned pip
+  installs. (2) `github.com/caregraf/FMQL` is **gone (404)** — and the FMQL
+  layer's trailing `|| true` rescued its whole `clone && cp && compile` chain,
+  so FMQL was never present in ANY built image (verified: zero FMQL routines in
+  the running container). ADR-016's "three DD exporter baselines" was in
+  reality two.
+- **Fix**: commit-SHA build ARGs for every fetch (VEHU_M_COMMIT, MUNIT_COMMIT,
+  YDBGUI_COMMIT, YDBOCTOVISTAM_COMMIT; ydbinstall via the r2.02 tag ref);
+  clones → immutable archive zips; pip pinned to the versions in the running
+  image (yottadb==2.0.1, click==8.4.0, pyyaml==6.0.3, requests==2.34.2); FMQL
+  layer removed with a tombstone comment. All five pinned URLs verified live
+  (HTTP 200). Ledger: dependencies.md. Residuals documented there: base image
+  pinned by tag not digest; YDBGUI's cmake transitively fetches its plugin deps.
+- **Lesson**: never guard a fetch chain with a trailing `|| true` — it converts
+  "upstream vanished" into silent success. Guard only the step that may
+  legitimately fail.
+- **Note**: the currently running image predates the pins (April masters); the
+  next `make build` is the first canonical pinned build and has NOT yet been
+  run (20-min build deferred; URLs + Dockerfile syntax verified).
 
 ### BL-014: RPC Broker + VistALink crashed on every connection — wrong xinetd entry label
 
