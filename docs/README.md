@@ -19,7 +19,7 @@ Documentation here is classified by **lifecycle state, not topic**:
 
 | Location | Contents | Lifetime |
 |---|---|---|
-| `docs/` root | this index · [`build-log.md`](build-log.md) (BL-NNN build/error record) · [`Packages.csv`](Packages.csv) (FOIA build manifest — build *input*, relocation pending) | evergreen |
+| `docs/` root | this index · [`build-log.md`](build-log.md) (BL-NNN build/error record) | evergreen |
 | [`guides/`](guides/) | operator/consumer docs, **kept current**: [`vista-meta-guide.md`](guides/vista-meta-guide.md) (start here) · developer onramp · situational-awareness playbooks · per-TSV code-model reference · PIKS methodology · XINDEX reference · VSCode/CLI guide + extension internals · snapshot/restore runbook · dependency pins | evergreen, edited freely |
 | [`reference/`](reference/) | durable contracts cited from code, **path-stable**: [`schema-v1-normalization-spec.md`](reference/schema-v1-normalization-spec.md) (the shipped `schema_version: 1` contract of record) · [`model-extraction-contract.md`](reference/model-extraction-contract.md) (spec-v0.4 §11.3–11.6, the extraction/PIKS contract) | evergreen; changes = version breaks |
 | [`adr/`](adr/) | numbered decision records, immutable once accepted; supersede via new ADR ([index](adr/000-index.md)) | permanent |
@@ -35,7 +35,7 @@ Documentation here is classified by **lifecycle state, not topic**:
 - **Live proposals:** [`vista-orchestration-plan.md`](proposals/vista-orchestration-plan.md)
   (cross-repo TDD toolchain roadmap — largely about sibling repos; Status: Proposed) — the docs-lifecycle
   reorganization itself closed 2026-07-04 (phases 0–3 executed; its record is in
-  `historical/`, and the deferred `Packages.csv` relocation is TODO T-005).
+  `historical/`; the `Packages.csv` relocation (T-005) closed 2026-07-04 — it lives at `host/vendor/Packages.csv` as vendored build input).
 - **Recently closed → `historical/`:** producer-contracts implementation plan (V1–V7 + Gate R,
   all gate-PASS) · upstream data fixes P1–P5 · the vista-info-hub heads-up memo · spec v0.4
   (as-built build record; its live §11 extraction/PIKS contract was promoted to `reference/`) ·

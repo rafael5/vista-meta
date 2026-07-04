@@ -5,7 +5,7 @@
 
 """Emit package-namespace.tsv — namespace/app_code per code-model package.
 
-The authoritative bridge is docs/Packages.csv, the FOIA build manifest that
+The authoritative bridge is host/vendor/Packages.csv, the FOIA build manifest that
 *created* the source-tree directory names. It maps, per package:
 
   Package Name   — the upper-case PACKAGE-file (#9.4) NAME ("VA FILEMAN")
@@ -21,7 +21,7 @@ upstream-data-fixes-prompt.md):
       carries both columns, so no string-munging heuristic is needed.
 
 Reads:
-  - docs/Packages.csv                              (authoritative manifest)
+  - host/vendor/Packages.csv                              (authoritative manifest)
   - vista/export/code-model/packages.tsv           (the 174 export packages)
 
 Writes:
@@ -43,7 +43,7 @@ import schema_v1
 import tsvio
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-PACKAGES_CSV = PROJECT_ROOT / "docs/Packages.csv"
+PACKAGES_CSV = PROJECT_ROOT / "host/vendor/Packages.csv"
 # The export tree is uid-1001-owned (in-container vehu); VM_CODE_MODEL_DIR lets
 # the operator point reads/writes at a writable staging dir, then copy in via
 # the make target's docker/1001 path. Defaults to the real export tree.

@@ -30,7 +30,7 @@ MANIFEST = HOST_SNAPSHOT / "MANIFEST.tsv"
 # boundary is membership in this mini-manifest.
 PERCENT_DIR = HOST_SNAPSHOT / "PercentRoutines"
 PERCENT_MANIFEST = PERCENT_DIR / "MANIFEST.tsv"
-PACKAGES_CSV = PROJECT_ROOT / "docs/Packages.csv"
+PACKAGES_CSV = PROJECT_ROOT / "host/vendor/Packages.csv"
 OUT_DIR = PROJECT_ROOT / "vista/export/code-model"
 ROUTINES_TSV = OUT_DIR / "routines.tsv"
 PACKAGES_TSV = OUT_DIR / "packages.tsv"
@@ -126,7 +126,7 @@ def percent_rows(percent_dir: Path, name_to_dir: dict[str, str]) -> list[dict]:
 
     Package attribution: the routine's own version line names its VA
     package (e.g. `;;22.2;VA FileMan;…`), mapped case-insensitively
-    through docs/Packages.csv to the canonical directory name.
+    through host/vendor/Packages.csv to the canonical directory name.
     Non-VA packages (e.g. YottaDB's Octo mapper) stay blank (null).
     """
     manifest = percent_dir / "MANIFEST.tsv"

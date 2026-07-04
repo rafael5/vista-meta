@@ -6,7 +6,7 @@ Boundary under test: %-routines enter the census ONLY via the synced
 PercentRoutines/MANIFEST.tsv (extracted from the image's VistA dirs) —
 never by walking $ydb_dist. Package attribution comes from each
 routine's own version line (`;;<ver>;<PACKAGE>;…`), mapped through
-docs/Packages.csv; unmappable packages stay blank (null).
+host/vendor/Packages.csv; unmappable packages stay blank (null).
 
 Run: python3 host/scripts/tests/test_build_routine_inventory.py
 """

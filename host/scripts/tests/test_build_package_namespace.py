@@ -17,7 +17,7 @@ sys.path.insert(0, str(SCRIPTS_DIR))
 import build_package_namespace as bpn  # noqa: E402
 
 
-# A minimal slice of docs/Packages.csv, including continuation rows (empty
+# A minimal slice of host/vendor/Packages.csv, including continuation rows (empty
 # Package Name + Directory Name) that carry extra prefixes/files, and the
 # "!"-excluded namespace convention.
 SAMPLE_CSV = (

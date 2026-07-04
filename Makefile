@@ -281,10 +281,10 @@ package-edge-matrix: ## Package-to-package call edge matrix (ADR-045 Phase 6c)
 	/usr/bin/python3 host/scripts/build_package_edge_matrix.py
 
 .PHONY: package-namespace
-package-namespace: ## Per-package namespace + VDL app_code from docs/Packages.csv (P3/P4)
+package-namespace: ## Per-package namespace + VDL app_code from host/vendor/Packages.csv (P3/P4)
 	@[ -f vista/export/code-model/packages.tsv ] || \
 		{ echo "Run 'make inventory' first."; exit 1; }
-	@[ -f docs/Packages.csv ] || { echo "Missing docs/Packages.csv"; exit 1; }
+	@[ -f host/vendor/Packages.csv ] || { echo "Missing host/vendor/Packages.csv"; exit 1; }
 	/usr/bin/python3 host/scripts/build_package_namespace.py
 
 .PHONY: augment-registries

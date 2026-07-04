@@ -18,14 +18,14 @@ Added columns (uniform meaning across all three files):
 
 Resolution:
   * options/protocols already store the upper #9.4 NAME in `package`; map it
-    to the directory via docs/Packages.csv (Package Name -> Directory Name).
+    to the directory via host/vendor/Packages.csv (Package Name -> Directory Name).
     Options also fall back to their `routine`'s package where `package` is
     blank or unmapped.
   * rpcs carry only a `routine`; resolve routine -> directory via routines.tsv,
-    then directory -> upper #9.4 NAME via docs/Packages.csv.
+    then directory -> upper #9.4 NAME via host/vendor/Packages.csv.
 
 Reads (defaults overridable via VM_CODE_MODEL_DIR for staging):
-  - docs/Packages.csv
+  - host/vendor/Packages.csv
   - vista/export/code-model/{routines,rpcs,options,protocols}.tsv
 
 Rewrites in place:
@@ -44,7 +44,7 @@ from pathlib import Path
 from build_package_namespace import parse_packages_csv
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-PACKAGES_CSV = PROJECT_ROOT / "docs/Packages.csv"
+PACKAGES_CSV = PROJECT_ROOT / "host/vendor/Packages.csv"
 CODE_MODEL_DIR = Path(
     os.environ.get(
         "VM_CODE_MODEL_DIR", str(PROJECT_ROOT / "vista/export/code-model")

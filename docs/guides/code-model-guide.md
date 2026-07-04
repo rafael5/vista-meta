@@ -486,7 +486,7 @@ Per the TODOs and closure RFs:
 
 Three registries carry an appended canonical `package_dir` (directory name,
 byte-identical to `packages.tsv`); `rpcs.tsv` also gains a `package` (upper
-PACKAGE-file #9.4 NAME). Authoritative source: `docs/Packages.csv` (the FOIA
+PACKAGE-file #9.4 NAME). Authoritative source: `host/vendor/Packages.csv` (the FOIA
 build manifest that created the source-tree directory names). The executed
 fix record is [../historical/upstream-data-fixes.md](../historical/upstream-data-fixes.md).
 

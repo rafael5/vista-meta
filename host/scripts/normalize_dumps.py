@@ -24,7 +24,7 @@ renamed) — every step is a fixpoint, so re-normalizing is idempotent.
 Reads:
   - vista/export/raw/<name> (or data-model/piks-triage.tsv)
   - vista/export/code-model/routines.tsv (routine → package lookup)
-  - docs/Packages.csv (package name ↔ directory maps)
+  - host/vendor/Packages.csv (package name ↔ directory maps)
 
 Writes:
   - vista/export/{data-model,code-model}/<name> per schema_v1
@@ -52,7 +52,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 RAW_DIR = PROJECT_ROOT / "vista/export/raw"
 DATA_DIR = PROJECT_ROOT / "vista/export/data-model"
 CODE_DIR = PROJECT_ROOT / "vista/export/code-model"
-PACKAGES_CSV = PROJECT_ROOT / "docs/Packages.csv"
+PACKAGES_CSV = PROJECT_ROOT / "host/vendor/Packages.csv"
 
 # Every M-dump-origin final, plus the curated triage file.
 NORMALIZED_FILES = (
