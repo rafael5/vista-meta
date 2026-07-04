@@ -532,6 +532,10 @@ smoke: ## Run post-build smoke tests
 
 # ── Docs ──────────────────────────────────────────────────────────────
 
+.PHONY: docs-check
+docs-check: ## Fail on dead docs links or dead '# Spec:'/'# Plan:' code citations
+	@python3 host/scripts/docs_check.py
+
 .PHONY: adr-new
 adr-new: ## Create a new ADR (TITLE="decision title")
 	@[ -n "$(TITLE)" ] || { echo "Usage: make adr-new TITLE=\"My Decision\""; exit 1; }

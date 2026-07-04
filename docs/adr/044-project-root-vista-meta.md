@@ -1,7 +1,7 @@
 # ADR-044: Project root = ~/vista-meta, standalone repo
 
 Date: 2026-04-18
-Status: Accepted (supersedes earlier drafts locating project under ~/claude/)
+Status: Superseded by ADR-049 (was: Accepted, itself superseding earlier drafts that located the project under ~/claude/)
 
 ## Context
 Early spec drafts placed the project at `~/claude/vista-meta/` — inside Rafael's claude-skills repo (`rafael5/claude`). On reflection, vista-meta is application code (a Docker-hosted VistA analytics sandbox), not a skill. Claude skills and vista-meta have different lifecycles, different update cadences, and different intended audiences.

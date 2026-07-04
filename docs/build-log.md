@@ -1,4 +1,11 @@
-# vista-meta — Build & Implementation Log
+# vista-meta — Build & Implementation Log (Phase-1 record, frozen)
+
+> **FROZEN (2026-07-04).** This is the Phase-1 build record: BL-001–BL-013,
+> Apr 2026. The append-only discipline lapsed after BL-013 — later build issues
+> (producer-contracts, Compass) were recorded in commit messages and
+> RESEARCH.md instead, which carried the load fine at this project's scale.
+> The file stays at this path because README/guides/spec-errata cite BL-NNN.
+> If the discipline is ever resumed, continue at BL-014 below this banner.
 
 Append-only record of errors, warnings, corrections, and verification
 outcomes encountered during implementation. Entries are reverse-chronological.

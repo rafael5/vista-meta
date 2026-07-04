@@ -205,6 +205,16 @@ if [ "${VISTA_META_XINDEX:-0}" = "1" ] && \
     fi
 fi
 
+# ── Docs link gate ───────────────────────────────────────────────────
+# Cheap (<1s): dead markdown links / dead '# Spec:' citations fail the
+# commit only when docs or code-with-citations are being touched.
+if git diff --cached --name-only | grep -qE '\.(md)$|^docs/|^host/scripts/|^docker/|^Makefile$'; then
+    if ! python3 host/scripts/docs_check.py > /dev/null 2>&1; then
+        STATUS=1
+        FAILS+=("docs-check: dead links/citations — run 'make docs-check' for the list")
+    fi
+fi
+
 # ── Report ───────────────────────────────────────────────────────────
 
 if [ $STATUS -ne 0 ]; then

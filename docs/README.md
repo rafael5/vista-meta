@@ -43,3 +43,7 @@ Documentation here is classified by **lifecycle state, not topic**:
 - **Open follow-ups:** [`../TODO.md`](../TODO.md) (T-001 routine-count reconciliation,
   T-002 cohorts, T-003 unreferenced-routine reduction, T-004 orchestration execution) —
   anchored to RESEARCH.md RF numbers.
+- **Governance:** ADRs through 049 (047 data-release model · 048 Compass architecture ·
+  049 root path, superseding 044); the [ADR index](adr/000-index.md) carries a Reality
+  column for decisions that diverged. `build-log.md` is frozen at BL-013 (Apr 2026).
+  `make docs-check` guards links/citations (also wired into the pre-commit hook).
