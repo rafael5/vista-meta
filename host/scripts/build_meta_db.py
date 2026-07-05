@@ -96,6 +96,8 @@ VIEWS: dict[str, str] = {
         "LEFT JOIN package_piks_summary s USING (package)",
 }
 
+# Consumer query shapes are indexed HERE — consumers never create
+# indexes (producer-side indexing directive; proposal Track P-vista-meta 3).
 INDEXES = (
     "CREATE INDEX idx_routine_calls_callee ON routine_calls "
     "(callee_routine)",
@@ -103,7 +105,12 @@ INDEXES = (
     "(global_name)",
     "CREATE INDEX idx_rpcs_name ON rpcs (name)",
     "CREATE INDEX idx_options_name ON options (name)",
+    "CREATE INDEX idx_protocols_name ON protocols (name)",
+    # NOCASE so the default (case-insensitive) LIKE 'PREFIX%' can use it —
+    # a plain index silently full-scans under LIKE (measured: ~12ms vs sub-ms).
+    "CREATE INDEX idx_xindex_tags_tag ON xindex_tags (tag COLLATE NOCASE)",
     "CREATE INDEX idx_bridge_key ON entity_bridge (vista_key_value)",
+    "CREATE INDEX idx_bridge_canonical ON entity_bridge (canonical_name)",
 )
 
 

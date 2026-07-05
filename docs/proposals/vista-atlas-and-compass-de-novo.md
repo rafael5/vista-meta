@@ -301,8 +301,16 @@ share conventions. Contract v1 is a P1 deliverable; the features are P5.
    fetch-verifies the published meta.db; it never builds one.
 2. Bake-side tag enrichment for signature help: `kind` / `formal_list` /
    `summary` columns (new TSV or xindex-tags widening; spec change → data-v2).
-3. Indexes tuned for the extension's query shapes (prefix search on tags,
-   callee lookups) — additive `build_meta_db.py` changes, no schema impact.
+3. ~~Indexes tuned for the extension's query shapes~~ — **done 2026-07-05**:
+   meta.db now indexes every spec'd consumer shape — `xindex_tags(tag COLLATE
+   NOCASE)` for symbol search (NOCASE so the default case-insensitive `LIKE
+   'PREFIX%'` actually uses it; a plain index silently full-scans — measured
+   12 ms → 0.49 ms over 14k matching rows), `protocols(name)`,
+   `entity_bridge(canonical_name)`, alongside the existing rpcs/options/
+   callee/global/bridge-key indexes and PKs. TDD'd; derived assets
+   re-published. vdocs' index.db already carries its shapes' indexes
+   (proven live by vdocs-web); its remaining producer work is the contract
+   additions in P-vdocs 1–3, not indexing.
 4. ~~**Canonicalization as published data**~~ — **done 2026-07-05**:
    `entity-bridge.meta.json` now carries a `canonicalization` block (per-type
    steps + vocabulary + the namespace-then-prefix resolution rule), emitted

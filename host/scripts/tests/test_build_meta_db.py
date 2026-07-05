@@ -172,6 +172,20 @@ class TestBuild(unittest.TestCase):
                       "FROM v_package_overview WHERE package='Order Entry'")
         self.assertEqual(rows, [("Order Entry", "OR", 2)])
 
+    def test_consumer_query_shape_indexes_exist(self):
+        # Producers publish the indexes; consumers never create them.
+        # The spec'd shapes: symbol search by tag prefix, name lookups on
+        # rpcs/options/protocols, callee/caller graph walks, bridge by
+        # entity name or vista key.
+        idx = {r[0] for r in self.q(
+            "SELECT name FROM sqlite_master WHERE type='index' "
+            "AND name LIKE 'idx_%'")}
+        for want in ("idx_xindex_tags_tag", "idx_protocols_name",
+                     "idx_bridge_canonical", "idx_rpcs_name",
+                     "idx_options_name", "idx_routine_calls_callee",
+                     "idx_routine_globals_global", "idx_bridge_key"):
+            self.assertIn(want, idx)
+
     def test_build_without_bridge_still_works(self):
         root = make_tree(with_bridge=False)
         db = root / "meta.db"
