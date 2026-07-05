@@ -81,7 +81,8 @@ Two sibling VSCode extensions, designed as a pair:
    "copy citation" producing the exact contract line the skills/agents use —
    humans and AI cite identically.
 6. **Read-only, no live engine.** Both are navigators over static releases —
-   squarely **VistA-Copilot org** material by the actuate/navigate ADR.
+   homed in **vista-forge** as non-waterline repos (VistA-Copilot retired;
+   see §6).
 7. **Producer-side shapes, consumer-side rendering.** Anything a consumer would
    re-derive or regex away (nav chrome, table titles, flattened-chunk detection)
    moves upstream into the published format (Track P below) — the vdocs-web
@@ -143,13 +144,19 @@ release manifest (pins/vintage badge, as today).
 
 ## 6. Shared infrastructure
 
-- **Home:** new sibling repos under the VistA-Copilot org (`~/vista-copilot/`):
-  `vista-atlas`, `vista-compass`, and a small shared lib (`vista-store`: sqlite
-  engine wrapper + contract check + release fetch/verify + deep-link registry).
-  Compass moving out of vista-meta is deliberate: it becomes a *consumer of the
-  release* like every other downstream; vista-meta keeps a pointer and stays the
-  producer. (Decision for owner: keeping Compass in-repo is workable but couples
-  the extension's cadence to the data repo and leaves the twin split across orgs.)
+- **Home — DECIDED 2026-07-05 (owner): the vista-forge org.** The VistA-Copilot
+  org is retired (name too close to Microsoft Copilot). Repos created and
+  published same day: `github.com/vista-forge/vista-atlas` +
+  `github.com/vista-forge/vista-compass` (house node template scaffolds,
+  Node 24 pinned, gates green). Both are **non-waterline** repos — read-only
+  navigators over published releases that never touch an engine, so they
+  declare no `m`/`v` layer artifact and sit outside the waterline gates (the
+  `clikit` precedent). The shared lib (`vista-store`: sqlite engine wrapper +
+  contract check + release fetch/verify + deep-link registry) starts inside
+  `vista-compass` at P1 and extracts to a sibling repo when Atlas consumes it.
+  Compass moving out of vista-meta is deliberate: it becomes a *consumer of
+  the release* like every other downstream; vista-meta keeps a pointer and
+  stays the producer.
 - **Toolchain:** house node template (npm, Biome, `node:test`, tsx, c8) +
   the VSCode extension harness (esbuild bundle, `@vscode/test-electron`, vsce
   platform builds). TDD as always.
@@ -211,8 +218,9 @@ release manifest (pins/vintage badge, as today).
   Go-sidecar fallback reuses proven code at the cost of process management.
 - **index.db in extension memory**: mmap should make 322 MB a non-issue; verify
   in P0 on the real file (and confirm FTS5 is compiled into whatever engine wins).
-- **Two orgs, one pair**: moving Compass to VistA-Copilot is the recommendation
-  but changes vista-meta's `exposes:`; owner call before P3.
+- ~~**Two orgs, one pair**~~ — resolved 2026-07-05: both repos live in
+  vista-forge (VistA-Copilot retired); vista-meta's `exposes:` gets the pointer
+  when Compass v2 reaches parity (P3).
 - **Webview duplication**: Atlas's reading pane re-implements vdocs-web's
   hydration logic in TS; keep the transforms pure + ported with their tests
   (the mis-nested-placeholder bug class must not regress).
