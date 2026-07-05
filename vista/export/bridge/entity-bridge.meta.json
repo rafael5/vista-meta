@@ -1,5 +1,50 @@
 {
   "artifact": "vista-meta-entity-bridge",
+  "canonicalization": {
+    "comment": "Apply `steps` in order to a raw token, then match against the type's vocabulary column. Consumers use THIS spec \u2014 do not re-implement the algorithm.",
+    "types": {
+      "fileman_file": {
+        "steps": [
+          "uppercase"
+        ],
+        "vocabulary": "files.tsv:file_number"
+      },
+      "global": {
+        "steps": [
+          "strip-leading-caret",
+          "uppercase"
+        ],
+        "vocabulary": "routine-globals.tsv:global_name"
+      },
+      "option": {
+        "steps": [
+          "uppercase"
+        ],
+        "vocabulary": "options.tsv:name"
+      },
+      "package_namespace": {
+        "prefix_exclusion_marker": "!",
+        "resolution": "namespace-then-prefix",
+        "steps": [
+          "uppercase"
+        ],
+        "vocabulary": "package-namespace.tsv:package"
+      },
+      "routine": {
+        "steps": [
+          "uppercase"
+        ],
+        "vocabulary": "routines.tsv:routine_name"
+      },
+      "rpc": {
+        "steps": [
+          "uppercase"
+        ],
+        "vocabulary": "rpcs.tsv:name"
+      }
+    },
+    "vocabulary_matching": "case-insensitive exact: vocabulary values are uppercased before comparison"
+  },
   "columns": [
     "entity_id",
     "entity_type",

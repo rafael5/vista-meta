@@ -84,7 +84,16 @@ Two sibling VSCode extensions, designed as a pair:
    neither builds a summary, index, or projection the producer publishes:
    vdocs ships `index.db`; vista-meta ships `meta.db` + the entity bridge as
    data-v1 assets (`docs/releases/data-v1-derived.json`). A shape a consumer
-   needs is added to the producer's bake first, surfaced second.
+   needs is added to the producer's bake first, surfaced second. This extends
+   to **algorithms as well as data** (owner directive, 2026-07-05): all
+   indexing and cross-referencing lands producer-side, published as data —
+   including the token **canonicalization spec** (`entity-bridge.meta.json`
+   `canonicalization`: per-type transform steps + target vocabulary, emitted
+   from the same declaration the bridge builder itself interprets, so spec
+   and implementation cannot drift). The payoff is answer identity: the MCP
+   servers, the extensions, and any agent resolve the same token through the
+   same published spec against the same published stores — human and machine
+   clients get **identical answers**.
 2. **Contract-first reads.** Atlas binds only to the `read_schema_version`'d `v_*`
    views + `chunks_fts` (the vendored-contract seam vdocs-web proved, ported to
    TS). Compass binds to `meta.db`'s tables/views + `ai-manifest.json` as its
@@ -246,9 +255,11 @@ queries the other's store — standalone is preserved structurally.
    Atlas entity chips show *"measured → Compass"*.
 2. **Seeded search handoff** — the searches are complementary (Atlas
    lexical FTS5/BM25; Compass exact/structural): each search UI adds one
-   footer row forwarding the query to the twin, with tokens normalized by the
-   bridge's canonicalization rules (caret-strip, case) so they land in the
-   other side's native form.
+   footer row forwarding the query to the twin, with tokens normalized by
+   applying the **published canonicalization spec**
+   (`entity-bridge.meta.json` `canonicalization` — declared steps per entity
+   type, interpreted, never re-implemented) so they land in the other side's
+   native form.
 3. **Editor-context entries** — right-click a token in an `.m` file →
    "find in docs" (Compass canonicalizes, forwards); entity mentions in
    Atlas's reading pane link to Compass.
@@ -292,6 +303,12 @@ share conventions. Contract v1 is a P1 deliverable; the features are P5.
    `summary` columns (new TSV or xindex-tags widening; spec change → data-v2).
 3. Indexes tuned for the extension's query shapes (prefix search on tags,
    callee lookups) — additive `build_meta_db.py` changes, no schema impact.
+4. ~~**Canonicalization as published data**~~ — **done 2026-07-05**:
+   `entity-bridge.meta.json` now carries a `canonicalization` block (per-type
+   steps + vocabulary + the namespace-then-prefix resolution rule), emitted
+   from the declaration `build_entity_bridge.py` itself interprets
+   (`canonicalize()`), TDD'd, and re-published to the data-v1 derived assets.
+   Consumers apply the spec; they never re-implement the algorithm.
 
 ## 8. Sequencing & acceptance
 

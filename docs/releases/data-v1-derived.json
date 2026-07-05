@@ -3,8 +3,8 @@
   "content_hash": "23d037f1e08adc206d251eea9adb4ec62051032c06b593737bebfcaf67e4c754",
   "files": {
     "entity-bridge.meta.json": {
-      "bytes": 2823,
-      "sha256": "a3887979793b5e68ea181c308585ed5996f4f4ba1bd8a993b84ffa9651b20231"
+      "bytes": 4043,
+      "sha256": "49807dec895889169429307e570c3e861c5bdd79878271f3e38154f1d27c2d5a"
     },
     "entity-bridge.tsv": {
       "bytes": 438639,

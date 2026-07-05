@@ -102,6 +102,54 @@ FLOORS: dict[str, float] = {
 # Types vdocs ships that have no vista-meta vocabulary at all.
 NO_VOCABULARY_TYPES = ("build", "hl7_segment", "mail_group")
 
+# Token canonicalization — DECLARED AS DATA and interpreted by this
+# emitter (canonicalize below), then published verbatim in
+# entity-bridge.meta.json. Consumers (extensions, MCP clients, agents)
+# apply the published steps to raw tokens instead of re-implementing
+# the algorithm — one spec, identical answers everywhere; a step change
+# here changes the published spec in the same commit, so they cannot
+# drift.
+CANONICAL_STEPS: dict[str, list[str]] = {
+    "fileman_file": ["uppercase"],
+    "rpc": ["uppercase"],
+    "routine": ["uppercase"],
+    "option": ["uppercase"],
+    "global": ["strip-leading-caret", "uppercase"],
+    "package_namespace": ["uppercase"],
+}
+
+VOCABULARY_MATCHING = ("case-insensitive exact: vocabulary values are "
+                       "uppercased before comparison")
+
+
+def canonicalize(etype: str, token: str) -> str:
+    """Apply the declared steps for a type to a raw token."""
+    for step in CANONICAL_STEPS.get(etype, []):
+        if step == "strip-leading-caret":
+            token = token[1:] if token.startswith("^") else token
+        elif step == "uppercase":
+            token = token.upper()
+        else:  # a declared step this interpreter doesn't know is a bug
+            raise ValueError(f"unknown canonicalization step {step!r}")
+    return token
+
+
+def _canonicalization_spec() -> dict:
+    types = {}
+    for etype, bspec in BRIDGES.items():
+        types[etype] = {"steps": CANONICAL_STEPS[etype],
+                        "vocabulary": bspec.vocabulary}
+        if etype == "package_namespace":
+            types[etype]["resolution"] = "namespace-then-prefix"
+            types[etype]["prefix_exclusion_marker"] = "!"
+    return {
+        "comment": "Apply `steps` in order to a raw token, then match "
+                   "against the type's vocabulary column. Consumers use "
+                   "THIS spec — do not re-implement the algorithm.",
+        "vocabulary_matching": VOCABULARY_MATCHING,
+        "types": types,
+    }
+
 
 def _read_column(export_dir: Path, name: str, column: str) -> list[str]:
     spec = schema_v1.spec_for(name)
@@ -195,10 +243,7 @@ def build_rows(export_dir: Path, peer_dir: Path) -> list[dict]:
                          "vista_key_value": pkg, "join_method": method,
                          "join_confidence": bspec.confidence})
             continue
-        lookup = name.upper()
-        if etype == "global" and lookup.startswith("^"):
-            lookup = lookup[1:]
-        hit = vocabs[etype].get(lookup)
+        hit = vocabs[etype].get(canonicalize(etype, name))
         if hit is None:
             rows.append(_unjoined(eid, etype, name, mentions))
             continue
@@ -252,6 +297,7 @@ def build_meta(rows: list[dict], peers_record: dict,
             "entities": len(rows),
             "joined": sum(1 for r in rows if r["join_method"] != "none"),
         },
+        "canonicalization": _canonicalization_spec(),
         "types": _rates(rows),
     }
 

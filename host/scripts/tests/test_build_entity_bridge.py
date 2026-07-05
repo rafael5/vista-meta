@@ -206,6 +206,27 @@ class TestMeta(unittest.TestCase):
         # ORWPT, ^DPT, 200, ORWPT SELECT, DG, DGQE
         self.assertEqual(self.meta["counts"]["joined"], 6)
 
+    def test_canonicalization_published_as_data(self):
+        # Consumers apply this DECLARED spec to raw tokens — they never
+        # re-implement the algorithm (producer-side indexing directive).
+        can = self.meta["canonicalization"]
+        self.assertEqual(can["types"]["global"]["steps"],
+                         ["strip-leading-caret", "uppercase"])
+        self.assertEqual(can["types"]["routine"]["steps"], ["uppercase"])
+        self.assertEqual(can["types"]["routine"]["vocabulary"],
+                         "routines.tsv:routine_name")
+        self.assertIn("uppercase", can["vocabulary_matching"])
+        # package_namespace resolves namespace-then-prefix; declared too
+        self.assertEqual(can["types"]["package_namespace"]["resolution"],
+                         "namespace-then-prefix")
+
+    def test_canonicalize_interprets_the_declared_steps(self):
+        # The emitter itself runs on the declared spec — one source of truth.
+        self.assertEqual(beb.canonicalize("global", "^dpt"), "DPT")
+        self.assertEqual(beb.canonicalize("global", "DPT"), "DPT")
+        self.assertEqual(beb.canonicalize("routine", "orwpt"), "ORWPT")
+        self.assertEqual(beb.canonicalize("fileman_file", "200"), "200")
+
 
 class TestGate(unittest.TestCase):
     def setUp(self):
