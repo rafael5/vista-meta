@@ -42,7 +42,12 @@ Documentation here is classified by **lifecycle state, not topic**:
   the `make meta-db` SQLite projection, and the **MCP server**
   (`host/scripts/mcp_server.py`, stdio, wired by `.mcp.json`; tools query / lookup /
   bridge / orientation; shipped 2026-07-05).
-- **Live proposals:** [`vista-orchestration-plan.md`](proposals/vista-orchestration-plan.md)
+- **Live proposals:** [`vista-atlas-and-compass-de-novo.md`](proposals/vista-atlas-and-compass-de-novo.md)
+  (de-novo twin VSCode extensions over the published releases — Vista Atlas supersedes
+  vdocs-web, Vista Compass v2 supersedes `vscode-extension/`; full published scope,
+  one sqlite engine, bridge deep-links, producer prerequisite tracks; Status: Draft
+  2026-07-05) ·
+  [`vista-orchestration-plan.md`](proposals/vista-orchestration-plan.md)
   (cross-repo TDD toolchain roadmap — largely about sibling repos; Status: Proposed) —
   the docs-lifecycle reorganization itself closed 2026-07-04 (phases 0–3 executed; its record is in
   `historical/`; the `Packages.csv` relocation (T-005) closed 2026-07-04 — it lives at `host/vendor/Packages.csv` as vendored build input).
