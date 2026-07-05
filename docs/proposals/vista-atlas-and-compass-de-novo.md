@@ -3,7 +3,10 @@
 **Status:** Draft · 2026-07-05
 **Owner:** rafael
 **Scope:** two repos' human surfaces — vdocs-web (superseded by **Vista Atlas**) and
-`vscode-extension/` here (superseded by **Vista Compass v2**)
+`vscode-extension/` here (superseded by **Vista Compass v2**). The twins also
+officially supersede **vista-info-hub** (the Go joined-CLI/TUI/MCP over vista-meta
+TSVs + the retired v1 `frontmatter.db`) — deleted with the VistA-Copilot org,
+2026-07-05, by owner direction.
 **Benchmark:** the two MCP front doors (`vdocs serve-mcp` · `host/scripts/mcp_server.py`) —
 the machine interfaces already expose the full published scope; the human interfaces do not.
 **Grounding:** 2026-07-05 three-way survey (vdocs-web consumption · vdocs gold human
