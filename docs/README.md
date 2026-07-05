@@ -37,8 +37,11 @@ Documentation here is classified by **lifecycle state, not topic**:
   the **VistA Compass** VSCode extension 0.2.0, the `vista-meta` CLI + `mfmt` + pre-commit hook.
 - **Live proposals:** [`vista-orchestration-plan.md`](proposals/vista-orchestration-plan.md)
   (cross-repo TDD toolchain roadmap — largely about sibling repos; Status: Proposed) ·
-  [`ai-card.md`](proposals/ai-card.md) (AI orientation card over the exports — hand-drafted
-  spec for a pipeline-generated `vista/export/AI-CARD.md`; Status: Draft) — the docs-lifecycle
+  [`machine-friendly-exports.md`](proposals/machine-friendly-exports.md) (vdocs-parity AI
+  consumability umbrella: generated AI card + drift gate, join surface, vdocs entity
+  bridge, harness/agent wiring, fingerprint-pinned citations; Status: Draft) ·
+  [`ai-card.md`](proposals/ai-card.md) (its phase-1 child — hand-drafted content
+  spec for the pipeline-generated `vista/export/AI-CARD.md`; Status: Draft) — the docs-lifecycle
   reorganization itself closed 2026-07-04 (phases 0–3 executed; its record is in
   `historical/`; the `Packages.csv` relocation (T-005) closed 2026-07-04 — it lives at `host/vendor/Packages.csv` as vendored build input).
 - **Recently closed → `historical/`:** producer-contracts implementation plan (V1–V7 + Gate R,

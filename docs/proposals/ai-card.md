@@ -1,11 +1,13 @@
 # vista-meta — AI card (the measured model of VistA)
 
-> **STATUS: hand-drafted proposal, 2026-07-05** (lives in `docs/proposals/` for now).
-> This card is the *spec* for a generated artifact: once adopted, the export pipeline
-> should emit it as `vista/export/AI-CARD.md` beside the TSVs (like vdocs regenerates
-> `CORPUS.md`) — note `vista/export/` is container-owned (uid 1001), so only the
-> pipeline can write there, which is exactly the right ownership for a drift-proof
-> card. Until then, trust the TSV headers over this card if they disagree.
+> **STATUS: hand-drafted content spec, 2026-07-05** — phase-1 child of
+> [`machine-friendly-exports.md`](machine-friendly-exports.md) (Workstream 1), the
+> umbrella proposal for vdocs-parity AI consumability. Once adopted, the export
+> pipeline emits this card as `vista/export/AI-CARD.md` beside the TSVs (like vdocs
+> regenerates `CORPUS.md`), drift-gated against the release manifest — the export
+> dirs' container-side ownership makes hand-editing structurally impossible, which is
+> the right failure mode. Until then, trust the TSV headers over this card if they
+> disagree.
 
 ## What this is
 
