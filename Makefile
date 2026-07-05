@@ -2,7 +2,9 @@
 # RUNS ON: host
 # Default target: help
 
-include .env
+# Soft include: .env is gitignored/machine-local (ports have ?= defaults
+# below), and a fresh clone must still run the host-side gates.
+-include .env
 
 IMAGE     := vista-meta
 RPC_PORT  ?= 9430          # RPC Broker host port; overridable in .env
