@@ -61,14 +61,17 @@ Two sibling VSCode extensions, designed as a pair:
    views + `chunks_fts` (the vendored-contract seam vdocs-web proved, ported to
    TS). Compass binds to `meta.db`'s tables/views + `ai-manifest.json` as its
    self-describing catalog (columns, pks, join keys — no hardcoded schemas).
-3. **One storage engine, chosen once (P0 spike).** index.db is **322 MB**, meta.db
-   **85 MB** — `sql.js` (whole-db-in-WASM-heap) is out. Recommended:
-   **`better-sqlite3`** with platform-specific VSIX builds (CI matrix; standard
-   practice), which memory-maps both files and gives FTS5 + indexes for free —
-   this dissolves Compass's "pre-sorted symbol index" format problem (an index on
-   `xindex_tags(tag)` *is* the symbol index). Fallbacks, in order: Node ≥22
-   built-in `node:sqlite` (VSCode's Electron permitting); a spawned Go sidecar
-   reusing vdocs-web's `internal/index` read-contract library behind localhost.
+3. **One storage engine — DECIDED at P0 (2026-07-05): `node:sqlite`.** VSCode
+   1.125's extension host runs Node 24.15 (Electron 42) with `node:sqlite`
+   available unflagged, FTS5 compiled in — zero native dependencies, one
+   universal VSIX. The spike record (§11) has the measurements; `better-sqlite3`
+   was verified *failing* in the extension host without an Electron-ABI rebuild,
+   which is exactly the complexity `node:sqlite` eliminates. Because the Node API
+   is still marked experimental, `vista-store` wraps it behind a thin interface
+   with `better-sqlite3` (+ platform VSIX) as the documented swap-in fallback.
+   SQLite in-process dissolves Compass's "pre-sorted symbol index" format
+   problem (an index on `xindex_tags(tag)` *is* the symbol index — and even the
+   unindexed prefix scan measured 13 ms over 292k rows).
 4. **Stable-ID deep links.** A documented command-URI contract:
    `vistaAtlas.open(doc_key|section_id|entity_id)` ·
    `vistaCompass.lookup(kind, key)`. Same IDs as the MCP citations
@@ -182,7 +185,7 @@ release manifest (pins/vintage badge, as today).
 
 | Phase | Work | Accept when |
 |---|---|---|
-| P0 | Engine spike: better-sqlite3 in extension host vs node:sqlite vs Go sidecar — FTS5 on the real 322 MB index.db, memory profile, platform-vsix build | decision recorded; both dbs queried from a toy extension on Linux |
+| P0 ✅ | Engine spike (done 2026-07-05): `node:sqlite` vs better-sqlite3 vs Go sidecar on the real dbs | **met** — decision recorded (§11); a toy extension inside the installed VSCode 1.125 host queried both real dbs (FTS5 hits from index.db, rpc+bridge rows from meta.db) |
 | P1 | `vista-store` shared lib: engine + contract checks + release fetch/verify + deep-link registry | unit-tested lib; both real releases fetched, verified, opened |
 | P2 | **Atlas MVP** = vdocs-web parity in-editor (facets, search, reading pane with table/figure hydration) | side-by-side parity on 10 benchmark docs; vdocs-web frozen |
 | P3 | **Compass v2 MVP** = 0.2.0 parity on meta.db (sidebar, hovers, PIKS) | current extension's guide walkthrough passes on v2 |
@@ -216,3 +219,34 @@ release manifest (pins/vintage badge, as today).
 - **Naming**: "Vista Atlas" (map of the documentation) / "Vista Compass"
   (orientation in the measured code) — pairs cleanly; Compass keeps its
   marketplace identity and bumps major.
+
+## 11. P0 spike record (2026-07-05)
+
+**Decision: `node:sqlite`** (Node's built-in SQLite), wrapped behind a thin
+`vista-store` interface; `better-sqlite3` + platform VSIX is the documented
+fallback if the experimental API regresses. The Go-sidecar option is retired.
+
+**Environment measured:** VSCode 1.125.1 on Linux; its extension host is
+Electron 42.2.0 / **Node 24.15.0**, where `node:sqlite` loads unflagged with
+**FTS5 compiled in** (sqlite 3.51.3). `better-sqlite3`'s node-24 prebuild fails
+to load in that host (Electron ABI 146 mismatch) — usable only with
+electron-rebuild + per-platform VSIX. `engines.vscode` floor: `^1.125.0`
+(the verified host; probe an earlier floor only if it ever matters).
+
+**Measurements** (real published artifacts: index.db 322 MB, meta.db 85 MB;
+identical shape in plain node 24 and in the extension-host runtime):
+
+| Probe | node:sqlite | notes |
+|---|---|---|
+| FTS5 `MATCH 'kaajee'` count / ranked top-5 | 2.6 ms / 0.4 ms | bm25 ordering works |
+| cold doc body reconstruct (481 chunks, 850 KB) | ~20 ms | reading pane path |
+| rpc lookup / callers lookup (indexed) | 0.3 ms / 0.2 ms | |
+| tag prefix scan, 292k rows, **no index** | 13 ms | symbol search viable even pre-index |
+| whole-model transitive agg (`v_rpc_data_piks`) | ~1.7 s | dashboard-only; precompute/cache (or add a covering index at Track P-vista-meta 3) |
+| RSS after everything, both dbs open | **84 MB** | mmap — the 322 MB fear is dead |
+
+**Acceptance run:** a toy extension (`activate()` + `@vscode/test-electron`
+against the *installed* VSCode binary) queried both dbs from inside the real
+extension host — FTS5 ranked hits from index.db, `SELECT^ORWPT` + the
+`global:^DPT` bridge row from meta.db — PASS. Spike sources live in the session
+scratchpad (`spike-p0/`); they are throwaway, this record is the artifact.
