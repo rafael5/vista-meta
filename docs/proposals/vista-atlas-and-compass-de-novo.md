@@ -52,6 +52,27 @@ Two sibling VSCode extensions, designed as a pair:
   `app_code`), so "open the docs for this RPC" and "show me the measured routine
   behind this doc mention" are single clicks — the human twin of the
   `documented:`/`measured:` MCP contract.
+- **Richer data → richer UX (the point of the rewrite).** Parity with the
+  predecessors is the **floor** (P2/P3), never the ceiling: the twins exist to
+  exploit, to the full extent, the newly published registry-gated data tiers —
+  search and display possibilities the old consumers structurally could not
+  offer because the data didn't ship or wasn't queryable. Concretely:
+  - **Compass** searches and displays the *whole* measured model, not 7 of 24
+    TSVs: workspace-wide symbol/call-graph search over indexed `meta.db`,
+    one-query transitive joins via the shipped views ("which RPCs reach
+    Patient-class globals" — `v_rpc_data_piks`), RPC/option/protocol pickers,
+    package dashboards (PIKS mix, cross-package coupling), field-level PIKS
+    drill-downs, XINDEX diagnostics with agreement-ratio context, and
+    bridge-ranked "documented in N docs" on every hover.
+  - **Atlas** searches and displays the *whole* gold corpus, not just chunks:
+    FTS5 ranked search side-by-side with **entity search** ("every doc
+    mentioning `^DIC`"), relations-graph cross-doc navigation, version-lineage
+    browsing, rendered revision histories, and reading views with hydrated
+    tables, figures, and boilerplate — the tiers vdocs-web left dark.
+  - **Cross-source search** spans both releases through the entity bridge: one
+    query surface answering `documented:` × `measured:` questions in the
+    editor, with copyable citations matching the MCP contracts.
+  P4/P5 are where this richness lands; §4–§5 enumerate the surfaces per side.
 
 ## 3. Design principles
 
@@ -98,9 +119,11 @@ Two sibling VSCode extensions, designed as a pair:
    `vscode-extension/` 0.2.0, vdocs-web, vista-info-hub — are **behavioral
    references, never code sources**: no file, module, or snippet is ported into
    the twins. Their ad-hoc/iterative design (and any orphaned code) stays
-   behind. What DOES carry over, deliberately: (a) the **UX to replicate**,
-   specified from their docs and guides (for Compass: the extension-internals /
-   situational-awareness guides; the guide walkthrough is P3's acceptance), and
+   behind. What DOES carry over, deliberately: (a) the **UX to replicate as a
+   floor** (§2 — the full published scope is the target, parity is never the
+   ceiling), specified from their docs and guides (for Compass: the
+   extension-internals / situational-awareness guides; the guide walkthrough is
+   P3's acceptance), and
    (b) their **known bug classes, re-encoded as new TDD test cases first**
    (bare-vs-caret global join, `global_root` normalization, XINDEX
    line-number-as-text, the mis-nested table placeholder) so the rewrite can't
