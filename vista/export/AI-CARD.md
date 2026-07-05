@@ -69,6 +69,10 @@ silently.
    WHERE rpcs.name LIKE 'ORWPT%' LIMIT 20;
    SQL
    ```
+   Or generate the one-file projection: `make meta-db` →
+   `dist/vista-meta-data-v1.db` (all tables typed + the entity bridge + join
+   views `v_rpc_impl`, `v_routine_global_piks`, `v_rpc_data_piks`,
+   `v_package_overview`, …). The TSVs stay canonical; the db is derived.
 
 ## Data dictionary
 

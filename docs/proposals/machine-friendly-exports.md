@@ -1,6 +1,6 @@
 # Machine-friendly exports — vdocs-parity for AI consumers
 
-**Status:** P1–P3 shipped 2026-07-05 (filed same day) · remaining: the deferred tier only (W2b `meta.db`, W4c MCP — wait for a real consumer / vdocs `serve-mcp`)
+**Status:** P1–P3 + W2b shipped 2026-07-05 (filed same day) · remaining: W4c MCP only (tracks vdocs `serve-mcp`)
 **Owner:** rafael
 **Children:** [`ai-card.md`](ai-card.md) (Workstream 1's artifact spec — filed 2026-07-05, `56a07e6`)
 **Benchmark:** the vdocs gold corpus AI surface (`~/data/vdocs/documents/gold/`)
@@ -66,11 +66,16 @@ Answering real questions needs joins (RPC → routine → package → PIKS). Two
 
 - **W2a (now, zero-build):** the documented `sqlite3 :memory:` `.import` recipe — already
   in the card spec; the generated card carries it. No new artifact.
-- **W2b (deferred until a consumer exists):** ship a generated `meta.db` (SQLite, one
-  table per TSV + the join views) as a dist artifact beside the tarballs, with its
-  sha256 in the release manifest. This is also the natural backing store for an
-  eventual MCP server. **Do not build until W4b or an external consumer asks** —
-  the TSVs stay the canonical format either way.
+- **W2b (done 2026-07-05 — unblocked by W4b shipping, per this clause):** generated
+  `meta.db` as a dist artifact. Implemented as `host/scripts/build_meta_db.py`
+  (TDD, `tests/test_build_meta_db.py`): `make meta-db` →
+  `dist/vista-meta-data-v1.db` — 24 typed tables + `entity_bridge` + `meta` pins
+  + 6 join views (`v_rpc_impl`, `v_option_impl`, `v_global_file_piks`,
+  `v_routine_global_piks`, `v_rpc_data_piks`, `v_package_overview`); `--check`
+  verifies contents ≡ TSVs + pin ≡ release record. First consumer: the W4b
+  dual-source agent (one attachable file). Its sha256 joins the release manifest
+  at the next data tag (data-v1 assets are immutable); the TSVs stay the
+  canonical format. Natural backing store for W4c when it comes.
 
 ### W3 — vdocs entity bridge — ✅ shipped 2026-07-05
 
@@ -126,7 +131,8 @@ as a workstream so the acceptance test below names it.
 | P1 ✅ | W1 card+manifest emitter + drift gate; W4a skill re-point (shipped 2026-07-05) | fresh clone → `make <export>` → card present, gate green, hash ≡ manifest; a cold AI session answers a measured question citing `AI-CARD.md` recipes only |
 | P2 ✅ | W3 entity bridge + rate report + regression floor (shipped 2026-07-05; release inclusion lands with the next data tag — data-v1 assets are immutable) | bridge TSV in release; measured join rates reported; dual-source question ("docs vs measured for package X") answers via one bridge hop |
 | P3 ✅ | W4b agent dual-source (shipped 2026-07-05) | corpus-researcher returns labeled `documented:`/`measured:` findings |
-| deferred | W2b `meta.db`, W4c MCP | first real consumer / vdocs `serve-mcp` ships |
+| W2b ✅ | `meta.db` projection (shipped 2026-07-05 — W4b's shipping met its unblock clause; consumer = the dual-source agent) | `make meta-db` green; join views answer the four canonical paths |
+| deferred | W4c MCP | vdocs `serve-mcp` ships |
 
 ## 5. Non-goals
 

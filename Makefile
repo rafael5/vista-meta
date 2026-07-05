@@ -364,6 +364,11 @@ bridge: ## Build the vdocs entity bridge from the two pinned releases (machine-f
 bridge-check: ## Bridge drift gate: dual pins + rates + floors (+ full diff when peer bundle present)
 	@/usr/bin/python3 host/scripts/build_entity_bridge.py --check
 
+.PHONY: meta-db
+meta-db: ## Generate dist/vista-meta-data-v1.db — SQLite projection (tables + join views; TSVs stay canonical)
+	/usr/bin/python3 host/scripts/build_meta_db.py
+	/usr/bin/python3 host/scripts/build_meta_db.py --check
+
 .PHONY: content-hash
 content-hash: ## Print the V5 data fingerprint (24 TSVs, normative recipe)
 	/usr/bin/python3 host/scripts/content_hash.py

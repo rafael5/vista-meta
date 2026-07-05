@@ -138,6 +138,12 @@ def build_manifest_doc(export_dir: Path, record: dict) -> dict:
             "verbs": CLI_VERBS,
             "tsv_root": "vista/export",
             "sqlite_recipe": SQLITE_RECIPE,
+            "meta_db": "make meta-db → dist/vista-meta-data-v1.db — "
+                       "generated SQLite projection (24 tables + "
+                       "entity_bridge + join views v_rpc_impl / "
+                       "v_option_impl / v_global_file_piks / "
+                       "v_routine_global_piks / v_rpc_data_piks / "
+                       "v_package_overview); the TSVs stay canonical",
         },
         "join_keys": _join_key_registry(),
         "shared_vocabularies": [
@@ -249,6 +255,10 @@ silently.
    ```bash
 {_indent(SQLITE_RECIPE, "   ")}
    ```
+   Or generate the one-file projection: `make meta-db` →
+   `dist/vista-meta-data-v1.db` (all tables typed + the entity bridge + join
+   views `v_rpc_impl`, `v_routine_global_piks`, `v_rpc_data_piks`,
+   `v_package_overview`, …). The TSVs stay canonical; the db is derived.
 
 ## Data dictionary
 
