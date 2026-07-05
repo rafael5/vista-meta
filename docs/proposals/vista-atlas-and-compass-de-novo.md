@@ -94,6 +94,19 @@ Two sibling VSCode extensions, designed as a pair:
    re-derive or regex away (nav chrome, table titles, flattened-chunk detection)
    moves upstream into the published format (Track P below) — the vdocs-web
    workaround list is the requirements list.
+8. **Clean-room de novo (owner directive, 2026-07-05).** The predecessors —
+   `vscode-extension/` 0.2.0, vdocs-web, vista-info-hub — are **behavioral
+   references, never code sources**: no file, module, or snippet is ported into
+   the twins. Their ad-hoc/iterative design (and any orphaned code) stays
+   behind. What DOES carry over, deliberately: (a) the **UX to replicate**,
+   specified from their docs and guides (for Compass: the extension-internals /
+   situational-awareness guides; the guide walkthrough is P3's acceptance), and
+   (b) their **known bug classes, re-encoded as new TDD test cases first**
+   (bare-vs-caret global join, `global_root` normalization, XINDEX
+   line-number-as-text, the mis-nested table placeholder) so the rewrite can't
+   re-learn them the hard way. Everything in the twins is written test-first
+   against the published data contracts, version-pinned (`.node-version`,
+   `engines.vscode`, pinned release tags), and gated by `ts-ci`.
 
 ## 4. Vista Atlas (successor of vdocs-web)
 
@@ -234,8 +247,9 @@ release manifest (pins/vintage badge, as today).
   vista-forge (VistA-Copilot retired); vista-meta's `exposes:` gets the pointer
   when Compass v2 reaches parity (P3).
 - **Webview duplication**: Atlas's reading pane re-implements vdocs-web's
-  hydration logic in TS; keep the transforms pure + ported with their tests
-  (the mis-nested-placeholder bug class must not regress).
+  hydration behavior in TS — clean-room per principle 8 (no code ported); the
+  behaviors are re-specified as pure TDD'd transforms, and the
+  mis-nested-placeholder bug class is encoded as a regression test first.
 - **Naming**: "Vista Atlas" (map of the documentation) / "Vista Compass"
   (orientation in the measured code) — pairs cleanly; Compass keeps its
   marketplace identity and bumps major.
