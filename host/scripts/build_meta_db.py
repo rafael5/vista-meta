@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # W2b of the machine-friendly-exports umbrella: the meta.db projection.
-# Plan: docs/proposals/machine-friendly-exports.md
+# Plan: docs/historical/machine-friendly-exports.md
 
 """Generate the SQLite projection of the data release.
 

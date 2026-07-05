@@ -24,6 +24,7 @@ exposes:
     - bin/vista-meta                       # doctor, pkg, context, where, callers, search, file, lint, xindex, new-test
     - bin/mfmt                             # M-language formatter
   vscode_extension: vscode-extension/      # VISTA ROUTINE sidebar
+  mcp_server: host/scripts/mcp_server.py   # stdio MCP over meta.db (query/lookup/bridge/orientation); wired by .mcp.json
   hooks: [hooks/pre-commit]                # SAC-compliant lint gate
   python_api: []                           # not packaged; host/scripts/ is internal
   formats_produced:

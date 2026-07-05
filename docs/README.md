@@ -36,20 +36,21 @@ Documentation here is classified by **lifecycle state, not topic**:
   the public **`vista-meta-data-v1`** release (mutually pinned with vdocs `data-v1`),
   the **VistA Compass** VSCode extension 0.2.0, the `vista-meta` CLI + `mfmt` + pre-commit hook,
   the generated AI surface (`vista/export/AI-CARD.md` + `ai-manifest.json`, `make ai-card`,
-  drift-gated by `make card-check`; shipped 2026-07-05), and the vdocs entity bridge
+  drift-gated by `make card-check`; shipped 2026-07-05), the vdocs entity bridge
   (`vista/export/bridge/entity-bridge.tsv` + meta, `make peer-fetch` + `make bridge`,
-  dual-pinned to both `data-v1` releases with measured join-rate floors; shipped 2026-07-05).
+  dual-pinned to both `data-v1` releases with measured join-rate floors; shipped 2026-07-05),
+  the `make meta-db` SQLite projection, and the **MCP server**
+  (`host/scripts/mcp_server.py`, stdio, wired by `.mcp.json`; tools query / lookup /
+  bridge / orientation; shipped 2026-07-05).
 - **Live proposals:** [`vista-orchestration-plan.md`](proposals/vista-orchestration-plan.md)
-  (cross-repo TDD toolchain roadmap — largely about sibling repos; Status: Proposed) ·
-  [`machine-friendly-exports.md`](proposals/machine-friendly-exports.md) (vdocs-parity AI
-  consumability umbrella: generated AI card + drift gate, join surface, vdocs entity
-  bridge, harness/agent wiring, fingerprint-pinned citations; Status: P1–P3 + W2b
-  `meta.db` shipped 2026-07-05, only W4c MCP open — tracks vdocs `serve-mcp`) ·
-  [`ai-card.md`](proposals/ai-card.md) (its phase-1 child — content spec for the
-  pipeline-generated `vista/export/AI-CARD.md`; Status: implemented 2026-07-05) — the docs-lifecycle
-  reorganization itself closed 2026-07-04 (phases 0–3 executed; its record is in
+  (cross-repo TDD toolchain roadmap — largely about sibling repos; Status: Proposed) —
+  the docs-lifecycle reorganization itself closed 2026-07-04 (phases 0–3 executed; its record is in
   `historical/`; the `Packages.csv` relocation (T-005) closed 2026-07-04 — it lives at `host/vendor/Packages.csv` as vendored build input).
-- **Recently closed → `historical/`:** producer-contracts implementation plan (V1–V7 + Gate R,
+- **Recently closed → `historical/`:** the machine-friendly-exports umbrella
+  ([`machine-friendly-exports.md`](historical/machine-friendly-exports.md) + its
+  [`ai-card.md`](historical/ai-card.md) content spec — ALL workstreams shipped
+  2026-07-05: generated card + drift gate, `meta.db`, entity bridge, dual-source
+  agent, MCP server) · producer-contracts implementation plan (V1–V7 + Gate R,
   all gate-PASS) · upstream data fixes P1–P5 · the vista-info-hub heads-up memo · spec v0.4
   (as-built build record; its live §11 extraction/PIKS contract was promoted to `reference/`) ·
   the relocate-and-publish record · the docs-lifecycle reorg proposal (executed).

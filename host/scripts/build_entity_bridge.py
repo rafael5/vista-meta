@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # W3 of the machine-friendly-exports umbrella: the vdocs entity bridge.
-# Plan: docs/proposals/machine-friendly-exports.md
+# Plan: docs/historical/machine-friendly-exports.md
 
 """Emit the vdocs↔vista-meta entity bridge from two pinned releases.
 

@@ -1,6 +1,8 @@
 # Machine-friendly exports — vdocs-parity for AI consumers
 
-**Status:** P1–P3 + W2b shipped 2026-07-05 (filed same day) · remaining: W4c MCP only (tracks vdocs `serve-mcp`)
+**Status:** COMPLETE — all workstreams shipped 2026-07-05 (filed same day). W4c was
+built on explicit direction ahead of vdocs `serve-mcp` (its original wait-for-parity
+deferral was overridden); when vdocs' front door ships, align tool naming then.
 **Owner:** rafael
 **Children:** [`ai-card.md`](ai-card.md) (Workstream 1's artifact spec — filed 2026-07-05, `56a07e6`)
 **Benchmark:** the vdocs gold corpus AI surface (`~/data/vdocs/documents/gold/`)
@@ -114,8 +116,13 @@ mutually-pinned releases (vdocs `data-v1` entity index × vista-meta `data-v1` k
   dual-source — queries vdocs *and* vista-meta, labels `documented:`/`measured:`,
   never reconciles silently, crosses via `entity-bridge.tsv`/`app_code`. Verified
   live on a PSO docs-vs-measured question (labeled, per-source citations).
-- **W4c (deferred, tracks vdocs):** MCP server exposing search/lookup/join over
-  `meta.db` — only after vdocs' own `serve-mcp` ships, so the two front doors match.
+- **W4c (done 2026-07-05 — deferral overridden by explicit direction):** MCP stdio
+  server over `meta.db`, stdlib-only (`host/scripts/mcp_server.py`, TDD
+  `tests/test_mcp_server.py`; wired by the repo's `.mcp.json`). Tools: `query`
+  (SELECT/WITH-only over a read-only connection, row-capped), `lookup` (keyed, emits
+  the citation line), `bridge` (vdocs entity → vista-meta row), `orientation` (pins +
+  surface + contract). Self-building: startup regenerates a missing/stale meta.db.
+  When vdocs' `serve-mcp` ships, align the two front doors' tool naming.
 
 ### W5 — Fingerprint-pinned answers
 
@@ -132,7 +139,7 @@ as a workstream so the acceptance test below names it.
 | P2 ✅ | W3 entity bridge + rate report + regression floor (shipped 2026-07-05; release inclusion lands with the next data tag — data-v1 assets are immutable) | bridge TSV in release; measured join rates reported; dual-source question ("docs vs measured for package X") answers via one bridge hop |
 | P3 ✅ | W4b agent dual-source (shipped 2026-07-05) | corpus-researcher returns labeled `documented:`/`measured:` findings |
 | W2b ✅ | `meta.db` projection (shipped 2026-07-05 — W4b's shipping met its unblock clause; consumer = the dual-source agent) | `make meta-db` green; join views answer the four canonical paths |
-| deferred | W4c MCP | vdocs `serve-mcp` ships |
+| W4c ✅ | MCP server (shipped 2026-07-05 on explicit direction, ahead of vdocs `serve-mcp`) | cold MCP client answers a measured question with a pinned citation via `orientation`+`lookup` |
 
 ## 5. Non-goals
 

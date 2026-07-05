@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "vista-meta": {
+      "command": "python3",
+      "args": ["host/scripts/mcp_server.py"]
+    }
+  }
+}

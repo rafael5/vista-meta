@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # W1 of the machine-friendly-exports umbrella: the generated AI card.
-# Plan: docs/proposals/machine-friendly-exports.md
-# Spec: docs/proposals/ai-card.md
+# Plan: docs/historical/machine-friendly-exports.md
+# Spec: docs/historical/ai-card.md
 
 """Emit the AI orientation surface beside the TSVs, as data.
 
@@ -144,6 +144,10 @@ def build_manifest_doc(export_dir: Path, record: dict) -> dict:
                        "v_option_impl / v_global_file_piks / "
                        "v_routine_global_piks / v_rpc_data_piks / "
                        "v_package_overview); the TSVs stay canonical",
+            "mcp": "python3 host/scripts/mcp_server.py — stdio MCP "
+                   "server over meta.db (self-building; tools: query / "
+                   "lookup / bridge / orientation); wired via the "
+                   "repo's .mcp.json",
         },
         "join_keys": _join_key_registry(),
         "shared_vocabularies": [
@@ -259,6 +263,10 @@ silently.
    `dist/vista-meta-data-v1.db` (all tables typed + the entity bridge + join
    views `v_rpc_impl`, `v_routine_global_piks`, `v_rpc_data_piks`,
    `v_package_overview`, …). The TSVs stay canonical; the db is derived.
+4. **MCP** — `python3 host/scripts/mcp_server.py` (stdio; wired by the repo's
+   `.mcp.json`): tools `query` (read-only SQL over the db above, self-building)
+   · `lookup` (keyed, returns the citation line ready-made) · `bridge` (vdocs
+   entity → vista-meta row) · `orientation` (pins + surface + contract).
 
 ## Data dictionary
 

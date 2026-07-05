@@ -98,6 +98,7 @@
   "query": {
     "cli": "bin/vista-meta",
     "cli_on_path": false,
+    "mcp": "python3 host/scripts/mcp_server.py \u2014 stdio MCP server over meta.db (self-building; tools: query / lookup / bridge / orientation); wired via the repo's .mcp.json",
     "meta_db": "make meta-db \u2192 dist/vista-meta-data-v1.db \u2014 generated SQLite projection (24 tables + entity_bridge + join views v_rpc_impl / v_option_impl / v_global_file_piks / v_routine_global_piks / v_rpc_data_piks / v_package_overview); the TSVs stay canonical",
     "sqlite_recipe": "cd ~/projects/vista-meta/vista/export\nsqlite3 :memory: <<'SQL'\n.mode tabs\n.import code-model/rpcs.tsv rpcs\n.import code-model/routines-comprehensive.tsv r\nSELECT rpcs.name, rpcs.tag, rpcs.routine_name, r.package, r.line_count\nFROM rpcs JOIN r ON r.routine_name = rpcs.routine_name\nWHERE rpcs.name LIKE 'ORWPT%' LIMIT 20;\nSQL",
     "tsv_root": "vista/export",

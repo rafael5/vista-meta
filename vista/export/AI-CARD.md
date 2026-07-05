@@ -73,6 +73,10 @@ silently.
    `dist/vista-meta-data-v1.db` (all tables typed + the entity bridge + join
    views `v_rpc_impl`, `v_routine_global_piks`, `v_rpc_data_piks`,
    `v_package_overview`, …). The TSVs stay canonical; the db is derived.
+4. **MCP** — `python3 host/scripts/mcp_server.py` (stdio; wired by the repo's
+   `.mcp.json`): tools `query` (read-only SQL over the db above, self-building)
+   · `lookup` (keyed, returns the citation line ready-made) · `bridge` (vdocs
+   entity → vista-meta row) · `orientation` (pins + surface + contract).
 
 ## Data dictionary
 
