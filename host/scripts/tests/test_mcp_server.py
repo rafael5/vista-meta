@@ -155,6 +155,12 @@ class TestTools(unittest.TestCase):
         self.assertIn("entity_bridge", text)
         self.assertIn("not measured in vista-meta data-v1", text)
 
+    def test_orientation_cross_points_to_the_vdocs_peer(self):
+        text = tool_text(call_tool(self.h, "orientation", {}))
+        self.assertIn("vdocs serve-mcp", text)
+        self.assertIn("documented:", text)
+        self.assertIn("measured:", text)
+
 
 class TestStdioFraming(unittest.TestCase):
     def test_serve_lines_roundtrip(self):

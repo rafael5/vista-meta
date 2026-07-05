@@ -1,8 +1,12 @@
 # Machine-friendly exports — vdocs-parity for AI consumers
 
 **Status:** COMPLETE — all workstreams shipped 2026-07-05 (filed same day). W4c was
-built on explicit direction ahead of vdocs `serve-mcp` (its original wait-for-parity
-deferral was overridden); when vdocs' front door ships, align tool naming then.
+built on explicit direction ahead of vdocs `serve-mcp`; the alignment follow-up closed
+the same day: vdocs `serve-mcp` shipped (vdocs `7d5ed7c`) with the matching front-door
+contract — shared tools `orientation`/`query`/`lookup` under identical conventions
+(stdio JSON-RPC, read-only SQL, row caps, pre-cited answers, explicit-miss answers),
+plus each side's native strength (`search` on vdocs, `bridge` here); both orientations
+cross-point and prescribe `documented:`/`measured:` labeling.
 **Owner:** rafael
 **Children:** [`ai-card.md`](ai-card.md) (Workstream 1's artifact spec — filed 2026-07-05, `56a07e6`)
 **Benchmark:** the vdocs gold corpus AI surface (`~/data/vdocs/documents/gold/`)

@@ -229,6 +229,11 @@ class Handler:
             "(the `lookup` tool returns this line ready-made). If no row "
             "answers the question, the correct answer is \"not measured "
             f"in vista-meta {self.tag}\" — say so and stop.\n\n"
+            "Peer front door: `vdocs serve-mcp` holds what the VA "
+            "documentation SAYS (same tool conventions; its extra tool is "
+            "`search`, this side's is `bridge` — vdocs entity_id → "
+            "measured row). Label findings measured: (here) vs "
+            "documented: (there); never reconcile silently.\n\n"
             "Full orientation card: vista/export/AI-CARD.md; per-TSV "
             "catalog: vista/export/ai-manifest.json."
         )
