@@ -1,4 +1,6 @@
 node_modules/
 out/
 *.vsix
+# extracted-vsix inspection dirs (*.vsix doesn't match a directory)
+vista-compass-*/
 .vscode-test/
