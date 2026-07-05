@@ -29,6 +29,8 @@ exposes:
   formats_produced:
     - "TSV/data-model/*.tsv"               # 4 TSVs — PIKS-classified FileMan files (schema_version 1)
     - "TSV/code-model/*.tsv"               # 20 TSVs, ~1.0M rows — calls/globals/RPCs/options/protocols/XINDEX (schema_version 1)
+    - "vista/export/AI-CARD.md"            # generated AI orientation card (make ai-card, drift-gated)
+    - "vista/export/ai-manifest.json"      # its machine twin — per-TSV catalog + join keys + query recipes
     - "vista/export/RESEARCH.md"           # RF-NNN findings log
 
 consumes:

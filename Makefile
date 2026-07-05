@@ -325,6 +325,19 @@ fidelity: ## Emit + verify the fidelity declarations (V4/R2+F9)
 validate: ## Validate the emitted tree against the full v1 contract (V6)
 	/usr/bin/python3 host/scripts/validate_export.py
 
+.PHONY: ai-card
+ai-card: ## Emit + verify AI-CARD.md and ai-manifest.json (machine-friendly-exports W1)
+	@[ -w vista/export/AI-CARD.md ] && [ -w vista/export/ai-manifest.json ] || \
+		$(DOCKER) exec -u root $(CONTAINER) sh -c \
+		'touch /home/vehu/export/AI-CARD.md /home/vehu/export/ai-manifest.json && \
+		chown 1000:1000 /home/vehu/export/AI-CARD.md /home/vehu/export/ai-manifest.json'
+	/usr/bin/python3 host/scripts/build_ai_card.py
+	/usr/bin/python3 host/scripts/build_ai_card.py --check
+
+.PHONY: card-check
+card-check: ## Drift gate: AI card ≡ regeneration, card pin ≡ release content_hash
+	@/usr/bin/python3 host/scripts/build_ai_card.py --check
+
 .PHONY: content-hash
 content-hash: ## Print the V5 data fingerprint (24 TSVs, normative recipe)
 	/usr/bin/python3 host/scripts/content_hash.py
@@ -356,7 +369,8 @@ emit-all: ## Single-run emission of all 24 finals from one engine state (F7)
 	$(MAKE) column-manifest
 	$(MAKE) fidelity
 	$(MAKE) validate
-	@echo "emit-all complete: 24 finals + typed manifest + fidelity from one extraction, validated."
+	$(MAKE) ai-card
+	@echo "emit-all complete: 24 finals + typed manifest + fidelity + AI card from one extraction, validated."
 
 .PHONY: dump-files dump-piks dump-field-piks
 .PHONY: raw-dir
@@ -539,7 +553,7 @@ test: ## Run the host-side Python unit suites (stdlib only, no installs)
 	@set -e; for t in host/scripts/tests/test_*.py; do echo "== $$t"; python3 $$t; done
 
 .PHONY: check
-check: test docs-check ## Full host-side gate: unit suites + docs link/citation gate
+check: test docs-check card-check ## Full host-side gate: unit suites + docs gate + AI-card drift gate
 
 .PHONY: docs-check
 docs-check: ## Fail on dead docs links or dead '# Spec:'/'# Plan:' code citations

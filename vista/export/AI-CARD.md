@@ -1,13 +1,11 @@
 # vista-meta — AI card (the measured model of VistA)
 
-> **STATUS: IMPLEMENTED 2026-07-05** — phase-1 child of
-> [`machine-friendly-exports.md`](machine-friendly-exports.md) (Workstream 1), the
-> umbrella proposal for vdocs-parity AI consumability. The export pipeline now emits
-> the card as `vista/export/AI-CARD.md` (+ machine twin `vista/export/ai-manifest.json`)
-> via `host/scripts/build_ai_card.py` (`make ai-card`), drift-gated by `make card-check`
-> (part of `make check`): stale card = RED, card pin must equal the release record's
-> `content_hash`. **The generated card is the live orientation surface; this file is
-> retained as its content spec** — if they disagree, the generated card wins.
+> **GENERATED — do not edit.** Emitted by `host/scripts/build_ai_card.py`
+> from `schema_v1` + the live TSVs + the pinned release record
+> (`docs/releases/data-v1.manifest.json`). Regenerate with `make ai-card`;
+> drift-gated by `make card-check` (stale card = RED, card pin must equal
+> the release manifest's `content_hash`). Machine-readable twin:
+> `vista/export/ai-manifest.json`.
 
 ## What this is
 
@@ -33,10 +31,8 @@ silently.
 | content_hash | `23d037f1e08adc206d251eea9adb4ec62051032c06b593737bebfcaf67e4c754` |
 | db_state_fingerprint | `b8518a87f50f0f14186f3f3da97155345979d6d6c5d2878d6a379b74e9fe0d32` |
 | extracted | 2026-07-03T21:03:48Z, engine `ydb`, image `vista-meta:latest` |
-| manifest | `dist/vista-meta-data-v1.manifest.json` (per-file sha256) |
+| manifest | `docs/releases/data-v1.manifest.json` (in-repo record; per-file sha256) |
 | schema contract | `docs/reference/schema-v1-normalization-spec.md` |
-
-*(Generated versions of this card must copy hashes from the manifest verbatim.)*
 
 **Scope caveats (state these when they matter):**
 - Measured on the **VEHU demo instance** — `record_count` and data-bearing counts reflect
@@ -51,10 +47,13 @@ silently.
 ## Query paths (in order of preference)
 
 1. **CLI** — `~/projects/vista-meta/bin/vista-meta <verb>` (not on `$PATH`):
-   `pkg <name>` package overview · `file <N> [--fields N]` FileMan file + PIKS +
-   pointers · `where TAG^ROUTINE` locate source · `callers [TAG^]ROUTINE` reverse call
-   graph · `search <regex> [--package P] [--tags-only]` annotated corpus grep ·
-   `context <pkg> [--with-source]` AI context pack · `doctor` health check.
+   `pkg <name>` package overview (namespace, footprint, PIKS mix) ·
+   `file <N> [--fields N]` FileMan file + PIKS + pointers + fields ·
+   `where TAG^ROUTINE` locate source ·
+   `callers [TAG^]ROUTINE` reverse call graph (measured, ranked) ·
+   `search <regex> [--package P] [--tags-only]` annotated corpus grep ·
+   `context <pkg> [--with-source]` AI context pack ·
+   `doctor` environment health check.
 2. **TSVs directly** — `vista/export/{data-model,code-model}/*.tsv`, tab-separated,
    header row, deterministic sort. Fine for `awk -F'\t'` single-file lookups.
 3. **Joins** — load into in-memory SQLite (no build step; first row becomes column
@@ -77,40 +76,40 @@ silently.
 
 | TSV | rows | key | columns |
 |---|---|---|---|
-| `files.tsv` | 8,261 | `file_number` | file_number · file_name · global_root · parent_file · field_count · pointer_in · pointer_out · record_count · is_dinum · status |
-| `piks.tsv` | 8,261 | `file_number` | file_number · piks (`P`/`I`/`K`/`S`) · piks_method · piks_confidence · piks_evidence · piks_source |
-| `piks-triage.tsv` | 220 | `file_number` | the hand-triaged subset: file_number · piks · piks_method · piks_confidence · piks_evidence |
 | `field-piks.tsv` | 69,809 | `file_number`+`field_number` | file_number · field_number · field_name · data_type · file_piks · pointer_target · ref_piks · cross_piks · sensitivity_flag |
+| `files.tsv` | 8,261 | `file_number` | file_number · file_name · global_root · parent_file · field_count · pointer_in · pointer_out · record_count · is_dinum · status |
+| `piks-triage.tsv` | 220 | `file_number` | file_number · piks · piks_method · piks_confidence · piks_evidence |
+| `piks.tsv` | 8,261 | `file_number` | file_number · piks · piks_method · piks_confidence · piks_evidence · piks_source |
 
 **PIKS in one line each** (full guide: `docs/guides/piks-analysis-guide.md`):
 **P** Patient — clinical data about identified individuals (PHI). **I** Institution —
 facilities, staff (File 200), schedules, assets. **K** Knowledge — terminologies, code
 tables, templates, rules. **S** System — Kernel/FileMan plumbing, menus, queues, config.
 
-### code-model/ (per-routine intelligence, ~1.0M rows)
+### code-model/ (per-routine intelligence)
 
 | TSV | rows | key | columns |
 |---|---|---|---|
-| `routines.tsv` | 39,373 | `routine_name` | routine_name · package · source_path · line_count · byte_size · first_line_comment · version_line · tag_count · comment_line_count · is_percent_routine |
-| `routines-comprehensive.tsv` | 39,373 | `routine_name` | adds: in_file_9_8 · file_9_8_type · rpc_count · option_count · protocol_invoked_count · out_degree · in_degree · out_calls_total · in_calls_total · distinct_globals_touched · global_ref_total |
-| `routine-calls.tsv` | 241,781 | caller→callee edge | caller_routine · caller_package · callee_tag · callee_routine · kind · ref_count |
-| `routine-globals.tsv` | 77,939 | routine→global edge | routine_name · package · global_name (bare, no `^`) · ref_count |
-| `rpcs.tsv` | 4,501 | `name` (file #8994) | ien · name · tag · routine_name · return_type(+label) · availability · inactive(+label) · version · package · package_dir |
-| `options.tsv` | 13,163 | `name` (file #19) | ien · name · menu_text · type · package · routine_raw · tag · routine_name · package_dir |
-| `protocols.tsv` | 6,556 | `name` (file #101) | ien · name · item_text · type · package · entry_action · exit_action · package_dir |
-| `protocol-calls.tsv` | 5,081 | protocol→callee edge | protocol_name · protocol_package · action_kind · callee_tag · callee_routine · call_kind · ref_count |
+| `options.tsv` | 13,163 | `ien` | ien · name · menu_text · type · package · routine_raw · tag · routine_name · package_dir |
+| `package-data.tsv` | 3,140 | `package`+`kind`+`file_number`+`chunk`+`entity_name` | package · kind · file_number · chunk · entity_name · source_path · byte_size |
+| `package-edge-matrix.tsv` | 1,875 | `source_package`+`dest_package` | source_package · dest_package · call_edges · distinct_caller_routines · distinct_callee_routines |
+| `package-manifest.tsv` | 175 | `package` | package · routine_count · total_lines · files_shipped · p_files · i_files · k_files · s_files · rpc_routines · option_routines · distinct_globals_touched · outbound_edges · outbound_cross_pkg |
+| `package-namespace.tsv` | 174 | `package` | package · package_name · namespace · prefixes · app_code · vdl_id |
+| `package-piks-summary.tsv` | 120 | `package` | package · p_files · i_files · k_files · s_files · unclassified · total_distinct_files |
 | `packages.tsv` | 174 | `package` | package · routine_count · percent_routine_count · total_lines · total_bytes |
-| `package-manifest.tsv` | 175 | `package` | + files_shipped · p/i/k/s_files · rpc_routines · option_routines · distinct_globals_touched · outbound_edges · outbound_cross_pkg |
-| `package-namespace.tsv` | 174 | `package` | package · package_name · namespace · prefixes · **app_code** · **vdl_id** ← the vdocs bridge |
-| `package-edge-matrix.tsv` | 1,875 | pkg→pkg edge | source_package · dest_package · call_edges · distinct_caller/callee_routines |
-| `package-piks-summary.tsv` | 120 | `package` | p/i/k/s_files · unclassified · total_distinct_files |
-| `package-data.tsv` | 3,140 | package+entity | package · kind · file_number · chunk · entity_name · source_path · byte_size |
-| `vista-file-9-8.tsv` | 30,665 | `routine_name` | ROUTINE file (#9.8) registry: ien · routine_name · type · byte_size · rsum_value · checksum_value |
-| `xindex-errors.tsv` | 6,907 | routine+entry | routine_name · entry_index · line_text · tag_offset · error_text |
-| `xindex-routines.tsv` | 29,097 | `routine_name` | line_count · tag_count · xref_count · error_count · rsum_value |
-| `xindex-tags.tsv` | 292,138 | routine+tag | routine_name · tag · data |
-| `xindex-xrefs.tsv` | 214,101 | routine+ref | routine_name · ref · location_list |
-| `xindex-validation.tsv` | 29,097 | `routine_name` | ours-vs-XINDEX agreement: lines/tags/callees counts + callees_agreement_ratio |
+| `protocol-calls.tsv` | 5,081 | `protocol_name`+`action_kind`+`callee_tag`+`callee_routine`+`call_kind` | protocol_name · protocol_package · action_kind · callee_tag · callee_routine · call_kind · ref_count |
+| `protocols.tsv` | 6,556 | `ien` | ien · name · item_text · type · package · entry_action · exit_action · package_dir |
+| `routine-calls.tsv` | 241,781 | `caller_routine`+`callee_tag`+`callee_routine`+`kind` | caller_routine · caller_package · callee_tag · callee_routine · kind · ref_count |
+| `routine-globals.tsv` | 77,939 | `routine_name`+`global_name` | routine_name · package · global_name · ref_count |
+| `routines-comprehensive.tsv` | 39,373 | `routine_name` | routine_name · package · source_path · line_count · byte_size · tag_count · comment_line_count · version_line · is_percent_routine · in_file_9_8 · file_9_8_type · rpc_count · option_count · protocol_invoked_count · out_degree · in_degree · out_calls_total · in_calls_total · distinct_globals_touched · global_ref_total |
+| `routines.tsv` | 39,373 | `routine_name` | routine_name · package · source_path · line_count · byte_size · first_line_comment · version_line · tag_count · comment_line_count · is_percent_routine |
+| `rpcs.tsv` | 4,501 | `ien` | ien · name · tag · routine_name · return_type · return_type_label · availability · inactive · inactive_label · version · package · package_dir |
+| `vista-file-9-8.tsv` | 30,665 | `ien` | ien · routine_name · type · byte_size · rsum_value · checksum_value |
+| `xindex-errors.tsv` | 6,907 | `routine_name`+`entry_index` | routine_name · entry_index · line_text · tag_offset · error_text |
+| `xindex-routines.tsv` | 29,097 | `routine_name` | routine_name · line_count · tag_count · xref_count · error_count · rsum_value |
+| `xindex-tags.tsv` | 292,138 | `routine_name`+`tag` | routine_name · tag · data |
+| `xindex-validation.tsv` | 29,097 | `routine_name` | routine_name · package · lines_ours · lines_xindex · lines_match · tags_ours · tags_xindex · tags_match · callees_ours_count · callees_xindex_count · callees_match_count · callees_ours_only_count · callees_xindex_only_count · callees_agreement_ratio |
+| `xindex-xrefs.tsv` | 214,101 | `routine_name`+`ref` | routine_name · ref · location_list |
 
 ## Join keys
 
@@ -126,6 +125,9 @@ tables, templates, rules. **S** System — Kernel/FileMan plumbing, menus, queue
 - **Global names** — `routine-globals.global_name` is bare (`DPT`); `files.global_root`
   is a global reference (may be empty, may carry `^`/subscripts) — normalize before
   joining.
+
+The full FK registry (every declared edge, machine-readable) lives in
+`ai-manifest.json` under `join_keys`.
 
 ## Recipes
 
@@ -158,5 +160,6 @@ Cite every measured claim as:
 Example: *"ORWPT SELECT is served by SELECT^ORWPT"* →
 **vista-meta data-v1** · `code-model/rpcs.tsv` · `name=ORWPT SELECT`.
 
-If no row answers the question, the correct answer is **"not measured in vista-meta
-data-v1"** — say so and stop; do not substitute general knowledge.
+If no row answers the question, the correct answer is
+**"not measured in vista-meta data-v1"** — say so and stop; do not substitute
+general knowledge.

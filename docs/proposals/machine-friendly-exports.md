@@ -1,6 +1,6 @@
 # Machine-friendly exports — vdocs-parity for AI consumers
 
-**Status:** Draft · 2026-07-05
+**Status:** In progress · P1 (W1 + W4a) shipped 2026-07-05 · filed 2026-07-05
 **Owner:** rafael
 **Children:** [`ai-card.md`](ai-card.md) (Workstream 1's artifact spec — filed 2026-07-05, `56a07e6`)
 **Benchmark:** the vdocs gold corpus AI surface (`~/data/vdocs/documents/gold/`)
@@ -37,7 +37,11 @@ red-gate` rule).
 
 ## 3. Workstreams
 
-### W1 — Generated AI card (phase 1, the core)
+### W1 — Generated AI card (phase 1, the core) — ✅ shipped 2026-07-05
+
+> Implemented as `host/scripts/build_ai_card.py` (TDD,
+> `tests/test_build_ai_card.py`): `make ai-card` emits both artifacts;
+> `make card-check` (in `make check`) is the drift gate; `emit-all` ends with it.
 
 Emit `vista/export/AI-CARD.md` + `vista/export/ai-manifest.json` from the export
 pipeline, replacing the hand-drafted draft ([`ai-card.md`](ai-card.md), which is the
@@ -88,8 +92,8 @@ mutually-pinned releases (vdocs `data-v1` entity index × vista-meta `data-v1` k
 
 - **W4a (done 2026-07-05):** `~/.claude/skills/vista-meta/SKILL.md` — measured-model
   protocol, citation contract, measured-vs-documented rule, pairs with `vdocs-corpus`.
-  Follow-up owned here: re-point the skill's orientation path from
-  `docs/proposals/ai-card.md` to `vista/export/AI-CARD.md` when W1 lands.
+  The skill's orientation path now points at the generated `vista/export/AI-CARD.md`
+  (re-pointed same day W1 landed).
 - **W4b:** extend the `corpus-researcher` agent definition to dual-source (query vdocs
   *and* vista-meta, label `documented:`/`measured:`, never reconcile silently).
 - **W4c (deferred, tracks vdocs):** MCP server exposing search/lookup/join over
@@ -106,7 +110,7 @@ as a workstream so the acceptance test below names it.
 
 | Phase | Work | Accept when |
 |---|---|---|
-| P1 | W1 card+manifest emitter + drift gate; W4a skill re-point | fresh clone → `make <export>` → card present, gate green, hash ≡ manifest; a cold AI session answers a measured question citing `AI-CARD.md` recipes only |
+| P1 ✅ | W1 card+manifest emitter + drift gate; W4a skill re-point (shipped 2026-07-05) | fresh clone → `make <export>` → card present, gate green, hash ≡ manifest; a cold AI session answers a measured question citing `AI-CARD.md` recipes only |
 | P2 | W3 entity bridge + rate report + regression floor | bridge TSV in release; measured join rates reported; dual-source question ("docs vs measured for package X") answers via one bridge hop |
 | P3 | W4b agent dual-source | corpus-researcher returns labeled `documented:`/`measured:` findings |
 | deferred | W2b `meta.db`, W4c MCP | first real consumer / vdocs `serve-mcp` ships |

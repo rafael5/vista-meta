@@ -1,0 +1,577 @@
+{
+  "artifact": "vista-meta-ai-manifest",
+  "capabilities": [
+    "call-graph",
+    "package-topology",
+    "piks-classification",
+    "rpc-option-protocol-bindings",
+    "routine-metrics",
+    "global-usage",
+    "xindex-findings",
+    "vdocs-bridge-keys"
+  ],
+  "card": "vista/export/AI-CARD.md",
+  "citation": {
+    "example": "vista-meta data-v1 \u00b7 code-model/rpcs.tsv \u00b7 name=ORWPT SELECT",
+    "format": "vista-meta data-v1 \u00b7 <tsv path> \u00b7 <key>=<value>",
+    "no_answer": "not measured in vista-meta data-v1"
+  },
+  "external_bridges": [
+    {
+      "columns": [
+        "app_code",
+        "vdl_id"
+      ],
+      "companion": "vdocs",
+      "note": "vdocs search hits carry app_code; both releases are mutually pinned (Gate R, docs/releases/data-v1-peers.json)",
+      "via": "code-model/package-namespace.tsv"
+    }
+  ],
+  "generated_by": "host/scripts/build_ai_card.py",
+  "join_keys": [
+    {
+      "referenced_by": [
+        "data-model/field-piks.tsv:file_number",
+        "data-model/field-piks.tsv:pointer_target",
+        "data-model/files.tsv:parent_file",
+        "code-model/package-data.tsv:file_number",
+        "data-model/piks-triage.tsv:file_number",
+        "data-model/piks.tsv:file_number"
+      ],
+      "target": "files.tsv:file_number"
+    },
+    {
+      "referenced_by": [
+        "code-model/options.tsv:package_dir",
+        "code-model/package-data.tsv:package",
+        "code-model/package-edge-matrix.tsv:dest_package",
+        "code-model/package-edge-matrix.tsv:source_package",
+        "code-model/package-manifest.tsv:package",
+        "code-model/package-namespace.tsv:package",
+        "code-model/package-piks-summary.tsv:package",
+        "code-model/protocols.tsv:package_dir",
+        "code-model/routine-calls.tsv:caller_package",
+        "code-model/routine-globals.tsv:package",
+        "code-model/routines-comprehensive.tsv:package",
+        "code-model/routines.tsv:package",
+        "code-model/rpcs.tsv:package_dir",
+        "code-model/xindex-validation.tsv:package"
+      ],
+      "target": "packages.tsv:package"
+    },
+    {
+      "referenced_by": [
+        "code-model/protocol-calls.tsv:protocol_name"
+      ],
+      "target": "protocols.tsv:name"
+    },
+    {
+      "referenced_by": [
+        "code-model/options.tsv:routine_name",
+        "code-model/protocol-calls.tsv:callee_routine",
+        "code-model/routine-calls.tsv:callee_routine",
+        "code-model/routine-calls.tsv:caller_routine",
+        "code-model/routine-globals.tsv:routine_name",
+        "code-model/routines-comprehensive.tsv:routine_name",
+        "code-model/rpcs.tsv:routine_name",
+        "code-model/vista-file-9-8.tsv:routine_name",
+        "code-model/xindex-errors.tsv:routine_name",
+        "code-model/xindex-routines.tsv:routine_name",
+        "code-model/xindex-tags.tsv:routine_name",
+        "code-model/xindex-validation.tsv:routine_name",
+        "code-model/xindex-xrefs.tsv:routine_name"
+      ],
+      "target": "routines.tsv:routine_name"
+    }
+  ],
+  "query": {
+    "cli": "bin/vista-meta",
+    "cli_on_path": false,
+    "sqlite_recipe": "cd ~/projects/vista-meta/vista/export\nsqlite3 :memory: <<'SQL'\n.mode tabs\n.import code-model/rpcs.tsv rpcs\n.import code-model/routines-comprehensive.tsv r\nSELECT rpcs.name, rpcs.tag, rpcs.routine_name, r.package, r.line_count\nFROM rpcs JOIN r ON r.routine_name = rpcs.routine_name\nWHERE rpcs.name LIKE 'ORWPT%' LIMIT 20;\nSQL",
+    "tsv_root": "vista/export",
+    "verbs": {
+      "callers [TAG^]ROUTINE": "reverse call graph (measured, ranked)",
+      "context <pkg> [--with-source]": "AI context pack",
+      "doctor": "environment health check",
+      "file <N> [--fields N]": "FileMan file + PIKS + pointers + fields",
+      "pkg <name>": "package overview (namespace, footprint, PIKS mix)",
+      "search <regex> [--package P] [--tags-only]": "annotated corpus grep",
+      "where TAG^ROUTINE": "locate source"
+    }
+  },
+  "release": {
+    "content_hash": "23d037f1e08adc206d251eea9adb4ec62051032c06b593737bebfcaf67e4c754",
+    "db_state_fingerprint": "b8518a87f50f0f14186f3f3da97155345979d6d6c5d2878d6a379b74e9fe0d32",
+    "engine": "ydb",
+    "engine_image": "vista-meta:latest",
+    "extraction_timestamp": "2026-07-03T21:03:48Z",
+    "manifest": "docs/releases/data-v1.manifest.json",
+    "schema_contract": "docs/reference/schema-v1-normalization-spec.md",
+    "source_commit": "8e9b447ce4c68a19d1983d43b212c6a16072a601",
+    "tag": "data-v1"
+  },
+  "schema_version": 1,
+  "shared_vocabularies": [
+    {
+      "column": "routine_name",
+      "file": "routines.tsv"
+    },
+    {
+      "column": "file_number",
+      "file": "files.tsv"
+    },
+    {
+      "column": "name",
+      "file": "options.tsv"
+    },
+    {
+      "column": "name",
+      "file": "rpcs.tsv"
+    }
+  ],
+  "tables": {
+    "code-model/options.tsv": {
+      "bytes": 1203476,
+      "columns": [
+        "ien",
+        "name",
+        "menu_text",
+        "type",
+        "package",
+        "routine_raw",
+        "tag",
+        "routine_name",
+        "package_dir"
+      ],
+      "pk": [
+        "ien"
+      ],
+      "rows": 13163,
+      "sha256": "fbdd3b765d94bc25cbdea3e92cb73915b55220f10bcc2124676d3012260096d3"
+    },
+    "code-model/package-data.tsv": {
+      "bytes": 407351,
+      "columns": [
+        "package",
+        "kind",
+        "file_number",
+        "chunk",
+        "entity_name",
+        "source_path",
+        "byte_size"
+      ],
+      "pk": [
+        "package",
+        "kind",
+        "file_number",
+        "chunk",
+        "entity_name"
+      ],
+      "rows": 3140,
+      "sha256": "e511938796b9f0cbc3a8d30a7160fd3ee194a5b634d3ac61665ecf8a0b8a5e15"
+    },
+    "code-model/package-edge-matrix.tsv": {
+      "bytes": 82839,
+      "columns": [
+        "source_package",
+        "dest_package",
+        "call_edges",
+        "distinct_caller_routines",
+        "distinct_callee_routines"
+      ],
+      "pk": [
+        "source_package",
+        "dest_package"
+      ],
+      "rows": 1875,
+      "sha256": "07a6a03dc7b7fb5134fc9cd2a68cdd6c386bdf34efe11317e1bf399628876fd8"
+    },
+    "code-model/package-manifest.tsv": {
+      "bytes": 9604,
+      "columns": [
+        "package",
+        "routine_count",
+        "total_lines",
+        "files_shipped",
+        "p_files",
+        "i_files",
+        "k_files",
+        "s_files",
+        "rpc_routines",
+        "option_routines",
+        "distinct_globals_touched",
+        "outbound_edges",
+        "outbound_cross_pkg"
+      ],
+      "pk": [
+        "package"
+      ],
+      "rows": 175,
+      "sha256": "312846913bd8a18b6d883505ae794e97e0f0bd717e568d9a773560365bd29fa7"
+    },
+    "code-model/package-namespace.tsv": {
+      "bytes": 10079,
+      "columns": [
+        "package",
+        "package_name",
+        "namespace",
+        "prefixes",
+        "app_code",
+        "vdl_id"
+      ],
+      "pk": [
+        "package"
+      ],
+      "rows": 174,
+      "sha256": "40d561c29ea576c66ccd65a5e32e9e6646dc75a286701d172c8e0381a9735f17"
+    },
+    "code-model/package-piks-summary.tsv": {
+      "bytes": 4073,
+      "columns": [
+        "package",
+        "p_files",
+        "i_files",
+        "k_files",
+        "s_files",
+        "unclassified",
+        "total_distinct_files"
+      ],
+      "pk": [
+        "package"
+      ],
+      "rows": 120,
+      "sha256": "832508ce8c23176a769ca7d1631c9970657731ac83ad768965f348ec5f63ab87"
+    },
+    "code-model/packages.tsv": {
+      "bytes": 6505,
+      "columns": [
+        "package",
+        "routine_count",
+        "percent_routine_count",
+        "total_lines",
+        "total_bytes"
+      ],
+      "pk": [
+        "package"
+      ],
+      "rows": 174,
+      "sha256": "2fbc3c08c2230ac16cd8907462a361a35e37db45b2cae7dc9685671ca53551f3"
+    },
+    "code-model/protocol-calls.tsv": {
+      "bytes": 298178,
+      "columns": [
+        "protocol_name",
+        "protocol_package",
+        "action_kind",
+        "callee_tag",
+        "callee_routine",
+        "call_kind",
+        "ref_count"
+      ],
+      "pk": [
+        "protocol_name",
+        "action_kind",
+        "callee_tag",
+        "callee_routine",
+        "call_kind"
+      ],
+      "rows": 5081,
+      "sha256": "879ced6306b8843a74318e1eacc2441d84fa8b66560af7fe13d3129a8b49e0c0"
+    },
+    "code-model/protocols.tsv": {
+      "bytes": 625025,
+      "columns": [
+        "ien",
+        "name",
+        "item_text",
+        "type",
+        "package",
+        "entry_action",
+        "exit_action",
+        "package_dir"
+      ],
+      "pk": [
+        "ien"
+      ],
+      "rows": 6556,
+      "sha256": "76e060fffde0b2eb4ac2b87f3ac703c7e1b29466c6e330fe80421be65d8b5c0d"
+    },
+    "code-model/routine-calls.tsv": {
+      "bytes": 10245399,
+      "columns": [
+        "caller_routine",
+        "caller_package",
+        "callee_tag",
+        "callee_routine",
+        "kind",
+        "ref_count"
+      ],
+      "pk": [
+        "caller_routine",
+        "callee_tag",
+        "callee_routine",
+        "kind"
+      ],
+      "rows": 241781,
+      "sha256": "61b5bbf46e163dcdd676126d040a2465b105004f64ee144287ba7f6bf32da413"
+    },
+    "code-model/routine-globals.tsv": {
+      "bytes": 2498374,
+      "columns": [
+        "routine_name",
+        "package",
+        "global_name",
+        "ref_count"
+      ],
+      "pk": [
+        "routine_name",
+        "global_name"
+      ],
+      "rows": 77939,
+      "sha256": "0942626f29cd6cfc327297a151f5bc1ae7f3ede905ba61771c749485a3915c3f"
+    },
+    "code-model/routines-comprehensive.tsv": {
+      "bytes": 6704072,
+      "columns": [
+        "routine_name",
+        "package",
+        "source_path",
+        "line_count",
+        "byte_size",
+        "tag_count",
+        "comment_line_count",
+        "version_line",
+        "is_percent_routine",
+        "in_file_9_8",
+        "file_9_8_type",
+        "rpc_count",
+        "option_count",
+        "protocol_invoked_count",
+        "out_degree",
+        "in_degree",
+        "out_calls_total",
+        "in_calls_total",
+        "distinct_globals_touched",
+        "global_ref_total"
+      ],
+      "pk": [
+        "routine_name"
+      ],
+      "rows": 39373,
+      "sha256": "43e32778f41bd7d987a9b8ca3cdb0f89e0118d91e21268e3ee6f5b3f5aea2260"
+    },
+    "code-model/routines.tsv": {
+      "bytes": 8292411,
+      "columns": [
+        "routine_name",
+        "package",
+        "source_path",
+        "line_count",
+        "byte_size",
+        "first_line_comment",
+        "version_line",
+        "tag_count",
+        "comment_line_count",
+        "is_percent_routine"
+      ],
+      "pk": [
+        "routine_name"
+      ],
+      "rows": 39373,
+      "sha256": "09942a01d1b4e4856478b54f16760fb23933c2433d4ca841eea172213d0c561f"
+    },
+    "code-model/rpcs.tsv": {
+      "bytes": 461379,
+      "columns": [
+        "ien",
+        "name",
+        "tag",
+        "routine_name",
+        "return_type",
+        "return_type_label",
+        "availability",
+        "inactive",
+        "inactive_label",
+        "version",
+        "package",
+        "package_dir"
+      ],
+      "pk": [
+        "ien"
+      ],
+      "rows": 4501,
+      "sha256": "0057afd4309baa258f34bb90b6bdd83b71fc99442aae7f5698deab07a862687a"
+    },
+    "code-model/vista-file-9-8.tsv": {
+      "bytes": 579754,
+      "columns": [
+        "ien",
+        "routine_name",
+        "type",
+        "byte_size",
+        "rsum_value",
+        "checksum_value"
+      ],
+      "pk": [
+        "ien"
+      ],
+      "rows": 30665,
+      "sha256": "cc32b6c25bfc86339c0ad86b7cb40e6e1e84672b8f521640d3b72687e31d8c37"
+    },
+    "code-model/xindex-errors.tsv": {
+      "bytes": 427176,
+      "columns": [
+        "routine_name",
+        "entry_index",
+        "line_text",
+        "tag_offset",
+        "error_text"
+      ],
+      "pk": [
+        "routine_name",
+        "entry_index"
+      ],
+      "rows": 6907,
+      "sha256": "84874e08521c3ca3c0f615de429a9c6718c1d45303a90006a82c0f36a075d4d0"
+    },
+    "code-model/xindex-routines.tsv": {
+      "bytes": 815130,
+      "columns": [
+        "routine_name",
+        "line_count",
+        "tag_count",
+        "xref_count",
+        "error_count",
+        "rsum_value"
+      ],
+      "pk": [
+        "routine_name"
+      ],
+      "rows": 29097,
+      "sha256": "4d353ea6a93bf0df74c0f0773f377b94bb94de8ff6a56fa4b2c3f5b8efc749d7"
+    },
+    "code-model/xindex-tags.tsv": {
+      "bytes": 4314385,
+      "columns": [
+        "routine_name",
+        "tag",
+        "data"
+      ],
+      "pk": [
+        "routine_name",
+        "tag"
+      ],
+      "rows": 292138,
+      "sha256": "ade1dc18a19ced35ac2fa436ad180a9013cd02d517a5c34111ec57bd806f241f"
+    },
+    "code-model/xindex-validation.tsv": {
+      "bytes": 1718403,
+      "columns": [
+        "routine_name",
+        "package",
+        "lines_ours",
+        "lines_xindex",
+        "lines_match",
+        "tags_ours",
+        "tags_xindex",
+        "tags_match",
+        "callees_ours_count",
+        "callees_xindex_count",
+        "callees_match_count",
+        "callees_ours_only_count",
+        "callees_xindex_only_count",
+        "callees_agreement_ratio"
+      ],
+      "pk": [
+        "routine_name"
+      ],
+      "rows": 29097,
+      "sha256": "982e34c515c7ad93118938953878b9d6e5a37c62a3a16d7b45550a0665baa336"
+    },
+    "code-model/xindex-xrefs.tsv": {
+      "bytes": 4738376,
+      "columns": [
+        "routine_name",
+        "ref",
+        "location_list"
+      ],
+      "pk": [
+        "routine_name",
+        "ref"
+      ],
+      "rows": 214101,
+      "sha256": "a5fdc530c09cd42c5cc4945e57e0b9094cec2a9c84ea24208d9fae46275d74d0"
+    },
+    "data-model/field-piks.tsv": {
+      "bytes": 2874100,
+      "columns": [
+        "file_number",
+        "field_number",
+        "field_name",
+        "data_type",
+        "file_piks",
+        "pointer_target",
+        "ref_piks",
+        "cross_piks",
+        "sensitivity_flag"
+      ],
+      "pk": [
+        "file_number",
+        "field_number"
+      ],
+      "rows": 69809,
+      "sha256": "cfa32265d3b8150bb8e11c5082f7af58819be8fa146a9bf6670defecef06a2d0"
+    },
+    "data-model/files.tsv": {
+      "bytes": 546818,
+      "columns": [
+        "file_number",
+        "file_name",
+        "global_root",
+        "parent_file",
+        "field_count",
+        "pointer_in",
+        "pointer_out",
+        "record_count",
+        "is_dinum",
+        "status"
+      ],
+      "pk": [
+        "file_number"
+      ],
+      "rows": 8261,
+      "sha256": "601b78b29ebc414e0702ac2d9a0a9c9f143c29e18f9e33532fbd9e1a64676d7d"
+    },
+    "data-model/piks-triage.tsv": {
+      "bytes": 12923,
+      "columns": [
+        "file_number",
+        "piks",
+        "piks_method",
+        "piks_confidence",
+        "piks_evidence"
+      ],
+      "pk": [
+        "file_number"
+      ],
+      "rows": 220,
+      "sha256": "266e641682d3701bc63e006ac06adf484a7a424f08e2c3754c9cc6a7c68e3707"
+    },
+    "data-model/piks.tsv": {
+      "bytes": 419065,
+      "columns": [
+        "file_number",
+        "piks",
+        "piks_method",
+        "piks_confidence",
+        "piks_evidence",
+        "piks_source"
+      ],
+      "pk": [
+        "file_number"
+      ],
+      "rows": 8261,
+      "sha256": "42567f78f602a8a15926aa0faee7e292304fbeaf5dfa575b4dd2f7c512ad51a7"
+    }
+  }
+}
