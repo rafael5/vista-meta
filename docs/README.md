@@ -27,7 +27,7 @@ Documentation here is classified by **lifecycle state, not topic**:
 | [`releases/`](releases/) | release records: [`data-v1.manifest.json`](releases/data-v1.manifest.json) (what consumers verify a download against) · [`data-v1-peers.json`](releases/data-v1-peers.json) (Gate-R mutual pin with vdocs) | permanent |
 | [`historical/`](historical/) | executed/superseded work — kept for the *why*, never updated | archive |
 
-## Current state (2026-07-04)
+## Current state (2026-07-05)
 
 - **Public (2026-07-04):** the repository is public under MIT; the `data-v1` release
   downloads anonymously (verified), so the vdocs ↔ vista-meta mutual pin chain is now
@@ -36,7 +36,9 @@ Documentation here is classified by **lifecycle state, not topic**:
   the public **`vista-meta-data-v1`** release (mutually pinned with vdocs `data-v1`),
   the **VistA Compass** VSCode extension 0.2.0, the `vista-meta` CLI + `mfmt` + pre-commit hook.
 - **Live proposals:** [`vista-orchestration-plan.md`](proposals/vista-orchestration-plan.md)
-  (cross-repo TDD toolchain roadmap — largely about sibling repos; Status: Proposed) — the docs-lifecycle
+  (cross-repo TDD toolchain roadmap — largely about sibling repos; Status: Proposed) ·
+  [`ai-card.md`](proposals/ai-card.md) (AI orientation card over the exports — hand-drafted
+  spec for a pipeline-generated `vista/export/AI-CARD.md`; Status: Draft) — the docs-lifecycle
   reorganization itself closed 2026-07-04 (phases 0–3 executed; its record is in
   `historical/`; the `Packages.csv` relocation (T-005) closed 2026-07-04 — it lives at `host/vendor/Packages.csv` as vendored build input).
 - **Recently closed → `historical/`:** producer-contracts implementation plan (V1–V7 + Gate R,
