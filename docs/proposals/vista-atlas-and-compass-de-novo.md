@@ -55,11 +55,15 @@ Two sibling VSCode extensions, designed as a pair:
 
 ## 3. Design principles
 
-1. **Consumers of releases, not repo internals.** Both extensions acquire data by
-   fetch-and-verify of the published release artifacts (both standalone manifests
-   already carry per-file sha256 + schema/read version; vdocs-web's `dbfetch`
-   proves the pattern) — or point at a local lake/checkout for dev. Neither
-   extension requires its producer repo.
+1. **Consumers of releases, not repo internals — and consumers never re-derive.**
+   Both extensions acquire data by fetch-and-verify of the published release
+   artifacts (both standalone manifests carry per-file sha256 + schema/read
+   version; vdocs-web's `dbfetch` proves the pattern) — or point at a local
+   lake/checkout for dev. Neither extension requires its producer repo, and
+   neither builds a summary, index, or projection the producer publishes:
+   vdocs ships `index.db`; vista-meta ships `meta.db` + the entity bridge as
+   data-v1 assets (`docs/releases/data-v1-derived.json`). A shape a consumer
+   needs is added to the producer's bake first, surfaced second.
 2. **Contract-first reads.** Atlas binds only to the `read_schema_version`'d `v_*`
    views + `chunks_fts` (the vendored-contract seam vdocs-web proved, ported to
    TS). Compass binds to `meta.db`'s tables/views + `ai-manifest.json` as its
@@ -184,8 +188,13 @@ release manifest (pins/vintage badge, as today).
    *(gates "figures work from a clean install")*
 
 **P-vista-meta** (here):
-1. **meta.db as a release asset** at the next data tag (sha in the manifest —
-   already the W2b plan); until then Compass builds it from the TSV checkout.
+1. ~~**meta.db as a release asset**~~ — **done 2026-07-05, ahead of schedule and
+   as a hard principle: consumers never re-derive summaries/indexes** (owner
+   direction). `make derived-publish` uploads meta.db + the entity bridge as
+   supplementary data-v1 assets (gate-verified against the pinned TSVs before
+   upload; existing assets untouched) and records their shas in
+   `docs/releases/data-v1-derived.json` (the peers-sidecar pattern). Compass
+   fetch-verifies the published meta.db; it never builds one.
 2. Bake-side tag enrichment for signature help: `kind` / `formal_list` /
    `summary` columns (new TSV or xindex-tags widening; spec change → data-v2).
 3. Indexes tuned for the extension's query shapes (prefix search on tags,
