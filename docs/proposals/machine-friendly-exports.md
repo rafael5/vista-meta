@@ -1,6 +1,6 @@
 # Machine-friendly exports — vdocs-parity for AI consumers
 
-**Status:** In progress · P1 (W1 + W4a) and P2 (W3) shipped 2026-07-05 · filed 2026-07-05
+**Status:** P1–P3 shipped 2026-07-05 (filed same day) · remaining: the deferred tier only (W2b `meta.db`, W4c MCP — wait for a real consumer / vdocs `serve-mcp`)
 **Owner:** rafael
 **Children:** [`ai-card.md`](ai-card.md) (Workstream 1's artifact spec — filed 2026-07-05, `56a07e6`)
 **Benchmark:** the vdocs gold corpus AI surface (`~/data/vdocs/documents/gold/`)
@@ -105,8 +105,10 @@ mutually-pinned releases (vdocs `data-v1` entity index × vista-meta `data-v1` k
   protocol, citation contract, measured-vs-documented rule, pairs with `vdocs-corpus`.
   The skill's orientation path now points at the generated `vista/export/AI-CARD.md`
   (re-pointed same day W1 landed).
-- **W4b:** extend the `corpus-researcher` agent definition to dual-source (query vdocs
-  *and* vista-meta, label `documented:`/`measured:`, never reconcile silently).
+- **W4b (done 2026-07-05):** `~/.claude/agents/corpus-researcher.md` extended to
+  dual-source — queries vdocs *and* vista-meta, labels `documented:`/`measured:`,
+  never reconciles silently, crosses via `entity-bridge.tsv`/`app_code`. Verified
+  live on a PSO docs-vs-measured question (labeled, per-source citations).
 - **W4c (deferred, tracks vdocs):** MCP server exposing search/lookup/join over
   `meta.db` — only after vdocs' own `serve-mcp` ships, so the two front doors match.
 
@@ -123,7 +125,7 @@ as a workstream so the acceptance test below names it.
 |---|---|---|
 | P1 ✅ | W1 card+manifest emitter + drift gate; W4a skill re-point (shipped 2026-07-05) | fresh clone → `make <export>` → card present, gate green, hash ≡ manifest; a cold AI session answers a measured question citing `AI-CARD.md` recipes only |
 | P2 ✅ | W3 entity bridge + rate report + regression floor (shipped 2026-07-05; release inclusion lands with the next data tag — data-v1 assets are immutable) | bridge TSV in release; measured join rates reported; dual-source question ("docs vs measured for package X") answers via one bridge hop |
-| P3 | W4b agent dual-source | corpus-researcher returns labeled `documented:`/`measured:` findings |
+| P3 ✅ | W4b agent dual-source (shipped 2026-07-05) | corpus-researcher returns labeled `documented:`/`measured:` findings |
 | deferred | W2b `meta.db`, W4c MCP | first real consumer / vdocs `serve-mcp` ships |
 
 ## 5. Non-goals

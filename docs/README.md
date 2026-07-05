@@ -43,8 +43,8 @@ Documentation here is classified by **lifecycle state, not topic**:
   (cross-repo TDD toolchain roadmap — largely about sibling repos; Status: Proposed) ·
   [`machine-friendly-exports.md`](proposals/machine-friendly-exports.md) (vdocs-parity AI
   consumability umbrella: generated AI card + drift gate, join surface, vdocs entity
-  bridge, harness/agent wiring, fingerprint-pinned citations; Status: P1+P2 shipped
-  2026-07-05, P3 open) ·
+  bridge, harness/agent wiring, fingerprint-pinned citations; Status: P1–P3 shipped
+  2026-07-05, only the deferred tier open — W2b `meta.db` + W4c MCP await a consumer) ·
   [`ai-card.md`](proposals/ai-card.md) (its phase-1 child — content spec for the
   pipeline-generated `vista/export/AI-CARD.md`; Status: implemented 2026-07-05) — the docs-lifecycle
   reorganization itself closed 2026-07-04 (phases 0–3 executed; its record is in
