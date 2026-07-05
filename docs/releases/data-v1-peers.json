@@ -2,10 +2,10 @@
   "comment": "Gate R mutual pinning — the peer data-v1 artifact measured against this release. The main record (data-v1.manifest.json) stays byte-identical to the published asset; peers are recorded here.",
   "peers": {
     "vdocs-data:data-v1": {
-      "corpus_content_hash": "54a26e072e5ea625666ea1f7ecac4978dfa9f0e3d1b23650518501b447cf47c1",
-      "bundle_sha256": "a795659768acfaab1d4ba0f398113540d1169d871cf36509760a610809b17be8",
+      "corpus_content_hash": "3ce0872e32ec3187eabcee703165134710cc6b92f8c897f149575ddd6ffa01ad",
+      "bundle_sha256": "56e6bd68c367eea57bc283c98ff068809169885e746e483e3d362673019d71a4",
       "release": "https://github.com/rafael5/vdocs/releases/tag/data-v1",
-      "relation": "vdocs entity-quality floors measured against this release's vocabularies"
+      "relation": "vdocs entity-quality floors measured against this release's vocabularies; pin updated 2026-07-05 to the published re-cut (SKL projections + vocab-validated option entities restored)"
     }
   }
 }

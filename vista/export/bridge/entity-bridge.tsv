@@ -4362,6 +4362,84 @@ mail_group:SUPPORT	mail_group	SUPPORT	14				none	undetermined
 mail_group:TCSP	mail_group	TCSP	7				none	undetermined
 mail_group:TEAM1	mail_group	TEAM1	6				none	undetermined
 mail_group:WII	mail_group	WII	2				none	undetermined
+option:DILIST	option	DILIST	3	code-model/options.tsv	name	DILIST	exact-name-ci	high
+option:ENBCNXCMR	option	ENBCNXCMR	2	code-model/options.tsv	name	ENBCNXCMR	exact-name-ci	high
+option:ENEQHID	option	ENEQHID	1	code-model/options.tsv	name	ENEQHID	exact-name-ci	high
+option:ENMM MGR	option	ENMM MGR	6	code-model/options.tsv	name	ENMM MGR	exact-name-ci	high
+option:ENPLM02	option	ENPLM02	2	code-model/options.tsv	name	ENPLM02	exact-name-ci	high
+option:ENPLM03	option	ENPLM03	2	code-model/options.tsv	name	ENPLM03	exact-name-ci	high
+option:ENPLM09	option	ENPLM09	2	code-model/options.tsv	name	ENPLM09	exact-name-ci	high
+option:ENPLM11	option	ENPLM11	2	code-model/options.tsv	name	ENPLM11	exact-name-ci	high
+option:ENPLM16	option	ENPLM16	2	code-model/options.tsv	name	ENPLM16	exact-name-ci	high
+option:ENWOWARD	option	ENWOWARD	2	code-model/options.tsv	name	ENWOWARD	exact-name-ci	high
+option:EVE	option	EVE	1	code-model/options.tsv	name	EVE	exact-name-ci	high
+option:FB PAID TO IB	option	FB PAID TO IB	1	code-model/options.tsv	name	FB PAID TO IB	exact-name-ci	high
+option:GMPL MGT MENU	option	GMPL MGT MENU	2	code-model/options.tsv	name	GMPL MGT MENU	exact-name-ci	high
+option:GMRA SITE FILE	option	GMRA SITE FILE	8	code-model/options.tsv	name	GMRA SITE FILE	exact-name-ci	high
+option:GMTS HS BY LOC	option	GMTS HS BY LOC	2	code-model/options.tsv	name	GMTS HS BY LOC	exact-name-ci	high
+option:GMTS TASK STARTUP	option	GMTS TASK STARTUP	2	code-model/options.tsv	name	GMTS TASK STARTUP	exact-name-ci	high
+option:HL EDIT APPL PARAM	option	HL EDIT APPL PARAM	1	code-model/options.tsv	name	HL EDIT APPL PARAM	exact-name-ci	high
+option:HL EDIT LOGICAL LINKS	option	HL EDIT LOGICAL LINKS	1	code-model/options.tsv	name	HL EDIT LOGICAL LINKS	exact-name-ci	high
+option:IBCNE PURGE IIV DATA	option	IBCNE PURGE IIV DATA	1	code-model/options.tsv	name	IBCNE PURGE IIV DATA	exact-name-ci	high
+option:LA7TASK NIGHTY	option	LA7TASK NIGHTY	3	code-model/options.tsv	name	LA7TASK NIGHTY	exact-name-ci	high
+option:LR INTEGRITY LOAD	option	LR INTEGRITY LOAD	1	code-model/options.tsv	name	LR INTEGRITY LOAD	exact-name-ci	high
+option:LRAR ARCHIVE MAIN MENU	option	LRAR ARCHIVE MAIN MENU	1	code-model/options.tsv	name	LRAR ARCHIVE MAIN MENU	exact-name-ci	high
+option:LRAR ARCHIVE PURGE	option	LRAR ARCHIVE PURGE	1	code-model/options.tsv	name	LRAR ARCHIVE PURGE	exact-name-ci	high
+option:LRBLPET	option	LRBLPET	2	code-model/options.tsv	name	LRBLPET	exact-name-ci	high
+option:LRTASK DAILY INTERIM 1	option	LRTASK DAILY INTERIM 1	1	code-model/options.tsv	name	LRTASK DAILY INTERIM 1	exact-name-ci	high
+option:LRTASK ROLLOVER	option	LRTASK ROLLOVER	1	code-model/options.tsv	name	LRTASK ROLLOVER	exact-name-ci	high
+option:LRUMD	option	LRUMD	1	code-model/options.tsv	name	LRUMD	exact-name-ci	high
+option:MAG JB OFFLINE	option	MAG JB OFFLINE	1	code-model/options.tsv	name	MAG JB OFFLINE	exact-name-ci	high
+option:MAG WINDOWS	option	MAG WINDOWS	4	code-model/options.tsv	name	MAG WINDOWS	exact-name-ci	high
+option:MAGD DICOM MENU	option	MAGD DICOM MENU	2	code-model/options.tsv	name	MAGD DICOM MENU	exact-name-ci	high
+option:MAGJ VISTARAD WINDOWS	option	MAGJ VISTARAD WINDOWS	2	code-model/options.tsv	name	MAGJ VISTARAD WINDOWS	exact-name-ci	high
+option:NUPA PURGE SAVED NOTES	option	NUPA PURGE SAVED NOTES	1	code-model/options.tsv	name	NUPA PURGE SAVED NOTES	exact-name-ci	high
+option:OOPS SCHEDULED XMIT 2162 DATA	option	OOPS SCHEDULED XMIT 2162 DATA	2	code-model/options.tsv	name	OOPS SCHEDULED XMIT 2162 DATA	exact-name-ci	high
+option:OR EPCS USERS PARAMETER	option	OR EPCS USERS PARAMETER	3	code-model/options.tsv	name	OR EPCS USERS PARAMETER	exact-name-ci	high
+option:ORB3 ARCHIVE PERIOD	option	ORB3 ARCHIVE PERIOD	1	code-model/options.tsv	name	ORB3 ARCHIVE PERIOD	exact-name-ci	high
+option:ORB3 DEFAULT RECIPIENTS	option	ORB3 DEFAULT RECIPIENTS	1	code-model/options.tsv	name	ORB3 DEFAULT RECIPIENTS	exact-name-ci	high
+option:ORB3 FORWARD BACKUP REVIEWER	option	ORB3 FORWARD BACKUP REVIEWER	1	code-model/options.tsv	name	ORB3 FORWARD BACKUP REVIEWER	exact-name-ci	high
+option:ORB3 FORWARD SUPERVISOR	option	ORB3 FORWARD SUPERVISOR	1	code-model/options.tsv	name	ORB3 FORWARD SUPERVISOR	exact-name-ci	high
+option:ORB3 FORWARD SURROGATES	option	ORB3 FORWARD SURROGATES	1	code-model/options.tsv	name	ORB3 FORWARD SURROGATES	exact-name-ci	high
+option:ORB3 PROCESSING FLAG	option	ORB3 PROCESSING FLAG	1	code-model/options.tsv	name	ORB3 PROCESSING FLAG	exact-name-ci	high
+option:ORB3 PROVIDER RECIPIENTS	option	ORB3 PROVIDER RECIPIENTS	1	code-model/options.tsv	name	ORB3 PROVIDER RECIPIENTS	exact-name-ci	high
+option:ORK ORDER CHK MGMT MENU	option	ORK ORDER CHK MGMT MENU	7	code-model/options.tsv	name	ORK ORDER CHK MGMT MENU	exact-name-ci	high
+option:ORK PROCESSING FLAG	option	ORK PROCESSING FLAG	1	code-model/options.tsv	name	ORK PROCESSING FLAG	exact-name-ci	high
+option:ORRCM REPORTING	option	ORRCM REPORTING	2	code-model/options.tsv	name	ORRCM REPORTING	exact-name-ci	high
+option:PSS DRUG DOSING LOOKUP	option	PSS DRUG DOSING LOOKUP	1	code-model/options.tsv	name	PSS DRUG DOSING LOOKUP	exact-name-ci	high
+option:PX COMPACT ACT EOC DISPLAY	option	PX COMPACT ACT EOC DISPLAY	1	code-model/options.tsv	name	PX COMPACT ACT EOC DISPLAY	exact-name-ci	high
+option:PX HF MEASUREMENT REPAIR	option	PX HF MEASUREMENT REPAIR	2	code-model/options.tsv	name	PX HF MEASUREMENT REPAIR	exact-name-ci	high
+option:PXQ USER REVIEW	option	PXQ USER REVIEW	1	code-model/options.tsv	name	PXQ USER REVIEW	exact-name-ci	high
+option:PXRM INDEX BUILD	option	PXRM INDEX BUILD	1	code-model/options.tsv	name	PXRM INDEX BUILD	exact-name-ci	high
+option:PXRM INDEX MANAGEMENT	option	PXRM INDEX MANAGEMENT	4	code-model/options.tsv	name	PXRM INDEX MANAGEMENT	exact-name-ci	high
+option:QAM TASKED AUTO ENROLL RUN	option	QAM TASKED AUTO ENROLL RUN	1	code-model/options.tsv	name	QAM TASKED AUTO ENROLL RUN	exact-name-ci	high
+option:SDECRPC	option	SDECRPC	1	code-model/options.tsv	name	SDECRPC	exact-name-ci	high
+option:TIU DEFINE CONSULTS	option	TIU DEFINE CONSULTS	1	code-model/options.tsv	name	TIU DEFINE CONSULTS	exact-name-ci	high
+option:TIU MISMATCHED ID NOTES	option	TIU MISMATCHED ID NOTES	1	code-model/options.tsv	name	TIU MISMATCHED ID NOTES	exact-name-ci	high
+option:TIU TEXT EVENT EDIT	option	TIU TEXT EVENT EDIT	4	code-model/options.tsv	name	TIU TEXT EVENT EDIT	exact-name-ci	high
+option:WII ADT SERVER	option	WII ADT SERVER	1	code-model/options.tsv	name	WII ADT SERVER	exact-name-ci	high
+option:WII REVIEW ADT EVENTS	option	WII REVIEW ADT EVENTS	1	code-model/options.tsv	name	WII REVIEW ADT EVENTS	exact-name-ci	high
+option:XMCLEAN	option	XMCLEAN	2	code-model/options.tsv	name	XMCLEAN	exact-name-ci	high
+option:XMHELPUSER	option	XMHELPUSER	1	code-model/options.tsv	name	XMHELPUSER	exact-name-ci	high
+option:XMPURGE	option	XMPURGE	3	code-model/options.tsv	name	XMPURGE	exact-name-ci	high
+option:XMQACTIVE	option	XMQACTIVE	1	code-model/options.tsv	name	XMQACTIVE	exact-name-ci	high
+option:XOBV VISTALINK TESTER	option	XOBV VISTALINK TESTER	1	code-model/options.tsv	name	XOBV VISTALINK TESTER	exact-name-ci	high
+option:XPDANLYZ	option	XPDANLYZ	1	code-model/options.tsv	name	XPDANLYZ	exact-name-ci	high
+option:XQAL SET BACKUP REVIEWER	option	XQAL SET BACKUP REVIEWER	1	code-model/options.tsv	name	XQAL SET BACKUP REVIEWER	exact-name-ci	high
+option:XQALERT	option	XQALERT	1	code-model/options.tsv	name	XQALERT	exact-name-ci	high
+option:XQALERT BY USER DELETE	option	XQALERT BY USER DELETE	1	code-model/options.tsv	name	XQALERT BY USER DELETE	exact-name-ci	high
+option:XQALERT DELETE OLD	option	XQALERT DELETE OLD	10	code-model/options.tsv	name	XQALERT DELETE OLD	exact-name-ci	high
+option:XQDIAGMENU	option	XQDIAGMENU	1	code-model/options.tsv	name	XQDIAGMENU	exact-name-ci	high
+option:XU FIRST LINE PRINT	option	XU FIRST LINE PRINT	15	code-model/options.tsv	name	XU FIRST LINE PRINT	exact-name-ci	high
+option:XUINQUIRE	option	XUINQUIRE	4	code-model/options.tsv	name	XUINQUIRE	exact-name-ci	high
+option:XUPRGL	option	XUPRGL	4	code-model/options.tsv	name	XUPRGL	exact-name-ci	high
+option:XUPRROU	option	XUPRROU	3	code-model/options.tsv	name	XUPRROU	exact-name-ci	high
+option:XUTM MGR	option	XUTM MGR	2	code-model/options.tsv	name	XUTM MGR	exact-name-ci	high
+option:XUTM SCHEDULE	option	XUTM SCHEDULE	3	code-model/options.tsv	name	XUTM SCHEDULE	exact-name-ci	high
+option:XUUSERACC	option	XUUSERACC	2	code-model/options.tsv	name	XUUSERACC	exact-name-ci	high
+option:YS BROKER1	option	YS BROKER1	2	code-model/options.tsv	name	YS BROKER1	exact-name-ci	high
+option:ZTMQUEUABLE OPTIONS	option	ZTMQUEUABLE OPTIONS	1	code-model/options.tsv	name	ZTMQUEUABLE OPTIONS	exact-name-ci	high
+option:ZZSERVER	option	ZZSERVER	1	code-model/options.tsv	name	ZZSERVER	exact-name-ci	high
 package_namespace:DG	package_namespace	DG	1216	code-model/package-namespace.tsv	package	Registration	namespace-ci	moderate
 package_namespace:DGPM	package_namespace	DGPM	58				none	undetermined
 package_namespace:DI	package_namespace	DI	413	code-model/package-namespace.tsv	package	VA FileMan	namespace-ci	moderate

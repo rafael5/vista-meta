@@ -12,15 +12,15 @@
     "join_confidence"
   ],
   "counts": {
-    "entities": 6494,
-    "joined": 1914
+    "entities": 6572,
+    "joined": 1992
   },
   "generated_by": "host/scripts/build_entity_bridge.py",
   "pins": {
     "vdocs": {
       "artifact": "vdocs-data",
-      "bundle_sha256": "a795659768acfaab1d4ba0f398113540d1169d871cf36509760a610809b17be8",
-      "corpus_content_hash": "54a26e072e5ea625666ea1f7ecac4978dfa9f0e3d1b23650518501b447cf47c1",
+      "bundle_sha256": "56e6bd68c367eea57bc283c98ff068809169885e746e483e3d362673019d71a4",
+      "corpus_content_hash": "3ce0872e32ec3187eabcee703165134710cc6b92f8c897f149575ddd6ffa01ad",
       "release": "https://github.com/rafael5/vdocs/releases/tag/data-v1",
       "tag": "data-v1"
     },
@@ -79,9 +79,9 @@
     },
     "option": {
       "confidence": "high",
-      "count": 0,
+      "count": 78,
       "floor": 0.95,
-      "joined": 0,
+      "joined": 78,
       "rate": 1.0,
       "status": "floor-verified",
       "vocabulary": "options.tsv:name"
