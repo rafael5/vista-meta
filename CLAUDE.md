@@ -31,6 +31,7 @@ exposes:
     - "TSV/code-model/*.tsv"               # 20 TSVs, ~1.0M rows — calls/globals/RPCs/options/protocols/XINDEX (schema_version 1)
     - "vista/export/AI-CARD.md"            # generated AI orientation card (make ai-card, drift-gated)
     - "vista/export/ai-manifest.json"      # its machine twin — per-TSV catalog + join keys + query recipes
+    - "vista/export/bridge/entity-bridge.tsv"  # vdocs entity ↔ vista-meta row map, dual-pinned (make bridge)
     - "vista/export/RESEARCH.md"           # RF-NNN findings log
 
 consumes:

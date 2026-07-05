@@ -1,6 +1,6 @@
 # Machine-friendly exports — vdocs-parity for AI consumers
 
-**Status:** In progress · P1 (W1 + W4a) shipped 2026-07-05 · filed 2026-07-05
+**Status:** In progress · P1 (W1 + W4a) and P2 (W3) shipped 2026-07-05 · filed 2026-07-05
 **Owner:** rafael
 **Children:** [`ai-card.md`](ai-card.md) (Workstream 1's artifact spec — filed 2026-07-05, `56a07e6`)
 **Benchmark:** the vdocs gold corpus AI surface (`~/data/vdocs/documents/gold/`)
@@ -72,7 +72,18 @@ Answering real questions needs joins (RPC → routine → package → PIKS). Two
   eventual MCP server. **Do not build until W4b or an external consumer asks** —
   the TSVs stay the canonical format either way.
 
-### W3 — vdocs entity bridge
+### W3 — vdocs entity bridge — ✅ shipped 2026-07-05
+
+> Implemented as `host/scripts/build_entity_bridge.py` (TDD,
+> `tests/test_build_entity_bridge.py`): `make peer-fetch` downloads +
+> sha256-verifies the pinned vdocs bundle into `dist/peers/`; `make bridge`
+> emits `vista/export/bridge/entity-bridge.tsv` + `entity-bridge.meta.json`
+> (dual pins — the Gate R extension); `make bridge-check` (in `make check`)
+> gates pins, recounted rates and floors even without the peer bundle.
+> Measured on the published pin (`54a26e07…`, option type quarantined there):
+> 1,914/6,494 joined — fileman_file 0.8526, rpc 0.7296, routine 0.5791
+> (reproducing vdocs' D2.5 rates exactly), package_namespace 0.9474,
+> global 0.076 (positive-only), build/hl7_segment/mail_group no-vocabulary.
 
 A generated `entity-bridge.tsv`: vdocs `entity_id` ↔ vista-meta `(tsv, key)` rows, with
 a `join_method` + `join_confidence` column, produced deterministically from the two
@@ -111,7 +122,7 @@ as a workstream so the acceptance test below names it.
 | Phase | Work | Accept when |
 |---|---|---|
 | P1 ✅ | W1 card+manifest emitter + drift gate; W4a skill re-point (shipped 2026-07-05) | fresh clone → `make <export>` → card present, gate green, hash ≡ manifest; a cold AI session answers a measured question citing `AI-CARD.md` recipes only |
-| P2 | W3 entity bridge + rate report + regression floor | bridge TSV in release; measured join rates reported; dual-source question ("docs vs measured for package X") answers via one bridge hop |
+| P2 ✅ | W3 entity bridge + rate report + regression floor (shipped 2026-07-05; release inclusion lands with the next data tag — data-v1 assets are immutable) | bridge TSV in release; measured join rates reported; dual-source question ("docs vs measured for package X") answers via one bridge hop |
 | P3 | W4b agent dual-source | corpus-researcher returns labeled `documented:`/`measured:` findings |
 | deferred | W2b `meta.db`, W4c MCP | first real consumer / vdocs `serve-mcp` ships |
 

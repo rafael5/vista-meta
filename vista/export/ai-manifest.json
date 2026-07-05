@@ -25,6 +25,17 @@
       "companion": "vdocs",
       "note": "vdocs search hits carry app_code; both releases are mutually pinned (Gate R, docs/releases/data-v1-peers.json)",
       "via": "code-model/package-namespace.tsv"
+    },
+    {
+      "columns": [
+        "entity_id",
+        "vista_tsv",
+        "vista_key_column",
+        "vista_key_value"
+      ],
+      "companion": "vdocs",
+      "note": "generated W3 bridge \u2014 one row per vdocs data-v1 entity mapped to its vista-meta vocabulary value (join_method/join_confidence, undetermined legal); dual release pins + measured join rates in bridge/entity-bridge.meta.json",
+      "via": "vista/export/bridge/entity-bridge.tsv"
     }
   ],
   "generated_by": "host/scripts/build_ai_card.py",

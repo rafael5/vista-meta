@@ -1,0 +1,117 @@
+{
+  "artifact": "vista-meta-entity-bridge",
+  "columns": [
+    "entity_id",
+    "entity_type",
+    "canonical_name",
+    "mention_count",
+    "vista_tsv",
+    "vista_key_column",
+    "vista_key_value",
+    "join_method",
+    "join_confidence"
+  ],
+  "counts": {
+    "entities": 6494,
+    "joined": 1914
+  },
+  "generated_by": "host/scripts/build_entity_bridge.py",
+  "pins": {
+    "vdocs": {
+      "artifact": "vdocs-data",
+      "bundle_sha256": "a795659768acfaab1d4ba0f398113540d1169d871cf36509760a610809b17be8",
+      "corpus_content_hash": "54a26e072e5ea625666ea1f7ecac4978dfa9f0e3d1b23650518501b447cf47c1",
+      "release": "https://github.com/rafael5/vdocs/releases/tag/data-v1",
+      "tag": "data-v1"
+    },
+    "vista_meta": {
+      "artifact": "vista-meta-data",
+      "content_hash": "23d037f1e08adc206d251eea9adb4ec62051032c06b593737bebfcaf67e4c754",
+      "tag": "data-v1"
+    }
+  },
+  "schema_version": 1,
+  "types": {
+    "build": {
+      "confidence": "undetermined",
+      "count": 263,
+      "floor": 0.0,
+      "joined": 0,
+      "rate": 0.0,
+      "status": "no-vocabulary",
+      "vocabulary": ""
+    },
+    "fileman_file": {
+      "confidence": "high",
+      "count": 441,
+      "floor": 0.8,
+      "joined": 376,
+      "rate": 0.8526,
+      "status": "floor-verified",
+      "vocabulary": "files.tsv:file_number"
+    },
+    "global": {
+      "confidence": "moderate",
+      "count": 3593,
+      "floor": 0.05,
+      "joined": 273,
+      "rate": 0.076,
+      "status": "positive-only",
+      "vocabulary": "routine-globals.tsv:global_name"
+    },
+    "hl7_segment": {
+      "confidence": "undetermined",
+      "count": 23,
+      "floor": 0.0,
+      "joined": 0,
+      "rate": 0.0,
+      "status": "no-vocabulary",
+      "vocabulary": ""
+    },
+    "mail_group": {
+      "confidence": "undetermined",
+      "count": 43,
+      "floor": 0.0,
+      "joined": 0,
+      "rate": 0.0,
+      "status": "no-vocabulary",
+      "vocabulary": ""
+    },
+    "option": {
+      "confidence": "high",
+      "count": 0,
+      "floor": 0.95,
+      "joined": 0,
+      "rate": 1.0,
+      "status": "floor-verified",
+      "vocabulary": "options.tsv:name"
+    },
+    "package_namespace": {
+      "confidence": "moderate",
+      "count": 19,
+      "floor": 0.9,
+      "joined": 18,
+      "rate": 0.9474,
+      "status": "positive-only",
+      "vocabulary": "package-namespace.tsv:package"
+    },
+    "routine": {
+      "confidence": "high",
+      "count": 1953,
+      "floor": 0.5,
+      "joined": 1131,
+      "rate": 0.5791,
+      "status": "floor-verified",
+      "vocabulary": "routines.tsv:routine_name"
+    },
+    "rpc": {
+      "confidence": "high",
+      "count": 159,
+      "floor": 0.65,
+      "joined": 116,
+      "rate": 0.7296,
+      "status": "floor-verified",
+      "vocabulary": "rpcs.tsv:name"
+    }
+  }
+}

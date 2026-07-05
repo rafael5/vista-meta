@@ -126,6 +126,12 @@ tables, templates, rules. **S** System — Kernel/FileMan plumbing, menus, queue
   is a global reference (may be empty, may carry `^`/subscripts) — normalize before
   joining.
 
+- **vdocs entities** — the generated bridge `bridge/entity-bridge.tsv` maps every
+  vdocs `data-v1` entity (`<type>:<canonical_name>`) to its vista-meta row
+  (`vista_tsv` + `vista_key_column`=`vista_key_value`, with `join_method` /
+  `join_confidence`; `undetermined` is legal). Dual release pins + measured join
+  rates: `bridge/entity-bridge.meta.json`.
+
 The full FK registry (every declared edge, machine-readable) lives in
 `ai-manifest.json` under `join_keys`.
 

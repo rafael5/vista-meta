@@ -36,13 +36,15 @@ Documentation here is classified by **lifecycle state, not topic**:
   the public **`vista-meta-data-v1`** release (mutually pinned with vdocs `data-v1`),
   the **VistA Compass** VSCode extension 0.2.0, the `vista-meta` CLI + `mfmt` + pre-commit hook,
   the generated AI surface (`vista/export/AI-CARD.md` + `ai-manifest.json`, `make ai-card`,
-  drift-gated by `make card-check`; shipped 2026-07-05).
+  drift-gated by `make card-check`; shipped 2026-07-05), and the vdocs entity bridge
+  (`vista/export/bridge/entity-bridge.tsv` + meta, `make peer-fetch` + `make bridge`,
+  dual-pinned to both `data-v1` releases with measured join-rate floors; shipped 2026-07-05).
 - **Live proposals:** [`vista-orchestration-plan.md`](proposals/vista-orchestration-plan.md)
   (cross-repo TDD toolchain roadmap — largely about sibling repos; Status: Proposed) ·
   [`machine-friendly-exports.md`](proposals/machine-friendly-exports.md) (vdocs-parity AI
   consumability umbrella: generated AI card + drift gate, join surface, vdocs entity
-  bridge, harness/agent wiring, fingerprint-pinned citations; Status: P1 shipped
-  2026-07-05, P2/P3 open) ·
+  bridge, harness/agent wiring, fingerprint-pinned citations; Status: P1+P2 shipped
+  2026-07-05, P3 open) ·
   [`ai-card.md`](proposals/ai-card.md) (its phase-1 child — content spec for the
   pipeline-generated `vista/export/AI-CARD.md`; Status: implemented 2026-07-05) — the docs-lifecycle
   reorganization itself closed 2026-07-04 (phases 0–3 executed; its record is in

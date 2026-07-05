@@ -150,6 +150,16 @@ def build_manifest_doc(export_dir: Path, record: dict) -> dict:
             "note": "vdocs search hits carry app_code; both releases are "
                     "mutually pinned (Gate R, docs/releases/"
                     "data-v1-peers.json)",
+        }, {
+            "companion": "vdocs",
+            "via": "vista/export/bridge/entity-bridge.tsv",
+            "columns": ["entity_id", "vista_tsv", "vista_key_column",
+                        "vista_key_value"],
+            "note": "generated W3 bridge — one row per vdocs data-v1 "
+                    "entity mapped to its vista-meta vocabulary value "
+                    "(join_method/join_confidence, undetermined legal); "
+                    "dual release pins + measured join rates in "
+                    "bridge/entity-bridge.meta.json",
         }],
         "tables": {
             f"{spec.model}/{name}": {
@@ -269,6 +279,12 @@ tables, templates, rules. **S** System — Kernel/FileMan plumbing, menus, queue
 - **Global names** — `routine-globals.global_name` is bare (`DPT`); `files.global_root`
   is a global reference (may be empty, may carry `^`/subscripts) — normalize before
   joining.
+
+- **vdocs entities** — the generated bridge `bridge/entity-bridge.tsv` maps every
+  vdocs `data-v1` entity (`<type>:<canonical_name>`) to its vista-meta row
+  (`vista_tsv` + `vista_key_column`=`vista_key_value`, with `join_method` /
+  `join_confidence`; `undetermined` is legal). Dual release pins + measured join
+  rates: `bridge/entity-bridge.meta.json`.
 
 The full FK registry (every declared edge, machine-readable) lives in
 `ai-manifest.json` under `join_keys`.

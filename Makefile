@@ -338,6 +338,32 @@ ai-card: ## Emit + verify AI-CARD.md and ai-manifest.json (machine-friendly-expo
 card-check: ## Drift gate: AI card ≡ regeneration, card pin ≡ release content_hash
 	@/usr/bin/python3 host/scripts/build_ai_card.py --check
 
+.PHONY: peer-fetch
+peer-fetch: ## Download + sha256-verify the pinned vdocs data-v1 bundle into dist/peers/
+	@mkdir -p dist/peers
+	@[ -f dist/peers/vdocs-data-v1.tar.gz ] || \
+		gh release download data-v1 --repo rafael5/vdocs \
+			--pattern 'vdocs-data-v1.tar.gz' -O dist/peers/vdocs-data-v1.tar.gz
+	@python3 -c "import hashlib,json,sys; \
+		want=json.load(open('docs/releases/data-v1-peers.json'))['peers']['vdocs-data:data-v1']['bundle_sha256']; \
+		got=hashlib.sha256(open('dist/peers/vdocs-data-v1.tar.gz','rb').read()).hexdigest(); \
+		sys.exit(0 if got==want else 'ERROR: peer bundle sha256 '+got[:16]+'… != pinned '+want[:16]+'…')"
+	@tar -xzf dist/peers/vdocs-data-v1.tar.gz -C dist/peers/
+	@echo "peer bundle verified + unpacked: dist/peers/vdocs-data-v1/"
+
+.PHONY: bridge
+bridge: ## Build the vdocs entity bridge from the two pinned releases (machine-friendly-exports W3)
+	@[ -d dist/peers/vdocs-data-v1 ] || { echo "Run 'make peer-fetch' first."; exit 1; }
+	@[ -w vista/export/bridge ] || \
+		$(DOCKER) exec -u root $(CONTAINER) sh -c \
+		'mkdir -p /home/vehu/export/bridge && chown 1000:1000 /home/vehu/export/bridge'
+	/usr/bin/python3 host/scripts/build_entity_bridge.py
+	/usr/bin/python3 host/scripts/build_entity_bridge.py --check
+
+.PHONY: bridge-check
+bridge-check: ## Bridge drift gate: dual pins + rates + floors (+ full diff when peer bundle present)
+	@/usr/bin/python3 host/scripts/build_entity_bridge.py --check
+
 .PHONY: content-hash
 content-hash: ## Print the V5 data fingerprint (24 TSVs, normative recipe)
 	/usr/bin/python3 host/scripts/content_hash.py
@@ -370,6 +396,7 @@ emit-all: ## Single-run emission of all 24 finals from one engine state (F7)
 	$(MAKE) fidelity
 	$(MAKE) validate
 	$(MAKE) ai-card
+	@[ ! -d dist/peers/vdocs-data-v1 ] || $(MAKE) bridge
 	@echo "emit-all complete: 24 finals + typed manifest + fidelity + AI card from one extraction, validated."
 
 .PHONY: dump-files dump-piks dump-field-piks
@@ -553,7 +580,7 @@ test: ## Run the host-side Python unit suites (stdlib only, no installs)
 	@set -e; for t in host/scripts/tests/test_*.py; do echo "== $$t"; python3 $$t; done
 
 .PHONY: check
-check: test docs-check card-check ## Full host-side gate: unit suites + docs gate + AI-card drift gate
+check: test docs-check card-check bridge-check ## Full host-side gate: unit suites + docs gate + AI-card + bridge drift gates
 
 .PHONY: docs-check
 docs-check: ## Fail on dead docs links or dead '# Spec:'/'# Plan:' code citations
