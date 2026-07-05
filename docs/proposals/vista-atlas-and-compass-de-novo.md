@@ -105,6 +105,7 @@ Two sibling VSCode extensions, designed as a pair:
    `vistaCompass.lookup(kind, key)`. Same IDs as the MCP citations
    (`vdocs://section/<id>`; `vista-meta data-v1 · tsv · key=value`), so AI
    citations, MCP answers, and human clicks all resolve through one scheme.
+   Full spec: the twin-link contract, §6.1.
 5. **Citation discipline for humans.** Every Atlas section and Compass row has
    "copy citation" producing the exact contract line the skills/agents use —
    humans and AI cite identically.
@@ -207,6 +208,62 @@ release manifest (pins/vintage badge, as today).
   data fetched on first run into `globalStorage` with sha256 verification against
   the in-repo release records.
 
+### 6.1 The twin-link contract (docs↔code synergy spec)
+
+Both extensions are installed side-by-side; each is fully standalone, and the
+synergy is a thin, versioned seam — designed 2026-07-05 by owner direction.
+
+**Mechanism — commands + URI handlers, soft-dependency.** VSCode's sanctioned
+inter-extension seam is registered commands: each twin exposes a small
+versioned command surface; the other calls `executeCommand` only after a
+`getExtension()` presence check. No shared runtime, storage, or activation
+dependency; every cross-feature degrades gracefully (twin absent → affordance
+hides, or a one-time "install the twin" hint). Each twin also registers a
+**URI handler** (`vscode://vista-forge.vista-atlas/…`,
+`vscode://vista-forge.vista-compass/…`) so deep links work from terminals,
+markdown, MCP answers, and AI chat — the citation contracts become clickable.
+
+**Keystone rule — the ID crosses the boundary, never the data.** Both sides
+already speak the same stable IDs (`entity_id` = `<type>:<canonical_name>`,
+`doc_key`/`section_id`, `(tsv, key)`). Atlas hands Compass an `entity_id` and
+Compass resolves it in its own meta.db (`entity_bridge`); Compass hands Atlas
+an `entity_id`/`section_id` and Atlas resolves it in its own index.db. Neither
+queries the other's store — standalone is preserved structurally.
+
+**Command surface (contract v1, sketch — frozen at P1):**
+- `vistaCompass.lookup {kind, key}` · `vistaCompass.openEntity {entity_id}` ·
+  `vistaCompass.search {query}` · `vistaCompass.pins → {tag, content_hash, …}`
+- `vistaAtlas.openDoc {doc_key}` · `vistaAtlas.openSection {section_id}` ·
+  `vistaAtlas.openEntity {entity_id}` · `vistaAtlas.search {query, filters?}` ·
+  `vistaAtlas.pins → {tag, corpus_content_hash, …}`
+- `vista.openCitation {text}` — accepts either citation format
+  (`vdocs://section/<id>` or `vista-meta data-vN · <tsv> · <key>=<value>`)
+  and routes to the right twin.
+
+**The synergy features (land at P5):**
+1. **Cross-jumps everywhere** — Compass hovers/rows show *"documented: N
+   mentions → Atlas"* (`entity_bridge.mention_count`, no docs query needed);
+   Atlas entity chips show *"measured → Compass"*.
+2. **Seeded search handoff** — the searches are complementary (Atlas
+   lexical FTS5/BM25; Compass exact/structural): each search UI adds one
+   footer row forwarding the query to the twin, with tokens normalized by the
+   bridge's canonicalization rules (caret-strip, case) so they land in the
+   other side's native form.
+3. **Editor-context entries** — right-click a token in an `.m` file →
+   "find in docs" (Compass canonicalizes, forwards); entity mentions in
+   Atlas's reading pane link to Compass.
+4. **Citation routing** — `vista.openCitation` + the URI handlers make any
+   citation an agent or MCP server emits navigable.
+5. **Mutual-pin handshake** — on activation each twin checks the other's
+   `pins` against the Gate R pair and warns on a mismatched release pair —
+   release-drift surfaced to the human the way the gates surface it to CI.
+
+**Contract as data (registry discipline).** The command IDs, payload schemas,
+and URI scheme live as a versioned contract artifact in `vista-store`; both
+extensions implement handlers against it and test against it, so the two
+command surfaces cannot drift apart — the same reason the two MCP front doors
+share conventions. Contract v1 is a P1 deliverable; the features are P5.
+
 ## 7. Producer prerequisites (Track P — land alongside, gate the marked phases)
 
 **P-vdocs** (in ~/projects/vdocs):
@@ -241,11 +298,11 @@ release manifest (pins/vintage badge, as today).
 | Phase | Work | Accept when |
 |---|---|---|
 | P0 ✅ | Engine spike (done 2026-07-05): `node:sqlite` vs better-sqlite3 vs Go sidecar on the real dbs | **met** — decision recorded (§11); a toy extension inside the installed VSCode 1.125 host queried both real dbs (FTS5 hits from index.db, rpc+bridge rows from meta.db) |
-| P1 | `vista-store` shared lib: engine + contract checks + release fetch/verify + deep-link registry | unit-tested lib; both real releases fetched, verified, opened |
+| P1 | `vista-store` shared lib: engine + contract checks + release fetch/verify + **twin-link contract v1 (§6.1)** | unit-tested lib; both real releases fetched, verified, opened; contract artifact frozen |
 | P2 | **Atlas MVP** = vdocs-web parity in-editor (facets, search, reading pane with table/figure hydration) | side-by-side parity on 10 benchmark docs; vdocs-web frozen |
 | P3 | **Compass v2 MVP** = 0.2.0 parity on meta.db (sidebar, hovers, PIKS) | current extension's guide walkthrough passes on v2 |
 | P4 | Full-scope surfaces: Atlas entities/relations/lineage/history *(needs P-vdocs 1)*; Compass RPC/option/protocol/package dashboard/symbols/diagnostics | each MCP tool's answer has a visible human counterpart (spot-check list) |
-| P5 | The bridge, both directions + copy-citation everywhere | "docs for this RPC" and "measured row for this mention" are single clicks; citations byte-match the MCP contracts |
+| P5 | The twin-link features (§6.1): cross-jumps, seeded search handoff, citation routing, mutual-pin handshake, copy-citation everywhere | "docs for this RPC" and "measured row for this mention" are single clicks; a query forwards to the twin's native search; `vista.openCitation` routes both citation formats; a mismatched release pair warns on activation |
 
 ## 9. Non-goals
 
