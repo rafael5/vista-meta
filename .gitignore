@@ -43,3 +43,7 @@ docker/etc/authorized_keys
 
 # V7 release assembly staging (build_release.py)
 dist/
+
+# Claude per-project memory — local working notes, deliberately NOT published
+# (this repo is public; memory lives beside the code but stays untracked).
+docs/memory/
