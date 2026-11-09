@@ -2,7 +2,8 @@
 # V7 of the producer-contracts plan: the release step → data-v1.
 # Plan: docs/historical/producer-contracts-implementation-plan.md § V7
 
-"""Assemble (and publish) the vista-meta data-v1 release bundle.
+"""Assemble (and publish) the vista-meta data release bundle
+(tag and names from release_id).
 
 Layout (all under dist/, gitignored):
   vista-meta-data-v1.tar.gz            the bundle: 24 TSVs + meta/ +
@@ -41,20 +42,21 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import content_hash
+import release_id
 import schema_v1
 import validate_export
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 EXPORT_DIR = PROJECT_ROOT / "vista/export"
 DIST_DIR = PROJECT_ROOT / "dist"
-RECORD_JSON = PROJECT_ROOT / "docs/releases/data-v1.manifest.json"
+RECORD_JSON = release_id.RECORD_JSON
 
-TAG = "data-v1"
-ARTIFACT = "vista-meta-data"
-BUNDLE_ROOT = "vista-meta-data-v1"
-BUNDLE_NAME = "vista-meta-data-v1.tar.gz"
-STANDALONE_NAME = "vista-meta-data-v1.manifest.json"
-RAW_NAME = "vista-meta-data-v1-raw.tar.gz"
+TAG = release_id.TAG
+ARTIFACT = release_id.ARTIFACT
+BUNDLE_ROOT = release_id.STEM
+BUNDLE_NAME = f"{release_id.STEM}.tar.gz"
+STANDALONE_NAME = f"{release_id.STEM}.manifest.json"
+RAW_NAME = f"{release_id.STEM}-raw.tar.gz"
 SUMS_NAME = "SHA256SUMS"
 
 META_FILES = ("meta/column-manifest.json", "meta/fidelity.json")

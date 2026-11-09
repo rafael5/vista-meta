@@ -4,7 +4,7 @@
 
 """Generate the SQLite projection of the data release.
 
-  dist/vista-meta-data-v1.db   one typed table per schema_v1 TSV
+  dist/<release stem>.db       one typed table per schema_v1 TSV
                                + entity_bridge (when emitted)
                                + a `meta` pins table
                                + the canonical join views
@@ -32,12 +32,13 @@ import sys
 from pathlib import Path
 
 import content_hash
+import release_id
 import schema_v1
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 EXPORT_DIR = PROJECT_ROOT / "vista/export"
-RECORD_JSON = PROJECT_ROOT / "docs/releases/data-v1.manifest.json"
-OUT_DB = PROJECT_ROOT / "dist/vista-meta-data-v1.db"
+RECORD_JSON = release_id.RECORD_JSON
+OUT_DB = PROJECT_ROOT / f"dist/{release_id.STEM}.db"
 BRIDGE_TSV = "bridge/entity-bridge.tsv"
 
 BRIDGE_COLUMNS = (

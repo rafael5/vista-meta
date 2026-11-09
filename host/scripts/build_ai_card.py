@@ -13,7 +13,7 @@ hand-maintained):
                                  recipe + join-key registry
 
 Inputs: schema_v1 (structure), the live TSVs (row counts), and the
-in-repo release record docs/releases/data-v1.manifest.json (the
+in-repo release record docs/releases/<tag>.manifest.json (the
 provenance pin — hashes are copied verbatim, never recomputed into
 the card). Static prose fragments (caveats, PIKS one-liners, recipes)
 live in this module.
@@ -32,11 +32,12 @@ import sys
 from pathlib import Path
 
 import content_hash
+import release_id
 import schema_v1
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 EXPORT_DIR = PROJECT_ROOT / "vista/export"
-RECORD_JSON = PROJECT_ROOT / "docs/releases/data-v1.manifest.json"
+RECORD_JSON = release_id.RECORD_JSON
 
 CARD_NAME = "AI-CARD.md"
 MANIFEST_NAME = "ai-manifest.json"
@@ -121,7 +122,7 @@ def build_manifest_doc(export_dir: Path, record: dict) -> dict:
             "engine": record["engine"],
             "engine_image": record["engine_image"],
             "source_commit": record["source_commit"],
-            "manifest": "docs/releases/data-v1.manifest.json",
+            "manifest": f"docs/releases/{RECORD_JSON.name}",
             "schema_contract":
                 "docs/reference/schema-v1-normalization-spec.md",
         },
@@ -138,7 +139,7 @@ def build_manifest_doc(export_dir: Path, record: dict) -> dict:
             "verbs": CLI_VERBS,
             "tsv_root": "vista/export",
             "sqlite_recipe": SQLITE_RECIPE,
-            "meta_db": "make meta-db → dist/vista-meta-data-v1.db — "
+            "meta_db": f"make meta-db → dist/{release_id.STEM}.db — "
                        "generated SQLite projection (24 tables + "
                        "entity_bridge + join views v_rpc_impl / "
                        "v_option_impl / v_global_file_piks / "
@@ -160,7 +161,7 @@ def build_manifest_doc(export_dir: Path, record: dict) -> dict:
             "columns": ["app_code", "vdl_id"],
             "note": "vdocs search hits carry app_code; both releases are "
                     "mutually pinned (Gate R, docs/releases/"
-                    "data-v1-peers.json)",
+                    f"{release_id.PEERS_JSON.name})",
         }, {
             "companion": "vdocs",
             "via": "vista/export/bridge/entity-bridge.tsv",
@@ -207,7 +208,7 @@ def render_card(export_dir: Path, record: dict) -> str:
 
 > **GENERATED — do not edit.** Emitted by `host/scripts/build_ai_card.py`
 > from `schema_v1` + the live TSVs + the pinned release record
-> (`docs/releases/data-v1.manifest.json`). Regenerate with `make ai-card`;
+> (`docs/releases/{RECORD_JSON.name}`). Regenerate with `make ai-card`;
 > drift-gated by `make card-check` (stale card = RED, card pin must equal
 > the release manifest's `content_hash`). Machine-readable twin:
 > `vista/export/ai-manifest.json`.
@@ -236,7 +237,7 @@ silently.
 | content_hash | `{record["content_hash"]}` |
 | db_state_fingerprint | `{record["db_state_fingerprint"]}` |
 | extracted | {record["extraction_timestamp"]}, engine `{record["engine"]}`, image `{record["engine_image"]}` |
-| manifest | `docs/releases/data-v1.manifest.json` (in-repo record; per-file sha256) |
+| manifest | `docs/releases/{RECORD_JSON.name}` (in-repo record; per-file sha256) |
 | schema contract | `docs/reference/schema-v1-normalization-spec.md` |
 
 **Scope caveats (state these when they matter):**
@@ -261,7 +262,7 @@ silently.
 {_indent(SQLITE_RECIPE, "   ")}
    ```
    Or generate the one-file projection: `make meta-db` →
-   `dist/vista-meta-data-v1.db` (all tables typed + the entity bridge + join
+   `dist/{release_id.STEM}.db` (all tables typed + the entity bridge + join
    views `v_rpc_impl`, `v_routine_global_piks`, `v_rpc_data_piks`,
    `v_package_overview`, …). The TSVs stay canonical; the db is derived.
 4. **MCP** — `python3 host/scripts/mcp_server.py` (stdio; wired by the repo's

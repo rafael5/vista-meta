@@ -39,6 +39,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import content_hash
+import release_id
 import schema_v1
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -46,8 +47,8 @@ EXPORT_DIR = PROJECT_ROOT / "vista/export"
 BRIDGE_DIR_NAME = "bridge"
 TSV_NAME = "entity-bridge.tsv"
 META_NAME = "entity-bridge.meta.json"
-RECORD_JSON = PROJECT_ROOT / "docs/releases/data-v1.manifest.json"
-PEERS_JSON = PROJECT_ROOT / "docs/releases/data-v1-peers.json"
+RECORD_JSON = release_id.RECORD_JSON
+PEERS_JSON = release_id.PEERS_JSON
 PEER_DIR = PROJECT_ROOT / "dist/peers/vdocs-data-v1"
 PEER_KEY = "vdocs-data:data-v1"
 
@@ -376,13 +377,13 @@ def check(export_dir: Path, peer_dir: Path | None, peers_record: dict,
     if (meta["pins"]["vista_meta"]["content_hash"]
             != release_record["content_hash"]):
         errors.append("pin mismatch (vista_meta): bridge meta != "
-                      "docs/releases/data-v1.manifest.json")
+                      f"docs/releases/{RECORD_JSON.name}")
     if (meta["pins"]["vdocs"]["corpus_content_hash"]
             != peer_pin["corpus_content_hash"]
             or meta["pins"]["vdocs"]["bundle_sha256"]
             != peer_pin["bundle_sha256"]):
         errors.append("pin mismatch (vdocs): bridge meta != "
-                      "docs/releases/data-v1-peers.json")
+                      f"docs/releases/{PEERS_JSON.name}")
 
     # Rates: recount from the committed TSV, compare to meta, gate floors.
     recount = _recount(tsv_path.read_text(encoding="utf-8"))

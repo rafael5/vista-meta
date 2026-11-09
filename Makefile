@@ -15,6 +15,9 @@ COMPOSE   := docker/compose.yml
 PROJECT   := vista-vehu
 BUILD_DATE := $(shell date +%F)
 DOCKER    := docker
+# The data release tag lives in one place: host/scripts/release_id.py.
+RELEASE   := $(shell python3 host/scripts/release_id.py)
+STEM      := vista-meta-$(RELEASE)
 
 # Single source of truth for the container is docker/compose.yml. Lifecycle
 # targets shell out to `docker compose`; one-off targets (exec/cp/logs)
@@ -347,7 +350,7 @@ peer-fetch: ## Download + sha256-verify the pinned vdocs data-v1 bundle into dis
 		gh release download data-v1 --repo rafael5/vdocs \
 			--pattern 'vdocs-data-v1.tar.gz' -O dist/peers/vdocs-data-v1.tar.gz
 	@python3 -c "import hashlib,json,sys; \
-		want=json.load(open('docs/releases/data-v1-peers.json'))['peers']['vdocs-data:data-v1']['bundle_sha256']; \
+		want=json.load(open('docs/releases/$(RELEASE)-peers.json'))['peers']['vdocs-data:data-v1']['bundle_sha256']; \
 		got=hashlib.sha256(open('dist/peers/vdocs-data-v1.tar.gz','rb').read()).hexdigest(); \
 		sys.exit(0 if got==want else 'ERROR: peer bundle sha256 '+got[:16]+'… != pinned '+want[:16]+'…')"
 	@tar -xzf dist/peers/vdocs-data-v1.tar.gz -C dist/peers/
@@ -367,46 +370,47 @@ bridge-check: ## Bridge drift gate: dual pins + rates + floors (+ full diff when
 	@/usr/bin/python3 host/scripts/build_entity_bridge.py --check
 
 .PHONY: meta-db
-meta-db: ## Generate dist/vista-meta-data-v1.db — SQLite projection (tables + join views; TSVs stay canonical)
+meta-db: ## Generate dist/<release>.db — SQLite projection (tables + join views; TSVs stay canonical)
 	/usr/bin/python3 host/scripts/build_meta_db.py
 	/usr/bin/python3 host/scripts/build_meta_db.py --check
 
 .PHONY: derived-publish
-derived-publish: ## Publish the derived projections (meta.db + entity bridge) as data-v1 release assets
+derived-publish: ## Publish the derived projections (meta.db + entity bridge) as assets of the current release
 	@# Consumers must never re-derive summaries/indexes — the producer publishes
-	@# its projections. Additive: existing data-v1 assets are untouched; the
-	@# supplementary shas land in docs/releases/data-v1-derived.json (the
+	@# its projections. Additive: the release's other assets are untouched; the
+	@# supplementary shas land in docs/releases/<release>-derived.json (the
 	@# peers-file pattern — the main record stays byte-identical to its asset).
 	$(MAKE) meta-db
 	$(MAKE) bridge-check
-	gh release upload data-v1 \
-		dist/vista-meta-data-v1.db \
+	gh release upload $(RELEASE) \
+		dist/$(STEM).db \
 		vista/export/bridge/entity-bridge.tsv \
 		vista/export/bridge/entity-bridge.meta.json --clobber
-	@python3 -c "import hashlib,json,pathlib; \
-		files={n: {'sha256': hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest(), \
-		           'bytes': pathlib.Path(p).stat().st_size} \
-		       for n,p in {'vista-meta-data-v1.db':'dist/vista-meta-data-v1.db', \
+	@cd host/scripts && python3 -c "import hashlib,json,pathlib,release_id as r; \
+		root=r.PROJECT_ROOT; \
+		files={n: {'sha256': hashlib.sha256((root/p).read_bytes()).hexdigest(), \
+		           'bytes': (root/p).stat().st_size} \
+		       for n,p in {r.STEM+'.db':'dist/'+r.STEM+'.db', \
 		                   'entity-bridge.tsv':'vista/export/bridge/entity-bridge.tsv', \
 		                   'entity-bridge.meta.json':'vista/export/bridge/entity-bridge.meta.json'}.items()}; \
-		rec={'comment':'Derived projections published as supplementary data-v1 release assets. Generated (never hand-edited), gate-verified against the pinned TSVs before upload; the TSVs remain the model of record. The main record (data-v1.manifest.json) stays byte-identical to its assets; this sidecar records the derived tier.', \
-		     'release':'data-v1', \
-		     'content_hash': json.load(open('docs/releases/data-v1.manifest.json'))['content_hash'], \
+		rec={'comment':'Derived projections published as supplementary '+r.TAG+' release assets. Generated (never hand-edited), gate-verified against the pinned TSVs before upload; the TSVs remain the model of record. The main record ('+r.RECORD_JSON.name+') stays byte-identical to its assets; this sidecar records the derived tier.', \
+		     'release':r.TAG, \
+		     'content_hash': json.loads(r.RECORD_JSON.read_text())['content_hash'], \
 		     'generated_by':['host/scripts/build_meta_db.py','host/scripts/build_entity_bridge.py'], \
 		     'files': files}; \
-		pathlib.Path('docs/releases/data-v1-derived.json').write_text(json.dumps(rec, indent=2, sort_keys=True)+'\n')"
-	@echo "derived assets uploaded; record written to docs/releases/data-v1-derived.json — commit it"
+		r.DERIVED_JSON.write_text(json.dumps(rec, indent=2, sort_keys=True)+'\n')"
+	@echo "derived assets uploaded; record written to docs/releases/$(RELEASE)-derived.json — commit it"
 
 .PHONY: content-hash
 content-hash: ## Print the V5 data fingerprint (24 TSVs, normative recipe)
 	/usr/bin/python3 host/scripts/content_hash.py
 
 .PHONY: release
-release: ## Assemble the data-v1 release assets into dist/ (V7; no publish)
+release: ## Assemble the current release's assets into dist/ (V7; no publish)
 	/usr/bin/python3 host/scripts/build_release.py
 
 .PHONY: release-publish
-release-publish: ## Assemble + publish the data-v1 GitHub Release (V7)
+release-publish: ## Assemble + publish the current release as a GitHub Release (V7)
 	/usr/bin/python3 host/scripts/build_release.py --publish
 
 .PHONY: emit-all

@@ -25,6 +25,7 @@ sys.path.insert(0, str(SCRIPTS_DIR))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import build_release as br  # noqa: E402
+import release_id  # noqa: E402
 import content_hash as ch  # noqa: E402
 import validate_export as vx  # noqa: E402
 from test_validate_export import SIDE_CAR, make_tree  # noqa: E402
@@ -39,7 +40,7 @@ class TestManifest(unittest.TestCase):
 
     def test_contract_fields(self):
         self.assertEqual(self.doc["schema_version"], 1)
-        self.assertEqual(self.doc["tag"], "data-v1")
+        self.assertEqual(self.doc["tag"], release_id.TAG)
         self.assertEqual(self.doc["source_commit"], RELEASE_COMMIT)
         self.assertEqual(self.doc["content_hash"], ch.compute(self.root))
 
