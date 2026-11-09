@@ -168,10 +168,7 @@ EXTRACT ;Write scratch-global contents to /tmp TSV files
  S R=""
  F  S R=$O(^UTILITY($J,1,R)) Q:R=""  D
  . S S=""
- . F  S S=$O(^UTILITY($J,1,R,"X",S)) Q:S=""  D
- . . N L,LL S LL="",L=""
- . . F  S L=$O(^UTILITY($J,1,R,"X",S,L)) Q:L=""  S LL=LL_$S(LL]"":",",1:"")_L
- . . W R,TAB,S,TAB,LL,!
+ . F  S S=$O(^UTILITY($J,1,R,"X",S)) Q:S=""  W R,TAB,S,TAB,$$LOCS(R,S),!
  C PC
  ;---- tags (labels) ----
  S PD="/tmp/xindex-tags.tsv"
@@ -186,6 +183,15 @@ EXTRACT ;Write scratch-global contents to /tmp TSV files
  U $P
  W !,"Extracted: /tmp/xindex-{routines,errors,xrefs,tags}.tsv",!
  Q
+ ;
+LOCS(R,S) ;TAG+n locations XINDEX recorded for external reference S in routine R
+ ;SET^XINDEX stores them as comma-terminated text ("EN+3,PROC,") in
+ ;^UTILITY($J,1,R,"X",S,K); K only numbers the chunks it starts past
+ ;230 chars. A bare label means offset 0. Until 2026-11-09 EXTRACT wrote
+ ;the K subscripts (0,1,...) here instead of these values.
+ N K,LL S LL="",K=""
+ F  S K=$O(^UTILITY($J,1,R,"X",S,K)) Q:K=""  S LL=LL_^UTILITY($J,1,R,"X",S,K)
+ Q $E(LL,1,$L(LL)-1)
  ;
 HDIFF(H1,H2) ;seconds between two $H values
  N D1,S1,D2,S2
