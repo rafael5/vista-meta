@@ -41,5 +41,14 @@ class TestCoverageReport(unittest.TestCase):
         self.assertIn("20 more", text)
 
 
+class TestValidatedNames(unittest.TestCase):
+    def test_a_routine_in_no_package_is_skipped_by_name(self):
+        ours = {"A": {"package": "Kernel"}, "%YDBX": {"package": ""},
+                "NOTX": {"package": "Kernel"}}
+        names, skipped = v.validated_names(ours, {"A", "%YDBX", "ZEXT"})
+        self.assertEqual(names, ["A"])
+        self.assertEqual(skipped, ["%YDBX"])
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -94,13 +94,9 @@ def main() -> int:
         if rou:
             xindex_callees[r["routine_name"]].add(rou)
 
-    # Build validation rows — one per XINDEX-processed routine that also
-    # appears in our inventory. (Excludes T-002 cohort that XINDEX can't
-    # process; excludes nothing from our side since ours is a superset.)
+    names, no_package = validated_names(our_rou, set(xindex_rou))
     rows: list[dict] = []
-    for name in sorted(xindex_rou.keys()):
-        if name not in our_rou:
-            continue
+    for name in names:
         ours = our_rou[name]
         xi = xindex_rou[name]
         oc = our_callees.get(name, set())
@@ -158,7 +154,24 @@ def main() -> int:
     print()
     for line in coverage_report(set(our_rou), set(xindex_rou)):
         print(line)
+    print(f"  processed but left out of xindex-validation (no package): "
+          f"{len(no_package):,}" + (f" — {', '.join(no_package)}"
+                                    if no_package else ""))
     return 0
+
+
+def validated_names(our_rou: dict[str, dict],
+                    xindexed: set[str]) -> tuple[list[str], list[str]]:
+    """The routines xindex-validation.tsv holds, and those it skips.
+
+    One row per routine both in the census and processed by XINDEX —
+    except a routine in no package (e.g. YottaDB's own %YDBOCTOVISTAM
+    in r/): the table's package column is non-null, an FK to
+    packages.tsv, so such a routine is skipped and named.
+    """
+    both = sorted(n for n in xindexed if n in our_rou)
+    return ([n for n in both if our_rou[n]["package"]],
+            [n for n in both if not our_rou[n]["package"]])
 
 
 SHOW_NAMES = 10

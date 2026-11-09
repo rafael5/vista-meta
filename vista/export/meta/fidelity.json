@@ -268,7 +268,7 @@
         },
         {
           "column": "routine_name",
-          "distinct_values": 4826,
+          "distinct_values": 12341,
           "file": "xindex-errors.tsv",
           "open_world": false,
           "target": "routines.tsv:routine_name",
@@ -277,7 +277,7 @@
         },
         {
           "column": "routine_name",
-          "distinct_values": 29097,
+          "distinct_values": 39519,
           "file": "xindex-routines.tsv",
           "open_world": false,
           "target": "routines.tsv:routine_name",
@@ -286,7 +286,7 @@
         },
         {
           "column": "routine_name",
-          "distinct_values": 29097,
+          "distinct_values": 39518,
           "file": "xindex-tags.tsv",
           "open_world": false,
           "target": "routines.tsv:routine_name",
@@ -295,7 +295,7 @@
         },
         {
           "column": "package",
-          "distinct_values": 144,
+          "distinct_values": 175,
           "file": "xindex-validation.tsv",
           "open_world": false,
           "target": "packages.tsv:package",
@@ -304,7 +304,7 @@
         },
         {
           "column": "routine_name",
-          "distinct_values": 29097,
+          "distinct_values": 39518,
           "file": "xindex-validation.tsv",
           "open_world": false,
           "target": "routines.tsv:routine_name",
@@ -313,7 +313,7 @@
         },
         {
           "column": "routine_name",
-          "distinct_values": 26755,
+          "distinct_values": 32517,
           "file": "xindex-xrefs.tsv",
           "open_world": false,
           "target": "routines.tsv:routine_name",
@@ -324,33 +324,42 @@
       "statement": "Declared FK edges are open-world: a value may name an entity outside this export. A failed join on an edge measured open_world=true below is expected and is not a data defect. All rates are measured on this emission at build time."
     },
     "xindex_coverage": {
-      "divergence_denominator": "xindex-validated routines only (File 9.8-registered and XINDEX-processed). %-routines are excluded: File 9.8 holds no %-routines on this instance and none appear in xindex-validation.tsv (verified at build time, and asserted by percent_routines_covered below).",
+      "divergence_denominator": "xindex-validated routines: the rows of xindex-validation.tsv, one per census routine XINDEX processed that belongs to a package \u2014 %-routines among them (percent_routines_covered below counts how many). A processed routine in no package has no row, since the table's package column is a non-null FK; validate_against_xindex prints each such name.",
       "measured": {
         "census_routines": 39526,
-        "coverage_rate": 0.7361,
-        "covered_routines": 29097,
+        "coverage_rate": 0.9998,
+        "covered_routines": 39519,
         "gap": {
-          "file_9_8_non_r_uncovered": 1,
+          "file_9_8_non_r_uncovered": 0,
           "file_9_8_r_uncovered": 3,
           "file_9_8_r_uncovered_routines": [
             "KMPPS44A",
             "KMPPS44B",
             "KMPPS44C"
           ],
-          "not_in_file_9_8": 10425
+          "not_in_file_9_8": 4,
+          "uncovered_routines": [
+            "KMPOPS",
+            "KMPPS44A",
+            "KMPPS44B",
+            "KMPPS44C",
+            "KMPPS45",
+            "KMPPS45A",
+            "KMPURP1"
+          ]
         },
-        "percent_routines_covered": 0,
+        "percent_routines_covered": 11,
         "percent_routines_in_census": 11
       },
-      "statement": "The xindex-* family describes only routines registered in VistA File 9.8 (the Kernel ROUTINE file): the XINDEX driver (VMXIDX) iterates ^DIC(9.8), so census routines never registered there are structurally outside XINDEX's scope. Absence of xindex rows/findings for a routine means NOT-PROCESSED, not clean."
+      "statement": "The xindex-* family covers every routine the XINDEX driver (VMXIDX) processed out of the image's source tree \u2014 the same r/ and o/ directories the routine census reads, whether or not Kernel registered the routine in File 9.8. A census routine in the gap is one XINDEX could not load; each is named. Absence of xindex rows/findings for a routine means NOT-PROCESSED, not clean."
     },
     "xindex_static_call_authority": {
       "measured": {
-        "callee_divergence_rate": 0.0699,
-        "callee_divergent_routines": 2033,
+        "callee_divergence_rate": 0.082,
+        "callee_divergent_routines": 3240,
         "lines_mismatch": 0,
-        "tags_mismatch": 0,
-        "validated_routines": 29097
+        "tags_mismatch": 1,
+        "validated_routines": 39518
       },
       "out_of_scope": [
         "indirection (DO @X / GOTO @X)",

@@ -17,9 +17,9 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-TAG = "data-v1.1"
+TAG = "data-v1.2"
 ARTIFACT = "vista-meta-data"
-STEM = f"{ARTIFACT}-{TAG.removeprefix('data-')}"   # vista-meta-data-v1.1
+STEM = f"{ARTIFACT}-{TAG.removeprefix('data-')}"   # vista-meta-data-v1.2
 
 RELEASES_DIR = PROJECT_ROOT / "docs/releases"
 RECORD_JSON = RELEASES_DIR / f"{TAG}.manifest.json"

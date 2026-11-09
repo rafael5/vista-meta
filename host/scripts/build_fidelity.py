@@ -103,8 +103,11 @@ STATEMENTS = {
 
 DIVERGENCE_DENOMINATOR = (
     "xindex-validated routines: the rows of xindex-validation.tsv, one "
-    "per census routine XINDEX processed — %-routines among them "
-    "(percent_routines_covered below counts how many).")
+    "per census routine XINDEX processed that belongs to a package — "
+    "%-routines among them (percent_routines_covered below counts how "
+    "many). A processed routine in no package has no row, since the "
+    "table's package column is a non-null FK; validate_against_xindex "
+    "prints each such name.")
 
 
 def _read(export_dir: Path, name: str) -> tuple[list[str], list[list[str]]]:
