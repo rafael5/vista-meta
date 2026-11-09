@@ -58,7 +58,7 @@
   ],
   "counts": {
     "entities": 6572,
-    "joined": 1992
+    "joined": 1994
   },
   "generated_by": "host/scripts/build_entity_bridge.py",
   "pins": {
@@ -71,8 +71,8 @@
     },
     "vista_meta": {
       "artifact": "vista-meta-data",
-      "content_hash": "23d037f1e08adc206d251eea9adb4ec62051032c06b593737bebfcaf67e4c754",
-      "tag": "data-v1"
+      "content_hash": "d52ad4d6ddfd7c63d8da7aa391cb406e2b0359880f0b25c2cf40ff22b83c5ea6",
+      "tag": "data-v1.1"
     }
   },
   "schema_version": 1,
@@ -144,8 +144,8 @@
       "confidence": "high",
       "count": 1953,
       "floor": 0.5,
-      "joined": 1131,
-      "rate": 0.5791,
+      "joined": 1133,
+      "rate": 0.5801,
       "status": "floor-verified",
       "vocabulary": "routines.tsv:routine_name"
     },

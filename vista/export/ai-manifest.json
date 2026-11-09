@@ -12,9 +12,9 @@
   ],
   "card": "vista/export/AI-CARD.md",
   "citation": {
-    "example": "vista-meta data-v1 \u00b7 code-model/rpcs.tsv \u00b7 name=ORWPT SELECT",
-    "format": "vista-meta data-v1 \u00b7 <tsv path> \u00b7 <key>=<value>",
-    "no_answer": "not measured in vista-meta data-v1"
+    "example": "vista-meta data-v1.1 \u00b7 code-model/rpcs.tsv \u00b7 name=ORWPT SELECT",
+    "format": "vista-meta data-v1.1 \u00b7 <tsv path> \u00b7 <key>=<value>",
+    "no_answer": "not measured in vista-meta data-v1.1"
   },
   "external_bridges": [
     {
@@ -23,7 +23,7 @@
         "vdl_id"
       ],
       "companion": "vdocs",
-      "note": "vdocs search hits carry app_code; both releases are mutually pinned (Gate R, docs/releases/data-v1-peers.json)",
+      "note": "vdocs search hits carry app_code; both releases are mutually pinned (Gate R, docs/releases/data-v1.1-peers.json)",
       "via": "code-model/package-namespace.tsv"
     },
     {
@@ -99,7 +99,7 @@
     "cli": "bin/vista-meta",
     "cli_on_path": false,
     "mcp": "python3 host/scripts/mcp_server.py \u2014 stdio MCP server over meta.db (self-building; tools: query / lookup / bridge / orientation / routine_card / package_card / listing); wired via the repo's .mcp.json",
-    "meta_db": "make meta-db \u2192 dist/vista-meta-data-v1.db \u2014 generated SQLite projection (24 tables + entity_bridge + join views v_rpc_impl / v_option_impl / v_global_file_piks / v_routine_global_piks / v_rpc_data_piks / v_package_overview); the TSVs stay canonical",
+    "meta_db": "make meta-db \u2192 dist/vista-meta-data-v1.1.db \u2014 generated SQLite projection (24 tables + entity_bridge + join views v_rpc_impl / v_option_impl / v_global_file_piks / v_routine_global_piks / v_rpc_data_piks / v_package_overview); the TSVs stay canonical",
     "sqlite_recipe": "cd ~/projects/vista-meta/vista/export\nsqlite3 :memory: <<'SQL'\n.mode tabs\n.import code-model/rpcs.tsv rpcs\n.import code-model/routines-comprehensive.tsv r\nSELECT rpcs.name, rpcs.tag, rpcs.routine_name, r.package, r.line_count\nFROM rpcs JOIN r ON r.routine_name = rpcs.routine_name\nWHERE rpcs.name LIKE 'ORWPT%' LIMIT 20;\nSQL",
     "tsv_root": "vista/export",
     "verbs": {
@@ -113,15 +113,15 @@
     }
   },
   "release": {
-    "content_hash": "23d037f1e08adc206d251eea9adb4ec62051032c06b593737bebfcaf67e4c754",
+    "content_hash": "d52ad4d6ddfd7c63d8da7aa391cb406e2b0359880f0b25c2cf40ff22b83c5ea6",
     "db_state_fingerprint": "b8518a87f50f0f14186f3f3da97155345979d6d6c5d2878d6a379b74e9fe0d32",
     "engine": "ydb",
     "engine_image": "vista-meta:latest",
-    "extraction_timestamp": "2026-07-03T21:03:48Z",
-    "manifest": "docs/releases/data-v1.manifest.json",
+    "extraction_timestamp": "2026-11-09T18:02:43Z",
+    "manifest": "docs/releases/data-v1.1.manifest.json",
     "schema_contract": "docs/reference/schema-v1-normalization-spec.md",
-    "source_commit": "8e9b447ce4c68a19d1983d43b212c6a16072a601",
-    "tag": "data-v1"
+    "source_commit": "bc2ed17735d1fabb6048c5e12903cb1996ea774d",
+    "tag": "data-v1.1"
   },
   "schema_version": 1,
   "shared_vocabularies": [
@@ -163,7 +163,7 @@
       "sha256": "fbdd3b765d94bc25cbdea3e92cb73915b55220f10bcc2124676d3012260096d3"
     },
     "code-model/package-data.tsv": {
-      "bytes": 407351,
+      "bytes": 409082,
       "columns": [
         "package",
         "kind",
@@ -180,11 +180,11 @@
         "chunk",
         "entity_name"
       ],
-      "rows": 3140,
-      "sha256": "e511938796b9f0cbc3a8d30a7160fd3ee194a5b634d3ac61665ecf8a0b8a5e15"
+      "rows": 3152,
+      "sha256": "b3c14e7d0e13b0eacf78a3aa4fc821482e6e712c077706b3f163651d7fadf0ce"
     },
     "code-model/package-edge-matrix.tsv": {
-      "bytes": 82839,
+      "bytes": 83306,
       "columns": [
         "source_package",
         "dest_package",
@@ -196,11 +196,11 @@
         "source_package",
         "dest_package"
       ],
-      "rows": 1875,
-      "sha256": "07a6a03dc7b7fb5134fc9cd2a68cdd6c386bdf34efe11317e1bf399628876fd8"
+      "rows": 1884,
+      "sha256": "f3847b08d2dcac54b8461a8755cd1b5cdb98adc57d6c775d32addb325456782b"
     },
     "code-model/package-manifest.tsv": {
-      "bytes": 9604,
+      "bytes": 9666,
       "columns": [
         "package",
         "routine_count",
@@ -219,11 +219,11 @@
       "pk": [
         "package"
       ],
-      "rows": 175,
-      "sha256": "312846913bd8a18b6d883505ae794e97e0f0bd717e568d9a773560365bd29fa7"
+      "rows": 176,
+      "sha256": "8d0ce3bf893fe81b9c95f334b14a7c421b4fd18435014a949c87eb8c9d397928"
     },
     "code-model/package-namespace.tsv": {
-      "bytes": 10079,
+      "bytes": 10114,
       "columns": [
         "package",
         "package_name",
@@ -235,8 +235,8 @@
       "pk": [
         "package"
       ],
-      "rows": 174,
-      "sha256": "40d561c29ea576c66ccd65a5e32e9e6646dc75a286701d172c8e0381a9735f17"
+      "rows": 175,
+      "sha256": "e9d38a9275be68f5c703383cd65e0591173415080fe9128d5b5231cd2581b850"
     },
     "code-model/package-piks-summary.tsv": {
       "bytes": 4073,
@@ -253,10 +253,10 @@
         "package"
       ],
       "rows": 120,
-      "sha256": "832508ce8c23176a769ca7d1631c9970657731ac83ad768965f348ec5f63ab87"
+      "sha256": "d30e3ff973c4c7fe523b531dd2a55ee9de400c690c881498750e033d6acabc57"
     },
     "code-model/packages.tsv": {
-      "bytes": 6505,
+      "bytes": 6553,
       "columns": [
         "package",
         "routine_count",
@@ -267,8 +267,8 @@
       "pk": [
         "package"
       ],
-      "rows": 174,
-      "sha256": "2fbc3c08c2230ac16cd8907462a361a35e37db45b2cae7dc9685671ca53551f3"
+      "rows": 175,
+      "sha256": "73277f8cbf4af6e21220b93780ef75c14ce8941f1960dea9703d1f0f052cff02"
     },
     "code-model/protocol-calls.tsv": {
       "bytes": 298178,
@@ -310,7 +310,7 @@
       "sha256": "76e060fffde0b2eb4ac2b87f3ac703c7e1b29466c6e330fe80421be65d8b5c0d"
     },
     "code-model/routine-calls.tsv": {
-      "bytes": 10245399,
+      "bytes": 10330737,
       "columns": [
         "caller_routine",
         "caller_package",
@@ -325,11 +325,11 @@
         "callee_routine",
         "kind"
       ],
-      "rows": 241781,
-      "sha256": "61b5bbf46e163dcdd676126d040a2465b105004f64ee144287ba7f6bf32da413"
+      "rows": 243409,
+      "sha256": "9a5c50952bf07f1534f3872aab0139d805a7dcd09a5a97bd83516b2ac9bd5354"
     },
     "code-model/routine-globals.tsv": {
-      "bytes": 2498374,
+      "bytes": 2511938,
       "columns": [
         "routine_name",
         "package",
@@ -340,11 +340,11 @@
         "routine_name",
         "global_name"
       ],
-      "rows": 77939,
-      "sha256": "0942626f29cd6cfc327297a151f5bc1ae7f3ede905ba61771c749485a3915c3f"
+      "rows": 78281,
+      "sha256": "31761a4306849638ce01b7f68fa148b32efa20841e19012c5a2586b622343d96"
     },
     "code-model/routines-comprehensive.tsv": {
-      "bytes": 6704072,
+      "bytes": 6734497,
       "columns": [
         "routine_name",
         "package",
@@ -370,11 +370,11 @@
       "pk": [
         "routine_name"
       ],
-      "rows": 39373,
-      "sha256": "43e32778f41bd7d987a9b8ca3cdb0f89e0118d91e21268e3ee6f5b3f5aea2260"
+      "rows": 39526,
+      "sha256": "3d4b4a4eaae0b0425374773296f629f2f1bf44919f12b45f497f14bdbd873590"
     },
     "code-model/routines.tsv": {
-      "bytes": 8292411,
+      "bytes": 8332916,
       "columns": [
         "routine_name",
         "package",
@@ -390,8 +390,8 @@
       "pk": [
         "routine_name"
       ],
-      "rows": 39373,
-      "sha256": "09942a01d1b4e4856478b54f16760fb23933c2433d4ca841eea172213d0c561f"
+      "rows": 39526,
+      "sha256": "8fed95d8bea043e6ea2360249f33cd909172dc4de3caa333e0f5822b21edfc51"
     },
     "code-model/rpcs.tsv": {
       "bytes": 461379,
@@ -432,7 +432,7 @@
       "sha256": "cc32b6c25bfc86339c0ad86b7cb40e6e1e84672b8f521640d3b72687e31d8c37"
     },
     "code-model/xindex-errors.tsv": {
-      "bytes": 427176,
+      "bytes": 425832,
       "columns": [
         "routine_name",
         "entry_index",
@@ -444,11 +444,11 @@
         "routine_name",
         "entry_index"
       ],
-      "rows": 6907,
-      "sha256": "84874e08521c3ca3c0f615de429a9c6718c1d45303a90006a82c0f36a075d4d0"
+      "rows": 6886,
+      "sha256": "8c980121bbd667ead85ac6055e815e3f17d05b0c7fb12cd724613ae33ed7032f"
     },
     "code-model/xindex-routines.tsv": {
-      "bytes": 815130,
+      "bytes": 815164,
       "columns": [
         "routine_name",
         "line_count",
@@ -461,10 +461,10 @@
         "routine_name"
       ],
       "rows": 29097,
-      "sha256": "4d353ea6a93bf0df74c0f0773f377b94bb94de8ff6a56fa4b2c3f5b8efc749d7"
+      "sha256": "4bdf7eb056a5c1038a9e228225a4f41560ad7b6c5a34612a14dd92eeb92636b8"
     },
     "code-model/xindex-tags.tsv": {
-      "bytes": 4314385,
+      "bytes": 4315954,
       "columns": [
         "routine_name",
         "tag",
@@ -474,11 +474,11 @@
         "routine_name",
         "tag"
       ],
-      "rows": 292138,
-      "sha256": "ade1dc18a19ced35ac2fa436ad180a9013cd02d517a5c34111ec57bd806f241f"
+      "rows": 292225,
+      "sha256": "b712d795b3c1268c712e0792507f8aca2ff26709daa8fabef1cae4addc695955"
     },
     "code-model/xindex-validation.tsv": {
-      "bytes": 1718403,
+      "bytes": 1718450,
       "columns": [
         "routine_name",
         "package",
@@ -499,10 +499,10 @@
         "routine_name"
       ],
       "rows": 29097,
-      "sha256": "982e34c515c7ad93118938953878b9d6e5a37c62a3a16d7b45550a0665baa336"
+      "sha256": "6a3fe92b29f600d56d3e76500277dfb52b01a56c1c64babb4c78c42333ace0dc"
     },
     "code-model/xindex-xrefs.tsv": {
-      "bytes": 4738376,
+      "bytes": 7482016,
       "columns": [
         "routine_name",
         "ref",
@@ -512,11 +512,11 @@
         "routine_name",
         "ref"
       ],
-      "rows": 214101,
-      "sha256": "a5fdc530c09cd42c5cc4945e57e0b9094cec2a9c84ea24208d9fae46275d74d0"
+      "rows": 214269,
+      "sha256": "aea3fc580bd2f15dad3e1beaa5329f2fa9f43b08bbac81bb8b53bc58f2ad34b4"
     },
     "data-model/field-piks.tsv": {
-      "bytes": 2874100,
+      "bytes": 2874110,
       "columns": [
         "file_number",
         "field_number",
@@ -533,7 +533,7 @@
         "field_number"
       ],
       "rows": 69809,
-      "sha256": "cfa32265d3b8150bb8e11c5082f7af58819be8fa146a9bf6670defecef06a2d0"
+      "sha256": "88937effc63789c0f9c65a27e71dc3d8e46f79974695fcf9537d3d595619c400"
     },
     "data-model/files.tsv": {
       "bytes": 546818,

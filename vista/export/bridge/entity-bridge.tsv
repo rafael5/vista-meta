@@ -6347,8 +6347,8 @@ routine:XUSRB1	routine	XUSRB1	14	code-model/routines.tsv	routine_name	XUSRB1	exa
 routine:XUSRB2	routine	XUSRB2	9	code-model/routines.tsv	routine_name	XUSRB2	exact-name-ci	high
 routine:XUSRB4	routine	XUSRB4	5	code-model/routines.tsv	routine_name	XUSRB4	exact-name-ci	high
 routine:XUSTAX	routine	XUSTAX	12	code-model/routines.tsv	routine_name	XUSTAX	exact-name-ci	high
-routine:XUSUDO	routine	XUSUDO	25				none	undetermined
-routine:XUTLS	routine	XUTLS	16				none	undetermined
+routine:XUSUDO	routine	XUSUDO	25	code-model/routines.tsv	routine_name	XUSUDO	exact-name-ci	high
+routine:XUTLS	routine	XUTLS	16	code-model/routines.tsv	routine_name	XUTLS	exact-name-ci	high
 routine:XUTMDEVQ	routine	XUTMDEVQ	73	code-model/routines.tsv	routine_name	XUTMDEVQ	exact-name-ci	high
 routine:XUTMOPT	routine	XUTMOPT	16	code-model/routines.tsv	routine_name	XUTMOPT	exact-name-ci	high
 routine:XUTMTP	routine	XUTMTP	4	code-model/routines.tsv	routine_name	XUTMTP	exact-name-ci	high

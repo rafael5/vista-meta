@@ -363,9 +363,10 @@ peer-fetch: ## Download + sha256-verify the pinned vdocs data-v1 bundle into dis
 .PHONY: bridge
 bridge: ## Build the vdocs entity bridge from the two pinned releases (machine-friendly-exports W3)
 	@[ -d dist/peers/vdocs-data-v1 ] || { echo "Run 'make peer-fetch' first."; exit 1; }
-	@[ -w vista/export/bridge ] || \
+	@# The dir and the files in it may be left owned by vehu (uid 1001).
+	@[ -d vista/export/bridge ] && [ -z "$$(find vista/export/bridge ! -writable)" ] || \
 		$(DOCKER) exec -u root $(CONTAINER) sh -c \
-		'mkdir -p /home/vehu/export/bridge && chown 1000:1000 /home/vehu/export/bridge'
+		'mkdir -p /home/vehu/export/bridge && chown -R 1000:1000 /home/vehu/export/bridge'
 	/usr/bin/python3 host/scripts/build_entity_bridge.py
 	/usr/bin/python3 host/scripts/build_entity_bridge.py --check
 

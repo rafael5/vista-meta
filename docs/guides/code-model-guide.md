@@ -19,7 +19,8 @@ ones above it.
 
 Shapes are `schema_version: 1` — the normalization contract is
 [../reference/schema-v1-normalization-spec.md](../reference/schema-v1-normalization-spec.md);
-per-release integrity in [../releases/data-v1.manifest.json](../releases/data-v1.manifest.json).
+per-release integrity in [../releases/data-v1.1.manifest.json](../releases/data-v1.1.manifest.json)
+(current; data-v1 in [../releases/data-v1.manifest.json](../releases/data-v1.manifest.json)).
 
 ### 1.1 Inventory layer — "what exists"
 
@@ -73,7 +74,7 @@ From XINDEX, VistA's own static analyzer (Toolkit XT*7.3*158, VEHU blend per RF-
 |---|---|---|---|
 | `xindex-routines.tsv` | 29,097 | 6 | Per-routine: routine_name, line_count, tag_count, xref_count, error_count, rsum_value |
 | `xindex-errors.tsv` | 6,907 | 5 | One row per error instance across 66 error classes (F/S/W/I severity): routine_name, entry_index, line_text, tag_offset, error_text |
-| `xindex-xrefs.tsv` | 214,101 | 3 | Authoritative call graph (MUMPS parser, not regex): routine_name, ref, location_list |
+| `xindex-xrefs.tsv` | 214,269 | 3 | Authoritative call graph (MUMPS parser, not regex): routine_name, ref (`ROUTINE [$$]TAG`), location_list — the `TAG+n` lines of each reference in the caller (since data-v1.1; data-v1 held XINDEX subscript indices) |
 | `xindex-tags.tsv` | 292,138 | 3 | Tag/label inventory with Supported Entry Point classification: routine_name, tag, data |
 | `xindex-validation.tsv` | 29,097 | 14 | Per-routine join of regex vs XINDEX — routine_name, package, lines_ours, lines_xindex, lines_match, tags_ours, tags_xindex, tags_match, callees_ours_count, callees_xindex_count, callees_match_count, callees_ours_only_count, callees_xindex_only_count, callees_agreement_ratio |
 
