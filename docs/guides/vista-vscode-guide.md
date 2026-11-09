@@ -898,7 +898,6 @@ directory holding `code-model/` + `data-model/` (the repo's
 - [host/scripts/mfmt.py](../../host/scripts/mfmt.py) — formatter
 - [hooks/pre-commit](../../hooks/pre-commit) — the pre-commit hook
 - [vscode-extension/](../../vscode-extension/) — extension source
-- [.github/workflows/](../../.github/workflows/) — CI
 - [Makefile](../../Makefile) — all Makefile targets (`make help` lists them)
 - [vista-developers-guide.md](vista-developers-guide.md) — architectural context
 - `~/vista-forge/v-pkg` — `.KID` decompose / assemble (successor of the
