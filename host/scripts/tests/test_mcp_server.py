@@ -119,6 +119,24 @@ class TestTools(unittest.TestCase):
             "sql": "SELECT tag FROM xindex_tags", "max_rows": 1})
         self.assertEqual(len(json.loads(tool_text(resp))["rows"]), 1)
 
+    def test_query_unknown_column_lists_the_tables_columns(self):
+        # 15 of 112 query calls in 45 days failed on a guessed column name;
+        # the error names the real ones so the retry needs no extra call.
+        resp = call_tool(self.h, "query", {"sql": "SELECT rpc_name FROM rpcs"})
+        self.assertTrue(resp["result"]["isError"])
+        text = tool_text(resp)
+        self.assertIn("no such column: rpc_name", text)
+        self.assertIn("rpcs columns: ien, name, tag, routine_name,", text)
+
+    def test_query_unknown_column_lists_every_joined_table(self):
+        resp = call_tool(self.h, "query", {
+            "sql": "SELECT r.nope FROM rpcs r "
+                   "JOIN routines t ON r.routine_name = t.name"})
+        text = tool_text(resp)
+        self.assertLess(text.index("rpcs columns:"),
+                        text.index("routines columns:"))
+        self.assertNotIn("files columns:", text)
+
     def test_lookup_rpc_carries_citation(self):
         resp = call_tool(self.h, "lookup",
                          {"kind": "rpc", "key": "ORWPT SELECT"})

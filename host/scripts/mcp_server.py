@@ -39,6 +39,7 @@ MAX_ROWS_CEILING = 500
 DEFAULT_MAX_ROWS = 50
 
 _SELECT_ONLY = re.compile(r"^\s*(select|with)\b", re.IGNORECASE)
+_IDENT = re.compile(r"[A-Za-z_][A-Za-z0-9_]*")
 
 # kind → (queryable relation, key column, citable TSV, citation key column)
 LOOKUP_KINDS = {
@@ -152,7 +153,10 @@ class Handler:
             cur = self.con.execute(sql)
             rows = cur.fetchmany(max_rows + 1)
         except sqlite3.Error as e:
-            raise ToolError(f"sqlite: {e}") from e
+            message = f"sqlite: {e}"
+            if "no such column" in str(e):
+                message += self._columns_of_named_relations(sql)
+            raise ToolError(message) from e
         truncated = len(rows) > max_rows
         rows = rows[:max_rows]
         return json.dumps({
@@ -162,6 +166,19 @@ class Handler:
             "truncated": truncated,
             "release": self.tag,
         }, indent=1, ensure_ascii=False)
+
+    def _columns_of_named_relations(self, sql: str) -> str:
+        """Each table or view the SQL names, with its columns, in the order
+        named — so a guessed column name is corrected without another call."""
+        relations = {name.lower(): name for (name,) in self.con.execute(
+            "SELECT name FROM sqlite_master WHERE type IN ('table', 'view')")}
+        named = dict.fromkeys(relations[w.lower()] for w in _IDENT.findall(sql)
+                              if w.lower() in relations)
+        lines = []
+        for rel in named:
+            cols = [r[1] for r in self.con.execute(f'PRAGMA table_info("{rel}")')]
+            lines.append(f"\n{rel} columns: {', '.join(cols)}")
+        return "".join(lines)
 
     def tool_lookup(self, args: dict) -> str:
         kind, key = args.get("kind", ""), args.get("key", "")
