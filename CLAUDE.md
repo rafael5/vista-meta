@@ -249,19 +249,12 @@ being callable from an Institution-scoped RPC?"* at query speed.
   tabs, no trailing whitespace, no bare `HALT`, `@summary`/`@test`
   on public tags for new files).
 
-## Orthogonal: gui-spec
-
-Wireframe tooling that used to live here was extracted to
-`~/projects/gui-spec/` in April 2026. It is completely orthogonal
-to VistA modeling and has no dependency on this repo.
-
 ## Orthogonal: py-kids-vc (retired — superseded by v-pkg)
 
 The KIDS decompose/assemble/round-trip toolchain that used to live
 here (as `kids_vc_pkg/` + `host/scripts/kids_vc*.py`) was extracted
 to `~/projects/py-kids-vc/` in May 2026, then fully superseded by
 its Go port **v-pkg** (`~/vista-forge/v-pkg`, vista-forge org) and
-retired 2026-07-04 (read-only copy at `~/projects/archive/py-kids-vc`;
-GitHub repo archived). v-pkg also absorbed the runtime-installer role
+retired 2026-07-04 (GitHub repo archived). v-pkg also absorbed the runtime-installer role
 of the former `py-kids-install`. The `make patch-*` targets shell out
 to `v-pkg`.
