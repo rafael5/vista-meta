@@ -24,9 +24,11 @@ SETUP ;one-time XINDEX environment setup
  S INDHDR="VMXIDX BATCH"
  S INDHDR(1)="UCI: VMXIDX  CPU: ROU  "_$H
  S INDHDR(2)="vista-meta XINDEX bake"
- ;INP parameters for full-fidelity capture (INP(7)=1 = save to File 9.8)
+ ;INP parameters for full-fidelity capture. INP(7)=0: nothing is saved to
+ ;File 9.8 — only ^XINDX5 (FINISH) reads it, and the bake never calls that;
+ ;EXTRACT reads ^UTILITY. The extraction must not change the engine.
  S INP(1)=0,INP(2)=0,INP(3)=0,INP(4)=1,INP(5)="R",INP(6)=1
- S INP(7)=1,INP(8)=0,INP(9)=0,INP(10)=""
+ S INP(7)=0,INP(8)=0,INP(9)=0,INP(10)=""
  S INP(11)="",INP(12)=""
  S INP("MAX")=20000,INP("CMAX")=15000
  S DUZ=.5
@@ -63,17 +65,15 @@ PROC(RTN) ;Process one routine end-to-end
  D BEG^XINDEX
  Q 1
  ;
-SAMPLE(N) ;run XINDEX on N routines (testing)
- N IEN,Z,NAME,TYP,OK,FAIL,STARTED,ELAPSED,R
+SAMPLE(N) ;run XINDEX on the first N routines of the source tree (testing)
+ N LIST,NAME,OK,FAIL,STARTED,ELAPSED,R
  I '$D(N) S N=5
  S STARTED=$H
  W !,"VMXIDX SAMPLE run (N=",N,")",!
  K ^UTILITY($J)
- D SETUP
- S (IEN,OK,FAIL)=0
- F  S IEN=$O(^DIC(9.8,IEN)) Q:IEN'>0!((OK+FAIL)'<N)  D
- . S Z=$G(^DIC(9.8,IEN,0)) Q:Z=""
- . S NAME=$P(Z,"^",1),TYP=$P(Z,"^",2) Q:TYP'="R"&(TYP'="")
+ D SETUP,ROUTINES(.LIST)
+ S (OK,FAIL)=0,NAME=""
+ F  S NAME=$O(LIST(NAME)) Q:NAME=""!((OK+FAIL)'<N)  D
  . S R=$$PROC(NAME) I R S OK=OK+1 Q
  . S FAIL=FAIL+1
  S ELAPSED=$$HDIFF(STARTED,$H)
@@ -100,16 +100,16 @@ DIAGSCRATCH ;Dump what's in ^UTILITY($J,1,...) — scratch state after a run
  . W "    ",R,": lines=",K," errs=",CE," tags=",CT," xref=",CX,!
  Q
  ;
-ALL ;run XINDEX on all type=R routines in File 9.8
- N IEN,Z,NAME,TYP,OK,FAIL,STARTED,ELAPSED,R
+ALL ;run XINDEX on every routine in the image's source tree
+ ;Until data-v1.2 this walked File 9.8 (^DIC(9.8)), which misses the
+ ;~10,400 shipped routines Kernel never registered there.
+ N LIST,NAME,OK,FAIL,STARTED,ELAPSED,R
  S STARTED=$H
  W !,"VMXIDX FULL run starting ($H=",$H,")",!
  K ^UTILITY($J)
- D SETUP
- S (IEN,OK,FAIL)=0
- F  S IEN=$O(^DIC(9.8,IEN)) Q:IEN'>0  D
- . S Z=$G(^DIC(9.8,IEN,0)) Q:Z=""
- . S NAME=$P(Z,"^",1),TYP=$P(Z,"^",2) Q:TYP'="R"&(TYP'="")
+ D SETUP,ROUTINES(.LIST)
+ S (OK,FAIL)=0,NAME=""
+ F  S NAME=$O(LIST(NAME)) Q:NAME=""  D
  . S R=$$PROC(NAME) I R S OK=OK+1 Q
  . S FAIL=FAIL+1
  . ;progress ticker every 500 routines
@@ -118,6 +118,22 @@ ALL ;run XINDEX on all type=R routines in File 9.8
  W !,"  Succeeded: ",OK,"  Failed: ",FAIL
  W !,"  Elapsed: ",ELAPSED," sec (",ELAPSED/60," min)",!
  D EXTRACT
+ Q
+ ;
+ROUTINES(LIST) ;LIST(name)="" for every routine whose source the image ships
+ ;The same two directories the routine census reads: r/ (the flat symlink
+ ;farm over Packages/*/Routines, ADR-029) and o/ (the %-routines). dev/r
+ ;is left out — it holds vista-meta's own routines, not VistA.
+ D FILES("/opt/VistA-M/r",.LIST),FILES("/opt/VistA-M/o",.LIST)
+ Q
+ ;
+FILES(DIR,LIST) ;Add a routine name to LIST for each DIR/*.m file
+ ;A %-routine's file is _NAME.m (YottaDB maps % to _ in file names).
+ N F,R
+ F  S F=$ZSEARCH(DIR_"/*.m",77) Q:F=""  D
+ . S R=$P(F,"/",$L(F,"/")),R=$E(R,1,$L(R)-2)
+ . S:$E(R)="_" R="%"_$E(R,2,$L(R))
+ . S LIST(R)=""
  Q
  ;
 FINISH ;After all PROC calls, drive ^XINDX5 to finalize + write File 9.8

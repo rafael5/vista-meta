@@ -5,9 +5,10 @@ VMXIDXT ;vista-meta — tests for VMXIDX (no M test framework in the image)
  Q
  ;
 EN ;@summary Run every VMXIDX check and print the total
- ;@test LOCS joins XINDEX's chunks; a real routine yields TAG+n
+ ;@test LOCS joins XINDEX's chunks; a real routine yields TAG+n;
+ ;@test the routine list is the source tree, not File 9.8
  N PASS,FAIL S (PASS,FAIL)=0
- D LOCSUNIT,LOCSREAL
+ D LOCSUNIT,LOCSREAL,FILESUNIT,LISTREAL
  W !,"VMXIDXT: ",PASS," passed, ",FAIL," failed",!
  Q
  ;
@@ -38,4 +39,29 @@ LOCSREAL ;@summary A real routine yields its TAG+n call site
  D EQ(OK,1,"PXRMASU indexed")
  D EQ($$LOCS^VMXIDX("PXRMASU","PXRMINDX $$OVERLAP"),"CLASS+16","real call site")
  K ^UTILITY($J)
+ Q
+ ;
+FILESUNIT ;@summary FILES lists a directory's .m files as routine names
+ ;@test _X.m is %X; a non-.m file is not a routine
+ N D,L,F,N S D="/tmp/vmxidxt"
+ ZSYSTEM "rm -rf "_D_" && mkdir -p "_D
+ F F="ZZA.m","_ZZB.m","notes.txt" O D_"/"_F:NEWVERSION U D_"/"_F W " Q",! C D_"/"_F
+ D FILES^VMXIDX(D,.L)
+ D EQ($D(L("ZZA")),1,"ZZA.m is ZZA")
+ D EQ($D(L("%ZZB")),1,"_ZZB.m is %ZZB")
+ D EQ($D(L("notes")),0,"notes.txt is not a routine")
+ S F="",N=0 F  S F=$O(L(F)) Q:F=""  S N=N+1
+ D EQ(N,2,"two routines")
+ ZSYSTEM "rm -rf "_D
+ Q
+ ;
+LISTREAL ;@summary ROUTINES lists the image's whole source tree
+ ;@test a routine missing from File 9.8 and a %-routine are both listed
+ N L,R,N
+ D ROUTINES^VMXIDX(.L)
+ D EQ($D(L("VADPT6")),1,"VADPT6 (not in File 9.8) listed")
+ D EQ($O(^DIC(9.8,"B","VADPT6",0))>0,0,"VADPT6 is indeed absent from File 9.8")
+ D EQ($D(L("%ZOSV")),1,"%ZOSV listed")
+ S R="",N=0 F  S R=$O(L(R)) Q:R=""  S N=N+1
+ D EQ(N>39000,1,"over 39,000 routines listed ("_N_")")
  Q

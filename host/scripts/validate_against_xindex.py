@@ -140,11 +140,6 @@ def main() -> int:
     total_xindex_only = sum(r["callees_xindex_only_count"] for r in rows)
     avg_ratio = sum(float(r["callees_agreement_ratio"]) for r in rows) / n if n else 0
 
-    # In-MANIFEST-but-not-in-XINDEX (T-002 cohort)
-    not_in_xindex = set(our_rou.keys()) - set(xindex_rou.keys())
-    # In-XINDEX-but-not-in-MANIFEST (File 9.8-only with ZLINK success)
-    not_in_ours = set(xindex_rou.keys()) - set(our_rou.keys())
-
     print(f"xindex-validation.tsv: {n:,} rows (routines in both our data and XINDEX)")
     print()
     print("=== Per-routine static features (our regex vs XINDEX parser) ===")
@@ -161,12 +156,33 @@ def main() -> int:
     print(f"  XINDEX-only (we missed):                   {total_xindex_only:,}")
     print(f"  average per-routine agreement ratio:       {avg_ratio:.4f}")
     print()
-    print("=== Population coverage ===")
-    print(f"  in our MANIFEST but not in XINDEX: {len(not_in_xindex):,}")
-    print(f"    (T-002 cohort — ABS*, A1A*, etc. — shipped but ZLINK fails)")
-    print(f"  in XINDEX but not in our MANIFEST: {len(not_in_ours):,}")
-    print(f"    (routines Kernel knows AND has registered; validate T-002 B-cohort)")
+    for line in coverage_report(set(our_rou), set(xindex_rou)):
+        print(line)
     return 0
+
+
+SHOW_NAMES = 10
+
+
+def coverage_report(census: set[str], xindexed: set[str]) -> list[str]:
+    """Counts and names on each side of the census/XINDEX difference.
+
+    Names only what was measured: why a routine is missing is not in
+    these two sets, so no cause is printed.
+    """
+    lines = ["=== Population coverage ==="]
+    for label, names in (
+            ("in the census but not processed by XINDEX",
+             census - xindexed),
+            ("processed by XINDEX but not in the census",
+             xindexed - census)):
+        lines.append(f"  {label}: {len(names):,}")
+        if names:
+            shown = sorted(names)[:SHOW_NAMES]
+            more = len(names) - len(shown)
+            lines.append("    " + ", ".join(shown)
+                         + (f" (and {more:,} more)" if more else ""))
+    return lines
 
 
 if __name__ == "__main__":

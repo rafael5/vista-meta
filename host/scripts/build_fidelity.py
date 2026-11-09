@@ -12,10 +12,10 @@
    for statically expressed calls only; dynamic dispatch is declared
    out of scope, and the callee divergence rate is measured from
    xindex-validation.tsv.
-3. xindex_coverage (F9) — the xindex family describes only File
-   9.8-registered routines (VMXIDX iterates ^DIC(9.8)); the census
-   gap is decomposed, and %-routines are verified outside XINDEX so
-   the divergence denominator excludes them.
+3. xindex_coverage (F9) — the xindex family covers the routines
+   XINDEX processed out of the image's source tree (VMXIDX walks the
+   same directories as the census, since data-v1.2); every routine in
+   the census gap is named, and decomposed by File 9.8 registration.
 
 Every number is re-measured from the emitted TSVs at build time —
 the V4 gate forbids stale rates. --check re-measures and fails on
@@ -92,20 +92,19 @@ STATEMENTS = {
         "graph — out of scope, not covered-by-authority. Line and tag "
         "counts agree exactly; divergence is confined to callee sets.",
     "xindex_coverage":
-        "The xindex-* family describes only routines registered in "
-        "VistA File 9.8 (the Kernel ROUTINE file): the XINDEX driver "
-        "(VMXIDX) iterates ^DIC(9.8), so census routines never "
-        "registered there are structurally outside XINDEX's scope. "
-        "Absence of xindex rows/findings for a routine means "
-        "NOT-PROCESSED, not clean.",
+        "The xindex-* family covers every routine the XINDEX driver "
+        "(VMXIDX) processed out of the image's source tree — the same "
+        "r/ and o/ directories the routine census reads, whether or not "
+        "Kernel registered the routine in File 9.8. A census routine in "
+        "the gap is one XINDEX could not load; each is named. Absence "
+        "of xindex rows/findings for a routine means NOT-PROCESSED, "
+        "not clean.",
 }
 
 DIVERGENCE_DENOMINATOR = (
-    "xindex-validated routines only (File 9.8-registered and "
-    "XINDEX-processed). %-routines are excluded: File 9.8 holds no "
-    "%-routines on this instance and none appear in "
-    "xindex-validation.tsv (verified at build time, and asserted by "
-    "percent_routines_covered below).")
+    "xindex-validated routines: the rows of xindex-validation.tsv, one "
+    "per census routine XINDEX processed — %-routines among them "
+    "(percent_routines_covered below counts how many).")
 
 
 def _read(export_dir: Path, name: str) -> tuple[list[str], list[list[str]]]:
@@ -192,6 +191,7 @@ def measure_xindex_coverage(export_dir: Path) -> dict:
             # The compile/ZLINK-failure cohort, by name — small by
             # construction; a big list here is itself a red flag.
             "file_9_8_r_uncovered_routines": sorted(gap & in_9_8_r),
+            "uncovered_routines": sorted(gap),
         },
         "percent_routines_in_census": len(percent),
         "percent_routines_covered": len(percent & covered),

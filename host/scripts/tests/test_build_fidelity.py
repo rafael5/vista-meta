@@ -68,8 +68,11 @@ def make_tree() -> Path:
          "is_percent_routine": "N", "in_file_9_8": "Y",
          "file_9_8_type": "R"},
     ])
+    # XINDEX walks the source tree: %DT is covered though File 9.8
+    # holds no %-routines; BRAVO and KFAIL failed to load.
     fill("xindex-routines.tsv", [
-        {"routine_name": "ALPHA"}, {"routine_name": "CHARLIE"}])
+        {"routine_name": "%DT"}, {"routine_name": "ALPHA"},
+        {"routine_name": "CHARLIE"}])
     fill("xindex-validation.tsv", [
         {"routine_name": "ALPHA", "package": "Kernel",
          "lines_match": "Y", "tags_match": "Y",
@@ -156,27 +159,32 @@ class TestXindexCoverage(unittest.TestCase):
     def test_coverage_counts(self):
         m = self.d["measured"]
         self.assertEqual(m["census_routines"], 5)
-        self.assertEqual(m["covered_routines"], 2)
-        self.assertEqual(m["coverage_rate"], 0.4)
+        self.assertEqual(m["covered_routines"], 3)
+        self.assertEqual(m["coverage_rate"], 0.6)
 
     def test_gap_decomposition_sums_to_gap(self):
         g = self.d["measured"]["gap"]
-        self.assertEqual(g["not_in_file_9_8"], 2)
+        self.assertEqual(g["not_in_file_9_8"], 1)
         self.assertEqual(g["file_9_8_non_r_uncovered"], 0)
         self.assertEqual(g["file_9_8_r_uncovered"], 1)
         self.assertEqual(g["file_9_8_r_uncovered_routines"], ["KFAIL"])
         self.assertEqual(sum((g["not_in_file_9_8"],
                               g["file_9_8_non_r_uncovered"],
-                              g["file_9_8_r_uncovered"])), 5 - 2)
+                              g["file_9_8_r_uncovered"])), 5 - 3)
 
-    def test_percent_routines_verified_outside_xindex(self):
+    def test_every_uncovered_routine_is_named(self):
+        g = self.d["measured"]["gap"]
+        self.assertEqual(g["uncovered_routines"], ["BRAVO", "KFAIL"])
+
+    def test_percent_routines_are_measured_not_assumed(self):
         m = self.d["measured"]
         self.assertEqual(m["percent_routines_in_census"], 1)
-        self.assertEqual(m["percent_routines_covered"], 0)
+        self.assertEqual(m["percent_routines_covered"], 1)
 
-    def test_divergence_denominator_excludes_percent_routines(self):
-        self.assertIn("%-routines", self.d["divergence_denominator"])
-        self.assertIn("excluded", self.d["divergence_denominator"])
+    def test_scope_is_the_source_tree_not_file_9_8(self):
+        self.assertIn("source tree", self.d["statement"])
+        self.assertNotIn("^DIC(9.8)", self.d["statement"])
+        self.assertNotIn("excluded", self.d["divergence_denominator"])
 
 
 class TestDeclarationsPresent(unittest.TestCase):
