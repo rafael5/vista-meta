@@ -83,7 +83,8 @@ TOOLS = [
         "description":
             "Keyed lookup with a release-pinned citation. kind: rpc | "
             "option | routine | file (FileMan number, incl. PIKS) | "
-            "package | global (bare name, e.g. DPT).",
+            "package | global (bare name, e.g. DPT). The key matches in "
+            "any case.",
         "inputSchema": {
             "type": "object",
             "properties": {
@@ -139,6 +140,27 @@ class Handler:
             "SELECT key, value FROM meta").fetchall())
         self.tag = self.meta.get("tag", "data-v1")
 
+    # ── arguments ─────────────────────────────────────────────────
+    @staticmethod
+    def _check_arguments(name: str, args) -> None:
+        """Refuse what the tool's schema does not declare, and what it
+        requires but did not get — measured 2026-11-09: a lookup sent
+        `name` instead of `key` was answered "not measured" for a key it
+        was never given."""
+        schema = next(t["inputSchema"] for t in TOOLS if t["name"] == name)
+        declared = list(schema["properties"])
+        takes = (f"it takes {', '.join(declared)}." if declared
+                 else "it takes no arguments.")
+        if not isinstance(args, dict):
+            raise ToolError(f"{name} arguments must be an object; {takes}")
+        unknown = [a for a in args if a not in declared]
+        if unknown:
+            named = ", ".join(repr(a) for a in unknown)
+            raise ToolError(f"{name} does not take {named}; {takes}")
+        absent = [a for a in schema.get("required", []) if a not in args]
+        if absent:
+            raise ToolError(f"{name} needs {', '.join(absent)}; {takes}")
+
     # ── tools ─────────────────────────────────────────────────────
     def tool_query(self, args: dict) -> str:
         sql = args.get("sql", "")
@@ -181,17 +203,25 @@ class Handler:
         return "".join(lines)
 
     def tool_lookup(self, args: dict) -> str:
-        kind, key = args.get("kind", ""), args.get("key", "")
+        kind, key = args.get("kind", ""), str(args.get("key", "")).strip()
         if kind not in LOOKUP_KINDS:
             raise ToolError(f"kind must be one of {sorted(LOOKUP_KINDS)}")
+        if not key:
+            raise ToolError("key is empty; give the name or number to "
+                            "look up")
         relation, column, tsv, cite_col = LOOKUP_KINDS[kind]
         if kind == "file":
             sql = ("SELECT f.*, p.piks, p.piks_confidence, p.piks_source "
                    "FROM files f LEFT JOIN piks p USING (file_number) "
                    "WHERE f.file_number = ?")
+            params: tuple = (key,)
         else:
-            sql = f"SELECT * FROM {relation} WHERE {column} = ?"
-        cur = self.con.execute(sql, (key,))
+            # Any case matches; a row spelled exactly as asked comes first.
+            sql = (f"SELECT * FROM {relation} "
+                   f"WHERE {column} = ? COLLATE NOCASE "
+                   f"ORDER BY {column} = ? DESC")
+            params = (key, key)
+        cur = self.con.execute(sql, params)
         rows = _rows_to_dicts(cur, cur.fetchmany(MAX_ROWS_CEILING))
         if not rows:
             return (f"not measured in vista-meta {self.tag} "
@@ -229,6 +259,10 @@ class Handler:
             "WHERE type IN ('table','view') ORDER BY name").fetchall())
         tables = sorted(n for n, t in kinds.items() if t == "table")
         views = sorted(n for n, t in kinds.items() if t == "view")
+        columns = "".join(
+            f"\n  {rel}: " + ", ".join(
+                r[1] for r in self.con.execute(f'PRAGMA table_info("{rel}")'))
+            for rel in tables + views)
         return (
             f"vista-meta — the measured model of VistA "
             f"(release {self.tag}, schema_version "
@@ -241,6 +275,7 @@ class Handler:
             f"  canonical format: {self.meta.get('canonical_format')}\n\n"
             f"Tables: {', '.join(tables)}\n\n"
             f"Join views: {', '.join(views)}\n\n"
+            f"Columns, by table and view:{columns}\n\n"
             "Citation contract — cite every measured claim as:\n"
             f"  vista-meta {self.tag} · <tsv path> · <key>=<value>\n"
             "(the `lookup` tool returns this line ready-made). If no row "
@@ -263,8 +298,11 @@ class Handler:
                 "orientation": self.tool_orientation}.get(name)
         if tool is None:
             return _error(msg_id, -32602, f"unknown tool {name!r}")
+        args = params.get("arguments")
+        args = {} if args is None else args
         try:
-            text = tool(params.get("arguments") or {})
+            self._check_arguments(name, args)
+            text = tool(args)
             is_error = False
         except ToolError as e:
             text, is_error = str(e), True

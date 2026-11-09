@@ -160,6 +160,47 @@ class TestTools(unittest.TestCase):
         resp = call_tool(self.h, "lookup", {"kind": "widget", "key": "x"})
         self.assertTrue(resp["result"]["isError"])
 
+    def test_lookup_key_matches_in_any_case(self):
+        # Measured 2026-11-09: `package "CLINICAL REMINDERS"` answered
+        # "not measured" while the row exists as `Clinical Reminders`.
+        text = tool_text(call_tool(self.h, "lookup",
+                                   {"kind": "package", "key": "ORDER ENTRY"}))
+        self.assertIn("package=Order Entry", text)
+        text = tool_text(call_tool(self.h, "lookup",
+                                   {"kind": "routine", "key": " orwpt "}))
+        self.assertIn("routine_name=ORWPT", text)
+
+    def test_lookup_without_a_key_is_an_input_error_not_a_miss(self):
+        # Measured 2026-11-09: `{"kind": "routine", "name": "DGSEC"}` was
+        # answered "not measured" — a malformed call stated as a fact.
+        for args in ({"kind": "routine", "name": "DGSEC"},
+                     {"kind": "routine"},
+                     {"kind": "routine", "key": "  "}):
+            resp = call_tool(self.h, "lookup", args)
+            self.assertTrue(resp["result"]["isError"], args)
+            self.assertNotIn("not measured", tool_text(resp))
+
+    def test_undeclared_argument_is_named_with_the_declared_ones(self):
+        resp = call_tool(self.h, "lookup",
+                         {"kind": "routine", "name": "DGSEC"})
+        text = tool_text(resp)
+        self.assertIn("'name'", text)
+        self.assertIn("kind, key", text)
+        resp = call_tool(self.h, "query",
+                         {"sql": "SELECT 1", "limit": 5})
+        self.assertTrue(resp["result"]["isError"])
+        self.assertIn("'limit'", tool_text(resp))
+
+    def test_missing_required_argument_is_named(self):
+        resp = call_tool(self.h, "query", {})
+        self.assertTrue(resp["result"]["isError"])
+        self.assertIn("needs sql", tool_text(resp))
+
+    def test_arguments_must_be_an_object(self):
+        resp = req(self.h, "tools/call",
+                   {"name": "lookup", "arguments": ["routine", "ORWPT"]})
+        self.assertTrue(resp["result"]["isError"])
+
     def test_bridge_lookup(self):
         text = tool_text(call_tool(self.h, "bridge",
                                    {"entity_id": "rpc:ORWPT SELECT"}))
@@ -172,6 +213,17 @@ class TestTools(unittest.TestCase):
         self.assertIn("v_rpc_data_piks", text)
         self.assertIn("entity_bridge", text)
         self.assertIn("not measured in vista-meta data-v1", text)
+
+    def test_orientation_lists_every_relations_columns(self):
+        # Measured 2026-11-09: 15 of 113 query calls failed on a guessed
+        # column; the columns belong where the first query is written.
+        text = tool_text(call_tool(self.h, "orientation", {}))
+        self.assertIn("rpcs: ien, name, tag, routine_name,", text)
+        self.assertIn("v_rpc_impl: rpc,", text)
+        relations = [n for (n,) in self.h.con.execute(
+            "SELECT name FROM sqlite_master WHERE type IN ('table','view')")]
+        for rel in relations:
+            self.assertIn(f"\n  {rel}: ", text, rel)
 
     def test_orientation_cross_points_to_the_vdocs_peer(self):
         text = tool_text(call_tool(self.h, "orientation", {}))
