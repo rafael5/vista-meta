@@ -12,9 +12,9 @@
   ],
   "card": "vista/export/AI-CARD.md",
   "citation": {
-    "example": "vista-meta data-v1.1 \u00b7 code-model/rpcs.tsv \u00b7 name=ORWPT SELECT",
-    "format": "vista-meta data-v1.1 \u00b7 <tsv path> \u00b7 <key>=<value>",
-    "no_answer": "not measured in vista-meta data-v1.1"
+    "example": "vista-meta data-v1.2 \u00b7 code-model/rpcs.tsv \u00b7 name=ORWPT SELECT",
+    "format": "vista-meta data-v1.2 \u00b7 <tsv path> \u00b7 <key>=<value>",
+    "no_answer": "not measured in vista-meta data-v1.2"
   },
   "external_bridges": [
     {
@@ -23,7 +23,7 @@
         "vdl_id"
       ],
       "companion": "vdocs",
-      "note": "vdocs search hits carry app_code; both releases are mutually pinned (Gate R, docs/releases/data-v1.1-peers.json)",
+      "note": "vdocs search hits carry app_code; both releases are mutually pinned (Gate R, docs/releases/data-v1.2-peers.json)",
       "via": "code-model/package-namespace.tsv"
     },
     {
@@ -99,7 +99,7 @@
     "cli": "bin/vista-meta",
     "cli_on_path": false,
     "mcp": "python3 host/scripts/mcp_server.py \u2014 stdio MCP server over meta.db (self-building; tools: query / lookup / bridge / orientation / routine_card / package_card / listing); wired via the repo's .mcp.json",
-    "meta_db": "make meta-db \u2192 dist/vista-meta-data-v1.1.db \u2014 generated SQLite projection (24 tables + entity_bridge + join views v_rpc_impl / v_option_impl / v_global_file_piks / v_routine_global_piks / v_rpc_data_piks / v_package_overview); the TSVs stay canonical",
+    "meta_db": "make meta-db \u2192 dist/vista-meta-data-v1.2.db \u2014 generated SQLite projection (24 tables + entity_bridge + join views v_rpc_impl / v_option_impl / v_global_file_piks / v_routine_global_piks / v_rpc_data_piks / v_package_overview); the TSVs stay canonical",
     "sqlite_recipe": "cd ~/projects/vista-meta/vista/export\nsqlite3 :memory: <<'SQL'\n.mode tabs\n.import code-model/rpcs.tsv rpcs\n.import code-model/routines-comprehensive.tsv r\nSELECT rpcs.name, rpcs.tag, rpcs.routine_name, r.package, r.line_count\nFROM rpcs JOIN r ON r.routine_name = rpcs.routine_name\nWHERE rpcs.name LIKE 'ORWPT%' LIMIT 20;\nSQL",
     "tsv_root": "vista/export",
     "verbs": {
@@ -113,15 +113,15 @@
     }
   },
   "release": {
-    "content_hash": "d52ad4d6ddfd7c63d8da7aa391cb406e2b0359880f0b25c2cf40ff22b83c5ea6",
+    "content_hash": "38baa362af0103fa6b80f213c93ecb273778d55ad808adf400ad61db8a3c0548",
     "db_state_fingerprint": "b8518a87f50f0f14186f3f3da97155345979d6d6c5d2878d6a379b74e9fe0d32",
     "engine": "ydb",
     "engine_image": "vista-meta:latest",
-    "extraction_timestamp": "2026-11-09T18:02:43Z",
-    "manifest": "docs/releases/data-v1.1.manifest.json",
+    "extraction_timestamp": "2026-11-09T18:40:05Z",
+    "manifest": "docs/releases/data-v1.2.manifest.json",
     "schema_contract": "docs/reference/schema-v1-normalization-spec.md",
-    "source_commit": "bc2ed17735d1fabb6048c5e12903cb1996ea774d",
-    "tag": "data-v1.1"
+    "source_commit": "e3461c9772d0810e1997c55203957407cf06e53d",
+    "tag": "data-v1.2"
   },
   "schema_version": 1,
   "shared_vocabularies": [
@@ -432,7 +432,7 @@
       "sha256": "cc32b6c25bfc86339c0ad86b7cb40e6e1e84672b8f521640d3b72687e31d8c37"
     },
     "code-model/xindex-errors.tsv": {
-      "bytes": 425832,
+      "bytes": 1303866,
       "columns": [
         "routine_name",
         "entry_index",
@@ -444,11 +444,11 @@
         "routine_name",
         "entry_index"
       ],
-      "rows": 6886,
-      "sha256": "8c980121bbd667ead85ac6055e815e3f17d05b0c7fb12cd724613ae33ed7032f"
+      "rows": 21241,
+      "sha256": "ed0e0c693aed648fced0b30b9f58aff34b642c51a5a2796e356200d875bf4971"
     },
     "code-model/xindex-routines.tsv": {
-      "bytes": 815164,
+      "bytes": 1103165,
       "columns": [
         "routine_name",
         "line_count",
@@ -460,11 +460,11 @@
       "pk": [
         "routine_name"
       ],
-      "rows": 29097,
-      "sha256": "4bdf7eb056a5c1038a9e228225a4f41560ad7b6c5a34612a14dd92eeb92636b8"
+      "rows": 39519,
+      "sha256": "b1f9adf47db2622845cdf19a1896d0eb8e4c8cfa7555fc93827f30b9f9c287f9"
     },
     "code-model/xindex-tags.tsv": {
-      "bytes": 4315954,
+      "bytes": 5773744,
       "columns": [
         "routine_name",
         "tag",
@@ -474,11 +474,11 @@
         "routine_name",
         "tag"
       ],
-      "rows": 292225,
-      "sha256": "b712d795b3c1268c712e0792507f8aca2ff26709daa8fabef1cae4addc695955"
+      "rows": 398860,
+      "sha256": "dcdddfc0b1b6038d74e10e949f429cd3822a947420f1e31d37b086f5e159d6f5"
     },
     "code-model/xindex-validation.tsv": {
-      "bytes": 1718450,
+      "bytes": 2377004,
       "columns": [
         "routine_name",
         "package",
@@ -498,11 +498,11 @@
       "pk": [
         "routine_name"
       ],
-      "rows": 29097,
-      "sha256": "6a3fe92b29f600d56d3e76500277dfb52b01a56c1c64babb4c78c42333ace0dc"
+      "rows": 39518,
+      "sha256": "04b5d5c05821672fc862b7cb4ccd3b618c29f5dff353351fdf3cecd3ecf199ca"
     },
     "code-model/xindex-xrefs.tsv": {
-      "bytes": 7482016,
+      "bytes": 8545498,
       "columns": [
         "routine_name",
         "ref",
@@ -512,8 +512,8 @@
         "routine_name",
         "ref"
       ],
-      "rows": 214269,
-      "sha256": "aea3fc580bd2f15dad3e1beaa5329f2fa9f43b08bbac81bb8b53bc58f2ad34b4"
+      "rows": 252728,
+      "sha256": "9701cbaeabdd49daaf02571c138d9fc011b0fc2725bad2d689a124cdbd78d48b"
     },
     "data-model/field-piks.tsv": {
       "bytes": 2874110,

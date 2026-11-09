@@ -183,16 +183,19 @@ are the V4 emission's — the machine-checkable copy in fidelity.json is authori
   invisible to it and to this export — dynamic dispatch is **declared out of scope**, not
   covered-by-authority. (Line/tag counts agree 100% — re-verified at V4: zero mismatches on
   either across all 29,097 validated routines; divergence is callees only.)
-- **XINDEX coverage scope (added at V4, from plan risk F9):** the xindex-* family describes
-  **only File 9.8-registered routines** — the XINDEX driver (`VMXIDX`) iterates `^DIC(9.8)`,
-  so absence of xindex rows/findings means *not-processed*, never *clean*. Measured on this
-  emission: 29,097 of 39,373 census routines covered (73.9%). Gap decomposition: 10,272
-  census routines never registered in File 9.8 (the T-002 MANIFEST-only cohort, including
-  all 11 %-routines), 3 registered type-R routines XINDEX failed to process (KMPPS44A/B/C),
-  and 1 registered non-R-type entry. **Divergence denominator decision:** %-routines are
-  **excluded** — verified, not assumed: File 9.8 holds zero %-routines on this instance and
-  zero appear in xindex-validation.tsv; the denominator is the 29,097 XINDEX-processed
-  routines.
+- **XINDEX coverage scope (added at V4, from plan risk F9):** absence of xindex rows/findings
+  means *not-processed*, never *clean*. At V4 the XINDEX driver (`VMXIDX`) iterated `^DIC(9.8)`
+  and covered only File 9.8-registered routines (29,097 of 39,373, 73.9%; %-routines were then
+  excluded from the divergence denominator because none were processed). **Since data-v1.2**
+  `VMXIDX` walks the image's source tree (`r/` and `o/`, the census's own directories):
+  39,519 of 39,526 census routines covered (99.98%), all 11 %-routines included. The 7 it
+  cannot load are KMP routines in Caché object syntax; fidelity.json names every uncovered
+  routine and decomposes the gap by File 9.8 registration. **Divergence denominator:** the
+  rows of xindex-validation.tsv — every processed census routine in a package (39,518; the
+  package-less `%YDBOCTOVISTAM` has no row because that table's `package` is a non-null FK).
+  Re-measured at data-v1.2: callee divergence 3,240 of 39,518 (8.2%); line counts agree on all;
+  tag counts on all but ZZBACSUA, whose source has two broken lines starting in column 1 that
+  XINDEX reads as labels.
 
 **R3 — Pin the upstream engine identity and state (added 2026-07-03).** The export is
 derived from a live engine, and engine state drifts: measured against the org gold-master

@@ -2,7 +2,7 @@
 
 > **GENERATED — do not edit.** Emitted by `host/scripts/build_ai_card.py`
 > from `schema_v1` + the live TSVs + the pinned release record
-> (`docs/releases/data-v1.1.manifest.json`). Regenerate with `make ai-card`;
+> (`docs/releases/data-v1.2.manifest.json`). Regenerate with `make ai-card`;
 > drift-gated by `make card-check` (stale card = RED, card pin must equal
 > the release manifest's `content_hash`). Machine-readable twin:
 > `vista/export/ai-manifest.json`.
@@ -27,11 +27,11 @@ silently.
 
 | Field | Value |
 |---|---|
-| release | `data-v1.1` (`schema_version: 1`) |
-| content_hash | `d52ad4d6ddfd7c63d8da7aa391cb406e2b0359880f0b25c2cf40ff22b83c5ea6` |
+| release | `data-v1.2` (`schema_version: 1`) |
+| content_hash | `38baa362af0103fa6b80f213c93ecb273778d55ad808adf400ad61db8a3c0548` |
 | db_state_fingerprint | `b8518a87f50f0f14186f3f3da97155345979d6d6c5d2878d6a379b74e9fe0d32` |
-| extracted | 2026-11-09T18:02:43Z, engine `ydb`, image `vista-meta:latest` |
-| manifest | `docs/releases/data-v1.1.manifest.json` (in-repo record; per-file sha256) |
+| extracted | 2026-11-09T18:40:05Z, engine `ydb`, image `vista-meta:latest` |
+| manifest | `docs/releases/data-v1.2.manifest.json` (in-repo record; per-file sha256) |
 | schema contract | `docs/reference/schema-v1-normalization-spec.md` |
 
 **Scope caveats (state these when they matter):**
@@ -70,7 +70,7 @@ silently.
    SQL
    ```
    Or generate the one-file projection: `make meta-db` →
-   `dist/vista-meta-data-v1.1.db` (all tables typed + the entity bridge + join
+   `dist/vista-meta-data-v1.2.db` (all tables typed + the entity bridge + join
    views `v_rpc_impl`, `v_routine_global_piks`, `v_rpc_data_piks`,
    `v_package_overview`, …). The TSVs stay canonical; the db is derived.
 4. **MCP** — `python3 host/scripts/mcp_server.py` (stdio; wired by the repo's
@@ -118,11 +118,11 @@ tables, templates, rules. **S** System — Kernel/FileMan plumbing, menus, queue
 | `routines.tsv` | 39,526 | `routine_name` | routine_name · package · source_path · line_count · byte_size · first_line_comment · version_line · tag_count · comment_line_count · is_percent_routine |
 | `rpcs.tsv` | 4,501 | `ien` | ien · name · tag · routine_name · return_type · return_type_label · availability · inactive · inactive_label · version · package · package_dir |
 | `vista-file-9-8.tsv` | 30,665 | `ien` | ien · routine_name · type · byte_size · rsum_value · checksum_value |
-| `xindex-errors.tsv` | 6,886 | `routine_name`+`entry_index` | routine_name · entry_index · line_text · tag_offset · error_text |
-| `xindex-routines.tsv` | 29,097 | `routine_name` | routine_name · line_count · tag_count · xref_count · error_count · rsum_value |
-| `xindex-tags.tsv` | 292,225 | `routine_name`+`tag` | routine_name · tag · data |
-| `xindex-validation.tsv` | 29,097 | `routine_name` | routine_name · package · lines_ours · lines_xindex · lines_match · tags_ours · tags_xindex · tags_match · callees_ours_count · callees_xindex_count · callees_match_count · callees_ours_only_count · callees_xindex_only_count · callees_agreement_ratio |
-| `xindex-xrefs.tsv` | 214,269 | `routine_name`+`ref` | routine_name · ref · location_list |
+| `xindex-errors.tsv` | 21,241 | `routine_name`+`entry_index` | routine_name · entry_index · line_text · tag_offset · error_text |
+| `xindex-routines.tsv` | 39,519 | `routine_name` | routine_name · line_count · tag_count · xref_count · error_count · rsum_value |
+| `xindex-tags.tsv` | 398,860 | `routine_name`+`tag` | routine_name · tag · data |
+| `xindex-validation.tsv` | 39,518 | `routine_name` | routine_name · package · lines_ours · lines_xindex · lines_match · tags_ours · tags_xindex · tags_match · callees_ours_count · callees_xindex_count · callees_match_count · callees_ours_only_count · callees_xindex_only_count · callees_agreement_ratio |
+| `xindex-xrefs.tsv` | 252,728 | `routine_name`+`ref` | routine_name · ref · location_list |
 
 ## Join keys
 
@@ -174,11 +174,11 @@ awk -F'\t' '$2=="VA FileMan"' $X/code-model/package-edge-matrix.tsv | sort -t$'\
 
 Cite every measured claim as:
 
-> **vista-meta data-v1.1** · `<tsv path>` · `<key>=<value>` — *or* the exact CLI command run.
+> **vista-meta data-v1.2** · `<tsv path>` · `<key>=<value>` — *or* the exact CLI command run.
 
 Example: *"ORWPT SELECT is served by SELECT^ORWPT"* →
-**vista-meta data-v1.1** · `code-model/rpcs.tsv` · `name=ORWPT SELECT`.
+**vista-meta data-v1.2** · `code-model/rpcs.tsv` · `name=ORWPT SELECT`.
 
 If no row answers the question, the correct answer is
-**"not measured in vista-meta data-v1.1"** — say so and stop; do not substitute
+**"not measured in vista-meta data-v1.2"** — say so and stop; do not substitute
 general knowledge.

@@ -71,8 +71,8 @@
     },
     "vista_meta": {
       "artifact": "vista-meta-data",
-      "content_hash": "d52ad4d6ddfd7c63d8da7aa391cb406e2b0359880f0b25c2cf40ff22b83c5ea6",
-      "tag": "data-v1.1"
+      "content_hash": "38baa362af0103fa6b80f213c93ecb273778d55ad808adf400ad61db8a3c0548",
+      "tag": "data-v1.2"
     }
   },
   "schema_version": 1,

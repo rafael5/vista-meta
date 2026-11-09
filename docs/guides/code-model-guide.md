@@ -19,8 +19,8 @@ ones above it.
 
 Shapes are `schema_version: 1` — the normalization contract is
 [../reference/schema-v1-normalization-spec.md](../reference/schema-v1-normalization-spec.md);
-per-release integrity in [../releases/data-v1.1.manifest.json](../releases/data-v1.1.manifest.json)
-(current; data-v1 in [../releases/data-v1.manifest.json](../releases/data-v1.manifest.json)).
+per-release integrity in [../releases/data-v1.2.manifest.json](../releases/data-v1.2.manifest.json)
+(current; earlier releases have their own records in [../releases/](../releases/)).
 
 ### 1.1 Inventory layer — "what exists"
 
@@ -64,7 +64,7 @@ Regex-based extraction from `.m` source and FileMan-stored MUMPS text.
 | `routine-globals.tsv` | 77,939 | 4 | Routine → subscripted-global edges: routine_name, package, global_name, ref_count |
 | `protocol-calls.tsv` | 5,081 | 7 | Protocol ENTRY/EXIT ACTION → routine invocations: protocol_name, protocol_package, action_kind, callee_tag, callee_routine, call_kind, ref_count |
 
-These are approximate (regex, not parsed MUMPS) but broad-coverage — they include routines that XINDEX can't process (the T-002 cohort of ~10,000 routines not in `$ydb_routines` paths).
+These are approximate (regex, not parsed MUMPS) but broad-coverage — they include the 7 routines XINDEX cannot load (KMP routines in Caché object syntax). Until data-v1.2 XINDEX also skipped the ~10,400 routines never registered in File 9.8; it now walks the source tree.
 
 ### 1.4 Code-quality layer — "how the code behaves"
 
@@ -72,11 +72,11 @@ From XINDEX, VistA's own static analyzer (Toolkit XT*7.3*158, VEHU blend per RF-
 
 | File | Rows | Columns | Contents |
 |---|---|---|---|
-| `xindex-routines.tsv` | 29,097 | 6 | Per-routine: routine_name, line_count, tag_count, xref_count, error_count, rsum_value |
-| `xindex-errors.tsv` | 6,907 | 5 | One row per error instance across 66 error classes (F/S/W/I severity): routine_name, entry_index, line_text, tag_offset, error_text |
-| `xindex-xrefs.tsv` | 214,269 | 3 | Authoritative call graph (MUMPS parser, not regex): routine_name, ref (`ROUTINE [$$]TAG`), location_list — the `TAG+n` lines of each reference in the caller (since data-v1.1; data-v1 held XINDEX subscript indices) |
-| `xindex-tags.tsv` | 292,138 | 3 | Tag/label inventory with Supported Entry Point classification: routine_name, tag, data |
-| `xindex-validation.tsv` | 29,097 | 14 | Per-routine join of regex vs XINDEX — routine_name, package, lines_ours, lines_xindex, lines_match, tags_ours, tags_xindex, tags_match, callees_ours_count, callees_xindex_count, callees_match_count, callees_ours_only_count, callees_xindex_only_count, callees_agreement_ratio |
+| `xindex-routines.tsv` | 39,519 | 6 | Per-routine: routine_name, line_count, tag_count, xref_count, error_count, rsum_value |
+| `xindex-errors.tsv` | 21,241 | 5 | One row per error instance across 66 error classes (F/S/W/I severity): routine_name, entry_index, line_text, tag_offset, error_text |
+| `xindex-xrefs.tsv` | 252,728 | 3 | Authoritative call graph (MUMPS parser, not regex): routine_name, ref (`ROUTINE [$$]TAG`), location_list — the `TAG+n` lines of each reference in the caller (since data-v1.1; data-v1 held XINDEX subscript indices) |
+| `xindex-tags.tsv` | 398,860 | 3 | Tag/label inventory with Supported Entry Point classification: routine_name, tag, data |
+| `xindex-validation.tsv` | 39,518 | 14 | Per-routine join of regex vs XINDEX (routines in a package) — routine_name, package, lines_ours, lines_xindex, lines_match, tags_ours, tags_xindex, tags_match, callees_ours_count, callees_xindex_count, callees_match_count, callees_ours_only_count, callees_xindex_only_count, callees_agreement_ratio |
 
 XINDEX is the ground-truth reference. Our regex extractions validated at 100% for static features and 98.75% for call graph.
 
@@ -475,7 +475,7 @@ awk -F'\t' 'NR>1 && $12+0>0 && $13+0>0 {print $1, $2}' \
 Per the TODOs and closure RFs:
 
 - **T-001**: reconcile the 39,330 / 39,331 / 39,338 count divergence in Dockerfile build artifacts.
-- **T-002**: characterize the 10,228 MANIFEST-only + 1,563 File-9.8-only cohorts.
+- **T-002**: characterize the 10,228 MANIFEST-only + 1,563 File-9.8-only cohorts. *(MANIFEST-only side resolved in data-v1.2: those routines were absent from File 9.8, which VMXIDX used to walk; it now walks the source tree.)*
 - **T-003**: reduce the 14,658 "truly unreferenced" cohort via DD-embedded MUMPS extraction.
 - **Phase 7b** (candidate): re-run with WorldVistA/XINDEX/master for comparative analysis.
 - **Code-quality phase**: surface `xindex-errors.tsv` per-package and per-severity into a ranked hotspot view.

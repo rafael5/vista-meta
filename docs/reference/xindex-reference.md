@@ -206,7 +206,8 @@ the key provenance marker.
 File 9.8 was largely empty of XINDEX-generated data and that the bake's
 `xindex` phase was still pending. The batch XINDEX run has since happened
 and shipped the five `xindex-*.tsv` artifacts (29,097 routines processed,
-6,907 errors). See §3 for the error catalog and
+6,907 errors, while the driver walked File 9.8; since data-v1.2 it walks the
+source tree — 39,519 routines, 21,241 errors). See §3 for the error catalog and
 [code-model-guide.md](../guides/code-model-guide.md) §1.4 for the current shapes.
 
 ## 7. How DOX (vivian.worldvista.org/dox/) uses XINDEX
@@ -357,7 +358,11 @@ stable across VistA patches since XT*7.3 baseline.
 
 > Retrospective essay — figures below are the April 2026 baseline
 > (6,918 errors / 29,098 routines / 39,330 source files) and are kept
-> as written; current counts live in code-model-guide §1.
+> as written; current counts live in code-model-guide §1. Correction
+> (data-v1.2): the ~10,200 "T-002 cohort" routines it says XINDEX could not
+> process or ZLINK were never offered to it — the driver walked File 9.8,
+> which does not list them. Walking the source tree, XINDEX processes all
+> but 7.
 
 A common question in retrospect: if we'd decided to use XINDEX at the
 outset rather than building ad-hoc regex extraction, how much of the

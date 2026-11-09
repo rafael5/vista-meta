@@ -564,18 +564,22 @@ producer-contracts workstream (2026-07-03):
   standalone manifest with per-file sha256, a normative `content_hash`
   data fingerprint, and the engine identity. Record:
   [`../releases/data-v1.manifest.json`](../releases/data-v1.manifest.json).
-- **Current release: `data-v1.1`** (2026-11-09) — the same schema,
-  re-extracted from the image pinned to VEHU-M `62622e63` (153 more
-  routines than data-v1's unpinned image) with XINDEX's `TAG+n` call
-  sites in `xindex-xrefs.tsv` `location_list`. A re-extraction under the
-  same schema takes a minor number; the tag lives only in
-  `host/scripts/release_id.py`. Record:
+- **`data-v1.1`** (2026-11-09) — the same schema, re-extracted from the
+  image pinned to VEHU-M `62622e63` (153 more routines than data-v1's
+  unpinned image) with XINDEX's `TAG+n` call sites in `xindex-xrefs.tsv`
+  `location_list`. A re-extraction under the same schema takes a minor
+  number; the tag lives only in `host/scripts/release_id.py`. Record:
   [`../releases/data-v1.1.manifest.json`](../releases/data-v1.1.manifest.json).
+- **Current release: `data-v1.2`** (2026-11-09) — the xindex-* family
+  covers the whole source tree (39,519 of 39,526 routines; data-v1.1
+  covered only the 29,097 registered in File 9.8); every other TSV is
+  unchanged. Record:
+  [`../releases/data-v1.2.manifest.json`](../releases/data-v1.2.manifest.json).
 - **Peer pin (Gate R):** the vdocs corpus release (`vdocs-data:data-v1`)
   measured its entity-quality floors against data-v1 and the two releases
   pin each other — [`../releases/data-v1-peers.json`](../releases/data-v1-peers.json);
-  data-v1.1 keeps the same vdocs pin
-  ([`../releases/data-v1.1-peers.json`](../releases/data-v1.1-peers.json)).
+  data-v1.1 and data-v1.2 keep the same vdocs pin
+  ([`../releases/data-v1.2-peers.json`](../releases/data-v1.2-peers.json)).
 - **Consumers:** the Compass extension (§7.1) auto-discovers either the live
   `vista/export/` tree or an unpacked `vista-meta-data-v1` bundle and shows
   the data vintage (`data-v1 · content_hash…`) in its sidebar.
