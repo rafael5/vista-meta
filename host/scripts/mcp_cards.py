@@ -33,6 +33,7 @@ CAP_BY_TAG = 30             # per-tag caller counts on a routine card
 CAP_LIST = 40               # callees, globals, RPCs, options, protocols
 CAP_TAGS = 150              # labels listed on a routine card
 CAP_TAG_LINES = 80          # lines of a tag's text
+CAP_CALL_SITES = 10         # TAG+n sites shown per caller row
 CAP_PACKAGE_LIST = 30       # a package's RPCs, options, protocols
 CAP_ENTRY_POINTS = 25       # a package's cross-package entry points
 LISTING_DEFAULT_ROWS = 100
@@ -48,9 +49,15 @@ _NAME = re.compile(r"^(?:\$\$)?(?:([%A-Za-z0-9]+)?\^)?([%A-Za-z0-9]+)$")
 _LABEL = re.compile(r"^([%A-Za-z0-9]+)(?:\(([^)]*)\))?")
 
 CALL_SITES_NOTE = (
-    "TAG+n call sites: not measured in this release — "
-    "xindex_xrefs.location_list holds XINDEX's subscript indices "
-    "(0,1,…), not line offsets.")
+    "call_sites: the TAG+n lines in the caller where XINDEX recorded "
+    "this reference (code-model/xindex-xrefs.tsv, location_list); "
+    "absent (null) where XINDEX did not index the caller or keyed the "
+    "reference differently — absent means not measured, not no call. "
+    f"At most {CAP_CALL_SITES} per row; call_sites_more counts the rest.")
+# routine_calls row → the "ROUTINE [$$]TAG" key XINDEX files the reference
+# under (a bare `D ^ROUTINE` is "ROUTINE " with an empty tag).
+_XREF_KEY = ("c.callee_routine || ' ' || CASE WHEN c.kind = 'func' "
+             "THEN '$$' ELSE '' END || COALESCE(c.callee_tag, '')")
 PER_ROUTINE_NOTE = ("measured for the whole routine, not per tag — the "
                     "tag's text shows its own calls and references")
 
@@ -373,14 +380,24 @@ class Cards:
             f"COUNT(DISTINCT caller_package) FROM routine_calls "
             f"WHERE {where}", params).fetchone()
         order = "ref_count DESC, caller_routine, callee_tag, kind"
+        rows = self._dicts(
+            "SELECT caller_routine, caller_package, callee_tag, kind, "
+            "ref_count, x.location_list AS call_sites FROM ("
+            "SELECT * FROM routine_calls "
+            f"WHERE {where} ORDER BY {order} LIMIT {CAP_CALLERS}) c "
+            "LEFT JOIN xindex_xrefs x ON x.routine_name = "
+            f"c.caller_routine AND x.ref = {_XREF_KEY} "
+            f"ORDER BY {order}", params)
+        for row in rows:
+            sites = (row["call_sites"] or "").split(",")
+            if len(sites) > CAP_CALL_SITES:
+                row["call_sites"] = ",".join(sites[:CAP_CALL_SITES])
+                row["call_sites_more"] = len(sites) - CAP_CALL_SITES
         part = {
             "citation": self.cite("routine_calls", key),
             "count": count, "refs": refs, "calling_packages": packages,
-            "rows": self._dicts(
-                "SELECT caller_routine, caller_package, callee_tag, kind, "
-                f"ref_count FROM routine_calls WHERE {where} "
-                f"ORDER BY {order} LIMIT {CAP_CALLERS}", params),
-            "note": CALL_SITES_NOTE,
+            "rows": rows,
+            "call_sites": CALL_SITES_NOTE,
         }
         if not tag:
             part["by_tag"] = self._dicts(

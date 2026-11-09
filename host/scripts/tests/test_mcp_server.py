@@ -313,6 +313,17 @@ CARD_ROWS = {
         {"routine_name": "ORWPT", "tag": "SELECT"},
         {"routine_name": "ORWPT", "tag": "LIST"},
     ],
+    # XINDEX's TAG+n locations in the caller, keyed by "ROUTINE [$$]TAG"
+    "xindex-xrefs.tsv": [
+        {"routine_name": "DGREG", "ref": "ORWPT SELECT",
+         "location_list": "EN+4,EN+9"},
+        {"routine_name": "ZZ059", "ref": "XLFDT $$FMTE",
+         "location_list": "A+1,B+3"},
+        {"routine_name": "ZZ058", "ref": "XLFDT $$FMTE",
+         "location_list": ",".join(f"T+{n}" for n in range(1, 13))},
+        {"routine_name": "ORWPT", "ref": "DIC ",
+         "location_list": "LIST+1"},
+    ],
     "field-piks.tsv": [
         {"file_number": "2", "field_number": ".02", "field_name": "SEX"},
         {"file_number": "2", "field_number": ".01", "field_name": "NAME"},
@@ -472,10 +483,34 @@ class TestRoutineCard(unittest.TestCase):
         c, _ = self.routine("^orwpt")
         self.assertEqual(c["routine"]["row"]["routine_name"], "ORWPT")
 
-    def test_call_sites_are_stated_unmeasured(self):
+    def test_callers_carry_their_tag_offset_call_sites(self):
         c, _ = self.routine("ORWPT")
-        self.assertIn("TAG+n call sites: not measured",
-                      c["callers"]["note"])
+        sites = {(r["caller_routine"], r["callee_tag"]): r.get("call_sites")
+                 for r in c["callers"]["rows"]}
+        self.assertEqual(sites[("DGREG", "SELECT")], "EN+4,EN+9")
+        # ORQQ was not indexed by XINDEX: no sites, and no guess
+        self.assertIsNone(sites[("ORQQ", "SELECT")])
+        self.assertIn("xindex-xrefs.tsv", c["callers"]["call_sites"])
+        self.assertIn("absent", c["callers"]["call_sites"])
+
+    def test_function_and_routine_level_calls_match_xindex_refs(self):
+        # a func call is keyed "XLFDT $$FMTE" in XINDEX, a do "ORWPT SELECT"
+        c, _ = self.routine("XLFDT")
+        sites = {r["caller_routine"]: r["call_sites"]
+                 for r in c["callers"]["rows"]}
+        self.assertEqual(sites["ZZ059"], "A+1,B+3")   # $$FMTE^XLFDT
+        self.assertIsNone(sites["ZZ057"])
+
+    def test_a_long_call_site_list_is_cut_and_counted(self):
+        c, _ = self.routine("XLFDT")
+        row = next(r for r in c["callers"]["rows"]
+                   if r["caller_routine"] == "ZZ058")
+        self.assertEqual(row["call_sites"],
+                         ",".join(f"T+{n}" for n in range(1, 11)))
+        self.assertEqual(row["call_sites_more"], 2)
+        short = next(r for r in c["callers"]["rows"]
+                     if r["caller_routine"] == "ZZ059")
+        self.assertNotIn("call_sites_more", short)
 
     def test_percent_routine_maps_to_the_percent_tree(self):
         c, _ = self.routine("%DT")
