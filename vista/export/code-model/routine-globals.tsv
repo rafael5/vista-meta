@@ -1244,11 +1244,11 @@ ALPBIND	Barcode Medication Administration	SC	2
 ALPBIND	Barcode Medication Administration	TMP	7
 ALPBINP	Barcode Medication Administration	DG	2
 ALPBINP	Barcode Medication Administration	DIC	1
-ALPBINP	Barcode Medication Administration	PS	3
+ALPBINP	Barcode Medication Administration	PS	4
 ALPBINP	Barcode Medication Administration	PSB	12
 ALPBINP	Barcode Medication Administration	SC	5
 ALPBINP	Barcode Medication Administration	TMP	3
-ALPBINP	Barcode Medication Administration	VA	1
+ALPBINP	Barcode Medication Administration	VA	2
 ALPBOP	Barcode Medication Administration	ALPB	7
 ALPBPALL	Barcode Medication Administration	ALPB	11
 ALPBPALL	Barcode Medication Administration	TMP	16
@@ -2801,6 +2801,10 @@ DG1066P	Registration	DIC	4
 DG1068P	Registration	DG	1
 DG1071P	Registration	MPIF	3
 DG1074P	Registration	DD	1
+DG1157ZN	Registration	DGPM	3
+DG1157ZN	Registration	DPT	10
+DG1157ZN	Registration	SCE	3
+DG1157ZN	Registration	XTMP	2
 DG141PB	Registration	DGMT	2
 DG141PB	Registration	DPT	3
 DG141PB	Registration	XTMP	1
@@ -4251,7 +4255,7 @@ DGJXE9	Incomplete Records Tracking	VAS	6
 DGLOCK	Registration	DD	6
 DGLOCK	Registration	DG	1
 DGLOCK	Registration	DGEN	2
-DGLOCK	Registration	DPT	41
+DGLOCK	Registration	DPT	40
 DGLOCK	Registration	XUSEC	5
 DGLOCK1	Registration	DIC	4
 DGLOCK1	Registration	DPT	22
@@ -4260,7 +4264,7 @@ DGLOCK2	Registration	DGPR	1
 DGLOCK2	Registration	DIC	2
 DGLOCK2	Registration	DPT	22
 DGLOCK3	Registration	DD	2
-DGLOCK3	Registration	DPT	10
+DGLOCK3	Registration	DPT	9
 DGLP3USR	Registration	VA	1
 DGLP3USR	Registration	XTV	1
 DGMFA10	Registration	DGRAM	2
@@ -6179,16 +6183,16 @@ DGREG00	Registration	DPT	2
 DGREG00	Registration	EAS	3
 DGREGAED	Registration	DPT	1
 DGREGAED	Registration	HL	1
+DGREGAED	Registration	UTILITY	4
 DGREGARP	Registration	DD	2
 DGREGARP	Registration	DIA	9
 DGREGARP	Registration	TMP	47
 DGREGAZL	Registration	DIC	3
 DGREGAZL	Registration	DPT	1
 DGREGAZL	Registration	XUSEC	3
-DGREGCOP	Registration	DPT	4
-DGREGCP1	Registration	DIC	6
-DGREGCP1	Registration	DPT	12
-DGREGCP2	Registration	DPT	2
+DGREGCOP	Registration	DPT	8
+DGREGCP1	Registration	DIC	12
+DGREGCP1	Registration	DPT	15
 DGREGDD1	Registration	DD	4
 DGREGDD1	Registration	DIC	2
 DGREGDD1	Registration	DPT	5
@@ -6206,10 +6210,12 @@ DGREGG	Registration	DD	1
 DGREGG	Registration	DPT	3
 DGREGRED	Registration	DPT	1
 DGREGRED	Registration	HL	1
-DGREGTE2	Registration	DPT	1
+DGREGRED	Registration	UTILITY	4
+DGREGTE2	Registration	DPT	7
 DGREGTE2	Registration	HL	1
-DGREGTED	Registration	DPT	2
-DGREGTED	Registration	HL	2
+DGREGTED	Registration	DPT	3
+DGREGTED	Registration	HL	3
+DGREGTED	Registration	UTILITY	4
 DGREGTZL	Registration	DIC	3
 DGREGTZL	Registration	DPT	1
 DGREGTZL	Registration	XUSEC	4
@@ -6340,6 +6346,7 @@ DGRPC3	Registration	IBA	3
 DGRPCADD	Registration	DD	4
 DGRPCADD	Registration	DIC	1
 DGRPCADD	Registration	DPT	9
+DGRPCADD	Registration	UTILITY	4
 DGRPCB	Registration	DD	2
 DGRPCB	Registration	DGIN	4
 DGRPCB	Registration	VA	1
@@ -6405,10 +6412,10 @@ DGRPDD1	Registration	DIC	1
 DGRPDD1	Registration	DPT	16
 DGRPDT	Registration	DPT	5
 DGRPE	Registration	DI	1
-DGRPE	Registration	DPT	6
+DGRPE	Registration	DPT	5
 DGRPE	Registration	HL	2
 DGRPE1	Registration	DG	1
-DGRPE1	Registration	DPT	9
+DGRPE1	Registration	DPT	12
 DGRPE1	Registration	XMB	1
 DGRPE4	Registration	DPT	2
 DGRPECE	Registration	%ZOSF	1
@@ -6487,7 +6494,7 @@ DGRPTX20	Registration	DPT	1
 DGRPTX21	Registration	DD	3
 DGRPTX21	Registration	DIC	1
 DGRPTX21	Registration	DPT	2
-DGRPTX22	Registration	DD	6
+DGRPTX22	Registration	DD	7
 DGRPTX22	Registration	DISV	2
 DGRPTX22	Registration	DPT	8
 DGRPTX23	Registration	DPT	1
@@ -7296,6 +7303,7 @@ DGY1NTEG	Registration	UTILITY	1
 DGY1PST	Registration	DGBT	1
 DGY3NTEG	Registration	%ZOSF	3
 DGY3NTEG	Registration	UTILITY	1
+DGY991PO	Registration	DGPF	2
 DGY994PO	Registration	DGPF	2
 DGYBPT	Registration	DG	2
 DGYCAPU	Registration	DGPM	3
@@ -10243,7 +10251,7 @@ DVBHCE19	HINQ	DD	15
 DVBHCE19	HINQ	DIC	4
 DVBHCE19	HINQ	DISV	2
 DVBHCE19	HINQ	DPT	19
-DVBHCE2	HINQ	DD	6
+DVBHCE2	HINQ	DD	7
 DVBHCE2	HINQ	DISV	2
 DVBHCE2	HINQ	DPT	8
 DVBHCE20	HINQ	DD	4
@@ -12600,9 +12608,38 @@ EHMAPTRQ	Electronic Health Modernization	SD	1
 EHMAPTRQ	Electronic Health Modernization	SDEC	1
 EHMAPTRQ	Electronic Health Modernization	SDWL	1
 EHMAPTRQ	Electronic Health Modernization	TMP	48
+EHMDGPMV	Electronic Health Modernization	DD	1
+EHMDGPMV	Electronic Health Modernization	DIC	1
+EHMDGPMV	Electronic Health Modernization	DPT	1
+EHMDGPMV	Electronic Health Modernization	UTILITY	2
+EHMDGPMV1	Electronic Health Modernization	DGPM	2
+EHMDGPMV1	Electronic Health Modernization	DPT	1
+EHMDGPMV1	Electronic Health Modernization	UTILITY	6
+EHMDGPMV2	Electronic Health Modernization	DD	3
+EHMDGPMV2	Electronic Health Modernization	DG	2
+EHMDGPMV2	Electronic Health Modernization	DGPM	10
+EHMDGPMV2	Electronic Health Modernization	UTILITY	18
+EHMDGPMV3	Electronic Health Modernization	DD	1
+EHMDGPMV3	Electronic Health Modernization	DG	1
+EHMDGPMV3	Electronic Health Modernization	DGCPT	2
+EHMDGPMV3	Electronic Health Modernization	DGICD9	2
+EHMDGPMV3	Electronic Health Modernization	DGPM	17
+EHMDGPMV3	Electronic Health Modernization	UTILITY	10
+EHMDISCH	Electronic Health Modernization	DIC	3
+EHMDISCH	Electronic Health Modernization	DPT	4
+EHMDISCH	Electronic Health Modernization	SC	3
+EHMDISCH	Electronic Health Modernization	TMP	39
+EHMDISCH	Electronic Health Modernization	VAS	3
+EHMDISH1	Electronic Health Modernization	DIC	1
+EHMDISH1	Electronic Health Modernization	DPT	2
+EHMDISH1	Electronic Health Modernization	SC	3
+EHMDISH1	Electronic Health Modernization	TMP	22
 EHMHL7	Electronic Health Modernization	DIC	2
 EHMHL7	Electronic Health Modernization	EHMHL7	2
 EHMHL7	Electronic Health Modernization	TMP	1
+EHMPSRXDC	Electronic Health Modernization	PS	13
+EHMPSRXDC	Electronic Health Modernization	PSRX	50
+EHMRXLP	Electronic Health Modernization	PSRX	3
 EHMSDC8A	Electronic Health Modernization	DPT	1
 EHMSDC8A	Electronic Health Modernization	SC	4
 EHMSDEC8	Electronic Health Modernization	DPT	2
@@ -16511,8 +16548,7 @@ GECSULOC	Generic Code Sheet	GECS	10
 GECSULOC	Generic Code Sheet	VA	1
 GECSUNUM	Generic Code Sheet	%ZOSF	1
 GECSUNUM	Generic Code Sheet	GECS	26
-GECSUSEL	Generic Code Sheet	GECS	1
-GECSUSEL	Generic Code Sheet	XTMP	2
+GECSUSEL	Generic Code Sheet	GECS	3
 GECSUSEL	Generic Code Sheet	XUSEC	2
 GECSUSTA	Generic Code Sheet	GECS	7
 GECSUTIL	Generic Code Sheet	DIC	1
@@ -16704,6 +16740,9 @@ GMPLSLI1	Problem List	TMP	33
 GMPLSLI2	Problem List	TMP	21
 GMPLSLRP	Problem List	GMPL	2
 GMPLSLRP	Problem List	VA	2
+GMPLSPECAUTH	Problem List	AUPNPROB	17
+GMPLSPECAUTH	Problem List	PXIND	2
+GMPLSPECAUTH	Problem List	TMP	2
 GMPLUTL	Problem List	AUPNPROB	3
 GMPLUTL	Problem List	DPT	1
 GMPLUTL	Problem List	GMPL	2
@@ -17442,9 +17481,9 @@ GMRCR	Consult Request Tracking	ORD	3
 GMRCRA	Consult Request Tracking	GMR	8
 GMRCRA	Consult Request Tracking	TMP	7
 GMRCREXT	Consult Request Tracking	TMP	3
-GMRCRFC0	Consult Request Tracking	GMR	2
-GMRCRFC0	Consult Request Tracking	RMPR	5
-GMRCRFC0	Consult Request Tracking	TMP	17
+GMRCRFC0	Consult Request Tracking	GMR	3
+GMRCRFC0	Consult Request Tracking	RMPR	6
+GMRCRFC0	Consult Request Tracking	TMP	24
 GMRCS	Consult Request Tracking	ORD	1
 GMRCSLDT	Consult Request Tracking	GMR	3
 GMRCSLDT	Consult Request Tracking	ORD	6
@@ -20396,6 +20435,7 @@ IB20P840	Integrated Billing	IBE	2
 IB20P842	Integrated Billing	IBA	1
 IB20P842	Integrated Billing	IBE	8
 IB20P842	Integrated Billing	XMB	1
+IB20P847	Integrated Billing	DGCR	3
 IB20P88	Integrated Billing	DGCR	1
 IB20P88	Integrated Billing	IBA	10
 IB20P88	Integrated Billing	PRCA	1
@@ -20533,6 +20573,80 @@ IB488PRE	Integrated Billing	IBE	4
 IB499PO	Integrated Billing	DD	7
 IB534PST	Integrated Billing	IBCNR	4
 IB812POST	Integrated Billing	IBA	1
+IBACCROWFT	Integrated Billing	IBA	14
+IBACCRPT	Integrated Billing	IBA	4
+IBACCWL1	Integrated Billing	IBA	3
+IBACCWL1	Integrated Billing	TMP	7
+IBACCWLAI	Integrated Billing	DGCR	6
+IBACCWLAI	Integrated Billing	IBA	4
+IBACCWLAI	Integrated Billing	TMP	2
+IBACCWLAIBILL	Integrated Billing	DGCR	11
+IBACCWLAIBILL	Integrated Billing	IBA	11
+IBACCWLAIBILL1	Integrated Billing	DGCR	7
+IBACCWLAIBILL1	Integrated Billing	IBA	3
+IBACCWLAIREAS	Integrated Billing	DGCR	2
+IBACCWLAIREAS	Integrated Billing	IBA	12
+IBACCWLAIVIEW	Integrated Billing	DGCR	6
+IBACCWLAIVIEW	Integrated Billing	DPT	1
+IBACCWLAIVIEW	Integrated Billing	IBA	5
+IBACCWLAIVIEW	Integrated Billing	SD	5
+IBACCWLAIVIEW	Integrated Billing	TMP	6
+IBACCWLBILLVE	Integrated Billing	IBA	1
+IBACCWLBILLVE2	Integrated Billing	TMP	1
+IBACCWLEE	Integrated Billing	TMP	1
+IBACCWLEE1	Integrated Billing	DGCR	7
+IBACCWLEE1	Integrated Billing	DIC	6
+IBACCWLEE1	Integrated Billing	IB	1
+IBACCWLEE1	Integrated Billing	IBA	3
+IBACCWLEE1	Integrated Billing	IBM	3
+IBACCWLEE1	Integrated Billing	TMP	11
+IBACCWLEE1	Integrated Billing	VA	1
+IBACCWLEE2	Integrated Billing	DGCR	9
+IBACCWLEE2	Integrated Billing	DIC	1
+IBACCWLEE2	Integrated Billing	IBE	2
+IBACCWLEE2	Integrated Billing	IBM	3
+IBACCWLEE2	Integrated Billing	TMP	22
+IBACCWLEE3	Integrated Billing	IBA	2
+IBACCWLEE3	Integrated Billing	IBM	7
+IBACCWLEE3	Integrated Billing	TMP	2
+IBACCWLEE4	Integrated Billing	DG	1
+IBACCWLEE4	Integrated Billing	DPT	1
+IBACCWLEE4	Integrated Billing	IBE	2
+IBACCWLEE4	Integrated Billing	PRCA	4
+IBACCWLEE4	Integrated Billing	SC	1
+IBACCWLEE4	Integrated Billing	TMP	1
+IBACCWLPREV	Integrated Billing	DGCR	3
+IBACCWLPREV	Integrated Billing	IBA	5
+IBACCWLPREV	Integrated Billing	SD	2
+IBACCWLPREV	Integrated Billing	UTILITY	5
+IBACCWLPURGE	Integrated Billing	IBA	2
+IBACCWLRURREV	Integrated Billing	IBA	5
+IBACCWLRURREV	Integrated Billing	SD	2
+IBACCWLRURREV2	Integrated Billing	TMP	1
+IBACCWLSEC	Integrated Billing	IBA	6
+IBACCWLSORT1	Integrated Billing	DPT	1
+IBACCWLSORT1	Integrated Billing	TMP	25
+IBACCWLSPKUP	Integrated Billing	DIC	5
+IBACCWLSPKUP	Integrated Billing	IBA	10
+IBACCWLUTIL	Integrated Billing	DGCR	2
+IBACCWLUTIL	Integrated Billing	IBA	17
+IBACCWLUTIL	Integrated Billing	ORD	10
+IBACCWLUTIL	Integrated Billing	SD	4
+IBACCWLUTIL	Integrated Billing	TMP	11
+IBACCWLUTIL	Integrated Billing	VA	1
+IBACCWLUTIL1	Integrated Billing	DPT	1
+IBACCWLUTIL1	Integrated Billing	IBA	10
+IBACCWLUTIL1	Integrated Billing	TMP	7
+IBACCWLUTIL2	Integrated Billing	IBA	1
+IBACCWLUTIL4	Integrated Billing	IBA	4
+IBACCWLUTIL4	Integrated Billing	SD	3
+IBACCWLUTIL4	Integrated Billing	TMP	3
+IBACCWLUTIL5	Integrated Billing	ICD9	2
+IBACCWLVE	Integrated Billing	IBA	1
+IBACCWLVE	Integrated Billing	TMP	1
+IBACCWLVE2	Integrated Billing	TMP	1
+IBACCWLVS	Integrated Billing	DPT	1
+IBACCWLVS	Integrated Billing	TMP	3
 IBACSV	Integrated Billing	DGCR	3
 IBACSV	Integrated Billing	IBT	1
 IBACSV	Integrated Billing	ICD	1
@@ -21053,7 +21167,7 @@ IBCBB	Integrated Billing	UTILITY	6
 IBCBB0	Integrated Billing	DGCR	6
 IBCBB0	Integrated Billing	IBE	2
 IBCBB1	Integrated Billing	DG	2
-IBCBB1	Integrated Billing	DGCR	23
+IBCBB1	Integrated Billing	DGCR	27
 IBCBB1	Integrated Billing	DGPT	2
 IBCBB1	Integrated Billing	DIC	10
 IBCBB1	Integrated Billing	DPT	1
@@ -21184,6 +21298,34 @@ IBCE837A	Integrated Billing	IBA	14
 IBCE837A	Integrated Billing	IBE	2
 IBCE837A	Integrated Billing	TMP	50
 IBCE837A	Integrated Billing	UTILITY	4
+IBCE837ACC	Integrated Billing	IBA	10
+IBCE837ACC	Integrated Billing	IBE	2
+IBCE837ACC	Integrated Billing	TMP	31
+IBCE837ACC1	Integrated Billing	IBA	4
+IBCE837ACC1	Integrated Billing	TMP	21
+IBCE837ACC2	Integrated Billing	DG	1
+IBCE837ACC2	Integrated Billing	DGCR	22
+IBCE837ACC2	Integrated Billing	DIC	5
+IBCE837ACC2	Integrated Billing	TMP	43
+IBCE837ACC2A	Integrated Billing	DGEN	1
+IBCE837ACC2A	Integrated Billing	DPT	1
+IBCE837ACC2A	Integrated Billing	IBA	3
+IBCE837ACC2A	Integrated Billing	TMP	4
+IBCE837ACC3	Integrated Billing	TMP	27
+IBCE837ACC4	Integrated Billing	DGCR	10
+IBCE837ACC4	Integrated Billing	DIC	2
+IBCE837ACC4	Integrated Billing	IBA	8
+IBCE837ACC4	Integrated Billing	TMP	30
+IBCE837ACCU	Integrated Billing	DIC	1
+IBCE837ACCU	Integrated Billing	IBA	16
+IBCE837ACCU	Integrated Billing	IBE	1
+IBCE837ACCU	Integrated Billing	TMP	30
+IBCE837ACCU1	Integrated Billing	IBA	2
+IBCE837ACCU1	Integrated Billing	TMP	3
+IBCE837ACCU2	Integrated Billing	DIC	1
+IBCE837ACCU2	Integrated Billing	IBA	5
+IBCE837ACCU2	Integrated Billing	TMP	23
+IBCE837ACCU3	Integrated Billing	TMP	1
 IBCE837B	Integrated Billing	IBE	4
 IBCE837B	Integrated Billing	TMP	1
 IBCE837H	Integrated Billing	DGCR	2
@@ -21192,13 +21334,13 @@ IBCE837H	Integrated Billing	TMP	14
 IBCE837I	Integrated Billing	DGCR	1
 IBCE837I	Integrated Billing	IBA	4
 IBCE837I	Integrated Billing	TMP	4
-IBCE837K	Integrated Billing	IBA	7
+IBCE837K	Integrated Billing	IBA	11
 IBCE837P	Integrated Billing	IBA	1
 IBCE837P	Integrated Billing	IBE	1
 IBCE837P	Integrated Billing	TMP	178
 IBCE837Q	Integrated Billing	DGCR	1
-IBCE837Q	Integrated Billing	IBA	13
-IBCE837Q	Integrated Billing	TMP	42
+IBCE837Q	Integrated Billing	IBA	17
+IBCE837Q	Integrated Billing	TMP	47
 IBCE837S	Integrated Billing	IBE	2
 IBCE837T	Integrated Billing	DGCR	4
 IBCE837T	Integrated Billing	IBA	3
@@ -21628,7 +21770,7 @@ IBCEP7C	Integrated Billing	IBE	1
 IBCEP7C	Integrated Billing	TMP	1
 IBCEP8	Integrated Billing	DGCR	1
 IBCEP8	Integrated Billing	DIC	3
-IBCEP8	Integrated Billing	IBA	9
+IBCEP8	Integrated Billing	IBA	10
 IBCEP8	Integrated Billing	IBE	4
 IBCEP8	Integrated Billing	TMP	2
 IBCEP81	Integrated Billing	DIC	3
@@ -21973,6 +22115,7 @@ IBCIWK	Integrated Billing	XUSEC	2
 IBCMDT	Integrated Billing	DIC	2
 IBCMDT	Integrated Billing	IBA	1
 IBCMDT	Integrated Billing	TMP	16
+IBCMDT1	Integrated Billing	DIC	1
 IBCMDT1	Integrated Billing	IBA	2
 IBCMDT2	Integrated Billing	DIC	1
 IBCMDT2	Integrated Billing	IBA	6
@@ -22124,8 +22267,8 @@ IBCNEDE2	Integrated Billing	IBE	5
 IBCNEDE2	Integrated Billing	TMP	13
 IBCNEDE3	Integrated Billing	DIC	1
 IBCNEDE3	Integrated Billing	DPT	9
-IBCNEDE3	Integrated Billing	IBA	6
-IBCNEDE3	Integrated Billing	IBCN	9
+IBCNEDE3	Integrated Billing	IBA	12
+IBCNEDE3	Integrated Billing	IBCN	11
 IBCNEDE3	Integrated Billing	IBE	1
 IBCNEDE4	Integrated Billing	SC	1
 IBCNEDE4	Integrated Billing	TMP	9
@@ -22370,7 +22513,7 @@ IBCNICB	Integrated Billing	IBT	3
 IBCNICB	Integrated Billing	XUSEC	2
 IBCNICB2	Integrated Billing	IBA	1
 IBCNILK	Integrated Billing	DIC	3
-IBCNILK	Integrated Billing	TMP	23
+IBCNILK	Integrated Billing	TMP	25
 IBCNINSC	Integrated Billing	DD	2
 IBCNINSC	Integrated Billing	DIC	12
 IBCNINSL	Integrated Billing	TMP	1
@@ -22746,7 +22889,7 @@ IBCNSU2	Integrated Billing	IBA	3
 IBCNSU2	Integrated Billing	TMP	11
 IBCNSU21	Integrated Billing	DIC	1
 IBCNSU21	Integrated Billing	IBA	1
-IBCNSU21	Integrated Billing	TMP	26
+IBCNSU21	Integrated Billing	TMP	28
 IBCNSU3	Integrated Billing	IBA	7
 IBCNSU3	Integrated Billing	IBE	3
 IBCNSU31	Integrated Billing	DIC	2
@@ -25035,7 +25178,7 @@ IBOMBL	Integrated Billing	DPT	2
 IBOMHC	Integrated Billing	DGPM	1
 IBOMHC	Integrated Billing	IB	4
 IBOMHC	Integrated Billing	IBE	1
-IBOMHC	Integrated Billing	TMP	28
+IBOMHC	Integrated Billing	TMP	20
 IBOMTC1	Integrated Billing	DPT	2
 IBOMTC1	Integrated Billing	IB	6
 IBOMTC1	Integrated Billing	IBE	3
@@ -25928,7 +26071,7 @@ IBXS111	Integrated Billing	%ZOSF	6
 IBXS111	Integrated Billing	DD	11
 IBXS111	Integrated Billing	DIC	1
 IBXS111	Integrated Billing	DISV	2
-IBXS111	Integrated Billing	DPT	17
+IBXS111	Integrated Billing	DPT	16
 IBXS112	Integrated Billing	DPT	13
 IBXS12	Integrated Billing	DD	6
 IBXS12	Integrated Billing	DISV	2
@@ -26815,6 +26958,12 @@ IBY759PR	Integrated Billing	IBA	1
 IBY759PR	Integrated Billing	IBE	1
 IBY763PO	Integrated Billing	IBA	1
 IBY764PO	Integrated Billing	IBE	1
+IBY770PO	Integrated Billing	IBA	2
+IBY770PO	Integrated Billing	XOB	4
+IBY770PR	Integrated Billing	IBA	8
+IBY770PR	Integrated Billing	IBE	1
+IBY770PRE	Integrated Billing	IBA	3
+IBY770PRE	Integrated Billing	ORD	2
 IBY771PO	Integrated Billing	IBA	1
 IBY771PO	Integrated Billing	IBE	2
 IBY778PR	Integrated Billing	DPT	1
@@ -28020,18 +28169,18 @@ IVMPREC7	Income Verification Match	DD	4
 IVMPREC7	Income Verification Match	DGMT	4
 IVMPREC7	Income Verification Match	DPT	4
 IVMPREC7	Income Verification Match	TMP	3
-IVMPREC8	Income Verification Match	DIC	11
+IVMPREC8	Income Verification Match	DIC	10
 IVMPREC8	Income Verification Match	DPT	9
 IVMPREC8	Income Verification Match	HL	1
-IVMPREC8	Income Verification Match	IVM	7
+IVMPREC8	Income Verification Match	IVM	6
 IVMPREC9	Income Verification Match	DD	1
 IVMPREC9	Income Verification Match	DIC	1
 IVMPREC9	Income Verification Match	DPT	5
 IVMPREC9	Income Verification Match	HL	4
 IVMPREC9	Income Verification Match	IVM	29
-IVMPRECA	Income Verification Match	DIC	4
+IVMPRECA	Income Verification Match	DIC	5
 IVMPRECA	Income Verification Match	DPT	1
-IVMPRECA	Income Verification Match	IVM	1
+IVMPRECA	Income Verification Match	IVM	2
 IVMPRECA	Income Verification Match	TMP	1
 IVMPRECZ	Income Verification Match	DD	2
 IVMPRECZ	Income Verification Match	DGMT	3
@@ -30877,6 +31026,10 @@ LR582	Lab Service	DD	14
 LR582	Lab Service	LAB	14
 LR582	Lab Service	LAM	10
 LR582	Lab Service	XTMP	14
+LR588	Lab Service	DD	20
+LR588	Lab Service	LAB	14
+LR588	Lab Service	LAM	10
+LR588	Lab Service	XTMP	15
 LR59	Lab Service	VA	1
 LR664L	Lab Service	LAB	4
 LR664L	Lab Service	LRMLTF	1
@@ -34383,6 +34536,7 @@ MAGBRTUT	Imaging	MAGQUEUE	31
 MAGBVAL	Imaging	%ZOSF	1
 MAGBVAL	Imaging	GEK	2
 MAGCFIX	Imaging	MAG	4
+MAGCQMGR	Imaging	MAGV	5
 MAGCRPT	Imaging	DD	1
 MAGCRPT	Imaging	MAG	8
 MAGCRPT	Imaging	TMP	11
@@ -34985,6 +35139,9 @@ MAGIP351	Imaging	MAG	1
 MAGIP356	Imaging	DIC	1
 MAGIP356	Imaging	XTV	1
 MAGIP356	Imaging	XWB	1
+MAGIP365	Imaging	DIC	2
+MAGIP365	Imaging	XMB	3
+MAGIP365	Imaging	XWB	6
 MAGIPRE	Imaging	MAG	1
 MAGIPS93	Imaging	MAG	9
 MAGIPS93	Imaging	UTILITY	4
@@ -35139,7 +35296,13 @@ MAGNU003	Imaging	RADPT	3
 MAGNU003	Imaging	RARPT	1
 MAGNUID1	Imaging	MAGD	6
 MAGNUID2	Imaging	MAG	3
-MAGNUTL2	Imaging	TMP	3
+MAGNUTL2	Imaging	MAG	1
+MAGNUTL2	Imaging	TMP	6
+MAGNUTL3	Imaging	MAG	2
+MAGNUTL4	Imaging	DIC	1
+MAGNUTL4	Imaging	ICPT	2
+MAGNUTL4	Imaging	MAG	2
+MAGNUTL4	Imaging	XMB	1
 MAGNVIC	Imaging	MAG	2
 MAGNVQ01	Imaging	DPT	1
 MAGNVQ01	Imaging	MAGV	9
@@ -38893,7 +39056,7 @@ ORAREN	Order Entry Results Reporting	DPT	1
 ORAREN	Order Entry Results Reporting	OR	4
 ORAREN	Order Entry Results Reporting	TMP	22
 ORB3	Order Entry Results Reporting	OR	7
-ORB3	Order Entry Results Reporting	ORD	9
+ORB3	Order Entry Results Reporting	ORD	11
 ORB3	Order Entry Results Reporting	TMP	14
 ORB3	Order Entry Results Reporting	XTMP	6
 ORB3	Order Entry Results Reporting	XUSEC	2
@@ -38997,7 +39160,7 @@ ORBPRCHK	Order Entry Results Reporting	ORD	2
 ORBPRCHK	Order Entry Results Reporting	TMP	2
 ORBPRCHK	Order Entry Results Reporting	XUSEC	2
 ORBSMART	Order Entry Results Reporting	ORD	8
-ORBSMART	Order Entry Results Reporting	TMP	6
+ORBSMART	Order Entry Results Reporting	TMP	3
 ORBSMART	Order Entry Results Reporting	XTMP	6
 ORBX31	Order Entry Results Reporting	TMP	6
 ORCACT	Order Entry Results Reporting	OR	3
@@ -39113,7 +39276,7 @@ ORCDVBEC	Order Entry Results Reporting	TMP	5
 ORCENV	Order Entry Results Reporting	PSX	1
 ORCFLAG	Order Entry Results Reporting	OR	13
 ORCFLAG	Order Entry Results Reporting	ORD	1
-ORCFLAG	Order Entry Results Reporting	VA	4
+ORCFLAG	Order Entry Results Reporting	XTMP	3
 ORCHANG1	Order Entry Results Reporting	ORD	3
 ORCHANG2	Order Entry Results Reporting	ORD	1
 ORCHANG2	Order Entry Results Reporting	TMP	8
@@ -39232,7 +39395,7 @@ ORCPROB	Order Entry Results Reporting	TMP	8
 ORCPROB	Order Entry Results Reporting	VA	1
 ORCPROB	Order Entry Results Reporting	XUSEC	3
 ORCSAVE	Order Entry Results Reporting	DIC	2
-ORCSAVE	Order Entry Results Reporting	OR	108
+ORCSAVE	Order Entry Results Reporting	OR	115
 ORCSAVE	Order Entry Results Reporting	ORD	15
 ORCSAVE	Order Entry Results Reporting	TMP	8
 ORCSAVE1	Order Entry Results Reporting	DPT	1
@@ -39302,26 +39465,28 @@ ORD21	Order Entry Results Reporting	DD	4
 ORD21	Order Entry Results Reporting	OR	12
 ORD210	Order Entry Results Reporting	OR	4
 ORD211	Order Entry Results Reporting	OR	4
-ORD212	Order Entry Results Reporting	DD	4
-ORD212	Order Entry Results Reporting	OR	14
-ORD213	Order Entry Results Reporting	OR	3
-ORD214	Order Entry Results Reporting	OR	4
-ORD215	Order Entry Results Reporting	OR	9
-ORD216	Order Entry Results Reporting	OR	7
-ORD217	Order Entry Results Reporting	OR	3
+ORD212	Order Entry Results Reporting	OR	4
+ORD213	Order Entry Results Reporting	DD	4
+ORD213	Order Entry Results Reporting	OR	14
+ORD214	Order Entry Results Reporting	OR	3
+ORD215	Order Entry Results Reporting	OR	4
+ORD216	Order Entry Results Reporting	OR	9
+ORD217	Order Entry Results Reporting	OR	7
 ORD218	Order Entry Results Reporting	OR	3
 ORD219	Order Entry Results Reporting	OR	3
 ORD22	Order Entry Results Reporting	OR	3
-ORD220	Order Entry Results Reporting	OR	4
-ORD221	Order Entry Results Reporting	OR	4
+ORD220	Order Entry Results Reporting	OR	3
+ORD221	Order Entry Results Reporting	OR	3
 ORD222	Order Entry Results Reporting	OR	4
+ORD223	Order Entry Results Reporting	OR	4
+ORD224	Order Entry Results Reporting	OR	4
 ORD23	Order Entry Results Reporting	OR	4
 ORD24	Order Entry Results Reporting	OR	8
 ORD25	Order Entry Results Reporting	OR	7
 ORD26	Order Entry Results Reporting	OR	3
 ORD27	Order Entry Results Reporting	OR	3
 ORD28	Order Entry Results Reporting	OR	3
-ORD29	Order Entry Results Reporting	OR	4
+ORD29	Order Entry Results Reporting	OR	3
 ORDD1	Order Entry Results Reporting	DIC	6
 ORDD1	Order Entry Results Reporting	ORD	20
 ORDD100	Order Entry Results Reporting	OR	47
@@ -39334,6 +39499,12 @@ ORDD41	Order Entry Results Reporting	ORD	17
 ORDD41	Order Entry Results Reporting	XUTL	17
 ORDD43	Order Entry Results Reporting	DD	1
 ORDD43	Order Entry Results Reporting	ORD	60
+ORDD71	Order Entry Results Reporting	OR	6
+ORDD71	Order Entry Results Reporting	ORE	6
+ORDD71	Order Entry Results Reporting	ORI	22
+ORDD71	Order Entry Results Reporting	ORW	3
+ORDD71	Order Entry Results Reporting	PXD	1
+ORDD71	Order Entry Results Reporting	PXRMD	1
 ORDDPAPI	Order Entry Results Reporting	TMP	7
 ORDEA	Order Entry Results Reporting	DPT	2
 ORDEA	Order Entry Results Reporting	OR	12
@@ -39427,6 +39598,26 @@ ORDVU	Order Entry Results Reporting	TMP	1
 ORDVX1	Order Entry Results Reporting	LR	12
 ORDVX1	Order Entry Results Reporting	TMP	14
 ORECS01	Order Entry Results Reporting	AUPNVSIT	1
+OREDITOR	Order Entry Results Reporting	ORE	15
+OREDITOR	Order Entry Results Reporting	ORI	1
+OREDITOR	Order Entry Results Reporting	ORW	2
+OREDITOR	Order Entry Results Reporting	TMP	46
+OREDITOR1	Order Entry Results Reporting	OR	6
+OREDITOR1	Order Entry Results Reporting	ORI	10
+OREDITOR1	Order Entry Results Reporting	ORW	6
+OREDITOR1	Order Entry Results Reporting	TMP	13
+OREDITOR2	Order Entry Results Reporting	ORI	5
+OREDITOR2	Order Entry Results Reporting	TMP	5
+OREDITOR3	Order Entry Results Reporting	ORE	13
+OREDITOR3	Order Entry Results Reporting	ORI	2
+OREDITOR3	Order Entry Results Reporting	TMP	2
+OREDITOR4	Order Entry Results Reporting	DIC	1
+OREDITOR4	Order Entry Results Reporting	OR	1
+OREDITOR4	Order Entry Results Reporting	ORE	1
+OREDITOR4	Order Entry Results Reporting	ORI	16
+OREDITOR4	Order Entry Results Reporting	PXD	1
+OREDITOR4	Order Entry Results Reporting	PXRMD	1
+OREDITOR4	Order Entry Results Reporting	TMP	4
 ORELR1	Order Entry Results Reporting	DIC	1
 ORELR1	Order Entry Results Reporting	OR	1
 ORELR2	Order Entry Results Reporting	DPT	1
@@ -39512,6 +39703,21 @@ ORGUEM1	Order Entry Results Reporting	XUTL	7
 ORGUEM2	Order Entry Results Reporting	ORD	6
 ORGUEM3	Order Entry Results Reporting	%ZOSF	2
 ORGUEM3	Order Entry Results Reporting	ORD	15
+ORHEDITOR	Order Entry Results Reporting	ORE	4
+ORHEDITOR	Order Entry Results Reporting	ORW	1
+ORHEDITOR	Order Entry Results Reporting	SC	1
+ORHEDITOR	Order Entry Results Reporting	TIU	1
+ORHEDITOR	Order Entry Results Reporting	TMP	14
+ORHEDITOR	Order Entry Results Reporting	VA	1
+ORHRPC	Order Entry Results Reporting	DIC	2
+ORHRPC	Order Entry Results Reporting	ORI	2
+ORHRPC	Order Entry Results Reporting	VA	3
+ORICHECK	Order Entry Results Reporting	ORE	2
+ORICHECK	Order Entry Results Reporting	ORI	1
+ORIMGR	Order Entry Results Reporting	OR	2
+ORIMGR	Order Entry Results Reporting	ORE	1
+ORIMGR	Order Entry Results Reporting	ORI	45
+ORIMGR	Order Entry Results Reporting	TMP	18
 ORIMO	Order Entry Results Reporting	OR	2
 ORIMO	Order Entry Results Reporting	ORD	6
 ORIMO	Order Entry Results Reporting	SC	4
@@ -39523,6 +39729,22 @@ ORINQIV	Order Entry Results Reporting	ORD	23
 ORINQIV	Order Entry Results Reporting	PXRMD	3
 ORINQIV	Order Entry Results Reporting	TMP	10
 ORINQIV	Order Entry Results Reporting	XMB	2
+ORIRPC	Order Entry Results Reporting	ORE	1
+ORIRPC	Order Entry Results Reporting	ORI	25
+ORIRPC	Order Entry Results Reporting	PXRMD	1
+ORIRPC	Order Entry Results Reporting	TMP	32
+ORIRPC1	Order Entry Results Reporting	ORI	7
+ORIRPCCL	Order Entry Results Reporting	ORI	10
+ORIRPCCL	Order Entry Results Reporting	TMP	7
+ORITEST	Order Entry Results Reporting	AUPNVSIT	1
+ORITEST	Order Entry Results Reporting	ORI	4
+ORITEST	Order Entry Results Reporting	SC	1
+ORITEST	Order Entry Results Reporting	TMP	12
+ORIUTL	Order Entry Results Reporting	%ZOSF	1
+ORIUTL	Order Entry Results Reporting	OR	3
+ORIUTL	Order Entry Results Reporting	ORI	1
+ORIUTL	Order Entry Results Reporting	TMP	4
+ORIUTL	Order Entry Results Reporting	XTMP	4
 ORKCHK	Order Entry Results Reporting	DIC	1
 ORKCHK	Order Entry Results Reporting	ORD	1
 ORKCHK	Order Entry Results Reporting	TMP	8
@@ -39617,7 +39839,7 @@ ORLPR0	Order Entry Results Reporting	TMP	11
 ORLPR0	Order Entry Results Reporting	VA	2
 ORLPREM	Order Entry Results Reporting	OR	4
 ORLPREM	Order Entry Results Reporting	PXRM	1
-ORLPREM	Order Entry Results Reporting	TMP	18
+ORLPREM	Order Entry Results Reporting	TMP	26
 ORLPREML	Order Entry Results Reporting	OR	5
 ORLPREML	Order Entry Results Reporting	ORD	1
 ORLPREML	Order Entry Results Reporting	PXRM	3
@@ -39658,7 +39880,7 @@ ORMBLDLR	Order Entry Results Reporting	TMP	12
 ORMBLDOR	Order Entry Results Reporting	OR	5
 ORMBLDOR	Order Entry Results Reporting	ORD	2
 ORMBLDP1	Order Entry Results Reporting	TMP	1
-ORMBLDPS	Order Entry Results Reporting	OR	13
+ORMBLDPS	Order Entry Results Reporting	OR	12
 ORMBLDPS	Order Entry Results Reporting	ORD	6
 ORMBLDPS	Order Entry Results Reporting	TMP	15
 ORMBLDRA	Order Entry Results Reporting	DIC	1
@@ -39734,7 +39956,7 @@ ORMLR1	Order Entry Results Reporting	TMP	5
 ORMLR4	Order Entry Results Reporting	OR	1
 ORMORG	Order Entry Results Reporting	OR	7
 ORMORG	Order Entry Results Reporting	ORE	4
-ORMPS	Order Entry Results Reporting	OR	49
+ORMPS	Order Entry Results Reporting	OR	48
 ORMPS	Order Entry Results Reporting	ORD	5
 ORMPS	Order Entry Results Reporting	TMP	4
 ORMPS	Order Entry Results Reporting	VA	4
@@ -39742,11 +39964,11 @@ ORMPS1	Order Entry Results Reporting	DIC	1
 ORMPS1	Order Entry Results Reporting	OR	4
 ORMPS1	Order Entry Results Reporting	ORD	13
 ORMPS1	Order Entry Results Reporting	TMP	17
-ORMPS2	Order Entry Results Reporting	OR	33
+ORMPS2	Order Entry Results Reporting	OR	32
 ORMPS2	Order Entry Results Reporting	ORD	4
 ORMPS2	Order Entry Results Reporting	TMP	2
 ORMPS2	Order Entry Results Reporting	VA	1
-ORMPS3	Order Entry Results Reporting	OR	43
+ORMPS3	Order Entry Results Reporting	OR	42
 ORMPS3	Order Entry Results Reporting	ORD	2
 ORMPS3	Order Entry Results Reporting	TMP	4
 ORMRA	Order Entry Results Reporting	DIC	1
@@ -39772,7 +39994,7 @@ ORMTIMST	Order Entry Results Reporting	OR	2
 ORMVBEC	Order Entry Results Reporting	OR	23
 ORMVBEC	Order Entry Results Reporting	ORD	2
 ORNEWPERS	Order Entry Results Reporting	DIC	3
-ORNEWPERS	Order Entry Results Reporting	ORD	1
+ORNEWPERS	Order Entry Results Reporting	ORD	2
 ORNEWPERS	Order Entry Results Reporting	VA	9
 ORNEWPERS	Order Entry Results Reporting	XWB	2
 ORNORC	Order Entry Results Reporting	DD	5
@@ -39794,6 +40016,7 @@ ORPARMG1	Order Entry Results Reporting	OR	1
 ORPARMG1	Order Entry Results Reporting	ORD	3
 ORPARMG1	Order Entry Results Reporting	VA	4
 ORPARMGR	Order Entry Results Reporting	ORD	1
+ORPATCHUTILS	Order Entry Results Reporting	ORD	5
 ORPDMP	Order Entry Results Reporting	ORD	9
 ORPDMP	Order Entry Results Reporting	TMP	54
 ORPDMP	Order Entry Results Reporting	XTMP	18
@@ -39938,7 +40161,7 @@ ORQ20	Order Entry Results Reporting	ORE	6
 ORQ20	Order Entry Results Reporting	UTILITY	8
 ORQ20	Order Entry Results Reporting	VA	1
 ORQ21	Order Entry Results Reporting	DIC	2
-ORQ21	Order Entry Results Reporting	OR	7
+ORQ21	Order Entry Results Reporting	OR	6
 ORQ21	Order Entry Results Reporting	ORD	2
 ORQ21	Order Entry Results Reporting	TMP	25
 ORQ21	Order Entry Results Reporting	UTILITY	3
@@ -40164,6 +40387,8 @@ ORSNAST2	Order Entry Results Reporting	OR	27
 ORSNAST2	Order Entry Results Reporting	ORD	1
 ORSNAST2	Order Entry Results Reporting	TMP	11
 ORSNAST2	Order Entry Results Reporting	VA	9
+ORSPECAUTH	Order Entry Results Reporting	OR	18
+ORSPECAUTH	Order Entry Results Reporting	TMP	4
 ORSPUTIL	Order Entry Results Reporting	ORD	24
 ORSRCHOR	Order Entry Results Reporting	DG	1
 ORSRCHOR	Order Entry Results Reporting	DIC	1
@@ -40415,7 +40640,7 @@ ORWDSD1	Order Entry Results Reporting	ORD	2
 ORWDSD1	Order Entry Results Reporting	SC	3
 ORWDVAL	Order Entry Results Reporting	TMP	9
 ORWDX	Order Entry Results Reporting	DIC	2
-ORWDX	Order Entry Results Reporting	OR	19
+ORWDX	Order Entry Results Reporting	OR	21
 ORWDX	Order Entry Results Reporting	ORD	11
 ORWDX	Order Entry Results Reporting	TMP	2
 ORWDX	Order Entry Results Reporting	XTMP	1
@@ -40443,7 +40668,7 @@ ORWDXA	Order Entry Results Reporting	ORD	10
 ORWDXA	Order Entry Results Reporting	ORE	3
 ORWDXA	Order Entry Results Reporting	SC	1
 ORWDXA	Order Entry Results Reporting	TMP	5
-ORWDXA	Order Entry Results Reporting	VA	3
+ORWDXA	Order Entry Results Reporting	XTMP	3
 ORWDXA	Order Entry Results Reporting	XUSEC	6
 ORWDXA1	Order Entry Results Reporting	OR	24
 ORWDXA1	Order Entry Results Reporting	ORD	2
@@ -40494,6 +40719,7 @@ ORWDXVB2	Order Entry Results Reporting	ORD	4
 ORWDXVB2	Order Entry Results Reporting	SC	2
 ORWDXVB2	Order Entry Results Reporting	TMP	3
 ORWDXVB3	Order Entry Results Reporting	ORD	1
+ORWEB	Order Entry Results Reporting	ORW	19
 ORWGAPI	Order Entry Results Reporting	TMP	11
 ORWGAPI1	Order Entry Results Reporting	PXRMINDX	11
 ORWGAPI1	Order Entry Results Reporting	TMP	23
@@ -40606,7 +40832,7 @@ ORWORB	Order Entry Results Reporting	DPT	1
 ORWORB	Order Entry Results Reporting	OR	1
 ORWORB	Order Entry Results Reporting	ORD	8
 ORWORB	Order Entry Results Reporting	TMP	29
-ORWORB	Order Entry Results Reporting	VA	2
+ORWORB	Order Entry Results Reporting	VA	1
 ORWORB	Order Entry Results Reporting	XTV	12
 ORWORB	Order Entry Results Reporting	XUSEC	1
 ORWORDG	Order Entry Results Reporting	ORD	10
@@ -40649,7 +40875,7 @@ ORWPCE3	Order Entry Results Reporting	AUTTEXAM	1
 ORWPCE3	Order Entry Results Reporting	AUTTHF	1
 ORWPCE3	Order Entry Results Reporting	SC	1
 ORWPCE3	Order Entry Results Reporting	TIU	1
-ORWPCE3	Order Entry Results Reporting	TMP	27
+ORWPCE3	Order Entry Results Reporting	TMP	28
 ORWPCE3	Order Entry Results Reporting	VA	1
 ORWPCE4	Order Entry Results Reporting	TMP	15
 ORWPCE5	Order Entry Results Reporting	LEX	7
@@ -40672,7 +40898,7 @@ ORWPT	Order Entry Results Reporting	DG	2
 ORWPT	Order Entry Results Reporting	DGPM	5
 ORWPT	Order Entry Results Reporting	DIC	8
 ORWPT	Order Entry Results Reporting	DISV	2
-ORWPT	Order Entry Results Reporting	DPT	29
+ORWPT	Order Entry Results Reporting	DPT	30
 ORWPT	Order Entry Results Reporting	OR	4
 ORWPT	Order Entry Results Reporting	SC	1
 ORWPT	Order Entry Results Reporting	TMP	17
@@ -41193,6 +41419,12 @@ ORY45	Order Entry Results Reporting	DIC	1
 ORY46	Order Entry Results Reporting	DD	1
 ORY46	Order Entry Results Reporting	ORD	5
 ORY46	Order Entry Results Reporting	XUTL	1
+ORY508	Order Entry Results Reporting	DIC	1
+ORY508	Order Entry Results Reporting	OR	1
+ORY508	Order Entry Results Reporting	ORD	2
+ORY508	Order Entry Results Reporting	ORE	1
+ORY508	Order Entry Results Reporting	ORI	3
+ORY508	Order Entry Results Reporting	ORW	1
 ORY519	Order Entry Results Reporting	TMP	1
 ORY535R	Order Entry Results Reporting	OCXS	3
 ORY535R	Order Entry Results Reporting	ORD	6
@@ -41387,6 +41619,40 @@ PRCA315P	Accounts Receivable	TMP	8
 PRCA320P	Accounts Receivable	DIC	1
 PRCA320P	Accounts Receivable	PRCA	2
 PRCA350P	Accounts Receivable	PRCA	3
+PRCA399A	Accounts Receivable	PRCA	28
+PRCA399A	Accounts Receivable	TMP	1
+PRCA399A	Accounts Receivable	XTMP	96
+PRCA399B	Accounts Receivable	PRCA	3
+PRCA399B	Accounts Receivable	XTMP	19
+PRCA399C	Accounts Receivable	PRCA	15
+PRCA399C	Accounts Receivable	RC	8
+PRCA399C	Accounts Receivable	RCD	1
+PRCA399C	Accounts Receivable	TMP	3
+PRCA399C	Accounts Receivable	XTMP	17
+PRCA399D	Accounts Receivable	PRCA	18
+PRCA399D	Accounts Receivable	PRCAGT	1
+PRCA399D	Accounts Receivable	TMP	11
+PRCA399D	Accounts Receivable	XTMP	28
+PRCA399E	Accounts Receivable	DPT	7
+PRCA399E	Accounts Receivable	PRCA	12
+PRCA399E	Accounts Receivable	RC	17
+PRCA399E	Accounts Receivable	RCD	3
+PRCA399E	Accounts Receivable	XTMP	52
+PRCA399F	Accounts Receivable	PRCA	13
+PRCA399F	Accounts Receivable	XTMP	28
+PRCA399P	Accounts Receivable	DIC	1
+PRCA399P	Accounts Receivable	PRCA	23
+PRCA399P	Accounts Receivable	RC	2
+PRCA399P	Accounts Receivable	RCD	2
+PRCA399P	Accounts Receivable	TMP	3
+PRCA399P	Accounts Receivable	XTMP	40
+PRCA399Z	Accounts Receivable	DIC	1
+PRCA399Z	Accounts Receivable	DISV	2
+PRCA399Z	Accounts Receivable	PRCA	25
+PRCA399Z	Accounts Receivable	RC	2
+PRCA399Z	Accounts Receivable	RCD	4
+PRCA399Z	Accounts Receivable	TMP	10
+PRCA399Z	Accounts Receivable	XTMP	40
 PRCA419P	Accounts Receivable	PRCA	4
 PRCA427P	Accounts Receivable	RC	2
 PRCA434P	Accounts Receivable	RC	3
@@ -41678,6 +41944,9 @@ PRCAMDS	Accounts Receivable	DGCR	1
 PRCAMRG	Accounts Receivable	DIC	2
 PRCAMRG	Accounts Receivable	PRCA	1
 PRCAMRG	Accounts Receivable	TMP	3
+PRCAMRKC	Accounts Receivable	DPT	1
+PRCAMRKC	Accounts Receivable	PRCA	3
+PRCAMRKC	Accounts Receivable	RCD	1
 PRCAMRKC	Accounts Receivable	TMP	2
 PRCANTE0	Accounts Receivable	%ZOSF	3
 PRCANTE0	Accounts Receivable	UTILITY	1
@@ -47294,7 +47563,7 @@ PSAVER7	Drug Accountability	DD	1
 PSAVER7	Drug Accountability	PSD	11
 PSAVER7	Drug Accountability	PSDRUG	21
 PSAVERA	Drug Accountability	DIC	1
-PSAVERA	Drug Accountability	PSD	23
+PSAVERA	Drug Accountability	PSD	20
 PSAVERA	Drug Accountability	PSDRUG	18
 PSAVERA1	Drug Accountability	DD	2
 PSAVERA1	Drug Accountability	DIC	1
@@ -50441,6 +50710,9 @@ PSNOUT	National Drug File	PSDRUG	6
 PSNOUT	National Drug File	PSNDF	3
 PSNOUT	National Drug File	PSNTRAN	1
 PSNOUT	National Drug File	TMP	14
+PSNP578	National Drug File	PSNDF	7
+PSNP578	National Drug File	XTMP	12
+PSNP578	National Drug File	XUSEC	1
 PSNPARM	National Drug File	DD	2
 PSNPARM	National Drug File	PS	11
 PSNPARM	National Drug File	TMP	4
@@ -53256,7 +53528,7 @@ PSOUTL	Outpatient Pharmacy	DIC	1
 PSOUTL	Outpatient Pharmacy	DPT	1
 PSOUTL	Outpatient Pharmacy	PS	70
 PSOUTL	Outpatient Pharmacy	PSDRUG	4
-PSOUTL	Outpatient Pharmacy	PSRX	79
+PSOUTL	Outpatient Pharmacy	PSRX	76
 PSOUTL	Outpatient Pharmacy	XMB	4
 PSOUTL	Outpatient Pharmacy	XUSEC	1
 PSOUTLA	Outpatient Pharmacy	PS	25
@@ -53264,7 +53536,7 @@ PSOUTLA	Outpatient Pharmacy	PSDRUG	1
 PSOUTLA	Outpatient Pharmacy	PSRX	31
 PSOUTLA1	Outpatient Pharmacy	PS	13
 PSOUTLA1	Outpatient Pharmacy	PSDRUG	2
-PSOUTLA1	Outpatient Pharmacy	PSRX	30
+PSOUTLA1	Outpatient Pharmacy	PSRX	33
 PSOUTLA2	Outpatient Pharmacy	PS	7
 PSOUTLA2	Outpatient Pharmacy	PSDRUG	1
 PSOUTLA2	Outpatient Pharmacy	PSRX	2
@@ -54850,7 +55122,7 @@ PX91P	PCE Patient Care Encounter	TMP	7
 PXAAVCPT	PCE Patient Care Encounter	AUPNVCPT	41
 PXAAVSIT	PCE Patient Care Encounter	AUPNVSIT	2
 PXAI	PCE Patient Care Encounter	AUPNVSIT	3
-PXAI	PCE Patient Care Encounter	TMP	8
+PXAI	PCE Patient Care Encounter	TMP	10
 PXAI	PCE Patient Care Encounter	VA	1
 PXAICPT	PCE Patient Care Encounter	AUPNVCPT	1
 PXAICPT	PCE Patient Care Encounter	AUPNVSIT	4
@@ -54878,8 +55150,8 @@ PXAIPEDV	PCE Patient Care Encounter	AUTTEDT	3
 PXAIPL	PCE Patient Care Encounter	AUPNVSIT	1
 PXAIPOV	PCE Patient Care Encounter	AUPNVPOV	3
 PXAIPOV	PCE Patient Care Encounter	AUPNVPRV	2
-PXAIPOV	PCE Patient Care Encounter	AUPNVSIT	3
-PXAIPOV	PCE Patient Care Encounter	TMP	26
+PXAIPOV	PCE Patient Care Encounter	AUPNVSIT	2
+PXAIPOV	PCE Patient Care Encounter	TMP	29
 PXAIPOVV	PCE Patient Care Encounter	AUPNVSIT	1
 PXAIPRV	PCE Patient Care Encounter	AUPNVPRV	7
 PXAIPRV	PCE Patient Care Encounter	AUPNVSIT	3
@@ -54898,7 +55170,7 @@ PXAISKV	PCE Patient Care Encounter	AUTTSK	2
 PXAIUPRV	PCE Patient Care Encounter	VA	1
 PXAIVAL	PCE Patient Care Encounter	PX	2
 PXAIVST	PCE Patient Care Encounter	AUPNVSIT	4
-PXAIVST	PCE Patient Care Encounter	TMP	47
+PXAIVST	PCE Patient Care Encounter	TMP	53
 PXAIVSTV	PCE Patient Care Encounter	AUPNPAT	1
 PXAIVSTV	PCE Patient Care Encounter	AUPNVSIT	2
 PXAIVSTV	PCE Patient Care Encounter	DIC	2
@@ -54910,7 +55182,7 @@ PXAIXAM	PCE Patient Care Encounter	AUTTEXAM	2
 PXAIXAM	PCE Patient Care Encounter	TMP	13
 PXAIXAMV	PCE Patient Care Encounter	AUTTEXAM	3
 PXAPI	PCE Patient Care Encounter	AUPNVCPT	2
-PXAPI	PCE Patient Care Encounter	AUPNVSIT	9
+PXAPI	PCE Patient Care Encounter	AUPNVSIT	10
 PXAPI	PCE Patient Care Encounter	AUTNPOV	1
 PXAPI	PCE Patient Care Encounter	AUTTEDT	1
 PXAPI	PCE Patient Care Encounter	AUTTEXAM	1
@@ -54922,7 +55194,7 @@ PXAPIDEL	PCE Patient Care Encounter	AUPNVSIT	11
 PXAPIDEL	PCE Patient Care Encounter	AUPNVSK	1
 PXAPIDEL	PCE Patient Care Encounter	DIC	1
 PXAPIDEL	PCE Patient Care Encounter	SCE	1
-PXAPIDEL	PCE Patient Care Encounter	TMP	18
+PXAPIDEL	PCE Patient Care Encounter	TMP	21
 PXAPIIB	PCE Patient Care Encounter	AUPNVPOV	2
 PXAPIIB	PCE Patient Care Encounter	AUTTEDT	4
 PXAPIIB	PCE Patient Care Encounter	AUTTEXAM	4
@@ -54954,14 +55226,15 @@ PXBAPI1	PCE Patient Care Encounter	AUPNVCPT	2
 PXBAPI1	PCE Patient Care Encounter	AUPNVSIT	7
 PXBAPI1	PCE Patient Care Encounter	DPT	1
 PXBAPI1	PCE Patient Care Encounter	SC	1
-PXBAPI1	PCE Patient Care Encounter	TMP	10
+PXBAPI1	PCE Patient Care Encounter	TMP	14
 PXBAPI2	PCE Patient Care Encounter	DD	1
 PXBAPI2	PCE Patient Care Encounter	DPT	1
 PXBAPI2	PCE Patient Care Encounter	SC	4
 PXBAPI2	PCE Patient Care Encounter	SCE	2
-PXBAPI21	PCE Patient Care Encounter	AUPNVSIT	9
+PXBAPI21	PCE Patient Care Encounter	AUPNVSIT	4
 PXBAPI21	PCE Patient Care Encounter	DPT	2
-PXBAPI21	PCE Patient Care Encounter	SCE	7
+PXBAPI21	PCE Patient Care Encounter	PXIND	2
+PXBAPI21	PCE Patient Care Encounter	SCE	8
 PXBAPI22	PCE Patient Care Encounter	DG	1
 PXBAPI22	PCE Patient Care Encounter	DPT	5
 PXBAPI22	PCE Patient Care Encounter	SCE	1
@@ -54990,9 +55263,9 @@ PXBGPED	PCE Patient Care Encounter	AUPNVPED	2
 PXBGPED	PCE Patient Care Encounter	TMP	5
 PXBGPL	PCE Patient Care Encounter	TMP	2
 PXBGPL2	PCE Patient Care Encounter	TMP	18
-PXBGPOV	PCE Patient Care Encounter	AUPNVPOV	6
+PXBGPOV	PCE Patient Care Encounter	AUPNVPOV	5
 PXBGPOV	PCE Patient Care Encounter	TMP	16
-PXBGPOV	PCE Patient Care Encounter	UTILITY	12
+PXBGPOV	PCE Patient Care Encounter	UTILITY	10
 PXBGPOV2	PCE Patient Care Encounter	ICD9	5
 PXBGPOV2	PCE Patient Care Encounter	TMP	38
 PXBGPOV3	PCE Patient Care Encounter	TMP	14
@@ -55078,9 +55351,9 @@ PXBSTOR	PCE Patient Care Encounter	AUPNVPOV	1
 PXBSTOR	PCE Patient Care Encounter	AUPNVPRV	2
 PXBSTOR	PCE Patient Care Encounter	AUPNVSIT	4
 PXBSTOR	PCE Patient Care Encounter	DIC	1
-PXBSTOR	PCE Patient Care Encounter	TMP	30
+PXBSTOR	PCE Patient Care Encounter	TMP	32
 PXBSTOR1	PCE Patient Care Encounter	AUPNVCPT	10
-PXBSTOR1	PCE Patient Care Encounter	AUPNVPOV	5
+PXBSTOR1	PCE Patient Care Encounter	AUPNVPOV	4
 PXBSTOR1	PCE Patient Care Encounter	AUPNVPRV	3
 PXBSTOR1	PCE Patient Care Encounter	AUPNVSIT	4
 PXBSTOR1	PCE Patient Care Encounter	PX	3
@@ -55157,8 +55430,8 @@ PXCEAE1	PCE Patient Care Encounter	AUPNVIMM	4
 PXCEAE1	PCE Patient Care Encounter	AUPNVSIT	2
 PXCEAE2	PCE Patient Care Encounter	TMP	2
 PXCEC800	PCE Patient Care Encounter	AUPNVSIT	3
-PXCEC800	PCE Patient Care Encounter	SCE	2
-PXCECCLS	PCE Patient Care Encounter	AUPNVPOV	3
+PXCEC800	PCE Patient Care Encounter	SCE	3
+PXCECCLS	PCE Patient Care Encounter	AUPNVPOV	2
 PXCECCLS	PCE Patient Care Encounter	AUPNVSIT	1
 PXCECPT	PCE Patient Care Encounter	AUPNVCPT	2
 PXCECPT	PCE Patient Care Encounter	AUPNVSIT	1
@@ -55221,7 +55494,7 @@ PXCEVFI2	PCE Patient Care Encounter	AUPNVSIT	5
 PXCEVFI2	PCE Patient Care Encounter	DIC	3
 PXCEVFI2	PCE Patient Care Encounter	DPT	5
 PXCEVFI2	PCE Patient Care Encounter	SCE	1
-PXCEVFI2	PCE Patient Care Encounter	TMP	13
+PXCEVFI2	PCE Patient Care Encounter	TMP	17
 PXCEVFI4	PCE Patient Care Encounter	AUPNVPOV	3
 PXCEVFI4	PCE Patient Care Encounter	AUPNVPRV	3
 PXCEVFI4	PCE Patient Care Encounter	TMP	22
@@ -55232,7 +55505,7 @@ PXCEVFI5	PCE Patient Care Encounter	AUPNVSIT	4
 PXCEVFIL	PCE Patient Care Encounter	AUPNVSIT	5
 PXCEVFIL	PCE Patient Care Encounter	DD	1
 PXCEVFIL	PCE Patient Care Encounter	DPT	3
-PXCEVFIL	PCE Patient Care Encounter	TMP	19
+PXCEVFIL	PCE Patient Care Encounter	TMP	23
 PXCEVIMM	PCE Patient Care Encounter	AUPNVIMM	7
 PXCEVIMM	PCE Patient Care Encounter	AUTTIML	1
 PXCEVIMM	PCE Patient Care Encounter	TMP	1
@@ -55381,7 +55654,7 @@ PXKCO	PCE Patient Care Encounter	DIC	4
 PXKCO	PCE Patient Care Encounter	SC	1
 PXKCO	PCE Patient Care Encounter	VSIT	3
 PXKENC	PCE Patient Care Encounter	AUPNVSIT	5
-PXKENC	PCE Patient Care Encounter	TMP	2
+PXKENC	PCE Patient Care Encounter	TMP	6
 PXKENCOUNTER	PCE Patient Care Encounter	AUPNVCPT	12
 PXKENCOUNTER	PCE Patient Care Encounter	AUPNVHF	7
 PXKENCOUNTER	PCE Patient Care Encounter	AUPNVICR	7
@@ -55394,13 +55667,14 @@ PXKENCOUNTER	PCE Patient Care Encounter	AUPNVSIT	13
 PXKENCOUNTER	PCE Patient Care Encounter	AUPNVSK	7
 PXKENCOUNTER	PCE Patient Care Encounter	AUPNVTRT	7
 PXKENCOUNTER	PCE Patient Care Encounter	AUPNVXAM	7
-PXKENCOUNTER	PCE Patient Care Encounter	TMP	55
+PXKENCOUNTER	PCE Patient Care Encounter	TMP	69
 PXKFCPT1	PCE Patient Care Encounter	AUPNVCPT	25
 PXKFCPT1	PCE Patient Care Encounter	AUPNVSIT	1
 PXKFCPT1	PCE Patient Care Encounter	AUTNPOV	3
 PXKFCPT1	PCE Patient Care Encounter	TMP	30
 PXKFIMM1	PCE Patient Care Encounter	AUPNVIMM	5
 PXKFIMM1	PCE Patient Care Encounter	TMP	11
+PXKFPOV	PCE Patient Care Encounter	AUPNVPOV	2
 PXKFPOV1	PCE Patient Care Encounter	AUPNVPOV	8
 PXKFPOV1	PCE Patient Care Encounter	TMP	18
 PXKFSK1	PCE Patient Care Encounter	AUPNVSK	5
@@ -55409,7 +55683,7 @@ PXKFVST	PCE Patient Care Encounter	UTILITY	3
 PXKIMM	PCE Patient Care Encounter	AUPNVIMM	1
 PXKMAIN	PCE Patient Care Encounter	%ZOSF	1
 PXKMAIN	PCE Patient Care Encounter	AUPNVSIT	1
-PXKMAIN	PCE Patient Care Encounter	TMP	12
+PXKMAIN	PCE Patient Care Encounter	TMP	14
 PXKMAIN1	PCE Patient Care Encounter	AUPNVCPT	1
 PXKMAIN1	PCE Patient Care Encounter	TMP	1
 PXKMAIN2	PCE Patient Care Encounter	AUPNVIMM	1
@@ -55421,7 +55695,7 @@ PXKMASC	PCE Patient Care Encounter	DIC	1
 PXKMASC	PCE Patient Care Encounter	ORD	2
 PXKMASC	PCE Patient Care Encounter	PX	2
 PXKMASC	PCE Patient Care Encounter	SCE	4
-PXKMASC	PCE Patient Care Encounter	TMP	40
+PXKMASC	PCE Patient Care Encounter	TMP	46
 PXKMASC1	PCE Patient Care Encounter	TMP	7
 PXKMCODE	PCE Patient Care Encounter	AUPNVSC	13
 PXKMCODE	PCE Patient Care Encounter	AUPNVSIT	5
@@ -55432,9 +55706,9 @@ PXKMCODE	PCE Patient Care Encounter	TMP	17
 PXKMOD	PCE Patient Care Encounter	AUPNVCPT	3
 PXKMOD	PCE Patient Care Encounter	DD	1
 PXKMOD	PCE Patient Care Encounter	TMP	1
-PXKVST	PCE Patient Care Encounter	AUPNVSIT	14
+PXKVST	PCE Patient Care Encounter	AUPNVSIT	8
 PXKVST	PCE Patient Care Encounter	SC	1
-PXKVST	PCE Patient Care Encounter	TMP	42
+PXKVST	PCE Patient Care Encounter	TMP	23
 PXKWSRCH	PCE Patient Care Encounter	TMP	18
 PXLEXS	PCE Patient Care Encounter	ORD	1
 PXLEXS	PCE Patient Care Encounter	TMP	71
@@ -55685,7 +55959,8 @@ PXRM7XT	Clinical Reminders	PXRMXT	3
 PXRM7XT	Clinical Reminders	TMP	41
 PXRMAGE	Clinical Reminders	PXD	2
 PXRMAGE	Clinical Reminders	TMP	5
-PXRMAPI	Clinical Reminders	PXD	8
+PXRMAPI	Clinical Reminders	PXD	12
+PXRMAPI	Clinical Reminders	PXRMD	3
 PXRMAPI	Clinical Reminders	TMP	11
 PXRMAPI0	Clinical Reminders	PXD	1
 PXRMAPI0	Clinical Reminders	PXRMD	7
@@ -55700,6 +55975,9 @@ PXRMART	Clinical Reminders	GMR	4
 PXRMART	Clinical Reminders	PS	3
 PXRMASL	Clinical Reminders	DPT	3
 PXRMASL	Clinical Reminders	TMP	3
+PXRMBANNER	Clinical Reminders	DPT	1
+PXRMBANNER	Clinical Reminders	PXD	2
+PXRMBANNER	Clinical Reminders	TMP	11
 PXRMBMI	Clinical Reminders	PXRMINDX	6
 PXRMCALT	Clinical Reminders	DPT	1
 PXRMCALT	Clinical Reminders	RADPT	8
@@ -56020,7 +56298,7 @@ PXRMEXPS	Clinical Reminders	GMT	5
 PXRMEXPS	Clinical Reminders	ORD	1
 PXRMEXPS	Clinical Reminders	PXD	10
 PXRMEXPS	Clinical Reminders	PXRM	12
-PXRMEXPS	Clinical Reminders	PXRMD	28
+PXRMEXPS	Clinical Reminders	PXRMD	27
 PXRMEXPS	Clinical Reminders	TIU	1
 PXRMEXPS	Clinical Reminders	TMP	4
 PXRMEXPU	Clinical Reminders	DD	2
@@ -56051,6 +56329,7 @@ PXRMEXU5	Clinical Reminders	DIC	2
 PXRMEXU5	Clinical Reminders	ORD	1
 PXRMEXU5	Clinical Reminders	PXD	6
 PXRMEXU5	Clinical Reminders	TMP	5
+PXRMEXUINFOPNL	Clinical Reminders	PXD	1
 PXRMEXWB	Clinical Reminders	TMP	5
 PXRMFF	Clinical Reminders	PXRMD	2
 PXRMFF	Clinical Reminders	TMP	18
@@ -56160,13 +56439,15 @@ PXRMGEDT	Clinical Reminders	TMP	12
 PXRMGEN	Clinical Reminders	TMP	1
 PXRMGEV	Clinical Reminders	DPT	1
 PXRMGEV	Clinical Reminders	PXD	5
-PXRMGEV	Clinical Reminders	TMP	2
+PXRMGEV	Clinical Reminders	PXRM	3
+PXRMGEV	Clinical Reminders	PXRMD	2
+PXRMGEV	Clinical Reminders	TMP	3
 PXRMGEVA	Clinical Reminders	ORD	1
 PXRMGEVA	Clinical Reminders	PXD	4
 PXRMGEVA	Clinical Reminders	PXRM	1
 PXRMGEVA	Clinical Reminders	PXRMD	1
-PXRMGEVA	Clinical Reminders	PXRMXP	9
-PXRMGEVA	Clinical Reminders	TMP	23
+PXRMGEVA	Clinical Reminders	PXRMXP	10
+PXRMGEVA	Clinical Reminders	TMP	31
 PXRMHF	Clinical Reminders	AUTTHF	8
 PXRMHF	Clinical Reminders	PXRMINDX	2
 PXRMHF	Clinical Reminders	TMP	4
@@ -56552,6 +56833,8 @@ PXRMP71I	Clinical Reminders	XMB	1
 PXRMP72I	Clinical Reminders	ORD	8
 PXRMP72I	Clinical Reminders	PXRMD	2
 PXRMP85I	Clinical Reminders	PXRMD	2
+PXRMP87I	Clinical Reminders	PXD	1
+PXRMP87I	Clinical Reminders	PXRMD	2
 PXRMPARS	Clinical Reminders	PXRM	7
 PXRMPCMM	Clinical Reminders	TMP	6
 PXRMPDEM	Clinical Reminders	DGPM	8
@@ -56998,6 +57281,9 @@ PXSCH4	PCE Patient Care Encounter	AUPNVPOV	6
 PXSCH4	PCE Patient Care Encounter	TMP	16
 PXSELDS	PCE Patient Care Encounter	UTILITY	4
 PXSINQ	PCE Patient Care Encounter	DD	1
+PXSPECAUTH	PCE Patient Care Encounter	AUPNVPOV	4
+PXSPECAUTH	PCE Patient Care Encounter	AUPNVSIT	7
+PXSPECAUTH	PCE Patient Care Encounter	PXIND	18
 PXTTEDC	PCE Patient Care Encounter	AUTTEDT	3
 PXTTEDL	PCE Patient Care Encounter	AUTTEDT	1
 PXUACM	PCE Patient Care Encounter	AUTTIMM	3
@@ -62481,6 +62767,41 @@ RMPSCON	Prosthetics	DD	2
 RMPSCON	Prosthetics	PRC	14
 RMPSCON	Prosthetics	PRCD	1
 RMPSCON	Prosthetics	RMPR	10
+RMPV0RMPRDIS	Prosthetics Vision 4 Sight II	DD	2
+RMPV0RMPRDIS	Prosthetics Vision 4 Sight II	DPT	2
+RMPV0RMPRDIS	Prosthetics Vision 4 Sight II	RMPR	26
+RMPV0RMPROP	Prosthetics Vision 4 Sight II	RMPR	4
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II	DIC	2
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II	DPT	6
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II	RMPR	9
+RMPV0RMPRPAT5	Prosthetics Vision 4 Sight II	DPT	2
+RMPV0RMPRPAT5	Prosthetics Vision 4 Sight II	RMPR	14
+RMPV0RMPRPIYE	Prosthetics Vision 4 Sight II	PRCP	1
+RMPV0RMPRPIYE	Prosthetics Vision 4 Sight II	RMPR	8
+RMPV0RMPRPIYF	Prosthetics Vision 4 Sight II	RMPR	11
+RMPV0RMPRPIYF	Prosthetics Vision 4 Sight II	TMP	1
+RMPV0RMPRPIYI	Prosthetics Vision 4 Sight II	RMPR	8
+RMPV0RMPRPIYI	Prosthetics Vision 4 Sight II	TMP	3
+RMPV0RMPRPIYJ	Prosthetics Vision 4 Sight II	TMP	1
+RMPV0RMPRPIYS	Prosthetics Vision 4 Sight II	RMPR	6
+RMPV0RMPRSIT	Prosthetics Vision 4 Sight II	DIC	2
+RMPV0RMPRSIT	Prosthetics Vision 4 Sight II	RMPR	19
+RMPV0RMPRUTIL	Prosthetics Vision 4 Sight II	DD	2
+RMPV0RMPRUTIL	Prosthetics Vision 4 Sight II	DIC	2
+RMPV0RMPRUTIL	Prosthetics Vision 4 Sight II	DPT	2
+RMPV0RMPRUTIL	Prosthetics Vision 4 Sight II	PRC	2
+RMPV0RMPRUTIL	Prosthetics Vision 4 Sight II	RMPR	24
+RMPV0RMPRUTIL	Prosthetics Vision 4 Sight II	TMP	10
+RMPVDRV	Prosthetics Vision 4 Sight II	TMP	4
+RMPVRT	Prosthetics Vision 4 Sight II	TMP	1
+RMPVS633	Prosthetics Vision 4 Sight II	DPT	1
+RMPVS633	Prosthetics Vision 4 Sight II	RMPR	5
+RMPVS633	Prosthetics Vision 4 Sight II	TMP	56
+RMPVS925	Prosthetics Vision 4 Sight II	RMPR	9
+RMPVS925	Prosthetics Vision 4 Sight II	TMP	50
+RMPVVALM	Prosthetics Vision 4 Sight II	ORD	5
+RMPVVALM	Prosthetics Vision 4 Sight II	SD	2
+RMPVVALM	Prosthetics Vision 4 Sight II	TMP	2
 RODGDID	Uncategorized	DD	5
 RODGDID	Uncategorized	DIBT	1
 RODGDID	Uncategorized	DIC	1
@@ -64715,6 +65036,7 @@ SD53P821	Scheduling	SD	1
 SD53P832	Scheduling	SD	1
 SD53P876	Scheduling	SD	2
 SD53P888	Scheduling	SD	1
+SD53P923	Scheduling	SD	1
 SD599PT	Scheduling	SC	3
 SD5USTOP	Scheduling	DIC	4
 SD628PST	Scheduling	DIC	3
@@ -65115,9 +65437,9 @@ SDCCRSEN1	Scheduling	DPT	10
 SDCCRSEN1	Scheduling	SC	14
 SDCCRSEN1	Scheduling	SDEC	3
 SDCCRSEN1	Scheduling	TMP	10
-SDCCRSEN2	Scheduling	DPT	1
+SDCCRSEN2	Scheduling	DPT	2
 SDCCRSEN2	Scheduling	GMR	2
-SDCCRSEN2	Scheduling	ORD	2
+SDCCRSEN2	Scheduling	ORD	3
 SDCD	Scheduling	DPT	8
 SDCD	Scheduling	SC	3
 SDCDAL1	Scheduling	SC	1
@@ -65955,6 +66277,8 @@ SDES2APTLETTERSV	Scheduling	SC	3
 SDES2APTLETTERSV	Scheduling	SDEC	2
 SDES2ARCLOSE	Scheduling	SDEC	3
 SDES2ARCLOSE	Scheduling	TMP	2
+SDES2BLCKANDMOV2	Scheduling	HOLIDAY	1
+SDES2BLCKANDMOV2	Scheduling	SC	2
 SDES2BLDAPPT2	Scheduling	DGPF	4
 SDES2BLDAPPT2	Scheduling	DGS	3
 SDES2BLDAPPT2	Scheduling	SDEC	1
@@ -65974,6 +66298,13 @@ SDES2CANCELAPPT	Scheduling	SCE	2
 SDES2CANCELAPPT	Scheduling	SD	1
 SDES2CANCELAPPT	Scheduling	SDD	2
 SDES2CANCELAPPT	Scheduling	SDEC	4
+SDES2CANCELAPPT1	Scheduling	SDEC	2
+SDES2CANCELAPPT2	Scheduling	DPT	2
+SDES2CANCELAPPT2	Scheduling	SC	3
+SDES2CANCELAPPT2	Scheduling	SCE	2
+SDES2CANCELAPPT2	Scheduling	SD	1
+SDES2CANCELAPPT2	Scheduling	SDD	2
+SDES2CANCELAPPT2	Scheduling	SDEC	2
 SDES2CANCLNAVAIL	Scheduling	SC	9
 SDES2CANCLNAVAIL	Scheduling	SDEC	3
 SDES2CHECKIN	Scheduling	DPT	1
@@ -65985,6 +66316,7 @@ SDES2CLINICLIST	Scheduling	SC	3
 SDES2CLINICLIST	Scheduling	SDEC	6
 SDES2CLININFO	Scheduling	SC	4
 SDES2CLININFO	Scheduling	SDEC	2
+SDES2CLINPRECAN	Scheduling	SDEC	2
 SDES2CLINUT	Scheduling	SC	24
 SDES2CLINUT	Scheduling	SDEC	2
 SDES2CLNSEARCH	Scheduling	SC	8
@@ -65992,6 +66324,8 @@ SDES2CLONESLOTS	Scheduling	SC	6
 SDES2CONTACTS	Scheduling	SDEC	4
 SDES2CREATEAPPT	Scheduling	DPT	4
 SDES2CREATEAPPT	Scheduling	SC	1
+SDES2CREATEAPPT2	Scheduling	DPT	4
+SDES2CREATEAPPT2	Scheduling	SC	1
 SDES2CREATESNAPS	Scheduling	SDEC	2
 SDES2CRTAPREQ	Scheduling	SDEC	6
 SDES2CRTCLNAVAIL	Scheduling	HOLIDAY	1
@@ -66007,6 +66341,8 @@ SDES2CRTVISIT	Scheduling	DD	2
 SDES2CRTVISIT	Scheduling	DIC	1
 SDES2EDITAPPT	Scheduling	SC	1
 SDES2EDITAPPT	Scheduling	SDEC	1
+SDES2EDITAPPT2	Scheduling	SC	1
+SDES2EDITAPPT2	Scheduling	SDEC	1
 SDES2EDITAPREQ	Scheduling	SDEC	8
 SDES2EDITPATDEMO	Scheduling	DIC	6
 SDES2EDITPATDEMO	Scheduling	DPT	2
@@ -66044,6 +66380,7 @@ SDES2GETEXPENTRY	Scheduling	SDD	2
 SDES2GETHOLIDAYS	Scheduling	HOLIDAY	1
 SDES2GETLETRTYPE	Scheduling	VA	2
 SDES2GETLINKS	Scheduling	SDEC	2
+SDES2GETNEXTSLOT	Scheduling	TMP	1
 SDES2GETPATSTAT	Scheduling	SDEC	2
 SDES2GETRECALL	Scheduling	SD	2
 SDES2GETREGS	Scheduling	DGS	1
@@ -66089,7 +66426,7 @@ SDES2NOSHOW	Scheduling	SC	1
 SDES2PATDATA	Scheduling	DGS	2
 SDES2PATSEARCH	Scheduling	DGPF	2
 SDES2PATSEARCH	Scheduling	DGS	3
-SDES2PATSEARCH	Scheduling	DPT	10
+SDES2PATSEARCH	Scheduling	DPT	11
 SDES2PROVSEARCH	Scheduling	VA	2
 SDES2PRVCLINSRC	Scheduling	SC	3
 SDES2QRYAPREQS	Scheduling	GMR	4
@@ -66134,6 +66471,9 @@ SDES2SETCHECKOUT	Scheduling	SC	9
 SDES2SETCHECKOUT	Scheduling	SCE	7
 SDES2SETCHECKOUT	Scheduling	SD	3
 SDES2SETCHECKOUT	Scheduling	SDEC	1
+SDES2SNODEUTIL	Scheduling	DPT	1
+SDES2SNODEUTIL	Scheduling	SC	24
+SDES2SNODEUTIL	Scheduling	SDEC	6
 SDES2SPACEBAR	Scheduling	DISV	3
 SDES2SPACEBAR	Scheduling	TMP	3
 SDES2SRCHCLNBYSC	Scheduling	DIC	2
@@ -66157,7 +66497,7 @@ SDES2VAL2	Scheduling	DPT	2
 SDES2VAL200	Scheduling	VA	2
 SDES2VAL44	Scheduling	DG	3
 SDES2VAL44	Scheduling	SC	4
-SDES2VAL44	Scheduling	SD	2
+SDES2VAL44	Scheduling	SD	3
 SDES2VAL44	Scheduling	VA	1
 SDES2VAL44A	Scheduling	SC	4
 SDES2VAL44A	Scheduling	SDEC	5
@@ -66269,6 +66609,8 @@ SDES929P	Scheduling	HOLIDAY	1
 SDES929P	Scheduling	SC	7
 SDES929P	Scheduling	TMP	5
 SDES929P	Scheduling	XTMP	10
+SDES930P	Scheduling	SC	1
+SDES930P	Scheduling	XTMP	9
 SDES933P	Scheduling	DIC	2
 SDES933P	Scheduling	SC	7
 SDES933P	Scheduling	TMP	6
@@ -66278,6 +66620,10 @@ SDES935P	Scheduling	SC	5
 SDES935P	Scheduling	TMP	5
 SDES935P	Scheduling	XTMP	8
 SDES939P	Scheduling	DIC	9
+SDES942P	Scheduling	SC	7
+SDES942P	Scheduling	XTMP	12
+SDES943P	Scheduling	SDEC	1
+SDES943P	Scheduling	XTMP	5
 SDESADDDELCGI	Scheduling	SDEC	6
 SDESADDRG	Scheduling	SDEC	6
 SDESAPPT	Scheduling	DPT	1
@@ -66702,37 +67048,23 @@ SDM1A	Scheduling	SDD	1
 SDM1A	Scheduling	SDEC	1
 SDM1A	Scheduling	SDWL	4
 SDM1A	Scheduling	TMP	17
-SDM1T	Scheduling	%ZOSF	4
-SDM1T	Scheduling	DD	7
+SDM1T	Scheduling	%ZOSF	11
+SDM1T	Scheduling	DD	11
+SDM1T	Scheduling	DIC	1
 SDM1T	Scheduling	DIE	1
 SDM1T	Scheduling	DISV	2
-SDM1T	Scheduling	DPT	13
+SDM1T	Scheduling	DPT	32
 SDM1T1	Scheduling	%ZOSF	1
+SDM1T1	Scheduling	DD	1
 SDM1T1	Scheduling	DPT	2
-SDM1T10	Scheduling	%ZOSF	2
-SDM1T10	Scheduling	DD	6
-SDM1T10	Scheduling	DISV	2
-SDM1T10	Scheduling	DPT	1
 SDM1T2	Scheduling	%ZOSF	1
-SDM1T2	Scheduling	DD	1
-SDM1T2	Scheduling	DPT	2
 SDM1T3	Scheduling	%ZOSF	1
-SDM1T3	Scheduling	DPT	2
+SDM1T3	Scheduling	DD	1
 SDM1T4	Scheduling	%ZOSF	1
-SDM1T4	Scheduling	DD	1
-SDM1T4	Scheduling	DPT	2
-SDM1T5	Scheduling	%ZOSF	5
-SDM1T5	Scheduling	DD	9
-SDM1T5	Scheduling	DIC	1
-SDM1T5	Scheduling	DISV	2
-SDM1T5	Scheduling	DPT	14
-SDM1T6	Scheduling	%ZOSF	1
-SDM1T6	Scheduling	DD	1
-SDM1T7	Scheduling	%ZOSF	1
-SDM1T8	Scheduling	%ZOSF	1
-SDM1T8	Scheduling	DD	1
-SDM1T9	Scheduling	%ZOSF	1
-SDM1T9	Scheduling	DD	1
+SDM1T4	Scheduling	DPT	3
+SDM1T5	Scheduling	%ZOSF	1
+SDM1T5	Scheduling	DD	1
+SDM1T5	Scheduling	DPT	3
 SDM2	Scheduling	DPT	9
 SDM2	Scheduling	GMR	3
 SDM2	Scheduling	SC	25
@@ -69055,7 +69387,7 @@ SROUTL	Surgery	SRO	5
 SROUTL	Surgery	VA	2
 SROUTL	Surgery	XTMP	26
 SROUTL0	Surgery	DIC	1
-SROUTL0	Surgery	SC	15
+SROUTL0	Surgery	SC	13
 SROUTL0	Surgery	SRF	19
 SROUTL0	Surgery	SRO	9
 SROUTL0	Surgery	SRS	4
@@ -69470,7 +69802,7 @@ TIUAL1	Text Integration Utility	TIU	19
 TIUAL1	Text Integration Utility	TMP	33
 TIUALFUN	Text Integration Utility	TIU	1
 TIUALRT	Text Integration Utility	DPT	1
-TIUALRT	Text Integration Utility	TIU	23
+TIUALRT	Text Integration Utility	TIU	24
 TIUALRT	Text Integration Utility	VA	2
 TIUALRT1	Text Integration Utility	TIU	6
 TIUALRT1	Text Integration Utility	VA	2
@@ -69540,10 +69872,8 @@ TIUCOPP	Text Integration Utility	TMP	4
 TIUCOPR1	Text Integration Utility	DPT	3
 TIUCOPR1	Text Integration Utility	GMR	3
 TIUCOPR1	Text Integration Utility	OR	1
-TIUCOPR1	Text Integration Utility	SC	1
 TIUCOPR1	Text Integration Utility	TIU	10
 TIUCOPR1	Text Integration Utility	TIUP	3
-TIUCOPR1	Text Integration Utility	VA	5
 TIUCOPUT	Text Integration Utility	TIU	2
 TIUCP	Text Integration Utility	TIU	4
 TIUCPFIX	Text Integration Utility	TIU	34
@@ -70383,9 +70713,8 @@ TIUSRVT1	Text Integration Utility	VA	2
 TIUSRVT2	Text Integration Utility	PXRMD	2
 TIUSRVT2	Text Integration Utility	TIU	2
 TIUSRVT3	Text Integration Utility	TIU	4
-TIUSRVT3	Text Integration Utility	VA	1
 TIUSRVT4	Text Integration Utility	TIU	4
-TIUSRVT4	Text Integration Utility	VA	2
+TIUSRVT4	Text Integration Utility	VA	1
 TIUSRVT5	Text Integration Utility	TIU	7
 TIUSRVT5	Text Integration Utility	TMP	12
 TIUSTA	Text Integration Utility	DIPT	1
@@ -72329,7 +72658,7 @@ VPSVTL01	VA Point of Service	UTILITY	5
 VPSWRIST	VA Point of Service	DPT	1
 VRTEST	Uncategorized	PSDRUG	2
 VRTEST	Uncategorized	PSTRAN	1
-VSIT	PCE Patient Care Encounter	AUPNVSIT	12
+VSIT	PCE Patient Care Encounter	AUPNVSIT	11
 VSIT	PCE Patient Care Encounter	DIC	1
 VSIT	PCE Patient Care Encounter	TMP	7
 VSIT0	PCE Patient Care Encounter	DIC	4
@@ -72363,13 +72692,13 @@ VSITNTEG	PCE Patient Care Encounter	%ZOSF	3
 VSITNTEG	PCE Patient Care Encounter	UTILITY	1
 VSITOE	PCE Patient Care Encounter	AUPNVSIT	9
 VSITOE	PCE Patient Care Encounter	TMP	2
-VSITPUT	PCE Patient Care Encounter	TMP	2
+VSITPUT	PCE Patient Care Encounter	TMP	5
 VSITPUT1	PCE Patient Care Encounter	AUPNVSIT	19
 VSITPUT1	PCE Patient Care Encounter	XTMP	2
 VSITSTAT	PCE Patient Care Encounter	AUPNVSIT	6
 VSITSTAT	PCE Patient Care Encounter	DIC	3
 VSITSTAT	PCE Patient Care Encounter	UTILITY	10
-VSITVAR	PCE Patient Care Encounter	AUPNVSIT	2
+VSITVAR	PCE Patient Care Encounter	AUPNVSIT	4
 VSITVAR	PCE Patient Care Encounter	DD	2
 VSITVAR	PCE Patient Care Encounter	TMP	11
 VSITVID	PCE Patient Care Encounter	AUPNVSIT	5
@@ -72803,8 +73132,8 @@ XHDPTREE	HealtheVet Desktop	XTV	1
 XHDTST	HealtheVet Desktop	TMP	1
 XHDX	HealtheVet Desktop	DIC	3
 XHDX	HealtheVet Desktop	VA	1
-XINDEX	Toolkit	%ZOSF	3
-XINDEX	Toolkit	UTILITY	26
+XINDEX	Toolkit	%ZOSF	6
+XINDEX	Toolkit	UTILITY	27
 XINDX1	Toolkit	UTILITY	1
 XINDX10	Toolkit	DD	23
 XINDX10	Toolkit	DIC	1
@@ -74590,10 +74919,11 @@ XUEPCSUT	Kernel	XTV	4
 XUESSO1	Kernel	TMP	3
 XUESSO1	Kernel	VA	34
 XUESSO1	Kernel	XTV	2
+XUESSO1	Kernel	XWB	1
 XUESSO2	Kernel	DIC	1
 XUESSO2	Kernel	TMP	4
 XUESSO2	Kernel	VA	32
-XUESSO2	Kernel	XWB	1
+XUESSO2	Kernel	XWB	2
 XUESSO3	Kernel	DIC	7
 XUESSO3	Kernel	TMP	16
 XUESSO3	Kernel	VA	36
@@ -74699,6 +75029,7 @@ XUINTSK4	Kernel	%ZOSF	4
 XUINTSK4	Kernel	%ZTSCH	3
 XUINZIS	Kernel	%ZIS	2
 XUINZIS	Kernel	UTILITY	3
+XUKSPTLSF	Kernel	TMP	9
 XULM	Kernel	%ZOSF	2
 XULM	Kernel	DIC	1
 XULM	Kernel	TMP	1
@@ -74842,6 +75173,9 @@ XUMFXP2	Kernel	DIC	5
 XUMFXP2	Kernel	TMP	28
 XUMFXR	Kernel	TMP	12
 XUMPI	Kernel	XTV	2
+XUMUCI	Kernel	ROUTINE	1
+XUMUCI	Kernel	VA	1
+XUMUCI	Kernel	XUTL	9
 XUMVIDTA	Kernel	VA	2
 XUMVIENU	Kernel	DIC	6
 XUMVIENU	Kernel	ORD	1
@@ -74915,6 +75249,9 @@ XUPSQRY	Kernel	USC	1
 XUPSQRY	Kernel	VA	6
 XUPSUTL1	Kernel	DIC	1
 XUPSUTL1	Kernel	VA	3
+XUREMAP	Toolkit	DIC	2
+XUREMAP	Toolkit	XWB	2
+XUREMAP1	Toolkit	XWB	1
 XURNPAUD	Toolkit	DIA	2
 XURNPAUD	Toolkit	TMP	2
 XURNPAUD	Toolkit	VA	1
@@ -74951,7 +75288,7 @@ XUS2	Kernel	%ZOSF	7
 XUS2	Kernel	VA	18
 XUS2	Kernel	XMB	1
 XUS2	Kernel	XTV	2
-XUS3	Kernel	%ZIS	3
+XUS3	Kernel	%ZIS	2
 XUS3	Kernel	DISV	1
 XUS3	Kernel	VA	1
 XUS3	Kernel	XTV	1
@@ -74996,7 +75333,7 @@ XUSBSE1	Kernel	TMP	7
 XUSBSE1	Kernel	VA	1
 XUSBSE1	Kernel	XTMP	19
 XUSBSE1	Kernel	XUTL	2
-XUSBSE1	Kernel	XWB	2
+XUSBSE1	Kernel	XWB	4
 XUSC1	Kernel	XTV	3
 XUSC1C	Kernel	TMP	4
 XUSC1S	Kernel	TMP	11
@@ -75181,6 +75518,7 @@ XUSZ91	Kernel	%ZOSF	4
 XUSZ91	Kernel	DIC	10
 XUSZ91	Kernel	UTILITY	5
 XUSZ91	Kernel	XUTL	6
+XUTLS	Kernel	XTMP	4
 XUTMD	Kernel	DIC	2
 XUTMD	Kernel	TMP	1
 XUTMDQ	Kernel	DIC	2
@@ -75763,6 +76101,9 @@ YS254PST	Mental Health	XTMP	2
 YS254PST	Mental Health	YTT	3
 YS255PST	Mental Health	TMP	1
 YS255PST	Mental Health	YTT	5
+YS269PST	Mental Health	TMP	8
+YS269PST	Mental Health	XTMP	2
+YS269PST	Mental Health	YTT	3
 YSASA2	Mental Health	DPT	1
 YSASA2	Mental Health	TMP	1
 YSASA2	Mental Health	YSTX	6
@@ -76537,6 +76878,7 @@ YTSCOREV	Mental Health	YTT	21
 YTSCOREX	Mental Health	TMP	10
 YTSCOREX	Mental Health	YTT	25
 YTSCSDD	Mental Health	TMP	11
+YTSCSSR2	Mental Health	TMP	5
 YTSDBAS	Mental Health	TMP	11
 YTSDERS	Mental Health	TMP	9
 YTSEAT26	Mental Health	TMP	9

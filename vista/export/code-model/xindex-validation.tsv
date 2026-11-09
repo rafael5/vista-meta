@@ -157,7 +157,7 @@ ALPBHL1	Barcode Medication Administration	222	222	Y	3	3	Y	8	8	8	0	0	1.0000
 ALPBHL1U	Barcode Medication Administration	302	302	Y	12	12	Y	4	4	4	0	0	1.0000
 ALPBIN	Barcode Medication Administration	124	124	Y	10	10	Y	6	6	6	0	0	1.0000
 ALPBIND	Barcode Medication Administration	220	220	Y	15	15	Y	9	9	9	0	0	1.0000
-ALPBINP	Barcode Medication Administration	302	302	Y	16	16	Y	16	16	16	0	0	1.0000
+ALPBINP	Barcode Medication Administration	310	310	Y	16	16	Y	16	16	16	0	0	1.0000
 ALPBOP	Barcode Medication Administration	44	44	Y	4	4	Y	4	4	4	0	0	1.0000
 ALPBPALL	Barcode Medication Administration	181	181	Y	3	3	Y	10	10	10	0	0	1.0000
 ALPBPARM	Barcode Medication Administration	134	134	Y	12	12	Y	4	4	4	0	0	1.0000
@@ -1157,8 +1157,8 @@ DGABUL	Registration	55	55	Y	11	11	Y	8	8	8	0	0	1.0000
 DGACT	Registration	69	69	Y	5	5	Y	1	1	1	0	0	1.0000
 DGADDLST	Registration	162	162	Y	9	9	Y	11	11	11	0	0	1.0000
 DGADDUT2	Registration	82	82	Y	5	5	Y	6	6	6	0	0	1.0000
-DGADDUTL	Registration	279	279	Y	20	20	Y	12	12	12	0	0	1.0000
-DGADDVAL	Registration	75	75	Y	2	2	Y	3	3	3	0	0	1.0000
+DGADDUTL	Registration	343	343	Y	24	24	Y	15	15	15	0	0	1.0000
+DGADDVAL	Registration	82	82	Y	2	2	Y	3	3	3	0	0	1.0000
 DGADTTM1	Registration	41	41	Y	1	1	Y	1	1	1	0	0	1.0000
 DGADTTM2	Registration	39	39	Y	1	1	Y	1	1	1	0	0	1.0000
 DGADTTM3	Registration	41	41	Y	1	1	Y	1	1	1	0	0	1.0000
@@ -1245,7 +1245,7 @@ DGBUL	Registration	32	32	Y	4	4	Y	2	2	2	0	0	1.0000
 DGCLAPI1	Registration	66	66	Y	4	4	Y	4	4	4	0	0	1.0000
 DGCLEAR	Registration	64	64	Y	4	4	Y	1	1	1	0	0	1.0000
 DGCNTRY	Registration	73	73	Y	5	5	Y	2	2	2	0	0	1.0000
-DGCOL	Registration	74	74	Y	12	12	Y	11	11	11	0	0	1.0000
+DGCOL	Registration	81	81	Y	13	13	Y	13	13	13	0	0	1.0000
 DGCOMPACT	Registration	252	252	Y	12	12	Y	9	9	9	0	0	1.0000
 DGCOMPACTELIG	Registration	82	82	Y	5	5	Y	7	7	7	0	0	1.0000
 DGCV	Registration	270	270	Y	13	13	Y	6	6	6	0	0	1.0000
@@ -1418,10 +1418,10 @@ DGJTVW1	Incomplete Records Tracking	67	67	Y	12	12	Y	9	9	9	0	0	1.0000
 DGJTVW2	Incomplete Records Tracking	84	84	Y	3	3	Y	3	3	3	0	0	1.0000
 DGJTVW3	Incomplete Records Tracking	83	83	Y	4	4	Y	5	5	5	0	0	1.0000
 DGJUTQ	Incomplete Records Tracking	25	25	Y	11	11	Y	4	4	4	0	0	1.0000
-DGLOCK	Registration	200	200	Y	33	33	Y	3	3	3	0	0	1.0000
+DGLOCK	Registration	217	217	Y	33	33	Y	4	4	4	0	0	1.0000
 DGLOCK1	Registration	138	138	Y	18	18	Y	8	8	8	0	0	1.0000
 DGLOCK2	Registration	89	89	Y	27	27	Y	2	2	2	0	0	1.0000
-DGLOCK3	Registration	71	71	Y	12	12	Y	6	6	6	0	0	1.0000
+DGLOCK3	Registration	90	90	Y	12	12	Y	7	7	7	0	0	1.0000
 DGLP3USR	Registration	169	169	Y	21	21	Y	6	6	6	0	0	1.0000
 DGMFA10	Registration	90	90	Y	8	8	Y	6	6	6	0	0	1.0000
 DGMFA11	Registration	89	89	Y	8	8	Y	6	6	6	0	0	1.0000
@@ -1465,7 +1465,7 @@ DGMTDD1	Registration	83	83	Y	8	8	Y	3	3	3	0	0	1.0000
 DGMTDD2	Registration	110	110	Y	14	14	Y	3	3	3	0	0	1.0000
 DGMTDD3	Registration	78	78	Y	12	12	Y	2	2	2	0	0	1.0000
 DGMTDD4	Registration	169	169	Y	7	7	Y	1	1	1	0	0	1.0000
-DGMTDD5	Registration	100	100	Y	5	5	Y	1	1	1	0	0	1.0000
+DGMTDD5	Registration	109	109	Y	5	5	Y	1	1	1	0	0	1.0000
 DGMTDEL	Registration	96	96	Y	12	12	Y	7	7	7	0	0	1.0000
 DGMTDEL1	Registration	83	83	Y	8	8	Y	11	11	11	0	0	1.0000
 DGMTDELS	Registration	62	62	Y	8	8	Y	5	5	5	0	0	1.0000
@@ -1914,12 +1914,12 @@ DGR114	Registration	87	87	Y	11	11	Y	8	8	8	0	0	1.0000
 DGREG	Registration	367	367	Y	36	36	Y	37	37	37	0	0	1.0000
 DGREG0	Registration	85	85	Y	16	16	Y	13	13	13	0	0	1.0000
 DGREG00	Registration	71	71	Y	17	17	Y	11	11	11	0	0	1.0000
-DGREGAED	Registration	256	256	Y	18	18	Y	7	7	7	0	0	1.0000
+DGREGAED	Registration	377	377	Y	24	24	Y	9	9	9	0	0	1.0000
 DGREGARP	Registration	277	277	Y	22	22	Y	13	14	13	0	1	0.9286
-DGREGAZL	Registration	196	196	Y	14	14	Y	10	10	10	0	0	1.0000
-DGREGCOP	Registration	50	50	Y	4	4	Y	1	1	1	0	0	1.0000
-DGREGCP1	Registration	161	161	Y	7	7	Y	5	5	5	0	0	1.0000
-DGREGCP2	Registration	53	53	Y	5	5	Y	1	1	1	0	0	1.0000
+DGREGAZL	Registration	204	204	Y	14	14	Y	10	10	10	0	0	1.0000
+DGREGCOP	Registration	185	185	Y	6	6	Y	1	1	1	0	0	1.0000
+DGREGCP1	Registration	323	323	Y	12	12	Y	5	5	5	0	0	1.0000
+DGREGCP2	Registration	52	52	Y	5	5	Y	1	1	1	0	0	1.0000
 DGREGDD	Registration	49	49	Y	7	7	Y	2	2	2	0	0	1.0000
 DGREGDD1	Registration	136	136	Y	9	9	Y	5	5	5	0	0	1.0000
 DGREGDEL	Registration	11	11	Y	4	4	Y	4	4	4	0	0	1.0000
@@ -1927,10 +1927,10 @@ DGREGE	Registration	48	48	Y	12	12	Y	10	10	10	0	0	1.0000
 DGREGEEWS	Registration	76	76	Y	7	7	Y	3	3	3	0	0	1.0000
 DGREGFAC	Registration	20	20	Y	2	2	Y	0	0	0	0	0	1.0000
 DGREGG	Registration	31	31	Y	2	2	Y	1	1	1	0	0	1.0000
-DGREGRED	Registration	291	291	Y	20	20	Y	9	9	9	0	0	1.0000
-DGREGTE2	Registration	131	131	Y	8	8	Y	4	5	4	0	1	0.8000
-DGREGTED	Registration	288	288	Y	22	22	Y	6	6	6	0	0	1.0000
-DGREGTZL	Registration	203	203	Y	15	15	Y	12	12	12	0	0	1.0000
+DGREGRED	Registration	406	406	Y	25	25	Y	11	11	11	0	0	1.0000
+DGREGTE2	Registration	397	397	Y	17	17	Y	10	11	10	0	1	0.9091
+DGREGTED	Registration	437	437	Y	26	26	Y	10	10	10	0	0	1.0000
+DGREGTZL	Registration	213	213	Y	15	15	Y	12	12	12	0	0	1.0000
 DGRNCVNC	Registration	310	310	Y	15	15	Y	8	8	8	0	0	1.0000
 DGRNCVNP	Registration	58	58	Y	5	5	Y	3	3	3	0	0	1.0000
 DGROAPI	Registration	58	58	Y	2	2	Y	4	4	4	0	0	1.0000
@@ -1951,7 +1951,7 @@ DGROMAIL	Registration	202	202	Y	7	7	Y	8	8	8	0	0	1.0000
 DGROUT	Registration	118	118	Y	4	4	Y	3	3	3	0	0	1.0000
 DGROUT2	Registration	68	68	Y	3	3	Y	2	2	2	0	0	1.0000
 DGRP	Registration	88	88	Y	12	12	Y	6	6	6	0	0	1.0000
-DGRP1	Registration	138	138	Y	8	8	Y	7	7	7	0	0	1.0000
+DGRP1	Registration	139	139	Y	8	8	Y	7	7	7	0	0	1.0000
 DGRP10	Registration	17	17	Y	3	3	Y	5	5	5	0	0	1.0000
 DGRP11	Registration	50	50	Y	3	3	Y	4	4	4	0	0	1.0000
 DGRP1152A	Registration	286	286	Y	26	26	Y	14	14	14	0	0	1.0000
@@ -1981,7 +1981,7 @@ DGRPC	Registration	206	206	Y	30	30	Y	16	16	16	0	0	1.0000
 DGRPC1	Registration	74	74	Y	31	31	Y	2	2	2	0	0	1.0000
 DGRPC2	Registration	242	242	Y	43	43	Y	20	20	20	0	0	1.0000
 DGRPC3	Registration	230	230	Y	20	20	Y	14	15	14	0	1	0.9333
-DGRPCADD	Registration	118	118	Y	3	3	Y	6	6	6	0	0	1.0000
+DGRPCADD	Registration	390	390	Y	11	11	Y	13	13	13	0	0	1.0000
 DGRPCE	Registration	163	163	Y	41	41	Y	14	14	14	0	0	1.0000
 DGRPCE1	Registration	141	141	Y	90	90	Y	2	2	2	0	0	1.0000
 DGRPCF	Registration	105	105	Y	9	9	Y	16	16	16	0	0	1.0000
@@ -1990,15 +1990,15 @@ DGRPCM	Registration	21	21	Y	3	3	Y	3	3	3	0	0	1.0000
 DGRPCP	Registration	29	29	Y	6	6	Y	6	6	6	0	0	1.0000
 DGRPCP1	Registration	55	55	Y	10	10	Y	2	3	2	0	1	0.6667
 DGRPCR	Registration	30	30	Y	7	7	Y	9	9	9	0	0	1.0000
-DGRPCTRG	Registration	25	25	Y	3	3	Y	1	1	1	0	0	1.0000
+DGRPCTRG	Registration	26	26	Y	3	3	Y	1	1	1	0	0	1.0000
 DGRPCU	Registration	27	27	Y	7	7	Y	11	11	11	0	0	1.0000
 DGRPD	Registration	314	314	Y	16	16	Y	27	27	27	0	0	1.0000
 DGRPD1	Registration	120	120	Y	5	5	Y	9	9	9	0	0	1.0000
 DGRPDB	Registration	163	163	Y	16	16	Y	14	14	14	0	0	1.0000
 DGRPDD1	Registration	75	75	Y	20	20	Y	4	4	4	0	0	1.0000
 DGRPDT	Registration	188	188	Y	32	32	Y	2	2	2	0	0	1.0000
-DGRPE	Registration	329	329	Y	72	72	Y	23	23	23	0	0	1.0000
-DGRPE1	Registration	153	153	Y	20	20	Y	11	11	11	0	0	1.0000
+DGRPE	Registration	333	333	Y	68	68	Y	24	24	24	0	0	1.0000
+DGRPE1	Registration	247	247	Y	26	26	Y	13	14	13	0	1	0.9286
 DGRPE4	Registration	72	72	Y	8	8	Y	1	1	1	0	0	1.0000
 DGRPECE	Registration	247	247	Y	13	13	Y	7	7	7	0	0	1.0000
 DGRPECE1	Registration	124	124	Y	8	8	Y	8	8	8	0	0	1.0000
@@ -2007,15 +2007,15 @@ DGRPEIS	Registration	166	166	Y	12	12	Y	7	8	7	0	1	0.8750
 DGRPEIS1	Registration	107	107	Y	9	9	Y	12	12	12	0	0	1.0000
 DGRPEIS2	Registration	115	115	Y	11	11	Y	10	10	10	0	0	1.0000
 DGRPEIS3	Registration	235	235	Y	18	18	Y	9	9	9	0	0	1.0000
-DGRPH	Registration	63	63	Y	22	22	Y	2	2	2	0	0	1.0000
+DGRPH	Registration	64	64	Y	22	22	Y	2	2	2	0	0	1.0000
 DGRPLE	Registration	158	158	Y	10	10	Y	9	9	9	0	0	1.0000
 DGRPMS	Registration	299	299	Y	36	36	Y	6	6	6	0	0	1.0000
-DGRPP	Registration	115	115	Y	13	13	Y	11	11	11	0	0	1.0000
+DGRPP	Registration	193	193	Y	17	17	Y	12	12	12	0	0	1.0000
 DGRPP1	Registration	52	52	Y	7	7	Y	4	4	4	0	0	1.0000
 DGRPTU	Registration	82	82	Y	8	8	Y	7	7	7	0	0	1.0000
 DGRPU	Registration	279	279	Y	19	19	Y	12	12	12	0	0	1.0000
-DGRPU1	Registration	60	60	Y	8	8	Y	1	1	1	0	0	1.0000
-DGRPV	Registration	109	109	Y	10	10	Y	3	3	3	0	0	1.0000
+DGRPU1	Registration	99	99	Y	11	11	Y	4	4	4	0	0	1.0000
+DGRPV	Registration	112	112	Y	10	10	Y	3	3	3	0	0	1.0000
 DGRR557U	Registration	54	54	Y	10	10	Y	3	3	3	0	0	1.0000
 DGRRLU	Registration	165	165	Y	8	8	Y	13	13	13	0	0	1.0000
 DGRRLU0	Registration	180	180	Y	10	10	Y	11	11	11	0	0	1.0000
@@ -2108,7 +2108,7 @@ DGSSNRP2	Registration	278	278	Y	24	24	Y	9	9	9	0	0	1.0000
 DGSTAT	Registration	72	72	Y	9	9	Y	6	6	6	0	0	1.0000
 DGSWITCH	Registration	16	16	Y	7	7	Y	6	7	6	0	1	0.8571
 DGTSSET	Registration	65	65	Y	9	9	Y	5	5	5	0	0	1.0000
-DGUAMWS	Registration	207	207	Y	9	9	Y	7	7	7	0	0	1.0000
+DGUAMWS	Registration	208	208	Y	9	9	Y	7	7	7	0	0	1.0000
 DGUTL	Registration	140	140	Y	24	24	Y	8	8	8	0	0	1.0000
 DGUTL2	Registration	98	98	Y	9	9	Y	1	1	1	0	0	1.0000
 DGUTL3	Registration	117	117	Y	13	13	Y	3	3	3	0	0	1.0000
@@ -6369,7 +6369,7 @@ GECSTRAN	Generic Code Sheet	107	107	Y	5	5	Y	8	8	8	0	0	1.0000
 GECSUFM1	Generic Code Sheet	91	91	Y	4	4	Y	4	4	4	0	0	1.0000
 GECSUFMS	Generic Code Sheet	101	101	Y	4	4	Y	6	6	6	0	0	1.0000
 GECSUNUM	Generic Code Sheet	88	88	Y	5	5	Y	0	0	0	0	0	1.0000
-GECSUSEL	Generic Code Sheet	138	138	Y	10	10	Y	4	4	4	0	0	1.0000
+GECSUSEL	Generic Code Sheet	127	127	Y	10	10	Y	1	1	1	0	0	1.0000
 GECSUSTA	Generic Code Sheet	37	37	Y	3	3	Y	2	2	2	0	0	1.0000
 GECSUTIL	Generic Code Sheet	101	101	Y	10	10	Y	6	6	6	0	0	1.0000
 GECSXBL1	Generic Code Sheet	36	36	Y	2	2	Y	10	10	10	0	0	1.0000
@@ -6392,11 +6392,11 @@ GMPLDUP2	Problem List	99	99	Y	10	10	Y	6	6	6	0	0	1.0000
 GMPLE9	Problem List	9	9	Y	2	2	Y	1	1	1	0	0	1.0000
 GMPLEDIT	Problem List	120	120	Y	14	14	Y	9	9	9	0	0	1.0000
 GMPLEDT1	Problem List	138	138	Y	21	21	Y	7	7	7	0	0	1.0000
-GMPLEDT2	Problem List	114	114	Y	15	15	Y	7	7	7	0	0	1.0000
-GMPLEDT3	Problem List	118	118	Y	7	7	Y	5	5	5	0	0	1.0000
+GMPLEDT2	Problem List	116	116	Y	15	15	Y	7	7	7	0	0	1.0000
+GMPLEDT3	Problem List	119	119	Y	7	7	Y	6	6	6	0	0	1.0000
 GMPLEDT4	Problem List	108	108	Y	12	12	Y	9	9	9	0	0	1.0000
 GMPLENFM	Problem List	162	162	Y	5	5	Y	8	8	8	0	0	1.0000
-GMPLHIST	Problem List	70	70	Y	5	5	Y	3	3	3	0	0	1.0000
+GMPLHIST	Problem List	80	80	Y	5	5	Y	4	4	4	0	0	1.0000
 GMPLHS	Problem List	123	123	Y	6	6	Y	5	5	5	0	0	1.0000
 GMPLINTR	Problem List	114	114	Y	10	10	Y	7	7	7	0	0	1.0000
 GMPLMENU	Problem List	92	92	Y	13	13	Y	4	4	4	0	0	1.0000
@@ -6411,16 +6411,16 @@ GMPLP44I	Problem List	224	224	Y	9	9	Y	6	6	6	0	0	1.0000
 GMPLPRNT	Problem List	154	154	Y	15	15	Y	14	14	14	0	0	1.0000
 GMPLPXRM	Problem List	241	241	Y	11	11	Y	5	5	5	0	0	1.0000
 GMPLRPTR	Problem List	79	79	Y	9	9	Y	7	7	7	0	0	1.0000
-GMPLSAVE	Problem List	283	283	Y	15	15	Y	14	15	14	0	1	0.9333
+GMPLSAVE	Problem List	292	292	Y	15	15	Y	15	16	15	0	1	0.9375
 GMPLSLI1	Problem List	323	323	Y	18	18	Y	13	13	13	0	0	1.0000
 GMPLSLI2	Problem List	72	72	Y	4	4	Y	1	1	1	0	0	1.0000
 GMPLSLRP	Problem List	42	42	Y	4	4	Y	3	3	3	0	0	1.0000
 GMPLUTL	Problem List	212	212	Y	9	9	Y	12	12	12	0	0	1.0000
 GMPLUTL1	Problem List	218	218	Y	32	32	Y	5	5	5	0	0	1.0000
-GMPLUTL2	Problem List	233	233	Y	17	17	Y	17	17	17	0	0	1.0000
+GMPLUTL2	Problem List	226	226	Y	17	17	Y	17	17	17	0	0	1.0000
 GMPLUTL3	Problem List	126	126	Y	9	9	Y	6	6	6	0	0	1.0000
 GMPLUTL4	Problem List	130	130	Y	10	10	Y	4	4	4	0	0	1.0000
-GMPLX	Problem List	302	302	Y	35	35	Y	15	15	15	0	0	1.0000
+GMPLX	Problem List	303	303	Y	35	35	Y	16	16	16	0	0	1.0000
 GMPLX1	Problem List	239	239	Y	20	20	Y	12	12	12	0	0	1.0000
 GMPLY36	Problem List	19	19	Y	3	3	Y	2	2	2	0	0	1.0000
 GMPLY42	Problem List	21	21	Y	3	3	Y	3	3	3	0	0	1.0000
@@ -6696,7 +6696,7 @@ GMRCIERR	Consult Request Tracking	231	231	Y	8	8	Y	12	12	12	0	0	1.0000
 GMRCIEV1	Consult Request Tracking	337	337	Y	10	10	Y	13	13	13	0	0	1.0000
 GMRCIEVT	Consult Request Tracking	399	399	Y	13	13	Y	23	23	23	0	0	1.0000
 GMRCILKP	Consult Request Tracking	54	54	Y	2	2	Y	8	8	8	0	0	1.0000
-GMRCIMSG	Consult Request Tracking	223	223	Y	8	8	Y	19	19	19	0	0	1.0000
+GMRCIMSG	Consult Request Tracking	225	225	Y	8	8	Y	19	19	19	0	0	1.0000
 GMRCINC	Consult Request Tracking	158	158	Y	11	11	Y	12	12	12	0	0	1.0000
 GMRCIR	Consult Request Tracking	176	176	Y	12	12	Y	12	12	12	0	0	1.0000
 GMRCIRSN	Consult Request Tracking	134	134	Y	6	6	Y	6	6	6	0	0	1.0000
@@ -6705,7 +6705,7 @@ GMRCISG1	Consult Request Tracking	160	160	Y	7	7	Y	9	9	9	0	0	1.0000
 GMRCITPI	Consult Request Tracking	67	67	Y	4	4	Y	5	5	5	0	0	1.0000
 GMRCITR	Consult Request Tracking	167	167	Y	12	12	Y	10	10	10	0	0	1.0000
 GMRCITST	Consult Request Tracking	116	116	Y	6	6	Y	6	6	6	0	0	1.0000
-GMRCIUT1	Consult Request Tracking	182	182	Y	4	4	Y	18	18	18	0	0	1.0000
+GMRCIUT1	Consult Request Tracking	184	184	Y	4	4	Y	18	18	18	0	0	1.0000
 GMRCIUTL	Consult Request Tracking	362	362	Y	37	37	Y	17	17	17	0	0	1.0000
 GMRCMCP	Consult Request Tracking	51	51	Y	7	7	Y	9	9	9	0	0	1.0000
 GMRCMED	Consult Request Tracking	164	164	Y	11	11	Y	14	14	14	0	0	1.0000
@@ -6761,7 +6761,7 @@ GMRCQCST	Consult Request Tracking	55	55	Y	6	6	Y	2	2	2	0	0	1.0000
 GMRCR	Consult Request Tracking	76	76	Y	6	6	Y	10	10	10	0	0	1.0000
 GMRCRA	Consult Request Tracking	28	28	Y	8	8	Y	0	0	0	0	0	1.0000
 GMRCREXT	Consult Request Tracking	8	8	Y	1	1	Y	0	0	0	0	0	1.0000
-GMRCRFC0	Consult Request Tracking	86	86	Y	6	6	Y	6	6	6	0	0	1.0000
+GMRCRFC0	Consult Request Tracking	112	112	Y	6	6	Y	8	8	8	0	0	1.0000
 GMRCS	Consult Request Tracking	22	22	Y	5	5	Y	3	3	3	0	0	1.0000
 GMRCSL	Consult Request Tracking	14	14	Y	4	4	Y	4	4	4	0	0	1.0000
 GMRCSLDT	Consult Request Tracking	63	63	Y	8	8	Y	7	7	7	0	0	1.0000
@@ -8355,15 +8355,15 @@ IBCB	Integrated Billing	112	112	Y	23	23	Y	15	16	15	0	1	0.9375
 IBCB1	Integrated Billing	213	213	Y	16	16	Y	28	29	28	0	1	0.9655
 IBCB11	Integrated Billing	28	28	Y	2	2	Y	6	6	6	0	0	1.0000
 IBCB2	Integrated Billing	230	230	Y	21	21	Y	19	21	19	0	2	0.9048
-IBCBB	Integrated Billing	271	271	Y	7	7	Y	16	16	16	0	0	1.0000
+IBCBB	Integrated Billing	272	272	Y	7	7	Y	16	16	16	0	0	1.0000
 IBCBB0	Integrated Billing	118	118	Y	9	9	Y	12	12	12	0	0	1.0000
-IBCBB1	Integrated Billing	376	376	Y	7	7	Y	20	20	20	0	0	1.0000
+IBCBB1	Integrated Billing	380	380	Y	7	7	Y	21	21	21	0	0	1.0000
 IBCBB11	Integrated Billing	321	321	Y	18	18	Y	9	9	9	0	0	1.0000
 IBCBB12	Integrated Billing	337	337	Y	9	9	Y	2	2	2	0	0	1.0000
 IBCBB13	Integrated Billing	143	143	Y	9	9	Y	4	4	4	0	0	1.0000
 IBCBB14	Integrated Billing	51	51	Y	5	5	Y	7	7	7	0	0	1.0000
-IBCBB2	Integrated Billing	167	167	Y	4	4	Y	12	12	12	0	0	1.0000
-IBCBB21	Integrated Billing	102	102	Y	2	2	Y	11	11	11	0	0	1.0000
+IBCBB2	Integrated Billing	174	174	Y	4	4	Y	12	12	12	0	0	1.0000
+IBCBB21	Integrated Billing	105	105	Y	2	2	Y	11	11	11	0	0	1.0000
 IBCBB3	Integrated Billing	216	216	Y	9	9	Y	11	11	11	0	0	1.0000
 IBCBB4	Integrated Billing	36	36	Y	1	1	Y	4	4	4	0	0	1.0000
 IBCBB5	Integrated Billing	66	66	Y	1	1	Y	4	4	4	0	0	1.0000
@@ -8403,11 +8403,11 @@ IBCE837A	Integrated Billing	205	205	Y	15	15	Y	17	17	17	0	0	1.0000
 IBCE837B	Integrated Billing	32	32	Y	3	3	Y	2	2	2	0	0	1.0000
 IBCE837H	Integrated Billing	120	120	Y	3	3	Y	10	10	10	0	0	1.0000
 IBCE837I	Integrated Billing	169	169	Y	16	16	Y	11	11	11	0	0	1.0000
-IBCE837K	Integrated Billing	81	81	Y	5	5	Y	12	12	12	0	0	1.0000
+IBCE837K	Integrated Billing	100	100	Y	6	6	Y	12	12	12	0	0	1.0000
 IBCE837L	Integrated Billing	443	443	Y	3	3	Y	1	1	1	0	0	1.0000
 IBCE837N	Integrated Billing	27	27	Y	3	3	Y	5	5	5	0	0	1.0000
-IBCE837P	Integrated Billing	346	346	Y	16	16	Y	1	2	1	0	1	0.5000
-IBCE837Q	Integrated Billing	205	205	Y	9	9	Y	5	5	5	0	0	1.0000
+IBCE837P	Integrated Billing	349	349	Y	16	16	Y	1	2	1	0	1	0.5000
+IBCE837Q	Integrated Billing	240	240	Y	11	11	Y	5	5	5	0	0	1.0000
 IBCE837S	Integrated Billing	26	26	Y	3	3	Y	6	6	6	0	0	1.0000
 IBCE837T	Integrated Billing	66	66	Y	4	4	Y	8	8	8	0	0	1.0000
 IBCEBUL	Integrated Billing	88	88	Y	6	6	Y	5	5	5	0	0	1.0000
@@ -8436,7 +8436,7 @@ IBCEF11	Integrated Billing	299	299	Y	12	12	Y	14	14	14	0	0	1.0000
 IBCEF12	Integrated Billing	201	201	Y	19	19	Y	6	6	6	0	0	1.0000
 IBCEF2	Integrated Billing	359	359	Y	34	34	Y	13	13	13	0	0	1.0000
 IBCEF21	Integrated Billing	157	157	Y	11	11	Y	7	7	7	0	0	1.0000
-IBCEF22	Integrated Billing	278	278	Y	6	6	Y	9	9	9	0	0	1.0000
+IBCEF22	Integrated Billing	281	281	Y	6	6	Y	9	9	9	0	0	1.0000
 IBCEF3	Integrated Billing	250	250	Y	24	24	Y	8	8	8	0	0	1.0000
 IBCEF31	Integrated Billing	238	238	Y	16	16	Y	8	8	8	0	0	1.0000
 IBCEF4	Integrated Billing	156	156	Y	13	13	Y	5	5	5	0	0	1.0000
@@ -8446,7 +8446,7 @@ IBCEF6	Integrated Billing	94	94	Y	10	10	Y	6	6	6	0	0	1.0000
 IBCEF61	Integrated Billing	224	224	Y	23	23	Y	15	15	15	0	0	1.0000
 IBCEF62	Integrated Billing	106	106	Y	12	12	Y	9	9	9	0	0	1.0000
 IBCEF7	Integrated Billing	248	248	Y	17	17	Y	9	9	9	0	0	1.0000
-IBCEF71	Integrated Billing	218	218	Y	10	10	Y	7	7	7	0	0	1.0000
+IBCEF71	Integrated Billing	220	220	Y	10	10	Y	7	7	7	0	0	1.0000
 IBCEF72	Integrated Billing	255	255	Y	15	15	Y	8	8	8	0	0	1.0000
 IBCEF73	Integrated Billing	281	281	Y	31	31	Y	4	4	4	0	0	1.0000
 IBCEF73A	Integrated Billing	219	219	Y	10	10	Y	9	9	9	0	0	1.0000
@@ -8547,7 +8547,7 @@ IBCEP7	Integrated Billing	195	195	Y	18	18	Y	12	13	12	0	1	0.9231
 IBCEP7A	Integrated Billing	74	74	Y	8	8	Y	9	9	9	0	0	1.0000
 IBCEP7B	Integrated Billing	82	82	Y	4	4	Y	6	6	6	0	0	1.0000
 IBCEP7C	Integrated Billing	159	159	Y	4	4	Y	6	6	6	0	0	1.0000
-IBCEP8	Integrated Billing	461	461	Y	32	32	Y	15	15	15	0	0	1.0000
+IBCEP8	Integrated Billing	477	477	Y	32	32	Y	16	16	16	0	0	1.0000
 IBCEP81	Integrated Billing	211	211	Y	12	12	Y	6	6	6	0	0	1.0000
 IBCEP82	Integrated Billing	219	219	Y	19	19	Y	9	9	9	0	0	1.0000
 IBCEP8A	Integrated Billing	168	168	Y	19	19	Y	4	4	4	0	0	1.0000
@@ -8592,7 +8592,7 @@ IBCESRV2	Integrated Billing	257	257	Y	13	13	Y	6	6	6	0	0	1.0000
 IBCESRV3	Integrated Billing	118	118	Y	10	10	Y	8	8	8	0	0	1.0000
 IBCEST	Integrated Billing	288	288	Y	10	10	Y	17	17	17	0	0	1.0000
 IBCEST1	Integrated Billing	50	50	Y	5	5	Y	0	0	0	0	0	1.0000
-IBCEU	Integrated Billing	305	305	Y	22	22	Y	11	11	11	0	0	1.0000
+IBCEU	Integrated Billing	309	309	Y	22	22	Y	11	11	11	0	0	1.0000
 IBCEU0	Integrated Billing	218	218	Y	13	13	Y	14	14	14	0	0	1.0000
 IBCEU1	Integrated Billing	310	310	Y	19	19	Y	6	6	6	0	0	1.0000
 IBCEU2	Integrated Billing	165	165	Y	6	6	Y	4	4	4	0	0	1.0000
@@ -8655,10 +8655,10 @@ IBCIUT5	Integrated Billing	220	220	Y	18	18	Y	5	5	5	0	0	1.0000
 IBCIUT6	Integrated Billing	261	261	Y	10	10	Y	10	11	10	0	1	0.9091
 IBCIUT7	Integrated Billing	190	190	Y	4	4	Y	5	5	5	0	0	1.0000
 IBCIWK	Integrated Billing	88	88	Y	5	5	Y	7	7	7	0	0	1.0000
-IBCMDT	Integrated Billing	234	234	Y	26	26	Y	8	8	8	0	0	1.0000
-IBCMDT1	Integrated Billing	162	162	Y	19	19	Y	1	1	1	0	0	1.0000
-IBCMDT2	Integrated Billing	143	143	Y	7	7	Y	3	3	3	0	0	1.0000
-IBCMDT3	Integrated Billing	93	93	Y	7	7	Y	4	4	4	0	0	1.0000
+IBCMDT	Integrated Billing	245	245	Y	26	26	Y	8	8	8	0	0	1.0000
+IBCMDT1	Integrated Billing	180	180	Y	19	19	Y	2	2	2	0	0	1.0000
+IBCMDT2	Integrated Billing	152	152	Y	7	7	Y	3	3	3	0	0	1.0000
+IBCMDT3	Integrated Billing	166	166	Y	10	10	Y	4	4	4	0	0	1.0000
 IBCMENU	Integrated Billing	71	71	Y	19	19	Y	13	14	13	0	1	0.9286
 IBCN118	Integrated Billing	93	93	Y	6	6	Y	3	3	3	0	0	1.0000
 IBCNADD	Integrated Billing	81	81	Y	7	7	Y	3	3	3	0	0	1.0000
@@ -8710,8 +8710,8 @@ IBCNEAMI	Integrated Billing	126	126	Y	9	9	Y	4	4	4	0	0	1.0000
 IBCNEBF	Integrated Billing	237	237	Y	6	6	Y	8	8	8	0	0	1.0000
 IBCNEDE	Integrated Billing	245	245	Y	15	15	Y	17	17	17	0	0	1.0000
 IBCNEDE1	Integrated Billing	172	172	Y	6	6	Y	13	13	13	0	0	1.0000
-IBCNEDE2	Integrated Billing	303	303	Y	10	10	Y	12	12	12	0	0	1.0000
-IBCNEDE3	Integrated Billing	325	325	Y	18	18	Y	7	7	7	0	0	1.0000
+IBCNEDE2	Integrated Billing	313	313	Y	10	10	Y	12	12	12	0	0	1.0000
+IBCNEDE3	Integrated Billing	416	416	Y	22	22	Y	8	8	8	0	0	1.0000
 IBCNEDE4	Integrated Billing	133	133	Y	4	4	Y	10	10	10	0	0	1.0000
 IBCNEDE5	Integrated Billing	122	122	Y	7	7	Y	3	3	3	0	0	1.0000
 IBCNEDE6	Integrated Billing	78	78	Y	5	5	Y	5	5	5	0	0	1.0000
@@ -8720,7 +8720,7 @@ IBCNEDEP	Integrated Billing	399	399	Y	13	13	Y	14	14	14	0	0	1.0000
 IBCNEDEQ	Integrated Billing	194	194	Y	12	12	Y	8	8	8	0	0	1.0000
 IBCNEDST	Integrated Billing	287	287	Y	8	8	Y	7	7	7	0	0	1.0000
 IBCNEHL1	Integrated Billing	282	282	Y	10	10	Y	13	14	13	0	1	0.9286
-IBCNEHL1A	Integrated Billing	170	170	Y	3	3	Y	7	7	7	0	0	1.0000
+IBCNEHL1A	Integrated Billing	217	217	Y	3	3	Y	7	7	7	0	0	1.0000
 IBCNEHL2	Integrated Billing	285	285	Y	17	17	Y	8	8	8	0	0	1.0000
 IBCNEHL3	Integrated Billing	416	416	Y	18	18	Y	11	11	11	0	0	1.0000
 IBCNEHL4	Integrated Billing	395	395	Y	18	18	Y	14	14	14	0	0	1.0000
@@ -8744,7 +8744,7 @@ IBCNEPM	Integrated Billing	104	104	Y	9	9	Y	6	6	6	0	0	1.0000
 IBCNEPM1	Integrated Billing	157	157	Y	10	10	Y	7	7	7	0	0	1.0000
 IBCNEPM2	Integrated Billing	53	53	Y	5	5	Y	4	4	4	0	0	1.0000
 IBCNEPY	Integrated Billing	374	374	Y	17	17	Y	9	9	9	0	0	1.0000
-IBCNEQU	Integrated Billing	409	409	Y	29	29	Y	17	17	17	0	0	1.0000
+IBCNEQU	Integrated Billing	408	408	Y	29	29	Y	17	17	17	0	0	1.0000
 IBCNEQU1	Integrated Billing	110	110	Y	4	4	Y	11	11	11	0	0	1.0000
 IBCNERP1	Integrated Billing	329	329	Y	34	34	Y	10	10	10	0	0	1.0000
 IBCNERP2	Integrated Billing	178	178	Y	6	6	Y	4	4	4	0	0	1.0000
@@ -8803,7 +8803,7 @@ IBCNHUT1	Integrated Billing	158	158	Y	14	14	Y	6	6	6	0	0	1.0000
 IBCNHUT2	Integrated Billing	287	287	Y	12	12	Y	11	11	11	0	0	1.0000
 IBCNICB	Integrated Billing	375	375	Y	10	10	Y	8	8	8	0	0	1.0000
 IBCNICB2	Integrated Billing	40	40	Y	2	2	Y	2	2	2	0	0	1.0000
-IBCNILK	Integrated Billing	470	470	Y	18	18	Y	8	8	8	0	0	1.0000
+IBCNILK	Integrated Billing	459	459	Y	19	19	Y	9	9	9	0	0	1.0000
 IBCNINS	Integrated Billing	69	69	Y	4	4	Y	11	11	11	0	0	1.0000
 IBCNINSC	Integrated Billing	246	246	Y	15	15	Y	6	6	6	0	0	1.0000
 IBCNINSL	Integrated Billing	139	139	Y	15	15	Y	4	4	4	0	0	1.0000
@@ -8923,7 +8923,7 @@ IBCNSP3	Integrated Billing	171	171	Y	21	21	Y	12	12	12	0	0	1.0000
 IBCNSU	Integrated Billing	218	218	Y	18	18	Y	6	6	6	0	0	1.0000
 IBCNSU1	Integrated Billing	151	151	Y	16	16	Y	9	9	9	0	0	1.0000
 IBCNSU2	Integrated Billing	122	122	Y	7	7	Y	8	8	8	0	0	1.0000
-IBCNSU21	Integrated Billing	386	386	Y	20	20	Y	7	7	7	0	0	1.0000
+IBCNSU21	Integrated Billing	453	453	Y	21	21	Y	8	8	8	0	0	1.0000
 IBCNSU3	Integrated Billing	43	43	Y	5	5	Y	1	1	1	0	0	1.0000
 IBCNSU31	Integrated Billing	61	61	Y	7	7	Y	2	2	2	0	0	1.0000
 IBCNSU4	Integrated Billing	64	64	Y	4	4	Y	0	0	0	0	0	1.0000
@@ -8956,7 +8956,7 @@ IBCONS2	Integrated Billing	228	228	Y	23	23	Y	6	6	6	0	0	1.0000
 IBCONS3	Integrated Billing	59	59	Y	6	6	Y	5	5	5	0	0	1.0000
 IBCONS4	Integrated Billing	125	125	Y	11	11	Y	4	4	4	0	0	1.0000
 IBCONSC	Integrated Billing	101	101	Y	12	12	Y	9	9	9	0	0	1.0000
-IBCOPP	Integrated Billing	180	180	Y	6	6	Y	8	8	8	0	0	1.0000
+IBCOPP	Integrated Billing	183	183	Y	6	6	Y	8	8	8	0	0	1.0000
 IBCOPP1	Integrated Billing	129	129	Y	10	10	Y	1	1	1	0	0	1.0000
 IBCOPP2	Integrated Billing	272	272	Y	8	8	Y	7	7	7	0	0	1.0000
 IBCOPP3	Integrated Billing	246	246	Y	7	7	Y	3	3	3	0	0	1.0000
@@ -9057,7 +9057,7 @@ IBCSC10	Integrated Billing	84	84	Y	5	5	Y	6	6	6	0	0	1.0000
 IBCSC102	Integrated Billing	169	169	Y	3	3	Y	20	20	20	0	0	1.0000
 IBCSC10A	Integrated Billing	68	68	Y	7	7	Y	5	5	5	0	0	1.0000
 IBCSC10B	Integrated Billing	154	154	Y	17	17	Y	7	7	7	0	0	1.0000
-IBCSC10H	Integrated Billing	248	248	Y	7	7	Y	17	17	17	0	0	1.0000
+IBCSC10H	Integrated Billing	249	249	Y	7	7	Y	17	17	17	0	0	1.0000
 IBCSC11	Integrated Billing	45	45	Y	5	5	Y	7	7	7	0	0	1.0000
 IBCSC3	Integrated Billing	109	109	Y	10	10	Y	12	14	12	0	2	0.8571
 IBCSC4	Integrated Billing	110	110	Y	10	10	Y	17	17	17	0	0	1.0000
@@ -9097,7 +9097,7 @@ IBCU62	Integrated Billing	49	49	Y	8	8	Y	3	3	3	0	0	1.0000
 IBCU63	Integrated Billing	76	76	Y	11	11	Y	5	5	5	0	0	1.0000
 IBCU64	Integrated Billing	117	117	Y	17	17	Y	5	5	5	0	0	1.0000
 IBCU65	Integrated Billing	139	139	Y	10	10	Y	6	6	6	0	0	1.0000
-IBCU7	Integrated Billing	410	410	Y	27	27	Y	26	26	26	0	0	1.0000
+IBCU7	Integrated Billing	417	417	Y	27	27	Y	26	26	26	0	0	1.0000
 IBCU71	Integrated Billing	121	121	Y	9	9	Y	10	10	10	0	0	1.0000
 IBCU72	Integrated Billing	279	279	Y	20	20	Y	8	8	8	0	0	1.0000
 IBCU73	Integrated Billing	84	84	Y	6	6	Y	5	5	5	0	0	1.0000
@@ -9476,8 +9476,8 @@ IBJDF12	Integrated Billing	129	129	Y	16	16	Y	4	4	4	0	0	1.0000
 IBJDF1H	Integrated Billing	110	110	Y	3	3	Y	0	0	0	0	0	1.0000
 IBJDF2	Integrated Billing	245	245	Y	23	23	Y	16	16	16	0	0	1.0000
 IBJDF4	Integrated Billing	200	200	Y	18	18	Y	8	8	8	0	0	1.0000
-IBJDF41	Integrated Billing	388	388	Y	21	21	Y	11	11	11	0	0	1.0000
-IBJDF42	Integrated Billing	257	257	Y	22	22	Y	6	6	6	0	0	1.0000
+IBJDF41	Integrated Billing	399	399	Y	22	22	Y	11	11	11	0	0	1.0000
+IBJDF42	Integrated Billing	258	258	Y	22	22	Y	6	6	6	0	0	1.0000
 IBJDF43	Integrated Billing	198	198	Y	16	16	Y	8	8	8	0	0	1.0000
 IBJDF4H	Integrated Billing	76	76	Y	3	3	Y	0	0	0	0	0	1.0000
 IBJDF5	Integrated Billing	135	135	Y	11	11	Y	7	7	7	0	0	1.0000
@@ -9485,9 +9485,9 @@ IBJDF51	Integrated Billing	218	218	Y	15	15	Y	13	13	13	0	0	1.0000
 IBJDF52	Integrated Billing	152	152	Y	17	17	Y	6	6	6	0	0	1.0000
 IBJDF53	Integrated Billing	156	156	Y	14	14	Y	5	5	5	0	0	1.0000
 IBJDF5H	Integrated Billing	60	60	Y	3	3	Y	0	0	0	0	0	1.0000
-IBJDF6	Integrated Billing	159	159	Y	11	11	Y	7	7	7	0	0	1.0000
+IBJDF6	Integrated Billing	158	158	Y	11	11	Y	7	7	7	0	0	1.0000
 IBJDF61	Integrated Billing	222	222	Y	13	13	Y	13	13	13	0	0	1.0000
-IBJDF62	Integrated Billing	168	168	Y	18	18	Y	6	6	6	0	0	1.0000
+IBJDF62	Integrated Billing	168	168	Y	18	18	Y	7	7	7	0	0	1.0000
 IBJDF63	Integrated Billing	144	144	Y	14	14	Y	6	6	6	0	0	1.0000
 IBJDF6H	Integrated Billing	60	60	Y	3	3	Y	0	0	0	0	0	1.0000
 IBJDF7	Integrated Billing	74	74	Y	7	7	Y	6	6	6	0	0	1.0000
@@ -9557,7 +9557,7 @@ IBJTRA1	Integrated Billing	66	66	Y	7	7	Y	11	11	11	0	0	1.0000
 IBJTRX	Integrated Billing	268	268	Y	14	14	Y	17	17	17	0	0	1.0000
 IBJTTA1	Integrated Billing	74	74	Y	4	4	Y	5	5	5	0	0	1.0000
 IBJTTB1	Integrated Billing	96	96	Y	5	5	Y	9	9	9	0	0	1.0000
-IBJTTC	Integrated Billing	241	241	Y	16	16	Y	14	14	14	0	0	1.0000
+IBJTTC	Integrated Billing	251	251	Y	17	17	Y	15	15	15	0	0	1.0000
 IBJTU1	Integrated Billing	59	59	Y	7	7	Y	8	8	8	0	0	1.0000
 IBJTU2	Integrated Billing	75	75	Y	10	10	Y	5	5	5	0	0	1.0000
 IBJTU3	Integrated Billing	119	119	Y	14	14	Y	1	1	1	0	0	1.0000
@@ -9647,7 +9647,7 @@ IBOHRL	Integrated Billing	70	70	Y	6	6	Y	7	7	7	0	0	1.0000
 IBOHTOT	Integrated Billing	75	75	Y	10	10	Y	6	6	6	0	0	1.0000
 IBOLK	Integrated Billing	111	111	Y	15	15	Y	11	12	11	0	1	0.9167
 IBOLK1	Integrated Billing	45	45	Y	2	2	Y	2	2	2	0	0	1.0000
-IBOMHC	Integrated Billing	340	340	Y	19	19	Y	15	15	15	0	0	1.0000
+IBOMHC	Integrated Billing	306	306	Y	14	14	Y	15	15	15	0	0	1.0000
 IBOMTC	Integrated Billing	37	37	Y	4	4	Y	6	6	6	0	0	1.0000
 IBOMTC1	Integrated Billing	82	82	Y	6	6	Y	5	5	5	0	0	1.0000
 IBOMTE	Integrated Billing	57	57	Y	6	6	Y	12	12	12	0	0	1.0000
@@ -10775,7 +10775,7 @@ IVMLINS4	Income Verification Match	107	107	Y	6	6	Y	3	3	3	0	0	1.0000
 IVMLINS5	Income Verification Match	52	52	Y	2	2	Y	2	2	2	0	0	1.0000
 IVMPBUL	Income Verification Match	58	58	Y	5	5	Y	1	1	1	0	0	1.0000
 IVMPINS	Income Verification Match	48	48	Y	4	4	Y	4	4	4	0	0	1.0000
-IVMPLOG	Income Verification Match	283	283	Y	13	13	Y	6	6	6	0	0	1.0000
+IVMPLOG	Income Verification Match	287	287	Y	13	13	Y	7	7	7	0	0	1.0000
 IVMPLOG2	Income Verification Match	72	72	Y	4	4	Y	4	4	4	0	0	1.0000
 IVMPMTE	Income Verification Match	58	58	Y	4	4	Y	5	5	5	0	0	1.0000
 IVMPREC	Income Verification Match	132	132	Y	6	6	Y	10	10	10	0	0	1.0000
@@ -10788,7 +10788,7 @@ IVMPREC6	Income Verification Match	389	389	Y	15	15	Y	8	8	8	0	0	1.0000
 IVMPREC7	Income Verification Match	170	170	Y	6	6	Y	9	10	9	0	1	0.9000
 IVMPREC8	Income Verification Match	421	421	Y	17	17	Y	9	9	9	0	0	1.0000
 IVMPREC9	Income Verification Match	376	376	Y	13	13	Y	18	18	18	0	0	1.0000
-IVMPRECA	Income Verification Match	306	306	Y	11	11	Y	14	14	14	0	0	1.0000
+IVMPRECA	Income Verification Match	328	328	Y	12	12	Y	14	14	14	0	0	1.0000
 IVMPRECZ	Income Verification Match	120	120	Y	6	6	Y	7	7	7	0	0	1.0000
 IVMPTRN	Income Verification Match	237	237	Y	11	11	Y	21	21	21	0	0	1.0000
 IVMPTRN1	Income Verification Match	70	70	Y	8	8	Y	5	5	5	0	0	1.0000
@@ -12887,7 +12887,7 @@ MAGDQR11	Imaging	39	39	Y	2	2	Y	0	0	0	0	0	1.0000
 MAGDQR12	Imaging	58	58	Y	2	2	Y	3	3	3	0	0	1.0000
 MAGDQR13	Imaging	291	291	Y	18	18	Y	1	1	1	0	0	1.0000
 MAGDQR20	Imaging	297	297	Y	15	15	Y	9	9	9	0	0	1.0000
-MAGDQR21	Imaging	425	425	Y	27	27	Y	10	10	10	0	0	1.0000
+MAGDQR21	Imaging	433	433	Y	27	27	Y	12	12	12	0	0	1.0000
 MAGDQR22	Imaging	42	42	Y	2	2	Y	1	1	1	0	0	1.0000
 MAGDQR23	Imaging	37	37	Y	2	2	Y	1	1	1	0	0	1.0000
 MAGDQR31	Imaging	39	39	Y	2	2	Y	2	2	2	0	0	1.0000
@@ -12978,13 +12978,13 @@ MAGGA03A	Imaging	144	144	Y	2	2	Y	4	4	4	0	0	1.0000
 MAGGA03Q	Imaging	332	332	Y	9	9	Y	8	8	8	0	0	1.0000
 MAGGA03U	Imaging	121	121	Y	3	3	Y	3	3	3	0	0	1.0000
 MAGGA04	Imaging	125	125	Y	4	4	Y	4	4	4	0	0	1.0000
-MAGGAII	Imaging	384	384	Y	5	5	Y	9	9	9	0	0	1.0000
+MAGGAII	Imaging	394	394	Y	5	5	Y	9	9	9	0	0	1.0000
 MAGGDEV	Imaging	58	58	Y	6	6	Y	3	3	3	0	0	1.0000
 MAGGETUIDSTATUS	Imaging	60	60	Y	5	5	Y	0	0	0	0	0	1.0000
 MAGGI11	Imaging	246	246	Y	11	11	Y	2	2	2	0	0	1.0000
 MAGGI12	Imaging	379	379	Y	9	9	Y	6	6	6	0	0	1.0000
-MAGGI13	Imaging	289	289	Y	5	5	Y	4	4	4	0	0	1.0000
-MAGGI14	Imaging	278	278	Y	5	5	Y	2	2	2	0	0	1.0000
+MAGGI13	Imaging	293	293	Y	5	5	Y	4	4	4	0	0	1.0000
+MAGGI14	Imaging	279	279	Y	5	5	Y	2	2	2	0	0	1.0000
 MAGGIPRE	Imaging	38	38	Y	3	3	Y	1	1	1	0	0	1.0000
 MAGGNLKP	Imaging	96	96	Y	3	3	Y	3	3	3	0	0	1.0000
 MAGGNTI	Imaging	259	259	Y	8	8	Y	18	18	18	0	0	1.0000
@@ -13055,7 +13055,7 @@ MAGGTU4C	Imaging	90	90	Y	3	3	Y	0	0	0	0	0	1.0000
 MAGGTU4D	Imaging	92	92	Y	3	3	Y	0	0	0	0	0	1.0000
 MAGGTU4L	Imaging	59	59	Y	3	3	Y	0	0	0	0	0	1.0000
 MAGGTU4M	Imaging	136	136	Y	5	5	Y	1	1	1	0	0	1.0000
-MAGGTU4T	Imaging	76	76	Y	3	3	Y	0	0	0	0	0	1.0000
+MAGGTU4T	Imaging	75	75	Y	3	3	Y	0	0	0	0	0	1.0000
 MAGGTU5	Imaging	72	72	Y	5	5	Y	6	6	6	0	0	1.0000
 MAGGTU6	Imaging	213	213	Y	13	13	Y	5	5	5	0	0	1.0000
 MAGGTU7	Imaging	125	125	Y	7	7	Y	5	5	5	0	0	1.0000
@@ -13130,20 +13130,20 @@ MAGNTLR5	Imaging	79	79	Y	3	3	Y	3	3	3	0	0	1.0000
 MAGNTLR6	Imaging	119	119	Y	3	3	Y	4	4	4	0	0	1.0000
 MAGNTLR7	Imaging	95	95	Y	4	4	Y	4	4	4	0	0	1.0000
 MAGNTLRS	Imaging	503	503	Y	14	14	Y	7	7	7	0	0	1.0000
-MAGNTRAI	Imaging	250	250	Y	8	8	Y	8	8	8	0	0	1.0000
+MAGNTRAI	Imaging	280	280	Y	9	9	Y	10	10	10	0	0	1.0000
 MAGNU001	Imaging	142	142	Y	11	11	Y	3	3	3	0	0	1.0000
 MAGNU002	Imaging	65	65	Y	11	11	Y	1	1	1	0	0	1.0000
 MAGNU003	Imaging	188	188	Y	11	11	Y	9	9	9	0	0	1.0000
 MAGNUID1	Imaging	110	110	Y	4	4	Y	5	5	5	0	0	1.0000
 MAGNUID2	Imaging	40	40	Y	2	2	Y	0	0	0	0	0	1.0000
-MAGNUTL2	Imaging	140	140	Y	6	6	Y	9	9	9	0	0	1.0000
+MAGNUTL2	Imaging	167	167	Y	7	7	Y	9	9	9	0	0	1.0000
 MAGNVIC	Imaging	56	56	Y	3	3	Y	1	1	1	0	0	1.0000
 MAGNVQ01	Imaging	278	278	Y	15	15	Y	8	8	8	0	0	1.0000
 MAGNVQ02	Imaging	126	126	Y	6	6	Y	5	5	5	0	0	1.0000
 MAGNVQ03	Imaging	153	153	Y	6	6	Y	3	3	3	0	0	1.0000
 MAGNVQ04	Imaging	158	158	Y	6	6	Y	12	12	12	0	0	1.0000
 MAGNVQ05	Imaging	140	140	Y	7	7	Y	4	4	4	0	0	1.0000
-MAGNVQ06	Imaging	193	193	Y	6	6	Y	5	5	5	0	0	1.0000
+MAGNVQ06	Imaging	202	202	Y	6	6	Y	5	5	5	0	0	1.0000
 MAGNVQ07	Imaging	39	39	Y	2	2	Y	1	1	1	0	0	1.0000
 MAGNWRK1	Imaging	182	182	Y	6	6	Y	11	11	11	0	0	1.0000
 MAGQAI	Imaging	96	96	Y	8	8	Y	5	5	5	0	0	1.0000
@@ -13168,7 +13168,7 @@ MAGQBUT6	Imaging	298	298	Y	13	13	Y	8	8	8	0	0	1.0000
 MAGQCBP	Imaging	252	252	Y	14	14	Y	7	7	7	0	0	1.0000
 MAGQE1	Imaging	92	92	Y	7	7	Y	3	3	3	0	0	1.0000
 MAGQE2	Imaging	91	91	Y	6	6	Y	10	10	10	0	0	1.0000
-MAGQE3	Imaging	228	228	Y	7	7	Y	6	6	6	0	0	1.0000
+MAGQE3	Imaging	230	230	Y	7	7	Y	6	6	6	0	0	1.0000
 MAGQE4	Imaging	84	84	Y	6	6	Y	5	5	5	0	0	1.0000
 MAGQE5	Imaging	209	209	Y	14	14	Y	12	12	12	0	0	1.0000
 MAGQE6	Imaging	87	87	Y	3	3	Y	4	4	4	0	0	1.0000
@@ -13192,9 +13192,9 @@ MAGSDOFL	Imaging	209	209	Y	24	24	Y	4	4	4	0	0	1.0000
 MAGSFTCH	Imaging	281	281	Y	23	23	Y	5	5	5	0	0	1.0000
 MAGSHEC	Imaging	52	52	Y	3	3	Y	3	3	3	0	0	1.0000
 MAGSIMBR	Imaging	44	44	Y	3	3	Y	1	1	1	0	0	1.0000
-MAGSIXG1	Imaging	243	243	Y	5	5	Y	10	11	10	0	1	0.9091
+MAGSIXG1	Imaging	251	251	Y	5	5	Y	10	11	10	0	1	0.9091
 MAGSIXG2	Imaging	257	257	Y	7	7	Y	6	6	6	0	0	1.0000
-MAGSIXG3	Imaging	309	309	Y	7	7	Y	11	11	11	0	0	1.0000
+MAGSIXG3	Imaging	318	318	Y	7	7	Y	11	11	11	0	0	1.0000
 MAGSIXG4	Imaging	134	134	Y	2	2	Y	3	3	3	0	0	1.0000
 MAGSIXGT	Imaging	256	256	Y	14	14	Y	4	4	4	0	0	1.0000
 MAGSPID	Imaging	63	63	Y	6	6	Y	8	8	8	0	0	1.0000
@@ -14455,7 +14455,7 @@ OCXOEDT5	Order Entry Results Reporting	22	22	Y	7	7	Y	3	3	3	0	0	1.0000
 OCXOEDT6	Order Entry Results Reporting	145	145	Y	11	11	Y	5	5	5	0	0	1.0000
 OCXOENV	Order Entry Results Reporting	10	10	Y	3	3	Y	0	0	0	0	0	1.0000
 OCXOEPS	Order Entry Results Reporting	82	82	Y	8	8	Y	3	3	3	0	0	1.0000
-OCXOERR	Order Entry Results Reporting	81	81	Y	9	9	Y	3	3	3	0	0	1.0000
+OCXOERR	Order Entry Results Reporting	85	85	Y	10	10	Y	3	3	3	0	0	1.0000
 OCXOHL7	Order Entry Results Reporting	192	192	Y	13	13	Y	2	2	2	0	0	1.0000
 OCXOLOC	Order Entry Results Reporting	9	9	Y	2	2	Y	0	0	0	0	0	1.0000
 OCXOLOG	Order Entry Results Reporting	72	72	Y	9	9	Y	1	1	1	0	0	1.0000
@@ -15069,7 +15069,7 @@ ORAMX1	Order Entry Results Reporting	200	200	Y	4	4	Y	10	10	10	0	0	1.0000
 ORAMY	Order Entry Results Reporting	143	143	Y	8	8	Y	4	4	4	0	0	1.0000
 ORAPDLG	Order Entry Results Reporting	26	26	Y	3	3	Y	0	0	0	0	0	1.0000
 ORAREN	Order Entry Results Reporting	165	165	Y	9	9	Y	19	19	19	0	0	1.0000
-ORB3	Order Entry Results Reporting	316	316	Y	22	22	Y	18	18	18	0	0	1.0000
+ORB3	Order Entry Results Reporting	330	330	Y	22	22	Y	19	19	19	0	0	1.0000
 ORB31	Order Entry Results Reporting	173	173	Y	15	15	Y	7	7	7	0	0	1.0000
 ORB3C0	Order Entry Results Reporting	60	60	Y	3	3	Y	4	4	4	0	0	1.0000
 ORB3C1	Order Entry Results Reporting	174	174	Y	12	12	Y	9	9	9	0	0	1.0000
@@ -15078,7 +15078,7 @@ ORB3ENV	Order Entry Results Reporting	53	53	Y	3	3	Y	4	4	4	0	0	1.0000
 ORB3F1	Order Entry Results Reporting	132	132	Y	9	9	Y	5	5	5	0	0	1.0000
 ORB3FN	Order Entry Results Reporting	65	65	Y	5	5	Y	3	3	3	0	0	1.0000
 ORB3FUP1	Order Entry Results Reporting	260	260	Y	18	18	Y	11	11	11	0	0	1.0000
-ORB3FUP2	Order Entry Results Reporting	245	245	Y	20	20	Y	14	14	14	0	0	1.0000
+ORB3FUP2	Order Entry Results Reporting	248	248	Y	21	21	Y	14	14	14	0	0	1.0000
 ORB3LAB	Order Entry Results Reporting	19	19	Y	2	2	Y	1	1	1	0	0	1.0000
 ORB3MGR1	Order Entry Results Reporting	237	237	Y	21	21	Y	4	4	4	0	0	1.0000
 ORB3MGR2	Order Entry Results Reporting	120	120	Y	10	10	Y	9	9	9	0	0	1.0000
@@ -15098,7 +15098,7 @@ ORBCMA32	Order Entry Results Reporting	244	244	Y	34	34	Y	13	13	13	0	0	1.0000
 ORBCMA5	Order Entry Results Reporting	68	68	Y	9	9	Y	1	1	1	0	0	1.0000
 ORBINPTR	Order Entry Results Reporting	16	16	Y	2	2	Y	2	2	2	0	0	1.0000
 ORBPRCHK	Order Entry Results Reporting	139	139	Y	16	16	Y	11	11	11	0	0	1.0000
-ORBSMART	Order Entry Results Reporting	219	219	Y	24	24	Y	10	10	10	0	0	1.0000
+ORBSMART	Order Entry Results Reporting	215	215	Y	24	24	Y	10	10	10	0	0	1.0000
 ORBX31	Order Entry Results Reporting	15	15	Y	3	3	Y	2	2	2	0	0	1.0000
 ORBX3101	Order Entry Results Reporting	44	44	Y	3	3	Y	0	0	0	0	0	1.0000
 ORCACT	Order Entry Results Reporting	95	95	Y	15	15	Y	12	12	12	0	0	1.0000
@@ -15137,7 +15137,7 @@ ORCDSD	Order Entry Results Reporting	82	82	Y	10	10	Y	6	6	6	0	0	1.0000
 ORCDVBC1	Order Entry Results Reporting	61	61	Y	8	8	Y	6	6	6	0	0	1.0000
 ORCDVBEC	Order Entry Results Reporting	234	234	Y	25	25	Y	13	14	13	0	1	0.9286
 ORCENV	Order Entry Results Reporting	107	107	Y	8	8	Y	1	1	1	0	0	1.0000
-ORCFLAG	Order Entry Results Reporting	106	106	Y	11	11	Y	14	15	14	0	1	0.9333
+ORCFLAG	Order Entry Results Reporting	109	109	Y	11	11	Y	14	15	14	0	1	0.9333
 ORCHANG1	Order Entry Results Reporting	34	34	Y	7	7	Y	0	0	0	0	0	1.0000
 ORCHANG2	Order Entry Results Reporting	149	149	Y	11	11	Y	5	5	5	0	0	1.0000
 ORCHANG3	Order Entry Results Reporting	47	47	Y	4	4	Y	5	5	5	0	0	1.0000
@@ -15177,9 +15177,9 @@ ORCPOST	Order Entry Results Reporting	94	94	Y	10	10	Y	12	15	12	0	3	0.8000
 ORCPRE	Order Entry Results Reporting	26	26	Y	3	3	Y	5	5	5	0	0	1.0000
 ORCPROB	Order Entry Results Reporting	105	105	Y	11	11	Y	10	10	10	0	0	1.0000
 ORCRC	Order Entry Results Reporting	134	134	Y	11	11	Y	0	0	0	0	0	1.0000
-ORCSAVE	Order Entry Results Reporting	253	253	Y	15	15	Y	10	10	10	0	0	1.0000
+ORCSAVE	Order Entry Results Reporting	268	268	Y	16	16	Y	12	12	12	0	0	1.0000
 ORCSAVE1	Order Entry Results Reporting	130	130	Y	10	10	Y	8	8	8	0	0	1.0000
-ORCSAVE2	Order Entry Results Reporting	273	273	Y	25	25	Y	21	22	21	0	1	0.9545
+ORCSAVE2	Order Entry Results Reporting	285	285	Y	25	25	Y	23	24	23	0	1	0.9583
 ORCSEND	Order Entry Results Reporting	191	191	Y	23	23	Y	20	20	20	0	0	1.0000
 ORCSEND1	Order Entry Results Reporting	234	234	Y	21	21	Y	16	16	16	0	0	1.0000
 ORCSEND2	Order Entry Results Reporting	119	119	Y	12	12	Y	10	11	10	0	1	0.9091
@@ -15307,7 +15307,7 @@ ORLPAUT0	Order Entry Results Reporting	60	60	Y	8	8	Y	3	3	3	0	0	1.0000
 ORLPL	Order Entry Results Reporting	64	64	Y	8	8	Y	7	7	7	0	0	1.0000
 ORLPR	Order Entry Results Reporting	24	24	Y	2	2	Y	5	6	5	0	1	0.8333
 ORLPR0	Order Entry Results Reporting	111	111	Y	9	9	Y	5	5	5	0	0	1.0000
-ORLPREM	Order Entry Results Reporting	183	183	Y	8	8	Y	14	14	14	0	0	1.0000
+ORLPREM	Order Entry Results Reporting	188	188	Y	8	8	Y	14	14	14	0	0	1.0000
 ORLPREML	Order Entry Results Reporting	581	581	Y	33	33	Y	12	12	12	0	0	1.0000
 ORLPSR	Order Entry Results Reporting	163	163	Y	24	24	Y	7	7	7	0	0	1.0000
 ORLPSRA	Order Entry Results Reporting	125	125	Y	9	9	Y	5	5	5	0	0	1.0000
@@ -15323,7 +15323,7 @@ ORMBLDGM	Order Entry Results Reporting	48	48	Y	5	5	Y	6	6	6	0	0	1.0000
 ORMBLDLR	Order Entry Results Reporting	93	93	Y	11	11	Y	8	8	8	0	0	1.0000
 ORMBLDOR	Order Entry Results Reporting	61	61	Y	8	8	Y	6	6	6	0	0	1.0000
 ORMBLDP1	Order Entry Results Reporting	50	50	Y	4	4	Y	2	2	2	0	0	1.0000
-ORMBLDPS	Order Entry Results Reporting	234	234	Y	23	23	Y	14	14	14	0	0	1.0000
+ORMBLDPS	Order Entry Results Reporting	233	233	Y	23	23	Y	15	15	15	0	0	1.0000
 ORMBLDRA	Order Entry Results Reporting	66	66	Y	7	7	Y	7	7	7	0	0	1.0000
 ORMBLDSD	Order Entry Results Reporting	96	96	Y	10	10	Y	7	8	7	0	1	0.8750
 ORMBLDVB	Order Entry Results Reporting	167	167	Y	18	18	Y	14	14	14	0	0	1.0000
@@ -15339,10 +15339,10 @@ ORMLR	Order Entry Results Reporting	188	188	Y	28	28	Y	12	12	12	0	0	1.0000
 ORMLR1	Order Entry Results Reporting	43	43	Y	5	5	Y	7	8	7	0	1	0.8750
 ORMLR4	Order Entry Results Reporting	10	10	Y	2	2	Y	0	0	0	0	0	1.0000
 ORMORG	Order Entry Results Reporting	48	48	Y	8	8	Y	2	2	2	0	0	1.0000
-ORMPS	Order Entry Results Reporting	249	249	Y	41	41	Y	16	16	16	0	0	1.0000
-ORMPS1	Order Entry Results Reporting	184	184	Y	14	14	Y	9	9	9	0	0	1.0000
-ORMPS2	Order Entry Results Reporting	180	180	Y	18	18	Y	9	11	9	0	2	0.8182
-ORMPS3	Order Entry Results Reporting	138	138	Y	14	14	Y	8	8	8	0	0	1.0000
+ORMPS	Order Entry Results Reporting	250	250	Y	41	41	Y	17	17	17	0	0	1.0000
+ORMPS1	Order Entry Results Reporting	183	183	Y	14	14	Y	9	9	9	0	0	1.0000
+ORMPS2	Order Entry Results Reporting	180	180	Y	18	18	Y	10	12	10	0	2	0.8333
+ORMPS3	Order Entry Results Reporting	139	139	Y	14	14	Y	9	9	9	0	0	1.0000
 ORMRA	Order Entry Results Reporting	183	183	Y	25	25	Y	14	15	14	0	1	0.9333
 ORMSD	Order Entry Results Reporting	286	286	Y	31	31	Y	12	13	12	0	1	0.9231
 ORMTIM01	Order Entry Results Reporting	93	93	Y	5	5	Y	8	8	8	0	0	1.0000
@@ -15350,7 +15350,7 @@ ORMTIM02	Order Entry Results Reporting	96	96	Y	8	8	Y	6	6	6	0	0	1.0000
 ORMTIME	Order Entry Results Reporting	84	84	Y	9	9	Y	11	11	11	0	0	1.0000
 ORMTIMST	Order Entry Results Reporting	116	116	Y	13	13	Y	3	3	3	0	0	1.0000
 ORMVBEC	Order Entry Results Reporting	141	141	Y	18	18	Y	11	11	11	0	0	1.0000
-ORNEWPERS	Order Entry Results Reporting	152	152	Y	20	20	Y	12	12	12	0	0	1.0000
+ORNEWPERS	Order Entry Results Reporting	163	163	Y	20	20	Y	12	12	12	0	0	1.0000
 ORNORC	Order Entry Results Reporting	277	277	Y	16	16	Y	14	14	14	0	0	1.0000
 OROCAPI	Order Entry Results Reporting	34	34	Y	4	4	Y	1	1	1	0	0	1.0000
 OROCAPI1	Order Entry Results Reporting	212	212	Y	16	16	Y	9	9	9	0	0	1.0000
@@ -15405,7 +15405,7 @@ ORQ12	Order Entry Results Reporting	136	136	Y	13	13	Y	6	6	6	0	0	1.0000
 ORQ13	Order Entry Results Reporting	56	56	Y	7	7	Y	1	1	1	0	0	1.0000
 ORQ2	Order Entry Results Reporting	218	218	Y	17	17	Y	13	13	13	0	0	1.0000
 ORQ20	Order Entry Results Reporting	164	164	Y	16	16	Y	9	9	9	0	0	1.0000
-ORQ21	Order Entry Results Reporting	150	150	Y	13	13	Y	8	8	8	0	0	1.0000
+ORQ21	Order Entry Results Reporting	151	151	Y	13	13	Y	9	9	9	0	0	1.0000
 ORQ3	Order Entry Results Reporting	233	233	Y	10	10	Y	9	9	9	0	0	1.0000
 ORQOAUIA	Order Entry Results Reporting	33	33	Y	3	3	Y	2	2	2	0	0	1.0000
 ORQOAUIB	Order Entry Results Reporting	114	114	Y	10	10	Y	9	9	9	0	0	1.0000
@@ -15434,10 +15434,10 @@ ORQQCN2	Order Entry Results Reporting	195	195	Y	23	23	Y	16	16	16	0	0	1.0000
 ORQQCN3	Order Entry Results Reporting	36	36	Y	6	6	Y	3	3	3	0	0	1.0000
 ORQQLR	Order Entry Results Reporting	103	103	Y	9	9	Y	8	8	8	0	0	1.0000
 ORQQLR1	Order Entry Results Reporting	110	110	Y	10	10	Y	4	4	4	0	0	1.0000
-ORQQPL	Order Entry Results Reporting	118	118	Y	4	4	Y	9	9	9	0	0	1.0000
-ORQQPL1	Order Entry Results Reporting	362	362	Y	20	20	Y	16	16	16	0	0	1.0000
+ORQQPL	Order Entry Results Reporting	121	121	Y	4	4	Y	10	10	10	0	0	1.0000
+ORQQPL1	Order Entry Results Reporting	375	375	Y	20	20	Y	16	16	16	0	0	1.0000
 ORQQPL2	Order Entry Results Reporting	187	187	Y	13	13	Y	11	12	11	0	1	0.9167
-ORQQPL3	Order Entry Results Reporting	264	264	Y	10	10	Y	10	10	10	0	0	1.0000
+ORQQPL3	Order Entry Results Reporting	267	267	Y	11	11	Y	11	11	11	0	0	1.0000
 ORQQPL4	Order Entry Results Reporting	86	86	Y	6	6	Y	7	7	7	0	0	1.0000
 ORQQPP	Order Entry Results Reporting	31	31	Y	3	3	Y	3	3	3	0	0	1.0000
 ORQQPS	Order Entry Results Reporting	115	115	Y	3	3	Y	2	2	2	0	0	1.0000
@@ -15525,7 +15525,7 @@ ORVOM5	Order Entry Results Reporting	18	18	Y	2	2	Y	2	2	2	0	0	1.0000
 ORVOM6	Order Entry Results Reporting	11	11	Y	1	1	Y	2	3	2	0	1	0.6667
 ORVOMH	Order Entry Results Reporting	21	21	Y	7	7	Y	1	1	1	0	0	1.0000
 ORVW	Order Entry Results Reporting	8	8	Y	2	2	Y	1	1	1	0	0	1.0000
-ORWCH	Order Entry Results Reporting	83	83	Y	11	11	Y	3	3	3	0	0	1.0000
+ORWCH	Order Entry Results Reporting	97	97	Y	12	12	Y	3	3	3	0	0	1.0000
 ORWCIRN	Order Entry Results Reporting	77	77	Y	8	8	Y	7	8	7	0	1	0.8750
 ORWCOM	Order Entry Results Reporting	32	32	Y	6	6	Y	2	2	2	0	0	1.0000
 ORWCS	Order Entry Results Reporting	45	45	Y	5	5	Y	3	3	3	0	0	1.0000
@@ -15576,11 +15576,11 @@ ORWDRA	Order Entry Results Reporting	51	51	Y	10	10	Y	2	2	2	0	0	1.0000
 ORWDRA32	Order Entry Results Reporting	159	159	Y	24	24	Y	6	6	6	0	0	1.0000
 ORWDSD1	Order Entry Results Reporting	111	111	Y	12	12	Y	4	4	4	0	0	1.0000
 ORWDVAL	Order Entry Results Reporting	39	39	Y	5	5	Y	1	1	1	0	0	1.0000
-ORWDX	Order Entry Results Reporting	197	197	Y	25	25	Y	14	14	14	0	0	1.0000
+ORWDX	Order Entry Results Reporting	198	198	Y	25	25	Y	14	14	14	0	0	1.0000
 ORWDX1	Order Entry Results Reporting	189	189	Y	15	15	Y	8	8	8	0	0	1.0000
 ORWDX2	Order Entry Results Reporting	164	164	Y	12	12	Y	10	10	10	0	0	1.0000
 ORWDX3	Order Entry Results Reporting	208	208	Y	3	3	Y	12	12	12	0	0	1.0000
-ORWDXA	Order Entry Results Reporting	314	314	Y	19	19	Y	29	31	29	0	2	0.9355
+ORWDXA	Order Entry Results Reporting	317	317	Y	19	19	Y	30	32	30	0	2	0.9375
 ORWDXA1	Order Entry Results Reporting	189	189	Y	15	15	Y	11	11	11	0	0	1.0000
 ORWDXC	Order Entry Results Reporting	379	379	Y	27	27	Y	14	14	14	0	0	1.0000
 ORWDXC2	Order Entry Results Reporting	10	10	Y	2	2	Y	0	0	0	0	0	1.0000
@@ -15640,7 +15640,7 @@ ORWOD1	Order Entry Results Reporting	102	102	Y	3	3	Y	0	0	0	0	0	1.0000
 ORWOR	Order Entry Results Reporting	184	184	Y	16	16	Y	12	14	12	0	2	0.8571
 ORWOR1	Order Entry Results Reporting	143	143	Y	11	11	Y	8	8	8	0	0	1.0000
 ORWOR2	Order Entry Results Reporting	114	114	Y	9	9	Y	12	12	12	0	0	1.0000
-ORWORB	Order Entry Results Reporting	316	316	Y	19	19	Y	22	22	22	0	0	1.0000
+ORWORB	Order Entry Results Reporting	319	319	Y	19	19	Y	22	22	22	0	0	1.0000
 ORWORDG	Order Entry Results Reporting	56	56	Y	9	9	Y	2	2	2	0	0	1.0000
 ORWORR	Order Entry Results Reporting	256	256	Y	20	20	Y	13	13	13	0	0	1.0000
 ORWORR1	Order Entry Results Reporting	87	87	Y	5	5	Y	9	9	9	0	0	1.0000
@@ -15649,7 +15649,7 @@ ORWPAR1	Order Entry Results Reporting	11	11	Y	2	2	Y	0	0	0	0	0	1.0000
 ORWPCE	Order Entry Results Reporting	247	247	Y	29	29	Y	21	21	21	0	0	1.0000
 ORWPCE1	Order Entry Results Reporting	148	148	Y	8	8	Y	9	9	9	0	0	1.0000
 ORWPCE2	Order Entry Results Reporting	204	204	Y	31	31	Y	15	20	15	0	5	0.7500
-ORWPCE3	Order Entry Results Reporting	338	338	Y	10	10	Y	12	12	12	0	0	1.0000
+ORWPCE3	Order Entry Results Reporting	320	320	Y	10	10	Y	13	13	13	0	0	1.0000
 ORWPCE4	Order Entry Results Reporting	135	135	Y	7	7	Y	7	7	7	0	0	1.0000
 ORWPCE5	Order Entry Results Reporting	75	75	Y	9	9	Y	7	7	7	0	0	1.0000
 ORWPFSS	Order Entry Results Reporting	76	76	Y	5	5	Y	3	3	3	0	0	1.0000
@@ -15659,7 +15659,7 @@ ORWPFSS2	Order Entry Results Reporting	41	41	Y	2	2	Y	3	3	3	0	0	1.0000
 ORWPFSS4	Order Entry Results Reporting	139	139	Y	9	9	Y	6	6	6	0	0	1.0000
 ORWPS	Order Entry Results Reporting	265	265	Y	16	16	Y	12	12	12	0	0	1.0000
 ORWPS1	Order Entry Results Reporting	41	41	Y	6	6	Y	4	4	4	0	0	1.0000
-ORWPT	Order Entry Results Reporting	304	304	Y	30	30	Y	14	14	14	0	0	1.0000
+ORWPT	Order Entry Results Reporting	305	305	Y	30	30	Y	14	14	14	0	0	1.0000
 ORWPT1	Order Entry Results Reporting	134	134	Y	5	5	Y	6	6	6	0	0	1.0000
 ORWPT16	Order Entry Results Reporting	86	86	Y	9	9	Y	5	5	5	0	0	1.0000
 ORWPT2	Order Entry Results Reporting	77	77	Y	6	6	Y	10	10	10	0	0	1.0000
@@ -15691,7 +15691,7 @@ ORWTPR	Order Entry Results Reporting	190	190	Y	19	19	Y	5	5	5	0	0	1.0000
 ORWTPT	Order Entry Results Reporting	196	196	Y	12	12	Y	5	5	5	0	0	1.0000
 ORWTPUA	Order Entry Results Reporting	49	49	Y	7	7	Y	4	4	4	0	0	1.0000
 ORWTPUP	Order Entry Results Reporting	17	17	Y	3	3	Y	0	0	0	0	0	1.0000
-ORWU	Order Entry Results Reporting	339	339	Y	29	29	Y	25	25	25	0	0	1.0000
+ORWU	Order Entry Results Reporting	341	341	Y	29	29	Y	27	27	27	0	0	1.0000
 ORWU1	Order Entry Results Reporting	295	295	Y	11	11	Y	16	16	16	0	0	1.0000
 ORWU16	Order Entry Results Reporting	70	70	Y	9	9	Y	5	5	5	0	0	1.0000
 ORWU2	Order Entry Results Reporting	155	155	Y	8	8	Y	12	12	12	0	0	1.0000
@@ -18108,7 +18108,7 @@ PSAVER4	Drug Accountability	130	130	Y	12	12	Y	7	7	7	0	0	1.0000
 PSAVER5	Drug Accountability	87	87	Y	12	12	Y	4	4	4	0	0	1.0000
 PSAVER6	Drug Accountability	155	155	Y	12	12	Y	10	10	10	0	0	1.0000
 PSAVER7	Drug Accountability	96	96	Y	10	10	Y	3	3	3	0	0	1.0000
-PSAVERA	Drug Accountability	138	138	Y	15	15	Y	10	11	10	0	1	0.9091
+PSAVERA	Drug Accountability	164	164	Y	16	16	Y	11	12	11	0	1	0.9167
 PSAVERA1	Drug Accountability	163	163	Y	22	22	Y	9	9	9	0	0	1.0000
 PSAVERA2	Drug Accountability	34	34	Y	5	5	Y	3	4	3	0	1	0.7500
 PSAVERA3	Drug Accountability	54	54	Y	6	6	Y	5	5	5	0	0	1.0000
@@ -18169,7 +18169,7 @@ PSBOIV	Barcode Medication Administration	215	215	Y	12	12	Y	11	12	11	0	1	0.9167
 PSBOIV1	Barcode Medication Administration	36	36	Y	5	5	Y	0	0	0	0	0	1.0000
 PSBOMD	Barcode Medication Administration	106	106	Y	5	5	Y	5	5	5	0	0	1.0000
 PSBOMH	Barcode Medication Administration	209	209	Y	4	4	Y	14	14	14	0	0	1.0000
-PSBOMH1	Barcode Medication Administration	189	189	Y	4	4	Y	12	12	12	0	0	1.0000
+PSBOMH1	Barcode Medication Administration	191	191	Y	4	4	Y	13	13	13	0	0	1.0000
 PSBOMH2	Barcode Medication Administration	191	191	Y	12	12	Y	5	5	5	0	0	1.0000
 PSBOMH3	Barcode Medication Administration	63	63	Y	2	2	Y	1	1	1	0	0	1.0000
 PSBOML	Barcode Medication Administration	223	223	Y	7	7	Y	10	10	10	0	0	1.0000
@@ -18934,7 +18934,7 @@ PSJHIS	Inpatient Medications	47	47	Y	8	8	Y	10	12	10	0	2	0.8333
 PSJHL10	Inpatient Medications	173	173	Y	14	14	Y	17	17	17	0	0	1.0000
 PSJHL11	Inpatient Medications	14	14	Y	3	3	Y	0	0	0	0	0	1.0000
 PSJHL2	Inpatient Medications	133	133	Y	22	22	Y	7	7	7	0	0	1.0000
-PSJHL3	Inpatient Medications	216	216	Y	11	11	Y	11	12	11	0	1	0.9167
+PSJHL3	Inpatient Medications	217	217	Y	11	11	Y	11	12	11	0	1	0.9167
 PSJHL4	Inpatient Medications	204	204	Y	22	22	Y	15	15	15	0	0	1.0000
 PSJHL4A	Inpatient Medications	178	178	Y	13	13	Y	11	11	11	0	0	1.0000
 PSJHL5	Inpatient Medications	100	100	Y	7	7	Y	12	12	12	0	0	1.0000
@@ -19389,7 +19389,7 @@ PSOATRPP	Outpatient Pharmacy	71	71	Y	10	10	Y	6	6	6	0	0	1.0000
 PSOATRR	Outpatient Pharmacy	74	74	Y	10	10	Y	6	6	6	0	0	1.0000
 PSOAUTOC	Outpatient Pharmacy	141	141	Y	12	12	Y	20	20	20	0	0	1.0000
 PSOB	Outpatient Pharmacy	58	58	Y	10	10	Y	9	9	9	0	0	1.0000
-PSOBAI	Outpatient Pharmacy	83	83	Y	9	9	Y	6	7	6	0	1	0.8571
+PSOBAI	Outpatient Pharmacy	86	86	Y	9	9	Y	4	5	4	0	1	0.8000
 PSOBAIR2	Outpatient Pharmacy	156	156	Y	17	17	Y	12	12	12	0	0	1.0000
 PSOBAIRP	Outpatient Pharmacy	105	105	Y	13	13	Y	10	10	10	0	0	1.0000
 PSOBARV	Outpatient Pharmacy	26	26	Y	6	6	Y	1	1	1	0	0	1.0000
@@ -19676,7 +19676,7 @@ PSOERXU3	Outpatient Pharmacy	305	305	Y	11	11	Y	9	9	9	0	0	1.0000
 PSOERXU4	Outpatient Pharmacy	263	263	Y	11	11	Y	16	16	16	0	0	1.0000
 PSOERXU5	Outpatient Pharmacy	275	275	Y	14	14	Y	11	11	11	0	0	1.0000
 PSOERXU6	Outpatient Pharmacy	288	288	Y	12	12	Y	17	18	17	0	1	0.9444
-PSOERXU7	Outpatient Pharmacy	243	243	Y	11	11	Y	9	9	9	0	0	1.0000
+PSOERXU7	Outpatient Pharmacy	244	244	Y	11	11	Y	9	9	9	0	0	1.0000
 PSOERXU8	Outpatient Pharmacy	172	172	Y	9	9	Y	11	11	11	0	0	1.0000
 PSOERXU9	Outpatient Pharmacy	192	192	Y	10	10	Y	4	4	4	0	0	1.0000
 PSOERXUT	Outpatient Pharmacy	307	307	Y	19	19	Y	13	13	13	0	0	1.0000
@@ -19912,7 +19912,7 @@ PSOPRA	Outpatient Pharmacy	99	99	Y	10	10	Y	6	6	6	0	0	1.0000
 PSOPRF	Outpatient Pharmacy	86	86	Y	16	16	Y	13	13	13	0	0	1.0000
 PSOPRFSS	Outpatient Pharmacy	52	52	Y	13	13	Y	9	9	9	0	0	1.0000
 PSOPRI	Outpatient Pharmacy	68	68	Y	10	10	Y	7	7	7	0	0	1.0000
-PSOPRK	Outpatient Pharmacy	236	236	Y	16	16	Y	23	23	23	0	0	1.0000
+PSOPRK	Outpatient Pharmacy	242	242	Y	16	16	Y	23	23	23	0	0	1.0000
 PSOPRKA	Outpatient Pharmacy	202	202	Y	16	16	Y	12	12	12	0	0	1.0000
 PSOPROD1	Outpatient Pharmacy	438	438	Y	22	22	Y	7	7	7	0	0	1.0000
 PSOPROD2	Outpatient Pharmacy	367	367	Y	12	12	Y	6	6	6	0	0	1.0000
@@ -20103,9 +20103,9 @@ PSOTRI	Outpatient Pharmacy	157	157	Y	2	2	Y	10	10	10	0	0	1.0000
 PSOTRLBL	Outpatient Pharmacy	61	61	Y	17	17	Y	5	5	5	0	0	1.0000
 PSOUTCRM	Outpatient Pharmacy	28	28	Y	3	3	Y	1	1	1	0	0	1.0000
 PSOUTIL	Outpatient Pharmacy	307	307	Y	24	24	Y	10	10	10	0	0	1.0000
-PSOUTL	Outpatient Pharmacy	371	371	Y	40	40	Y	18	18	18	0	0	1.0000
+PSOUTL	Outpatient Pharmacy	344	344	Y	40	40	Y	17	17	17	0	0	1.0000
 PSOUTLA	Outpatient Pharmacy	145	145	Y	25	25	Y	9	9	9	0	0	1.0000
-PSOUTLA1	Outpatient Pharmacy	208	208	Y	13	13	Y	9	9	9	0	0	1.0000
+PSOUTLA1	Outpatient Pharmacy	242	242	Y	14	14	Y	9	9	9	0	0	1.0000
 PSOUTLA2	Outpatient Pharmacy	312	312	Y	22	22	Y	12	13	12	0	1	0.9231
 PSOUTOR	Outpatient Pharmacy	436	436	Y	16	16	Y	7	7	7	0	0	1.0000
 PSOUTOR1	Outpatient Pharmacy	121	121	Y	5	5	Y	1	1	1	0	0	1.0000
@@ -20672,7 +20672,7 @@ PSXLIST	CMOP	57	57	Y	10	10	Y	8	8	8	0	0	1.0000
 PSXLKUP	CMOP	38	38	Y	4	4	Y	2	2	2	0	0	1.0000
 PSXLTST	CMOP	12	12	Y	2	2	Y	0	0	0	0	0	1.0000
 PSXMISC	CMOP	70	70	Y	8	8	Y	10	10	10	0	0	1.0000
-PSXMISC1	CMOP	148	148	Y	11	11	Y	10	10	10	0	0	1.0000
+PSXMISC1	CMOP	150	150	Y	11	11	Y	10	10	10	0	0	1.0000
 PSXMSGS	CMOP	119	119	Y	11	11	Y	9	9	9	0	0	1.0000
 PSXMST	CMOP	51	51	Y	17	17	Y	5	6	5	0	1	0.8333
 PSXNEW	CMOP	81	81	Y	8	8	Y	5	5	5	0	0	1.0000
@@ -20751,10 +20751,10 @@ PX91P	PCE Patient Care Encounter	69	69	Y	5	5	Y	2	2	2	0	0	1.0000
 PXAADOC	PCE Patient Care Encounter	62	62	Y	1	1	Y	0	0	0	0	0	1.0000
 PXAAVCPT	PCE Patient Care Encounter	96	96	Y	21	21	Y	0	0	0	0	0	1.0000
 PXAAVSIT	PCE Patient Care Encounter	33	33	Y	3	3	Y	1	1	1	0	0	1.0000
-PXAI	PCE Patient Care Encounter	196	196	Y	20	20	Y	17	17	17	0	0	1.0000
+PXAI	PCE Patient Care Encounter	209	209	Y	20	20	Y	17	17	17	0	0	1.0000
 PXAICPT	PCE Patient Care Encounter	118	118	Y	9	9	Y	6	7	6	0	1	0.8571
 PXAICPTV	PCE Patient Care Encounter	182	182	Y	5	5	Y	4	4	4	0	0	1.0000
-PXAIERR	PCE Patient Care Encounter	50	50	Y	3	3	Y	0	0	0	0	0	1.0000
+PXAIERR	PCE Patient Care Encounter	48	48	Y	4	4	Y	0	0	0	0	0	1.0000
 PXAIHF	PCE Patient Care Encounter	80	80	Y	4	4	Y	2	2	2	0	0	1.0000
 PXAIHFV	PCE Patient Care Encounter	91	91	Y	3	3	Y	2	2	2	0	0	1.0000
 PXAIICR	PCE Patient Care Encounter	72	72	Y	4	4	Y	1	1	1	0	0	1.0000
@@ -20764,9 +20764,9 @@ PXAIIMMV	PCE Patient Care Encounter	266	266	Y	5	5	Y	4	4	4	0	0	1.0000
 PXAIMOD	PCE Patient Care Encounter	31	31	Y	3	3	Y	0	0	0	0	0	1.0000
 PXAIPED	PCE Patient Care Encounter	80	80	Y	4	4	Y	2	2	2	0	0	1.0000
 PXAIPEDV	PCE Patient Care Encounter	84	84	Y	3	3	Y	2	2	2	0	0	1.0000
-PXAIPL	PCE Patient Care Encounter	66	66	Y	5	5	Y	2	2	2	0	0	1.0000
-PXAIPOV	PCE Patient Care Encounter	171	171	Y	11	11	Y	8	9	8	0	1	0.8889
-PXAIPOVV	PCE Patient Care Encounter	248	248	Y	6	6	Y	3	3	3	0	0	1.0000
+PXAIPL	PCE Patient Care Encounter	68	68	Y	5	5	Y	3	3	3	0	0	1.0000
+PXAIPOV	PCE Patient Care Encounter	167	167	Y	11	11	Y	8	9	8	0	1	0.8889
+PXAIPOVV	PCE Patient Care Encounter	217	217	Y	6	6	Y	3	3	3	0	0	1.0000
 PXAIPRV	PCE Patient Care Encounter	172	172	Y	11	11	Y	3	3	3	0	0	1.0000
 PXAIPRVV	PCE Patient Care Encounter	118	118	Y	5	5	Y	3	3	3	0	0	1.0000
 PXAISC	PCE Patient Care Encounter	92	92	Y	8	8	Y	2	2	2	0	0	1.0000
@@ -20775,12 +20775,12 @@ PXAISK	PCE Patient Care Encounter	104	104	Y	5	5	Y	2	2	2	0	0	1.0000
 PXAISKV	PCE Patient Care Encounter	135	135	Y	3	3	Y	1	1	1	0	0	1.0000
 PXAIUPRV	PCE Patient Care Encounter	23	23	Y	4	4	Y	0	0	0	0	0	1.0000
 PXAIVAL	PCE Patient Care Encounter	190	190	Y	9	9	Y	7	7	7	0	0	1.0000
-PXAIVST	PCE Patient Care Encounter	192	192	Y	9	9	Y	6	6	6	0	0	1.0000
-PXAIVSTV	PCE Patient Care Encounter	261	261	Y	8	8	Y	5	5	5	0	0	1.0000
+PXAIVST	PCE Patient Care Encounter	194	194	Y	9	9	Y	7	7	7	0	0	1.0000
+PXAIVSTV	PCE Patient Care Encounter	262	262	Y	9	9	Y	5	5	5	0	0	1.0000
 PXAIXAM	PCE Patient Care Encounter	80	80	Y	4	4	Y	2	2	2	0	0	1.0000
 PXAIXAMV	PCE Patient Care Encounter	84	84	Y	3	3	Y	2	2	2	0	0	1.0000
-PXAPI	PCE Patient Care Encounter	229	229	Y	23	23	Y	15	15	15	0	0	1.0000
-PXAPIDEL	PCE Patient Care Encounter	229	229	Y	6	6	Y	11	11	11	0	0	1.0000
+PXAPI	PCE Patient Care Encounter	242	242	Y	24	24	Y	16	16	16	0	0	1.0000
+PXAPIDEL	PCE Patient Care Encounter	241	241	Y	6	6	Y	12	12	12	0	0	1.0000
 PXAPIEED	PCE Patient Care Encounter	50	50	Y	3	3	Y	3	4	3	0	1	0.7500
 PXAPIIB	PCE Patient Care Encounter	112	112	Y	15	15	Y	0	0	0	0	0	1.0000
 PXAPIIM	PCE Patient Care Encounter	596	596	Y	20	20	Y	11	11	11	0	0	1.0000
@@ -20788,15 +20788,15 @@ PXAPIIM2	PCE Patient Care Encounter	49	49	Y	2	2	Y	0	0	0	0	0	1.0000
 PXAPIOE	PCE Patient Care Encounter	202	202	Y	23	23	Y	2	2	2	0	0	1.0000
 PXAPIUTL	PCE Patient Care Encounter	33	33	Y	4	4	Y	2	2	2	0	0	1.0000
 PXBAICS	PCE Patient Care Encounter	13	13	Y	11	11	Y	0	0	0	0	0	1.0000
-PXBAPI	PCE Patient Care Encounter	121	121	Y	2	2	Y	7	8	7	0	1	0.8750
-PXBAPI1	PCE Patient Care Encounter	255	255	Y	21	21	Y	15	15	15	0	0	1.0000
+PXBAPI	PCE Patient Care Encounter	124	124	Y	2	2	Y	7	8	7	0	1	0.8750
+PXBAPI1	PCE Patient Care Encounter	250	250	Y	21	21	Y	16	16	16	0	0	1.0000
 PXBAPI2	PCE Patient Care Encounter	41	41	Y	6	6	Y	3	3	3	0	0	1.0000
-PXBAPI21	PCE Patient Care Encounter	117	117	Y	8	8	Y	10	10	10	0	0	1.0000
+PXBAPI21	PCE Patient Care Encounter	117	117	Y	8	8	Y	11	11	11	0	0	1.0000
 PXBAPI22	PCE Patient Care Encounter	59	59	Y	6	6	Y	5	5	5	0	0	1.0000
 PXBCC	PCE Patient Care Encounter	229	229	Y	26	26	Y	2	2	2	0	0	1.0000
 PXBDCPT	PCE Patient Care Encounter	237	237	Y	10	10	Y	15	15	15	0	0	1.0000
 PXBDPL	PCE Patient Care Encounter	91	91	Y	8	8	Y	3	5	3	0	2	0.6000
-PXBDPOV	PCE Patient Care Encounter	150	150	Y	10	10	Y	8	8	8	0	0	1.0000
+PXBDPOV	PCE Patient Care Encounter	154	154	Y	10	10	Y	8	8	8	0	0	1.0000
 PXBDPRV	PCE Patient Care Encounter	120	120	Y	8	8	Y	5	5	5	0	0	1.0000
 PXBDREQ	PCE Patient Care Encounter	120	120	Y	28	28	Y	1	1	1	0	0	1.0000
 PXBDSTP	PCE Patient Care Encounter	73	73	Y	6	6	Y	2	2	2	0	0	1.0000
@@ -20809,7 +20809,7 @@ PXBGIMM	PCE Patient Care Encounter	45	45	Y	2	2	Y	1	1	1	0	0	1.0000
 PXBGPED	PCE Patient Care Encounter	43	43	Y	2	2	Y	1	1	1	0	0	1.0000
 PXBGPL	PCE Patient Care Encounter	28	28	Y	4	4	Y	1	1	1	0	0	1.0000
 PXBGPL2	PCE Patient Care Encounter	121	121	Y	18	18	Y	5	5	5	0	0	1.0000
-PXBGPOV	PCE Patient Care Encounter	74	74	Y	7	7	Y	5	5	5	0	0	1.0000
+PXBGPOV	PCE Patient Care Encounter	80	80	Y	7	7	Y	6	6	6	0	0	1.0000
 PXBGPOV2	PCE Patient Care Encounter	183	183	Y	22	22	Y	7	7	7	0	0	1.0000
 PXBGPOV3	PCE Patient Care Encounter	108	108	Y	15	15	Y	4	4	4	0	0	1.0000
 PXBGPOV4	PCE Patient Care Encounter	128	128	Y	16	16	Y	6	6	6	0	0	1.0000
@@ -20832,7 +20832,7 @@ PXBHLPR	PCE Patient Care Encounter	29	29	Y	7	7	Y	0	0	0	0	0	1.0000
 PXBIBB	PCE Patient Care Encounter	76	76	Y	3	3	Y	4	4	4	0	0	1.0000
 PXBMCPT	PCE Patient Care Encounter	123	123	Y	12	12	Y	15	15	15	0	0	1.0000
 PXBMCPT2	PCE Patient Care Encounter	133	133	Y	15	15	Y	17	17	17	0	0	1.0000
-PXBMPOV	PCE Patient Care Encounter	80	80	Y	6	6	Y	10	12	10	0	2	0.8333
+PXBMPOV	PCE Patient Care Encounter	81	81	Y	6	6	Y	10	12	10	0	2	0.8333
 PXBMPRV	PCE Patient Care Encounter	68	68	Y	5	5	Y	8	9	8	0	1	0.8889
 PXBMSTP	PCE Patient Care Encounter	61	61	Y	5	5	Y	8	8	8	0	0	1.0000
 PXBPCPT	PCE Patient Care Encounter	203	203	Y	12	12	Y	14	14	14	0	0	1.0000
@@ -20842,7 +20842,7 @@ PXBPL	PCE Patient Care Encounter	120	120	Y	9	9	Y	13	14	13	0	1	0.9286
 PXBPMOD	PCE Patient Care Encounter	86	86	Y	6	6	Y	6	6	6	0	0	1.0000
 PXBPORD	PCE Patient Care Encounter	50	50	Y	5	5	Y	5	5	5	0	0	1.0000
 PXBPPOV	PCE Patient Care Encounter	141	141	Y	10	10	Y	13	13	13	0	0	1.0000
-PXBPPOV1	PCE Patient Care Encounter	132	132	Y	11	11	Y	9	10	9	0	1	0.9000
+PXBPPOV1	PCE Patient Care Encounter	133	133	Y	11	11	Y	9	10	9	0	1	0.9000
 PXBPPRV	PCE Patient Care Encounter	166	166	Y	8	8	Y	11	11	11	0	0	1.0000
 PXBPPRV1	PCE Patient Care Encounter	108	108	Y	9	9	Y	11	11	11	0	0	1.0000
 PXBPQUA	PCE Patient Care Encounter	38	38	Y	6	6	Y	4	4	4	0	0	1.0000
@@ -20850,8 +20850,8 @@ PXBPSTP	PCE Patient Care Encounter	105	105	Y	9	9	Y	10	10	10	0	0	1.0000
 PXBPSTP1	PCE Patient Care Encounter	81	81	Y	5	5	Y	7	7	7	0	0	1.0000
 PXBPVST	PCE Patient Care Encounter	184	184	Y	13	13	Y	5	5	5	0	0	1.0000
 PXBPWCH	PCE Patient Care Encounter	40	40	Y	6	6	Y	2	2	2	0	0	1.0000
-PXBSTOR	PCE Patient Care Encounter	156	156	Y	11	11	Y	7	7	7	0	0	1.0000
-PXBSTOR1	PCE Patient Care Encounter	92	92	Y	6	6	Y	2	2	2	0	0	1.0000
+PXBSTOR	PCE Patient Care Encounter	166	166	Y	11	11	Y	8	8	8	0	0	1.0000
+PXBSTOR1	PCE Patient Care Encounter	93	93	Y	6	6	Y	3	3	3	0	0	1.0000
 PXBUTL	PCE Patient Care Encounter	148	148	Y	14	14	Y	9	9	9	0	0	1.0000
 PXBUTL0	PCE Patient Care Encounter	148	148	Y	29	29	Y	0	0	0	0	0	1.0000
 PXBUTL1	PCE Patient Care Encounter	71	71	Y	21	21	Y	0	0	0	0	0	1.0000
@@ -20885,11 +20885,11 @@ PXCAVST2	PCE Patient Care Encounter	39	39	Y	3	3	Y	3	3	3	0	0	1.0000
 PXCAXAM	PCE Patient Care Encounter	45	45	Y	3	3	Y	2	2	2	0	0	1.0000
 PXCE	PCE Patient Care Encounter	232	232	Y	18	18	Y	19	19	19	0	0	1.0000
 PXCEAE	PCE Patient Care Encounter	170	170	Y	14	14	Y	17	17	17	0	0	1.0000
-PXCEAE1	PCE Patient Care Encounter	112	112	Y	6	6	Y	7	7	7	0	0	1.0000
+PXCEAE1	PCE Patient Care Encounter	127	127	Y	6	6	Y	8	8	8	0	0	1.0000
 PXCEAE2	PCE Patient Care Encounter	59	59	Y	4	4	Y	2	2	2	0	0	1.0000
 PXCEAPPM	PCE Patient Care Encounter	41	41	Y	3	3	Y	1	1	1	0	0	1.0000
-PXCEC800	PCE Patient Care Encounter	26	26	Y	2	2	Y	1	1	1	0	0	1.0000
-PXCECCLS	PCE Patient Care Encounter	89	89	Y	2	2	Y	1	1	1	0	0	1.0000
+PXCEC800	PCE Patient Care Encounter	24	24	Y	2	2	Y	2	2	2	0	0	1.0000
+PXCECCLS	PCE Patient Care Encounter	79	79	Y	2	2	Y	2	2	2	0	0	1.0000
 PXCECPT	PCE Patient Care Encounter	242	242	Y	17	17	Y	17	17	17	0	0	1.0000
 PXCECPT1	PCE Patient Care Encounter	31	31	Y	3	3	Y	6	6	6	0	0	1.0000
 PXCECSTP	PCE Patient Care Encounter	75	75	Y	7	7	Y	4	4	4	0	0	1.0000
@@ -20917,10 +20917,10 @@ PXCESIT	PCE Patient Care Encounter	53	53	Y	3	3	Y	1	1	1	0	0	1.0000
 PXCESK	PCE Patient Care Encounter	277	277	Y	16	16	Y	11	11	11	0	0	1.0000
 PXCETRT	PCE Patient Care Encounter	53	53	Y	5	5	Y	1	1	1	0	0	1.0000
 PXCEVFI1	PCE Patient Care Encounter	242	242	Y	16	16	Y	14	14	14	0	0	1.0000
-PXCEVFI2	PCE Patient Care Encounter	159	159	Y	7	7	Y	7	7	7	0	0	1.0000
+PXCEVFI2	PCE Patient Care Encounter	168	168	Y	7	7	Y	8	8	8	0	0	1.0000
 PXCEVFI4	PCE Patient Care Encounter	123	123	Y	5	5	Y	7	7	7	0	0	1.0000
 PXCEVFI5	PCE Patient Care Encounter	60	60	Y	2	2	Y	3	3	3	0	0	1.0000
-PXCEVFIL	PCE Patient Care Encounter	161	161	Y	8	8	Y	11	11	11	0	0	1.0000
+PXCEVFIL	PCE Patient Care Encounter	174	174	Y	8	8	Y	12	12	12	0	0	1.0000
 PXCEVIMM	PCE Patient Care Encounter	272	272	Y	18	18	Y	15	15	15	0	0	1.0000
 PXCEVIS	PCE Patient Care Encounter	21	21	Y	3	3	Y	2	2	2	0	0	1.0000
 PXCEVSIT	PCE Patient Care Encounter	153	153	Y	11	11	Y	11	11	11	0	0	1.0000
@@ -20973,8 +20973,8 @@ PXIPOST	PCE Patient Care Encounter	171	171	Y	13	13	Y	7	7	7	0	0	1.0000
 PXIPOST1	PCE Patient Care Encounter	157	157	Y	7	7	Y	4	4	4	0	0	1.0000
 PXIPREI	PCE Patient Care Encounter	13	13	Y	1	1	Y	2	2	2	0	0	1.0000
 PXKCO	PCE Patient Care Encounter	99	99	Y	6	6	Y	1	1	1	0	0	1.0000
-PXKENC	PCE Patient Care Encounter	142	142	Y	6	6	Y	1	1	1	0	0	1.0000
-PXKENCOUNTER	PCE Patient Care Encounter	323	323	Y	3	3	Y	0	0	0	0	0	1.0000
+PXKENC	PCE Patient Care Encounter	159	159	Y	6	6	Y	2	2	2	0	0	1.0000
+PXKENCOUNTER	PCE Patient Care Encounter	351	351	Y	3	3	Y	1	1	1	0	0	1.0000
 PXKFCPT	PCE Patient Care Encounter	86	86	Y	12	12	Y	0	0	0	0	0	1.0000
 PXKFCPT1	PCE Patient Care Encounter	113	113	Y	10	10	Y	2	2	2	0	0	1.0000
 PXKFHF	PCE Patient Care Encounter	73	73	Y	12	12	Y	0	0	0	0	0	1.0000
@@ -20982,24 +20982,24 @@ PXKFICR	PCE Patient Care Encounter	69	69	Y	11	11	Y	0	0	0	0	0	1.0000
 PXKFIMM	PCE Patient Care Encounter	126	126	Y	17	17	Y	0	0	0	0	0	1.0000
 PXKFIMM1	PCE Patient Care Encounter	31	31	Y	4	4	Y	0	0	0	0	0	1.0000
 PXKFPED	PCE Patient Care Encounter	75	75	Y	12	12	Y	0	0	0	0	0	1.0000
-PXKFPOV	PCE Patient Care Encounter	92	92	Y	13	13	Y	0	0	0	0	0	1.0000
+PXKFPOV	PCE Patient Care Encounter	101	101	Y	14	14	Y	2	2	2	0	0	1.0000
 PXKFPOV1	PCE Patient Care Encounter	86	86	Y	8	8	Y	3	3	3	0	0	1.0000
 PXKFPRV	PCE Patient Care Encounter	70	70	Y	11	11	Y	0	0	0	0	0	1.0000
 PXKFSC	PCE Patient Care Encounter	71	71	Y	12	12	Y	0	0	0	0	0	1.0000
 PXKFSK	PCE Patient Care Encounter	98	98	Y	13	13	Y	0	0	0	0	0	1.0000
 PXKFSK1	PCE Patient Care Encounter	31	31	Y	4	4	Y	0	0	0	0	0	1.0000
 PXKFTRT	PCE Patient Care Encounter	74	74	Y	12	12	Y	0	0	0	0	0	1.0000
-PXKFVST	PCE Patient Care Encounter	122	122	Y	11	11	Y	2	2	2	0	0	1.0000
+PXKFVST	PCE Patient Care Encounter	125	125	Y	11	11	Y	2	2	2	0	0	1.0000
 PXKFXAM	PCE Patient Care Encounter	72	72	Y	12	12	Y	0	0	0	0	0	1.0000
 PXKIMM	PCE Patient Care Encounter	180	180	Y	8	8	Y	2	2	2	0	0	1.0000
-PXKMAIN	PCE Patient Care Encounter	176	176	Y	19	19	Y	11	11	11	0	0	1.0000
-PXKMAIN1	PCE Patient Care Encounter	251	251	Y	15	15	Y	7	8	7	0	1	0.8750
+PXKMAIN	PCE Patient Care Encounter	185	185	Y	19	19	Y	11	11	11	0	0	1.0000
+PXKMAIN1	PCE Patient Care Encounter	262	262	Y	15	15	Y	8	9	8	0	1	0.8889
 PXKMAIN2	PCE Patient Care Encounter	171	171	Y	7	7	Y	5	5	5	0	0	1.0000
-PXKMASC	PCE Patient Care Encounter	179	179	Y	12	12	Y	10	10	10	0	0	1.0000
+PXKMASC	PCE Patient Care Encounter	215	215	Y	13	13	Y	11	11	11	0	0	1.0000
 PXKMASC1	PCE Patient Care Encounter	22	22	Y	3	3	Y	0	0	0	0	0	1.0000
 PXKMCODE	PCE Patient Care Encounter	190	190	Y	9	9	Y	4	4	4	0	0	1.0000
 PXKMOD	PCE Patient Care Encounter	46	46	Y	8	8	Y	3	3	3	0	0	1.0000
-PXKVST	PCE Patient Care Encounter	96	96	Y	3	3	Y	1	1	1	0	0	1.0000
+PXKVST	PCE Patient Care Encounter	93	93	Y	3	3	Y	1	1	1	0	0	1.0000
 PXKWSRCH	PCE Patient Care Encounter	192	192	Y	10	10	Y	8	8	8	0	0	1.0000
 PXLEX	PCE Patient Care Encounter	128	128	Y	9	9	Y	10	10	10	0	0	1.0000
 PXLEXS	PCE Patient Care Encounter	365	365	Y	25	25	Y	11	11	11	0	0	1.0000
@@ -21069,7 +21069,7 @@ PXRM7M1	Clinical Reminders	17	17	Y	2	2	Y	3	3	3	0	0	1.0000
 PXRM7XT	Clinical Reminders	254	254	Y	6	6	Y	3	3	3	0	0	1.0000
 PXRMACT	Clinical Reminders	85	85	Y	8	8	Y	2	2	2	0	0	1.0000
 PXRMAGE	Clinical Reminders	123	123	Y	8	8	Y	3	3	3	0	0	1.0000
-PXRMAPI	Clinical Reminders	62	62	Y	5	5	Y	1	1	1	0	0	1.0000
+PXRMAPI	Clinical Reminders	85	85	Y	8	8	Y	1	1	1	0	0	1.0000
 PXRMAPI0	Clinical Reminders	50	50	Y	4	4	Y	0	0	0	0	0	1.0000
 PXRMAPI1	Clinical Reminders	73	73	Y	6	6	Y	2	2	2	0	0	1.0000
 PXRMARCH	Clinical Reminders	61	61	Y	4	4	Y	3	3	3	0	0	1.0000
@@ -21157,7 +21157,7 @@ PXRMDRGR	Clinical Reminders	200	200	Y	8	8	Y	7	7	7	0	0	1.0000
 PXRMDRSG	Clinical Reminders	125	125	Y	6	6	Y	2	2	2	0	0	1.0000
 PXRMDRUG	Clinical Reminders	218	218	Y	8	8	Y	10	10	10	0	0	1.0000
 PXRMDRVI	Clinical Reminders	108	108	Y	9	9	Y	2	2	2	0	0	1.0000
-PXRMDTAX	Clinical Reminders	394	394	Y	25	25	Y	12	12	12	0	0	1.0000
+PXRMDTAX	Clinical Reminders	397	397	Y	25	25	Y	12	12	12	0	0	1.0000
 PXRMDTX1	Clinical Reminders	16	16	Y	2	2	Y	0	0	0	0	0	1.0000
 PXRMDUTL	Clinical Reminders	207	207	Y	10	10	Y	5	5	5	0	0	1.0000
 PXRMDUTL1	Clinical Reminders	81	81	Y	7	7	Y	4	4	4	0	0	1.0000
@@ -21189,14 +21189,14 @@ PXRMEVFI	Clinical Reminders	79	79	Y	5	5	Y	15	15	15	0	0	1.0000
 PXRMEXAM	Clinical Reminders	109	109	Y	7	7	Y	8	8	8	0	0	1.0000
 PXRMEXCC	Clinical Reminders	95	95	Y	3	3	Y	3	3	3	0	0	1.0000
 PXRMEXCF	Clinical Reminders	66	66	Y	3	3	Y	4	4	4	0	0	1.0000
-PXRMEXCO	Clinical Reminders	205	205	Y	8	8	Y	5	5	5	0	0	1.0000
+PXRMEXCO	Clinical Reminders	205	205	Y	8	8	Y	6	6	6	0	0	1.0000
 PXRMEXCS	Clinical Reminders	143	143	Y	11	11	Y	7	7	7	0	0	1.0000
 PXRMEXDB	Clinical Reminders	211	211	Y	11	11	Y	2	2	2	0	0	1.0000
 PXRMEXDH	Clinical Reminders	50	50	Y	3	3	Y	0	0	0	0	0	1.0000
 PXRMEXED	Clinical Reminders	42	42	Y	3	3	Y	0	0	0	0	0	1.0000
 PXRMEXFI	Clinical Reminders	275	275	Y	11	11	Y	15	15	15	0	0	1.0000
 PXRMEXHF	Clinical Reminders	202	202	Y	7	7	Y	6	6	6	0	0	1.0000
-PXRMEXIC	Clinical Reminders	300	300	Y	7	7	Y	16	16	16	0	0	1.0000
+PXRMEXIC	Clinical Reminders	342	342	Y	7	7	Y	19	19	19	0	0	1.0000
 PXRMEXID	Clinical Reminders	278	278	Y	15	15	Y	14	14	14	0	0	1.0000
 PXRMEXIH	Clinical Reminders	241	241	Y	16	16	Y	9	9	9	0	0	1.0000
 PXRMEXIU	Clinical Reminders	344	344	Y	17	17	Y	16	16	16	0	0	1.0000
@@ -21209,12 +21209,12 @@ PXRMEXLM	Clinical Reminders	259	259	Y	17	17	Y	17	17	17	0	0	1.0000
 PXRMEXLR	Clinical Reminders	120	120	Y	10	10	Y	10	10	10	0	0	1.0000
 PXRMEXMH	Clinical Reminders	79	79	Y	3	3	Y	1	1	1	0	0	1.0000
 PXRMEXMM	Clinical Reminders	202	202	Y	9	9	Y	11	11	11	0	0	1.0000
-PXRMEXPD	Clinical Reminders	490	490	Y	22	22	Y	21	21	21	0	0	1.0000
-PXRMEXPS	Clinical Reminders	529	529	Y	32	32	Y	7	7	7	0	0	1.0000
+PXRMEXPD	Clinical Reminders	466	466	Y	21	21	Y	23	23	23	0	0	1.0000
+PXRMEXPS	Clinical Reminders	556	556	Y	33	33	Y	7	7	7	0	0	1.0000
 PXRMEXPU	Clinical Reminders	169	169	Y	9	9	Y	6	6	6	0	0	1.0000
 PXRMEXRP	Clinical Reminders	82	82	Y	6	6	Y	8	8	8	0	0	1.0000
 PXRMEXSI	Clinical Reminders	206	206	Y	8	8	Y	19	19	19	0	0	1.0000
-PXRMEXSP	Clinical Reminders	193	193	Y	11	11	Y	13	13	13	0	0	1.0000
+PXRMEXSP	Clinical Reminders	175	175	Y	10	10	Y	13	13	13	0	0	1.0000
 PXRMEXU0	Clinical Reminders	196	196	Y	7	7	Y	6	6	6	0	0	1.0000
 PXRMEXU1	Clinical Reminders	199	199	Y	9	9	Y	10	10	10	0	0	1.0000
 PXRMEXU2	Clinical Reminders	242	242	Y	8	8	Y	4	4	4	0	0	1.0000
@@ -21261,8 +21261,8 @@ PXRMGECY	Clinical Reminders	247	247	Y	3	3	Y	0	0	0	0	0	1.0000
 PXRMGECZ	Clinical Reminders	185	185	Y	9	9	Y	2	2	2	0	0	1.0000
 PXRMGEDT	Clinical Reminders	257	257	Y	14	14	Y	10	10	10	0	0	1.0000
 PXRMGEN	Clinical Reminders	65	65	Y	9	9	Y	13	14	13	0	1	0.9286
-PXRMGEV	Clinical Reminders	171	171	Y	3	3	Y	2	2	2	0	0	1.0000
-PXRMGEVA	Clinical Reminders	200	200	Y	13	13	Y	8	8	8	0	0	1.0000
+PXRMGEV	Clinical Reminders	214	214	Y	3	3	Y	2	2	2	0	0	1.0000
+PXRMGEVA	Clinical Reminders	255	255	Y	14	14	Y	9	9	9	0	0	1.0000
 PXRMHF	Clinical Reminders	217	217	Y	9	9	Y	12	12	12	0	0	1.0000
 PXRMHIST	Clinical Reminders	97	97	Y	5	5	Y	6	6	6	0	0	1.0000
 PXRMHOST	Clinical Reminders	24	24	Y	2	2	Y	3	3	3	0	0	1.0000
@@ -21277,7 +21277,7 @@ PXRMINDL	Clinical Reminders	130	130	Y	5	5	Y	11	11	11	0	0	1.0000
 PXRMINDX	Clinical Reminders	176	176	Y	8	8	Y	10	10	10	0	0	1.0000
 PXRMINPL	Clinical Reminders	82	82	Y	5	5	Y	2	2	2	0	0	1.0000
 PXRMINQ	Clinical Reminders	175	175	Y	13	13	Y	6	6	6	0	0	1.0000
-PXRMINTR	Clinical Reminders	298	298	Y	14	14	Y	5	5	5	0	0	1.0000
+PXRMINTR	Clinical Reminders	337	337	Y	15	15	Y	5	5	5	0	0	1.0000
 PXRMIOPT	Clinical Reminders	72	72	Y	2	2	Y	7	7	7	0	0	1.0000
 PXRMISE	Clinical Reminders	287	287	Y	19	19	Y	6	6	6	0	0	1.0000
 PXRMISF	Clinical Reminders	64	64	Y	3	3	Y	4	4	4	0	0	1.0000
@@ -21528,7 +21528,7 @@ PXRMUCUM	Clinical Reminders	57	57	Y	4	4	Y	4	4	4	0	0	1.0000
 PXRMUID	Clinical Reminders	13	13	Y	2	2	Y	0	0	0	0	0	1.0000
 PXRMUIDE	Clinical Reminders	134	134	Y	11	11	Y	7	7	7	0	0	1.0000
 PXRMUIDR	Clinical Reminders	63	63	Y	3	3	Y	4	4	4	0	0	1.0000
-PXRMUSAGE	Clinical Reminders	45	45	Y	3	3	Y	2	2	2	0	0	1.0000
+PXRMUSAGE	Clinical Reminders	52	52	Y	3	3	Y	2	2	2	0	0	1.0000
 PXRMUTIL	Clinical Reminders	458	458	Y	27	27	Y	21	21	21	0	0	1.0000
 PXRMV2E	Clinical Reminders	88	88	Y	3	3	Y	3	3	3	0	0	1.0000
 PXRMV2I	Clinical Reminders	275	275	Y	20	20	Y	22	23	22	0	1	0.9565
@@ -21582,7 +21582,7 @@ PXRMXX1	Clinical Reminders	166	166	Y	6	6	Y	3	3	3	0	0	1.0000
 PXRMXX2	Clinical Reminders	163	163	Y	16	16	Y	1	1	1	0	0	1.0000
 PXRMXXT	Clinical Reminders	32	32	Y	5	5	Y	3	3	3	0	0	1.0000
 PXRPC	PCE Patient Care Encounter	245	245	Y	14	14	Y	7	7	7	0	0	1.0000
-PXRPC1	PCE Patient Care Encounter	281	281	Y	2	2	Y	7	7	7	0	0	1.0000
+PXRPC1	PCE Patient Care Encounter	274	274	Y	2	2	Y	8	8	8	0	0	1.0000
 PXRRADUT	PCE Patient Care Encounter	159	159	Y	16	16	Y	5	5	5	0	0	1.0000
 PXRRBUSY	PCE Patient Care Encounter	24	24	Y	4	4	Y	0	0	0	0	0	1.0000
 PXRRECSC	PCE Patient Care Encounter	125	125	Y	10	10	Y	4	4	4	0	0	1.0000
@@ -21652,7 +21652,7 @@ PXUAXTMP	PCE Patient Care Encounter	40	40	Y	4	4	Y	1	1	1	0	0	1.0000
 PXUCUM	PCE Patient Care Encounter	25	25	Y	2	2	Y	1	1	1	0	0	1.0000
 PXUTIL	PCE Patient Care Encounter	193	193	Y	13	13	Y	13	13	13	0	0	1.0000
 PXUTL1	PCE Patient Care Encounter	102	102	Y	11	11	Y	2	2	2	0	0	1.0000
-PXUTLSCC	PCE Patient Care Encounter	164	164	Y	6	6	Y	6	6	6	0	0	1.0000
+PXUTLSCC	PCE Patient Care Encounter	124	124	Y	6	6	Y	8	8	8	0	0	1.0000
 PXUTLSTP	PCE Patient Care Encounter	91	91	Y	6	6	Y	5	5	5	0	0	1.0000
 PXUTLVST	PCE Patient Care Encounter	168	168	Y	3	3	Y	6	6	6	0	0	1.0000
 PXVDIS	PCE Patient Care Encounter	197	197	Y	12	12	Y	8	8	8	0	0	1.0000
@@ -22321,7 +22321,7 @@ RCDMCR4B	Accounts Receivable	201	201	Y	3	3	Y	6	6	6	0	0	1.0000
 RCDMCR5A	Accounts Receivable	224	224	Y	11	11	Y	10	10	10	0	0	1.0000
 RCDMCR5B	Accounts Receivable	131	131	Y	4	4	Y	7	7	7	0	0	1.0000
 RCDMCR6A	Accounts Receivable	185	185	Y	9	9	Y	8	8	8	0	0	1.0000
-RCDMCR6B	Accounts Receivable	108	108	Y	2	2	Y	5	5	5	0	0	1.0000
+RCDMCR6B	Accounts Receivable	107	107	Y	2	2	Y	6	6	6	0	0	1.0000
 RCDMCR7A	Accounts Receivable	173	173	Y	9	9	Y	8	8	8	0	0	1.0000
 RCDMCR7B	Accounts Receivable	108	108	Y	2	2	Y	5	5	5	0	0	1.0000
 RCDMCR8A	Accounts Receivable	218	218	Y	10	10	Y	9	9	9	0	0	1.0000
@@ -22649,7 +22649,7 @@ RCTCSJR	Accounts Receivable	291	291	Y	19	19	Y	10	10	10	0	0	1.0000
 RCTCSJS	Accounts Receivable	145	145	Y	9	9	Y	4	4	4	0	0	1.0000
 RCTCSJS0	Accounts Receivable	290	290	Y	31	31	Y	4	4	4	0	0	1.0000
 RCTCSJS1	Accounts Receivable	208	208	Y	13	13	Y	3	3	3	0	0	1.0000
-RCTCSP1	Accounts Receivable	297	297	Y	16	16	Y	14	14	14	0	0	1.0000
+RCTCSP1	Accounts Receivable	299	299	Y	16	16	Y	14	14	14	0	0	1.0000
 RCTCSP1A	Accounts Receivable	156	156	Y	10	10	Y	4	4	4	0	0	1.0000
 RCTCSP2	Accounts Receivable	336	336	Y	19	19	Y	16	17	16	0	1	0.9412
 RCTCSP3	Accounts Receivable	263	263	Y	24	24	Y	11	11	11	0	0	1.0000
@@ -24361,9 +24361,9 @@ SDCCRCOR	Scheduling	399	399	Y	36	36	Y	13	13	13	0	0	1.0000
 SDCCRGAP	Scheduling	175	175	Y	9	9	Y	3	3	3	0	0	1.0000
 SDCCRP912	Scheduling	92	92	Y	3	3	Y	4	4	4	0	0	1.0000
 SDCCRSCU	Scheduling	280	280	Y	11	11	Y	5	5	5	0	0	1.0000
-SDCCRSEN	Scheduling	303	303	Y	18	18	Y	10	10	10	0	0	1.0000
-SDCCRSEN1	Scheduling	177	177	Y	6	6	Y	8	8	8	0	0	1.0000
-SDCCRSEN2	Scheduling	87	87	Y	7	7	Y	4	4	4	0	0	1.0000
+SDCCRSEN	Scheduling	312	312	Y	18	18	Y	11	11	11	0	0	1.0000
+SDCCRSEN1	Scheduling	179	179	Y	6	6	Y	8	8	8	0	0	1.0000
+SDCCRSEN2	Scheduling	58	58	Y	5	5	Y	2	2	2	0	0	1.0000
 SDCD	Scheduling	32	32	Y	6	6	Y	5	5	5	0	0	1.0000
 SDCDAL1	Scheduling	41	41	Y	6	6	Y	3	3	3	0	0	1.0000
 SDCED	Scheduling	330	330	Y	25	25	Y	12	12	12	0	0	1.0000
@@ -24410,7 +24410,7 @@ SDCWL1	Scheduling	39	39	Y	16	16	Y	2	2	2	0	0	1.0000
 SDCWL2	Scheduling	31	31	Y	9	9	Y	1	1	1	0	0	1.0000
 SDCWL3	Scheduling	34	34	Y	5	5	Y	1	1	1	0	0	1.0000
 SDD	Scheduling	13	13	Y	7	7	Y	6	6	6	0	0	1.0000
-SDD0	Scheduling	55	55	Y	15	15	Y	8	8	8	0	0	1.0000
+SDD0	Scheduling	56	56	Y	15	15	Y	8	8	8	0	0	1.0000
 SDDPA	Scheduling	150	150	Y	17	17	Y	10	10	10	0	0	1.0000
 SDDSO	Scheduling	28	28	Y	9	9	Y	5	5	5	0	0	1.0000
 SDEC	Scheduling	291	291	Y	136	136	Y	65	65	65	0	0	1.0000
@@ -24636,32 +24636,32 @@ SDES2APPTUTIL	Scheduling	267	267	Y	24	24	Y	19	19	19	0	0	1.0000
 SDES2APPTYPES	Scheduling	113	113	Y	7	7	Y	6	6	6	0	0	1.0000
 SDES2APTLETTER	Scheduling	284	284	Y	17	17	Y	10	10	10	0	0	1.0000
 SDES2APTLETTERSV	Scheduling	159	159	Y	10	10	Y	9	9	9	0	0	1.0000
-SDES2ARCLOSE	Scheduling	111	111	Y	5	5	Y	10	10	10	0	0	1.0000
-SDES2BLDAPPT2	Scheduling	182	182	Y	8	8	Y	9	9	9	0	0	1.0000
-SDES2BLDAPPT44	Scheduling	101	101	Y	6	6	Y	3	3	3	0	0	1.0000
-SDES2BLDAPPTOBJ	Scheduling	137	137	Y	8	8	Y	6	6	6	0	0	1.0000
+SDES2ARCLOSE	Scheduling	112	112	Y	5	5	Y	10	10	10	0	0	1.0000
+SDES2BLDAPPT2	Scheduling	182	182	Y	8	8	Y	10	10	10	0	0	1.0000
+SDES2BLDAPPT44	Scheduling	101	101	Y	6	6	Y	4	4	4	0	0	1.0000
+SDES2BLDAPPTOBJ	Scheduling	140	140	Y	8	8	Y	7	7	7	0	0	1.0000
 SDES2BLOCKANDMOV	Scheduling	168	168	Y	7	7	Y	16	16	16	0	0	1.0000
 SDES2BLOCKMOVE	Scheduling	196	196	Y	15	15	Y	13	13	13	0	0	1.0000
 SDES2BLOCKPBSP	Scheduling	72	72	Y	6	6	Y	8	8	8	0	0	1.0000
 SDES2CANCELAPPT	Scheduling	325	325	Y	18	18	Y	23	23	23	0	0	1.0000
-SDES2CANCELAPPT1	Scheduling	17	17	Y	3	3	Y	2	2	2	0	0	1.0000
+SDES2CANCELAPPT1	Scheduling	36	36	Y	4	4	Y	6	6	6	0	0	1.0000
 SDES2CANCLNAVAIL	Scheduling	184	184	Y	9	9	Y	15	15	15	0	0	1.0000
 SDES2CHECKIN	Scheduling	163	163	Y	12	12	Y	12	12	12	0	0	1.0000
 SDES2CHKCAVAIL	Scheduling	28	28	Y	4	4	Y	4	4	4	0	0	1.0000
 SDES2CKNSTEP	Scheduling	57	57	Y	4	4	Y	6	6	6	0	0	1.0000
-SDES2CLINICLIST	Scheduling	188	188	Y	7	7	Y	10	10	10	0	0	1.0000
+SDES2CLINICLIST	Scheduling	192	192	Y	7	7	Y	11	11	11	0	0	1.0000
 SDES2CLININFO	Scheduling	316	316	Y	9	9	Y	10	10	10	0	0	1.0000
 SDES2CLINUT	Scheduling	268	268	Y	13	13	Y	8	8	8	0	0	1.0000
 SDES2CLNSEARCH	Scheduling	213	213	Y	6	6	Y	12	12	12	0	0	1.0000
 SDES2CLONESLOTS	Scheduling	116	116	Y	8	8	Y	7	7	7	0	0	1.0000
 SDES2CONTACTS	Scheduling	229	229	Y	17	17	Y	11	11	11	0	0	1.0000
-SDES2CREATEAPPT	Scheduling	273	273	Y	6	6	Y	14	14	14	0	0	1.0000
+SDES2CREATEAPPT	Scheduling	291	291	Y	6	6	Y	14	14	14	0	0	1.0000
 SDES2CREATECLIN	Scheduling	187	187	Y	6	6	Y	8	8	8	0	0	1.0000
 SDES2CREATESNAPS	Scheduling	75	75	Y	5	5	Y	9	9	9	0	0	1.0000
 SDES2CRTAPREQ	Scheduling	355	355	Y	16	16	Y	16	16	16	0	0	1.0000
 SDES2CRTAPREQ2	Scheduling	73	73	Y	2	2	Y	5	5	5	0	0	1.0000
 SDES2CRTCLNAVAIL	Scheduling	281	281	Y	23	23	Y	15	16	15	0	1	0.9375
-SDES2CRTCLNAVAL2	Scheduling	252	252	Y	13	13	Y	15	15	15	0	0	1.0000
+SDES2CRTCLNAVAL2	Scheduling	254	254	Y	13	13	Y	15	15	15	0	0	1.0000
 SDES2CRTPRVRES	Scheduling	45	45	Y	5	5	Y	7	7	7	0	0	1.0000
 SDES2CRTVETAPPT	Scheduling	165	165	Y	9	9	Y	15	15	15	0	0	1.0000
 SDES2CRTVISIT	Scheduling	157	157	Y	5	5	Y	8	8	8	0	0	1.0000
@@ -24678,11 +24678,11 @@ SDES2EDITTEMPADD	Scheduling	158	158	Y	6	6	Y	7	7	7	0	0	1.0000
 SDES2ENTERLETTER	Scheduling	206	206	Y	10	10	Y	8	8	8	0	0	1.0000
 SDES2ENTERLETTR2	Scheduling	200	200	Y	11	11	Y	8	8	8	0	0	1.0000
 SDES2EPT	Scheduling	129	129	Y	3	3	Y	9	9	9	0	0	1.0000
-SDES2GETAPPTREQ	Scheduling	235	235	Y	10	10	Y	12	12	12	0	0	1.0000
+SDES2GETAPPTREQ	Scheduling	236	236	Y	10	10	Y	12	12	12	0	0	1.0000
 SDES2GETAPPTRPCS	Scheduling	213	213	Y	15	15	Y	10	10	10	0	0	1.0000
 SDES2GETCANSLOTS	Scheduling	125	125	Y	4	4	Y	10	10	10	0	0	1.0000
 SDES2GETCLINAVL	Scheduling	147	147	Y	8	8	Y	13	13	13	0	0	1.0000
-SDES2GETCLINST	Scheduling	58	58	Y	4	4	Y	7	7	7	0	0	1.0000
+SDES2GETCLINST	Scheduling	77	77	Y	5	5	Y	7	7	7	0	0	1.0000
 SDES2GETCLINSVC	Scheduling	28	28	Y	2	2	Y	4	4	4	0	0	1.0000
 SDES2GETCLNSLOT	Scheduling	48	48	Y	4	4	Y	7	7	7	0	0	1.0000
 SDES2GETCLNSTA	Scheduling	64	64	Y	4	4	Y	7	7	7	0	0	1.0000
@@ -24720,7 +24720,7 @@ SDES2INACTCLIN	Scheduling	185	185	Y	11	11	Y	10	10	10	0	0	1.0000
 SDES2JSON	Scheduling	56	56	Y	5	5	Y	3	3	3	0	0	1.0000
 SDES2NOSHOW	Scheduling	148	148	Y	10	10	Y	15	15	15	0	0	1.0000
 SDES2PATDATA	Scheduling	102	102	Y	2	2	Y	8	8	8	0	0	1.0000
-SDES2PATSEARCH	Scheduling	228	228	Y	16	16	Y	17	17	17	0	0	1.0000
+SDES2PATSEARCH	Scheduling	229	229	Y	16	16	Y	17	17	17	0	0	1.0000
 SDES2PROVSEARCH	Scheduling	113	113	Y	6	6	Y	7	7	7	0	0	1.0000
 SDES2PRVCLINSRC	Scheduling	51	51	Y	4	4	Y	6	6	6	0	0	1.0000
 SDES2QRYAPREQS	Scheduling	303	303	Y	12	12	Y	14	14	14	0	0	1.0000
@@ -24751,7 +24751,7 @@ SDES2UTIL1	Scheduling	409	409	Y	37	37	Y	13	14	13	0	1	0.9286
 SDES2VAL2	Scheduling	20	20	Y	3	3	Y	1	1	1	0	0	1.0000
 SDES2VAL200	Scheduling	40	40	Y	5	5	Y	5	5	5	0	0	1.0000
 SDES2VAL4	Scheduling	16	16	Y	2	2	Y	3	3	3	0	0	1.0000
-SDES2VAL44	Scheduling	366	366	Y	43	43	Y	5	5	5	0	0	1.0000
+SDES2VAL44	Scheduling	369	369	Y	43	43	Y	5	5	5	0	0	1.0000
 SDES2VAL44A	Scheduling	114	114	Y	10	10	Y	6	6	6	0	0	1.0000
 SDES2VALCONTEXT	Scheduling	33	33	Y	5	5	Y	5	5	5	0	0	1.0000
 SDES2VALCRTCLIN1	Scheduling	114	114	Y	6	6	Y	5	5	5	0	0	1.0000
@@ -24817,7 +24817,7 @@ SDESADDRG	Scheduling	122	122	Y	9	9	Y	5	5	5	0	0	1.0000
 SDESAPPT	Scheduling	265	265	Y	17	17	Y	11	11	11	0	0	1.0000
 SDESAPPT3	Scheduling	233	233	Y	16	16	Y	9	9	9	0	0	1.0000
 SDESAPPT4	Scheduling	342	342	Y	19	19	Y	13	13	13	0	0	1.0000
-SDESAPPTDATA	Scheduling	227	227	Y	4	4	Y	5	5	5	0	0	1.0000
+SDESAPPTDATA	Scheduling	231	231	Y	4	4	Y	6	6	6	0	0	1.0000
 SDESAPPTEDIT	Scheduling	80	80	Y	7	7	Y	3	3	3	0	0	1.0000
 SDESAPPTLETTERS	Scheduling	303	303	Y	18	18	Y	9	9	9	0	0	1.0000
 SDESAPPTLETTERSV	Scheduling	160	160	Y	13	13	Y	8	8	8	0	0	1.0000
@@ -24850,7 +24850,7 @@ SDESCHECKOUT	Scheduling	484	484	Y	22	22	Y	14	14	14	0	0	1.0000
 SDESCHKAPPTOVP	Scheduling	86	86	Y	7	7	Y	5	5	5	0	0	1.0000
 SDESCKNSTEP	Scheduling	182	182	Y	13	13	Y	7	7	7	0	0	1.0000
 SDESCLINDAILYSCH	Scheduling	67	67	Y	8	8	Y	6	6	6	0	0	1.0000
-SDESCLINICAVAIL	Scheduling	125	125	Y	5	5	Y	6	6	6	0	0	1.0000
+SDESCLINICAVAIL	Scheduling	131	131	Y	5	5	Y	7	7	7	0	0	1.0000
 SDESCLINICDATA	Scheduling	71	71	Y	2	2	Y	2	2	2	0	0	1.0000
 SDESCLINICSET	Scheduling	454	454	Y	10	10	Y	6	6	6	0	0	1.0000
 SDESCLINICSET2	Scheduling	245	245	Y	17	17	Y	8	8	8	0	0	1.0000
@@ -24877,9 +24877,9 @@ SDESEDITAPPTREQ2	Scheduling	33	33	Y	3	3	Y	3	3	3	0	0	1.0000
 SDESEDITAPREQVAL	Scheduling	60	60	Y	8	8	Y	3	3	3	0	0	1.0000
 SDESEDITNEEDPREF	Scheduling	62	62	Y	5	5	Y	5	5	5	0	0	1.0000
 SDESGETALLCANCOM	Scheduling	28	28	Y	4	4	Y	2	2	2	0	0	1.0000
-SDESGETAPPTREQ	Scheduling	288	288	Y	15	15	Y	7	7	7	0	0	1.0000
+SDESGETAPPTREQ	Scheduling	289	289	Y	15	15	Y	7	7	7	0	0	1.0000
 SDESGETAPPTREQ2	Scheduling	80	80	Y	10	10	Y	4	4	4	0	0	1.0000
-SDESGETAPPTRPCS	Scheduling	60	60	Y	5	5	Y	7	7	7	0	0	1.0000
+SDESGETAPPTRPCS	Scheduling	79	79	Y	8	8	Y	7	7	7	0	0	1.0000
 SDESGETAPPTSIEN	Scheduling	36	36	Y	3	3	Y	4	4	4	0	0	1.0000
 SDESGETAPPTSIEN2	Scheduling	42	42	Y	4	4	Y	4	4	4	0	0	1.0000
 SDESGETAPPTTYPE	Scheduling	26	26	Y	4	4	Y	2	2	2	0	0	1.0000
@@ -24892,7 +24892,7 @@ SDESGETAREQINST	Scheduling	55	55	Y	6	6	Y	6	6	6	0	0	1.0000
 SDESGETAREQINST2	Scheduling	91	91	Y	6	6	Y	9	9	9	0	0	1.0000
 SDESGETAVAILSC	Scheduling	85	85	Y	7	7	Y	9	9	9	0	0	1.0000
 SDESGETCANCMT	Scheduling	54	54	Y	5	5	Y	2	2	2	0	0	1.0000
-SDESGETCLINAPPT	Scheduling	96	96	Y	6	6	Y	4	4	4	0	0	1.0000
+SDESGETCLINAPPT	Scheduling	96	96	Y	6	6	Y	5	5	5	0	0	1.0000
 SDESGETCLINSIEN	Scheduling	35	35	Y	3	3	Y	4	4	4	0	0	1.0000
 SDESGETCLNSCHEDS	Scheduling	71	71	Y	7	7	Y	6	6	6	0	0	1.0000
 SDESGETCONDETAIL	Scheduling	35	35	Y	5	5	Y	3	3	3	0	0	1.0000
@@ -24902,7 +24902,7 @@ SDESGETDISPREASN	Scheduling	19	19	Y	2	2	Y	2	2	2	0	0	1.0000
 SDESGETDIVISION	Scheduling	73	73	Y	5	5	Y	5	5	5	0	0	1.0000
 SDESGETLETTERS	Scheduling	94	94	Y	9	9	Y	4	4	4	0	0	1.0000
 SDESGETMHCODE	Scheduling	43	43	Y	5	5	Y	3	3	3	0	0	1.0000
-SDESGETPATAPPT	Scheduling	116	116	Y	9	9	Y	4	4	4	0	0	1.0000
+SDESGETPATAPPT	Scheduling	116	116	Y	9	9	Y	5	5	5	0	0	1.0000
 SDESGETPATINQUIR	Scheduling	38	38	Y	4	4	Y	3	3	3	0	0	1.0000
 SDESGETPRFGAPS	Scheduling	117	117	Y	8	8	Y	4	4	4	0	0	1.0000
 SDESGETRECALL	Scheduling	123	123	Y	8	8	Y	11	11	11	0	0	1.0000
@@ -24930,7 +24930,7 @@ SDESMISSIONELG	Scheduling	283	283	Y	10	10	Y	12	12	12	0	0	1.0000
 SDESNEEDSPREFS	Scheduling	51	51	Y	5	5	Y	5	5	5	0	0	1.0000
 SDESNOSHOW	Scheduling	238	238	Y	11	11	Y	13	13	13	0	0	1.0000
 SDESOPENVETREQS	Scheduling	126	126	Y	9	9	Y	6	6	6	0	0	1.0000
-SDESORDCLEAN	Scheduling	155	155	Y	13	13	Y	7	7	7	0	0	1.0000
+SDESORDCLEAN	Scheduling	157	157	Y	13	13	Y	8	8	8	0	0	1.0000
 SDESPATCHINFO	Scheduling	16	16	Y	2	2	Y	2	2	2	0	0	1.0000
 SDESPATCOMMTS	Scheduling	53	53	Y	6	6	Y	4	4	4	0	0	1.0000
 SDESPATFLAGS	Scheduling	71	71	Y	4	4	Y	7	7	7	0	0	1.0000
@@ -25781,7 +25781,7 @@ SROUTC	Surgery	69	69	Y	12	12	Y	5	6	5	0	1	0.8333
 SROUTED	Surgery	18	18	Y	5	5	Y	8	8	8	0	0	1.0000
 SROUTIN	Surgery	30	30	Y	7	7	Y	3	3	3	0	0	1.0000
 SROUTL	Surgery	127	127	Y	21	21	Y	10	10	10	0	0	1.0000
-SROUTL0	Surgery	95	95	Y	10	10	Y	4	4	4	0	0	1.0000
+SROUTL0	Surgery	98	98	Y	10	10	Y	5	5	5	0	0	1.0000
 SROUTL1	Surgery	53	53	Y	8	8	Y	3	3	3	0	0	1.0000
 SROUTLN	Surgery	14	14	Y	3	3	Y	2	2	2	0	0	1.0000
 SROUTUP	Surgery	46	46	Y	7	7	Y	4	4	4	0	0	1.0000
@@ -25950,7 +25950,7 @@ TIUADD	Text Integration Utility	156	156	Y	10	10	Y	19	19	19	0	0	1.0000
 TIUADSIG	Text Integration Utility	19	19	Y	3	3	Y	1	1	1	0	0	1.0000
 TIUAL1	Text Integration Utility	202	202	Y	16	16	Y	11	11	11	0	0	1.0000
 TIUALFUN	Text Integration Utility	185	185	Y	11	11	Y	12	12	12	0	0	1.0000
-TIUALRT	Text Integration Utility	171	171	Y	12	12	Y	15	15	15	0	0	1.0000
+TIUALRT	Text Integration Utility	181	181	Y	13	13	Y	15	15	15	0	0	1.0000
 TIUALRT1	Text Integration Utility	53	53	Y	4	4	Y	7	7	7	0	0	1.0000
 TIUALSET	Text Integration Utility	90	90	Y	4	4	Y	15	15	15	0	0	1.0000
 TIUAPIOK	Text Integration Utility	100	100	Y	12	12	Y	13	13	13	0	0	1.0000
@@ -25986,7 +25986,7 @@ TIUCOP1	Text Integration Utility	158	158	Y	3	3	Y	2	2	2	0	0	1.0000
 TIUCOPC	Text Integration Utility	260	260	Y	7	7	Y	4	4	4	0	0	1.0000
 TIUCOPP	Text Integration Utility	472	472	Y	9	9	Y	7	7	7	0	0	1.0000
 TIUCOPR	Text Integration Utility	320	320	Y	15	15	Y	10	10	10	0	0	1.0000
-TIUCOPR1	Text Integration Utility	245	245	Y	5	5	Y	4	4	4	0	0	1.0000
+TIUCOPR1	Text Integration Utility	219	219	Y	5	5	Y	4	4	4	0	0	1.0000
 TIUCOPSU	Text Integration Utility	53	53	Y	4	4	Y	0	0	0	0	0	1.0000
 TIUCOPUT	Text Integration Utility	142	142	Y	10	10	Y	4	4	4	0	0	1.0000
 TIUCP	Text Integration Utility	103	103	Y	11	11	Y	2	2	2	0	0	1.0000
@@ -26074,7 +26074,7 @@ TIUFLF	Text Integration Utility	111	111	Y	11	11	Y	4	4	4	0	0	1.0000
 TIUFLF1	Text Integration Utility	125	125	Y	20	20	Y	14	14	14	0	0	1.0000
 TIUFLF2	Text Integration Utility	88	88	Y	8	8	Y	4	4	4	0	0	1.0000
 TIUFLF3	Text Integration Utility	121	121	Y	6	6	Y	6	6	6	0	0	1.0000
-TIUFLF4	Text Integration Utility	117	117	Y	12	12	Y	4	4	4	0	0	1.0000
+TIUFLF4	Text Integration Utility	118	118	Y	12	12	Y	4	4	4	0	0	1.0000
 TIUFLF5	Text Integration Utility	125	125	Y	13	13	Y	5	5	5	0	0	1.0000
 TIUFLF6	Text Integration Utility	77	77	Y	9	9	Y	5	5	5	0	0	1.0000
 TIUFLF7	Text Integration Utility	142	142	Y	14	14	Y	4	4	4	0	0	1.0000
@@ -26398,8 +26398,8 @@ TIUSRVR3	Text Integration Utility	78	78	Y	5	5	Y	3	3	3	0	0	1.0000
 TIUSRVT	Text Integration Utility	248	248	Y	20	20	Y	8	8	8	0	0	1.0000
 TIUSRVT1	Text Integration Utility	95	95	Y	12	12	Y	4	4	4	0	0	1.0000
 TIUSRVT2	Text Integration Utility	129	129	Y	15	15	Y	4	4	4	0	0	1.0000
-TIUSRVT3	Text Integration Utility	140	140	Y	7	7	Y	3	3	3	0	0	1.0000
-TIUSRVT4	Text Integration Utility	116	116	Y	7	7	Y	5	5	5	0	0	1.0000
+TIUSRVT3	Text Integration Utility	144	144	Y	7	7	Y	3	3	3	0	0	1.0000
+TIUSRVT4	Text Integration Utility	123	123	Y	7	7	Y	5	5	5	0	0	1.0000
 TIUSRVT5	Text Integration Utility	127	127	Y	9	9	Y	6	6	6	0	0	1.0000
 TIUSUPN	Text Integration Utility	149	149	Y	13	13	Y	8	8	8	0	0	1.0000
 TIUSUPN1	Text Integration Utility	69	69	Y	5	5	Y	11	11	11	0	0	1.0000
@@ -27052,7 +27052,7 @@ VPSSRVY4	VA Point of Service	157	157	Y	10	10	Y	2	2	2	0	0	1.0000
 VPSVTL01	VA Point of Service	121	121	Y	4	4	Y	6	6	6	0	0	1.0000
 VPSVTL02	VA Point of Service	117	117	Y	3	3	Y	5	5	5	0	0	1.0000
 VPSWRIST	VA Point of Service	72	72	Y	4	4	Y	4	4	4	0	0	1.0000
-VSIT	PCE Patient Care Encounter	204	204	Y	17	17	Y	20	20	20	0	0	1.0000
+VSIT	PCE Patient Care Encounter	212	212	Y	17	17	Y	21	21	21	0	0	1.0000
 VSIT0	PCE Patient Care Encounter	57	57	Y	6	6	Y	2	2	2	0	0	1.0000
 VSITASK	PCE Patient Care Encounter	60	60	Y	4	4	Y	4	4	4	0	0	1.0000
 VSITBUL	PCE Patient Care Encounter	65	65	Y	5	5	Y	4	4	4	0	0	1.0000
@@ -27069,10 +27069,10 @@ VSITIPRE	PCE Patient Care Encounter	19	19	Y	1	1	Y	2	2	2	0	0	1.0000
 VSITKIL	PCE Patient Care Encounter	125	125	Y	10	10	Y	3	3	3	0	0	1.0000
 VSITNTEG	PCE Patient Care Encounter	38	38	Y	25	25	Y	0	0	0	0	0	1.0000
 VSITOE	PCE Patient Care Encounter	108	108	Y	3	3	Y	1	1	1	0	0	1.0000
-VSITPUT	PCE Patient Care Encounter	36	36	Y	4	4	Y	2	2	2	0	0	1.0000
-VSITPUT1	PCE Patient Care Encounter	44	44	Y	1	1	Y	2	2	2	0	0	1.0000
+VSITPUT	PCE Patient Care Encounter	41	41	Y	4	4	Y	2	2	2	0	0	1.0000
+VSITPUT1	PCE Patient Care Encounter	53	53	Y	1	1	Y	5	5	5	0	0	1.0000
 VSITSTAT	PCE Patient Care Encounter	209	209	Y	9	9	Y	4	4	4	0	0	1.0000
-VSITVAR	PCE Patient Care Encounter	95	95	Y	8	8	Y	4	4	4	0	0	1.0000
+VSITVAR	PCE Patient Care Encounter	99	99	Y	8	8	Y	4	4	4	0	0	1.0000
 VSITVID	PCE Patient Care Encounter	79	79	Y	7	7	Y	2	2	2	0	0	1.0000
 WEBG012P	WEBVRAM	111	111	Y	4	4	Y	4	4	4	0	0	1.0000
 WEBG013P	WEBVRAM	79	79	Y	3	3	Y	2	2	2	0	0	1.0000
@@ -27294,7 +27294,7 @@ XHDPTREE	HealtheVet Desktop	160	160	Y	13	13	Y	8	8	8	0	0	1.0000
 XHDTST	HealtheVet Desktop	38	38	Y	5	5	Y	2	2	2	0	0	1.0000
 XHDX	HealtheVet Desktop	82	82	Y	8	8	Y	5	5	5	0	0	1.0000
 XHDYP01	HealtheVet Desktop	198	198	Y	3	3	Y	0	0	0	0	0	1.0000
-XINDEX	Toolkit	158	158	Y	39	39	Y	10	10	10	0	0	1.0000
+XINDEX	Toolkit	162	162	Y	39	39	Y	10	10	10	0	0	1.0000
 XINDX1	Toolkit	88	88	Y	71	71	Y	0	0	0	0	0	1.0000
 XINDX10	Toolkit	81	81	Y	18	18	Y	3	3	3	0	0	1.0000
 XINDX11	Toolkit	96	96	Y	15	15	Y	1	1	1	0	0	1.0000
@@ -28079,8 +28079,8 @@ XUEPCSRT	Kernel	142	142	Y	11	11	Y	11	11	11	0	0	1.0000
 XUEPCSU1	Kernel	171	171	Y	5	5	Y	9	9	9	0	0	1.0000
 XUEPCSUT	Kernel	354	354	Y	23	23	Y	7	7	7	0	0	1.0000
 XUEPCSVR	Kernel	17	17	Y	2	2	Y	1	1	1	0	0	1.0000
-XUESSO1	Kernel	304	304	Y	20	20	Y	12	12	12	0	0	1.0000
-XUESSO2	Kernel	329	329	Y	16	16	Y	10	10	10	0	0	1.0000
+XUESSO1	Kernel	311	311	Y	20	20	Y	12	12	12	0	0	1.0000
+XUESSO2	Kernel	344	344	Y	17	17	Y	10	10	10	0	0	1.0000
 XUESSO3	Kernel	426	426	Y	10	10	Y	12	12	12	0	0	1.0000
 XUESSO4	Kernel	203	203	Y	7	7	Y	19	19	19	0	0	1.0000
 XUFILE	Kernel	62	62	Y	20	20	Y	7	7	7	0	0	1.0000
@@ -28239,7 +28239,7 @@ XUS11	Kernel	21	21	Y	4	4	Y	3	3	3	0	0	1.0000
 XUS1A	Kernel	83	83	Y	11	11	Y	5	5	5	0	0	1.0000
 XUS1B	Kernel	88	88	Y	12	12	Y	6	6	6	0	0	1.0000
 XUS2	Kernel	182	182	Y	34	34	Y	14	14	14	0	0	1.0000
-XUS3	Kernel	132	132	Y	38	38	Y	8	8	8	0	0	1.0000
+XUS3	Kernel	135	135	Y	38	38	Y	8	8	8	0	0	1.0000
 XUS3A	Kernel	46	46	Y	8	8	Y	4	4	4	0	0	1.0000
 XUS4	Kernel	31	31	Y	14	14	Y	0	0	0	0	0	1.0000
 XUS5	Kernel	65	65	Y	10	10	Y	15	15	15	0	0	1.0000
@@ -28250,7 +28250,7 @@ XUS91	Kernel	62	62	Y	11	11	Y	6	6	6	0	0	1.0000
 XUSAML	Kernel	328	328	Y	14	14	Y	9	9	9	0	0	1.0000
 XUSAP	Kernel	89	89	Y	9	9	Y	3	3	3	0	0	1.0000
 XUSAP1	Kernel	322	322	Y	27	27	Y	8	8	8	0	0	1.0000
-XUSBSE1	Kernel	305	305	Y	18	18	Y	25	25	25	0	0	1.0000
+XUSBSE1	Kernel	311	311	Y	18	18	Y	25	25	25	0	0	1.0000
 XUSBSE2	Kernel	110	110	Y	12	12	Y	10	10	10	0	0	1.0000
 XUSC1	Kernel	74	74	Y	13	13	Y	2	2	2	0	0	1.0000
 XUSC1C	Kernel	88	88	Y	14	14	Y	8	8	8	0	0	1.0000
@@ -28723,7 +28723,7 @@ YTQRQAD2	Mental Health	201	201	Y	10	10	Y	19	19	19	0	0	1.0000
 YTQRQAD3	Mental Health	286	286	Y	16	16	Y	15	15	15	0	0	1.0000
 YTQRQAD4	Mental Health	360	360	Y	15	15	Y	13	13	13	0	0	1.0000
 YTQRQAD5	Mental Health	183	183	Y	8	8	Y	7	7	7	0	0	1.0000
-YTQRQAD6	Mental Health	306	306	Y	24	24	Y	5	5	5	0	0	1.0000
+YTQRQAD6	Mental Health	318	318	Y	25	25	Y	5	5	5	0	0	1.0000
 YTQRQAD7	Mental Health	453	453	Y	38	38	Y	9	9	9	0	0	1.0000
 YTQRQAD8	Mental Health	92	92	Y	6	6	Y	8	8	8	0	0	1.0000
 YTQRRPC	Mental Health	93	93	Y	5	5	Y	3	3	3	0	0	1.0000

@@ -2474,7 +2474,6 @@ MAGQBU6A	1	1	MAGQBU6A	S - First line of routine violates the SAC.
 MAGRDEL2	1	1	MAGRDEL2	S - First line of routine violates the SAC.
 MAGRDEL3	1	1	MAGRDEL3	S - First line of routine violates the SAC.
 MAGSDOFF	1	1	MAGSDOFF	S - First line of routine violates the SAC.
-MAGSIXG1	1	1	MAGSIXG1	S - First line of routine violates the SAC.
 MAGSIXGT	1	1	MAGSIXGT	S - First line of routine violates the SAC.
 MAGVCAE	1	1	MAGVCAE	S - First line of routine violates the SAC.
 MAGVCHK	1	1	MAGVCHK	S - First line of routine violates the SAC.
@@ -2883,7 +2882,6 @@ ORB3ENV	1	1	ORB3ENV	S - First line of routine violates the SAC.
 ORB3ENV	2	17	ORMTIME+11	S - Non-Incremental Lock.
 ORB3F1	1	1	ORB3F1	S - First line of routine violates the SAC.
 ORB3FN	1	1	ORB3FN	S - First line of routine violates the SAC.
-ORB3FUP2	1	1	ORB3FUP2	S - First line of routine violates the SAC.
 ORB3LAB	1	1	ORB3LAB	S - First line of routine violates the SAC.
 ORB3P9	1	1	ORB3P9	S - First line of routine violates the SAC.
 ORB3REG	1	1	ORB3REG	S - First line of routine violates the SAC.
@@ -4915,8 +4913,6 @@ PX1P88B	1	1	PX1P88B	S - First line of routine violates the SAC.
 PX1P94	1	1	PX1P94	S - First line of routine violates the SAC.
 PXAADOC	1	1	PXAADOC	S - First line of routine violates the SAC.
 PXAAVCPT	1	1	PXAAVCPT	S - First line of routine violates the SAC.
-PXAPI	1	1	PXAPI	S - First line of routine violates the SAC.
-PXAPIDEL	1	1	PXAPIDEL	S - First line of routine violates the SAC.
 PXAPIEED	1	1	PXAPIEED	S - First line of routine violates the SAC.
 PXAPIUTL	1	1	PXAPIUTL	S - First line of routine violates the SAC.
 PXBGPRV3	1	102	SETUP+2	F - Block structure mismatch.
@@ -4950,10 +4946,8 @@ PXCAVST2	1	1	PXCAVST2	S - First line of routine violates the SAC.
 PXCAXAM	1	1	PXCAXAM	S - First line of routine violates the SAC.
 PXCE	1	1	PXCE	S - First line of routine violates the SAC.
 PXCEAE	1	1	PXCEAE	S - First line of routine violates the SAC.
-PXCEAE1	1	1	PXCEAE1	S - First line of routine violates the SAC.
 PXCEAE2	1	1	PXCEAE2	S - First line of routine violates the SAC.
 PXCEAPPM	1	1	PXCEAPPM	S - First line of routine violates the SAC.
-PXCEC800	1	1	PXCEC800	S - First line of routine violates the SAC.
 PXCECPT	1	1	PXCECPT	S - First line of routine violates the SAC.
 PXCECSTP	1	1	PXCECSTP	S - First line of routine violates the SAC.
 PXCEDATE	1	1	PXCEDATE	S - First line of routine violates the SAC.
@@ -4979,7 +4973,6 @@ PXCETRT	1	1	PXCETRT	S - First line of routine violates the SAC.
 PXCEVFI1	1	1	PXCEVFI1	S - First line of routine violates the SAC.
 PXCEVFI4	1	1	PXCEVFI4	S - First line of routine violates the SAC.
 PXCEVFI5	1	1	PXCEVFI5	S - First line of routine violates the SAC.
-PXCEVFIL	1	1	PXCEVFIL	S - First line of routine violates the SAC.
 PXCEVIMM	1	1	PXCEVIMM	S - First line of routine violates the SAC.
 PXCEVSIT	1	1	PXCEVSIT	S - First line of routine violates the SAC.
 PXCEVST	1	1	PXCEVST	S - First line of routine violates the SAC.
@@ -4994,10 +4987,7 @@ PXIPENV	1	1	PXIPENV	S - First line of routine violates the SAC.
 PXIPOST	1	1	PXIPOST	S - First line of routine violates the SAC.
 PXIPOST1	1	1	PXIPOST1	S - First line of routine violates the SAC.
 PXIPREI	1	1	PXIPREI	S - First line of routine violates the SAC.
-PXKENC	1	1	PXKENC	S - First line of routine violates the SAC.
 PXKFIMM	1	1	PXKFIMM	S - First line of routine violates the SAC.
-PXKMAIN	1	1	PXKMAIN	S - First line of routine violates the SAC.
-PXKMAIN1	1	1	PXKMAIN1	S - First line of routine violates the SAC.
 PXKMCODE	1	1	PXKMCODE	S - First line of routine violates the SAC.
 PXMEASCF	1	1	PXMEASCF	S - First line of routine violates the SAC.
 PXPT	1	1	PXPT	S - First line of routine violates the SAC.
@@ -5033,7 +5023,6 @@ PXRRWLD	1	1	PXRRWLD	S - First line of routine violates the SAC.
 PXRRWLS2	1	1	PXRRWLS2	S - First line of routine violates the SAC.
 PXRRWLSE	1	1	PXRRWLSE	S - First line of routine violates the SAC.
 PXUTL1	1	1	PXUTL1	S - First line of routine violates the SAC.
-PXUTLSCC	1	1	PXUTLSCC	S - First line of routine violates the SAC.
 PXUTLSTP	1	1	PXUTLSTP	S - First line of routine violates the SAC.
 PXVEDIT	1	1	PXVEDIT	S - First line of routine violates the SAC.
 PXVNITLY	1	1	PXVNITLY	S - First line of routine violates the SAC.
@@ -5519,11 +5508,6 @@ SDCCRP912	2	86	GET+16	W - Vendor specific code is restricted.]
 SDCCRP912	3	87	GET+17	W - Vendor specific code is restricted.]
 SDCCRP912	4	89	GET+19	W - Vendor specific code is restricted.]
 SDCCRP912	5	89	GET+19	W - Vendor specific code is restricted.]
-SDCCRSEN2	1	65	WEBSERV+5	W - Vendor specific code is restricted.]
-SDCCRSEN2	2	68	WEBSERV+8	W - Vendor specific code is restricted.]
-SDCCRSEN2	3	69	WEBSERV+9	W - Vendor specific code is restricted.]
-SDCCRSEN2	4	71	WEBSERV+11	W - Vendor specific code is restricted.]
-SDCCRSEN2	5	71	WEBSERV+11	W - Vendor specific code is restricted.]
 SDCD	1	32	STAT+3	S - Non-Incremental Lock.
 SDCD	2	32	STAT+3	S - Non-Incremental Lock.
 SDCLAS1	1	5	SDCLAS1+4	F - Undefined Function.
@@ -5985,7 +5969,6 @@ SROUNV1	1	2	SROUNV1+2	S - 2nd line of routine violates the SAC.
 SROUNV2	1	2	SROUNV2+2	S - 2nd line of routine violates the SAC.
 SROUTED	1	2	SROUTED+2	S - 2nd line of routine violates the SAC.
 SROUTIN	1	2	SROUTIN+2	S - 2nd line of routine violates the SAC.
-SROUTL0	1	2	SROUTL0+2	S - 2nd line of routine violates the SAC.
 SROUTLN	1	2	SROUTLN+2	S - 2nd line of routine violates the SAC.
 SROUTUP	1	2	SROUTUP+2	S - 2nd line of routine violates the SAC.
 SROWC	1	2	SROWC+2	S - 2nd line of routine violates the SAC.
@@ -6137,8 +6120,6 @@ TIUPRPN4	1	1	TIUPRPN4	S - First line of routine violates the SAC.
 TIUPS185	1	2	TIUPS185+2	S - 2nd line of routine violates the SAC.
 TIUPT329	1	1	TIUPT329	S - First line of routine violates the SAC.
 TIURENDX	1	1	TIURENDX	S - First line of routine violates the SAC.
-TIUSRVT3	1	1	TIUSRVT3	S - First line of routine violates the SAC.
-TIUSRVT4	1	1	TIUSRVT4	S - First line of routine violates the SAC.
 TIUSUPN	1	1	TIUSUPN	S - First line of routine violates the SAC.
 TIUSUPN1	1	2	TIUSUPN1+2	S - 2nd line of routine violates the SAC.
 TIUSUPN2	1	2	TIUSUPN2+2	S - 2nd line of routine violates the SAC.
@@ -6352,8 +6333,6 @@ VSITICL1	2	12	PRE+6	S - Lock missing Timeout.
 VSITIENV	1	1	VSITIENV	S - First line of routine violates the SAC.
 VSITIPOS	1	1	VSITIPOS	S - First line of routine violates the SAC.
 VSITIPRE	1	1	VSITIPRE	S - First line of routine violates the SAC.
-VSITPUT1	1	19	VSITPUT1+18	S - Lock missing Timeout.
-VSITPUT1	2	27	VSITPUT1+26	S - Lock missing Timeout.
 VSITVID	1	1	VSITVID	S - First line of routine violates the SAC.
 WIIACT4	1	1	WIIACT4	S - First line of routine violates the SAC.
 WIIADT1	1	1	WIIADT1	S - First line of routine violates the SAC.

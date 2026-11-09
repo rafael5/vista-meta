@@ -55,7 +55,7 @@ Income Verification Match	9	1	0	2	0	12
 Incomplete Records Tracking	1	2	2	0	0	5
 Inpatient Medications	1	3	21	0	0	25
 Insurance Capture Buffer	4	1	0	0	0	5
-Integrated Billing	203	18	2	1	0	224
+Integrated Billing	203	18	2	1	5	229
 Integrated Patient Fund	1	7	0	0	0	8
 Interim Management Support	1	1	0	2	0	4
 Kernel	1	25	7	44	0	77
@@ -75,10 +75,10 @@ Nursing Service	24	4	3	1	0	32
 ODS	1	8	0	0	0	9
 Occurrence Screen	1	2	0	11	0	14
 Oncology	1	3	62	0	0	66
-Order Entry Results Reporting	14	9	36	5	0	64
+Order Entry Results Reporting	14	9	36	5	6	70
 Outpatient Pharmacy	15	5	17	2	0	39
 PAID	0	43	0	0	0	43
-PCE Patient Care Encounter	17	20	9	1	0	47
+PCE Patient Care Encounter	17	20	9	1	1	48
 Patient Assessment Documentation	12	2	0	0	0	14
 Patient Data Exchange	11	5	0	2	0	18
 Pharmacy Benefits Management	1	0	0	0	0	1

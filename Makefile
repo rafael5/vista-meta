@@ -308,6 +308,10 @@ normalize-dumps: ## Normalize raw M dumps -> schema_v1 finals (V1.4)
 
 .PHONY: capture-extraction
 capture-extraction: ## Capture R3 engine identity/state sidecar (V1.6)
+	@# raw/ is the container's dump dir; a sidecar left there owned by vehu
+	@# (uid 1001) is not host-writable — take it back before rewriting it.
+	@[ ! -e vista/export/raw/extraction.json ] || [ -w vista/export/raw/extraction.json ] || \
+		$(DOCKER) exec -u root $(CONTAINER) chown 1000:1000 /home/vehu/export/raw/extraction.json
 	/usr/bin/python3 host/scripts/capture_extraction.py $(CONTAINER)
 
 .PHONY: finals-owner

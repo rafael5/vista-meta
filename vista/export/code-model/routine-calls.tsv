@@ -8283,6 +8283,9 @@ DG1112P	Registration	BMES	XPDUTL	do	4
 DG1112P	Registration	FILE	DIE	do	1
 DG1112P	Registration	FIND1	DIC	func	1
 DG1112P	Registration	MES	XPDUTL	do	2
+DG1157ZN	Registration		DIE	do	1
+DG1157ZN	Registration	BMES	XPDUTL	do	8
+DG1157ZN	Registration	FMADD	XLFDT	func	1
 DG141PB	Registration	EN	DGMTR141	do	1
 DG141PB	Registration	LST	DGMTU	func	2
 DG17201	Registration		DIE	do	1
@@ -10609,16 +10612,19 @@ DGADDUT2	Registration	COUNTRY	DGADDUTL	func	1
 DGADDUT2	Registration	EXTERNAL	DILFD	func	1
 DGADDUT2	Registration	FORIEN	DGADDUTL	func	1
 DGADDUT2	Registration	NOW	%DTC	do	1
-DGADDUTL	Registration		DGRPE	do	1
 DGADDUTL	Registration		DIC	do	1
-DGADDUTL	Registration		DIR	do	1
+DGADDUTL	Registration		DIE	do	1
+DGADDUTL	Registration		DIR	do	3
 DGADDUTL	Registration		DIWP	do	1
-DGADDUTL	Registration	CHOICE	DGRPP	do	1
 DGADDUTL	Registration	CNTRYI	DGADDUTL	func	1
 DGADDUTL	Registration	DISPADD	DGADDUT2	do	1
-DGADDUTL	Registration	EN	DGREGAED	do	1
+DGADDUTL	Registration	DR115	DGRPE1	do	1
+DGADDUTL	Registration	EN	DGREGAED	do	2
+DGADDUTL	Registration	EN	DGREGTED	do	1
 DGADDUTL	Registration	FMTE	XLFDT	func	2
 DGADDUTL	Registration	GETS	DIQ	do	3
+DGADDUTL	Registration	ISRTAUON	DGRTAUPD	func	2
+DGADDUTL	Registration	RTASEND	DGRPCADD	func	1
 DGADDUTL	Registration	UPDADDLG	DGADDUT2	do	1
 DGADDUTL	Registration	UPDDTTM	DGADDUT2	do	1
 DGADDUTL	Registration	UPPER	DGUTL	func	2
@@ -11351,11 +11357,13 @@ DGCNTRY	Registration	UPD	DGENDBS	func	1
 DGCOL	Registration		DIC	do	1
 DGCOL	Registration		DIE	do	5
 DGCOL	Registration		DIR	do	2
+DGCOL	Registration	EN	DGREGAED	do	1
 DGCOL	Registration	EN	DGREGEEWS	func	1
 DGCOL	Registration	EN	DGRPD	do	1
 DGCOL	Registration	FINDCUR	DGENA	func	1
 DGCOL	Registration	GET1	DIQ	func	2
 DGCOL	Registration	GETICN	MPIF001	func	1
+DGCOL	Registration	ISRTAUON	DGRTAUPD	func	1
 DGCOL	Registration	NOW	XLFDT	func	1
 DGCOL	Registration	REGONLY	DGEN	do	1
 DGCOL	Registration	YN	DICN	do	2
@@ -13257,6 +13265,7 @@ DGJXE9	Incomplete Records Tracking	Z	DIE2	goto	1
 DGL	Registration	ADM	VADPT2	do	1
 DGLOCK	Registration	EN	DDIOL	do	14
 DGLOCK	Registration	EN	DGCLEAR	do	1
+DGLOCK	Registration	LOADTEMP	DGREGTE2	do	1
 DGLOCK	Registration	YN	DICN	do	1
 DGLOCK1	Registration		DIC	do	2
 DGLOCK1	Registration	GET	XPAR	func	1
@@ -13269,11 +13278,12 @@ DGLOCK1	Registration	SV1	DGLOCK	do	1
 DGLOCK1	Registration	VET1	DGENPTA	func	1
 DGLOCK2	Registration		DIC	do	1
 DGLOCK2	Registration	EN	DDIOL	do	1
-DGLOCK3	Registration	EN	DDIOL	do	3
+DGLOCK3	Registration	EN	DDIOL	do	2
 DGLOCK3	Registration	EN	DGCLEAR	do	1
-DGLOCK3	Registration	FILE	DIE	do	2
+DGLOCK3	Registration	FILE	DIE	do	1
 DGLOCK3	Registration	FIND1	DIC	func	1
 DGLOCK3	Registration	GET1	DIQ	func	1
+DGLOCK3	Registration	LOADCONF	DGREGTE2	do	1
 DGLOCK3	Registration	YN	DICN	do	1
 DGLP3USR	Registration		%ZIS	do	1
 DGLP3USR	Registration		DIE	do	1
@@ -19650,12 +19660,14 @@ DGREG00	Registration	PROMPRN	DG1010PA	func	2
 DGREG00	Registration	SEL1010	DG1010P	func	1
 DGREG00	Registration	SEND	VAFHUTL	func	2
 DGREG00	Registration	YN	DICN	do	1
-DGREGAED	Registration		DIR	do	4
+DGREGAED	Registration		DIR	do	5
+DGREGAED	Registration		DIWP	do	2
 DGREGAED	Registration	CNTRYI	DGADDUTL	func	3
 DGREGAED	Registration	CNTY	DGREGAZL	func	1
 DGREGAED	Registration	EN	DGADDVAL	func	1
 DGREGAED	Registration	EN	DGREGAZL	do	1
-DGREGAED	Registration	FILE	DIE	do	1
+DGREGAED	Registration	EN	DGRTAUPD	func	1
+DGREGAED	Registration	FILE	DIE	do	2
 DGREGAED	Registration	FILEYN	DGADDUTL	func	1
 DGREGAED	Registration	FOREIGN	DGADDUTL	func	1
 DGREGAED	Registration	FORIEN	DGADDUTL	func	2
@@ -19663,6 +19675,7 @@ DGREGAED	Registration	GET1	DIQ	func	3
 DGREGAED	Registration	GETPRIOR	DGADDUTL	do	1
 DGREGAED	Registration	GETS	DIQ	do	1
 DGREGAED	Registration	GETUPDTS	DGADDUTL	do	1
+DGREGAED	Registration	ISRTAUON	DGRTAUPD	func	1
 DGREGAED	Registration	UPD	DGENDBS	func	1
 DGREGAED	Registration	UPDADDLG	DGADDUTL	do	1
 DGREGARP	Registration		%ZISC	do	1
@@ -19684,7 +19697,7 @@ DGREGAZL	Registration		DIR	do	5
 DGREGAZL	Registration	ALWEDT	DGREGDD1	func	1
 DGREGAZL	Registration	FIELD	DID	do	1
 DGREGAZL	Registration	FIND1	DIC	func	1
-DGREGAZL	Registration	GET1	DIQ	func	6
+DGREGAZL	Registration	GET1	DIQ	func	7
 DGREGAZL	Registration	GETSITE	DGMTU4	func	1
 DGREGAZL	Registration	KSP	XUPARAM	func	1
 DGREGAZL	Registration	MLT	DGREGDD1	func	2
@@ -19692,13 +19705,15 @@ DGREGAZL	Registration	POSTALB	XIPUTIL	do	3
 DGREGAZL	Registration	STA	XUAF4	func	1
 DGREGAZL	Registration	UPCT	DGREGAED	do	5
 DGREGCOP	Registration	FILE	DIE	do	2
-DGREGCP1	Registration		DIR	do	5
-DGREGCP1	Registration	CNTRYI	DGADDUTL	func	2
-DGREGCP1	Registration	CNTY	DGREGAZL	func	2
-DGREGCP1	Registration	FORIEN	DGADDUTL	func	3
+DGREGCP1	Registration		DIR	do	9
+DGREGCP1	Registration	CNTRYI	DGADDUTL	func	4
+DGREGCP1	Registration	CNTY	DGREGAZL	func	4
+DGREGCP1	Registration	FORIEN	DGADDUTL	func	7
 DGREGCP1	Registration	P2R	DGREGCOP	do	1
-DGREGCP1	Registration	POBOXPM	DGREGCP2	func	1
+DGREGCP1	Registration	P2RLOCAL	DGREGCOP	do	1
+DGREGCP1	Registration	POBOXPM	DGREGCP2	func	2
 DGREGCP1	Registration	R2P	DGREGCOP	do	1
+DGREGCP1	Registration	R2PLOCAL	DGREGCOP	do	1
 DGREGCP2	Registration	GET1	DIQ	func	1
 DGREGDD	Registration	F4	XUAF4	do	3
 DGREGDD	Registration	FILE	DIE	do	2
@@ -19733,38 +19748,58 @@ DGREGEEWS	Registration	UNWIND	%ZTER	do	1
 DGREGEEWS	Registration	ZTER	XOBWLIB	do	2
 DGREGG	Registration	GETMSE	DGMSEUTL	do	1
 DGREGRED	Registration		DIR	do	4
+DGREGRED	Registration		DIWP	do	2
 DGREGRED	Registration	CNTRYI	DGADDUTL	func	3
 DGREGRED	Registration	CNTY	DGREGAZL	func	1
 DGREGRED	Registration	EN	DGADDVAL	func	1
 DGREGRED	Registration	EN	DGREGTZL	do	1
-DGREGRED	Registration	FILE	DIE	do	2
+DGREGRED	Registration	EN	DGRTAUPD	func	1
+DGREGRED	Registration	FILE	DIE	do	3
 DGREGRED	Registration	FOREIGN	DGADDUTL	func	1
 DGREGRED	Registration	FORIEN	DGADDUTL	func	2
 DGREGRED	Registration	GET1	DIQ	func	1
 DGREGRED	Registration	GETS	DIQ	do	1
-DGREGRED	Registration	POBOXRES	DGREGCP2	func	1
+DGREGRED	Registration	ISRTAUON	DGRTAUPD	func	1
+DGREGRED	Registration	POBOXRES	DGREGCP2	func	2
 DGREGRED	Registration	UPD	DGENDBS	func	1
-DGREGTE2	Registration		DIR	do	1
-DGREGTE2	Registration	CNTRYI	DGADDUTL	func	1
+DGREGTE2	Registration		DIE	do	1
+DGREGTE2	Registration		DIK	do	2
+DGREGTE2	Registration		DIR	do	3
+DGREGTE2	Registration	CAACT	DGRPCADD	func	1
+DGREGTE2	Registration	CADD	DGLOCK3	do	1
+DGREGTE2	Registration	CNTRYI	DGADDUTL	func	3
 DGREGTE2	Registration	CNTY	DGREGAZL	func	1
+DGREGTE2	Registration	FMTE	DILIBF	func	1
 DGREGTE2	Registration	FORIEN	DGADDUTL	func	1
-DGREGTE2	Registration	GETS	DIQ	do	1
-DGREGTED	Registration		DIR	do	3
-DGREGTED	Registration	CNTRYI	DGADDUTL	func	2
+DGREGTE2	Registration	GET1	DIQ	func	2
+DGREGTE2	Registration	GETS	DIQ	do	4
+DGREGTE2	Registration	TADD	DGLOCK	do	1
+DGREGTE2	Registration	UPDATE	DIE	do	2
+DGREGTED	Registration		DIK	do	2
+DGREGTED	Registration		DIR	do	4
+DGREGTED	Registration		DIWP	do	2
+DGREGTED	Registration	DISPFGN	DGREGTE2	do	1
+DGREGTED	Registration	DISPUS	DGREGTE2	do	1
 DGREGTED	Registration	EN	DGADDVAL	func	1
 DGREGTED	Registration	EN	DGREGTZL	do	1
+DGREGTED	Registration	EN	DGRTAUPD	func	2
+DGREGTED	Registration	FILE	DIE	do	1
 DGREGTED	Registration	FOREIGN	DGADDUTL	func	1
+DGREGTED	Registration	GETACT	DGREGTE2	func	1
 DGREGTED	Registration	GETOLD	DGREGTE2	do	1
 DGREGTED	Registration	INIT	DGREGTE2	do	1
 DGREGTED	Registration	INPT1	DGREGTE2	func	1
+DGREGTED	Registration	ISRTAUON	DGRTAUPD	func	1
 DGREGTED	Registration	SKIP	DGREGTE2	func	1
 DGREGTED	Registration	SURE	DGREGTE2	func	1
+DGREGTED	Registration	UPD	DGENDBS	do	1
 DGREGTED	Registration	UPD	DGENDBS	func	1
+DGREGTED	Registration	UPDATE	DIE	do	2
 DGREGTZL	Registration		DIR	do	5
 DGREGTZL	Registration	FIELD	DID	do	1
 DGREGTZL	Registration	FIND1	DIC	func	1
 DGREGTZL	Registration	FOREIGN	DGREGAZL	func	1
-DGREGTZL	Registration	GET1	DIQ	func	6
+DGREGTZL	Registration	GET1	DIQ	func	7
 DGREGTZL	Registration	GETSITE	DGMTU4	func	1
 DGREGTZL	Registration	KSP	XUPARAM	func	1
 DGREGTZL	Registration	MLT	DGREGDD1	func	3
@@ -20247,12 +20282,23 @@ DGRPC3	Registration	RWITHIN	DGRPDT	func	3
 DGRPC3	Registration	TIME	DGRPC	do	1
 DGRPC3	Registration	WWII	DGRPMS	func	4
 DGRPCADD	Registration		DGRPP	goto	1
+DGRPCADD	Registration		DIR	do	1
+DGRPCADD	Registration		DIWP	do	2
 DGRPCADD	Registration	AL	DGRPU	do	4
+DGRPCADD	Registration	CLEAN	DGREGAED	do	1
+DGRPCADD	Registration	CLEAN	DGREGRED	do	1
+DGRPCADD	Registration	CLEAN	DGREGTED	do	2
+DGRPCADD	Registration	EN	DGRTAUPD	func	1
 DGRPCADD	Registration	EXTERNAL	DILFD	func	1
+DGRPCADD	Registration	FILE	DIE	do	1
 DGRPCADD	Registration	FORIEN	DGADDUTL	func	1
-DGRPCADD	Registration	GET1	DID	func	1
+DGRPCADD	Registration	GET1	DID	func	2
 DGRPCADD	Registration	H	DGRPU	do	1
-DGRPCADD	Registration	WW	DGRPV	do	4
+DGRPCADD	Registration	ISRTAUON	DGRTAUPD	func	1
+DGRPCADD	Registration	SAVEFROMLOCAL	DGREGAED	do	1
+DGRPCADD	Registration	SAVEFROMLOCAL	DGREGRED	do	1
+DGRPCADD	Registration	SAVEFROMLOCAL	DGREGTED	do	2
+DGRPCADD	Registration	WW	DGRPV	do	5
 DGRPCADD	Registration	WW1	DGRPV	do	4
 DGRPCB	Registration		%DTC	do	1
 DGRPCB	Registration		DGBUL	do	1
@@ -20421,6 +20467,7 @@ DGRPDD1	Registration	S	DGPATN	do	1
 DGRPDT	Registration	DT	XLFDT	func	1
 DGRPDT	Registration	FMTE	XLFDT	func	6
 DGRPDT	Registration	GETS	DIQ	do	3
+DGRPE	Registration		DGRPE	do	2
 DGRPE	Registration		DGRPE1	goto	1
 DGRPE	Registration		DGRPE4	do	1
 DGRPE	Registration		DGRPEIS	do	1
@@ -20436,6 +20483,7 @@ DGRPE	Registration	EDIT9	DGRPEIS2	do	1
 DGRPE	Registration	EDITPH1	DGRPLE	do	1
 DGRPE	Registration	EN	DDIOL	do	1
 DGRPE	Registration	EN	DGR111	do	1
+DGRPE	Registration	EN	DGREGTED	do	1
 DGRPE	Registration	EN	DGRP1152A	do	1
 DGRPE	Registration	EN	DGRP11B	do	1
 DGRPE	Registration	EN	DGRP61	do	1
@@ -20445,21 +20493,22 @@ DGRPE	Registration	EN	DGRP7CP	do	1
 DGRPE	Registration	FILE	DIE	do	1
 DGRPE	Registration	PREG	IBCNBME	do	1
 DGRPE	Registration	REG	IBCNBME	do	1
-DGRPE	Registration	RESMVQ	DGREGCP1	do	1
 DGRPE	Registration	UPD	DGENDBS	func	1
 DGRPE1	Registration		DIE	do	1
-DGRPE1	Registration		DIR	do	3
+DGRPE1	Registration		DIR	do	5
 DGRPE1	Registration		XMD	do	1
 DGRPE1	Registration	DEACTIVE	DGOTHEL	do	1
 DGRPE1	Registration	FILE	DIE	do	2
 DGRPE1	Registration	GET1	DIQ	func	3
 DGRPE1	Registration	LINE	DGEN	do	7
-DGRPE1	Registration	NOW	XLFDT	func	1
+DGRPE1	Registration	NOW	XLFDT	func	2
+DGRPE1	Registration	RESMVQ	DGREGCP1	do	1
 DGRPE1	Registration	SETCLNO	DGENCLEA	do	1
 DGRPE1	Registration	UPD	DGENDBS	func	1
 DGRPE1	Registration	UPDATE	DIE	do	2
 DGRPE1	Registration	XMY	DGMTUTL	do	1
 DGRPE1	Registration	YN	DICN	do	1
+DGRPE1	Registration	YN1316	DGRPE1	func	1
 DGRPE4	Registration		DIE	do	6
 DGRPECE	Registration		%ZTLOAD	do	1
 DGRPECE	Registration		DIR	do	8
@@ -20569,8 +20618,11 @@ DGRPP	Registration		DGRPC	do	1
 DGRPP	Registration		DGRPCADD	goto	2
 DGRPP	Registration		DGRPE	do	1
 DGRPP	Registration		DGRPH	do	2
+DGRPP	Registration		DIR	do	2
 DGRPP	Registration	BEGUPLD	DGENUPL3	func	1
 DGRPP	Registration	CKUPLOAD	DGENUPL3	do	1
+DGRPP	Registration	CLEAN	DGRPCADD	do	2
+DGRPP	Registration	DISCARD	DGRPCADD	do	1
 DGRPP	Registration	ENDUPLD	DGENUPL3	do	1
 DGRPP	Registration	FILE	DICN	do	1
 DGRPP	Registration	IN	DGHELP	do	1
@@ -20578,6 +20630,7 @@ DGRPP	Registration	JUMP	DGRPP1	goto	1
 DGRPP	Registration	LOCK	DGENPTA1	func	1
 DGRPP	Registration	LT	DGRPP1	do	1
 DGRPP	Registration	MOREHLP	DGRPP1	do	1
+DGRPP	Registration	RTASEND	DGRPCADD	do	1
 DGRPP	Registration	STR	DGRPP1	do	1
 DGRPP	Registration	UNLOCK	DGENPTA1	do	1
 DGRPP	Registration	UPPER	DGUTL	func	1
@@ -20733,6 +20786,7 @@ DGRPTX22	Registration		DICR	do	1
 DGRPTX22	Registration		DIE17	goto	1
 DGRPTX22	Registration	ARCHALL	DGRP1152U	do	1
 DGRPTX22	Registration	AST	DIED	goto	1
+DGRPTX22	Registration	AUDIT	DIET	do	2
 DGRPTX22	Registration	AUTOUPD	DGENA2	do	2
 DGRPTX22	Registration	E	DIE0	do	1
 DGRPTX22	Registration	EZBLD	DIALOG	func	1
@@ -20870,6 +20924,9 @@ DGRPU	Registration	SSNNM	DGRPU	func	2
 DGRPU	Registration	TFL	VAFCTFU2	do	1
 DGRPU	Registration	UP	XLFSTR	func	1
 DGRPU1	Registration		DGRPE	do	1
+DGRPU1	Registration		DIR	do	1
+DGRPU1	Registration	ISRTAUON	DGRTAUPD	func	1
+DGRPU1	Registration	RTASEND	DGRPCADD	func	1
 DGRPV	Registration	DT	DICRW	do	1
 DGRPV	Registration	HOME	%ZIS	do	1
 DGRPV	Registration	MOVMSE	DGMSEUTL	do	1
@@ -21679,6 +21736,24 @@ DGRSTBAD	Registration	GETS	DIQ	do	1
 DGRSTBAD	Registration	HOME	%ZIS	do	1
 DGRSTBAD	Registration	LTD	VAFHUTL	func	2
 DGRSTBAD	Registration	PHARM	IVMLDEM6	func	1
+DGRTAUPD	Registration	CHKEXT	DGRTAUPD1	do	1
+DGRTAUPD	Registration	CNTY	DGREGAZL	func	1
+DGRTAUPD	Registration	EN	DGRTAUWS	func	1
+DGRTAUPD	Registration	GET1	DIQ	func	5
+DGRTAUPD	Registration	HLDATE	HLFNC	func	1
+DGRTAUPD	Registration	MPINODE	MPIFAPI	func	1
+DGRTAUPD	Registration	NOW	%DTC	do	1
+DGRTAUPD	Registration	SITE	VASITE	func	1
+DGRTAUPD1	Registration	GET1	DIQ	func	10
+DGRTAUWS	Registration		%ZTER	do	1
+DGRTAUWS	Registration	APPERROR	%ZTER	do	1
+DGRTAUWS	Registration	DECODE	XLFJSON	do	1
+DGRTAUWS	Registration	ENCODE	XLFJSON	do	1
+DGRTAUWS	Registration	ERR2ARR	XOBWLIB	do	1
+DGRTAUWS	Registration	FIND1	DIC	func	2
+DGRTAUWS	Registration	GET	XPAR	func	1
+DGRTAUWS	Registration	GETREST	XOBWLIB	func	1
+DGRTAUWS	Registration	POST	XOBWLIB	func	1
 DGRTRIG	Registration	EVENT	IVMPLOG	do	8
 DGRUADT	Registration		%ZTLOAD	do	1
 DGRUADT	Registration	BLDMSG	DGRUADT1	do	13
@@ -23380,6 +23455,12 @@ DGY1PST	Registration		%ZTLOAD	do	1
 DGY1PST	Registration		DIE	do	1
 DGY1PST	Registration		XMD	do	1
 DGY1PST	Registration	HTE	XLFDT	func	2
+DGY991PO	Registration	CRNRSITE	VAFCCRNR	func	1
+DGY991PO	Registration	GETLF	DGPFALF	func	1
+DGY991PO	Registration	NOW	XLFDT	func	1
+DGY991PO	Registration	OUT	XPDMENU	do	1
+DGY991PO	Registration	SITE	VASITE	func	1
+DGY991PO	Registration	STOALL	DGPFALF1	func	1
 DGY994PO	Registration	BMES	XPDUTL	do	8
 DGY994PO	Registration	DEACT	DGPFXCRN	do	1
 DGY994PO	Registration	FIND1	DIC	func	2
@@ -31244,6 +31325,7 @@ DVBHCE2	HINQ		DICR	do	1
 DVBHCE2	HINQ		DIE17	goto	1
 DVBHCE2	HINQ	ARCHALL	DGRP1152U	do	1
 DVBHCE2	HINQ	AST	DIED	goto	1
+DVBHCE2	HINQ	AUDIT	DIET	do	2
 DVBHCE2	HINQ	AUTOUPD	DGENA2	do	2
 DVBHCE2	HINQ	E	DIE0	do	1
 DVBHCE2	HINQ	EZBLD	DIALOG	func	1
@@ -38840,6 +38922,81 @@ EHMAPTRQ	Electronic Health Modernization	GET1	DIQ	func	21
 EHMAPTRQ	Electronic Health Modernization	LASTFI	EHM13UTIL	func	3
 EHMAPTRQ	Electronic Health Modernization	PROGRESS	EHM13UTIL	do	3
 EHMAPTRQ	Electronic Health Modernization	SITE	VASITE	func	1
+EHMDGPMV	Electronic Health Modernization		%ZIS	do	1
+EHMDGPMV	Electronic Health Modernization		DIE	do	1
+EHMDGPMV	Electronic Health Modernization	C	DGPMV1	do	1
+EHMDGPMV	Electronic Health Modernization	ENTRY	EHMDGPMV1	func	1
+EHMDGPMV	Electronic Health Modernization	INP	DGPMV10	do	1
+EHMDGPMV	Electronic Health Modernization	KVAR	VADPT	do	1
+EHMDGPMV	Electronic Health Modernization	LO	DGUTL	do	1
+EHMDGPMV	Electronic Health Modernization	LODGER	DGPMV10	do	1
+EHMDGPMV	Electronic Health Modernization	NEW	DGPMVODS	do	1
+EHMDGPMV	Electronic Health Modernization	Q	DGPMV1	do	1
+EHMDGPMV	Electronic Health Modernization	SEL	DGPMV2	do	1
+EHMDGPMV	Electronic Health Modernization	UC	DGPMV	do	1
+EHMDGPMV	Electronic Health Modernization	VERSION	XPDUTL	func	1
+EHMDGPMV	Electronic Health Modernization	YN	DICN	do	1
+EHMDGPMV1	Electronic Health Modernization	CS	DGPMV10	do	1
+EHMDGPMV1	Electronic Health Modernization	DGPMV2	EHMDGPMV2	do	1
+EHMDGPMV1	Electronic Health Modernization	DIS	DGMTU	do	1
+EHMDGPMV1	Electronic Health Modernization	DOM	DGMTR	do	1
+EHMDGPMV1	Electronic Health Modernization	ENED	DGRP	do	1
+EHMDGPMV1	Electronic Health Modernization	IN	DGHELP	do	1
+EHMDGPMV1	Electronic Health Modernization	INP	DGPMV10	do	2
+EHMDGPMV1	Electronic Health Modernization	KVAR	VADPT	do	1
+EHMDGPMV1	Electronic Health Modernization	LODGER	DGPMV10	do	1
+EHMDGPMV2	Electronic Health Modernization		%DT	do	1
+EHMDGPMV2	Electronic Health Modernization		DGPMV20	do	1
+EHMDGPMV2	Electronic Health Modernization		DGPMV21	do	2
+EHMDGPMV2	Electronic Health Modernization	DGPMV3	EHMDGPMV3	do	1
+EHMDGPMV2	Electronic Health Modernization	HELP	%DTC	do	1
+EHMDGPMV2	Electronic Health Modernization	NOW	%DTC	do	2
+EHMDGPMV2	Electronic Health Modernization	PTF	DGPMV21	do	1
+EHMDGPMV2	Electronic Health Modernization	UP	DGHELP	do	1
+EHMDGPMV2	Electronic Health Modernization	WR	DGPMV20	do	1
+EHMDGPMV3	Electronic Health Modernization		%DT	do	1
+EHMDGPMV3	Electronic Health Modernization		DGPMEVT	do	1
+EHMDGPMV3	Electronic Health Modernization		DIE	do	1
+EHMDGPMV3	Electronic Health Modernization		DIK	do	2
+EHMDGPMV3	Electronic Health Modernization	AFTER	DGPMV36	do	3
+EHMDGPMV3	Electronic Health Modernization	CHK	DGPMV30	do	1
+EHMDGPMV3	Electronic Health Modernization	EN	DGPMVBM	do	1
+EHMDGPMV3	Electronic Health Modernization	HELP	%DTC	do	2
+EHMDGPMV3	Electronic Health Modernization	NEW	DGPMV301	do	1
+EHMDGPMV3	Electronic Health Modernization	NOW	%DTC	do	1
+EHMDGPMV3	Electronic Health Modernization	PRIOR	DGPMV36	do	4
+EHMDGPMV3	Electronic Health Modernization	RESET	DGPMDDCN	do	1
+EHMDGPMV3	Electronic Health Modernization	RESET	DGPMDDLD	do	1
+EHMDGPMV3	Electronic Health Modernization	SI	DGPMV33	do	1
+EHMDGPMV3	Electronic Health Modernization	START	DGPWB	do	1
+EHMDGPMV3	Electronic Health Modernization	YN	DICN	do	1
+EHMDISCH	Electronic Health Modernization		%ZIS	do	3
+EHMDISCH	Electronic Health Modernization		%ZISC	do	3
+EHMDISCH	Electronic Health Modernization		%ZTLOAD	do	3
+EHMDISCH	Electronic Health Modernization		DIC	do	2
+EHMDISCH	Electronic Health Modernization		DIE	do	1
+EHMDISCH	Electronic Health Modernization		DIR	do	4
+EHMDISCH	Electronic Health Modernization	DEM	VADPT	do	2
+EHMDISCH	Electronic Health Modernization	ENTRY	EHMDGPMV	do	1
+EHMDISCH	Electronic Health Modernization	FMTE	XLFDT	func	4
+EHMDISCH	Electronic Health Modernization	GET1	DIQ	func	9
+EHMDISCH	Electronic Health Modernization	IN5	VADPT	do	1
+EHMDISCH	Electronic Health Modernization	INP	VADPT	do	1
+EHMDISCH	Electronic Health Modernization	SITE	VASITE	func	2
+EHMDISH1	Electronic Health Modernization		%ZIS	do	1
+EHMDISH1	Electronic Health Modernization		%ZISC	do	1
+EHMDISH1	Electronic Health Modernization		%ZTLOAD	do	1
+EHMDISH1	Electronic Health Modernization		DIR	do	2
+EHMDISH1	Electronic Health Modernization	CENTER	EHMDISCH	func	2
+EHMDISH1	Electronic Health Modernization	CONTINUE	EHMDISCH	func	3
+EHMDISH1	Electronic Health Modernization	DASHES	EHMDISCH	func	9
+EHMDISH1	Electronic Health Modernization	DATETIME	EHMDISCH	func	2
+EHMDISH1	Electronic Health Modernization	DEM	VADPT	do	1
+EHMDISH1	Electronic Health Modernization	FMTE	XLFDT	func	2
+EHMDISH1	Electronic Health Modernization	GET1	DIQ	func	4
+EHMDISH1	Electronic Health Modernization	INSTFLTR	EHMDISCH	func	1
+EHMDISH1	Electronic Health Modernization	SDAPI	SDAMA301	func	2
+EHMDISH1	Electronic Health Modernization	WARDFLTR	EHMDISCH	func	1
 EHMHL7	Electronic Health Modernization		DIK	do	1
 EHMHL7	Electronic Health Modernization		DIR	do	1
 EHMHL7	Electronic Health Modernization	APPERROR	%ZTER	do	2
@@ -38850,6 +39007,22 @@ EHMHL7	Electronic Health Modernization	FMDIFF	XLFDT	func	1
 EHMHL7	Electronic Health Modernization	IX	DIC	do	1
 EHMHL7	Electronic Health Modernization	NOW	XLFDT	func	1
 EHMHL7	Electronic Health Modernization	WP	DIE	do	1
+EHMPSRXDC	Electronic Health Modernization		DIK	do	2
+EHMPSRXDC	Electronic Health Modernization	CHKCMOP	PSOUTL	do	1
+EHMPSRXDC	Electronic Health Modernization	EN	PSOHLSN1	do	1
+EHMPSRXDC	Electronic Health Modernization	KVAR	VADPT	do	1
+EHMPSRXDC	Electronic Health Modernization	NOW	%DTC	do	1
+EHMPSRXDC	Electronic Health Modernization	REF	PSOCAN2	do	1
+EHMPSRXDC	Electronic Health Modernization	REVERSE	PSOBPSU1	do	1
+EHMRXLP	Electronic Health Modernization		DIC	do	1
+EHMRXLP	Electronic Health Modernization		DIR	do	2
+EHMRXLP	Electronic Health Modernization		XMD	do	1
+EHMRXLP	Electronic Health Modernization	CAN	EHMPSRXDC	do	1
+EHMRXLP	Electronic Health Modernization	CJ	XLFSTR	func	1
+EHMRXLP	Electronic Health Modernization	EXTERNAL	DILFD	func	1
+EHMRXLP	Electronic Health Modernization	FMADD	XLFDT	func	1
+EHMRXLP	Electronic Health Modernization	NODEV	XUTMDEVQ	do	1
+EHMRXLP	Electronic Health Modernization	REPEAT	XLFSTR	func	1
 EHMSDC8A	Electronic Health Modernization		DIE	do	1
 EHMSDC8A	Electronic Health Modernization	CANCEL	EHMSDEC8	func	1
 EHMSDC8A	Electronic Health Modernization	YMD	%DTC	do	1
@@ -49272,9 +49445,6 @@ GECSULOC	Generic Code Sheet	DD	%DT	do	1
 GECSULOC	Generic Code Sheet	FILE	DICN	do	1
 GECSULOC	Generic Code Sheet	NOW	%DTC	do	1
 GECSUSEL	Generic Code Sheet		DIC	do	6
-GECSUSEL	Generic Code Sheet	FMADD	XLFDT	func	1
-GECSUSEL	Generic Code Sheet	NOW	%DTC	do	1
-GECSUSEL	Generic Code Sheet	SENDMSG	XMXAPI	do	1
 GECSUSTA	Generic Code Sheet		DIE	do	1
 GECSUSTA	Generic Code Sheet	DD	%DT	do	3
 GECSUTIL	Generic Code Sheet		%ZIS	do	1
@@ -49619,6 +49789,7 @@ GMPLEDT2	Problem List	SURE	GMPLX	func	3
 GMPLEDT2	Problem List	UP	XLFSTR	func	1
 GMPLEDT3	Problem List		DIR	do	1
 GMPLEDT3	Problem List	CODECS	ICDEX	func	1
+GMPLEDT3	Problem List	EDIT	GMPLSPECAUTH	do	1
 GMPLEDT3	Problem List	EN	DIQ1	do	1
 GMPLEDT3	Problem List	EXTDT	GMPLX	func	1
 GMPLEDT3	Problem List	UP	XLFSTR	func	1
@@ -49653,8 +49824,11 @@ GMPLENFM	Problem List	STATCHK	ICDXCODE	func	4
 GMPLENFM	Problem List	STATCHK	LEXSRC2	func	2
 GMPLHIST	Problem List	CSI	ICDEX	func	2
 GMPLHIST	Problem List	EXTDT	GMPLX	func	4
+GMPLHIST	Problem List	GETVALUE	GMPLSPECAUTH	func	2
 GMPLHIST	Problem List	ICDDATA	ICDXCODE	func	2
 GMPLHIST	Problem List	PAD	GMPLX	func	3
+GMPLHIST	Problem List	SADESC	GMPLSPECAUTH	func	1
+GMPLHIST	Problem List	SHOWSA	GMPLSPECAUTH	func	1
 GMPLHS	Problem List	CSI	ICDEX	func	1
 GMPLHS	Problem List	DETAIL	GMPLUTL2	do	1
 GMPLHS	Problem List	EN	DIQ1	do	1
@@ -49923,6 +50097,7 @@ GMPLSAVE	Problem List	NOS	GMPLX	func	12
 GMPLSAVE	Problem List	NOW	XLFDT	func	4
 GMPLSAVE	Problem List	PROVNARR	GMPLX	func	2
 GMPLSAVE	Problem List	SAB	ICDEX	func	3
+GMPLSAVE	Problem List	SET	GMPLSPECAUTH	do	2
 GMPLSAVE	Problem List	SITE	VASITE	func	1
 GMPLSAVE	Problem List	UPDATE	DIE	do	1
 GMPLSAVE	Problem List	USERINFO	XUSRB2	do	1
@@ -49959,6 +50134,19 @@ GMPLSLI2	Problem List	EN	DDIOL	do	1
 GMPLSLRP	Problem List		DIR	do	1
 GMPLSLRP	Problem List	GET1	DIQ	func	4
 GMPLSLRP	Problem List	REPEAT	XLFSTR	func	1
+GMPLSPECAUTH	Problem List	AUDIT	GMPLX	do	1
+GMPLSPECAUTH	Problem List	DECODE	XLFJSON	do	2
+GMPLSPECAUTH	Problem List	DEM	VADPT	do	1
+GMPLSPECAUTH	Problem List	ENCODE	XLFJSON	do	4
+GMPLSPECAUTH	Problem List	FINDBYCODE	PXSPECAUTH	func	2
+GMPLSPECAUTH	Problem List	GETVALUE	PXSPECAUTH	func	2
+GMPLSPECAUTH	Problem List	GETZERO	PXSPECAUTH	func	5
+GMPLSPECAUTH	Problem List	NOW	XLFDT	func	1
+GMPLSPECAUTH	Problem List	PTR	GMPLUTL4	func	1
+GMPLSPECAUTH	Problem List	SCS	GMPLX1	do	1
+GMPLSPECAUTH	Problem List	SETARRAY	PXSPECAUTH	do	1
+GMPLSPECAUTH	Problem List	UPDATE	DIE	do	1
+GMPLSPECAUTH	Problem List	VADPT	GMPLX1	do	1
 GMPLUTL	Problem List	CSI	ICDEX	func	2
 GMPLUTL	Problem List	DT	XLFDT	func	3
 GMPLUTL	Problem List	EN	GMPLSAVE	do	1
@@ -49988,6 +50176,7 @@ GMPLUTL2	Problem List	CODE	LEXTRAN	func	1
 GMPLUTL2	Problem List	CODECS	ICDEX	func	1
 GMPLUTL2	Problem List	CSI	ICDEX	func	1
 GMPLUTL2	Problem List	DEM	VADPT	do	2
+GMPLUTL2	Problem List	DETAIL	GMPLSPECAUTH	do	1
 GMPLUTL2	Problem List	DEVICE	GMPLPRNT	do	1
 GMPLUTL2	Problem List	EN	VALM	do	1
 GMPLUTL2	Problem List	EXTDT	GMPLX	func	6
@@ -49996,8 +50185,8 @@ GMPLUTL2	Problem List	GET1	DIQ	func	3
 GMPLUTL2	Problem List	GETCUR	DGNTAPI	func	1
 GMPLUTL2	Problem List	GETSTAT	DGMSTAPI	func	1
 GMPLUTL2	Problem List	HTFM	XLFDT	func	1
-GMPLUTL2	Problem List	ICDDATA	ICDXCODE	func	1
-GMPLUTL2	Problem List	ICDDESC	ICDXCODE	func	1
+GMPLUTL2	Problem List	ICDD	ICDEX	func	1
+GMPLUTL2	Problem List	ICDDX	ICDEX	func	1
 GMPLUTL2	Problem List	LIST	GMPLUTL3	do	1
 GMPLUTL2	Problem List	LOCKED	GMPLX	func	1
 GMPLUTL2	Problem List	NEWNOTE	GMPLSAVE	do	1
@@ -50027,6 +50216,7 @@ GMPLX	Problem List	CONFIG	LEXSET	do	1
 GMPLX	Problem List	CSI	ICDEX	func	1
 GMPLX	Problem List	DT	XLFDT	func	2
 GMPLX	Problem List	EN1	XQOR	do	1
+GMPLX	Problem List	EP	GMPLSPECAUTH	func	1
 GMPLX	Problem List	FILE	DICN	do	1
 GMPLX	Problem List	FMTE	XLFDT	func	1
 GMPLX	Problem List	GETASSN	LEXTRAN1	func	3
@@ -50037,7 +50227,6 @@ GMPLX	Problem List	IX1	DIK	do	1
 GMPLX	Problem List	PROVNARR	PXAPI	func	2
 GMPLX	Problem List	SAB	ICDEX	func	1
 GMPLX	Problem List	SAI	ICDEX	func	1
-GMPLX	Problem List	SCS	GMPLX1	do	1
 GMPLX	Problem List	SERVICE	GMPLX1	func	1
 GMPLX	Problem List	STRIP	XLFSTR	func	2
 GMPLX	Problem List	UP	XLFSTR	func	1
@@ -52306,8 +52495,8 @@ GMRCIMSG	Consult Request Tracking	GENACK	HLMA1	do	1
 GMRCIMSG	Consult Request Tracking	GET	XPAR	func	1
 GMRCIMSG	Consult Request Tracking	GET1	DIQ	func	2
 GMRCIMSG	Consult Request Tracking	HL7TFM	XLFDT	func	1
-GMRCIMSG	Consult Request Tracking	IEN	XUAF4	func	5
-GMRCIMSG	Consult Request Tracking	KSP	XUPARAM	func	6
+GMRCIMSG	Consult Request Tracking	IEN	XUAF4	func	6
+GMRCIMSG	Consult Request Tracking	KSP	XUPARAM	func	7
 GMRCIMSG	Consult Request Tracking	MGMSG	GMRCIAC2	do	1
 GMRCIMSG	Consult Request Tracking	NW	GMRCIACT	do	1
 GMRCIMSG	Consult Request Tracking	ORRIN	MAGDTR01	do	1
@@ -52733,9 +52922,13 @@ GMRCRFC0	Consult Request Tracking	EN	RMPRFC4	do	1
 GMRCRFC0	Consult Request Tracking	EXIT	RMPRFC4	do	1
 GMRCRFC0	Consult Request Tracking	FILE	DIE	do	1
 GMRCRFC0	Consult Request Tracking	FIND	DIC	do	1
-GMRCRFC0	Consult Request Tracking	IEN	XUAF4	func	1
-GMRCRFC0	Consult Request Tracking	KSP	XUPARAM	func	1
+GMRCRFC0	Consult Request Tracking	IEN	XUAF4	func	2
+GMRCRFC0	Consult Request Tracking	KSP	XUPARAM	func	2
 GMRCRFC0	Consult Request Tracking	NOW	%DTC	do	1
+GMRCRFC0	Consult Request Tracking	NOW	XLFDT	func	1
+GMRCRFC0	Consult Request Tracking	TRIMWP	GMRCIUTL	do	1
+GMRCRFC0	Consult Request Tracking	UPDATE	DIE	do	1
+GMRCRFC0	Consult Request Tracking	WP	DIE	do	1
 GMRCS	Consult Request Tracking		DIC	do	2
 GMRCS	Consult Request Tracking	DEM	GMRCU	do	1
 GMRCS	Consult Request Tracking	EN	XQORM	do	1
@@ -61879,6 +62072,10 @@ IB20P842	Integrated Billing	NEWCP	XPDUTL	func	3
 IB20P842	Integrated Billing	NOW	%DTC	do	1
 IB20P842	Integrated Billing	SENDMSG	XMXAPI	do	1
 IB20P842	Integrated Billing	UPDATE	DIE	do	2
+IB20P847	Integrated Billing		DIE	do	1
+IB20P847	Integrated Billing	BMES	XPDUTL	do	1
+IB20P847	Integrated Billing	FILE	DICN	do	1
+IB20P847	Integrated Billing	MES	XPDUTL	do	1
 IB20P88	Integrated Billing		DIE	do	1
 IB20P88	Integrated Billing	BMES	XPDUTL	do	10
 IB20POST	Integrated Billing		DIE	do	1
@@ -62119,6 +62316,464 @@ IB534PST	Integrated Billing	UP	XLFSTR	func	1
 IB812POST	Integrated Billing		DIE	do	1
 IB812POST	Integrated Billing	GET1	DIQ	func	3
 IB812POST	Integrated Billing	MES	XPDUTL	do	6
+IBACCROWFT	Integrated Billing		DIC	do	1
+IBACCROWFT	Integrated Billing	FIND1	DIC	func	1
+IBACCROWFT	Integrated Billing	GET1	DIQ	func	3
+IBACCRPT	Integrated Billing		DIE	do	1
+IBACCRPT	Integrated Billing	DTNOLF	DICRW	do	3
+IBACCRPT	Integrated Billing	ENCODE	XLFJSON	do	2
+IBACCRPT	Integrated Billing	ENCODE	XLFJSONE	do	1
+IBACCRPT	Integrated Billing	GET1	DIQ	func	7
+IBACCRPT	Integrated Billing	SITE	VASITE	func	3
+IBACCWL	Integrated Billing	CLEAN	VALM10	do	1
+IBACCWL	Integrated Billing	CPUTIME	XLFSHAN	func	3
+IBACCWL	Integrated Billing	DISP	XQORM1	do	1
+IBACCWL	Integrated Billing	DISPSORTCRIT	IBACCWLSORT	func	1
+IBACCWL	Integrated Billing	ETIMEMS	XLFSHAN	func	2
+IBACCWL	Integrated Billing	INIT	IBACCWLSORT	do	1
+IBACCWL	Integrated Billing	ISTESTER	IBACCWLUTIL	func	1
+IBACCWL	Integrated Billing	PAUSE	VALM1	do	1
+IBACCWL	Integrated Billing	PULLLIST	IBACCWL1	do	1
+IBACCWL	Integrated Billing	REPLACE	XLFSTR	func	1
+IBACCWL1	Integrated Billing	ADDFILTERS	IBACCWLUTIL2	do	1
+IBACCWL1	Integrated Billing	APPERROR	%ZTER	do	1
+IBACCWL1	Integrated Billing	CONVERT2DEC	IBACCWLUTIL1	func	1
+IBACCWL1	Integrated Billing	CPUTIME	XLFSHAN	func	4
+IBACCWL1	Integrated Billing	ENS	%ZISS	do	1
+IBACCWL1	Integrated Billing	ETIMEMS	XLFSHAN	func	2
+IBACCWL1	Integrated Billing	EXIT	XPDID	do	1
+IBACCWL1	Integrated Billing	FMTE	XLFDT	func	3
+IBACCWL1	Integrated Billing	GET1	DIQ	func	1
+IBACCWL1	Integrated Billing	GETS	DIQ	do	6
+IBACCWL1	Integrated Billing	ICDLKUP	IBACCWLUTIL1	func	1
+IBACCWL1	Integrated Billing	INIT	XPDID	do	1
+IBACCWL1	Integrated Billing	ISSPECAUTH	IBACCWLUTIL1	func	1
+IBACCWL1	Integrated Billing	ISTESTER	IBACCWLUTIL	func	2
+IBACCWL1	Integrated Billing	LIST	DIC	do	1
+IBACCWL1	Integrated Billing	LKUP	XUAF4	func	1
+IBACCWL1	Integrated Billing	PAUSE	VALM1	do	5
+IBACCWL1	Integrated Billing	RJ	XLFSTR	func	1
+IBACCWL1	Integrated Billing	SETFLD	VALM1	func	29
+IBACCWL1	Integrated Billing	SORTLINE	IBACCWLUTIL	do	1
+IBACCWL1	Integrated Billing	SORTSET	IBACCWLSORT1	do	1
+IBACCWL1	Integrated Billing	TITLE	XPDID	do	1
+IBACCWL1	Integrated Billing	UPDATE	XPDID	do	1
+IBACCWLAI	Integrated Billing		DIR	do	1
+IBACCWLAI	Integrated Billing	EN	IBACCWLEE	do	1
+IBACCWLAI	Integrated Billing	EN	IBACCWLPREV	do	1
+IBACCWLAI	Integrated Billing	EN	IBACCWLRURREV	do	1
+IBACCWLAI	Integrated Billing	EN	VALM2	do	1
+IBACCWLAI	Integrated Billing	FULL	VALM1	do	4
+IBACCWLAI	Integrated Billing	PAUSE	VALM1	do	1
+IBACCWLAIBILL	Integrated Billing		DIE	do	1
+IBACCWLAIBILL	Integrated Billing		DIR	do	6
+IBACCWLAIBILL	Integrated Billing		IBCB1	do	1
+IBACCWLAIBILL	Integrated Billing	ADDPREVACT	IBACCWLUTIL	do	1
+IBACCWLAIBILL	Integrated Billing	ASSIGNEDGRP	IBACCWLUTIL1	func	1
+IBACCWLAIBILL	Integrated Billing	AVAILABLECHK	IBACCWLUTIL1	do	1
+IBACCWLAIBILL	Integrated Billing	DATEASSNED	IBACCWLUTIL1	func	1
+IBACCWLAIBILL	Integrated Billing	EDITAS2GRP	IBACCWLUTIL	do	1
+IBACCWLAIBILL	Integrated Billing	EDITPREVACT	IBACCWLUTIL	do	1
+IBACCWLAIBILL	Integrated Billing	EDITSTATUS	IBACCWLUTIL	do	1
+IBACCWLAIBILL	Integrated Billing	EEPUBLISH	IBACCWLUTIL1	do	1
+IBACCWLAIBILL	Integrated Billing	EN	VALM2	do	1
+IBACCWLAIBILL	Integrated Billing	FILE	DIE	do	2
+IBACCWLAIBILL	Integrated Billing	FLDTEXT	VALM10	do	6
+IBACCWLAIBILL	Integrated Billing	FMTE	XLFDT	func	1
+IBACCWLAIBILL	Integrated Billing	FULL	VALM1	do	8
+IBACCWLAIBILL	Integrated Billing	GET1	DIQ	func	17
+IBACCWLAIBILL	Integrated Billing	GETS	DIQ	do	1
+IBACCWLAIBILL	Integrated Billing	IENS	DILF	func	1
+IBACCWLAIBILL	Integrated Billing	NOPTF	IBCC	do	1
+IBACCWLAIBILL	Integrated Billing	PAUSE	VALM1	do	15
+IBACCWLAIBILL	Integrated Billing	PREVACT	IBACCWLUTIL1	func	2
+IBACCWLAIBILL	Integrated Billing	PUBLISH	IBACCWLUTIL	do	1
+IBACCWLAIBILL	Integrated Billing	PULLLIST	IBACCWL1	do	2
+IBACCWLAIBILL	Integrated Billing	REASCODE	IBACCWLUTIL1	func	1
+IBACCWLAIBILL	Integrated Billing	STATUS	IBACCWLUTIL1	func	5
+IBACCWLAIBILL	Integrated Billing	TRANSMITTED	IBACCWLUTIL1	func	1
+IBACCWLAIBILL	Integrated Billing	UPDAS2GRP	IBACCWLUTIL	do	2
+IBACCWLAIBILL	Integrated Billing	UPDATE	DIE	do	1
+IBACCWLAIBILL	Integrated Billing	UPDSTATUS	IBACCWLUTIL	do	2
+IBACCWLAIBILL	Integrated Billing	VAL	IBCE837ACCU	func	1
+IBACCWLAIBILL1	Integrated Billing		DIR	do	2
+IBACCWLAIBILL1	Integrated Billing		IBCB1	do	1
+IBACCWLAIBILL1	Integrated Billing	CHKSTATUS	IBACCWLUTIL	func	1
+IBACCWLAIBILL1	Integrated Billing	EEPUBLISH	IBACCWLUTIL1	do	1
+IBACCWLAIBILL1	Integrated Billing	EN	VALM2	do	1
+IBACCWLAIBILL1	Integrated Billing	ENS	%ZISS	do	3
+IBACCWLAIBILL1	Integrated Billing	FMTE	XLFDT	func	1
+IBACCWLAIBILL1	Integrated Billing	FULL	VALM1	do	2
+IBACCWLAIBILL1	Integrated Billing	GET1	DIQ	func	4
+IBACCWLAIBILL1	Integrated Billing	PAUSE	VALM1	do	7
+IBACCWLAIBILL1	Integrated Billing	PULLLIST	IBACCWL1	do	1
+IBACCWLAIBILL1	Integrated Billing	STATUS	IBACCWLUTIL1	func	1
+IBACCWLAIBILL1	Integrated Billing	TRANSMITTED	IBACCWLUTIL1	func	1
+IBACCWLAIBILL1	Integrated Billing	UPDSTATUS	IBACCWLUTIL	do	1
+IBACCWLAIBILL1	Integrated Billing	VIEW1	IBCB2	do	1
+IBACCWLAIREAS	Integrated Billing		DIC	do	1
+IBACCWLAIREAS	Integrated Billing		DIE	do	1
+IBACCWLAIREAS	Integrated Billing		DIR	do	4
+IBACCWLAIREAS	Integrated Billing	AVAILABLECHK	IBACCWLUTIL1	do	1
+IBACCWLAIREAS	Integrated Billing	EDITAS2GRP	IBACCWLUTIL	do	1
+IBACCWLAIREAS	Integrated Billing	EDITPREVACT	IBACCWLUTIL	do	1
+IBACCWLAIREAS	Integrated Billing	EDITSTATUS	IBACCWLUTIL	do	1
+IBACCWLAIREAS	Integrated Billing	EEPUBLISH	IBACCWLUTIL1	do	1
+IBACCWLAIREAS	Integrated Billing	EN	VALM2	do	1
+IBACCWLAIREAS	Integrated Billing	FIELD	DID	do	1
+IBACCWLAIREAS	Integrated Billing	FLDTEXT	VALM10	do	4
+IBACCWLAIREAS	Integrated Billing	FMTE	XLFDT	func	1
+IBACCWLAIREAS	Integrated Billing	FULL	VALM1	do	5
+IBACCWLAIREAS	Integrated Billing	GET1	DIQ	func	8
+IBACCWLAIREAS	Integrated Billing	GETS	DIQ	do	1
+IBACCWLAIREAS	Integrated Billing	IENS	DILF	func	1
+IBACCWLAIREAS	Integrated Billing	IPSCREEN	IBACCWLUTIL1	do	1
+IBACCWLAIREAS	Integrated Billing	NBSCREEN	IBACCWLUTIL1	do	1
+IBACCWLAIREAS	Integrated Billing	PAUSE	VALM1	do	2
+IBACCWLAIREAS	Integrated Billing	PUBLISH	IBACCWLUTIL	do	1
+IBACCWLAIREAS	Integrated Billing	PULLLIST	IBACCWL1	do	1
+IBACCWLAIREAS	Integrated Billing	RESUBMITLOOP	IBACCWLAIBILL	do	1
+IBACCWLAIREAS	Integrated Billing	UPDAS2GRP	IBACCWLUTIL	do	1
+IBACCWLAIREAS	Integrated Billing	UPDATE	DIE	do	1
+IBACCWLAIREAS	Integrated Billing	UPDSTATUS	IBACCWLUTIL	do	1
+IBACCWLAIVIEW	Integrated Billing		DIC	do	1
+IBACCWLAIVIEW	Integrated Billing		DIE	do	1
+IBACCWLAIVIEW	Integrated Billing		DIR	do	1
+IBACCWLAIVIEW	Integrated Billing	ASKSTATUS	IBACCWLUTIL1	func	1
+IBACCWLAIVIEW	Integrated Billing	AVAILABLECHK	IBACCWLUTIL1	do	1
+IBACCWLAIVIEW	Integrated Billing	CJ	XLFSTR	func	4
+IBACCWLAIVIEW	Integrated Billing	EDITPREVACT	IBACCWLUTIL	do	1
+IBACCWLAIVIEW	Integrated Billing	EDITSTATUS	IBACCWLUTIL	do	1
+IBACCWLAIVIEW	Integrated Billing	EN	IBACCWLBILLVE	do	1
+IBACCWLAIVIEW	Integrated Billing	EN	IBACCWLVE	do	1
+IBACCWLAIVIEW	Integrated Billing	EN	IBACCWLVERUR	do	1
+IBACCWLAIVIEW	Integrated Billing	EN	IBACCWLVS	do	1
+IBACCWLAIVIEW	Integrated Billing	EN	VALM	do	2
+IBACCWLAIVIEW	Integrated Billing	EN	VALM2	do	1
+IBACCWLAIVIEW	Integrated Billing	FIELDPUBLISH	IBACCWLUTIL1	do	2
+IBACCWLAIVIEW	Integrated Billing	FLDTEXT	VALM10	do	6
+IBACCWLAIVIEW	Integrated Billing	FULL	VALM1	do	4
+IBACCWLAIVIEW	Integrated Billing	GET1	DIQ	func	5
+IBACCWLAIVIEW	Integrated Billing	GETFLD	IBACCWLUTIL	func	3
+IBACCWLAIVIEW	Integrated Billing	GETS	DIQ	do	1
+IBACCWLAIVIEW	Integrated Billing	IENS	DILF	func	1
+IBACCWLAIVIEW	Integrated Billing	INIT	IBACCWLEE	do	1
+IBACCWLAIVIEW	Integrated Billing	INIT	IBACCWLVE	do	1
+IBACCWLAIVIEW	Integrated Billing	NEWPROVMAIN	IBACCWLUTIL4	do	1
+IBACCWLAIVIEW	Integrated Billing	PAUSE	VALM1	do	7
+IBACCWLAIVIEW	Integrated Billing	RJ	XLFSTR	func	1
+IBACCWLAIVIEW	Integrated Billing	UPDATE	DIE	do	1
+IBACCWLAIVIEW	Integrated Billing	UPDSTATUS	IBACCWLUTIL	do	1
+IBACCWLAIVIEW	Integrated Billing	WORDWRAP	IBACCWLPREV	do	1
+IBACCWLBILLVE	Integrated Billing	CLEAN	VALM10	do	1
+IBACCWLBILLVE	Integrated Billing	CNTRL	VALM10	do	1
+IBACCWLBILLVE	Integrated Billing	DISP	XQORM1	do	1
+IBACCWLBILLVE	Integrated Billing	DISUSERGROUP	IBACCWLBILLVE1A	func	1
+IBACCWLBILLVE	Integrated Billing	EN	VALM	do	1
+IBACCWLBILLVE	Integrated Billing	FMTE	XLFDT	func	3
+IBACCWLBILLVE	Integrated Billing	GET1	DIQ	func	4
+IBACCWLBILLVE	Integrated Billing	GETINCLUSIONS	IBACCWLBILLVE1A	do	1
+IBACCWLBILLVE	Integrated Billing	HL7TFM	XLFDT	func	3
+IBACCWLBILLVE	Integrated Billing	PAUSE	VALM1	do	1
+IBACCWLBILLVE	Integrated Billing	SET	VALM10	do	4
+IBACCWLBILLVE	Integrated Billing	SETFLD	VALM1	func	2
+IBACCWLBILLVE	Integrated Billing	SETSTR	VALM1	func	1
+IBACCWLBILLVE1	Integrated Billing	FMTE	XLFDT	func	3
+IBACCWLBILLVE1	Integrated Billing	HL7TFM	XLFDT	func	3
+IBACCWLBILLVE1	Integrated Billing	SET	IBACCWLBILLVE	do	1
+IBACCWLBILLVE1A	Integrated Billing	DATE	IBACCWLBILLVE1	func	1
+IBACCWLBILLVE1A	Integrated Billing	DIAGSRCH	LEX10CS	func	1
+IBACCWLBILLVE1A	Integrated Billing	DOL	IBACCWLBILLVE1	func	1
+IBACCWLBILLVE1A	Integrated Billing	PCSLKUP	IBACCWLRURREV1A	func	3
+IBACCWLBILLVE1A	Integrated Billing	SET	IBACCWLBILLVE1	do	4
+IBACCWLBILLVE1A	Integrated Billing	YN	IBACCWLBILLVE1	func	1
+IBACCWLBILLVE2	Integrated Billing	FMTE	XLFDT	func	3
+IBACCWLBILLVE2	Integrated Billing	HL7TFM	XLFDT	func	3
+IBACCWLBILLVE2	Integrated Billing	SET	IBACCWLBILLVE	do	1
+IBACCWLBILLVE3	Integrated Billing	CPT	ICPTCOD	func	1
+IBACCWLBILLVE3	Integrated Billing	FMTE	XLFDT	func	3
+IBACCWLBILLVE3	Integrated Billing	HL7TFM	XLFDT	func	3
+IBACCWLBILLVE3	Integrated Billing	MOD	ICPTMOD	func	1
+IBACCWLBILLVE3	Integrated Billing	SET	IBACCWLBILLVE	do	1
+IBACCWLEE	Integrated Billing	BLD	IBACCWLEE1	do	1
+IBACCWLEE	Integrated Billing	BLD	IBACCWLEE2	do	1
+IBACCWLEE	Integrated Billing	BLD	IBACCWLEE3	do	1
+IBACCWLEE	Integrated Billing	CLEAN	VALM10	do	1
+IBACCWLEE	Integrated Billing	CNTRL	VALM10	do	1
+IBACCWLEE	Integrated Billing	CPT	IBACCWLEEUTIL	do	1
+IBACCWLEE	Integrated Billing	DIAGBLD	IBACCWLEE4	do	1
+IBACCWLEE	Integrated Billing	EN	VALM	do	1
+IBACCWLEE	Integrated Billing	FIELD	DID	do	1
+IBACCWLEE	Integrated Billing	GET1	DIQ	func	3
+IBACCWLEE	Integrated Billing	GETS	DIQ	do	1
+IBACCWLEE	Integrated Billing	PAUSE	VALM1	do	1
+IBACCWLEE	Integrated Billing	PRIMDX	IBACCWLEEUTIL	do	1
+IBACCWLEE	Integrated Billing	PROCBLD	IBACCWLEE4	do	1
+IBACCWLEE	Integrated Billing	SECDX	IBACCWLEEUTIL	do	1
+IBACCWLEE	Integrated Billing	SETFLD	VALM1	func	9
+IBACCWLEE	Integrated Billing	SETSTR	VALM1	func	5
+IBACCWLEE	Integrated Billing	TITLE	XLFSTR	func	1
+IBACCWLEE1	Integrated Billing	ARSTATA	IBJTU4	func	1
+IBACCWLEE1	Integrated Billing	BADD	IBJTU3	func	1
+IBACCWLEE1	Integrated Billing	BCOB	IBCU3	do	1
+IBACCWLEE1	Integrated Billing	BILINF	IBNCPUT3	func	1
+IBACCWLEE1	Integrated Billing	BILL	RCJIBFN2	func	2
+IBACCWLEE1	Integrated Billing	CNTRL	VALM10	do	3
+IBACCWLEE1	Integrated Billing	COBN	IBCEF	func	1
+IBACCWLEE1	Integrated Billing	DATE	IBJU1	func	3
+IBACCWLEE1	Integrated Billing	EDIACTV	IBCEF4	func	1
+IBACCWLEE1	Integrated Billing	EMPL	IBACCWLEE4	func	1
+IBACCWLEE1	Integrated Billing	EN	IBCCR	do	1
+IBACCWLEE1	Integrated Billing	EXPAND	IBTRE	func	3
+IBACCWLEE1	Integrated Billing	EXSET	IBJU1	func	5
+IBACCWLEE1	Integrated Billing	EXTERNAL	DILFD	func	1
+IBACCWLEE1	Integrated Billing	F	IBCEF	do	2
+IBACCWLEE1	Integrated Billing	FMTE	XLFDT	func	2
+IBACCWLEE1	Integrated Billing	FT	IBCEF	func	2
+IBACCWLEE1	Integrated Billing	HOD	IBCNHUT1	func	1
+IBACCWLEE1	Integrated Billing	HPD	IBCNHUT1	func	1
+IBACCWLEE1	Integrated Billing	MCRWNR	IBEFUNC	func	1
+IBACCWLEE1	Integrated Billing	NABP	BPSBUTL	func	1
+IBACCWLEE1	Integrated Billing	NABP	IBNCPDPU	func	1
+IBACCWLEE1	Integrated Billing	POLICY	IBCEF	func	1
+IBACCWLEE1	Integrated Billing	PRINT2	IBACCWLEE4	do	1
+IBACCWLEE1	Integrated Billing	RCANC	IBJTU2	do	1
+IBACCWLEE1	Integrated Billing	RELBILL	IBRFN	do	1
+IBACCWLEE1	Integrated Billing	RX	PSO52API	do	1
+IBACCWLEE1	Integrated Billing	SET	VALM10	do	1
+IBACCWLEE1	Integrated Billing	SETN	IBJTCA1	func	2
+IBACCWLEE1	Integrated Billing	SETSTR	VALM1	func	1
+IBACCWLEE1	Integrated Billing	STNO	RCJIBFN2	func	1
+IBACCWLEE1	Integrated Billing	TITLE	XLFSTR	func	1
+IBACCWLEE1	Integrated Billing	WNRBILL	IBEFUNC	func	1
+IBACCWLEE2	Integrated Billing	BILLN	IBCEFG0	func	2
+IBACCWLEE2	Integrated Billing	BN1	PRCAFN	func	1
+IBACCWLEE2	Integrated Billing	BOX24D	IBCEF11	func	1
+IBACCWLEE2	Integrated Billing	DAT1	IBOUTL	func	2
+IBACCWLEE2	Integrated Billing	INPAT	IBCEF	func	1
+IBACCWLEE2	Integrated Billing	ISPROS	IBCEF1	func	1
+IBACCWLEE2	Integrated Billing	ISRX	IBCEF1	func	1
+IBACCWLEE2	Integrated Billing	LOS	IBCU64	func	1
+IBACCWLEE2	Integrated Billing	LOS1	IBCU64	func	1
+IBACCWLEE2	Integrated Billing	PINB	IBCSC5B	func	1
+IBACCWLEE2	Integrated Billing	RCBOX	IBCEF11	func	1
+IBACCWLEE2	Integrated Billing	SET	IBCSC5A	do	1
+IBACCWLEE2	Integrated Billing	SET	IBCSC5B	do	1
+IBACCWLEE2	Integrated Billing	SET	VALM10	do	2
+IBACCWLEE2	Integrated Billing	SETSTR	VALM1	func	1
+IBACCWLEE2	Integrated Billing	SHEOB	IBJTBA1	do	1
+IBACCWLEE2	Integrated Billing	ZERO	IBRXUTL	do	1
+IBACCWLEE3	Integrated Billing	CNTRL	VALM10	do	3
+IBACCWLEE3	Integrated Billing	DAT1	IBOUTL	func	1
+IBACCWLEE3	Integrated Billing	EXPAND	IBTRE	func	5
+IBACCWLEE3	Integrated Billing	FMTE	XLFDT	func	2
+IBACCWLEE3	Integrated Billing	LAST364	IBCEF4	func	1
+IBACCWLEE3	Integrated Billing	SETSTR	VALM1	func	1
+IBACCWLEE4	Integrated Billing	BDATE	IBACSV	func	2
+IBACCWLEE4	Integrated Billing	CNTRL	VALM10	do	2
+IBACCWLEE4	Integrated Billing	DATE	IBJU1	func	2
+IBACCWLEE4	Integrated Billing	F	IBCEF	do	2
+IBACCWLEE4	Integrated Billing	GET1	DIQ	func	1
+IBACCWLEE4	Integrated Billing	ICD9	IBACSV	func	2
+IBACCWLEE4	Integrated Billing	MODLST	IBEFUNC2	func	1
+IBACCWLEE4	Integrated Billing	PRCD	IBCEF1	func	1
+IBACCWLEE4	Integrated Billing	SET	IBCSC4D	do	1
+IBACCWLEE4	Integrated Billing	SET	VALM10	do	4
+IBACCWLEE4	Integrated Billing	SETSTR	VALM1	func	3
+IBACCWLEEUTIL	Integrated Billing	CONVERT2DEC	IBACCWLUTIL1	func	2
+IBACCWLEEUTIL	Integrated Billing	EMPTYLINE	IBACCWLEE	do	1
+IBACCWLEEUTIL	Integrated Billing	HCPCSMANY	IBACCWLUTIL1	do	1
+IBACCWLEEUTIL	Integrated Billing	SET	IBACCWLEE	do	1
+IBACCWLEEUTIL	Integrated Billing	SETFLD	VALM1	func	1
+IBACCWLEEUTIL	Integrated Billing	SETSTR	VALM1	func	2
+IBACCWLPREV	Integrated Billing		DIWP	do	1
+IBACCWLPREV	Integrated Billing	EN	VALM	do	1
+IBACCWLPREV	Integrated Billing	GET1	DIQ	func	3
+IBACCWLPREV	Integrated Billing	GETS	DIQ	do	1
+IBACCWLPREV	Integrated Billing	PAUSE	VALM1	do	3
+IBACCWLPREV	Integrated Billing	PROTOCOL	IBACCWLUTIL	do	1
+IBACCWLPREV	Integrated Billing	SENTENCE	XLFSTR	func	1
+IBACCWLPREV	Integrated Billing	SETFLD	VALM1	func	11
+IBACCWLPREV	Integrated Billing	SETSTR	VALM1	func	4
+IBACCWLPURGE	Integrated Billing		DIE	do	2
+IBACCWLPURGE	Integrated Billing		DIR	do	1
+IBACCWLPURGE	Integrated Billing	ACTIVE	IBJTU4	func	1
+IBACCWLPURGE	Integrated Billing	FIND1	DIC	func	1
+IBACCWLPURGE	Integrated Billing	FMADD	XLFDT	func	1
+IBACCWLPURGE	Integrated Billing	GET1	DIQ	func	6
+IBACCWLRURREV	Integrated Billing	BLD	IBACCWLVS	do	1
+IBACCWLRURREV	Integrated Billing	CLEAN	VALM10	do	1
+IBACCWLRURREV	Integrated Billing	CNTRL	VALM10	do	1
+IBACCWLRURREV	Integrated Billing	DISP	XQORM1	do	1
+IBACCWLRURREV	Integrated Billing	EN	VALM	do	1
+IBACCWLRURREV	Integrated Billing	FMTE	XLFDT	func	1
+IBACCWLRURREV	Integrated Billing	GET1	DIQ	func	17
+IBACCWLRURREV	Integrated Billing	PTNAME	IBACCWLUTIL1	func	1
+IBACCWLRURREV	Integrated Billing	SET	VALM10	do	4
+IBACCWLRURREV	Integrated Billing	SETFLD	VALM1	func	3
+IBACCWLRURREV	Integrated Billing	SETSTR	VALM1	func	1
+IBACCWLRURREV1	Integrated Billing	FMTE	XLFDT	func	3
+IBACCWLRURREV1	Integrated Billing	HL7TFM	XLFDT	func	3
+IBACCWLRURREV1	Integrated Billing	SET	IBACCWLRURREV	do	1
+IBACCWLRURREV1A	Integrated Billing	DIAGSRCH	LEX10CS	func	1
+IBACCWLRURREV1A	Integrated Billing	PCSDIG	LEX10CS	func	1
+IBACCWLRURREV1A	Integrated Billing	SET	IBACCWLRURREV	do	5
+IBACCWLRURREV2	Integrated Billing	FMTE	XLFDT	func	3
+IBACCWLRURREV2	Integrated Billing	HL7TFM	XLFDT	func	3
+IBACCWLRURREV2	Integrated Billing	SET	IBACCWLRURREV	do	1
+IBACCWLRURREV3	Integrated Billing	CPT	ICPTCOD	func	1
+IBACCWLRURREV3	Integrated Billing	FMTE	XLFDT	func	3
+IBACCWLRURREV3	Integrated Billing	HCPCS	IBACCWLUTIL1	func	1
+IBACCWLRURREV3	Integrated Billing	HL7TFM	XLFDT	func	3
+IBACCWLRURREV3	Integrated Billing	MOD	ICPTMOD	func	1
+IBACCWLRURREV3	Integrated Billing	SET	IBACCWLRURREV	do	17
+IBACCWLSEC	Integrated Billing		DIR	do	5
+IBACCWLSEC	Integrated Billing	EN	VALM	do	1
+IBACCWLSEC	Integrated Billing	GETENV	%ZOSV	do	1
+IBACCWLSEC	Integrated Billing	ISITME	IBACCWLUTIL	func	1
+IBACCWLSEC	Integrated Billing	OWNSKEY	XUSRB	do	1
+IBACCWLSEC	Integrated Billing	REPLACE	XLFSTR	func	1
+IBACCWLSEC	Integrated Billing	TRANSMITTED	IBACCWLUTIL1	func	1
+IBACCWLSORT	Integrated Billing		DIR	do	1
+IBACCWLSORT	Integrated Billing	CLEAN	VALM10	do	1
+IBACCWLSORT	Integrated Billing	GETENV	%ZOSV	do	1
+IBACCWLSORT	Integrated Billing	IBSORTOR	IBACCWLSORT1	do	1
+IBACCWLSORT	Integrated Billing	SITE	VASITE	func	1
+IBACCWLSORT	Integrated Billing	SPECLKUP	IBACCWLSPKUP	do	1
+IBACCWLSORT	Integrated Billing	TITLE	XLFSTR	func	2
+IBACCWLSORT1	Integrated Billing		DIR	do	5
+IBACCWLSORT1	Integrated Billing	CURR	IBCEF2	func	1
+IBACCWLSORT1	Integrated Billing	FLD3649	IBACCWLSORT	func	10
+IBACCWLSORT1	Integrated Billing	GET1	DIQ	func	1
+IBACCWLSORT1	Integrated Billing	INPAT	IBCEF	func	1
+IBACCWLSORT1	Integrated Billing	INVERT	IBACCWLSORT1	func	1
+IBACCWLSORT1	Integrated Billing	LKUP	XUAF4	func	1
+IBACCWLSORT1	Integrated Billing	NNT	XUAF4	func	1
+IBACCWLSORT1	Integrated Billing	SORTFILTER	IBACCWLUTIL2	func	1
+IBACCWLSORT1	Integrated Billing	TRANSMITTED	IBACCWLUTIL1	func	1
+IBACCWLSORT1	Integrated Billing	UPDSTATUS	IBACCWLUTIL	do	1
+IBACCWLSPKUP	Integrated Billing		DIR	do	3
+IBACCWLSPKUP	Integrated Billing	EN1	DIK	do	1
+IBACCWLSPKUP	Integrated Billing	FIND	DIC	do	1
+IBACCWLSPKUP	Integrated Billing	RUST	IBACCROWFT	func	1
+IBACCWLSPKUP	Integrated Billing	SITE	VASITE	func	2
+IBACCWLSPKUP	Integrated Billing	UP	XLFSTR	func	1
+IBACCWLUTIL	Integrated Billing		%DTC	do	1
+IBACCWLUTIL	Integrated Billing		DIE	do	2
+IBACCWLUTIL	Integrated Billing		DIR	do	2
+IBACCWLUTIL	Integrated Billing	CHK	XMA21	do	1
+IBACCWLUTIL	Integrated Billing	CLEAR	VALM1	do	1
+IBACCWLUTIL	Integrated Billing	DISP	XQORM1	do	1
+IBACCWLUTIL	Integrated Billing	FIELD	DID	do	1
+IBACCWLUTIL	Integrated Billing	FILE	DIE	do	2
+IBACCWLUTIL	Integrated Billing	FIND1	DIC	func	1
+IBACCWLUTIL	Integrated Billing	FULL	VALM1	do	1
+IBACCWLUTIL	Integrated Billing	GET1	DIQ	func	2
+IBACCWLUTIL	Integrated Billing	MSG	VALM10	do	1
+IBACCWLUTIL	Integrated Billing	PAUSE	VALM1	do	2
+IBACCWLUTIL	Integrated Billing	PROD	XUPROD	func	1
+IBACCWLUTIL	Integrated Billing	RE	VALM4	do	1
+IBACCWLUTIL	Integrated Billing	SETFLD	VALM1	func	1
+IBACCWLUTIL	Integrated Billing	SETSTR	VALM1	func	1
+IBACCWLUTIL	Integrated Billing	SUBDATAUPDATE	IBACCWLUTIL1	do	1
+IBACCWLUTIL	Integrated Billing	UPDATE	DIE	do	1
+IBACCWLUTIL	Integrated Billing	WP	DIE	do	1
+IBACCWLUTIL1	Integrated Billing		%DTC	do	2
+IBACCWLUTIL1	Integrated Billing		DIR	do	1
+IBACCWLUTIL1	Integrated Billing	ASSIGNEDGRP	IBACCWLUTIL1	func	1
+IBACCWLUTIL1	Integrated Billing	CL	IBACV	do	1
+IBACCWLUTIL1	Integrated Billing	CPT	ICPTCOD	func	1
+IBACCWLUTIL1	Integrated Billing	DIAGSRCH	LEX10CS	func	1
+IBACCWLUTIL1	Integrated Billing	FIELD	DID	do	1
+IBACCWLUTIL1	Integrated Billing	FLDTEXT	VALM10	do	5
+IBACCWLUTIL1	Integrated Billing	FMTE	XLFDT	func	3
+IBACCWLUTIL1	Integrated Billing	GET1	DIQ	func	32
+IBACCWLUTIL1	Integrated Billing	GETS	DIQ	do	1
+IBACCWLUTIL1	Integrated Billing	LKUP	XUAF4	func	1
+IBACCWLUTIL1	Integrated Billing	MOD	ICPTMOD	func	1
+IBACCWLUTIL1	Integrated Billing	PAUSE	VALM1	do	6
+IBACCWLUTIL1	Integrated Billing	PREVACT	IBACCWLUTIL1	func	1
+IBACCWLUTIL1	Integrated Billing	PUBLISH	IBACCWLUTIL	do	1
+IBACCWLUTIL1	Integrated Billing	RJ	XLFSTR	func	1
+IBACCWLUTIL1	Integrated Billing	SETSTR	VALM1	func	1
+IBACCWLUTIL1	Integrated Billing	STATUS	IBACCWLUTIL1	func	1
+IBACCWLUTIL2	Integrated Billing		DIR	do	11
+IBACCWLUTIL2	Integrated Billing	DOM	IBACCWLUTIL3	func	2
+IBACCWLUTIL2	Integrated Billing	EQUALTO	IBACCWLUTIL3	func	1
+IBACCWLUTIL2	Integrated Billing	FLDNUM	DILFD	func	1
+IBACCWLUTIL2	Integrated Billing	FMTE	XLFDT	func	5
+IBACCWLUTIL2	Integrated Billing	GET1	DID	func	1
+IBACCWLUTIL2	Integrated Billing	GET1	DIQ	func	4
+IBACCWLUTIL2	Integrated Billing	GREATERTHAN	IBACCWLUTIL3	func	1
+IBACCWLUTIL2	Integrated Billing	GREATTHANEQUALTO	IBACCWLUTIL3	func	1
+IBACCWLUTIL2	Integrated Billing	LESSTHAN	IBACCWLUTIL3	func	1
+IBACCWLUTIL2	Integrated Billing	LESSTHANEQUALTO	IBACCWLUTIL3	func	1
+IBACCWLUTIL2	Integrated Billing	NUMRANGE	IBACCWLUTIL3	func	1
+IBACCWLUTIL2	Integrated Billing	PRIMDXTEXT	IBACCWLUTIL5	do	1
+IBACCWLUTIL2	Integrated Billing	ROOT	DILFD	func	2
+IBACCWLUTIL2	Integrated Billing	TITLE	XLFSTR	func	2
+IBACCWLUTIL3	Integrated Billing		DIR	do	7
+IBACCWLUTIL4	Integrated Billing		DIR	do	4
+IBACCWLUTIL4	Integrated Billing	EDITPREVACT	IBACCWLUTIL	do	1
+IBACCWLUTIL4	Integrated Billing	EN	IBCEP6	do	1
+IBACCWLUTIL4	Integrated Billing	FLDTEXT	VALM10	do	7
+IBACCWLUTIL4	Integrated Billing	FULL	VALM1	do	2
+IBACCWLUTIL4	Integrated Billing	GET1	DIQ	func	16
+IBACCWLUTIL4	Integrated Billing	IENS	DILF	func	1
+IBACCWLUTIL4	Integrated Billing	PAUSE	VALM1	do	1
+IBACCWLUTIL4	Integrated Billing	PREVACT	IBACCWLUTIL1	func	2
+IBACCWLUTIL4	Integrated Billing	REASCODE	IBACCWLUTIL1	func	1
+IBACCWLUTIL4	Integrated Billing	UPDATE	DIE	do	1
+IBACCWLUTIL4	Integrated Billing	VAL	IBCE837ACCU	func	1
+IBACCWLUTIL5	Integrated Billing		DIR	do	3
+IBACCWLUTIL5	Integrated Billing	GET1	DIQ	func	2
+IBACCWLUTIL5	Integrated Billing	ICDCODE	IBACCWLUTIL5	func	1
+IBACCWLUTIL5	Integrated Billing	ICDLKUP	IBACCWLVE1A	func	1
+IBACCWLUTIL5	Integrated Billing	TITLE	XLFSTR	func	1
+IBACCWLUTIL5	Integrated Billing	UPPER	IBACCWLUTIL	func	3
+IBACCWLVE	Integrated Billing	CLEAN	VALM10	do	1
+IBACCWLVE	Integrated Billing	CNTRL	VALM10	do	1
+IBACCWLVE	Integrated Billing	DISP	XQORM1	do	1
+IBACCWLVE	Integrated Billing	EN	VALM	do	1
+IBACCWLVE	Integrated Billing	FMTE	XLFDT	func	3
+IBACCWLVE	Integrated Billing	GET1	DIQ	func	3
+IBACCWLVE	Integrated Billing	HL7TFM	XLFDT	func	3
+IBACCWLVE	Integrated Billing	SET	VALM10	do	4
+IBACCWLVE	Integrated Billing	SETFLD	VALM1	func	2
+IBACCWLVE	Integrated Billing	SETSTR	VALM1	func	1
+IBACCWLVE1	Integrated Billing	FMTE	XLFDT	func	3
+IBACCWLVE1	Integrated Billing	HL7TFM	XLFDT	func	3
+IBACCWLVE1	Integrated Billing	SET	IBACCWLVE	do	1
+IBACCWLVE1A	Integrated Billing	DATE	IBACCWLVE1	func	1
+IBACCWLVE1A	Integrated Billing	DIAGSRCH	LEX10CS	func	1
+IBACCWLVE1A	Integrated Billing	DOL	IBACCWLVE1	func	1
+IBACCWLVE1A	Integrated Billing	PCSLKUP	IBACCWLRURREV1A	func	3
+IBACCWLVE1A	Integrated Billing	SET	IBACCWLVE1	do	4
+IBACCWLVE1A	Integrated Billing	YN	IBACCWLVE1	func	1
+IBACCWLVE2	Integrated Billing	FMTE	XLFDT	func	3
+IBACCWLVE2	Integrated Billing	HL7TFM	XLFDT	func	3
+IBACCWLVE2	Integrated Billing	SET	IBACCWLVE	do	1
+IBACCWLVE3	Integrated Billing	CPT	ICPTCOD	func	1
+IBACCWLVE3	Integrated Billing	FMTE	XLFDT	func	3
+IBACCWLVE3	Integrated Billing	HL7TFM	XLFDT	func	3
+IBACCWLVE3	Integrated Billing	MOD	ICPTMOD	func	1
+IBACCWLVE3	Integrated Billing	SET	IBACCWLVE	do	1
+IBACCWLVERUR	Integrated Billing	EN	VALM	do	1
+IBACCWLVS	Integrated Billing	ALL	IBCNS1	do	1
+IBACCWLVS	Integrated Billing	CL	IBACV	do	1
+IBACCWLVS	Integrated Billing	CLEAN	VALM10	do	2
+IBACCWLVS	Integrated Billing	CLEAR	VALM1	do	1
+IBACCWLVS	Integrated Billing	DISP	XQORM1	do	1
+IBACCWLVS	Integrated Billing	EN	VALM	do	1
+IBACCWLVS	Integrated Billing	FINDCUR	DGENA	func	1
+IBACCWLVS	Integrated Billing	FMTE	XLFDT	func	2
+IBACCWLVS	Integrated Billing	GET	DGENA	func	1
+IBACCWLVS	Integrated Billing	GET1	DIQ	func	3
+IBACCWLVS	Integrated Billing	GETS	DIQ	do	1
+IBACCWLVS	Integrated Billing	PID	VADPT	do	1
+IBACCWLVS	Integrated Billing	SET	VALM10	do	12
+IBACCWLVS	Integrated Billing	SETFLD	VALM1	func	37
+IBACCWLVS	Integrated Billing	WAIT	DICD	do	1
 IBACSV	Integrated Billing	CPT	ICPTCOD	func	3
 IBACSV	Integrated Billing	DRG	ICDGTDRG	func	3
 IBACSV	Integrated Billing	DRGD	ICDGTDRG	func	1
@@ -64107,7 +64762,7 @@ IBCBB1	Integrated Billing	BILLRATE	IBCRU3	func	1
 IBCBB1	Integrated Billing	CMNCHK	IBCBB13	func	1
 IBCBB1	Integrated Billing	COBAMT	IBCBB11	func	1
 IBCBB1	Integrated Billing	COBMRA	IBCBB11	func	1
-IBCBB1	Integrated Billing	COBN	IBCEF	func	2
+IBCBB1	Integrated Billing	COBN	IBCEF	func	3
 IBCBB1	Integrated Billing	COBSEC	IBCBB11	func	1
 IBCBB1	Integrated Billing	CURR	IBCEF2	func	3
 IBCBB1	Integrated Billing	EDIACTV	IBCEF4	func	1
@@ -64146,13 +64801,14 @@ IBCBB1	Integrated Billing	ROIDTCK	IBCEU7	func	1
 IBCBB1	Integrated Billing	RXNPI	IBCBB11	do	1
 IBCBB1	Integrated Billing	SECIDCK	IBCEF74	func	1
 IBCBB1	Integrated Billing	STA	PRCAFN	func	1
+IBCBB1	Integrated Billing	SW	IBCE837Q	func	1
 IBCBB1	Integrated Billing	TAXCHK	IBCBB11	do	1
 IBCBB1	Integrated Billing	TMCK	IBCBB11	func	1
 IBCBB1	Integrated Billing	TOB	IBCEF1	func	1
 IBCBB1	Integrated Billing	UP	XLFSTR	func	1
 IBCBB1	Integrated Billing	VALNDC	IBCBB11	do	1
 IBCBB1	Integrated Billing	WARN	IBCBB11	do	14
-IBCBB1	Integrated Billing	WNRBILL	IBEFUNC	func	1
+IBCBB1	Integrated Billing	WNRBILL	IBEFUNC	func	2
 IBCBB11	Integrated Billing	ALLIDS	IBCEFP	do	2
 IBCBB11	Integrated Billing	COBN	IBCEF	func	2
 IBCBB11	Integrated Billing	F	IBCEF	do	1
@@ -64188,7 +64844,7 @@ IBCBB2	Integrated Billing	BILLSPEC	IBCEU3	func	1
 IBCBB2	Integrated Billing	CLIAREQ	IBCEP8A	func	1
 IBCBB2	Integrated Billing	EVENT	IBCF22	func	1
 IBCBB2	Integrated Billing	F	IBCEF	do	4
-IBCBB2	Integrated Billing	FT	IBCEF	func	2
+IBCBB2	Integrated Billing	FT	IBCEF	func	5
 IBCBB2	Integrated Billing	GETTYP	IBCEP2A	func	1
 IBCBB2	Integrated Billing	ICD9	IBACSV	func	2
 IBCBB2	Integrated Billing	INPAT	IBCEF	func	2
@@ -64199,11 +64855,12 @@ IBCBB2	Integrated Billing	PROVINF	IBCEF74	do	1
 IBCBB2	Integrated Billing	REQMRA	IBEFUNC	func	2
 IBCBB2	Integrated Billing	SET	IBCSC4D	do	1
 IBCBB2	Integrated Billing	TXMT	IBCEF4	func	1
-IBCBB2	Integrated Billing	WARN	IBCBB11	do	12
+IBCBB2	Integrated Billing	WARN	IBCBB11	do	14
 IBCBB2	Integrated Billing	WNRBILL	IBEFUNC	func	1
 IBCBB21	Integrated Billing	ALLPROC	IBCVA1	do	1
 IBCBB21	Integrated Billing	BDATE	IBACSV	func	2
 IBCBB21	Integrated Billing	F	IBCEF	do	2
+IBCBB21	Integrated Billing	FT	IBCEF	func	1
 IBCBB21	Integrated Billing	GET1	DIQ	func	1
 IBCBB21	Integrated Billing	IBER	IBCBB3	func	2
 IBCBB21	Integrated Billing	ICD9	IBACSV	func	2
@@ -64214,7 +64871,7 @@ IBCBB21	Integrated Billing	PRCD	IBCEF1	func	1
 IBCBB21	Integrated Billing	REQMRA	IBEFUNC	func	1
 IBCBB21	Integrated Billing	TXMT	IBCEF4	func	1
 IBCBB21	Integrated Billing	UBPRVCK	IBCBB12	func	1
-IBCBB21	Integrated Billing	WARN	IBCBB11	do	7
+IBCBB21	Integrated Billing	WARN	IBCBB11	do	8
 IBCBB21	Integrated Billing	WNRBILL	IBEFUNC	func	1
 IBCBB3	Integrated Billing		IBCBB4	do	1
 IBCBB3	Integrated Billing	ALLPROC	IBCVA1	do	1
@@ -64611,6 +65268,151 @@ IBCE837A	Integrated Billing	SENDMSG	XMXAPI	do	3
 IBCE837A	Integrated Billing	SETUP	XQALERT	do	1
 IBCE837A	Integrated Billing	SITE	VASITE	func	2
 IBCE837A	Integrated Billing	TXMT	IBCEF4	func	1
+IBCE837ACC	Integrated Billing		DIC	do	1
+IBCE837ACC	Integrated Billing		DIE	do	10
+IBCE837ACC	Integrated Billing	AUTH	IBCE837ACCU2	do	1
+IBCE837ACC	Integrated Billing	CHKINS	IBCE837ACCU	func	1
+IBCE837ACC	Integrated Billing	CREATE	IBCE837ACC2	func	1
+IBCE837ACC	Integrated Billing	CURR	IBCEF2	func	2
+IBCE837ACC	Integrated Billing	DD	%DT	do	1
+IBCE837ACC	Integrated Billing	DTNOLF	DICRW	do	1
+IBCE837ACC	Integrated Billing	DUZ	XUP	do	2
+IBCE837ACC	Integrated Billing	EN	IBCBB	do	1
+IBCE837ACC	Integrated Billing	EX	IBCE837ACC3	func	1
+IBCE837ACC	Integrated Billing	FILE	DICN	do	3
+IBCE837ACC	Integrated Billing	FINAL	IBCE837ACC4	func	1
+IBCE837ACC	Integrated Billing	FIND1	DIC	func	1
+IBCE837ACC	Integrated Billing	FINISH	IBCE837ACC2A	goto	1
+IBCE837ACC	Integrated Billing	GET1	DIQ	func	6
+IBCE837ACC	Integrated Billing	MCD	IBACCROWFT	func	1
+IBCE837ACC	Integrated Billing	MCRWNR	IBEFUNC	func	2
+IBCE837ACC	Integrated Billing	NOW	%DTC	do	1
+IBCE837ACC	Integrated Billing	PCP	IBCE837ACCU	do	1
+IBCE837ACC	Integrated Billing	PS	IBCE837ACC4	do	1
+IBCE837ACC	Integrated Billing	RUST	IBACCROWFT	func	1
+IBCE837ACC	Integrated Billing	SCRUB	IBCE837ACC4	func	1
+IBCE837ACC	Integrated Billing	SET	IBCE837ACC1	do	2
+IBCE837ACC	Integrated Billing	SITE	VASITE	func	1
+IBCE837ACC	Integrated Billing	STRIP	IBCE837ACC2A	func	1
+IBCE837ACC	Integrated Billing	SW	IBCE837ACCU2	func	1
+IBCE837ACC	Integrated Billing	UPDATE	DIE	do	4
+IBCE837ACC	Integrated Billing	USER	IBCE837ACC4	func	1
+IBCE837ACC	Integrated Billing	WP	DIE	do	1
+IBCE837ACC1	Integrated Billing		DIK	do	1
+IBCE837ACC1	Integrated Billing	CHK35593	IBCE837ACCU	func	9
+IBCE837ACC1	Integrated Billing	DT	IBCE837ACC	do	20
+IBCE837ACC1	Integrated Billing	FILE	DICN	do	6
+IBCE837ACC1	Integrated Billing	PAT	IBCE837ACC4	do	2
+IBCE837ACC1	Integrated Billing	UP	IBCE837ACC	do	9
+IBCE837ACC2	Integrated Billing		DIE	do	4
+IBCE837ACC2	Integrated Billing	ARSET	IBCD2	func	1
+IBCE837ACC2	Integrated Billing	CODEN	ICDEX	func	1
+IBCE837ACC2	Integrated Billing	D	IBCE837ACC4	do	1
+IBCE837ACC2	Integrated Billing	D	IBCE837ACCU	do	2
+IBCE837ACC2	Integrated Billing	DUZ	XUP	do	1
+IBCE837ACC2	Integrated Billing	FILE	DICN	do	11
+IBCE837ACC2	Integrated Billing	FIND1	DIC	func	12
+IBCE837ACC2	Integrated Billing	GET1	DIQ	func	5
+IBCE837ACC2	Integrated Billing	GETMOD	IBCE837ACC4	func	4
+IBCE837ACC2	Integrated Billing	GETSPEC	IBEFUNC	func	2
+IBCE837ACC2	Integrated Billing	IBREG	IBCE837ACC	func	1
+IBCE837ACC2	Integrated Billing	IDFIND	IBCEP2	func	3
+IBCE837ACC2	Integrated Billing	IX1	DIK	do	1
+IBCE837ACC2	Integrated Billing	NOTE	IBCE837ACC3	do	2
+IBCE837ACC2	Integrated Billing	PROC	IBCU7A	do	1
+IBCE837ACC2	Integrated Billing	RJ	XLFSTR	func	1
+IBCE837ACC2	Integrated Billing	SC	IBCU3	func	1
+IBCE837ACC2	Integrated Billing	TEETH	IBCE837ACC2A	do	1
+IBCE837ACC2	Integrated Billing	TOS	IBCE837ACC2A	func	1
+IBCE837ACC2A	Integrated Billing		DIE	do	1
+IBCE837ACC2A	Integrated Billing	ENCODE	XLFJSON	do	1
+IBCE837ACC2A	Integrated Billing	FILE	DICN	do	1
+IBCE837ACC2A	Integrated Billing	FIND1	DIC	func	3
+IBCE837ACC2A	Integrated Billing	GET1	DIQ	func	4
+IBCE837ACC2A	Integrated Billing	WP	DIE	do	1
+IBCE837ACC2A	Integrated Billing	WRAP	IBCE837ACC2A	func	3
+IBCE837ACC3	Integrated Billing	CHK35593	IBCE837ACCU	func	6
+IBCE837ACC3	Integrated Billing	CPT	ICPTCOD	func	1
+IBCE837ACC3	Integrated Billing	FIND1	DIC	func	4
+IBCE837ACC3	Integrated Billing	GET1	DIQ	func	4
+IBCE837ACC3	Integrated Billing	GETMOD	IBCE837ACC4	func	1
+IBCE837ACC3	Integrated Billing	NEXT	IBCE837ACC1	do	4
+IBCE837ACC3	Integrated Billing	SET	IBCE837ACC1	do	2
+IBCE837ACC3	Integrated Billing	UP	IBCE837ACC	do	7
+IBCE837ACC3	Integrated Billing	UPDATE	DIE	do	1
+IBCE837ACC3	Integrated Billing	WP	DIE	do	1
+IBCE837ACC4	Integrated Billing		DIE	do	2
+IBCE837ACC4	Integrated Billing	ADDPREVACT	IBACCWLUTIL	do	1
+IBCE837ACC4	Integrated Billing	CL	IBACV	do	1
+IBCE837ACC4	Integrated Billing	CS	IBCE837ACCU3	func	1
+IBCE837ACC4	Integrated Billing	DUZ	XUP	do	1
+IBCE837ACC4	Integrated Billing	EX1	IBCE837ACC3	func	1
+IBCE837ACC4	Integrated Billing	FILE	DICN	do	4
+IBCE837ACC4	Integrated Billing	FIND1	DIC	func	5
+IBCE837ACC4	Integrated Billing	FT	IBCEF	func	1
+IBCE837ACC4	Integrated Billing	GET1	DIQ	func	7
+IBCE837ACC4	Integrated Billing	GETDFN	MPIF001	func	1
+IBCE837ACC4	Integrated Billing	GETNPI	IBCEF73A	func	2
+IBCE837ACC4	Integrated Billing	GETSPEC	IBEFUNC	func	1
+IBCE837ACC4	Integrated Billing	IBREG	IBCE837ACC	func	1
+IBCE837ACC4	Integrated Billing	ICD9	IBACSV	func	1
+IBCE837ACC4	Integrated Billing	MNB	IBCE837ACC3	func	1
+IBCE837ACC4	Integrated Billing	NB	IBCE837ACC3	func	1
+IBCE837ACC4	Integrated Billing	PRCD	IBCEF1	func	1
+IBCE837ACC4	Integrated Billing	SET	IBCSC4D	do	1
+IBCE837ACC4	Integrated Billing	UP	IBCE837ACC	do	10
+IBCE837ACC4	Integrated Billing	USERUP	IBCE837ACC	do	1
+IBCE837ACC4	Integrated Billing	VAL	IBCE837ACCU	func	1
+IBCE837ACCU	Integrated Billing		%DTC	do	1
+IBCE837ACCU	Integrated Billing		DIK	do	3
+IBCE837ACCU	Integrated Billing	ALL	IBCE837ACC	goto	1
+IBCE837ACCU	Integrated Billing	ALL	IBCNS1	do	1
+IBCE837ACCU	Integrated Billing	CODEN	ICDEX	func	1
+IBCE837ACCU	Integrated Billing	DD	%DT	do	1
+IBCE837ACCU	Integrated Billing	DIV	IBCE837ACC	func	1
+IBCE837ACCU	Integrated Billing	FILE	DICN	do	1
+IBCE837ACCU	Integrated Billing	GET1	DIQ	func	11
+IBCE837ACCU	Integrated Billing	GETTAX	IBCEF73A	func	2
+IBCE837ACCU	Integrated Billing	NOW	%DTC	do	1
+IBCE837ACCU	Integrated Billing	OUTPTPR	SDUTL3	func	2
+IBCE837ACCU	Integrated Billing	PAT	IBCE837ACC4	do	1
+IBCE837ACCU	Integrated Billing	PLCOV	IBCNSU3	func	1
+IBCE837ACCU	Integrated Billing	QI	XUSNPI	func	1
+IBCE837ACCU	Integrated Billing	SET	IBCE837ACC1	do	7
+IBCE837ACCU	Integrated Billing	SITE	VASITE	func	1
+IBCE837ACCU	Integrated Billing	UP	IBCE837ACC	do	15
+IBCE837ACCU	Integrated Billing	UPDATE	IBCE837ACC2A	do	5
+IBCE837ACCU	Integrated Billing	USERUP	IBCE837ACC	do	1
+IBCE837ACCU1	Integrated Billing		DIK	do	1
+IBCE837ACCU1	Integrated Billing	CHK35593	IBCE837ACCU	func	8
+IBCE837ACCU1	Integrated Billing	PAT	IBCE837ACC4	do	1
+IBCE837ACCU1	Integrated Billing	SET	IBCE837ACC1	do	41
+IBCE837ACCU1	Integrated Billing	UP	IBCE837ACC	do	9
+IBCE837ACCU2	Integrated Billing	ADDTBILL	IBCB1	func	1
+IBCE837ACCU2	Integrated Billing	AMBMOD	IBCE837ACC3	func	2
+IBCE837ACCU2	Integrated Billing	ARPASS	IBCB1	do	1
+IBCE837ACCU2	Integrated Billing	AUTOCK	IBCEU2	do	1
+IBCE837ACCU2	Integrated Billing	CHK35593	IBCE837ACCU	func	6
+IBCE837ACCU2	Integrated Billing	CPT	ICPTCOD	func	1
+IBCE837ACCU2	Integrated Billing	FT	IBCE837ACC3	do	1
+IBCE837ACCU2	Integrated Billing	GETMOD	IBCE837ACC4	func	1
+IBCE837ACCU2	Integrated Billing	OPPROV	IBCE837ACC3	func	1
+IBCE837ACCU2	Integrated Billing	SET	IBCE837ACC1	do	2
+IBCE837ACCU2	Integrated Billing	SETL	IBCE837ACC3	do	4
+IBCE837ACCU2	Integrated Billing	STAT	IBCEMU2	do	1
+IBCE837ACCU2	Integrated Billing	TXMT	IBCEF4	func	1
+IBCE837ACCU2	Integrated Billing	UP	IBCE837ACC	do	7
+IBCE837ACCU2	Integrated Billing	UP	XLFSTR	func	1
+IBCE837ACCU2	Integrated Billing	UPDATE	DIE	do	1
+IBCE837ACCU3	Integrated Billing	DECODE	XLFJSON	do	1
+IBCE837ACCU3	Integrated Billing	EN	VEJDIBPX	do	1
+IBCE837ACCU3	Integrated Billing	EN	VEJDIBPY	do	1
+IBCE837ACCU3	Integrated Billing	ENCODE	XLFJSON	do	1
+IBCE837ACCU3	Integrated Billing	FIND1	DIC	func	1
+IBCE837ACCU3	Integrated Billing	FT	IBCEF	func	1
+IBCE837ACCU3	Integrated Billing	GET1	DIQ	func	1
+IBCE837ACCU3	Integrated Billing	GETREST	XOBWLIB	func	1
+IBCE837ACCU3	Integrated Billing	POST	XOBWLIB	func	1
 IBCE837B	Integrated Billing	FMADD	XLFDT	func	1
 IBCE837B	Integrated Billing	FORM	IBCEFG7	do	2
 IBCE837B	Integrated Billing	NOW	XLFDT	func	1
@@ -64643,7 +65445,7 @@ IBCE837I	Integrated Billing	SITE	VASITE	func	2
 IBCE837I	Integrated Billing	TEST	IBCEF4	func	3
 IBCE837I	Integrated Billing	TESTPT	IBCEU	func	1
 IBCE837I	Integrated Billing	TXMT	IBCEF4	func	1
-IBCE837K	Integrated Billing		DIE	do	1
+IBCE837K	Integrated Billing		DIE	do	2
 IBCE837K	Integrated Billing	CLEAN	DILF	do	1
 IBCE837K	Integrated Billing	DTNOLF	DICRW	do	1
 IBCE837K	Integrated Billing	ENCODE	XLFJSONE	do	1
@@ -64669,8 +65471,8 @@ IBCE837Q	Integrated Billing		%DT	do	1
 IBCE837Q	Integrated Billing	COBN	IBCEF	func	1
 IBCE837Q	Integrated Billing	FT	IBCEF	func	2
 IBCE837Q	Integrated Billing	PAYERID	IBCEF2	func	1
-IBCE837Q	Integrated Billing	PROD	XUPROD	func	2
-IBCE837Q	Integrated Billing	TEST	IBCEF4	func	2
+IBCE837Q	Integrated Billing	PROD	XUPROD	func	3
+IBCE837Q	Integrated Billing	TEST	IBCEF4	func	3
 IBCE837S	Integrated Billing		DIE	do	1
 IBCE837S	Integrated Billing	DTNOLF	DICRW	do	1
 IBCE837S	Integrated Billing	ENCODE	XLFJSONE	do	1
@@ -66155,6 +66957,7 @@ IBCEP8	Integrated Billing	FIND1	DIC	func	1
 IBCEP8	Integrated Billing	FULL	VALM1	do	3
 IBCEP8	Integrated Billing	GET1	DIQ	func	2
 IBCEP8	Integrated Billing	IDFIND	IBCEP2	func	1
+IBCEP8	Integrated Billing	NPI	XUSNPI	func	1
 IBCEP8	Integrated Billing	STATE	IBCEFG1	func	2
 IBCEP8	Integrated Billing	STDNAME	XLFNAME	do	1
 IBCEP8	Integrated Billing	VALFAC	IBCEP8	func	1
@@ -67105,6 +67908,7 @@ IBCMDT	Integrated Billing	SLPCN	IBCMDT1	do	1
 IBCMDT	Integrated Billing	SLPTY	IBCMDT1	do	1
 IBCMDT	Integrated Billing	SLTFT	IBCMDT1	do	1
 IBCMDT1	Integrated Billing		DIR	do	9
+IBCMDT1	Integrated Billing	GETS	DIQ	do	1
 IBCMDT2	Integrated Billing	DAT1	IBOUTL	func	1
 IBCMDT2	Integrated Billing	FTFGP	IBCNEUT7	func	1
 IBCMDT2	Integrated Billing	GET1	DIQ	func	18
@@ -67613,6 +68417,7 @@ IBCNEDE1	Integrated Billing	SYMBOL	IBCNBLL	func	1
 IBCNEDE1	Integrated Billing	TQUPDSV	IBCNEUT5	do	1
 IBCNEDE1	Integrated Billing	UPDDTS	IBCNEDE6	do	1
 IBCNEDE2	Integrated Billing	ALL	IBCNEDE3	do	1
+IBCNEDE2	Integrated Billing	BFCHECK	IBCNEDE3	func	1
 IBCNEDE2	Integrated Billing	BFEXIST	IBCNEDE3	func	1
 IBCNEDE2	Integrated Billing	FIND1	DIC	func	1
 IBCNEDE2	Integrated Billing	FMADD	XLFDT	func	3
@@ -67631,17 +68436,19 @@ IBCNEDE2	Integrated Billing	SETTINGS	IBCNEDE7	func	1
 IBCNEDE2	Integrated Billing	SETTQ	IBCNEDE7	func	1
 IBCNEDE2	Integrated Billing	STRIP	IBCNEDE3	func	2
 IBCNEDE2	Integrated Billing	TQCHKS	IBCNEDE3	do	2
+IBCNEDE2	Integrated Billing	TQEXIST	IBCNEDE3	func	1
 IBCNEDE2	Integrated Billing	TQUPDSV	IBCNEDE3	do	2
 IBCNEDE2	Integrated Billing	UPDSD	IBCNEDE3	do	1
 IBCNEDE2	Integrated Billing	XMIT1	IBCNEDEP	do	2
 IBCNEDE3	Integrated Billing	DT	XLFDT	func	3
 IBCNEDE3	Integrated Billing	FMADD	XLFDT	func	3
 IBCNEDE3	Integrated Billing	FMDIFF	XLFDT	func	2
-IBCNEDE3	Integrated Billing	GET1	DIQ	func	15
+IBCNEDE3	Integrated Billing	GET1	DIQ	func	18
 IBCNEDE3	Integrated Billing	SAVETQ	IBCNEUT2	do	4
-IBCNEDE3	Integrated Billing	STRIP	IBCNEDE3	func	4
-IBCNEDE3	Integrated Billing	TRIM	XLFSTR	func	2
-IBCNEDE3	Integrated Billing	UP	XLFSTR	func	2
+IBCNEDE3	Integrated Billing	STRIP	IBCNEDE3	func	6
+IBCNEDE3	Integrated Billing	SYMBOL	IBCNBLL	func	1
+IBCNEDE3	Integrated Billing	TRIM	XLFSTR	func	4
+IBCNEDE3	Integrated Billing	UP	XLFSTR	func	4
 IBCNEDE3	Integrated Billing	VALIDDT	IBCNINSU	func	4
 IBCNEDE3	Integrated Billing	ZND	IBCNS1	func	1
 IBCNEDE4	Integrated Billing	ADDTQ	IBCNEUT5	func	1
@@ -68579,7 +69386,7 @@ IBCNICB	Integrated Billing	WP	DIE	do	1
 IBCNICB2	Integrated Billing	GET1	DIQ	func	4
 IBCNICB2	Integrated Billing	TRIM	XLFSTR	func	4
 IBCNICB2	Integrated Billing	UP	XLFSTR	func	4
-IBCNILK	Integrated Billing		DIR	do	3
+IBCNILK	Integrated Billing		DIR	do	1
 IBCNILK	Integrated Billing	CLEAR	VALM1	do	2
 IBCNILK	Integrated Billing	EN	VALM	do	2
 IBCNILK	Integrated Billing	EN	VALM2	do	1
@@ -68587,11 +69394,13 @@ IBCNILK	Integrated Billing	FILTER	IBCNINSU	func	1
 IBCNILK	Integrated Billing	FLDTEXT	VALM10	do	1
 IBCNILK	Integrated Billing	FULL	VALM1	do	3
 IBCNILK	Integrated Billing	GET1	DIQ	func	11
-IBCNILK	Integrated Billing	PAUSE	VALM1	do	5
+IBCNILK	Integrated Billing	GETFILT	IBCNILK1	func	1
+IBCNILK	Integrated Billing	PAUSE	VALM1	do	6
 IBCNILK	Integrated Billing	SET	VALM10	do	2
 IBCNILK	Integrated Billing	SETSTR	VALM1	func	8
 IBCNILK	Integrated Billing	UP	XLFSTR	func	3
 IBCNILK	Integrated Billing	WRITE	VALM10	do	1
+IBCNILK1	Integrated Billing		DIR	do	3
 IBCNINS	Integrated Billing	BUFCLN	IBJPI3	do	1
 IBCNINS	Integrated Billing	DBR	IBCNERTC	do	1
 IBCNINS	Integrated Billing	DBR	IBCNOR2	do	1
@@ -69777,15 +70586,16 @@ IBCNSU2	Integrated Billing	PAUSE	VALM1	do	1
 IBCNSU2	Integrated Billing	SETFLD	VALM1	func	8
 IBCNSU2	Integrated Billing	SETSTR	VALM1	func	4
 IBCNSU2	Integrated Billing	YN	IBCNSM	func	4
+IBCNSU21	Integrated Billing		DIR	do	1
 IBCNSU21	Integrated Billing	CLEAN	VALM10	do	1
 IBCNSU21	Integrated Billing	CLEAR	VALM1	do	1
 IBCNSU21	Integrated Billing	EN	VALM	do	2
 IBCNSU21	Integrated Billing	EN	VALM2	do	1
 IBCNSU21	Integrated Billing	FLDTEXT	VALM10	do	1
-IBCNSU21	Integrated Billing	FULL	VALM1	do	1
-IBCNSU21	Integrated Billing	GET1	DIQ	func	8
+IBCNSU21	Integrated Billing	FULL	VALM1	do	2
+IBCNSU21	Integrated Billing	GET1	DIQ	func	11
 IBCNSU21	Integrated Billing	GETS	DIQ	do	2
-IBCNSU21	Integrated Billing	PAUSE	VALM1	do	3
+IBCNSU21	Integrated Billing	PAUSE	VALM1	do	4
 IBCNSU21	Integrated Billing	SET	VALM10	do	2
 IBCNSU21	Integrated Billing	SETFLD	VALM1	func	8
 IBCNSU21	Integrated Billing	SETSTR	VALM1	func	4
@@ -70066,7 +70876,7 @@ IBCOPP	Integrated Billing		IBCOPP2	do	1
 IBCOPP	Integrated Billing	EN	IBCNILK	do	1
 IBCOPP	Integrated Billing	GET1	DIQ	func	2
 IBCOPP	Integrated Billing	HOME	%ZIS	do	1
-IBCOPP	Integrated Billing	LKP	IBCNSU2	do	1
+IBCOPP	Integrated Billing	LKP	IBCNSU21	do	1
 IBCOPP	Integrated Billing	OK	IBCNSM3	do	1
 IBCOPP	Integrated Billing	OUT	IBCOPP1	func	2
 IBCOPP	Integrated Billing	SELA	IBCOPP1	func	1
@@ -71293,7 +72103,7 @@ IBCU7	Integrated Billing	EN	DDIOL	do	1
 IBCU7	Integrated Billing	EN	IBCU7B	do	1
 IBCU7	Integrated Billing	EN	IBCU7C	do	1
 IBCU7	Integrated Billing	FMTE	XLFDT	func	2
-IBCU7	Integrated Billing	FT	IBCEF	func	2
+IBCU7	Integrated Billing	FT	IBCEF	func	4
 IBCU7	Integrated Billing	GETMOD	IBEFUNC	func	1
 IBCU7	Integrated Billing	GETSPEC	IBEFUNC	func	1
 IBCU7	Integrated Billing	ICD0ACT	IBACSV	func	1
@@ -75358,6 +76168,7 @@ IBJDF41	Integrated Billing	LST	DGMTU	func	1
 IBJDF41	Integrated Billing	PYMT	IBJD1	func	1
 IBJDF41	Integrated Billing	RXST	IBARXEU	func	1
 IBJDF41	Integrated Billing	STOP	IBOUTL	func	1
+IBJDF41	Integrated Billing	SVC	VADPT	do	1
 IBJDF41	Integrated Billing	VA	IBJD1	func	1
 IBJDF42	Integrated Billing		DIR	do	1
 IBJDF42	Integrated Billing		DIWP	do	1
@@ -75452,6 +76263,7 @@ IBJDF62	Integrated Billing		DIR	do	1
 IBJDF62	Integrated Billing		DIWP	do	1
 IBJDF62	Integrated Billing	DAT1	IBOUTL	func	5
 IBJDF62	Integrated Billing	DAT2	IBOUTL	func	1
+IBJDF62	Integrated Billing	FMTE	XLFDT	func	1
 IBJDF62	Integrated Billing	GET1	DIQ	func	1
 IBJDF62	Integrated Billing	NOW	%DTC	do	1
 IBJDF62	Integrated Billing	PRT	IBJDF63	do	1
@@ -76319,6 +77131,7 @@ IBJTTC	Integrated Billing	EXTERNAL	DILFD	func	1
 IBJTTC	Integrated Billing	FMTE	XLFDT	func	3
 IBJTTC	Integrated Billing	GET1	DIQ	func	3
 IBJTTC	Integrated Billing	HDR	IBJTU1	do	1
+IBJTTC	Integrated Billing	INIT	IBACCWLPREV	do	1
 IBJTTC	Integrated Billing	MCOM	PRCAMDA2	do	1
 IBJTTC	Integrated Billing	N5	RCJIBFN1	func	2
 IBJTTC	Integrated Billing	N7	RCJIBFN1	do	1
@@ -77330,24 +78143,25 @@ IBOMBL	Integrated Billing	HOME	%ZIS	do	1
 IBOMBL	Integrated Billing	NOW	%DTC	do	1
 IBOMBL	Integrated Billing	PID	VADPT6	do	1
 IBOMHC	Integrated Billing		%ZIS	do	1
+IBOMHC	Integrated Billing		%ZISC	do	1
 IBOMHC	Integrated Billing		%ZTLOAD	do	1
-IBOMHC	Integrated Billing		DIR	do	4
+IBOMHC	Integrated Billing		DIR	do	2
 IBOMHC	Integrated Billing	CAI	VADPT	do	1
+IBOMHC	Integrated Billing	CJ	XLFSTR	func	2
 IBOMHC	Integrated Billing	CODEC	ICDEX	func	2
 IBOMHC	Integrated Billing	DEM	VADPT	do	1
 IBOMHC	Integrated Billing	DT	XLFDT	func	2
-IBOMHC	Integrated Billing	FMADD	XLFDT	func	2
-IBOMHC	Integrated Billing	FMTE	XLFDT	func	14
-IBOMHC	Integrated Billing	GET1	DIQ	func	11
+IBOMHC	Integrated Billing	FMADD	XLFDT	func	1
+IBOMHC	Integrated Billing	FMTE	XLFDT	func	9
+IBOMHC	Integrated Billing	GET1	DIQ	func	8
 IBOMHC	Integrated Billing	GETCPT	SDOE	do	1
 IBOMHC	Integrated Billing	GETEXCEL	IBUCMM	func	1
 IBOMHC	Integrated Billing	INP	IBJDF2	func	2
 IBOMHC	Integrated Billing	OEDX	IBCU81	do	1
 IBOMHC	Integrated Billing	OPT	IBJDF2	func	1
-IBOMHC	Integrated Billing	PRIM	VASITE	func	1
 IBOMHC	Integrated Billing	PRTEXCEL	IBUCMM	do	1
-IBOMHC	Integrated Billing	PSDR	IBODIV	do	1
 IBOMHC	Integrated Billing	PTFDX	IBCSC4F	do	1
+IBOMHC	Integrated Billing	REQUEST	PXCOMPACTIB	func	1
 IBOMHC	Integrated Billing	RJ	XLFSTR	func	1
 IBOMTC	Integrated Billing		%DT	do	2
 IBOMTC	Integrated Billing		%ZIS	do	1
@@ -80141,10 +80955,13 @@ IBXS1	Integrated Billing	LABEL	DIALOGZ	func	1
 IBXS1	Integrated Billing	M	DIE17	goto	1
 IBXS1	Integrated Billing	NOSCR	DIED	do	1
 IBXS1	Integrated Billing	OUT	DIE17	goto	3
+IBXS1	Integrated Billing	OUTPUT	DIETLIBF	func	1
 IBXS1	Integrated Billing	RW	DIR2	goto	1
 IBXS1	Integrated Billing	SET	DIED	do	1
 IBXS1	Integrated Billing	SET	DIQ	func	1
 IBXS1	Integrated Billing	UNIQFERR	DIE17	goto	1
+IBXS1	Integrated Billing	VALEXT	DIETLIBF	func	1
+IBXS1	Integrated Billing	VALEXTS	DIETLIBF	func	1
 IBXS1	Integrated Billing	YN	IBCU	do	1
 IBXS1	Integrated Billing	Z	DIE17	goto	1
 IBXS1	Integrated Billing	Z	DIE2	goto	1
@@ -80188,6 +81005,7 @@ IBXS11	Integrated Billing	M	DIE17	goto	1
 IBXS11	Integrated Billing	NOSCR	DIED	do	1
 IBXS11	Integrated Billing	NOW	XLFDT	func	2
 IBXS11	Integrated Billing	OUT	DIE17	goto	8
+IBXS11	Integrated Billing	OUTPUT	DIETLIBF	func	1
 IBXS11	Integrated Billing	RESTORE	DGRP1152U	do	1
 IBXS11	Integrated Billing	RW	DIR2	goto	1
 IBXS11	Integrated Billing	SET	DIED	do	1
@@ -80195,6 +81013,8 @@ IBXS11	Integrated Billing	SET	DIQ	func	1
 IBXS11	Integrated Billing	UNIQFERR	DIE17	goto	1
 IBXS11	Integrated Billing	UP	DGHELP	do	4
 IBXS11	Integrated Billing	VAGE	DGLOCK	do	1
+IBXS11	Integrated Billing	VALEXT	DIETLIBF	func	1
+IBXS11	Integrated Billing	VALEXTS	DIETLIBF	func	1
 IBXS11	Integrated Billing	Z	DIE17	goto	1
 IBXS11	Integrated Billing	Z	DIE2	goto	1
 IBXS110	Integrated Billing		A1B2XFR	do	1
@@ -80229,14 +81049,16 @@ IBXS111	Integrated Billing	NOSCR	DIED	do	1
 IBXS111	Integrated Billing	NOW	XLFDT	func	4
 IBXS111	Integrated Billing	OREF	DILF	func	9
 IBXS111	Integrated Billing	OUT	DIE17	goto	5
+IBXS111	Integrated Billing	OUTPUT	DIETLIBF	func	1
 IBXS111	Integrated Billing	RW	DIR2	goto	1
 IBXS111	Integrated Billing	SET	DGREGDD1	do	2
 IBXS111	Integrated Billing	SET	DIED	do	1
 IBXS111	Integrated Billing	SET	DIQ	func	1
 IBXS111	Integrated Billing	TAD	DGLOCK	do	9
-IBXS111	Integrated Billing	TADD	DGLOCK	do	1
 IBXS111	Integrated Billing	UNIQFERR	DIE17	goto	1
 IBXS111	Integrated Billing	UP	DGHELP	do	4
+IBXS111	Integrated Billing	VALEXT	DIETLIBF	func	1
+IBXS111	Integrated Billing	VALEXTS	DIETLIBF	func	1
 IBXS111	Integrated Billing	Z	DIE17	goto	1
 IBXS111	Integrated Billing	Z	DIE2	goto	1
 IBXS111	Integrated Billing	ZIP	DGREGDD1	func	1
@@ -80255,10 +81077,13 @@ IBXS12	Integrated Billing	LABEL	DIALOGZ	func	2
 IBXS12	Integrated Billing	M	DIE17	goto	1
 IBXS12	Integrated Billing	NARY	XLFNAME7	do	1
 IBXS12	Integrated Billing	NOSCR	DIED	do	1
+IBXS12	Integrated Billing	OUTPUT	DIETLIBF	func	1
 IBXS12	Integrated Billing	RW	DIR2	goto	1
 IBXS12	Integrated Billing	SET	DIED	do	1
 IBXS12	Integrated Billing	SET	DIQ	func	1
 IBXS12	Integrated Billing	UNIQFERR	DIE17	goto	1
+IBXS12	Integrated Billing	VALEXT	DIETLIBF	func	1
+IBXS12	Integrated Billing	VALEXTS	DIETLIBF	func	1
 IBXS12	Integrated Billing	Z	DIE17	goto	1
 IBXS12	Integrated Billing	Z	DIE2	goto	1
 IBXS13	Integrated Billing		A1B2XFR	do	1
@@ -83913,6 +84738,30 @@ IBY764PO	Integrated Billing		DIE	do	1
 IBY764PO	Integrated Billing	BMES	XPDUTL	do	2
 IBY764PO	Integrated Billing	FILE	DICN	do	1
 IBY764PO	Integrated Billing	MES	XPDUTL	do	1
+IBY770EC	Integrated Billing		DIR	do	1
+IBY770EC	Integrated Billing	KCHK	XUSRB	func	1
+IBY770PO	Integrated Billing		DIE	do	1
+IBY770PO	Integrated Billing	ADD	XPDMENU	func	7
+IBY770PO	Integrated Billing	BMES	XPDUTL	do	1
+IBY770PO	Integrated Billing	CREATE	XUSAP	func	1
+IBY770PO	Integrated Billing	ENALL	DIK	do	1
+IBY770PO	Integrated Billing	FILE	DIE	do	1
+IBY770PO	Integrated Billing	GET1	DIQ	func	1
+IBY770PO	Integrated Billing	IXALL	DIK	do	1
+IBY770PO	Integrated Billing	LKOPT	XPDMENU	func	3
+IBY770PO	Integrated Billing	MES	XPDUTL	do	23
+IBY770PO	Integrated Billing	NOW	XLFDT	func	2
+IBY770PO	Integrated Billing	PROD	XUPROD	func	1
+IBY770PO	Integrated Billing	PUT	IBY770PRE	do	1
+IBY770PO	Integrated Billing	RESCH	XUTMOPT	do	1
+IBY770PO	Integrated Billing	SITE	VASITE	func	1
+IBY770PO	Integrated Billing	UPDATE	DIE	do	3
+IBY770PR	Integrated Billing		DIK	do	2
+IBY770PR	Integrated Billing	MES	XPDUTL	do	6
+IBY770PRE	Integrated Billing		DIK	do	1
+IBY770PRE	Integrated Billing	BMES	XPDUTL	do	2
+IBY770PRE	Integrated Billing	CJ	XLFSTR	func	1
+IBY770PRE	Integrated Billing	TRIM	XLFSTR	func	1
 IBY771PO	Integrated Billing		%ZTLOAD	do	2
 IBY771PO	Integrated Billing	ADD	XPDMENU	func	2
 IBY771PO	Integrated Billing	BMES	XPDUTL	do	19
@@ -87268,6 +88117,7 @@ IVMPINS	Income Verification Match	LYR	DGMTSCU1	func	1
 IVMPINS	Income Verification Match	SETSTAT	IVMPLOG	func	1
 IVMPLOG	Income Verification Match	ADD	DGENDBS	func	1
 IVMPLOG	Income Verification Match	FINDCUR	DGENA	func	1
+IVMPLOG	Income Verification Match	GET1	DIQ	func	1
 IVMPLOG	Income Verification Match	LD	IVMUFNC4	func	1
 IVMPLOG	Income Verification Match	NOW	XLFDT	func	1
 IVMPLOG	Income Verification Match	ON	IVMUPAR1	func	1
@@ -87360,15 +88210,16 @@ IVMPREC8	Income Verification Match	AUTOEPC	IVMPREC9	func	1
 IVMPREC8	Income Verification Match	CLEARF	IVMPRECA	func	1
 IVMPREC8	Income Verification Match	CODE2PTR	DGUTL4	func	1
 IVMPREC8	Income Verification Match	DEM	VADPT	do	1
-IVMPREC8	Income Verification Match	FMDATE	HLFNC	func	8
+IVMPREC8	Income Verification Match	FMDATE	HLFNC	func	7
 IVMPREC8	Income Verification Match	FMNAME	HLFNC	func	1
 IVMPREC8	Income Verification Match	GET1	DIQ	func	3
 IVMPREC8	Income Verification Match	PID12	IVMPREC9	do	1
 IVMPREC8	Income Verification Match	RF1CHK	IVMPREC6	func	1
-IVMPREC8	Income Verification Match	STORE	IVMPREC9	do	13
+IVMPREC8	Income Verification Match	STORE	IVMPREC9	do	12
 IVMPREC8	Income Verification Match	UPLOAD	IVMLDEM6	do	8
 IVMPREC8	Income Verification Match	ZAVA	IVMPREC6	do	1
-IVMPREC8	Income Verification Match	ZIPIN	VAFADDR	do	5
+IVMPREC8	Income Verification Match	ZGDPA	IVMPRECA	do	1
+IVMPREC8	Income Verification Match	ZIPIN	VAFADDR	do	4
 IVMPREC8	Income Verification Match	ZPDPA	IVMPRECA	do	1
 IVMPREC9	Income Verification Match		DIE	do	1
 IVMPREC9	Income Verification Match		DIK	do	1
@@ -87403,15 +88254,15 @@ IVMPRECA	Income Verification Match	CODE2PTR	DGUTL4	func	2
 IVMPRECA	Income Verification Match	DEM	VADPT	do	1
 IVMPRECA	Income Verification Match	FIND1	DIC	func	1
 IVMPRECA	Income Verification Match	FIPSCHK	XIPUTIL	func	1
-IVMPRECA	Income Verification Match	FMDATE	HLFNC	func	4
+IVMPRECA	Income Verification Match	FMDATE	HLFNC	func	5
 IVMPRECA	Income Verification Match	FMNAME	HLFNC	func	1
 IVMPRECA	Income Verification Match	GETS	DIQ	do	1
 IVMPRECA	Income Verification Match	LANGCK	IVMPREC9	func	1
 IVMPRECA	Income Verification Match	MATCH	IVMUFNC	func	1
 IVMPRECA	Income Verification Match	NOW	XLFDT	func	1
 IVMPRECA	Income Verification Match	PARSPID3	IVMUFNC	do	1
-IVMPRECA	Income Verification Match	STORE	IVMPREC9	do	2
-IVMPRECA	Income Verification Match	ZIPIN	VAFADDR	do	1
+IVMPRECA	Income Verification Match	STORE	IVMPREC9	do	3
+IVMPRECA	Income Verification Match	ZIPIN	VAFADDR	do	2
 IVMPRECZ	Income Verification Match	BLDPID	IVMPREC6	do	1
 IVMPRECZ	Income Verification Match	FMDATE	HLFNC	func	2
 IVMPRECZ	Income Verification Match	LYR	DGMTSCU1	func	1
@@ -87818,6 +88669,10 @@ IVMZ7CS	Income Verification Match	TF	XUAF4	func	1
 IVMZCL	Income Verification Match		DIK	do	2
 JLV29P1	Joint Legacy Viewer	FIND1	DIC	func	1
 JLV29P1	Joint Legacy Viewer	PKGVER	XPDIP	func	1
+JLV3P59	Joint Legacy Viewer		DIC	do	1
+JLV3P59	Joint Legacy Viewer	EN	DDIOL	do	2
+JLV3P59	Joint Legacy Viewer	FIND1	DIC	func	2
+JLV3P59	Joint Legacy Viewer	PKGVER	XPDIP	func	1
 KBANDCPT	Uncategorized		DIK	do	1
 KBANDCPT	Uncategorized	FILE	DIE	do	2
 KBANGCNL	Uncategorized	C	%DTC	do	3
@@ -95524,6 +96379,25 @@ LR582	Lab Service	HTFM	XLFDT	func	3
 LR582	Lab Service	IXALL	DIK	do	1
 LR582	Lab Service	SETUP	XQALERT	do	3
 LR582	Lab Service	UPDATE	DIE	do	2
+LR588	Lab Service		DIC	do	2
+LR588	Lab Service		DIK	do	2
+LR588	Lab Service	APPERROR	%ZTER	do	1
+LR588	Lab Service	BMES	XPDUTL	do	10
+LR588	Lab Service	CJ	XLFSTR	func	9
+LR588	Lab Service	ENALL	DIK	do	2
+LR588	Lab Service	ENALL2	DIK	do	2
+LR588	Lab Service	FILE	DIE	do	4
+LR588	Lab Service	FIND	DIC	do	2
+LR588	Lab Service	FIND1	DIC	func	1
+LR588	Lab Service	GET1	DIQ	func	1
+LR588	Lab Service	GETS	DIQ	do	3
+LR588	Lab Service	HTE	XLFDT	func	3
+LR588	Lab Service	HTFM	XLFDT	func	4
+LR588	Lab Service	IXALL	DIK	do	1
+LR588	Lab Service	MES	XPDUTL	do	2
+LR588	Lab Service	SETUP	XQALERT	do	3
+LR588	Lab Service	UP	XLFSTR	func	1
+LR588	Lab Service	UPDATE	DIE	do	2
 LR59	Lab Service	CJ	XLFSTR	func	7
 LR59	Lab Service	VERSION	XPDUTL	func	1
 LR664L	Lab Service		%ZTLOAD	do	1
@@ -104597,6 +105471,9 @@ MAGCFIX	Imaging		DIE	do	1
 MAGCFIX	Imaging	FILE	DICN	do	1
 MAGCFIX	Imaging	FMADD	XLFDT	func	1
 MAGCFIX	Imaging	SITE	VASITE	func	1
+MAGCQMGR	Imaging	FMADD	XLFDT	func	1
+MAGCQMGR	Imaging	NOW	XLFDT	func	1
+MAGCQMGR	Imaging	UPDITEM	MAGVIM01	do	1
 MAGCRPT	Imaging		%DTC	do	1
 MAGCRPT	Imaging		%ZIS	do	1
 MAGCRPT	Imaging		%ZISC	do	1
@@ -105191,6 +106068,8 @@ MAGDQR21	Imaging	NETPLCS	MAGGTU6	do	1
 MAGDQR21	Imaging	NODE	MAGGI11	func	2
 MAGDQR21	Imaging	NS	XUAF4	func	1
 MAGDQR21	Imaging	ONEGROUP	MAGDQR21	func	1
+MAGDQR21	Imaging	REPLACE	XLFSTR	func	1
+MAGDQR21	Imaging	RPTTEXT	MAGNTRAI	func	1
 MAGDQR21	Imaging	RTRNFMT	XWBLIB	func	1
 MAGDQR21	Imaging	SRTUID	MAGDQR21	do	1
 MAGDQR21	Imaging	SRTUID2	MAGDQR21	do	1
@@ -105200,7 +106079,7 @@ MAGDQR21	Imaging	VALPAT	MAGDQR21	func	1
 MAGDQR21	Imaging	WRTIEN	MAGDQR21	func	1
 MAGDQR21	Imaging	WRTIMG	MAGDQR20	do	1
 MAGDQR21	Imaging	WRTMOD	MAGDQR21	do	1
-MAGDQR21	Imaging	WRTOUT	MAGDQR21	do	7
+MAGDQR21	Imaging	WRTOUT	MAGDQR21	do	8
 MAGDQR22	Imaging	RESULT	MAGDQR03	do	1
 MAGDQR23	Imaging	RESULT	MAGDQR03	do	2
 MAGDQR31	Imaging	ERR	MAGDQRUE	do	3
@@ -106440,6 +107319,15 @@ MAGIP356	Imaging	BMES	XPDUTL	do	4
 MAGIP356	Imaging	EN	XPAR	do	1
 MAGIP356	Imaging	FIND1	DIC	func	1
 MAGIP356	Imaging	GETENT	XPAREDIT	do	1
+MAGIP365	Imaging	ADD	XPDPROT	do	2
+MAGIP365	Imaging	AHISU	MAGQE2	do	1
+MAGIP365	Imaging	DELETE	XPDPROT	do	2
+MAGIP365	Imaging	DT	XLFDT	func	1
+MAGIP365	Imaging	FILE	DICN	do	2
+MAGIP365	Imaging	FMADD	XLFDT	func	2
+MAGIP365	Imaging	FMDIFF	XLFDT	func	1
+MAGIP365	Imaging	RESTASK	MAGQE4	do	1
+MAGIP365	Imaging	RJ	XLFSTR	func	2
 MAGIP376	Imaging	AHISU	MAGQE2	do	2
 MAGIP376	Imaging	INGSTFIX	MAGCFIX	do	1
 MAGIP376	Imaging	RESTASK	MAGQE4	do	1
@@ -106810,10 +107698,12 @@ MAGNTLRS	Imaging	UPDATE	DIE	do	9
 MAGNTRAI	Imaging	CHK	MAGGSQI	do	1
 MAGNTRAI	Imaging	DTE	MAGSIXG3	func	2
 MAGNTRAI	Imaging	EXTERNAL	DILFD	func	1
-MAGNTRAI	Imaging	GET1	DIQ	func	1
+MAGNTRAI	Imaging	GET1	DIQ	func	2
+MAGNTRAI	Imaging	IMAGEL	MAGNVQ06	do	1
 MAGNTRAI	Imaging	IMAGES	MAGGNTI	do	1
 MAGNTRAI	Imaging	INFO	MAGGAII	func	1
 MAGNTRAI	Imaging	NODE	MAGGI11	func	1
+MAGNTRAI	Imaging	REPLACE	XLFSTR	func	1
 MAGNTRAI	Imaging	RPTITLE	MAGSIXG3	func	1
 MAGNTRAI	Imaging	STUDY2	MAGDQR21	do	1
 MAGNU001	Imaging	FLDNUM	DILFD	func	1
@@ -106838,15 +107728,28 @@ MAGNUID1	Imaging	MSG	DIALOG	do	1
 MAGNUID1	Imaging	NOW	XLFDT	func	1
 MAGNUID1	Imaging	UP	XLFSTR	func	1
 MAGNUID1	Imaging	UPDATE	DIE	do	1
+MAGNUTL2	Imaging	CPTIENS	MAGNUTL3	func	1
 MAGNUTL2	Imaging	CRTITEM	MAGVIM01	do	2
 MAGNUTL2	Imaging	FACLIST	MAGJLST1	do	1
-MAGNUTL2	Imaging	GET	XPAR	func	1
-MAGNUTL2	Imaging	GET1	DIQ	func	2
-MAGNUTL2	Imaging	GETEXAM2	MAGJUTL1	do	1
+MAGNUTL2	Imaging	GET1	DIQ	func	4
+MAGNUTL2	Imaging	GETEXAM2	MAGJUTL1	do	2
 MAGNUTL2	Imaging	GETICN	MPIF001	func	3
 MAGNUTL2	Imaging	PRIOR1	MAGJEX2	do	1
 MAGNUTL2	Imaging	RACPRS	MAGNU003	func	2
-MAGNUTL2	Imaging	STA	XUAF4	func	3
+MAGNUTL2	Imaging	STA	XUAF4	func	4
+MAGNUTL3	Imaging	CODEN	ICPTCOD	func	1
+MAGNUTL3	Imaging	CRTITEM	MAGVIM01	do	1
+MAGNUTL3	Imaging	FACLIST	MAGJLST1	do	1
+MAGNUTL3	Imaging	GET1	DIQ	func	8
+MAGNUTL3	Imaging	GETICN	MPIF001	func	1
+MAGNUTL3	Imaging	GETS	DIQ	do	2
+MAGNUTL3	Imaging	STA	XUAF4	func	1
+MAGNUTL4	Imaging		DIE	do	2
+MAGNUTL4	Imaging		DIK	do	1
+MAGNUTL4	Imaging	FILE	DICN	do	1
+MAGNUTL4	Imaging	READ	XMGAPI1	func	1
+MAGNUTL4	Imaging	SUBJ	XMXUTIL2	func	1
+MAGNUTL4	Imaging	ZAPSERV	XMXAPI	do	1
 MAGNVIC	Imaging	ISDEL	MAGGI11	func	1
 MAGNVQ01	Imaging	ACNRAD	MAGNU003	func	1
 MAGNVQ01	Imaging	ACNTIU	MAGNU003	func	1
@@ -119001,6 +119904,7 @@ ORAREN	Order Entry Results Reporting	UP	XLFSTR	func	1
 ORAREN	Order Entry Results Reporting	VALID	ORWDXA	do	1
 ORB3	Order Entry Results Reporting	ADT	ORB31	do	1
 ORB3	Order Entry Results Reporting	ALERTDAT	XQALBUTL	do	1
+ORB3	Order Entry Results Reporting	CPRSTAB	ORNEWPERS	func	3
 ORB3	Order Entry Results Reporting	CVEDT	DGCV	func	1
 ORB3	Order Entry Results Reporting	DELETE	XQALERT	do	1
 ORB3	Order Entry Results Reporting	DUP	ORB31	func	1
@@ -119010,7 +119914,7 @@ ORB3	Order Entry Results Reporting	FMTE	XLFDT	func	1
 ORB3	Order Entry Results Reporting	GET	XPAR	func	7
 ORB3	Order Entry Results Reporting	HADD	XLFDT	func	2
 ORB3	Order Entry Results Reporting	HOOK	ORBSMART	func	1
-ORB3	Order Entry Results Reporting	NOW	XLFDT	func	4
+ORB3	Order Entry Results Reporting	NOW	XLFDT	func	7
 ORB3	Order Entry Results Reporting	OERR	VADPT	do	1
 ORB3	Order Entry Results Reporting	ONOFF	ORB3FN	func	1
 ORB3	Order Entry Results Reporting	ORDERER	ORQOR2	func	1
@@ -119837,11 +120741,12 @@ ORCENV	Order Entry Results Reporting	VERSION	XPDUTL	func	2
 ORCFLAG	Order Entry Results Reporting		DIC	do	1
 ORCFLAG	Order Entry Results Reporting		DIR	do	2
 ORCFLAG	Order Entry Results Reporting	DEM	VADPT	do	1
-ORCFLAG	Order Entry Results Reporting	EN	OCXOERR	do	2
+ORCFLAG	Order Entry Results Reporting	EN	OCXOERR	do	1
 ORCFLAG	Order Entry Results Reporting	EN	XMB	do	1
 ORCFLAG	Order Entry Results Reporting	GET	XPAR	func	1
-ORCFLAG	Order Entry Results Reporting	GET1	DIQ	func	1
+ORCFLAG	Order Entry Results Reporting	GET1	DIQ	func	5
 ORCFLAG	Order Entry Results Reporting	HL7DATE	ORMBLD	func	1
+ORCFLAG	Order Entry Results Reporting	IPOVERRIDE	OCXOERR	do	1
 ORCFLAG	Order Entry Results Reporting	KILL	XM	do	1
 ORCFLAG	Order Entry Results Reporting	LOCK1	ORX2	func	1
 ORCFLAG	Order Entry Results Reporting	MSG	XQOR	do	1
@@ -120358,13 +121263,16 @@ ORCSAVE	Order Entry Results Reporting	AUDORDXX	ORDEA	do	1
 ORCSAVE	Order Entry Results Reporting	CSVALUE	ORDEA	do	1
 ORCSAVE	Order Entry Results Reporting	DELOCC	OROCAPI1	do	1
 ORCSAVE	Order Entry Results Reporting	FIELD	DID	do	1
+ORCSAVE	Order Entry Results Reporting	FINDBYCODE	PXSPECAUTH	func	1
 ORCSAVE	Order Entry Results Reporting	GET1	DIQ	func	1
 ORCSAVE	Order Entry Results Reporting	INPT	ORCD	func	2
 ORCSAVE	Order Entry Results Reporting	NOW	XLFDT	func	6
+ORCSAVE	Order Entry Results Reporting	OLDCODE	ORSPECAUTH	func	1
 ORCSAVE	Order Entry Results Reporting	ORCAN	ORNORC	do	1
 ORCSAVE	Order Entry Results Reporting	ORDTEXT	ORCSAVE1	do	1
 ORCSAVE	Order Entry Results Reporting	PKI	ORWDPS1	do	1
 ORCSAVE	Order Entry Results Reporting	SAVEOC	OROCAPI1	do	1
+ORCSAVE	Order Entry Results Reporting	UPDATE112	ORSPECAUTH	do	1
 ORCSAVE1	Order Entry Results Reporting	ADD	VADPT	do	1
 ORCSAVE1	Order Entry Results Reporting	DEA	XUSER	func	1
 ORCSAVE1	Order Entry Results Reporting	DELETE	XQALERT	do	1
@@ -120375,7 +121283,7 @@ ORCSAVE1	Order Entry Results Reporting	TXT	ORCHTAB	do	8
 ORCSAVE1	Order Entry Results Reporting	VALUE	ORX8	func	6
 ORCSAVE2	Order Entry Results Reporting		%DT	do	2
 ORCSAVE2	Order Entry Results Reporting		DIE	do	4
-ORCSAVE2	Order Entry Results Reporting		DIK	do	1
+ORCSAVE2	Order Entry Results Reporting		DIK	do	2
 ORCSAVE2	Order Entry Results Reporting	CANCEL	ORCSAVE2	do	1
 ORCSAVE2	Order Entry Results Reporting	CANCEL	ORCSEND	do	1
 ORCSAVE2	Order Entry Results Reporting	COMP	EDPFMON	do	1
@@ -120386,6 +121294,7 @@ ORCSAVE2	Order Entry Results Reporting	EK	ORDD100A	do	1
 ORCSAVE2	Order Entry Results Reporting	ES	ORDD100A	do	2
 ORCSAVE2	Order Entry Results Reporting	FILE	DICN	do	1
 ORCSAVE2	Order Entry Results Reporting	FILE	DIE	do	1
+ORCSAVE2	Order Entry Results Reporting	FINDBYCODE	PXSPECAUTH	func	1
 ORCSAVE2	Order Entry Results Reporting	FMADD	XLFDT	func	1
 ORCSAVE2	Order Entry Results Reporting	FMTE	XLFDT	func	1
 ORCSAVE2	Order Entry Results Reporting	GETLST	XPAR	do	2
@@ -120394,6 +121303,7 @@ ORCSAVE2	Order Entry Results Reporting	MEALTIME	ORCDFHO	func	1
 ORCSAVE2	Order Entry Results Reporting	NEXTCOLL	ORCDLR1	func	2
 ORCSAVE2	Order Entry Results Reporting	NOTIF	ORCSIGN	do	1
 ORCSAVE2	Order Entry Results Reporting	NOW	XLFDT	func	7
+ORCSAVE2	Order Entry Results Reporting	OLDCODE	ORSPECAUTH	func	1
 ORCSAVE2	Order Entry Results Reporting	PTR	ORCD	func	3
 ORCSAVE2	Order Entry Results Reporting	RESOLVE	PSJORPOE	func	1
 ORCSAVE2	Order Entry Results Reporting	RS	ORDD100	do	1
@@ -120405,6 +121315,7 @@ ORCSAVE2	Order Entry Results Reporting	SIGNREQD	ORCACT1	func	1
 ORCSAVE2	Order Entry Results Reporting	SIGSTS	ORX1	func	1
 ORCSAVE2	Order Entry Results Reporting	SK	ORDD100	do	1
 ORCSAVE2	Order Entry Results Reporting	SS	ORDD100	do	2
+ORCSAVE2	Order Entry Results Reporting	UPDATE	DIE	do	1
 ORCSAVE2	Order Entry Results Reporting	VER	EDPFMON	do	1
 ORCSAVE2	Order Entry Results Reporting	WS	ORDD100	do	1
 ORCSEND	Order Entry Results Reporting	ACTION	ORCSAVE	func	1
@@ -120666,10 +121577,10 @@ ORD19	Order Entry Results Reporting		ORD110	goto	1
 ORD19	Order Entry Results Reporting	K21	ORDD1	do	1
 ORD19	Order Entry Results Reporting	REDOM	ORDD101	do	1
 ORD2	Order Entry Results Reporting		ORD21	do	2
-ORD2	Order Entry Results Reporting		ORD212	do	3
+ORD2	Order Entry Results Reporting		ORD213	do	3
 ORD2	Order Entry Results Reporting	A1	ORD210	do	1
 ORD2	Order Entry Results Reporting	A1	ORD211	do	1
-ORD2	Order Entry Results Reporting	A1	ORD213	do	1
+ORD2	Order Entry Results Reporting	A1	ORD212	do	1
 ORD2	Order Entry Results Reporting	A1	ORD214	do	1
 ORD2	Order Entry Results Reporting	A1	ORD215	do	1
 ORD2	Order Entry Results Reporting	A1	ORD216	do	1
@@ -120680,6 +121591,8 @@ ORD2	Order Entry Results Reporting	A1	ORD22	do	1
 ORD2	Order Entry Results Reporting	A1	ORD220	do	1
 ORD2	Order Entry Results Reporting	A1	ORD221	do	1
 ORD2	Order Entry Results Reporting	A1	ORD222	do	1
+ORD2	Order Entry Results Reporting	A1	ORD223	do	1
+ORD2	Order Entry Results Reporting	A1	ORD224	do	1
 ORD2	Order Entry Results Reporting	A1	ORD23	do	1
 ORD2	Order Entry Results Reporting	A1	ORD24	do	1
 ORD2	Order Entry Results Reporting	A1	ORD25	do	1
@@ -120694,21 +121607,21 @@ ORD21	Order Entry Results Reporting	OI2	ORDD100A	do	2
 ORD21	Order Entry Results Reporting	SK	ORDD100	do	1
 ORD21	Order Entry Results Reporting	WK	ORDD100	do	3
 ORD210	Order Entry Results Reporting		ORD211	goto	1
-ORD212	Order Entry Results Reporting		ORD213	goto	1
-ORD212	Order Entry Results Reporting	ES	ORDD100A	do	1
-ORD212	Order Entry Results Reporting	OI1	ORDD100A	do	2
-ORD212	Order Entry Results Reporting	SETALL	ORDD100	do	1
-ORD212	Order Entry Results Reporting	SS	ORDD100	do	1
-ORD212	Order Entry Results Reporting	WS	ORDD100	do	3
+ORD211	Order Entry Results Reporting		ORD212	goto	1
 ORD213	Order Entry Results Reporting		ORD214	goto	1
-ORD213	Order Entry Results Reporting	OI1	ORDD100A	do	1
+ORD213	Order Entry Results Reporting	ES	ORDD100A	do	1
+ORD213	Order Entry Results Reporting	OI1	ORDD100A	do	2
+ORD213	Order Entry Results Reporting	SETALL	ORDD100	do	1
+ORD213	Order Entry Results Reporting	SS	ORDD100	do	1
+ORD213	Order Entry Results Reporting	WS	ORDD100	do	3
 ORD214	Order Entry Results Reporting		ORD215	goto	1
+ORD214	Order Entry Results Reporting	OI1	ORDD100A	do	1
 ORD215	Order Entry Results Reporting		ORD216	goto	1
-ORD215	Order Entry Results Reporting	ACT1	ORDD100A	do	1
-ORD215	Order Entry Results Reporting	RS	ORDD100	do	1
-ORD215	Order Entry Results Reporting	S1	ORDD100	do	2
-ORD215	Order Entry Results Reporting	SET	ORDD100	do	1
 ORD216	Order Entry Results Reporting		ORD217	goto	1
+ORD216	Order Entry Results Reporting	ACT1	ORDD100A	do	1
+ORD216	Order Entry Results Reporting	RS	ORDD100	do	1
+ORD216	Order Entry Results Reporting	S1	ORDD100	do	2
+ORD216	Order Entry Results Reporting	SET	ORDD100	do	1
 ORD217	Order Entry Results Reporting		ORD218	goto	1
 ORD218	Order Entry Results Reporting		ORD219	goto	1
 ORD219	Order Entry Results Reporting		ORD220	goto	1
@@ -120716,6 +121629,8 @@ ORD22	Order Entry Results Reporting		ORD23	goto	1
 ORD22	Order Entry Results Reporting	OI2	ORDD100A	do	1
 ORD220	Order Entry Results Reporting		ORD221	goto	1
 ORD221	Order Entry Results Reporting		ORD222	goto	1
+ORD222	Order Entry Results Reporting		ORD223	goto	1
+ORD223	Order Entry Results Reporting		ORD224	goto	1
 ORD23	Order Entry Results Reporting		ORD24	goto	1
 ORD24	Order Entry Results Reporting		ORD25	goto	1
 ORD24	Order Entry Results Reporting	ACT2	ORDD100A	do	1
@@ -120742,6 +121657,8 @@ ORDD43	Order Entry Results Reporting		DIK	do	1
 ORDD43	Order Entry Results Reporting	FILE	DICN	do	1
 ORDD43	Order Entry Results Reporting	NOW	XLFDT	func	2
 ORDD43	Order Entry Results Reporting	UP	XLFSTR	func	12
+ORDD71	Order Entry Results Reporting	CHKPT	DIUTL	do	1
+ORDD71	Order Entry Results Reporting	ISACTIVE	PXRMAPI	func	1
 ORDDPAPI	Order Entry Results Reporting	GETWP	XPAR	do	3
 ORDDPAPI	Order Entry Results Reporting	ZERO	PSS51P1	do	2
 ORDEA	Order Entry Results Reporting	ADD	VADPT	do	1
@@ -121014,6 +121931,60 @@ ORECS01	Order Entry Results Reporting	GETLST	XPAR	do	1
 ORECS01	Order Entry Results Reporting	PATCH	XPDUTL	func	1
 ORECS01	Order Entry Results Reporting	RPTEN	ECRRPC	do	2
 ORECS01	Order Entry Results Reporting	UP	XLFSTR	func	1
+OREDITOR	Order Entry Results Reporting		DIWP	do	2
+OREDITOR	Order Entry Results Reporting	DECODE	XLFJSON	do	2
+OREDITOR	Order Entry Results Reporting	ENCODE	XLFJSON	do	2
+OREDITOR	Order Entry Results Reporting	GET1	DIQ	func	1
+OREDITOR	Order Entry Results Reporting	GETCOMP	ORDD71	func	1
+OREDITOR	Order Entry Results Reporting	GETINFOARRAY	ORIRPCCL	func	2
+OREDITOR	Order Entry Results Reporting	ONCLICKEXECODE	ORIUTL	func	2
+OREDITOR	Order Entry Results Reporting	REQDATA	ORIRPCCL	func	1
+OREDITOR	Order Entry Results Reporting	SAVEDATA	ORHEDITOR	func	1
+OREDITOR	Order Entry Results Reporting	SETTEXT	ORIMGR	do	5
+OREDITOR1	Order Entry Results Reporting		DIK	do	2
+OREDITOR1	Order Entry Results Reporting	CODE	ORIUTL	do	3
+OREDITOR1	Order Entry Results Reporting	FILE	DIE	do	1
+OREDITOR1	Order Entry Results Reporting	FORMAT	PXRMTEXT	do	1
+OREDITOR1	Order Entry Results Reporting	GENAREF	XLFSHAN	func	4
+OREDITOR1	Order Entry Results Reporting	MAXBLANK	XMXUTIL1	func	2
+OREDITOR1	Order Entry Results Reporting	UPDATE	DIE	do	1
+OREDITOR2	Order Entry Results Reporting	BLD	OREDITOR4	func	1
+OREDITOR2	Order Entry Results Reporting	CHECKPANEL	ORICHECK	do	1
+OREDITOR2	Order Entry Results Reporting	FILE	DICN	do	1
+OREDITOR2	Order Entry Results Reporting	FILE	DIE	do	1
+OREDITOR2	Order Entry Results Reporting	FMTE	XLFDT	func	1
+OREDITOR2	Order Entry Results Reporting	GENAREF	XLFSHAN	func	2
+OREDITOR2	Order Entry Results Reporting	GETNATIONAL	ORIUTL	func	1
+OREDITOR2	Order Entry Results Reporting	IENS	DILF	func	1
+OREDITOR2	Order Entry Results Reporting	NOW	XLFDT	func	1
+OREDITOR2	Order Entry Results Reporting	PARSETEXT	OREDITOR1	do	2
+OREDITOR2	Order Entry Results Reporting	SETHASHARRAY	OREDITOR1	do	1
+OREDITOR2	Order Entry Results Reporting	UPDATE	DIE	do	1
+OREDITOR3	Order Entry Results Reporting		DIK	do	1
+OREDITOR3	Order Entry Results Reporting	FILE	DICN	do	2
+OREDITOR3	Order Entry Results Reporting	FILE	DIE	do	1
+OREDITOR3	Order Entry Results Reporting	GENAREF	XLFSHAN	func	3
+OREDITOR3	Order Entry Results Reporting	GETLONGLIST	ORDD71	do	1
+OREDITOR3	Order Entry Results Reporting	GETPLUGINS	ORDD71	do	1
+OREDITOR3	Order Entry Results Reporting	GETSCHEMAS	ORDD71	do	2
+OREDITOR3	Order Entry Results Reporting	IENS	DILF	func	4
+OREDITOR3	Order Entry Results Reporting	ISLISTCOMP	ORDD71	func	1
+OREDITOR3	Order Entry Results Reporting	PARSETEXT	OREDITOR1	do	1
+OREDITOR3	Order Entry Results Reporting	PASSINVALUES	OREDITOR1	do	1
+OREDITOR3	Order Entry Results Reporting	SETFINALTMP	OREDITOR1	do	1
+OREDITOR3	Order Entry Results Reporting	SETHASH	OREDITOR1	do	4
+OREDITOR3	Order Entry Results Reporting	SETHASHARRAY	OREDITOR1	do	1
+OREDITOR3	Order Entry Results Reporting	SETHASHTOTAL	OREDITOR1	do	1
+OREDITOR4	Order Entry Results Reporting	BLDIENS	OREDITOR2	func	5
+OREDITOR4	Order Entry Results Reporting	CODE	ORIUTL	do	5
+OREDITOR4	Order Entry Results Reporting	FMTE	XLFDT	func	1
+OREDITOR4	Order Entry Results Reporting	GENAREF	XLFSHAN	func	1
+OREDITOR4	Order Entry Results Reporting	GETNATIONAL	ORIUTL	func	1
+OREDITOR4	Order Entry Results Reporting	GETPLUGINS	ORDD71	do	1
+OREDITOR4	Order Entry Results Reporting	INFOLIST	PXRMAPI	do	1
+OREDITOR4	Order Entry Results Reporting	PASSINVALUES	OREDITOR1	do	1
+OREDITOR4	Order Entry Results Reporting	SETHASH	OREDITOR1	do	1
+OREDITOR4	Order Entry Results Reporting	SETTEXT	OREDITOR1	func	2
 ORELR	Order Entry Results Reporting	EN	ORELR1	do	1
 ORELR	Order Entry Results Reporting	EN	ORELR5	do	1
 ORELR1	Order Entry Results Reporting		%DT	do	1
@@ -121324,9 +122295,41 @@ ORGUEM3	Order Entry Results Reporting		%ZISC	do	1
 ORGUEM3	Order Entry Results Reporting		%ZTLOAD	do	1
 ORGUEM3	Order Entry Results Reporting	DISP	XQORM1	do	1
 ORGUEM3	Order Entry Results Reporting	HOME	%ZIS	do	2
+ORHEDITOR	Order Entry Results Reporting	DECODE	XLFJSON	do	2
+ORHEDITOR	Order Entry Results Reporting	ENCODE	XLFJSON	do	1
+ORHEDITOR	Order Entry Results Reporting	FMTE	XLFDT	func	1
+ORHEDITOR	Order Entry Results Reporting	GET1	DIQ	func	1
+ORHEDITOR	Order Entry Results Reporting	GETINFOARRAY	ORIRPCCL	func	1
+ORHEDITOR	Order Entry Results Reporting	GETWEBCONTENTID	ORWEB	do	1
+ORHEDITOR	Order Entry Results Reporting	MAKE	TIUSRVP	do	1
+ORHEDITOR	Order Entry Results Reporting	NOW	XLFDT	func	2
+ORHEDITOR	Order Entry Results Reporting	ONCLICKEXECODE	ORIUTL	func	2
+ORHEDITOR	Order Entry Results Reporting	TITLE	XLFSTR	func	1
 ORHLESC	Order Entry Results Reporting	BASE	XLFUTL	func	1
 ORHLESC	Order Entry Results Reporting	REPLACE	XLFSTR	func	1
 ORHLESC	Order Entry Results Reporting	UP	XLFSTR	func	1
+ORHRPC	Order Entry Results Reporting	DECODE	XLFJSON	do	1
+ORHRPC	Order Entry Results Reporting	ENCODE	XLFJSON	do	1
+ORHRPC	Order Entry Results Reporting	EVALUATE	ORNEWPERS	func	1
+ORHRPC	Order Entry Results Reporting	GETEDITORS	ORDD71	do	1
+ORHRPC	Order Entry Results Reporting	GETPLUGINS	ORDD71	do	1
+ORHRPC	Order Entry Results Reporting	NEWPERSON	ORNEWPERS	do	1
+ORHRPC	Order Entry Results Reporting	UP	XLFSTR	func	1
+ORICHECK	Order Entry Results Reporting	GET1	DIQ	func	1
+ORICHECK	Order Entry Results Reporting	GETCOMP	ORDD71	func	1
+ORIHELP	Order Entry Results Reporting	FORMAT	PXRMTEXT	do	1
+ORIMGR	Order Entry Results Reporting		DIC	do	3
+ORIMGR	Order Entry Results Reporting		DIR	do	1
+ORIMGR	Order Entry Results Reporting		DIWP	do	1
+ORIMGR	Order Entry Results Reporting	EN1	DIP	do	1
+ORIMGR	Order Entry Results Reporting	FMTE	XLFDT	func	1
+ORIMGR	Order Entry Results Reporting	FORMAT	PXRMTEXT	do	1
+ORIMGR	Order Entry Results Reporting	GET1	DIQ	func	1
+ORIMGR	Order Entry Results Reporting	LJ	XLFSTR	func	8
+ORIMGR	Order Entry Results Reporting	LU	ORIRPC	func	1
+ORIMGR	Order Entry Results Reporting	NOW	XLFDT	func	2
+ORIMGR	Order Entry Results Reporting	PROMPTITEM	ORIMGR	func	1
+ORIMGR	Order Entry Results Reporting	RJ	XLFSTR	func	5
 ORIMO	Order Entry Results Reporting	ALL	PSJ53P46	do	1
 ORIMO	Order Entry Results Reporting	PATCH	XPDUTL	func	1
 ORIMO	Order Entry Results Reporting	SDIMO	SDAMA203	func	1
@@ -121353,6 +122356,47 @@ ORINQIV	Order Entry Results Reporting	QCK0	ORCMEDT1	do	1
 ORINQIV	Order Entry Results Reporting	SUBCHK	XMGAPI0	func	1
 ORINQIV	Order Entry Results Reporting	UPDATE	DIE	do	2
 ORINQIV	Order Entry Results Reporting	XMZ	XMA2	do	1
+ORIRPC	Order Entry Results Reporting	CLICKTEXT	PXRMBANNER	func	1
+ORIRPC	Order Entry Results Reporting	DECODE	XLFJSON	do	1
+ORIRPC	Order Entry Results Reporting	EN	PXRMGEV	do	2
+ORIRPC	Order Entry Results Reporting	ENCODE	XLFJSON	do	1
+ORIRPC	Order Entry Results Reporting	FIND1	DIC	func	1
+ORIRPC	Order Entry Results Reporting	FNFTXTO	PXRMFNFT	do	1
+ORIRPC	Order Entry Results Reporting	GET	XPAR	func	2
+ORIRPC	Order Entry Results Reporting	GETUPDSTATUS	ORIUTL	func	1
+ORIRPC	Order Entry Results Reporting	PNLEXECODE	ORIUTL	do	1
+ORIRPC	Order Entry Results Reporting	PNLEXECODE	ORIUTL	func	1
+ORIRPC	Order Entry Results Reporting	REPLACE	XLFSTR	func	1
+ORIRPC	Order Entry Results Reporting	SETSECTIONS	ORIRPC1	do	1
+ORIRPC	Order Entry Results Reporting	SETUPDATE	ORIRPC1	do	1
+ORIRPC	Order Entry Results Reporting	STATMTCH	PXRMAPI	func	2
+ORIRPC	Order Entry Results Reporting	STATUS	PXRMBANNER	func	2
+ORIRPC	Order Entry Results Reporting	TIUSRCH	PXRMEXU1	do	1
+ORIRPC1	Order Entry Results Reporting	ENCODE	XLFJSON	do	1
+ORIRPCCL	Order Entry Results Reporting	DECODE	XLFJSON	do	1
+ORIRPCCL	Order Entry Results Reporting	DTEXT	ORIRPC	do	1
+ORIRPCCL	Order Entry Results Reporting	ENCODE	XLFJSON	do	1
+ORIRPCCL	Order Entry Results Reporting	GETCOMP	ORDD71	func	1
+ORIRPCCL	Order Entry Results Reporting	GETEDITOR	OREDITOR	func	1
+ORIRPCCL	Order Entry Results Reporting	GETEDITOR	ORHEDITOR	func	1
+ORIRPCCL	Order Entry Results Reporting	ONCLICKEXECODE	ORIUTL	func	1
+ORIRPCCL	Order Entry Results Reporting	STRREP	ORIUTL	func	8
+ORITEST	Order Entry Results Reporting		DIC	do	1
+ORITEST	Order Entry Results Reporting		DIR	do	6
+ORITEST	Order Entry Results Reporting	DECODE	XLFJSON	do	2
+ORITEST	Order Entry Results Reporting	ENCODE	XLFJSON	do	2
+ORITEST	Order Entry Results Reporting	FINDBYNAME	ORIMGR	func	3
+ORITEST	Order Entry Results Reporting	GETCLICK	ORIRPCCL	do	1
+ORITEST	Order Entry Results Reporting	GETPANELS	ORIRPC	do	1
+ORITEST	Order Entry Results Reporting	LJ	XLFSTR	func	5
+ORIUTL	Order Entry Results Reporting		DIC	do	1
+ORIUTL	Order Entry Results Reporting		DIK	do	1
+ORIUTL	Order Entry Results Reporting		DIR	do	1
+ORIUTL	Order Entry Results Reporting	DEL	XPAR	do	1
+ORIUTL	Order Entry Results Reporting	EC	%ZOSV	func	1
+ORIUTL	Order Entry Results Reporting	FIELD	DID	do	1
+ORIUTL	Order Entry Results Reporting	FMADD	XLFDT	func	1
+ORIUTL	Order Entry Results Reporting	GETLST	XPAR	do	1
 ORKCHK	Order Entry Results Reporting	EN	ORB3	do	1
 ORKCHK	Order Entry Results Reporting	EN	ORKCHK3	do	2
 ORKCHK	Order Entry Results Reporting	EN	ORKCHK4	do	2
@@ -121794,6 +122838,7 @@ ORMBLDPS	Order Entry Results Reporting	OI2DD	ORKPS	func	1
 ORMBLDPS	Order Entry Results Reporting	PID	ORMBLD	func	2
 ORMBLDPS	Order Entry Results Reporting	PV1	ORMBLD	func	2
 ORMBLDPS	Order Entry Results Reporting	RESP	ORCSAVE2	do	1
+ORMBLDPS	Order Entry Results Reporting	SETHL7	ORSPECAUTH	do	1
 ORMBLDPS	Order Entry Results Reporting	TRIM	ORBCMA32	func	1
 ORMBLDPS	Order Entry Results Reporting	UP	XLFSTR	func	2
 ORMBLDPS	Order Entry Results Reporting	USID	ORMBLD	func	3
@@ -121998,6 +123043,7 @@ ORMPS	Order Entry Results Reporting	DATES	ORCSAVE2	do	5
 ORMPS	Order Entry Results Reporting	DELETE	ORCSAVE2	do	1
 ORMPS	Order Entry Results Reporting	EN	ORCSAVE	do	1
 ORMPS	Order Entry Results Reporting	FINISHED	ORMPS2	func	1
+ORMPS	Order Entry Results Reporting	GETHL7	ORSPECAUTH	do	1
 ORMPS	Order Entry Results Reporting	MVT	DGPMOBS	func	1
 ORMPS	Order Entry Results Reporting	NOW	XLFDT	func	2
 ORMPS	Order Entry Results Reporting	PARENT	ORMPS3	do	1
@@ -122013,7 +123059,6 @@ ORMPS	Order Entry Results Reporting	STATUS	ORCSAVE2	do	11
 ORMPS	Order Entry Results Reporting	UPD	ORMPS3	do	1
 ORMPS	Order Entry Results Reporting	VERIFY	ORCSAVE2	do	1
 ORMPS	Order Entry Results Reporting	XTMP	ORMEVNT	do	1
-ORMPS	Order Entry Results Reporting	ZSC	ORMPS3	func	1
 ORMPS1	Order Entry Results Reporting	ADDFRQCV	ORMBLDP1	func	1
 ORMPS1	Order Entry Results Reporting	ASKTITR	ORCDPS3	func	1
 ORMPS1	Order Entry Results Reporting	DOSETEXT	ORCDPS2	do	2
@@ -122030,12 +123075,12 @@ ORMPS1	Order Entry Results Reporting	RXR	ORMPS	func	3
 ORMPS1	Order Entry Results Reporting	UNESC	ORMPS2	func	23
 ORMPS1	Order Entry Results Reporting	UNESCARR	ORMPS2	do	2
 ORMPS1	Order Entry Results Reporting	URGENCY	ORM	func	1
-ORMPS1	Order Entry Results Reporting	ZSC	ORMPS3	func	1
 ORMPS2	Order Entry Results Reporting		DIE	do	2
 ORMPS2	Order Entry Results Reporting	ACTION	ORCSAVE	func	1
 ORMPS2	Order Entry Results Reporting	ADDFRQCV	ORMBLDP1	func	1
 ORMPS2	Order Entry Results Reporting	DATES	ORCSAVE2	do	1
 ORMPS2	Order Entry Results Reporting	FIND	ORM	func	6
+ORMPS2	Order Entry Results Reporting	GETHL7	ORSPECAUTH	do	1
 ORMPS2	Order Entry Results Reporting	HL7IVLMT	ORMBLDP1	func	1
 ORMPS2	Order Entry Results Reporting	NTE	ORMPS3	func	3
 ORMPS2	Order Entry Results Reporting	NTXT	ORMPS3	func	2
@@ -122050,10 +123095,10 @@ ORMPS2	Order Entry Results Reporting	SIGSTS	ORCSAVE2	do	1
 ORMPS2	Order Entry Results Reporting	STATUS	ORCSAVE2	do	1
 ORMPS2	Order Entry Results Reporting	UNESC	ORHLESC	func	1
 ORMPS2	Order Entry Results Reporting	VALTXT	ORMPS3	func	3
-ORMPS2	Order Entry Results Reporting	ZSC	ORMPS3	func	1
 ORMPS3	Order Entry Results Reporting		DIE	do	1
 ORMPS3	Order Entry Results Reporting	DOSES	ORCACT4	func	2
 ORMPS3	Order Entry Results Reporting	EN	ORCSAVE	do	1
+ORMPS3	Order Entry Results Reporting	GETHL7	ORSPECAUTH	do	1
 ORMPS3	Order Entry Results Reporting	ORDTEXT	ORCSAVE1	do	1
 ORMPS3	Order Entry Results Reporting	RELEASE	ORCSAVE2	do	1
 ORMPS3	Order Entry Results Reporting	RESP	ORCSAVE2	do	8
@@ -122158,7 +123203,7 @@ ORNEWPERS	Order Entry Results Reporting	CLEAN	XGF	do	1
 ORNEWPERS	Order Entry Results Reporting	DIV4	XUSER	func	3
 ORNEWPERS	Order Entry Results Reporting	DT	XLFDT	func	2
 ORNEWPERS	Order Entry Results Reporting	FIND1	DIC	func	3
-ORNEWPERS	Order Entry Results Reporting	GET	XPAR	func	2
+ORNEWPERS	Order Entry Results Reporting	GET	XPAR	func	3
 ORNEWPERS	Order Entry Results Reporting	GET1	DIQ	func	7
 ORNEWPERS	Order Entry Results Reporting	HOME	%ZIS	do	1
 ORNEWPERS	Order Entry Results Reporting	ISA	USRLM	func	1
@@ -122271,6 +123316,10 @@ ORPARMGR	Order Entry Results Reporting	SET	VALM10	do	2
 ORPARMGR	Order Entry Results Reporting	SETFLD	VALM1	func	4
 ORPARMGR	Order Entry Results Reporting	SETSTR	VALM1	func	3
 ORPARMGR	Order Entry Results Reporting	UP	XLFSTR	func	4
+ORPATCHUTILS	Order Entry Results Reporting		DIK	do	1
+ORPATCHUTILS	Order Entry Results Reporting	BMES	XPDUTL	do	13
+ORPATCHUTILS	Order Entry Results Reporting	EN	XPAR	do	2
+ORPATCHUTILS	Order Entry Results Reporting	UPDATE	DIE	do	1
 ORPDMP	Order Entry Results Reporting	ASKSTOP	%ZTLOAD	func	1
 ORPDMP	Order Entry Results Reporting	DEA	XUSER	func	1
 ORPDMP	Order Entry Results Reporting	EN	ORPDMPWS	do	1
@@ -122625,6 +123674,7 @@ ORQ21	Order Entry Results Reporting		DIWP	do	1
 ORQ21	Order Entry Results Reporting	EN30	RAO7PC1	do	1
 ORQ21	Order Entry Results Reporting	FMTE	XLFDT	func	4
 ORQ21	Order Entry Results Reporting	GET1	DIQ	func	3
+ORQ21	Order Entry Results Reporting	GETENVIND	ORSPECAUTH	do	1
 ORQ21	Order Entry Results Reporting	ICDDATA	ICDXCODE	func	1
 ORQ21	Order Entry Results Reporting	LJ	XLFSTR	func	1
 ORQ21	Order Entry Results Reporting	OEL	PSOORRL	do	1
@@ -122888,6 +123938,7 @@ ORQQPL	Order Entry Results Reporting	HIST	ORQQPL2	do	1
 ORQQPL	Order Entry Results Reporting	IMPDATE	LEXU	func	1
 ORQQPL	Order Entry Results Reporting	LIST	GMPLUTL2	do	1
 ORQQPL	Order Entry Results Reporting	PAD	ORUTL	func	2
+ORQQPL	Order Entry Results Reporting	SHOWSA	GMPLSPECAUTH	func	1
 ORQQPL	Order Entry Results Reporting	STATCHK	ICDXCODE	func	2
 ORQQPL	Order Entry Results Reporting	STATCHK	LEXSRC2	func	2
 ORQQPL	Order Entry Results Reporting	WRAP	ORU2	func	1
@@ -122933,6 +123984,7 @@ ORQQPL3	Order Entry Results Reporting	CODECS	ICDEX	func	3
 ORQQPL3	Order Entry Results Reporting	CSI	ICDEX	func	4
 ORQQPL3	Order Entry Results Reporting	DT	XLFDT	func	1
 ORQQPL3	Order Entry Results Reporting	GET	XPAR	func	1
+ORQQPL3	Order Entry Results Reporting	GETNEWSA	GMPLSPECAUTH	do	1
 ORQQPL3	Order Entry Results Reporting	GETPLIST	GMPLMGR1	do	1
 ORQQPL3	Order Entry Results Reporting	ICDDATA	ICDXCODE	func	2
 ORQQPL3	Order Entry Results Reporting	ICDDESC	GMPLUTL2	func	2
@@ -123231,6 +124283,19 @@ ORSNAST2	Order Entry Results Reporting	SER	ORS100	func	1
 ORSNAST2	Order Entry Results Reporting	STAT	ORS100	func	1
 ORSNAST2	Order Entry Results Reporting	TEXT	ORQ12	do	1
 ORSNAST2	Order Entry Results Reporting	USER	ORS100	func	2
+ORSPECAUTH	Order Entry Results Reporting	DECODE	XLFJSON	do	2
+ORSPECAUTH	Order Entry Results Reporting	ENCODE	XLFJSON	do	2
+ORSPECAUTH	Order Entry Results Reporting	FIND1	DIC	func	1
+ORSPECAUTH	Order Entry Results Reporting	FINDBYCODE	PXSPECAUTH	func	2
+ORSPECAUTH	Order Entry Results Reporting	GET	XPAR	func	4
+ORSPECAUTH	Order Entry Results Reporting	GETDISPLAYNAME	PXSPECAUTH	func	1
+ORSPECAUTH	Order Entry Results Reporting	GETSADEF	PXSPECAUTH	do	1
+ORSPECAUTH	Order Entry Results Reporting	GETVALUE	PXSPECAUTH	func	2
+ORSPECAUTH	Order Entry Results Reporting	NOW	XLFDT	func	1
+ORSPECAUTH	Order Entry Results Reporting	SETARRAY	PXSPECAUTH	do	1
+ORSPECAUTH	Order Entry Results Reporting	SETVALUE	PXSPECAUTH	func	1
+ORSPECAUTH	Order Entry Results Reporting	SHOWSA	GMPLSPECAUTH	func	1
+ORSPECAUTH	Order Entry Results Reporting	UPDATE	DIE	do	3
 ORSPUTIL	Order Entry Results Reporting		DIE	do	1
 ORSPUTIL	Order Entry Results Reporting		DIR	do	1
 ORSPUTIL	Order Entry Results Reporting	FILE	DIE	do	1
@@ -123509,8 +124574,8 @@ ORWCH	Order Entry Results Reporting		DIC	do	1
 ORWCH	Order Entry Results Reporting		DIR	do	1
 ORWCH	Order Entry Results Reporting	DEL	XPAR	do	1
 ORWCH	Order Entry Results Reporting	EN	XPAR	do	8
-ORWCH	Order Entry Results Reporting	GET	XPAR	func	5
-ORWCH	Order Entry Results Reporting	GETLST	XPAR	do	4
+ORWCH	Order Entry Results Reporting	GET	XPAR	func	6
+ORWCH	Order Entry Results Reporting	GETLST	XPAR	do	5
 ORWCH	Order Entry Results Reporting	NDEL	XPAR	do	3
 ORWCIRN	Order Entry Results Reporting	GET	XPAR	func	8
 ORWCIRN	Order Entry Results Reporting	GETDFN	MPIF001	func	1
@@ -123963,7 +125028,7 @@ ORWDXA	Order Entry Results Reporting	CHOREXP	ORWDXA1	do	1
 ORWDXA	Order Entry Results Reporting	COMP	ORCSAVE2	do	1
 ORWDXA	Order Entry Results Reporting	COMP	ORMBLDOR	do	1
 ORWDXA	Order Entry Results Reporting	COMPLETE	ORUTL5	do	1
-ORWDXA	Order Entry Results Reporting	EN	OCXOERR	do	2
+ORWDXA	Order Entry Results Reporting	EN	OCXOERR	do	1
 ORWDXA	Order Entry Results Reporting	EN	ORCSEND	do	1
 ORWDXA	Order Entry Results Reporting	EN	XMB	do	1
 ORWDXA	Order Entry Results Reporting	FLAGRCPT	ORWDXA1	do	1
@@ -123972,8 +125037,10 @@ ORWDXA	Order Entry Results Reporting	FLGHST	ORWDXA1	do	1
 ORWDXA	Order Entry Results Reporting	FMTE	XLFDT	func	5
 ORWDXA	Order Entry Results Reporting	FORMID	ORWDXM	do	1
 ORWDXA	Order Entry Results Reporting	GET	XPAR	func	1
+ORWDXA	Order Entry Results Reporting	GET1	DIQ	func	3
 ORWDXA	Order Entry Results Reporting	GETBYIFN	ORWORR	do	9
 ORWDXA	Order Entry Results Reporting	GTORITM	ORWDXR	do	1
+ORWDXA	Order Entry Results Reporting	IPOVERRIDE	OCXOERR	do	1
 ORWDXA	Order Entry Results Reporting	ISNOW	ORWDXR	do	1
 ORWDXA	Order Entry Results Reporting	ISVALIV	ORWDPS33	do	1
 ORWDXA	Order Entry Results Reporting	KILL	XM	do	1
@@ -124207,6 +125274,8 @@ ORWDXVB2	Order Entry Results Reporting	SITE	VASITE	func	1
 ORWDXVB2	Order Entry Results Reporting	WRAP	ORU2	do	2
 ORWDXVB3	Order Entry Results Reporting	GET	XPAR	func	2
 ORWDXVB3	Order Entry Results Reporting	GETLST	XPAR	do	1
+ORWEB	Order Entry Results Reporting	DECODE	XLFJSON	do	1
+ORWEB	Order Entry Results Reporting	ENCODE	XLFJSON	do	1
 ORWGAPI	Order Entry Results Reporting	ACC	ORWGAPIC	do	1
 ORWGAPI	Order Entry Results Reporting	ALLVIEWS	ORWGAPIP	do	1
 ORWGAPI	Order Entry Results Reporting	DATA	ORWGAPIR	do	2
@@ -124739,7 +125808,7 @@ ORWORB	Order Entry Results Reporting	EN	ORQ1	do	1
 ORWORB	Order Entry Results Reporting	EN	XPAR	do	2
 ORWORB	Order Entry Results Reporting	FMADD	XLFDT	func	4
 ORWORB	Order Entry Results Reporting	GET	XPAR	func	3
-ORWORB	Order Entry Results Reporting	GET1	DIQ	func	1
+ORWORB	Order Entry Results Reporting	GET1	DIQ	func	2
 ORWORB	Order Entry Results Reporting	GETACT	XQALERT	do	1
 ORWORB	Order Entry Results Reporting	GETLST	XPAR	do	1
 ORWORB	Order Entry Results Reporting	GETUSER1	XQALDATA	do	1
@@ -124786,7 +125855,7 @@ ORWORR1	Order Entry Results Reporting	ORDERER	ORQOR2	func	1
 ORWORR1	Order Entry Results Reporting	ORYD	ORDD100	do	2
 ORWORR1	Order Entry Results Reporting	REF	ORTOULT4	do	1
 ORWORR1	Order Entry Results Reporting	START	ORBPRCHK	do	1
-ORWOTHER	Order Entry Results Reporting	CLICKTEXT	PXRMCOVID19	func	1
+ORWOTHER	Order Entry Results Reporting	CLICKTEXT	PXRMBANNER	func	1
 ORWOTHER	Order Entry Results Reporting	GET	XPAR	func	7
 ORWOTHER	Order Entry Results Reporting	PATCH	XPDUTL	func	1
 ORWPCE	Order Entry Results Reporting	CLINUSER	ORQQPL1	func	1
@@ -124852,6 +125921,7 @@ ORWPCE3	Order Entry Results Reporting	CSI	ICDEX	func	1
 ORWPCE3	Order Entry Results Reporting	CSYS	LEXU	func	1
 ORWPCE3	Order Entry Results Reporting	ENCEVENT	PXAPI	do	1
 ORWPCE3	Order Entry Results Reporting	EXP	LEXCODE	func	1
+ORWPCE3	Order Entry Results Reporting	GETCODE	PXSPECAUTH	func	1
 ORWPCE3	Order Entry Results Reporting	GETFIND	PXRMRPCG	do	1
 ORWPCE3	Order Entry Results Reporting	GETVSIT	ORWPCE1	func	1
 ORWPCE3	Order Entry Results Reporting	ICDDATA	ICDXCODE	func	1
@@ -124968,7 +126038,7 @@ ORWPT2	Order Entry Results Reporting	INP	VADPT	do	1
 ORWPT2	Order Entry Results Reporting	LIST	ORQQVS	do	1
 ORWPT2	Order Entry Results Reporting	OUTPTPR	SDUTL3	func	1
 ORWPT2	Order Entry Results Reporting	PRCARE	ORWPT1	do	1
-ORWPT2	Order Entry Results Reporting	STATUS	PXRMCOVID19	func	1
+ORWPT2	Order Entry Results Reporting	STATUS	PXRMBANNER	func	1
 ORWRA	Order Entry Results Reporting	DT	ORCHTAB1	func	6
 ORWRA	Order Entry Results Reporting	EN1	RAO7PC1	do	1
 ORWRA	Order Entry Results Reporting	GET	XPAR	func	1
@@ -125291,8 +126361,9 @@ ORWU	Order Entry Results Reporting	ENCODE	XLFJSON	do	1
 ORWU	Order Entry Results Reporting	EXCPLST	ORWTIU	do	1
 ORWU	Order Entry Results Reporting	FIELD	DID	do	2
 ORWU	Order Entry Results Reporting	FIND	DIC	do	1
-ORWU	Order Entry Results Reporting	GET	XPAR	func	30
+ORWU	Order Entry Results Reporting	GET	XPAR	func	31
 ORWU	Order Entry Results Reporting	GETLST	XPAR	do	5
+ORWU	Order Entry Results Reporting	GETNVA	ORWCH	do	1
 ORWU	Order Entry Results Reporting	GETPAR	ORCDRA	do	1
 ORWU	Order Entry Results Reporting	GETPAR	ORGMRC	do	1
 ORWU	Order Entry Results Reporting	GETPAR	ORPDMP	do	1
@@ -125305,6 +126376,7 @@ ORWU	Order Entry Results Reporting	NP1	ORWU1	do	1
 ORWU	Order Entry Results Reporting	PATCH	XPDUTL	func	1
 ORWU	Order Entry Results Reporting	PCTCOPY	ORWTIU	do	1
 ORWU	Order Entry Results Reporting	PROD	XUPROD	func	1
+ORWU	Order Entry Results Reporting	RETURNPARAMS	ORSPECAUTH	do	1
 ORWU	Order Entry Results Reporting	ROOT	DILFD	func	1
 ORWU	Order Entry Results Reporting	SHWOTHER	ORWOTHER	do	1
 ORWU	Order Entry Results Reporting	SIGI	ORWPAR1	do	1
@@ -127013,6 +128085,20 @@ ORY46	Order Entry Results Reporting		DIE	do	1
 ORY48	Order Entry Results Reporting	EN	XPAR	do	1
 ORY48	Order Entry Results Reporting	GET	XPAR	func	1
 ORY484	Order Entry Results Reporting	PUT	XPAR	do	1
+ORY508	Order Entry Results Reporting	ADD	XPDMENU	func	2
+ORY508	Order Entry Results Reporting	AWRITE	ORINQIV	do	1
+ORY508	Order Entry Results Reporting	BMES	XPDUTL	do	14
+ORY508	Order Entry Results Reporting	DEL	XPAR	do	1
+ORY508	Order Entry Results Reporting	EN	DIU2	do	1
+ORY508	Order Entry Results Reporting	EN	XPAR	do	9
+ORY508	Order Entry Results Reporting	ENVAL	XPAR	do	1
+ORY508	Order Entry Results Reporting	MES	XPDUTL	do	8
+ORY508	Order Entry Results Reporting	NOW	XLFDT	func	1
+ORY508	Order Entry Results Reporting	PATCH	XPDUTL	func	2
+ORY508	Order Entry Results Reporting	SETALERTPARAMS	ORPATCHUTILS	func	1
+ORY508	Order Entry Results Reporting	SETALERTSTUB	ORPATCHUTILS	func	1
+ORY508	Order Entry Results Reporting	SETPARAMS	ORPATCHUTILS	do	1
+ORY508	Order Entry Results Reporting	UPDATE	DIE	do	1
 ORY519	Order Entry Results Reporting	BMES	XPDUTL	do	1
 ORY519	Order Entry Results Reporting	CJ	XLFSTR	func	2
 ORY519	Order Entry Results Reporting	EN	ORYDLG	do	1
@@ -127626,6 +128712,39 @@ PRCA369P	Accounts Receivable	FIND1	DIC	func	1
 PRCA369P	Accounts Receivable	UPDATE	DIE	do	1
 PRCA395P	Accounts Receivable	EN	XPAR	do	3
 PRCA395P	Accounts Receivable	GET	XPAR	func	3
+PRCA399A	Accounts Receivable	EN	PRCA399B	do	1
+PRCA399A	Accounts Receivable	EN	PRCA399C	do	1
+PRCA399A	Accounts Receivable	NOW	%DTC	do	3
+PRCA399C	Accounts Receivable	EN	PRCA399D	do	1
+PRCA399C	Accounts Receivable	NOW	%DTC	do	2
+PRCA399C	Accounts Receivable	TBAL	PRCA399D	do	1
+PRCA399D	Accounts Receivable	NOW	%DTC	do	1
+PRCA399E	Accounts Receivable		DIK	do	2
+PRCA399E	Accounts Receivable	IX	DIK	do	1
+PRCA399E	Accounts Receivable	LJ	XLFSTR	func	2
+PRCA399E	Accounts Receivable	MES	XPDUTL	do	17
+PRCA399E	Accounts Receivable	NOW	%DTC	do	9
+PRCA399E	Accounts Receivable	SITE	RCMSITE	func	1
+PRCA399F	Accounts Receivable		DIK	do	1
+PRCA399F	Accounts Receivable	GETTRANS	RCDPBTLM	func	1
+PRCA399F	Accounts Receivable	IX	DIK	do	1
+PRCA399P	Accounts Receivable	C	%DTC	do	2
+PRCA399P	Accounts Receivable	EN	PRCA399A	do	1
+PRCA399P	Accounts Receivable	EN	PRCA399E	do	1
+PRCA399P	Accounts Receivable	FMADD	XLFDT	func	1
+PRCA399P	Accounts Receivable	MES	XPDUTL	do	15
+PRCA399P	Accounts Receivable	NOW	%DTC	do	6
+PRCA399P	Accounts Receivable	SITE	RCMSITE	func	1
+PRCA399Z	Accounts Receivable		DIC	do	1
+PRCA399Z	Accounts Receivable	C	%DTC	do	2
+PRCA399Z	Accounts Receivable	EN	PRCA399A	do	1
+PRCA399Z	Accounts Receivable	FMADD	XLFDT	func	1
+PRCA399Z	Accounts Receivable	MES	XPDUTL	do	4
+PRCA399Z	Accounts Receivable	NAM	RCFN01	func	1
+PRCA399Z	Accounts Receivable	NOW	%DTC	do	5
+PRCA399Z	Accounts Receivable	REFUREVW	PRCAMRKC	func	1
+PRCA399Z	Accounts Receivable	SITE	RCMSITE	func	1
+PRCA399Z	Accounts Receivable	UPPER	VALM1	func	1
 PRCA419P	Accounts Receivable		DIE	do	1
 PRCA419P	Accounts Receivable	BMES	XPDUTL	do	1
 PRCA427P	Accounts Receivable	BMES	XPDUTL	do	3
@@ -145848,10 +146967,11 @@ PSAVER7	Drug Accountability		DIC	do	2
 PSAVER7	Drug Accountability		DIE	do	6
 PSAVER7	Drug Accountability	FILE	DICN	do	1
 PSAVERA	Drug Accountability		DIC	do	3
-PSAVERA	Drug Accountability		DIE	do	5
+PSAVERA	Drug Accountability		DIE	do	6
 PSAVERA	Drug Accountability		DIR	do	3
 PSAVERA	Drug Accountability		PSAVERA1	do	1
 PSAVERA	Drug Accountability		PSAVERA3	do	1
+PSAVERA	Drug Accountability	GET1	DIQ	func	1
 PSAVERA	Drug Accountability	HOME	%ZIS	do	1
 PSAVERA	Drug Accountability	PSANDC1	PSAHELP	do	1
 PSAVERA	Drug Accountability	RECORD	PSAVER2	do	1
@@ -146451,8 +147571,9 @@ PSBOMH1	Barcode Medication Administration	BAGDTL	PSBRPC2	do	1
 PSBOMH1	Barcode Medication Administration	CLEAN	PSBVT	do	2
 PSBOMH1	Barcode Medication Administration	DD	%DT	do	1
 PSBOMH1	Barcode Medication Administration	DT	DILF	do	1
-PSBOMH1	Barcode Medication Administration	FINDGIVE	PSBUTL	func	1
-PSBOMH1	Barcode Medication Administration	GET1	DIQ	func	15
+PSBOMH1	Barcode Medication Administration	FINDGIVE	PSBUTL	func	2
+PSBOMH1	Barcode Medication Administration	FMTE	XLFDT	func	1
+PSBOMH1	Barcode Medication Administration	GET1	DIQ	func	14
 PSBOMH1	Barcode Medication Administration	GETINIT	PSBCSUTX	func	4
 PSBOMH1	Barcode Medication Administration	H	%DTC	do	2
 PSBOMH1	Barcode Medication Administration	INITIAL	PSBRPC2	func	3
@@ -155112,6 +156233,10 @@ PSNOSKEY	National Drug File	VERSION	%ZOSV	func	2
 PSNOUT	National Drug File	CHK	PSNVFY	do	1
 PSNOUT	National Drug File	GONE	PSNDRUG	do	1
 PSNOUT	National Drug File	PSJING	PSNAPIS	func	2
+PSNP578	National Drug File		DIK	do	1
+PSNP578	National Drug File	BMES	XPDUTL	do	1
+PSNP578	National Drug File	FMADD	XLFDT	func	1
+PSNP578	National Drug File	SENDMSG	XMXAPI	do	1
 PSNPARM	National Drug File		DIE	do	1
 PSNPARM	National Drug File		DIR	do	2
 PSNPARM	National Drug File	DIREXIST	PSNFTP2	func	2
@@ -156384,12 +157509,10 @@ PSOB	Outpatient Pharmacy	EN	DIQ1	do	2
 PSOB	Outpatient Pharmacy	GET1	DIQ	func	3
 PSOB	Outpatient Pharmacy	LASK	PSOLSET	do	1
 PSOB	Outpatient Pharmacy	SELPRT	PSOFDAUT	func	1
-PSOBAI	Outpatient Pharmacy		DIE	do	1
-PSOBAI	Outpatient Pharmacy		DIR	do	3
+PSOBAI	Outpatient Pharmacy		DIR	do	2
 PSOBAI	Outpatient Pharmacy		PSOLSET	do	1
 PSOBAI	Outpatient Pharmacy	BADADR	DGUTL3	func	2
-PSOBAI	Outpatient Pharmacy	EN	DGREGAED	do	1
-PSOBAI	Outpatient Pharmacy	UPDATE	DGADDUTL	do	1
+PSOBAI	Outpatient Pharmacy	PSOPAT	DGADDUTL	do	1
 PSOBAIR2	Outpatient Pharmacy		%DT	do	1
 PSOBAIR2	Outpatient Pharmacy		%ZIS	do	1
 PSOBAIR2	Outpatient Pharmacy		%ZISC	do	1
@@ -165058,7 +166181,6 @@ PSOUTL	Outpatient Pharmacy		%DT	do	3
 PSOUTL	Outpatient Pharmacy		DIC	do	3
 PSOUTL	Outpatient Pharmacy		DIE	do	3
 PSOUTL	Outpatient Pharmacy		DIK	do	4
-PSOUTL	Outpatient Pharmacy		DIR	do	1
 PSOUTL	Outpatient Pharmacy		PSOCMOPA	do	1
 PSOUTL	Outpatient Pharmacy		PSODGAL1	do	1
 PSOUTL	Outpatient Pharmacy		PSSDIUTL	do	1
@@ -165066,15 +166188,15 @@ PSOUTL	Outpatient Pharmacy		XMD	do	1
 PSOUTL	Outpatient Pharmacy	C	%DTC	do	1
 PSOUTL	Outpatient Pharmacy	DEM	VADPT	do	1
 PSOUTL	Outpatient Pharmacy	DRG	PSSDSAPM	func	1
-PSOUTL	Outpatient Pharmacy	EN	DDIOL	do	11
+PSOUTL	Outpatient Pharmacy	EN	DDIOL	do	2
 PSOUTL	Outpatient Pharmacy	GET1	DIQ	func	12
 PSOUTL	Outpatient Pharmacy	KCMPX	PSOCMOP	do	3
 PSOUTL	Outpatient Pharmacy	KVA	VADPT	do	1
 PSOUTL	Outpatient Pharmacy	NOW	%DTC	do	1
 PSOUTL	Outpatient Pharmacy	REF	PSOCAN2	do	1
-PSOUTL	Outpatient Pharmacy	REFIP	PSOUTLA1	func	1
 PSOUTL	Outpatient Pharmacy	SCMPX	PSOCMOP	do	1
 PSOUTL	Outpatient Pharmacy	SERV	IBARX1	func	1
+PSOUTL	Outpatient Pharmacy	WARN	PSOUTLA1	do	1
 PSOUTL	Outpatient Pharmacy	WARN1	PSOUTLA1	do	1
 PSOUTLA	Outpatient Pharmacy		%DT	do	1
 PSOUTLA	Outpatient Pharmacy		DIC	do	2
@@ -165088,14 +166210,14 @@ PSOUTLA	Outpatient Pharmacy	NOW	%DTC	do	1
 PSOUTLA	Outpatient Pharmacy	SCMPX	PSOCMOP	do	1
 PSOUTLA1	Outpatient Pharmacy		%DT	do	1
 PSOUTLA1	Outpatient Pharmacy		%ZTLOAD	do	1
-PSOUTLA1	Outpatient Pharmacy		DIR	do	2
+PSOUTLA1	Outpatient Pharmacy		DIR	do	3
 PSOUTLA1	Outpatient Pharmacy	C	%DTC	do	1
 PSOUTLA1	Outpatient Pharmacy	DD	%DT	do	2
-PSOUTLA1	Outpatient Pharmacy	EN	DDIOL	do	4
+PSOUTLA1	Outpatient Pharmacy	EN	DDIOL	do	13
 PSOUTLA1	Outpatient Pharmacy	EN	PSOHLSN1	do	2
 PSOUTLA1	Outpatient Pharmacy	GET1	DIQ	func	2
 PSOUTLA1	Outpatient Pharmacy	MAXNUMRF	PSOUTIL	func	1
-PSOUTLA1	Outpatient Pharmacy	REFIP	PSOUTLA1	func	1
+PSOUTLA1	Outpatient Pharmacy	REFIP	PSOUTLA1	func	2
 PSOUTLA2	Outpatient Pharmacy		DIC	do	2
 PSOUTLA2	Outpatient Pharmacy		DIR	do	3
 PSOUTLA2	Outpatient Pharmacy		PSOBUILD	do	3
@@ -169288,6 +170410,10 @@ PX1P225	PCE Patient Care Encounter	BMES	XPDUTL	do	3
 PX1P225	PCE Patient Care Encounter	FMADD	XLFDT	func	1
 PX1P225	PCE Patient Care Encounter	MES	XPDUTL	do	3
 PX1P225	PCE Patient Care Encounter	UP	XLFSTR	func	2
+PX1P244	PCE Patient Care Encounter	BMES	XPDUTL	do	1
+PX1P244	PCE Patient Care Encounter	EN	DIU2	do	1
+PX1P244	PCE Patient Care Encounter	EN	XPAR	do	2
+PX1P244	PCE Patient Care Encounter	MES	XPDUTL	do	1
 PX1P88A	PCE Patient Care Encounter		%ZTLOAD	do	1
 PX1P88A	PCE Patient Care Encounter		DIK	do	1
 PX1P88A	PCE Patient Care Encounter		DIR	do	2
@@ -169322,7 +170448,7 @@ PX91P	PCE Patient Care Encounter	BMES	XPDUTL	do	2
 PX91P	PCE Patient Care Encounter	MES	XPDUTL	do	3
 PXAAVSIT	PCE Patient Care Encounter	GET1	DIQ	func	1
 PXAAVSIT	PCE Patient Care Encounter	GETS	DIQ	do	1
-PXAI	PCE Patient Care Encounter	BLD	DIALOG	do	2
+PXAI	PCE Patient Care Encounter	BLD	DIALOG	do	4
 PXAI	PCE Patient Care Encounter	CPT	PXAICPT	do	1
 PXAI	PCE Patient Care Encounter	EDU	PXAIPED	do	1
 PXAI	PCE Patient Care Encounter	EN1	PXKMAIN	do	1
@@ -169331,7 +170457,8 @@ PXAI	PCE Patient Care Encounter	EXAM	PXAIXAM	do	1
 PXAI	PCE Patient Care Encounter	HF	PXAIHF	do	1
 PXAI	PCE Patient Care Encounter	ICR	PXAIICR	do	1
 PXAI	PCE Patient Care Encounter	IMM	PXAIIMM	do	1
-PXAI	PCE Patient Care Encounter	MSG	DIALOG	do	2
+PXAI	PCE Patient Care Encounter	MSG	DIALOG	do	4
+PXAI	PCE Patient Care Encounter	NUMWARNINGS	PXAIERR	func	2
 PXAI	PCE Patient Care Encounter	OTHER	PXAIPRV	do	1
 PXAI	PCE Patient Care Encounter	POV	PXAIPOV	do	1
 PXAI	PCE Patient Care Encounter	PRIM	PXAIPOVV	do	1
@@ -169383,15 +170510,20 @@ PXAIPED	PCE Patient Care Encounter	VAL	PXAIPEDV	do	1
 PXAIPEDV	PCE Patient Care Encounter	MAG	PXAIVAL	func	1
 PXAIPEDV	PCE Patient Care Encounter	MAGFORMAT	PXMEASUREMENT	func	1
 PXAIPL	PCE Patient Care Encounter	CSDATE	PXDXUTL	func	1
+PXAIPL	PCE Patient Care Encounter	SHOWSA	GMPLSPECAUTH	func	1
 PXAIPL	PCE Patient Care Encounter	UPDATE	GMPLUTL	do	1
+PXAIPOV	PCE Patient Care Encounter	CONVERTTOPCE	PXSPECAUTH	do	1
 PXAIPOV	PCE Patient Care Encounter	EN1	PXKMAIN	do	1
 PXAIPOV	PCE Patient Care Encounter	ERRSET	PXAIPOVV	do	1
 PXAIPOV	PCE Patient Care Encounter	FILE	DIE	do	1
+PXAIPOV	PCE Patient Care Encounter	FINDBYCODE	PXSPECAUTH	func	1
+PXAIPOV	PCE Patient Care Encounter	GETPATSA	PXSPECAUTH	do	1
+PXAIPOV	PCE Patient Care Encounter	GETSAFORVPOVDET	PXSPECAUTH	do	1
 PXAIPOV	PCE Patient Care Encounter	PL	PXAIPL	do	1
 PXAIPOV	PCE Patient Care Encounter	POV	PXBGPOV	do	1
 PXAIPOV	PCE Patient Care Encounter	PROVNARR	PXAPI	func	2
 PXAIPOV	PCE Patient Care Encounter	PRV	PXBGPRV	do	1
-PXAIPOV	PCE Patient Care Encounter	SCC	PXUTLSCC	do	1
+PXAIPOV	PCE Patient Care Encounter	SETOLD800	PXSPECAUTH	do	1
 PXAIPOV	PCE Patient Care Encounter	VAL	PXAIPOVV	do	1
 PXAIPOV	PCE Patient Care Encounter	VAL04	PXAIPOVV	do	1
 PXAIPOV	PCE Patient Care Encounter	VAL802	PXAIPOVV	do	1
@@ -169421,17 +170553,22 @@ PXAIVAL	PCE Patient Care Encounter	SOURCE	PXAPIUTL	func	1
 PXAIVAL	PCE Patient Care Encounter	UCUMCODE	LEXMUCUM	func	1
 PXAIVAL	PCE Patient Care Encounter	VFMDATE	PXDATE	func	2
 PXAIVAL	PCE Patient Care Encounter	VPRV	PXAIPRVV	func	1
+PXAIVST	PCE Patient Care Encounter	CONVERTTOPCE	PXSPECAUTH	do	2
 PXAIVST	PCE Patient Care Encounter	EN1	PXKMAIN	do	1
 PXAIVST	PCE Patient Care Encounter	ERRSET	PXAIVSTV	do	2
 PXAIVST	PCE Patient Care Encounter	FILE	DIE	do	1
+PXAIVST	PCE Patient Care Encounter	FINDBYCODE	PXSPECAUTH	func	1
 PXAIVST	PCE Patient Care Encounter	FINDVISIT	PXUTLVST	do	1
 PXAIVST	PCE Patient Care Encounter	GET1	DIQ	func	6
+PXAIVST	PCE Patient Care Encounter	GETSAFORVISIT	PXSPECAUTH	do	1
 PXAIVST	PCE Patient Care Encounter	SEND	PXMSG	do	1
+PXAIVST	PCE Patient Care Encounter	SETOLD800	PXSPECAUTH	do	2
 PXAIVST	PCE Patient Care Encounter	VAL	PXAIVSTV	do	1
-PXAIVST	PCE Patient Care Encounter	VALSCC	PXAIVSTV	do	1
+PXAIVST	PCE Patient Care Encounter	VALSA	PXAIVSTV	do	1
 PXAIVSTV	PCE Patient Care Encounter	ERR	PXAI	do	1
 PXAIVSTV	PCE Patient Care Encounter	EXTERNAL	DILFD	func	1
-PXAIVSTV	PCE Patient Care Encounter	SCC	PXUTLSCC	do	1
+PXAIVSTV	PCE Patient Care Encounter	GETPATSA	PXSPECAUTH	do	1
+PXAIVSTV	PCE Patient Care Encounter	NODETOCODE	PXSPECAUTH	func	1
 PXAIVSTV	PCE Patient Care Encounter	VFMDATE	PXDATE	func	1
 PXAIVSTV	PCE Patient Care Encounter	VPKG	PXAIVAL	func	1
 PXAIVSTV	PCE Patient Care Encounter	VSOURCE	PXAIVAL	func	1
@@ -169449,6 +170586,7 @@ PXAPI	PCE Patient Care Encounter	ENCEVENT	PXKENCOUNTER	do	1
 PXAPI	PCE Patient Care Encounter	FILE	DID	do	1
 PXAPI	PCE Patient Care Encounter	FILE	DIE	do	1
 PXAPI	PCE Patient Care Encounter	GETENC	PXKENC	func	1
+PXAPI	PCE Patient Care Encounter	GETSAFORVISITDET	PXSPECAUTH	do	1
 PXAPI	PCE Patient Care Encounter	INTV	PXBAPI	func	1
 PXAPI	PCE Patient Care Encounter	LOPENCED	PXAPIEED	func	1
 PXAPI	PCE Patient Care Encounter	NOW	XLFDT	func	1
@@ -169463,6 +170601,7 @@ PXAPIDEL	PCE Patient Care Encounter		DIR	do	1
 PXAPIDEL	PCE Patient Care Encounter	DEC	VSITKIL	func	1
 PXAPIDEL	PCE Patient Care Encounter	EN1	PXKMAIN	do	1
 PXAPIDEL	PCE Patient Care Encounter	EVENT	PXKMAIN	do	1
+PXAPIDEL	PCE Patient Care Encounter	GETSAFORVISITDET	PXSPECAUTH	do	1
 PXAPIDEL	PCE Patient Care Encounter	KILL	VSITKIL	func	1
 PXAPIDEL	PCE Patient Care Encounter	LISTVST	SDOERPC	do	1
 PXAPIDEL	PCE Patient Care Encounter	LOCK	PXLOCK	func	1
@@ -169522,25 +170661,28 @@ PXBAPI1	PCE Patient Care Encounter	DISPOSIT	PXUTL1	func	2
 PXBAPI1	PCE Patient Care Encounter	ELAP	SDPCE	func	1
 PXBAPI1	PCE Patient Care Encounter	ELIG	DGCOMPACTELIG	func	1
 PXBAPI1	PCE Patient Care Encounter	EN1	PXKMAIN	do	1
+PXBAPI1	PCE Patient Care Encounter	GETCODE	PXSPECAUTH	func	1
 PXBAPI1	PCE Patient Care Encounter	GETEOC	PXCOMPACT	func	1
+PXBAPI1	PCE Patient Care Encounter	GETSAFORVISITDET	PXSPECAUTH	do	1
 PXBAPI1	PCE Patient Care Encounter	POV	PXBMPOV	do	1
 PXBAPI1	PCE Patient Care Encounter	PRV	PXBMPRV	do	1
+PXBAPI1	PCE Patient Care Encounter	SETOLD800	PXSPECAUTH	do	1
 PXBAPI1	PCE Patient Care Encounter	STP	PXBMSTP	do	1
 PXBAPI1	PCE Patient Care Encounter	VISIT	PXCOMPACT	do	1
 PXBAPI2	PCE Patient Care Encounter		DIR	do	1
 PXBAPI2	PCE Patient Care Encounter	PAUSE	PXCEHELP	do	2
 PXBAPI2	PCE Patient Care Encounter	YN	DICN	do	1
-PXBAPI21	PCE Patient Care Encounter		DIR	do	2
+PXBAPI21	PCE Patient Care Encounter		DIR	do	3
 PXBAPI21	PCE Patient Care Encounter	CL	SDCO21	do	1
 PXBAPI21	PCE Patient Care Encounter	CLINIC	SDAMU	func	2
 PXBAPI21	PCE Patient Care Encounter	CLOE	SDCO21	do	1
 PXBAPI21	PCE Patient Care Encounter	ENDR	%ZISS	do	1
 PXBAPI21	PCE Patient Care Encounter	EXOE	SDCOU2	func	1
+PXBAPI21	PCE Patient Care Encounter	GETPATSA	PXSPECAUTH	do	1
 PXBAPI21	PCE Patient Care Encounter	INP	SDAM2	func	2
-PXBAPI21	PCE Patient Care Encounter	ONE	PXBAPI22	do	1
 PXBAPI21	PCE Patient Care Encounter	REQ	SDM1A	func	2
 PXBAPI21	PCE Patient Care Encounter	SC	PXCEVFI2	do	1
-PXBAPI21	PCE Patient Care Encounter	SEQ	SDCO21	func	1
+PXBAPI21	PCE Patient Care Encounter	SC	SDSCAPI	func	1
 PXBAPI21	PCE Patient Care Encounter	YN	DICN	do	1
 PXBAPI22	PCE Patient Care Encounter		DIK	do	1
 PXBAPI22	PCE Patient Care Encounter		DIR	do	1
@@ -169642,6 +170784,7 @@ PXBGPL2	PCE Patient Care Encounter	WIN17	PXBCC	do	3
 PXBGPOV	PCE Patient Care Encounter	CSDATE	PXDXUTL	func	2
 PXBGPOV	PCE Patient Care Encounter	DXNARR	PXUTL1	func	1
 PXBGPOV	PCE Patient Care Encounter	EN	DIQ1	do	1
+PXBGPOV	PCE Patient Care Encounter	GETSAFORVPOV	PXSPECAUTH	do	1
 PXBGPOV	PCE Patient Care Encounter	ICDDATA	ICDXCODE	func	2
 PXBGPOV	PCE Patient Care Encounter	PL	PXBGPL	do	1
 PXBGPOV2	PCE Patient Care Encounter		DIR	do	3
@@ -170001,11 +171144,13 @@ PXBPWCH	PCE Patient Care Encounter	TERM	PXBCC	do	1
 PXBSTOR	PCE Patient Care Encounter	CPT	ICPTCOD	func	1
 PXBSTOR	PCE Patient Care Encounter	CSDATE	PXDXUTL	func	2
 PXBSTOR	PCE Patient Care Encounter	DXNARR	PXUTL1	func	2
+PXBSTOR	PCE Patient Care Encounter	GETSAFORVPOVDET	PXSPECAUTH	do	1
 PXBSTOR	PCE Patient Care Encounter	PROVNARR	PXAPI	func	3
 PXBSTOR	PCE Patient Care Encounter	SET	PXBSTOR1	func	1
 PXBSTOR	PCE Patient Care Encounter	SWSTAT	IBBAPI	func	1
 PXBSTOR	PCE Patient Care Encounter	XLATE	PXBGPOV	func	1
 PXBSTOR1	PCE Patient Care Encounter	EN1	PXKMAIN	do	1
+PXBSTOR1	PCE Patient Care Encounter	GETSAFORVPOVDET	PXSPECAUTH	do	1
 PXBSTOR1	PCE Patient Care Encounter	STOPCODE	PXUTLSTP	func	1
 PXBUTL	PCE Patient Care Encounter	CPT	ICPTCOD	func	2
 PXBUTL	PCE Patient Care Encounter	EN	DIQ1	do	3
@@ -170182,6 +171327,9 @@ PXCEAE1	PCE Patient Care Encounter	DISPLY01	PXCEPOV	func	1
 PXCEAE1	PCE Patient Care Encounter	DISPVIS	PXCEVIS	func	1
 PXCEAE1	PCE Patient Care Encounter	EXTERNAL	DILFD	func	1
 PXCEAE1	PCE Patient Care Encounter	FULL	VALM1	do	1
+PXCEAE1	PCE Patient Care Encounter	GETSAFORVISITDET	PXSPECAUTH	do	1
+PXCEAE1	PCE Patient Care Encounter	GETSAFORVPOVDET	PXSPECAUTH	do	1
+PXCEAE1	PCE Patient Care Encounter	GETZERO	PXSPECAUTH	func	1
 PXCEAE1	PCE Patient Care Encounter	ONEVCPT	PXPNARR	do	1
 PXCEAE1	PCE Patient Care Encounter	ONEVPOV	PXPNARR	do	1
 PXCEAE1	PCE Patient Care Encounter	WRAP	PXCEVFI4	do	1
@@ -170189,6 +171337,11 @@ PXCEAE2	PCE Patient Care Encounter		DIR	do	3
 PXCEAE2	PCE Patient Care Encounter	WAIT	PXCEHELP	do	4
 PXCEAPPM	PCE Patient Care Encounter	DISPLY01	PXCESIT	func	1
 PXCEC800	PCE Patient Care Encounter	CLASS	PXBAPI21	do	2
+PXCEC800	PCE Patient Care Encounter	GETCODE	PXSPECAUTH	func	1
+PXCEC800	PCE Patient Care Encounter	SETOLD800	PXSPECAUTH	do	1
+PXCECCLS	PCE Patient Care Encounter	FINDBYCODE	PXSPECAUTH	func	1
+PXCECCLS	PCE Patient Care Encounter	GETCODE	PXSPECAUTH	func	1
+PXCECCLS	PCE Patient Care Encounter	GETSAFORVPOVDET	PXSPECAUTH	do	1
 PXCECCLS	PCE Patient Care Encounter	UPD	VSIT	do	2
 PXCECPT	PCE Patient Care Encounter		DIE	do	2
 PXCECPT	PCE Patient Care Encounter		DIK	do	1
@@ -170421,6 +171574,7 @@ PXCEVFI2	PCE Patient Care Encounter		DIR	do	1
 PXCEVFI2	PCE Patient Care Encounter	CANDEL	PXCESK	func	1
 PXCEVFI2	PCE Patient Care Encounter	EN1	PXKMAIN	do	2
 PXCEVFI2	PCE Patient Care Encounter	EVENT	PXKMAIN	do	1
+PXCEVFI2	PCE Patient Care Encounter	GETSAFORVISITDET	PXSPECAUTH	do	1
 PXCEVFI2	PCE Patient Care Encounter	KILL	VSITKIL	func	1
 PXCEVFI2	PCE Patient Care Encounter	PAUSE	PXCEHELP	do	2
 PXCEVFI2	PCE Patient Care Encounter	SAVE	PXCESK	do	1
@@ -170447,6 +171601,8 @@ PXCEVFIL	PCE Patient Care Encounter	EVIS	PXCEVIS	do	1
 PXCEVFIL	PCE Patient Care Encounter	FILE	DICN	do	1
 PXCEVFIL	PCE Patient Care Encounter	FMDATE	SCDXUTL	func	1
 PXCEVFIL	PCE Patient Care Encounter	FULL	VALM1	do	1
+PXCEVFIL	PCE Patient Care Encounter	GETSAFORVISITDET	PXSPECAUTH	do	1
+PXCEVFIL	PCE Patient Care Encounter	GETSAFORVPOVDET	PXSPECAUTH	do	1
 PXCEVFIL	PCE Patient Care Encounter	PATINFO	PXCEPAT	do	1
 PXCEVFIL	PCE Patient Care Encounter	SAVE	PXCEVFI2	do	1
 PXCEVFIL	PCE Patient Care Encounter	VSTAPPT	PXUTL1	func	1
@@ -170889,8 +172045,14 @@ PXIPREI	PCE Patient Care Encounter		DIC	do	1
 PXIPREI	PCE Patient Care Encounter	FILE	DICN	do	1
 PXKCO	PCE Patient Care Encounter	UPD	VSIT	do	1
 PXKENC	PCE Patient Care Encounter	ENCEVENT	PXKENCOUNTER	do	1
+PXKENC	PCE Patient Care Encounter	GETSAFORVISITDET	PXSPECAUTH	do	1
+PXKENC	PCE Patient Care Encounter	GETSAFORVPOVDET	PXSPECAUTH	do	2
+PXKENCOUNTER	PCE Patient Care Encounter	GETSAFORVISITDET	PXSPECAUTH	do	3
+PXKENCOUNTER	PCE Patient Care Encounter	GETSAFORVPOVDET	PXSPECAUTH	do	2
 PXKFCPT1	PCE Patient Care Encounter	CPT	ICPTCOD	func	2
 PXKFCPT1	PCE Patient Care Encounter	GET1	DIQ	func	1
+PXKFPOV	PCE Patient Care Encounter	BLDFDA	PXSPECAUTH	do	1
+PXKFPOV	PCE Patient Care Encounter	FILE	DIE	do	1
 PXKFPOV1	PCE Patient Care Encounter	CSDATE	PXDXUTL	func	1
 PXKFPOV1	PCE Patient Care Encounter	DXNARR	PXUTL1	func	1
 PXKFPOV1	PCE Patient Care Encounter	PROVNARR	PXAPI	func	1
@@ -170932,6 +172094,7 @@ PXKMAIN1	PCE Patient Care Encounter	LOOP	PXKMOD	do	1
 PXKMAIN1	PCE Patient Care Encounter	NOW	XLFDT	func	2
 PXKMAIN1	PCE Patient Care Encounter	UPD	PXKFVST	do	1
 PXKMAIN1	PCE Patient Care Encounter	UPD	PXKMOD	do	1
+PXKMAIN1	PCE Patient Care Encounter	UPDATE900	PXKFPOV	do	1
 PXKMAIN2	PCE Patient Care Encounter	CODEN	ICDEX	func	1
 PXKMAIN2	PCE Patient Care Encounter	CODEN	ICPTCOD	func	1
 PXKMAIN2	PCE Patient Care Encounter	EN1	PXKMAIN	do	1
@@ -170945,6 +172108,9 @@ PXKMASC	PCE Patient Care Encounter	EN	XQOR	do	2
 PXKMASC	PCE Patient Care Encounter	FINAL	SCDXHLDR	do	1
 PXKMASC	PCE Patient Care Encounter	GETACCT	IBBAPI	func	1
 PXKMASC	PCE Patient Care Encounter	GETARN	SDPFSS2	func	1
+PXKMASC	PCE Patient Care Encounter	GETSAFORVISITDET	PXSPECAUTH	do	3
+PXKMASC	PCE Patient Care Encounter	GETSAFORVPOVDET	PXSPECAUTH	do	2
+PXKMASC	PCE Patient Care Encounter	NODETOCODE	PXSPECAUTH	func	1
 PXKMASC	PCE Patient Care Encounter	NOW	XLFDT	func	1
 PXKMASC	PCE Patient Care Encounter	ORACTREF	ORWPFSS	do	1
 PXKMASC	PCE Patient Care Encounter	PKG2IEN	VSIT	func	1
@@ -171441,6 +172607,11 @@ PXRMASU	Clinical Reminders	NOW	PXRMDATE	func	1
 PXRMASU	Clinical Reminders	OVERLAP	PXRMINDX	func	1
 PXRMASU	Clinical Reminders	SUBCLASS	USRLM	func	1
 PXRMASU	Clinical Reminders	WHATIS	USRLM	do	1
+PXRMBANNER	Clinical Reminders	DEF	PXRMLDR	do	1
+PXRMBANNER	Clinical Reminders	EVAL	PXRM	do	1
+PXRMBANNER	Clinical Reminders	FINDING	PXRMFNFT	do	1
+PXRMBANNER	Clinical Reminders	NOW	XLFDT	func	1
+PXRMBANNER	Clinical Reminders	STATUS	PXRMBANNER	func	1
 PXRMBMI	Clinical Reminders	EDATE	PXRMDATE	func	2
 PXRMBMI	Clinical Reminders	FMDIFF	XLFDT	func	2
 PXRMBMI	Clinical Reminders	GETDATA	PXRMVITL	do	3
@@ -172379,7 +173550,7 @@ PXRMEXCO	Clinical Reminders	CORDER	PXRMEXCO	do	1
 PXRMEXCO	Clinical Reminders	GETTAG	PXRMEXU3	func	1
 PXRMEXCO	Clinical Reminders	GETTAGV	PXRMEXU3	func	9
 PXRMEXCO	Clinical Reminders	ORDER	PXRMEXPD	do	1
-PXRMEXCO	Clinical Reminders	PACKORD	PXRMEXPD	do	1
+PXRMEXCO	Clinical Reminders	PACKORD	PXRMEXFILELIST	do	1
 PXRMEXCO	Clinical Reminders	PATTR	PXRMEXU2	func	1
 PXRMEXCS	Clinical Reminders	CLDIQOUT	PXRMEXPD	do	1
 PXRMEXCS	Clinical Reminders	CRC32	XLFCRC	func	8
@@ -172409,6 +173580,7 @@ PXRMEXFI	Clinical Reminders	GETUNAME	PXRMEXIU	func	1
 PXRMEXFI	Clinical Reminders	OBJBYIEN	TIUCHECK	do	1
 PXRMEXFI	Clinical Reminders	ROOT	DILFD	func	2
 PXRMEXFI	Clinical Reminders	TIU	PXRMEXU5	do	1
+PXRMEXFILELIST	Clinical Reminders	GET1	DID	func	14
 PXRMEXHF	Clinical Reminders		DIR	do	6
 PXRMEXHF	Clinical Reminders	DESC	PXRMEXU1	do	1
 PXRMEXHF	Clinical Reminders	DESC	PXRMEXU3	do	1
@@ -172422,7 +173594,7 @@ PXRMEXHF	Clinical Reminders	PWD	%ZISH	func	2
 PXRMEXHF	Clinical Reminders	REXISTS	PXRMEXIU	func	1
 PXRMEXHF	Clinical Reminders	RIEN	PXRMEXU1	func	2
 PXRMEXHF	Clinical Reminders	UPDATE	PXRMEXPU	do	1
-PXRMEXIC	Clinical Reminders	AWRITE	PXRMUTIL	do	2
+PXRMEXIC	Clinical Reminders	AWRITE	PXRMUTIL	do	3
 PXRMEXIC	Clinical Reminders	BLD30N	PXRMTAXD	do	1
 PXRMEXIC	Clinical Reminders	BLDALL	PXRMLOGX	do	1
 PXRMEXIC	Clinical Reminders	CPPCLS	PXRMLOGX	do	1
@@ -172434,6 +173606,7 @@ PXRMEXIC	Clinical Reminders	DIALOGGF	PXRMEXU5	do	1
 PXRMEXIC	Clinical Reminders	DLG	PXRMEXU4	do	1
 PXRMEXIC	Clinical Reminders	DLINKSAV	PXRMEXU5	do	1
 PXRMEXIC	Clinical Reminders	EDU	PXRMEXIU	do	1
+PXRMEXIC	Clinical Reminders	EN	PXRMEXUINFOPNL	do	1
 PXRMEXIC	Clinical Reminders	EXAM	PXRMEXIU	do	1
 PXRMEXIC	Clinical Reminders	EXCH	PXRMTXCR	do	1
 PXRMEXIC	Clinical Reminders	FIELD	DID	do	4
@@ -172441,6 +173614,7 @@ PXRMEXIC	Clinical Reminders	FIND1	DIC	func	1
 PXRMEXIC	Clinical Reminders	FMTE	XLFDT	func	1
 PXRMEXIC	Clinical Reminders	GETTAGV	PXRMEXU3	func	1
 PXRMEXIC	Clinical Reminders	HF	PXRMEXIU	do	1
+PXRMEXIC	Clinical Reminders	KILLUPDATING	ORIUTL	do	1
 PXRMEXIC	Clinical Reminders	LOC	PXRMEXU0	do	1
 PXRMEXIC	Clinical Reminders	LOIEN	PXRMEXU5	func	3
 PXRMEXIC	Clinical Reminders	MES	XPDUTL	do	2
@@ -172454,6 +173628,7 @@ PXRMEXIC	Clinical Reminders	SFNFTC	PXRMEXU0	do	1
 PXRMEXIC	Clinical Reminders	SPDS	PXRMPDS	do	1
 PXRMEXIC	Clinical Reminders	TAX	PXRMEXU0	do	1
 PXRMEXIC	Clinical Reminders	TIUOBJ	PXRMEXIU	do	1
+PXRMEXIC	Clinical Reminders	UP	XLFSTR	func	1
 PXRMEXIC	Clinical Reminders	UPDATE	DIE	do	2
 PXRMEXID	Clinical Reminders		DIE	do	3
 PXRMEXID	Clinical Reminders	ASK	PXRMEXIX	do	1
@@ -172614,16 +173789,19 @@ PXRMEXPD	Clinical Reminders	DEF	PXRMICHK	func	1
 PXRMEXPD	Clinical Reminders	DIALOGGF	PXRMEXPU	do	1
 PXRMEXPD	Clinical Reminders	DIQOUTCS	PXRMEXCS	func	1
 PXRMEXPD	Clinical Reminders	EN	DIWE	do	1
+PXRMEXPD	Clinical Reminders	FILELIST	PXRMEXFILELIST	do	1
 PXRMEXPD	Clinical Reminders	FLDNUM	DILFD	func	2
 PXRMEXPD	Clinical Reminders	FMTE	XLFDT	func	1
 PXRMEXPD	Clinical Reminders	FORMAT	PXRMTEXT	do	1
-PXRMEXPD	Clinical Reminders	GET1	DID	func	16
+PXRMEXPD	Clinical Reminders	GET1	DID	func	3
 PXRMEXPD	Clinical Reminders	GET1	DIQ	func	6
 PXRMEXPD	Clinical Reminders	GETENV	%ZOSV	do	1
+PXRMEXPD	Clinical Reminders	GETNATIONAL	ORIUTL	func	1
 PXRMEXPD	Clinical Reminders	GETS	DIQ	do	1
 PXRMEXPD	Clinical Reminders	GETSRTN	PXRMEXPS	func	1
 PXRMEXPD	Clinical Reminders	IOKTP	PXRMEXFI	func	1
 PXRMEXPD	Clinical Reminders	NOW	XLFDT	func	1
+PXRMEXPD	Clinical Reminders	PACKORD	PXRMEXFILELIST	do	1
 PXRMEXPD	Clinical Reminders	REPEAT	XLFSTR	func	2
 PXRMEXPD	Clinical Reminders	RETARR	PXRMDLRP	func	1
 PXRMEXPD	Clinical Reminders	RJ	XLFSTR	func	1
@@ -172689,14 +173867,13 @@ PXRMEXSP	Clinical Reminders	BMES	XPDUTL	do	3
 PXRMEXSP	Clinical Reminders	CMPLIST	PXRMEXPD	do	1
 PXRMEXSP	Clinical Reminders	DEF	PXRMICHK	func	1
 PXRMEXSP	Clinical Reminders	EXISTS	PXRMEXIU	func	1
-PXRMEXSP	Clinical Reminders	FILELIST	PXRMEXRP	do	1
+PXRMEXSP	Clinical Reminders	FILELIST	PXRMEXFILELIST	do	2
 PXRMEXSP	Clinical Reminders	FMTE	XLFDT	func	1
 PXRMEXSP	Clinical Reminders	FORMAT	PXRMTEXT	do	1
-PXRMEXSP	Clinical Reminders	GET1	DID	func	14
 PXRMEXSP	Clinical Reminders	NOW	XLFDT	func	1
 PXRMEXSP	Clinical Reminders	ORDER	PXRMEXPD	do	1
 PXRMEXSP	Clinical Reminders	PACK	PXRMEXPD	do	1
-PXRMEXSP	Clinical Reminders	PACKORD	PXRMEXPD	do	1
+PXRMEXSP	Clinical Reminders	PACKORD	PXRMEXFILELIST	do	1
 PXRMEXSP	Clinical Reminders	PATTR	PXRMEXPD	do	1
 PXRMEXSP	Clinical Reminders	PROC120	PXRMEXRP	do	1
 PXRMEXSP	Clinical Reminders	PUTSRC	PXRMEXPD	do	1
@@ -172756,6 +173933,15 @@ PXRMEXU5	Clinical Reminders	GETACT	PXRMEXIU	func	1
 PXRMEXU5	Clinical Reminders	GETS	DIQ	do	1
 PXRMEXU5	Clinical Reminders	MES	XPDUTL	do	1
 PXRMEXU5	Clinical Reminders	RMEH	PXRMEXPU	do	1
+PXRMEXUINFOPNL	Clinical Reminders		DIK	do	1
+PXRMEXUINFOPNL	Clinical Reminders	BMES	XPDUTL	do	5
+PXRMEXUINFOPNL	Clinical Reminders	CRE	PXRMEXSP	do	1
+PXRMEXUINFOPNL	Clinical Reminders	EXISTS	PXRMEXIU	func	1
+PXRMEXUINFOPNL	Clinical Reminders	FMTE	XLFDT	func	1
+PXRMEXUINFOPNL	Clinical Reminders	GETNATIONAL	ORIUTL	func	1
+PXRMEXUINFOPNL	Clinical Reminders	KILLNATIONAL	ORIUTL	do	1
+PXRMEXUINFOPNL	Clinical Reminders	NOW	XLFDT	func	2
+PXRMEXUINFOPNL	Clinical Reminders	SETUPDATING	ORIUTL	do	1
 PXRMEXWB	Clinical Reminders		DIR	do	1
 PXRMEXWB	Clinical Reminders	EN	DDIOL	do	1
 PXRMEXWB	Clinical Reminders	GETURL	XTHC10	func	1
@@ -173001,7 +174187,7 @@ PXRMGEN	Clinical Reminders	KILL	%ZISS	do	1
 PXRMGEN	Clinical Reminders	RESN	PXRMRESN	do	1
 PXRMGEN	Clinical Reminders	SHFR	PXRMSHF	do	1
 PXRMGEV	Clinical Reminders		%DT	do	1
-PXRMGEV	Clinical Reminders	ERROR	PXRMGEVA	do	20
+PXRMGEV	Clinical Reminders	ERROR	PXRMGEVA	do	23
 PXRMGEV	Clinical Reminders	FINDDGS	PXRMGEVA	do	1
 PXRMGEV	Clinical Reminders	GETOIS	PXRMGEVA	do	1
 PXRMGEV	Clinical Reminders	GTORDERS	PXRMGEVA	do	1
@@ -173011,12 +174197,15 @@ PXRMGEVA	Clinical Reminders	EN	ORQ1	do	1
 PXRMGEVA	Clinical Reminders	EN	ORX8	do	1
 PXRMGEVA	Clinical Reminders	EVAL	PXRM	do	1
 PXRMGEVA	Clinical Reminders	GETGRPS	PXRMORCH	do	1
+PXRMGEVA	Clinical Reminders	IEVALTER	PXRMTERM	do	1
 PXRMGEVA	Clinical Reminders	NOW	XLFDT	func	2
 PXRMGEVA	Clinical Reminders	OIS	ORX8	do	2
 PXRMGEVA	Clinical Reminders	ORDERCHK	PXRMORCH	do	1
 PXRMGEVA	Clinical Reminders	ORDERGRP	PXRMORCH	do	1
+PXRMGEVA	Clinical Reminders	OUTPUT	PXRMTERM	do	1
 PXRMGEVA	Clinical Reminders	PKGID	ORX8	func	1
 PXRMGEVA	Clinical Reminders	RUN	PXRMLCR	do	1
+PXRMGEVA	Clinical Reminders	TERM	PXRMLDR	do	1
 PXRMGEVA	Clinical Reminders	UPDATE	DIE	do	1
 PXRMGEVA	Clinical Reminders	VALUE	ORX8	func	1
 PXRMHF	Clinical Reminders	COLFMT	PXRMTEXT	do	1
@@ -173160,9 +174349,9 @@ PXRMINQ	Clinical Reminders	NOW	XLFDT	func	2
 PXRMINQ	Clinical Reminders	PWD	%ZISH	func	1
 PXRMINTR	Clinical Reminders	CTFMD	PXRMDATE	func	1
 PXRMINTR	Clinical Reminders	DT	DILF	do	1
-PXRMINTR	Clinical Reminders	EN	DDIOL	do	21
+PXRMINTR	Clinical Reminders	EN	DDIOL	do	23
 PXRMINTR	Clinical Reminders	EXTERNAL	DILFD	func	2
-PXRMINTR	Clinical Reminders	UP	XLFSTR	func	4
+PXRMINTR	Clinical Reminders	UP	XLFSTR	func	5
 PXRMIOPT	Clinical Reminders	BLDALIST	PXRMVPTR	do	1
 PXRMIOPT	Clinical Reminders	EDATE	PXRMDATE	func	1
 PXRMIOPT	Clinical Reminders	EVAL	PXRMEVFI	do	1
@@ -174491,6 +175680,10 @@ PXRMP86I	Clinical Reminders	DUPFIX	PXRMDLGBREPAIR	do	1
 PXRMP86I	Clinical Reminders	OPTIONS	PXRMUTIL	do	2
 PXRMP86I	Clinical Reminders	PROTCOLS	PXRMUTIL	do	2
 PXRMP86I	Clinical Reminders	SENDIM	PXRMMSG	do	1
+PXRMP87I	Clinical Reminders		DIE	do	2
+PXRMP87I	Clinical Reminders	BMES	XPDUTL	do	5
+PXRMP87I	Clinical Reminders	DELEXE	PXRMEXSI	do	1
+PXRMP87I	Clinical Reminders	SMEXINS	PXRMEXSI	do	1
 PXRMP88I	Clinical Reminders	DUPFIX	PXRMDLGBREPAIR	do	1
 PXRMP88I	Clinical Reminders	OPTIONS	PXRMUTIL	do	2
 PXRMP88I	Clinical Reminders	PROTCOLS	PXRMUTIL	do	2
@@ -175736,6 +176929,7 @@ PXRPC1	PCE Patient Care Encounter	CSI	ICDEX	func	1
 PXRPC1	PCE Patient Care Encounter	CTRL	XMXUTIL1	func	1
 PXRPC1	PCE Patient Care Encounter	CVXTOIEN	PXAPIIM	do	1
 PXRPC1	PCE Patient Care Encounter	EXP	LEXCODE	func	1
+PXRPC1	PCE Patient Care Encounter	FINDBYCODE	PXSPECAUTH	func	1
 PXRPC1	PCE Patient Care Encounter	IMMDSG	PXRPC	func	1
 PXRPC1	PCE Patient Care Encounter	IMMLOC	PXRPC	func	2
 PXRPC1	PCE Patient Care Encounter	IMMLOT	PXRPC	func	1
@@ -176149,6 +177343,13 @@ PXSMAN	PCE Patient Care Encounter	GET1	DID	func	1
 PXSMAN	PCE Patient Care Encounter	HLP	DDSUTL	do	2
 PXSMAN	PCE Patient Care Encounter	STRREP	PXUTIL	func	1
 PXSMAN	PCE Patient Care Encounter	WPNCHAR	PXSMAN	func	1
+PXSPECAUTH	PCE Patient Care Encounter	DECODE	XLFJSON	do	1
+PXSPECAUTH	PCE Patient Care Encounter	ENCODE	XLFJSON	do	3
+PXSPECAUTH	PCE Patient Care Encounter	FILE	DICN	do	1
+PXSPECAUTH	PCE Patient Care Encounter	FMDIFF	XLFDT	func	2
+PXSPECAUTH	PCE Patient Care Encounter	GET1	DIQ	func	7
+PXSPECAUTH	PCE Patient Care Encounter	INSTALDT	XPDUTL	func	2
+PXSPECAUTH	PCE Patient Care Encounter	SCCOND	PXUTLSCC	do	1
 PXTTEDC	PCE Patient Care Encounter		DIC	do	1
 PXTTEDC	PCE Patient Care Encounter		DIE	do	2
 PXTTEDC	PCE Patient Care Encounter		DIK	do	1
@@ -176200,7 +177401,9 @@ PXUTLSCC	PCE Patient Care Encounter	EXAE	SDOE	func	1
 PXUTLSCC	PCE Patient Care Encounter	EXOE	SDCOU2	func	1
 PXUTLSCC	PCE Patient Care Encounter	GETOE	SDOE	func	1
 PXUTLSCC	PCE Patient Care Encounter	INP	SDAM2	func	1
+PXUTLSCC	PCE Patient Care Encounter	NODETOCODE	PXSPECAUTH	func	1
 PXUTLSCC	PCE Patient Care Encounter	REQ	SDM1A	func	1
+PXUTLSCC	PCE Patient Care Encounter	VALSA	PXAIVSTV	do	1
 PXUTLSTP	PCE Patient Care Encounter	CHLD	SDCODEL	do	1
 PXUTLSTP	PCE Patient Care Encounter	DEC	VSITKIL	func	1
 PXUTLSTP	PCE Patient Care Encounter	EN1	PXKMAIN	do	1
@@ -182508,7 +183711,8 @@ RCDMCR6A	Accounts Receivable	ULINE	RCDMCUT2	do	1
 RCDMCR6B	Accounts Receivable	DEM	VADPT	do	1
 RCDMCR6B	Accounts Receivable	DMCELIG	RCDMCUT1	func	1
 RCDMCR6B	Accounts Receivable	FIRSTPAR	RCDMCUT1	func	1
-RCDMCR6B	Accounts Receivable	GET1	DIQ	func	4
+RCDMCR6B	Accounts Receivable	GET1	DIQ	func	3
+RCDMCR6B	Accounts Receivable	GETEFFDT	RCDMCRUT	func	1
 RCDMCR6B	Accounts Receivable	GETIB	RCDMCR4B	func	2
 RCDMCR6B	Accounts Receivable	KVAR	VADPT	do	4
 RCDMCR6B	Accounts Receivable	STOPIT	RCDMCUT2	func	2
@@ -182563,6 +183767,11 @@ RCDMCR8C	Accounts Receivable	IN5	VADPT	do	1
 RCDMCR8C	Accounts Receivable	KVAR	VADPT	do	3
 RCDMCR8C	Accounts Receivable	PARENTC	RCDMCR5B	func	1
 RCDMCR8C	Accounts Receivable	PARENTE	RCDMCR5B	func	1
+RCDMCRUT	Accounts Receivable	FINDCUR	DGENA	func	1
+RCDMCRUT	Accounts Receivable	GET	DGENA	func	1
+RCDMCRUT	Accounts Receivable	GETS	DIQ	do	1
+RCDMCRUT	Accounts Receivable	PRIORITY	DGENA	func	1
+RCDMCRUT	Accounts Receivable	STATUS	DGENA	func	1
 RCDMCUT1	Accounts Receivable		DIE	do	1
 RCDMCUT1	Accounts Receivable	DEM	VADPT	do	1
 RCDMCUT1	Accounts Receivable	DMCELIG	RCDMCUT1	func	1
@@ -192253,6 +193462,202 @@ RMPSCON	Prosthetics	BALUP	PRCH58	do	1
 RMPSCON	Prosthetics	DEM	VADPT	do	1
 RMPSCON	Prosthetics	KILL	XUSCLEAN	do	1
 RMPSCON	Prosthetics	NOW	%DTC	do	2
+RMPV0RMPRDIS	Prosthetics Vision 4 Sight II		DIK	do	1
+RMPV0RMPRDIS	Prosthetics Vision 4 Sight II	%DIC	RMPVFM	do	2
+RMPV0RMPRDIS	Prosthetics Vision 4 Sight II	%DIE	RMPVFM	do	4
+RMPV0RMPRDIS	Prosthetics Vision 4 Sight II	%DIR	RMPVFM	do	5
+RMPV0RMPRDIS	Prosthetics Vision 4 Sight II	ASK1	RMPV0RMPRPAT	goto	1
+RMPV0RMPRDIS	Prosthetics Vision 4 Sight II	FILEDICN	RMPVFM	do	1
+RMPV0RMPRDIS	Prosthetics Vision 4 Sight II	GETPAT	RMPV0RMPRUTIL	do	2
+RMPV0RMPRDIS	Prosthetics Vision 4 Sight II	IX1	DIK	do	1
+RMPV0RMPRDIS	Prosthetics Vision 4 Sight II	WRITE	RMPVIO	do	1
+RMPV0RMPRDIS	Prosthetics Vision 4 Sight II	WRITECTL	RMPVIO	do	20
+RMPV0RMPROP	Prosthetics Vision 4 Sight II		DIK	do	1
+RMPV0RMPROP	Prosthetics Vision 4 Sight II		RMPR21	do	5
+RMPV0RMPROP	Prosthetics Vision 4 Sight II		RMPRE21	do	1
+RMPV0RMPROP	Prosthetics Vision 4 Sight II		RMPV0RMPRPIYI	do	1
+RMPV0RMPROP	Prosthetics Vision 4 Sight II	%DIC	RMPVFM	do	1
+RMPV0RMPROP	Prosthetics Vision 4 Sight II	%DIR	RMPVFM	do	2
+RMPV0RMPROP	Prosthetics Vision 4 Sight II	DEL	RMPRPCED	func	1
+RMPV0RMPROP	Prosthetics Vision 4 Sight II	DIV4	RMPV0RMPRSIT	do	8
+RMPV0RMPROP	Prosthetics Vision 4 Sight II	EN	RMPRDP	do	1
+RMPV0RMPROP	Prosthetics Vision 4 Sight II	KILL	XUSCLEAN	do	1
+RMPV0RMPROP	Prosthetics Vision 4 Sight II	TYP1	RMPRE29	do	1
+RMPV0RMPROP	Prosthetics Vision 4 Sight II	WRITECTL	RMPVIO	do	3
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II		RMPRPAT2	goto	1
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II		RMPRPAT5	goto	1
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II	%DIR	RMPVFM	do	3
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II	%XY	%RCR	do	1
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II	ADD	VADPT	do	2
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II	ASK1	RMPRPAT1	do	1
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II	DEM	VADPT	do	2
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II	DIS	RMPV0RMPRPAT5	do	2
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II	DISP	RMPRPAT5	do	1
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II	DU	RMPRAINQ	goto	1
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II	ELIG	VADPT	do	2
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II	EN	RMPV0RMPRDIS	goto	1
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II	GETPAT	RMPV0RMPRUTIL	do	1
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II	HELP	RMPRPAT1	do	1
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II	HOMEZIS	RMPVRT	do	1
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II	KVAR	VADPT	do	1
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II	MB	VADPT	do	1
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II	NPC	RMPRPAT5	do	1
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II	OAD	VADPT	do	1
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II	READCTL	RMPVIO	do	1
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II	SVC	VADPT	do	1
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II	WRITE	RMPVIO	do	22
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II	WRITECTL	RMPVIO	do	37
+RMPV0RMPRPAT	Prosthetics Vision 4 Sight II	WRITEIND	RMPVIO	do	7
+RMPV0RMPRPAT5	Prosthetics Vision 4 Sight II	%DIE	RMPVFM	do	1
+RMPV0RMPRPAT5	Prosthetics Vision 4 Sight II	ASK1	RMPV0RMPRPAT	goto	1
+RMPV0RMPRPAT5	Prosthetics Vision 4 Sight II	EN	RMPV0RMPRDIS	do	1
+RMPV0RMPRPAT5	Prosthetics Vision 4 Sight II	ENDIWE	RMPVFM	do	1
+RMPV0RMPRPAT5	Prosthetics Vision 4 Sight II	GETPAT	RMPV0RMPRUTIL	do	1
+RMPV0RMPRPAT5	Prosthetics Vision 4 Sight II	WRITE	RMPVIO	do	2
+RMPV0RMPRPAT5	Prosthetics Vision 4 Sight II	WRITECTL	RMPVIO	do	16
+RMPV0RMPRPAT5	Prosthetics Vision 4 Sight II	WRITEIND	RMPVIO	do	2
+RMPV0RMPRPAT5	Prosthetics Vision 4 Sight II	YNDICN	RMPVFM	do	1
+RMPV0RMPRPIYE	Prosthetics Vision 4 Sight II		RMPRPIYK	do	2
+RMPV0RMPRPIYE	Prosthetics Vision 4 Sight II		RMPV0RMPRPIYF	goto	1
+RMPV0RMPRPIYE	Prosthetics Vision 4 Sight II	%DIC	RMPVFM	do	2
+RMPV0RMPRPIYE	Prosthetics Vision 4 Sight II	%DIR	RMPVFM	do	8
+RMPV0RMPRPIYE	Prosthetics Vision 4 Sight II	%XY	%RCR	do	2
+RMPV0RMPRPIYE	Prosthetics Vision 4 Sight II	CHK	RMPRED5	do	2
+RMPV0RMPRPIYE	Prosthetics Vision 4 Sight II	CO	RMPV0RMPRPIYE	goto	6
+RMPV0RMPRPIYE	Prosthetics Vision 4 Sight II	CPT	RMPRCPTU	do	2
+RMPV0RMPRPIYE	Prosthetics Vision 4 Sight II	DD	%DT	do	2
+RMPV0RMPRPIYE	Prosthetics Vision 4 Sight II	DEL1	RMPRPIYF	goto	2
+RMPV0RMPRPIYE	Prosthetics Vision 4 Sight II	DEM	VADPT	do	1
+RMPV0RMPRPIYE	Prosthetics Vision 4 Sight II	EXIT	RMPRPIYF	goto	7
+RMPV0RMPRPIYE	Prosthetics Vision 4 Sight II	HCPCS	RMPV0RMPRPIYE	goto	1
+RMPV0RMPRPIYE	Prosthetics Vision 4 Sight II	HCPCS3	RMPRPIY1	do	1
+RMPV0RMPRPIYE	Prosthetics Vision 4 Sight II	HOMEZIS	RMPVRT	do	1
+RMPV0RMPRPIYE	Prosthetics Vision 4 Sight II	LOWBA	RMPRPIYI	do	1
+RMPV0RMPRPIYE	Prosthetics Vision 4 Sight II	POST	RMPRPIYF	goto	1
+RMPV0RMPRPIYE	Prosthetics Vision 4 Sight II	SCAN	RMPV0RMPRPIYS	do	1
+RMPV0RMPRPIYE	Prosthetics Vision 4 Sight II	WRITECTL	RMPVIO	do	7
+RMPV0RMPRPIYE	Prosthetics Vision 4 Sight II	WRITEIND	RMPVIO	do	1
+RMPV0RMPRPIYF	Prosthetics Vision 4 Sight II	%DIR	RMPVFM	do	4
+RMPV0RMPRPIYF	Prosthetics Vision 4 Sight II	CO	RMPV0RMPRPIYE	goto	5
+RMPV0RMPRPIYF	Prosthetics Vision 4 Sight II	CRE	RMPRPIX3	func	2
+RMPV0RMPRPIYF	Prosthetics Vision 4 Sight II	CRE	RMPRPIX6	func	2
+RMPV0RMPRPIYF	Prosthetics Vision 4 Sight II	CRE	RMPRPIX7	func	2
+RMPV0RMPRPIYF	Prosthetics Vision 4 Sight II	DD	%DT	do	1
+RMPV0RMPRPIYF	Prosthetics Vision 4 Sight II	DEL1	RMPRPIFD	goto	1
+RMPV0RMPRPIYF	Prosthetics Vision 4 Sight II	FIFO	RMPRPIUB	func	1
+RMPV0RMPRPIYF	Prosthetics Vision 4 Sight II	KILL	XUSCLEAN	do	1
+RMPV0RMPRPIYF	Prosthetics Vision 4 Sight II	NOW	%DTC	do	2
+RMPV0RMPRPIYF	Prosthetics Vision 4 Sight II	SET60	RMPRPIYE	do	1
+RMPV0RMPRPIYF	Prosthetics Vision 4 Sight II	UPALL	RMPRPIX3	func	1
+RMPV0RMPRPIYF	Prosthetics Vision 4 Sight II	UPCR	RMPRPIXJ	func	1
+RMPV0RMPRPIYF	Prosthetics Vision 4 Sight II	UPD	RMPRPIX2	func	1
+RMPV0RMPRPIYF	Prosthetics Vision 4 Sight II	UPD	RMPRPIX3	func	1
+RMPV0RMPRPIYF	Prosthetics Vision 4 Sight II	UPD	RMPRPIX6	func	2
+RMPV0RMPRPIYF	Prosthetics Vision 4 Sight II	UPD	RMPRPIX7	func	1
+RMPV0RMPRPIYF	Prosthetics Vision 4 Sight II	WRITECTL	RMPVIO	do	12
+RMPV0RMPRPIYI	Prosthetics Vision 4 Sight II		RMPV0RMPRPAT	do	1
+RMPV0RMPRPIYI	Prosthetics Vision 4 Sight II		RMPV0RMPRPIYI	goto	6
+RMPV0RMPRPIYI	Prosthetics Vision 4 Sight II		RMPV0RMPRPIYJ	goto	3
+RMPV0RMPRPIYI	Prosthetics Vision 4 Sight II	%DIC	RMPVFM	do	1
+RMPV0RMPRPIYI	Prosthetics Vision 4 Sight II	%DIR	RMPVFM	do	3
+RMPV0RMPRPIYI	Prosthetics Vision 4 Sight II	CPT	RMPRPIYS	do	1
+RMPV0RMPRPIYI	Prosthetics Vision 4 Sight II	DIV4	RMPV0RMPRSIT	do	1
+RMPV0RMPRPIYI	Prosthetics Vision 4 Sight II	EN	DDIOL	do	1
+RMPV0RMPRPIYI	Prosthetics Vision 4 Sight II	ETOI	RMPRPIX1	func	2
+RMPV0RMPRPIYI	Prosthetics Vision 4 Sight II	EXIT	RMPRPIYJ	goto	4
+RMPV0RMPRPIYI	Prosthetics Vision 4 Sight II	GETPAT	RMPV0RMPRUTIL	do	1
+RMPV0RMPRPIYI	Prosthetics Vision 4 Sight II	HCPCS	RMPRPIY1	do	1
+RMPV0RMPRPIYI	Prosthetics Vision 4 Sight II	HCPCS3	RMPRPIY1	do	1
+RMPV0RMPRPIYI	Prosthetics Vision 4 Sight II	HOMEZIS	RMPVRT	do	1
+RMPV0RMPRPIYI	Prosthetics Vision 4 Sight II	LINK	RMPRS	do	1
+RMPV0RMPRPIYI	Prosthetics Vision 4 Sight II	LIST	RMPV0RMPRPIYJ	goto	9
+RMPV0RMPRPIYI	Prosthetics Vision 4 Sight II	MIX	DIC1	do	1
+RMPV0RMPRPIYI	Prosthetics Vision 4 Sight II	SCAN	RMPV0RMPRPIYS	do	1
+RMPV0RMPRPIYI	Prosthetics Vision 4 Sight II	STOCK	RMPRPIUE	func	1
+RMPV0RMPRPIYI	Prosthetics Vision 4 Sight II	STOCK	RMPRPIUV	func	1
+RMPV0RMPRPIYI	Prosthetics Vision 4 Sight II	WRITE	RMPVIO	do	2
+RMPV0RMPRPIYI	Prosthetics Vision 4 Sight II	WRITECTL	RMPVIO	do	27
+RMPV0RMPRPIYI	Prosthetics Vision 4 Sight II	WRITEIND	RMPVIO	do	2
+RMPV0RMPRPIYJ	Prosthetics Vision 4 Sight II		RMPRPIYK	do	1
+RMPV0RMPRPIYJ	Prosthetics Vision 4 Sight II		RMPV0RMPRPIYI	goto	4
+RMPV0RMPRPIYJ	Prosthetics Vision 4 Sight II	%DIR	RMPVFM	do	7
+RMPV0RMPRPIYJ	Prosthetics Vision 4 Sight II	AMGR	RMPRPIX2	func	1
+RMPV0RMPRPIYJ	Prosthetics Vision 4 Sight II	CHK	RMPRED5	do	1
+RMPV0RMPRPIYJ	Prosthetics Vision 4 Sight II	DD	%DT	do	3
+RMPV0RMPRPIYJ	Prosthetics Vision 4 Sight II	ISS	RMPRPIU6	func	1
+RMPV0RMPRPIYJ	Prosthetics Vision 4 Sight II	KILL	XUSCLEAN	do	1
+RMPV0RMPRPIYJ	Prosthetics Vision 4 Sight II	LOWBA	RMPRPIYI	do	2
+RMPV0RMPRPIYJ	Prosthetics Vision 4 Sight II	RES	RMPV0RMPRPIYI	goto	2
+RMPV0RMPRPIYJ	Prosthetics Vision 4 Sight II	WRITE	RMPVIO	do	3
+RMPV0RMPRPIYJ	Prosthetics Vision 4 Sight II	WRITECTL	RMPVIO	do	8
+RMPV0RMPRPIYS	Prosthetics Vision 4 Sight II		%ZIS	do	1
+RMPV0RMPRPIYS	Prosthetics Vision 4 Sight II		%ZISC	do	1
+RMPV0RMPRPIYS	Prosthetics Vision 4 Sight II		%ZTLOAD	do	1
+RMPV0RMPRPIYS	Prosthetics Vision 4 Sight II	%DIR	RMPVFM	do	3
+RMPV0RMPRPIYS	Prosthetics Vision 4 Sight II	BAL	RMPRPIX7	func	1
+RMPV0RMPRPIYS	Prosthetics Vision 4 Sight II	CHK	RMPRED5	do	1
+RMPV0RMPRPIYS	Prosthetics Vision 4 Sight II	CPT	RMPRCPTU	do	2
+RMPV0RMPRPIYS	Prosthetics Vision 4 Sight II	ETOI	RMPRPIX1	func	1
+RMPV0RMPRPIYS	Prosthetics Vision 4 Sight II	ETOI	RMPRPIX7	func	2
+RMPV0RMPRPIYS	Prosthetics Vision 4 Sight II	GET	RMPRPIX1	func	1
+RMPV0RMPRPIYS	Prosthetics Vision 4 Sight II	GET	RMPRPIX6	func	1
+RMPV0RMPRPIYS	Prosthetics Vision 4 Sight II	HCPCS	RMPRPIY7	do	1
+RMPV0RMPRPIYS	Prosthetics Vision 4 Sight II	HPACT	RMPRPIX1	func	1
+RMPV0RMPRPIYS	Prosthetics Vision 4 Sight II	HPETOI	RMPRPIX1	func	1
+RMPV0RMPRPIYS	Prosthetics Vision 4 Sight II	ITEM	RMPRPIYP	do	1
+RMPV0RMPRPIYS	Prosthetics Vision 4 Sight II	KILL	XUSCLEAN	do	1
+RMPV0RMPRPIYS	Prosthetics Vision 4 Sight II	PVEN	RMPRPIYR	do	1
+RMPV0RMPRPIYS	Prosthetics Vision 4 Sight II	SCAN	RMPRPIUA	func	1
+RMPV0RMPRPIYS	Prosthetics Vision 4 Sight II	STN	RMPRPIY1	func	1
+RMPV0RMPRPIYS	Prosthetics Vision 4 Sight II	VNDIEN	RMPRPIX6	func	1
+RMPV0RMPRPIYS	Prosthetics Vision 4 Sight II	WRITE	RMPVIO	do	7
+RMPV0RMPRPIYS	Prosthetics Vision 4 Sight II	WRITECTL	RMPVIO	do	20
+RMPV0RMPRPIYS	Prosthetics Vision 4 Sight II	WRITEIND	RMPVIO	do	1
+RMPV0RMPRPIYS	Prosthetics Vision 4 Sight II	ZPLII	RMPRPI11	do	1
+RMPV0RMPRUTIL	Prosthetics Vision 4 Sight II		RMPRSIT	do	1
+RMPV0RMPRUTIL	Prosthetics Vision 4 Sight II	%DIC	RMPVFM	do	2
+RMPV0RMPRUTIL	Prosthetics Vision 4 Sight II	%DIE	RMPVFM	do	3
+RMPV0RMPRUTIL	Prosthetics Vision 4 Sight II	%DIR	RMPVFM	do	3
+RMPV0RMPRUTIL	Prosthetics Vision 4 Sight II	ADD	VADPT	do	2
+RMPV0RMPRUTIL	Prosthetics Vision 4 Sight II	DEM	VADPT	do	1
+RMPV0RMPRUTIL	Prosthetics Vision 4 Sight II	IX	DIK	do	1
+RMPV0RMPRUTIL	Prosthetics Vision 4 Sight II	KVAR	VADPT	do	1
+RMPV0RMPRUTIL	Prosthetics Vision 4 Sight II	READ	RMPVIO	do	2
+RMPV0RMPRUTIL	Prosthetics Vision 4 Sight II	WRITE	RMPVIO	do	4
+RMPV0RMPRUTIL	Prosthetics Vision 4 Sight II	WRITECTL	RMPVIO	do	15
+RMPVDRV	Prosthetics Vision 4 Sight II		%ZIS	do	1
+RMPVFM	Prosthetics Vision 4 Sight II		DIC	do	1
+RMPVFM	Prosthetics Vision 4 Sight II	CREF	DILF	func	1
+RMPVFM	Prosthetics Vision 4 Sight II	DT	XLFDT	func	1
+RMPVFM	Prosthetics Vision 4 Sight II	HANDLE	RMPVDRV	do	5
+RMPVFM	Prosthetics Vision 4 Sight II	REPLACE	XLFSTR	func	1
+RMPVIO	Prosthetics Vision 4 Sight II	READ	RMPVDRV	do	1
+RMPVIO	Prosthetics Vision 4 Sight II	READCTL	RMPVDRV	do	1
+RMPVIO	Prosthetics Vision 4 Sight II	READIND	RMPVDRV	do	1
+RMPVIO	Prosthetics Vision 4 Sight II	READPMT	RMPVDRV	do	1
+RMPVIO	Prosthetics Vision 4 Sight II	REPLACE	XLFSTR	func	1
+RMPVIO	Prosthetics Vision 4 Sight II	WRITE	RMPVDRV	do	1
+RMPVIO	Prosthetics Vision 4 Sight II	WRITECTL	RMPVDRV	do	1
+RMPVIO	Prosthetics Vision 4 Sight II	WRITEIND	RMPVDRV	do	1
+RMPVRT	Prosthetics Vision 4 Sight II		%ZIS	do	1
+RMPVRT	Prosthetics Vision 4 Sight II	QUOTE	XLFSTR	func	4
+RMPVS633	Prosthetics Vision 4 Sight II		%DT	do	1
+RMPVS633	Prosthetics Vision 4 Sight II		%ZTER	do	1
+RMPVS633	Prosthetics Vision 4 Sight II		DIC	do	3
+RMPVS633	Prosthetics Vision 4 Sight II	FILE	DIE	do	1
+RMPVS633	Prosthetics Vision 4 Sight II	FIND1	DIC	func	1
+RMPVS633	Prosthetics Vision 4 Sight II	GETS	DIQ	do	1
+RMPVS633	Prosthetics Vision 4 Sight II	RUN	RMPVDRV	do	1
+RMPVS633	Prosthetics Vision 4 Sight II	UPDATE	DIE	do	1
+RMPVS925	Prosthetics Vision 4 Sight II		%DT	do	1
+RMPVS925	Prosthetics Vision 4 Sight II		DIC	do	1
+RMPVS925	Prosthetics Vision 4 Sight II	RUN	RMPVDRV	do	1
+RMPVVALM	Prosthetics Vision 4 Sight II	INIT	VALM0	do	1
+RMPVVALM	Prosthetics Vision 4 Sight II	NEWNAME	RMPVRT	func	2
+RMPVVALM	Prosthetics Vision 4 Sight II	POP	VALM0	do	1
+RMPVVALM	Prosthetics Vision 4 Sight II	READ	RMPVIO	do	1
+RMPVVALM	Prosthetics Vision 4 Sight II	REPLACE	XLFSTR	func	1
+RMPVVALM	Prosthetics Vision 4 Sight II	WRITE	RMPVIO	do	1
 RODGDID	Uncategorized		DIC	do	2
 RODGDID	Uncategorized	DT	DIO2	do	1
 RODGDID	Uncategorized	EN	DIP	goto	1
@@ -200502,6 +201907,8 @@ SD53P876	Scheduling	UPDATE	DIE	do	1
 SD53P888	Scheduling	CHKSTOP	SDTMPEDT	func	1
 SD53P888	Scheduling	MES	XPDUTL	do	10
 SD53P888	Scheduling	UPDATE	DIE	do	1
+SD53P923	Scheduling		DIK	do	1
+SD53P923	Scheduling	MES	XPDUTL	do	7
 SD599PT	Scheduling		DIK	do	1
 SD599PT	Scheduling	BMES	XPDUTL	do	3
 SD599PT	Scheduling	FIELD	DID	do	1
@@ -201644,7 +203051,7 @@ SDCCRSEN	Scheduling	ADDCANCOMMENT	SDCCRSEN2	do	1
 SDCCRSEN	Scheduling	ADDCOMMENT	SDCCRSEN2	do	1
 SDCCRSEN	Scheduling	APPMSG	SDCCRCOR	do	1
 SDCCRSEN	Scheduling	CANCEL	SDCCRSEN1	do	1
-SDCCRSEN	Scheduling	CHKAPPT	SDCCRSEN2	func	1
+SDCCRSEN	Scheduling	CHKAPPT	SDCCRSEN2	func	2
 SDCCRSEN	Scheduling	CHKMSG	SDCCRCOR	func	1
 SDCCRSEN	Scheduling	COPYMSG	SDCCRCOR	do	1
 SDCCRSEN	Scheduling	DONEINC	SDCCRCOR	do	1
@@ -201655,6 +203062,7 @@ SDCCRSEN	Scheduling	GETDFN	MPIF001	func	1
 SDCCRSEN	Scheduling	GETRSN	SDCCRCOR	func	1
 SDCCRSEN	Scheduling	GETUSER	SDCCRCOR	func	1
 SDCCRSEN	Scheduling	HL7TFM	XLFDT	func	4
+SDCCRSEN	Scheduling	HLPHONE	HLFNC	func	1
 SDCCRSEN	Scheduling	INACTIVE	SDEC32	func	2
 SDCCRSEN	Scheduling	INSTRING	SDCCRCOR	func	2
 SDCCRSEN	Scheduling	INT	SDCCRCOR	do	1
@@ -201666,10 +203074,10 @@ SDCCRSEN	Scheduling	NOSHOWCOMMENT	SDCCRSEN2	do	1
 SDCCRSEN	Scheduling	NOW	XLFDT	func	1
 SDCCRSEN	Scheduling	PARSESEG	SDCCRSCU	do	8
 SDCCRSEN	Scheduling	PATCH	XPDUTL	func	1
-SDCCRSEN	Scheduling	REPLACE	XLFSTR	func	3
+SDCCRSEN	Scheduling	REPLACE	XLFSTR	func	5
 SDCCRSEN	Scheduling	TIMES	SDCCRCOR	func	2
 SDCCRSEN	Scheduling	UP	XLFSTR	func	2
-SDCCRSEN1	Scheduling	ADDCANCOMMENT	SDCCRSEN2	do	2
+SDCCRSEN1	Scheduling	ADDCANCOMMENT	SDCCRSEN2	do	1
 SDCCRSEN1	Scheduling	ADDCOMMENT	SDCCRSEN2	do	1
 SDCCRSEN1	Scheduling	ANAK	SDCCRCOR	do	3
 SDCCRSEN1	Scheduling	APPADD	SDEC07	do	1
@@ -201679,10 +203087,8 @@ SDCCRSEN1	Scheduling	FMTE	XLFDT	func	1
 SDCCRSEN1	Scheduling	MESSAGE	SDCCRCOR	do	3
 SDCCRSEN1	Scheduling	NETTOFM	SDECDATE	func	2
 SDCCRSEN1	Scheduling	NOSHOW	SDEC31	do	1
+SDCCRSEN1	Scheduling	NOSHOWCOMMENT	SDCCRSEN2	do	1
 SDCCRSEN2	Scheduling	CMT	GMRCGUIB	do	3
-SDCCRSEN2	Scheduling	DECODE	XLFJSON	do	1
-SDCCRSEN2	Scheduling	GET	XOBWLIB	func	1
-SDCCRSEN2	Scheduling	GETREST	XOBWLIB	func	1
 SDCCRSEN2	Scheduling	NOW	%DTC	do	4
 SDCD	Scheduling		DIC	do	1
 SDCD	Scheduling		DIE	do	2
@@ -203933,6 +205339,28 @@ SDES2ARCLOSE	Scheduling	UPDATEPARENT	SDES2MRTCUTIL	do	1
 SDES2ARCLOSE	Scheduling	VALCONTEXT	SDES2VALCONTEXT	do	1
 SDES2ARCLOSE	Scheduling	WP	DIE	do	1
 SDES2ARCLOSE	Scheduling	WP	SDECUTL	do	1
+SDES2BLCKANDMOV2	Scheduling	BUILDJSON	SDES2JSON	do	3
+SDES2BLCKANDMOV2	Scheduling	CANCEL	SDES2CANCLNAVAIL	do	1
+SDES2BLCKANDMOV2	Scheduling	CREATE	SDES2CREATEAPPT2	do	1
+SDES2BLCKANDMOV2	Scheduling	DECODE	XLFJSON	do	2
+SDES2BLCKANDMOV2	Scheduling	DUZ	XUP	do	1
+SDES2BLCKANDMOV2	Scheduling	ERRLOG	SDES2JSON	do	11
+SDES2BLCKANDMOV2	Scheduling	ERRLOG	SDESJSON	do	1
+SDES2BLCKANDMOV2	Scheduling	FILE	DIE	do	2
+SDES2BLCKANDMOV2	Scheduling	FMADD	XLFDT	func	1
+SDES2BLCKANDMOV2	Scheduling	FMTISO	SDAMUTDT	func	14
+SDES2BLCKANDMOV2	Scheduling	GET1	DIQ	func	43
+SDES2BLCKANDMOV2	Scheduling	GET44RECORDIENS	SDESCANAPPT2	func	2
+SDES2BLCKANDMOV2	Scheduling	GETCLAVAILABLTY	SDESCLINICAVAIL	do	2
+SDES2BLCKANDMOV2	Scheduling	GETRES	SDESINPUTVALUTL	func	1
+SDES2BLCKANDMOV2	Scheduling	GETS	DIQ	do	3
+SDES2BLCKANDMOV2	Scheduling	ISOTFM	SDAMUTDT	func	2
+SDES2BLCKANDMOV2	Scheduling	VALCONTEXT	SDES2VALCONTEXT	do	1
+SDES2BLCKANDMOV2	Scheduling	VALFILEIEN	SDES2VALUTIL	do	2
+SDES2BLCKANDMOV2	Scheduling	VALIDATE	SDES2CANCLNAVAIL	do	1
+SDES2BLCKANDMOV2	Scheduling	VALIDATE	SDES2CREATEAPPT2	do	1
+SDES2BLCKANDMOV2	Scheduling	VALISODTTM	SDES2VALISODTTM	func	1
+SDES2BLDAPPT2	Scheduling	CLEANCMMTS	SDES2APPTUTIL	func	1
 SDES2BLDAPPT2	Scheduling	FMDIFF	XLFDT	func	1
 SDES2BLDAPPT2	Scheduling	FMTISO	SDAMUTDT	func	15
 SDES2BLDAPPT2	Scheduling	GET1	DIQ	func	20
@@ -203944,19 +205372,21 @@ SDES2BLDAPPT2	Scheduling	LIST	DIC	do	2
 SDES2BLDAPPT2	Scheduling	NEEDVERIFY	SDESPATRPC	do	1
 SDES2BLDAPPT2	Scheduling	ROOT	DILFD	func	2
 SDES2BLDAPPT2	Scheduling	SENSITIVE	SDES2UTIL	do	1
+SDES2BLDAPPT44	Scheduling	CLEANCMMTS	SDES2APPTUTIL	func	2
 SDES2BLDAPPT44	Scheduling	FMTISO	SDAMUTDT	func	2
 SDES2BLDAPPT44	Scheduling	GET1	DIQ	func	6
 SDES2BLDAPPT44	Scheduling	GETS	DIQ	do	3
 SDES2BLDAPPT44	Scheduling	STATIONNUMBER	SDESUTIL	func	1
 SDES2BLDAPPTOBJ	Scheduling	APPTSTATUS	SDES2GETSTATUS	func	1
 SDES2BLDAPPTOBJ	Scheduling	BLANK44003INFO	SDES2BLDAPPT44	do	1
+SDES2BLDAPPTOBJ	Scheduling	CLEANCMMTS	SDES2APPTUTIL	func	3
 SDES2BLDAPPTOBJ	Scheduling	ERRLOG	SDESJSON	do	1
 SDES2BLDAPPTOBJ	Scheduling	FMTISO	SDAMUTDT	func	11
 SDES2BLDAPPTOBJ	Scheduling	GET1	DIQ	func	15
 SDES2BLDAPPTOBJ	Scheduling	GET298INFO	SDES2BLDAPPT2	do	1
 SDES2BLDAPPTOBJ	Scheduling	GET2INFO	SDES2BLDAPPT2	do	2
 SDES2BLDAPPTOBJ	Scheduling	GET44003INFO	SDES2BLDAPPT44	do	1
-SDES2BLDAPPTOBJ	Scheduling	GET44INFO	SDES2BLDAPPT44	do	3
+SDES2BLDAPPTOBJ	Scheduling	GET44INFO	SDES2BLDAPPT44	do	2
 SDES2BLDAPPTOBJ	Scheduling	GETS	DIQ	do	1
 SDES2BLOCKANDMOV	Scheduling	BUILDJSON	SDES2JSON	do	4
 SDES2BLOCKANDMOV	Scheduling	CANCEL	SDES2CANCLNAVAIL	do	1
@@ -204033,8 +205463,42 @@ SDES2CANCELAPPT	Scheduling	VALFIELD	SDES2VALUTIL	do	2
 SDES2CANCELAPPT	Scheduling	VALFILEIEN	SDES2VALUTIL	do	3
 SDES2CANCELAPPT1	Scheduling	BEFORE	SDAMEVT	do	1
 SDES2CANCELAPPT1	Scheduling	CANCEL	SDAMEVT	do	1
+SDES2CANCELAPPT1	Scheduling	ERRLOG	SDES2JSON	do	2
+SDES2CANCELAPPT1	Scheduling	FILE	DIE	do	1
+SDES2CANCELAPPT1	Scheduling	GET1	DIQ	func	2
 SDES2CANCELAPPT1	Scheduling	HANDLE	SDAMEVT	func	2
+SDES2CANCELAPPT1	Scheduling	NOW	XLFDT	func	1
 SDES2CANCELAPPT1	Scheduling	SCIEN	SDECU2	func	1
+SDES2CANCELAPPT2	Scheduling	ADDPIDHISTORY	SDES2CRTAPREQ	do	1
+SDES2CANCELAPPT2	Scheduling	AFTEREVENT	SDES2CANCELAPPT1	do	1
+SDES2CANCELAPPT2	Scheduling	AMIECAN	SDESCOMPPEN	do	1
+SDES2CANCELAPPT2	Scheduling	BEFOREEVENT	SDES2CANCELAPPT1	func	1
+SDES2CANCELAPPT2	Scheduling	BUILDAPPTOBJ	SDES2BLDAPPTOBJ	do	1
+SDES2CANCELAPPT2	Scheduling	BUILDJSON	SDES2JSON	do	5
+SDES2CANCELAPPT2	Scheduling	CANCEL40984	SDES2CANCELAPPT1	do	1
+SDES2CANCELAPPT2	Scheduling	CTRL	XMXUTIL1	func	2
+SDES2CANCELAPPT2	Scheduling	DELVFILE	PXAPI	func	1
+SDES2CANCELAPPT2	Scheduling	DUZ	XUP	do	1
+SDES2CANCELAPPT2	Scheduling	EDITOK	SDCO3	func	1
+SDES2CANCELAPPT2	Scheduling	ERRLOG	SDES2JSON	do	12
+SDES2CANCELAPPT2	Scheduling	ERRLOG	SDESJSON	do	3
+SDES2CANCELAPPT2	Scheduling	FILE	DIE	do	14
+SDES2CANCELAPPT2	Scheduling	GET1	DIQ	func	34
+SDES2CANCELAPPT2	Scheduling	GETPROVIDER	SDESCREATEAPPT	func	1
+SDES2CANCELAPPT2	Scheduling	INCREMENTAVAIL1	SDESUTIL	do	1
+SDES2CANCELAPPT2	Scheduling	ISOTFM	SDAMUTDT	func	1
+SDES2CANCELAPPT2	Scheduling	KILL	VSITKIL	func	2
+SDES2CANCELAPPT2	Scheduling	NOW	XLFDT	func	1
+SDES2CANCELAPPT2	Scheduling	REMOVEMRTCAPTIEN	SDES2MRTCUTIL	do	1
+SDES2CANCELAPPT2	Scheduling	REMOVEMRTCINFO	SDES2MRTCUTIL	do	1
+SDES2CANCELAPPT2	Scheduling	REOPEN	SDESRECALLREQ	do	1
+SDES2CANCELAPPT2	Scheduling	REOPENREQUEST	SDES2MRTCUTIL	do	1
+SDES2CANCELAPPT2	Scheduling	REQSET	SDESCONSULTUPD	do	1
+SDES2CANCELAPPT2	Scheduling	UPDATECONSULTPID	SDES2APPTUTIL	do	1
+SDES2CANCELAPPT2	Scheduling	UPDCONTSEQ	SDESCONTACTS	do	3
+SDES2CANCELAPPT2	Scheduling	VALCONTEXT	SDES2VALCONTEXT	do	1
+SDES2CANCELAPPT2	Scheduling	VALFIELD	SDES2VALUTIL	do	2
+SDES2CANCELAPPT2	Scheduling	VALFILEIEN	SDES2VALUTIL	do	3
 SDES2CANCLNAVAIL	Scheduling		%DT	do	1
 SDES2CANCLNAVAIL	Scheduling	BUILDJSON	SDES2JSON	do	3
 SDES2CANCLNAVAIL	Scheduling	CANCELAPPT	SDES2CANCELAPPT	do	1
@@ -204080,6 +205544,7 @@ SDES2CKNSTEP	Scheduling	UPDATE	DIE	do	1
 SDES2CKNSTEP	Scheduling	VALCONTEXT	SDES2VALCONTEXT	do	1
 SDES2CLINICLIST	Scheduling	APPTCLINIC	SDESCLINICDATA	do	1
 SDES2CLINICLIST	Scheduling	BUILDJSON	SDES2JSON	do	3
+SDES2CLINICLIST	Scheduling	CLEANCMMTS	SDES2APPTUTIL	func	2
 SDES2CLINICLIST	Scheduling	DUZ	XUP	do	1
 SDES2CLINICLIST	Scheduling	ERRLOG	SDES2JSON	do	1
 SDES2CLINICLIST	Scheduling	FMADD	XLFDT	func	2
@@ -204108,6 +205573,14 @@ SDES2CLININFO	Scheduling	STATIONNUMBER	SDES2UTIL	func	1
 SDES2CLININFO	Scheduling	TIMEZONEDATA	SDES2UTIL	func	1
 SDES2CLININFO	Scheduling	VALCLINIEN	SDES2VAL44	do	1
 SDES2CLININFO	Scheduling	VALCONTEXT	SDES2VALCONTEXT	do	2
+SDES2CLINPRECAN	Scheduling	BUILDAPPTOBJ	SDES2BLDAPPTOBJ	do	1
+SDES2CLINPRECAN	Scheduling	BUILDJSON	SDES2JSON	do	5
+SDES2CLINPRECAN	Scheduling	DUZ	XUP	do	1
+SDES2CLINPRECAN	Scheduling	ERRLOG	SDES2JSON	do	4
+SDES2CLINPRECAN	Scheduling	GETRES	SDES2UTIL1	func	1
+SDES2CLINPRECAN	Scheduling	VALCONTEXT	SDES2VALCONTEXT	do	1
+SDES2CLINPRECAN	Scheduling	VALFILEIEN	SDES2VALUTIL	do	1
+SDES2CLINPRECAN	Scheduling	VALISODTTM	SDES2VALISODTTM	func	2
 SDES2CLINUT	Scheduling	BUILDJSON	SDES2JSON	do	1
 SDES2CLINUT	Scheduling	CHAR4	SDESUTIL	func	1
 SDES2CLINUT	Scheduling	CODEN	ICDEX	func	1
@@ -204162,7 +205635,7 @@ SDES2CREATEAPPT	Scheduling	APPTIN44EXISTS	SDES2APPTUTIL	func	1
 SDES2CREATEAPPT	Scheduling	APPTINDIFFTZ	SDES2APPTUTIL	func	1
 SDES2CREATEAPPT	Scheduling	APPTREQ	SDES2APPTUTIL	do	1
 SDES2CREATEAPPT	Scheduling	AVUPDT	SDEC07C	do	1
-SDES2CREATEAPPT	Scheduling	BUILDJSON	SDES2JSON	do	5
+SDES2CREATEAPPT	Scheduling	BUILDJSON	SDES2JSON	do	7
 SDES2CREATEAPPT	Scheduling	CLEANCMMTS	SDES2APPTUTIL	func	1
 SDES2CREATEAPPT	Scheduling	CONSULT	SDES2APPTUTIL	do	1
 SDES2CREATEAPPT	Scheduling	DELETECANRECORD	SDES2APPTUTIL	do	1
@@ -204170,7 +205643,7 @@ SDES2CREATEAPPT	Scheduling	DELETERECORD	SDES2APPTUTIL	do	3
 SDES2CREATEAPPT	Scheduling	DUZ	XUP	do	1
 SDES2CREATEAPPT	Scheduling	ENCOUNTERS	SDES2APPTUTIL	do	1
 SDES2CREATEAPPT	Scheduling	ERRLOG	SDES2JSON	do	1
-SDES2CREATEAPPT	Scheduling	ERRLOG	SDESJSON	do	13
+SDES2CREATEAPPT	Scheduling	ERRLOG	SDESJSON	do	16
 SDES2CREATEAPPT	Scheduling	FMADD	XLFDT	func	1
 SDES2CREATEAPPT	Scheduling	FMDIFF	XLFDT	func	1
 SDES2CREATEAPPT	Scheduling	FMTISO	SDAMUTDT	func	3
@@ -204194,6 +205667,43 @@ SDES2CREATEAPPT	Scheduling	VALCONTEXT	SDES2VALCONTEXT	do	1
 SDES2CREATEAPPT	Scheduling	VALFIELD	SDES2VALUTIL	do	12
 SDES2CREATEAPPT	Scheduling	VALFILEIEN	SDES2VALUTIL	do	6
 SDES2CREATEAPPT	Scheduling	VALISODTTM	SDES2VALISODTTM	func	6
+SDES2CREATEAPPT2	Scheduling	APPTIN44EXISTS	SDES2APPTUTIL	func	1
+SDES2CREATEAPPT2	Scheduling	APPTINDIFFTZ	SDES2APPTUTIL	func	1
+SDES2CREATEAPPT2	Scheduling	APPTREQ	SDES2APPTUTIL	do	1
+SDES2CREATEAPPT2	Scheduling	AVUPDT	SDEC07C	do	1
+SDES2CREATEAPPT2	Scheduling	BUILDAPPTOBJ	SDES2BLDAPPTOBJ	do	1
+SDES2CREATEAPPT2	Scheduling	BUILDJSON	SDES2JSON	do	8
+SDES2CREATEAPPT2	Scheduling	CLEANCMMTS	SDES2APPTUTIL	func	1
+SDES2CREATEAPPT2	Scheduling	CONSULT	SDES2APPTUTIL	do	1
+SDES2CREATEAPPT2	Scheduling	DELETECANRECORD	SDES2APPTUTIL	do	1
+SDES2CREATEAPPT2	Scheduling	DELETERECORD	SDES2APPTUTIL	do	3
+SDES2CREATEAPPT2	Scheduling	DUZ	XUP	do	1
+SDES2CREATEAPPT2	Scheduling	ENCOUNTERS	SDES2APPTUTIL	do	1
+SDES2CREATEAPPT2	Scheduling	ERRLOG	SDES2JSON	do	1
+SDES2CREATEAPPT2	Scheduling	ERRLOG	SDESJSON	do	16
+SDES2CREATEAPPT2	Scheduling	FMADD	XLFDT	func	1
+SDES2CREATEAPPT2	Scheduling	FMDIFF	XLFDT	func	1
+SDES2CREATEAPPT2	Scheduling	FMTISO	SDAMUTDT	func	3
+SDES2CREATEAPPT2	Scheduling	GET1	DIQ	func	5
+SDES2CREATEAPPT2	Scheduling	GETAPPTTYPE	SDES2APPTUTIL	do	1
+SDES2CREATEAPPT2	Scheduling	GETPID	SDES2APPTUTIL	do	1
+SDES2CREATEAPPT2	Scheduling	GETPROVIDER	SDES2APPTUTIL	do	1
+SDES2CREATEAPPT2	Scheduling	GETRESOURCE	SDES2APPTUTIL	do	1
+SDES2CREATEAPPT2	Scheduling	INACTIVE	SDESUTIL	func	1
+SDES2CREATEAPPT2	Scheduling	ISOTFM	SDAMUTDT	func	1
+SDES2CREATEAPPT2	Scheduling	MAKE	SDES2APPTUTIL	do	1
+SDES2CREATEAPPT2	Scheduling	NOW	XLFDT	func	6
+SDES2CREATEAPPT2	Scheduling	ORDERCHECKLOCK	SDES2APPTUTIL	func	1
+SDES2CREATEAPPT2	Scheduling	RECALL	SDES2APPTUTIL	do	1
+SDES2CREATEAPPT2	Scheduling	REQUESTTYPE	SDES2APPTUTIL	do	1
+SDES2CREATEAPPT2	Scheduling	SETMISSIONELIG	SDESMISSIONELG	do	1
+SDES2CREATEAPPT2	Scheduling	STORENOTE	SDES2APPTUTIL	do	1
+SDES2CREATEAPPT2	Scheduling	STOREREQUESTCOMM	SDES2APPTUTIL	do	1
+SDES2CREATEAPPT2	Scheduling	UPDATE	DIE	do	5
+SDES2CREATEAPPT2	Scheduling	VALCONTEXT	SDES2VALCONTEXT	do	1
+SDES2CREATEAPPT2	Scheduling	VALFIELD	SDES2VALUTIL	do	12
+SDES2CREATEAPPT2	Scheduling	VALFILEIEN	SDES2VALUTIL	do	6
+SDES2CREATEAPPT2	Scheduling	VALISODTTM	SDES2VALISODTTM	func	6
 SDES2CREATECLIN	Scheduling	ADDHASH2CLIN	SDES2CLINUT	do	1
 SDES2CREATECLIN	Scheduling	ADDRESOURCE	SDES2CLINUT	do	1
 SDES2CREATECLIN	Scheduling	BUILDJSON	SDES2JSON	do	7
@@ -204277,7 +205787,7 @@ SDES2CRTCLNAVAL2	Scheduling	CREATEAVAIL	SDES2UTIL1	do	1
 SDES2CRTCLNAVAL2	Scheduling	DECODE	XLFJSON	do	1
 SDES2CRTCLNAVAL2	Scheduling	DOW	XLFDT	func	1
 SDES2CRTCLNAVAL2	Scheduling	DUZ	XUP	do	1
-SDES2CRTCLNAVAL2	Scheduling	ERRLOG	SDES2JSON	do	20
+SDES2CRTCLNAVAL2	Scheduling	ERRLOG	SDES2JSON	do	21
 SDES2CRTCLNAVAL2	Scheduling	FMADD	XLFDT	func	4
 SDES2CRTCLNAVAL2	Scheduling	FMDIFF	XLFDT	func	1
 SDES2CRTCLNAVAL2	Scheduling	FMTISO	SDAMUTDT	func	3
@@ -204341,6 +205851,21 @@ SDES2CRTWALKIN	Scheduling	GETRES	SDESINPUTVALUTL	func	1
 SDES2CRTWALKIN	Scheduling	NOW	XLFDT	func	2
 SDES2CRTWALKIN	Scheduling	VALCONTEXT	SDES2VALCONTEXT	do	1
 SDES2CRTWALKIN	Scheduling	VALFIELD	SDES2VALUTIL	do	1
+SDES2CRTWALKIN2	Scheduling		DIK	do	1
+SDES2CRTWALKIN2	Scheduling	BUILDAPPTOBJ	SDES2BLDAPPTOBJ	do	1
+SDES2CRTWALKIN2	Scheduling	BUILDJSON	SDES2JSON	do	2
+SDES2CRTWALKIN2	Scheduling	CHECKIN	SDES2CHECKIN	do	1
+SDES2CRTWALKIN2	Scheduling	CREATE	SDES2CREATEAPPT2	do	1
+SDES2CRTWALKIN2	Scheduling	CREATEREQUEST	SDES2CRTAPREQ	do	1
+SDES2CRTWALKIN2	Scheduling	DECODE	XLFJSON	do	2
+SDES2CRTWALKIN2	Scheduling	DISPOSITION	SDES2ARCLOSE	do	1
+SDES2CRTWALKIN2	Scheduling	DUZ	XUP	do	1
+SDES2CRTWALKIN2	Scheduling	FMTE	XLFDT	func	1
+SDES2CRTWALKIN2	Scheduling	FMTISO	SDAMUTDT	func	2
+SDES2CRTWALKIN2	Scheduling	GETRES	SDESINPUTVALUTL	func	1
+SDES2CRTWALKIN2	Scheduling	NOW	XLFDT	func	2
+SDES2CRTWALKIN2	Scheduling	VALCONTEXT	SDES2VALCONTEXT	do	1
+SDES2CRTWALKIN2	Scheduling	VALFIELD	SDES2VALUTIL	do	1
 SDES2DISPRECALL	Scheduling	BUILDJSON	SDES2JSON	do	4
 SDES2DISPRECALL	Scheduling	CTRL	XMXUTIL1	func	1
 SDES2DISPRECALL	Scheduling	DUZ	XUP	do	1
@@ -204363,6 +205888,18 @@ SDES2EDITAPPT	Scheduling	NOW	XLFDT	func	1
 SDES2EDITAPPT	Scheduling	UPDATE	DIE	do	1
 SDES2EDITAPPT	Scheduling	VALCONTEXT	SDES2VALCONTEXT	do	1
 SDES2EDITAPPT	Scheduling	WP	DIE	do	1
+SDES2EDITAPPT2	Scheduling	BUILDAPPTOBJ	SDES2BLDAPPTOBJ	do	1
+SDES2EDITAPPT2	Scheduling	BUILDJSON	SDES2JSON	do	4
+SDES2EDITAPPT2	Scheduling	CLEANCMMTS	SDES2APPTUTIL	func	1
+SDES2EDITAPPT2	Scheduling	DUZ	XUP	do	1
+SDES2EDITAPPT2	Scheduling	ERRLOG	SDES2JSON	do	3
+SDES2EDITAPPT2	Scheduling	FILE	DIE	do	1
+SDES2EDITAPPT2	Scheduling	GET1	DIQ	func	5
+SDES2EDITAPPT2	Scheduling	GETS	DIQ	do	1
+SDES2EDITAPPT2	Scheduling	NOW	XLFDT	func	1
+SDES2EDITAPPT2	Scheduling	UPDATE	DIE	do	1
+SDES2EDITAPPT2	Scheduling	VALCONTEXT	SDES2VALCONTEXT	do	1
+SDES2EDITAPPT2	Scheduling	WP	DIE	do	1
 SDES2EDITAPREQ	Scheduling	ADDPIDHISTORY	SDES2CRTAPREQ	do	1
 SDES2EDITAPREQ	Scheduling	BUILDJSON	SDES2JSON	do	3
 SDES2EDITAPREQ	Scheduling	CLEANCMMTS	SDES2APPTUTIL	func	1
@@ -204519,7 +206056,7 @@ SDES2GETAPPTREQ	Scheduling	CONSULT	SDES2GETREQS	do	1
 SDES2GETAPPTREQ	Scheduling	DISPMULT	SDESCONTACTS	do	1
 SDES2GETAPPTREQ	Scheduling	DUZ	XUP	do	3
 SDES2GETAPPTREQ	Scheduling	FMTISO	SDAMUTDT	func	9
-SDES2GETAPPTREQ	Scheduling	GET1	DIQ	func	26
+SDES2GETAPPTREQ	Scheduling	GET1	DIQ	func	27
 SDES2GETAPPTREQ	Scheduling	GETCONTACTIEN	SDES2CONTACTS	do	1
 SDES2GETAPPTREQ	Scheduling	GETCONTIEN	SDESCONTACTS	func	1
 SDES2GETAPPTREQ	Scheduling	GETPATICN	SDESINPUTVALUTL	func	1
@@ -204576,10 +206113,10 @@ SDES2GETCLINST	Scheduling	AMISTOSTOPCODE	SDES2UTIL	func	3
 SDES2GETCLINST	Scheduling	BLDCLNREC	SDES2CLININFO	do	1
 SDES2GETCLINST	Scheduling	BUILDJSON	SDES2JSON	do	3
 SDES2GETCLINST	Scheduling	DUZ	XUP	do	1
-SDES2GETCLINST	Scheduling	ERRLOG	SDES2JSON	do	6
-SDES2GETCLINST	Scheduling	FIND	DIC	do	1
+SDES2GETCLINST	Scheduling	ERRLOG	SDES2JSON	do	5
+SDES2GETCLINST	Scheduling	FIND	DIC	do	2
 SDES2GETCLINST	Scheduling	GET1	DIQ	func	2
-SDES2GETCLINST	Scheduling	INACTIVE	SDES2UTIL	func	1
+SDES2GETCLINST	Scheduling	INACTIVE	SDES2UTIL	func	2
 SDES2GETCLINST	Scheduling	VALCONTEXT	SDES2VALCONTEXT	do	1
 SDES2GETCLINSVC	Scheduling	BUILDJSON	SDES2JSON	do	3
 SDES2GETCLINSVC	Scheduling	DUZ	XUP	do	1
@@ -204685,6 +206222,18 @@ SDES2GETMEDLIST	Scheduling	VALCONTEXT	SDES2VALCONTEXT	do	1
 SDES2GETMEDLIST	Scheduling	VALFILEIEN	SDES2VALUTIL	do	1
 SDES2GETMEDLIST	Scheduling	VALISODATERANGE	SDES2VALISODTTM	func	1
 SDES2GETMEDLIST	Scheduling	VALISODTTM	SDES2VALISODTTM	func	2
+SDES2GETNEXTSLOT	Scheduling	BUILDJSON	SDES2JSON	do	3
+SDES2GETNEXTSLOT	Scheduling	DUZ	XUP	do	1
+SDES2GETNEXTSLOT	Scheduling	ERRLOG	SDES2JSON	do	2
+SDES2GETNEXTSLOT	Scheduling	FMADD	XLFDT	func	2
+SDES2GETNEXTSLOT	Scheduling	FMTISO	SDAMUTDT	func	3
+SDES2GETNEXTSLOT	Scheduling	GET1	DIQ	func	2
+SDES2GETNEXTSLOT	Scheduling	GETRES	SDES2UTIL1	func	1
+SDES2GETNEXTSLOT	Scheduling	GETSLOTS	SDEC57	do	1
+SDES2GETNEXTSLOT	Scheduling	ISOTFM	SDAMUTDT	func	1
+SDES2GETNEXTSLOT	Scheduling	NOW	XLFDT	func	1
+SDES2GETNEXTSLOT	Scheduling	VALCLINIEN	SDES2VAL44	do	1
+SDES2GETNEXTSLOT	Scheduling	VALCONTEXT	SDES2VALCONTEXT	do	1
 SDES2GETPATDEMO	Scheduling	BUILDJSON	SDES2JSON	do	3
 SDES2GETPATDEMO	Scheduling	DEM	VADPT	do	1
 SDES2GETPATDEMO	Scheduling	DUZ	XUP	do	1
@@ -204878,7 +206427,7 @@ SDES2NOSHOW	Scheduling	HANDLE	SDAMEVT	func	1
 SDES2NOSHOW	Scheduling	ISOTFM	SDAMUTDT	func	1
 SDES2NOSHOW	Scheduling	NOSHOW	SDCNSLT	do	1
 SDES2NOSHOW	Scheduling	NOW	XLFDT	func	3
-SDES2NOSHOW	Scheduling	REMOVEMRTCAPTIEN	SDES2CANCELAPPT	do	1
+SDES2NOSHOW	Scheduling	REMOVEMRTCAPTIEN	SDES2MRTCUTIL	do	1
 SDES2NOSHOW	Scheduling	REOPEN	SDESRECALLREQ	do	1
 SDES2NOSHOW	Scheduling	UPDCONTSEQ	SDESCONTACTS	do	1
 SDES2NOSHOW	Scheduling	VALCONTEXT	SDES2VALCONTEXT	do	1
@@ -205126,6 +206675,17 @@ SDES2SETCHECKOUT	Scheduling	VALCONTEXT	SDES2VALCONTEXT	do	1
 SDES2SETCHECKOUT	Scheduling	VALFILEIEN	SDES2VALUTIL	do	1
 SDES2SETCHECKOUT	Scheduling	VALISODTTM	SDES2VALISODTTM	func	1
 SDES2SETCHECKOUT	Scheduling	VISIT	SDVSIT0	do	1
+SDES2SNODEUTIL	Scheduling	AVUPDT	SDEC07C	do	1
+SDES2SNODEUTIL	Scheduling	DECODE	XLFJSON	do	2
+SDES2SNODEUTIL	Scheduling	FMADD	XLFDT	func	1
+SDES2SNODEUTIL	Scheduling	FMTISO	SDAMUTDT	func	6
+SDES2SNODEUTIL	Scheduling	GET1	DIQ	func	14
+SDES2SNODEUTIL	Scheduling	GETCLAVAILABLTY	SDESCLINICAVAIL	do	1
+SDES2SNODEUTIL	Scheduling	GETS	DIQ	do	1
+SDES2SNODEUTIL	Scheduling	GETSCHEDULE	SDESCLINDAILYSCH	do	1
+SDES2SNODEUTIL	Scheduling	INCREMENTAVAIL1	SDESUTIL	do	1
+SDES2SNODEUTIL	Scheduling	MES	XPDUTL	do	9
+SDES2SNODEUTIL	Scheduling	UPDATE	DIE	do	2
 SDES2SPACEBAR	Scheduling	BUILDJSON	SDES2JSON	do	2
 SDES2SPACEBAR	Scheduling	DUZ	XUP	do	1
 SDES2SPACEBAR	Scheduling	GET1	DIQ	func	5
@@ -205154,6 +206714,22 @@ SDES2UNBLOCKPBSP	Scheduling	ERRLOG	SDESJSON	do	3
 SDES2UNBLOCKPBSP	Scheduling	RESTORE	SDES2RSTCAVAIL	do	1
 SDES2UNBLOCKPBSP	Scheduling	VALCONTEXT	SDES2VALCONTEXT	do	1
 SDES2UNBLOCKPBSP	Scheduling	VALISODTTM	SDES2VALISODTTM	func	1
+SDES2UNDOCHECKIN	Scheduling	AFTER	SDAMEVT	do	1
+SDES2UNDOCHECKIN	Scheduling	BEFORE	SDAMEVT	do	1
+SDES2UNDOCHECKIN	Scheduling	BUILDAPPTOBJ	SDES2BLDAPPTOBJ	do	1
+SDES2UNDOCHECKIN	Scheduling	BUILDJSON	SDES2JSON	do	6
+SDES2UNDOCHECKIN	Scheduling	DUZ	XUP	do	1
+SDES2UNDOCHECKIN	Scheduling	ERRLOG	SDES2JSON	do	5
+SDES2UNDOCHECKIN	Scheduling	ERRLOG	SDESJSON	do	1
+SDES2UNDOCHECKIN	Scheduling	EVT	SDAMEVT	do	1
+SDES2UNDOCHECKIN	Scheduling	FILE	DIE	do	2
+SDES2UNDOCHECKIN	Scheduling	FIND	SDESCHECKOUT	func	1
+SDES2UNDOCHECKIN	Scheduling	GET1	DIQ	func	4
+SDES2UNDOCHECKIN	Scheduling	GETS	DIQ	do	1
+SDES2UNDOCHECKIN	Scheduling	HANDLE	SDAMEVT	func	1
+SDES2UNDOCHECKIN	Scheduling	VALBOOLEAN	SDES2UTIL1	do	1
+SDES2UNDOCHECKIN	Scheduling	VALCONTEXT	SDES2VALCONTEXT	do	1
+SDES2UNDOCHECKIN	Scheduling	VALFILEIEN	SDES2VALUTIL	do	1
 SDES2UNDOCHKOUT	Scheduling	AFTER	SDAMEVT	do	1
 SDES2UNDOCHKOUT	Scheduling	BEFORE	SDAMEVT	do	1
 SDES2UNDOCHKOUT	Scheduling	BUILDJSON	SDES2JSON	do	3
@@ -205241,7 +206817,7 @@ SDES2VAL4	Scheduling	ERRLOG	SDES2JSON	do	1
 SDES2VAL4	Scheduling	ERRLOG	SDESJSON	do	1
 SDES2VAL4	Scheduling	FIND	DIC	do	1
 SDES2VAL44	Scheduling	CHECKYN	SDES2UTIL	func	12
-SDES2VAL44	Scheduling	ERRLOG	SDES2JSON	do	83
+SDES2VAL44	Scheduling	ERRLOG	SDES2JSON	do	84
 SDES2VAL44	Scheduling	GET1	DIQ	func	11
 SDES2VAL44	Scheduling	INACTIVE	SDES2UTIL	func	2
 SDES2VAL44	Scheduling	UP	XLFSTR	func	1
@@ -205651,6 +207227,14 @@ SDES929P	Scheduling	KSP	XUPARAM	func	1
 SDES929P	Scheduling	MES	XPDUTL	do	7
 SDES929P	Scheduling	NOW	%DTC	do	1
 SDES929P	Scheduling	UP	XLFSTR	func	1
+SDES930P	Scheduling		%ZTLOAD	do	1
+SDES930P	Scheduling		XMD	do	1
+SDES930P	Scheduling	FMADD	XLFDT	func	1
+SDES930P	Scheduling	GET1	DIQ	func	3
+SDES930P	Scheduling	INACTIVE	SDES2UTIL	func	1
+SDES930P	Scheduling	KSP	XUPARAM	func	1
+SDES930P	Scheduling	MES	XPDUTL	do	11
+SDES930P	Scheduling	NOW	%DTC	do	1
 SDES933P	Scheduling		%ZTLOAD	do	1
 SDES933P	Scheduling		XMD	do	1
 SDES933P	Scheduling	DOW	XLFDT	func	3
@@ -205688,6 +207272,23 @@ SDES939P	Scheduling	FILE	DIE	do	5
 SDES939P	Scheduling	FIND1	DIC	func	5
 SDES939P	Scheduling	MES	XPDUTL	do	35
 SDES939P	Scheduling	UPDATE	DIE	do	1
+SDES942P	Scheduling		%ZTLOAD	do	1
+SDES942P	Scheduling		XMD	do	1
+SDES942P	Scheduling	FMADD	XLFDT	func	3
+SDES942P	Scheduling	FMTISO	SDAMUTDT	func	2
+SDES942P	Scheduling	GET1	DIQ	func	3
+SDES942P	Scheduling	INACTIVE	SDESUTIL	func	1
+SDES942P	Scheduling	KSP	XUPARAM	func	1
+SDES942P	Scheduling	MES	XPDUTL	do	7
+SDES942P	Scheduling	NOW	%DTC	do	1
+SDES943P	Scheduling		%ZTLOAD	do	1
+SDES943P	Scheduling		XMD	do	1
+SDES943P	Scheduling	FMADD	XLFDT	func	2
+SDES943P	Scheduling	GET1	DIQ	func	1
+SDES943P	Scheduling	KSP	XUPARAM	func	1
+SDES943P	Scheduling	MES	XPDUTL	do	8
+SDES943P	Scheduling	NOW	%DTC	do	1
+SDES943P	Scheduling	ONEPAT	SDES2SNODEUTIL	do	1
 SDESADDDELCGI	Scheduling	BUILDJSON	SDESBUILDJSON	do	2
 SDESADDDELCGI	Scheduling	ERRLOG	SDESJSON	do	7
 SDESADDDELCGI	Scheduling	FILE	DIE	do	1
@@ -205743,6 +207344,7 @@ SDESAPPT4	Scheduling	PATIENTIDADDDON	SDESPATIENTDATA2	do	2
 SDESAPPT4	Scheduling	ROOT	DILFD	func	1
 SDESAPPT4	Scheduling	SUMMARY	SDESAPPTDATA	do	5
 SDESAPPTDATA	Scheduling	APPTCLINIC	SDESCLINICDATA	do	2
+SDESAPPTDATA	Scheduling	CLEANCMMTS	SDES2APPTUTIL	func	2
 SDESAPPTDATA	Scheduling	FMTE	XLFDT	func	5
 SDESAPPTDATA	Scheduling	FMTISO	SDAMUTDT	func	11
 SDESAPPTDATA	Scheduling	GET1	DIQ	func	24
@@ -206065,6 +207667,7 @@ SDESCLINDAILYSCH	Scheduling	UP	XLFSTR	func	1
 SDESCLINICAVAIL	Scheduling	EASVALIDATE	SDESUTIL	func	1
 SDESCLINICAVAIL	Scheduling	ENCODE	SDESJSON	do	1
 SDESCLINICAVAIL	Scheduling	ERRLOG	SDESJSON	do	18
+SDESCLINICAVAIL	Scheduling	FMADD	XLFDT	func	1
 SDESCLINICAVAIL	Scheduling	FMTISO	SDAMUTDT	func	4
 SDESCLINICAVAIL	Scheduling	GET1	DIQ	func	4
 SDESCLINICAVAIL	Scheduling	GETRES	SDES2UTIL1	func	1
@@ -206334,7 +207937,7 @@ SDESGETAPPTREQ	Scheduling	DISPMULT	SDESCONTACTS	do	1
 SDESGETAPPTREQ	Scheduling	ENCODE	XLFJSON	do	1
 SDESGETAPPTREQ	Scheduling	FINISHAPPTREQ	SDESGETAPPTREQ2	do	1
 SDESGETAPPTREQ	Scheduling	FMTISO	SDAMUTDT	func	9
-SDESGETAPPTREQ	Scheduling	GET1	DIQ	func	29
+SDESGETAPPTREQ	Scheduling	GET1	DIQ	func	30
 SDESGETAPPTREQ	Scheduling	GETCONTIEN	SDESCONTACTS	func	1
 SDESGETAPPTREQ	Scheduling	GETPATICN	SDESINPUTVALUTL	func	1
 SDESGETAPPTREQ	Scheduling	GETS	DIQ	do	1
@@ -206351,13 +207954,13 @@ SDESGETAPPTREQ2	Scheduling	EASVALIDATE	SDESUTIL	func	1
 SDESGETAPPTREQ2	Scheduling	ERRLOG	SDESJSON	do	12
 SDESGETAPPTREQ2	Scheduling	GET1	DIQ	func	1
 SDESGETAPPTREQ2	Scheduling	ISOTFM	SDAMUTDT	func	6
-SDESGETAPPTRPCS	Scheduling	BUILDAPPTOBJ	SDES2BLDAPPTOBJ	do	2
-SDESGETAPPTRPCS	Scheduling	BUILDJSON	SDES2JSON	do	7
-SDESGETAPPTRPCS	Scheduling	EASVALIDATE	SDESUTIL	func	1
+SDESGETAPPTRPCS	Scheduling	BUILDAPPTOBJ	SDES2BLDAPPTOBJ	do	3
+SDESGETAPPTRPCS	Scheduling	BUILDJSON	SDES2JSON	do	11
+SDESGETAPPTRPCS	Scheduling	EASVALIDATE	SDESUTIL	func	2
 SDESGETAPPTRPCS	Scheduling	ERRLOG	SDES2JSON	do	1
-SDESGETAPPTRPCS	Scheduling	ERRLOG	SDESJSON	do	2
+SDESGETAPPTRPCS	Scheduling	ERRLOG	SDESJSON	do	3
 SDESGETAPPTRPCS	Scheduling	GETRES	SDES2UTIL1	func	1
-SDESGETAPPTRPCS	Scheduling	VALFILEIEN	SDES2VALUTIL	do	2
+SDESGETAPPTRPCS	Scheduling	VALFILEIEN	SDES2VALUTIL	do	3
 SDESGETAPPTRPCS	Scheduling	VALISODTTM	SDES2VALISODTTM	func	4
 SDESGETAPPTSIEN	Scheduling	BUILDJSON	SDESBUILDJSON	do	1
 SDESGETAPPTSIEN	Scheduling	DECODE	XLFJSON	do	1
@@ -206454,6 +208057,7 @@ SDESGETAVAILSC	Scheduling	VALDATE2	SDESVALUTIL	func	2
 SDESGETAVAILSC	Scheduling	VALIDATEEAS	SDESINPUTVALUTL	do	1
 SDESGETCANCMT	Scheduling	BUILDJSON	SDESBUILDJSON	do	2
 SDESGETCANCMT	Scheduling	ERRLOG	SDESJSON	do	2
+SDESGETCLINAPPT	Scheduling	CLEANCMMTS	SDES2APPTUTIL	func	2
 SDESGETCLINAPPT	Scheduling	ENCODE	XLFJSON	do	1
 SDESGETCLINAPPT	Scheduling	ERRLOG	SDESJSON	do	2
 SDESGETCLINAPPT	Scheduling	FMTISO	SDAMUTDT	func	10
@@ -206506,6 +208110,7 @@ SDESGETLETTERS	Scheduling	GETS	DIQ	do	1
 SDESGETMHCODE	Scheduling	BUILDJSON	SDESBUILDJSON	do	1
 SDESGETMHCODE	Scheduling	ERRLOG	SDESJSON	do	4
 SDESGETMHCODE	Scheduling	GET1	DIQ	func	2
+SDESGETPATAPPT	Scheduling	CLEANCMMTS	SDES2APPTUTIL	func	1
 SDESGETPATAPPT	Scheduling	ENCODE	XLFJSON	do	1
 SDESGETPATAPPT	Scheduling	ERRLOG	SDESJSON	do	6
 SDESGETPATAPPT	Scheduling	FMTISO	SDAMUTDT	func	10
@@ -206736,6 +208341,7 @@ SDESORDCLEAN	Scheduling	DEM	VADPT	do	1
 SDESORDCLEAN	Scheduling	EN	SDHL7BLD	do	1
 SDESORDCLEAN	Scheduling	FILE	DIE	do	1
 SDESORDCLEAN	Scheduling	GET1	DIQ	func	18
+SDESORDCLEAN	Scheduling	NOW	XLFDT	func	1
 SDESPATCHINFO	Scheduling	ENCODE	SDESJSON	do	1
 SDESPATCHINFO	Scheduling	LAST	XPDUTL	func	1
 SDESPATCOMMTS	Scheduling	BUILDJSON	SDESBUILDJSON	do	2
@@ -207312,36 +208918,45 @@ SDM1A	Scheduling	REST	SDLT	do	1
 SDM1A	Scheduling	RT	SDUTL	do	1
 SDM1A	Scheduling	SDECADD	SDEC07	do	1
 SDM1A	Scheduling	YN	DICN	do	3
-SDM1T	Scheduling		A1B2XFR	do	4
-SDM1T	Scheduling		DICR	do	4
+SDM1T	Scheduling		A1B2XFR	do	10
+SDM1T	Scheduling		DIC	do	2
+SDM1T	Scheduling		DICR	do	11
 SDM1T	Scheduling		DIE17	goto	1
-SDM1T	Scheduling		DIR	do	1
 SDM1T	Scheduling		SDM1T1	do	1
 SDM1T	Scheduling		SDM1T2	do	1
 SDM1T	Scheduling		SDM1T3	do	1
 SDM1T	Scheduling		SDM1T4	do	1
-SDM1T	Scheduling		SDM1T5	goto	1
-SDM1T	Scheduling	ADGRU	DGRUDD01	do	4
+SDM1T	Scheduling		SDM1T5	do	1
+SDM1T	Scheduling	ADGRU	DGRUDD01	do	11
 SDM1T	Scheduling	AST	DIED	goto	1
-SDM1T	Scheduling	AUDIT	DIET	do	4
-SDM1T	Scheduling	AVAFC	VAFCDD01	do	4
-SDM1T	Scheduling	DPT	IVMPXFR	do	4
+SDM1T	Scheduling	AUDIT	DIET	do	11
+SDM1T	Scheduling	AVAFC	VAFCDD01	do	11
+SDM1T	Scheduling	DPT	IVMPXFR	do	11
 SDM1T	Scheduling	E	DIE0	do	1
-SDM1T	Scheduling	EVENT	IVMPLOG	do	4
-SDM1T	Scheduling	F	DIE17	do	6
-SDM1T	Scheduling	FC	DGFCPROT	do	8
+SDM1T	Scheduling	EVENT	IVMPLOG	do	11
+SDM1T	Scheduling	EZBLD	DIALOG	func	1
+SDM1T	Scheduling	F	DIE17	do	9
+SDM1T	Scheduling	FC	DGFCPROT	do	12
 SDM1T	Scheduling	FIREREC	DIE17	do	2
 SDM1T	Scheduling	GETTMP	DIKC1	func	1
+SDM1T	Scheduling	KILL	DGREGDD1	do	1
+SDM1T	Scheduling	LABEL	DIALOGZ	func	8
 SDM1T	Scheduling	M	DIE17	goto	1
 SDM1T	Scheduling	NOSCR	DIED	do	1
-SDM1T	Scheduling	NOW	XLFDT	func	4
+SDM1T	Scheduling	NOW	XLFDT	func	11
 SDM1T	Scheduling	OUT	DIE17	goto	2
+SDM1T	Scheduling	OUTPUT	DIETLIBF	func	1
 SDM1T	Scheduling	RW	DIR2	goto	1
+SDM1T	Scheduling	SET	DIED	do	1
+SDM1T	Scheduling	SET	DIQ	func	1
 SDM1T	Scheduling	UNIQFERR	DIE17	goto	1
-SDM1T	Scheduling	UP	DGHELP	do	1
+SDM1T	Scheduling	UP	DGHELP	do	4
+SDM1T	Scheduling	VALEXT	DIETLIBF	func	1
+SDM1T	Scheduling	VALEXTS	DIETLIBF	func	1
 SDM1T	Scheduling	Z	DIE17	goto	1
 SDM1T	Scheduling	Z	DIE2	goto	1
-SDM1T1	Scheduling		A1B2XFR	do	1
+SDM1T	Scheduling	ZIP	DGREGDD1	func	1
+SDM1T	Scheduling	ZIPIN	VAFADDR	do	1
 SDM1T1	Scheduling		DICR	do	1
 SDM1T1	Scheduling	ADGRU	DGRUDD01	do	1
 SDM1T1	Scheduling	AUDIT	DIET	do	1
@@ -207349,39 +208964,17 @@ SDM1T1	Scheduling	AVAFC	VAFCDD01	do	1
 SDM1T1	Scheduling	DPT	IVMPXFR	do	1
 SDM1T1	Scheduling	EVENT	IVMPLOG	do	1
 SDM1T1	Scheduling	NOW	XLFDT	func	1
-SDM1T10	Scheduling		DIE17	goto	1
-SDM1T10	Scheduling		DIR	do	1
-SDM1T10	Scheduling	ADGRU	DGRUDD01	do	2
-SDM1T10	Scheduling	AST	DIED	goto	1
-SDM1T10	Scheduling	AUDIT	DIET	do	2
-SDM1T10	Scheduling	AVAFC	VAFCDD01	do	2
-SDM1T10	Scheduling	DPT	IVMPXFR	do	2
-SDM1T10	Scheduling	E	DIE0	do	1
-SDM1T10	Scheduling	EVENT	IVMPLOG	do	2
-SDM1T10	Scheduling	F	DIE17	do	1
-SDM1T10	Scheduling	M	DIE17	goto	1
-SDM1T10	Scheduling	NOSCR	DIED	do	1
-SDM1T10	Scheduling	RW	DIR2	goto	1
-SDM1T10	Scheduling	UNIQFERR	DIE17	goto	1
-SDM1T10	Scheduling	Z	DIE17	goto	1
-SDM1T10	Scheduling	Z	DIE2	goto	1
+SDM1T1	Scheduling	SET	DGREGDD1	do	1
 SDM1T2	Scheduling		A1B2XFR	do	1
-SDM1T2	Scheduling		DICR	do	1
-SDM1T2	Scheduling	ADGRU	DGRUDD01	do	1
 SDM1T2	Scheduling	AUDIT	DIET	do	1
 SDM1T2	Scheduling	AVAFC	VAFCDD01	do	1
 SDM1T2	Scheduling	DPT	IVMPXFR	do	1
 SDM1T2	Scheduling	EVENT	IVMPLOG	do	1
-SDM1T2	Scheduling	NOW	XLFDT	func	1
 SDM1T3	Scheduling		A1B2XFR	do	1
-SDM1T3	Scheduling		DICR	do	1
-SDM1T3	Scheduling	ADGRU	DGRUDD01	do	1
 SDM1T3	Scheduling	AUDIT	DIET	do	1
 SDM1T3	Scheduling	AVAFC	VAFCDD01	do	1
 SDM1T3	Scheduling	DPT	IVMPXFR	do	1
 SDM1T3	Scheduling	EVENT	IVMPLOG	do	1
-SDM1T3	Scheduling	NOW	XLFDT	func	1
-SDM1T4	Scheduling		A1B2XFR	do	1
 SDM1T4	Scheduling		DICR	do	1
 SDM1T4	Scheduling	ADGRU	DGRUDD01	do	1
 SDM1T4	Scheduling	AUDIT	DIET	do	1
@@ -207389,54 +208982,13 @@ SDM1T4	Scheduling	AVAFC	VAFCDD01	do	1
 SDM1T4	Scheduling	DPT	IVMPXFR	do	1
 SDM1T4	Scheduling	EVENT	IVMPLOG	do	1
 SDM1T4	Scheduling	NOW	XLFDT	func	1
-SDM1T5	Scheduling		A1B2XFR	do	3
-SDM1T5	Scheduling		DIC	do	2
-SDM1T5	Scheduling		DICR	do	4
-SDM1T5	Scheduling		DIE17	goto	1
-SDM1T5	Scheduling		DIR	do	1
-SDM1T5	Scheduling		SDM1T6	do	1
-SDM1T5	Scheduling		SDM1T7	do	1
-SDM1T5	Scheduling		SDM1T8	do	1
-SDM1T5	Scheduling	ADGRU	DGRUDD01	do	4
-SDM1T5	Scheduling	AST	DIED	goto	1
-SDM1T5	Scheduling	AUDIT	DIET	do	5
-SDM1T5	Scheduling	AVAFC	VAFCDD01	do	5
-SDM1T5	Scheduling	DPT	IVMPXFR	do	5
-SDM1T5	Scheduling	E	DIE0	do	1
-SDM1T5	Scheduling	EVENT	IVMPLOG	do	5
-SDM1T5	Scheduling	F	DIE17	do	4
-SDM1T5	Scheduling	FC	DGFCPROT	do	4
-SDM1T5	Scheduling	KILL	DGREGDD1	do	1
-SDM1T5	Scheduling	M	DIE17	goto	1
-SDM1T5	Scheduling	NOSCR	DIED	do	1
-SDM1T5	Scheduling	NOW	XLFDT	func	4
-SDM1T5	Scheduling	RW	DIR2	goto	1
-SDM1T5	Scheduling	SET	DGREGDD1	do	1
-SDM1T5	Scheduling	UNIQFERR	DIE17	goto	1
-SDM1T5	Scheduling	Z	DIE17	goto	1
-SDM1T5	Scheduling	Z	DIE2	goto	1
-SDM1T5	Scheduling	ZIP	DGREGDD1	func	1
-SDM1T5	Scheduling	ZIPIN	VAFADDR	do	1
-SDM1T6	Scheduling		A1B2XFR	do	1
-SDM1T6	Scheduling	AUDIT	DIET	do	1
-SDM1T6	Scheduling	AVAFC	VAFCDD01	do	1
-SDM1T6	Scheduling	DPT	IVMPXFR	do	1
-SDM1T6	Scheduling	EVENT	IVMPLOG	do	1
-SDM1T7	Scheduling	ADGRU	DGRUDD01	do	1
-SDM1T7	Scheduling	AUDIT	DIET	do	1
-SDM1T7	Scheduling	AVAFC	VAFCDD01	do	1
-SDM1T7	Scheduling	DPT	IVMPXFR	do	1
-SDM1T7	Scheduling	EVENT	IVMPLOG	do	1
-SDM1T8	Scheduling	ADGRU	DGRUDD01	do	1
-SDM1T8	Scheduling	AUDIT	DIET	do	1
-SDM1T8	Scheduling	AVAFC	VAFCDD01	do	1
-SDM1T8	Scheduling	DPT	IVMPXFR	do	1
-SDM1T8	Scheduling	EVENT	IVMPLOG	do	1
-SDM1T9	Scheduling		A1B2XFR	do	1
-SDM1T9	Scheduling	AUDIT	DIET	do	1
-SDM1T9	Scheduling	AVAFC	VAFCDD01	do	1
-SDM1T9	Scheduling	DPT	IVMPXFR	do	1
-SDM1T9	Scheduling	EVENT	IVMPLOG	do	1
+SDM1T5	Scheduling		DICR	do	1
+SDM1T5	Scheduling	ADGRU	DGRUDD01	do	1
+SDM1T5	Scheduling	AUDIT	DIET	do	1
+SDM1T5	Scheduling	AVAFC	VAFCDD01	do	1
+SDM1T5	Scheduling	DPT	IVMPXFR	do	1
+SDM1T5	Scheduling	EVENT	IVMPLOG	do	1
+SDM1T5	Scheduling	NOW	XLFDT	func	1
 SDM2	Scheduling		%ZIS	do	1
 SDM2	Scheduling		%ZISC	do	1
 SDM2	Scheduling		DIR	do	1
@@ -213829,6 +215381,7 @@ SROUTL	Surgery	SIGNED	SROESUTL	func	1
 SROUTL	Surgery	SSOTH	SROCPT	do	1
 SROUTL	Surgery	SSPRIN	SROCPT	do	1
 SROUTL0	Surgery		DIR	do	2
+SROUTL0	Surgery	GET1	DIQ	func	2
 SROUTL0	Surgery	LIST	DIC	do	1
 SROUTL0	Surgery	SITE	SROVAR	func	2
 SROUTL0	Surgery	WIN	DGPMDDCF	do	1
@@ -215234,7 +216787,7 @@ TIUALRT	Text Integration Utility	DATE	TIULS	func	3
 TIUALRT	Text Integration Utility	DELETEA	XQALERT	do	2
 TIUALRT	Text Integration Utility	DOCCHK	TIULRR	func	1
 TIUALRT	Text Integration Utility	DOCPRM	TIULC1	do	2
-TIUALRT	Text Integration Utility	EN	VALM	do	2
+TIUALRT	Text Integration Utility	EN	VALM	do	3
 TIUALRT	Text Integration Utility	FILE	DIE	do	2
 TIUALRT	Text Integration Utility	GET1	DIQ	func	1
 TIUALRT	Text Integration Utility	NAME	TIULS	func	1
@@ -215244,8 +216797,8 @@ TIUALRT	Text Integration Utility	PERSNAME	TIULC1	func	1
 TIUALRT	Text Integration Utility	PNAME	TIULC1	func	3
 TIUALRT	Text Integration Utility	PROVIDER	XUSER	func	1
 TIUALRT	Text Integration Utility	PTNAME	TIULC1	func	1
-TIUALRT	Text Integration Utility	READ	TIUU	func	3
-TIUALRT	Text Integration Utility	SETPARM	TIULE	do	5
+TIUALRT	Text Integration Utility	READ	TIUU	func	4
+TIUALRT	Text Integration Utility	SETPARM	TIULE	do	6
 TIUALRT	Text Integration Utility	SETUP	XQALERT	do	2
 TIUALRT	Text Integration Utility	UP	XLFSTR	func	1
 TIUALRT1	Text Integration Utility	DATE	TIULS	func	1
@@ -215655,8 +217208,8 @@ TIUCOPR	Text Integration Utility	NOW	XLFDT	func	1
 TIUCOPR	Text Integration Utility	VIEW	TIUCOP	func	1
 TIUCOPR1	Text Integration Utility		XMD	do	1
 TIUCOPR1	Text Integration Utility	DEM	VADPT	do	1
-TIUCOPR1	Text Integration Utility	FMTE	XLFDT	func	6
-TIUCOPR1	Text Integration Utility	GET1	DIQ	func	1
+TIUCOPR1	Text Integration Utility	FMTE	XLFDT	func	5
+TIUCOPR1	Text Integration Utility	GET1	DIQ	func	6
 TIUCOPR1	Text Integration Utility	GETS	DIQ	do	1
 TIUCOPR1	Text Integration Utility	KVA	VADPT	do	1
 TIUCOPR1	Text Integration Utility	NOW	XLFDT	func	1
@@ -219892,7 +221445,7 @@ TIUSRVT3	Text Integration Utility	GET	XPAR	func	1
 TIUSRVT4	Text Integration Utility		DIR	do	1
 TIUSRVT4	Text Integration Utility	DELETE	TIUSRVT	do	1
 TIUSRVT4	Text Integration Utility	EDITPAR	XPAREDIT	do	1
-TIUSRVT4	Text Integration Utility	GET1	DIQ	func	1
+TIUSRVT4	Text Integration Utility	GET1	DIQ	func	2
 TIUSRVT4	Text Integration Utility	NOW	%DTC	do	1
 TIUSRVT5	Text Integration Utility		DIC	do	1
 TIUSRVT5	Text Integration Utility		DIE	do	2
@@ -225484,6 +227037,7 @@ VRTEST	Uncategorized		%ZIS	do	1
 VSIT	PCE Patient Care Encounter		VSITPUT	do	2
 VSIT	PCE Patient Care Encounter	ADD	AUPNVSIT	do	1
 VSIT	PCE Patient Care Encounter	ALL	VSITVAR	do	2
+VSIT	PCE Patient Care Encounter	BLDFDA	PXSPECAUTH	do	1
 VSIT	PCE Patient Care Encounter	DEFAULTS	VSITDEF	do	2
 VSIT	PCE Patient Care Encounter	DT	DICRW	do	1
 VSIT	PCE Patient Care Encounter	FILE	DIE	do	1
@@ -225497,6 +227051,7 @@ VSIT	PCE Patient Care Encounter	PKG	VSIT0	func	1
 VSIT	PCE Patient Care Encounter	PKG2IEN	VSIT0	func	2
 VSIT	PCE Patient Care Encounter	PKGON	VSIT0	func	1
 VSIT	PCE Patient Care Encounter	REQUIRED	VSITDEF	func	1
+VSIT	PCE Patient Care Encounter	SAVALUEFORVISIT	PXSPECAUTH	func	1
 VSIT	PCE Patient Care Encounter	SENDEMSG	PXMCLINK	do	1
 VSIT	PCE Patient Care Encounter	SETALL	VSITCK	do	1
 VSIT	PCE Patient Care Encounter	SND	VSITBUL	do	1
@@ -225558,8 +227113,11 @@ VSITKIL	PCE Patient Care Encounter	UNLOCK	PXLOCK	do	3
 VSITOE	PCE Patient Care Encounter	EXTERNAL	DILFD	func	4
 VSITPUT	PCE Patient Care Encounter		VSITPUT1	do	1
 VSITPUT	PCE Patient Care Encounter	VAR	VSITBUL	do	2
+VSITPUT1	PCE Patient Care Encounter	AWRITE	PXUTIL	do	1
+VSITPUT1	PCE Patient Care Encounter	BLDFDA	PXSPECAUTH	do	1
 VSITPUT1	PCE Patient Care Encounter	FILE	DICN	do	1
 VSITPUT1	PCE Patient Care Encounter	IX1	DIK	do	1
+VSITPUT1	PCE Patient Care Encounter	UPDATE	DIE	do	1
 VSITSTAT	PCE Patient Care Encounter	GET	VSIT	func	1
 VSITSTAT	PCE Patient Care Encounter	IN5	VADPT	do	1
 VSITSTAT	PCE Patient Care Encounter	KVA	VADPT	do	1
@@ -233402,6 +234960,7 @@ XUEPCSVR	Kernel	FIND	DIC	do	1
 XUESSO1	Kernel		DIK	do	1
 XUESSO1	Kernel		XMB	do	1
 XUESSO1	Kernel	ACTIVE	XUSER	func	2
+XUESSO1	Kernel	CANADD	XUESSO2	func	1
 XUESSO1	Kernel	CHK	DIE	do	2
 XUESSO1	Kernel	DUZ	XUS1A	do	1
 XUESSO1	Kernel	FILE	DICN	do	1
@@ -233678,6 +235237,10 @@ XUINTSK3	Kernel	FILE	DICN	do	5
 XUINTSK4	Kernel		DIE	do	6
 XUINTSK4	Kernel	FILE	DICN	do	5
 XUINZIS	Kernel	LODUTL	%ZISS	do	1
+XUKSPTLSF	Kernel		DIE	do	1
+XUKSPTLSF	Kernel	GET1	DIQ	func	1
+XUKSPTLSF	Kernel	GETTLSSERVERCNS	XUSUDO	func	1
+XUKSPTLSF	Kernel	GKSPTLSCN	XUTLS	func	1
 XULM	Kernel	ASKAV	XUS	func	1
 XULM	Kernel	ASKYESNO	XULMU	func	3
 XULM	Kernel	CALLRPC	XWBM2MC	func	2
@@ -234219,6 +235782,17 @@ XUMFXR	Kernel	FIND1	DIC	func	1
 XUMFXR	Kernel	GET1	DIQ	func	4
 XUMFXR	Kernel	MAIN	XUMF299	do	1
 XUMPI	Kernel	FILE	DIE	do	1
+XUMUCI	Kernel		DIR	do	4
+XUMUCI	Kernel	CLEAN	VALM10	do	1
+XUMUCI	Kernel	CLEAR	VALM1	do	1
+XUMUCI	Kernel	DISP	XQORM1	do	1
+XUMUCI	Kernel	EN	VALM	do	2
+XUMUCI	Kernel	FMDIFF	XLFDT	func	2
+XUMUCI	Kernel	FMTE	XLFDT	func	1
+XUMUCI	Kernel	NOW	%DTC	do	2
+XUMUCI	Kernel	SET	VALM10	do	13
+XUMUCI	Kernel	SETFLD	VALM1	func	5
+XUMUCI	Kernel	UP	XLFSTR	func	1
 XUMVIDTA	Kernel	EN	DIQ1	do	1
 XUMVIENU	Kernel		DIK	do	1
 XUMVIENU	Kernel	ADDUSER	XUMVINPA	func	1
@@ -234457,6 +236031,30 @@ XUPSUTQ	Kernel		%ZISC	do	1
 XUPSUTQ	Kernel		%ZTLOAD	do	1
 XUPSUTQ	Kernel	KILL	%ZTLOAD	do	1
 XUPSUTQ	Kernel	YMD	%DTC	do	1
+XUREMAP	Toolkit	ADDEP	XUREMAP1	do	2
+XUREMAP	Toolkit	ADDRA	XUREMAP1	do	2
+XUREMAP	Toolkit	CHKAEPIN	XUREMAP1	do	1
+XUREMAP	Toolkit	CONTEXT	XUREMAP1	do	1
+XUREMAP	Toolkit	FAUXFL	XUREMAP1	do	2
+XUREMAP	Toolkit	FILE	DIE	do	2
+XUREMAP	Toolkit	FIND1	DIC	func	4
+XUREMAP	Toolkit	FORMAT	XUREMAP1	do	1
+XUREMAP	Toolkit	GETCNTXT	XUREMAP1	do	2
+XUREMAP	Toolkit	GETFLNUM	XUREMAP1	func	2
+XUREMAP	Toolkit	INSPLIT	XUREMAP1	do	1
+XUREMAP	Toolkit	LIST	DIC	do	2
+XUREMAP	Toolkit	REMOVE	XUREMAP1	do	2
+XUREMAP	Toolkit	SITE	VASITE	func	9
+XUREMAP1	Toolkit	ADDRA	XUREMAP1	do	1
+XUREMAP1	Toolkit	FIELD	DID	do	2
+XUREMAP1	Toolkit	FILE	DIE	do	1
+XUREMAP1	Toolkit	FIND1	DIC	func	4
+XUREMAP1	Toolkit	FINDOPT	XUREMAP1	func	1
+XUREMAP1	Toolkit	GETS	DIQ	do	1
+XUREMAP1	Toolkit	SHAHASH	XUSHSH	func	1
+XUREMAP1	Toolkit	SITE	VASITE	func	5
+XUREMAP1	Toolkit	TRIM	XLFSTR	func	1
+XUREMAP1	Toolkit	UPDATE	DIE	do	3
 XURNPAUD	Toolkit		%DT	do	1
 XURNPAUD	Toolkit	EN	DIQ1	do	1
 XURNPAUD	Toolkit	FMTE	XLFDT	func	1
@@ -235257,12 +236855,21 @@ XUSTZIP	Kernel	HTE	XLFDT	func	3
 XUSTZIP	Kernel	HTFM	XLFDT	func	2
 XUSTZIP	Kernel	NOW	XLFDT	func	3
 XUSTZIP	Kernel	UPDATE	DIE	do	2
+XUSUDO	Kernel	APPERROR	%ZTER	do	4
 XUSZ91	Kernel		%ZIS	do	1
 XUSZ91	Kernel		DIC	do	1
 XUSZ91	Kernel		XQ	goto	2
 XUSZ91	Kernel	DT	DIO2	do	1
 XUSZ91	Kernel	YMD	%DTC	do	1
 XUSZ91	Kernel	YN	DICN	do	1
+XUTLS	Kernel	APPERROR	%ZTER	do	1
+XUTLS	Kernel	DT	XLFDT	func	1
+XUTLS	Kernel	FMADD	XLFDT	func	1
+XUTLS	Kernel	GET1	DIQ	func	1
+XUTLS	Kernel	INIT	XUTLS	func	1
+XUTLS	Kernel	ISTLSSERVERCONF	XUSUDO	func	1
+XUTLS	Kernel	NOW	XLFDT	func	1
+XUTLS	Kernel	UP	XLFSTR	func	1
 XUTMD	Kernel		DIE	do	1
 XUTMD	Kernel		DIR	do	1
 XUTMD	Kernel		XUTMD1	do	1
@@ -237293,6 +238900,9 @@ YS250PST	Mental Health	INSTALLQ	YTXCHG	do	1
 YS250PST	Mental Health	MES	XPDUTL	do	1
 YS250PST	Mental Health	REPLACE	XLFSTR	func	1
 YS250PST	Mental Health	UPDATE	DIE	do	1
+YS253PST	Mental Health	EN	XPAR	do	1
+YS253PST	Mental Health	GET	XPAR	func	1
+YS253PST	Mental Health	UPDVER	YTQAPI7	do	1
 YS254PST	Mental Health	BMES	XPDUTL	do	1
 YS254PST	Mental Health	EN	XPAR	do	1
 YS254PST	Mental Health	ENVAL	XPAR	do	1
@@ -237308,6 +238918,16 @@ YS255PST	Mental Health	MES	XPDUTL	do	1
 YS255PST	Mental Health	UPDATE	DIE	do	1
 YS258PST	Mental Health	INCLUDE	YTXCHG	func	1
 YS258PST	Mental Health	INSTALLQ	YTXCHG	do	1
+YS269PST	Mental Health	BMES	XPDUTL	do	1
+YS269PST	Mental Health	CLEAN	DILF	do	1
+YS269PST	Mental Health	EN	XPAR	do	1
+YS269PST	Mental Health	ENVAL	XPAR	do	1
+YS269PST	Mental Health	FMADD	XLFDT	func	1
+YS269PST	Mental Health	INCLUDE	YTXCHG	func	1
+YS269PST	Mental Health	INSTALLQ	YTXCHG	do	1
+YS269PST	Mental Health	MES	XPDUTL	do	1
+YS269PST	Mental Health	REPLACE	XLFSTR	func	1
+YS269PST	Mental Health	UPDATE	DIE	do	1
 YSASA2	Mental Health		DIC	do	1
 YSASA2	Mental Health		DIE	do	2
 YSASA2	Mental Health		DIR	do	2
@@ -239148,6 +240768,8 @@ YTSCOREX	Mental Health	LEGCR	YTQAPI9	do	1
 YTSCOREX	Mental Health	SCALEG	YTQAPI3	do	1
 YTSCSDD	Mental Health	GET1	DIQ	func	3
 YTSCSDD	Mental Health	LDSCORES	YTSCORE	do	1
+YTSCSSR2	Mental Health	BYKEY	YTSCORE	do	1
+YTSCSSR2	Mental Health	LDSCORES	YTSCORE	do	1
 YTSDBAS	Mental Health	GET1	DIQ	func	2
 YTSDERS	Mental Health	GET1	DIQ	func	8
 YTSEAT26	Mental Health	GET1	DIQ	func	7
@@ -241339,12 +242961,15 @@ ZZMAS	Uncategorized	NOP	XLFNAME7	func	1
 ZZMAS	Uncategorized	NOSCR	DIED	do	1
 ZZMAS	Uncategorized	NOW	XLFDT	func	8
 ZZMAS	Uncategorized	OUT	DIE17	goto	1
+ZZMAS	Uncategorized	OUTPUT	DIETLIBF	func	1
 ZZMAS	Uncategorized	RW	DIR2	goto	1
 ZZMAS	Uncategorized	SET	DIED	do	1
 ZZMAS	Uncategorized	SET	DIQ	func	1
 ZZMAS	Uncategorized	SET	VAFCMIS	do	1
 ZZMAS	Uncategorized	UNIQFERR	DIE17	goto	1
 ZZMAS	Uncategorized	UP	DGHELP	do	4
+ZZMAS	Uncategorized	VALEXT	DIETLIBF	func	1
+ZZMAS	Uncategorized	VALEXTS	DIETLIBF	func	1
 ZZMAS	Uncategorized	Z	DIE17	goto	1
 ZZMAS	Uncategorized	Z	DIE2	goto	1
 ZZMAS	Uncategorized	ZIP	DGREGDD1	func	1
@@ -241389,10 +243014,13 @@ ZZMAS5	Uncategorized	LABEL	DIALOGZ	func	2
 ZZMAS5	Uncategorized	M	DIE17	goto	1
 ZZMAS5	Uncategorized	NOSCR	DIED	do	1
 ZZMAS5	Uncategorized	NOW	XLFDT	func	2
+ZZMAS5	Uncategorized	OUTPUT	DIETLIBF	func	1
 ZZMAS5	Uncategorized	RW	DIR2	goto	1
 ZZMAS5	Uncategorized	SET	DIED	do	1
 ZZMAS5	Uncategorized	SET	DIQ	func	1
 ZZMAS5	Uncategorized	UNIQFERR	DIE17	goto	1
+ZZMAS5	Uncategorized	VALEXT	DIETLIBF	func	1
+ZZMAS5	Uncategorized	VALEXTS	DIETLIBF	func	1
 ZZMAS5	Uncategorized	Z	DIE17	goto	1
 ZZMAS5	Uncategorized	Z	DIE2	goto	1
 ZZMGP	Uncategorized		%ZIS	do	1
