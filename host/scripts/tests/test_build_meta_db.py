@@ -41,6 +41,7 @@ FIXTURE_ROWS = {
     "routines.tsv": [{"routine_name": "ORWPT", "line_count": "120"}],
     "routines-comprehensive.tsv": [
         {"routine_name": "ORWPT", "package": "Order Entry",
+         "source_path": "/opt/VistA-M/Packages/Order Entry/Routines/ORWPT.m",
          "line_count": "120", "in_degree": "7"}],
     "routine-globals.tsv": [
         {"routine_name": "ORWPT", "package": "Order Entry",
@@ -67,13 +68,17 @@ def _filler(spec: schema_v1.FileSpec, col: str, i: int) -> str:
     return f"x{i}"
 
 
-def make_tree(with_bridge: bool = True) -> Path:
+def make_tree(with_bridge: bool = True,
+              extra_rows: dict | None = None) -> Path:
+    """`extra_rows` appends rows per TSV, for suites that need a larger
+    world than these tests assert on."""
     root = Path(tempfile.mkdtemp())
+    extra_rows = extra_rows or {}
     for name, spec in schema_v1.FILES.items():
         d = root / spec.model
         d.mkdir(exist_ok=True)
         lines = ["\t".join(spec.columns)]
-        for row in FIXTURE_ROWS.get(name, [{}]):
+        for row in FIXTURE_ROWS.get(name, [{}]) + extra_rows.get(name, []):
             lines.append("\t".join(
                 row.get(c, "" if c in spec.nullable
                         else _filler(spec, c, i))

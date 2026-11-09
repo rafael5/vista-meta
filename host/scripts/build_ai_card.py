@@ -146,7 +146,8 @@ def build_manifest_doc(export_dir: Path, record: dict) -> dict:
                        "v_package_overview); the TSVs stay canonical",
             "mcp": "python3 host/scripts/mcp_server.py — stdio MCP "
                    "server over meta.db (self-building; tools: query / "
-                   "lookup / bridge / orientation); wired via the "
+                   "lookup / bridge / orientation / routine_card / "
+                   "package_card / listing); wired via the "
                    "repo's .mcp.json",
         },
         "join_keys": _join_key_registry(),
@@ -266,7 +267,12 @@ silently.
 4. **MCP** — `python3 host/scripts/mcp_server.py` (stdio; wired by the repo's
    `.mcp.json`): tools `query` (read-only SQL over the db above, self-building)
    · `lookup` (keyed, returns the citation line ready-made) · `bridge` (vdocs
-   entity → vista-meta row) · `orientation` (pins + surface + contract).
+   entity → vista-meta row) · `orientation` (pins + surface + contract) ·
+   `routine_card` (one routine or `TAG^ROUTINE`: its row, source text with
+   `TAG+n` offsets, callers, callees, globals, RPC/option/protocol bindings —
+   use it before reading or grepping source) · `package_card` (a package's
+   RPCs, options, protocols and the entry points other packages call) ·
+   `listing` (RPCs or options by name prefix, the fields of a file).
 
 ## Data dictionary
 

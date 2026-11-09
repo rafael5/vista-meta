@@ -1,7 +1,8 @@
 # Routine card and package interface card — kickoff
 
-**Status:** accepted by the owner 2026-11-09 · nothing built · run it in one
-session with: `cd ~/projects/vista-meta && claude "Execute docs/proposals/routine-and-package-cards.md"`.
+**Status:** accepted by the owner 2026-11-09 · built 2026-11-09 —
+`routine_card`, `package_card` and `listing` in the MCP server
+(`host/scripts/mcp_cards.py`).
 
 This repository answers only to its own `make check`. The measurement below
 comes from the vista-forge `docs` repo

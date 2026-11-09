@@ -5,14 +5,23 @@
 """MCP stdio server over the meta.db projection — stdlib only.
 
 Speaks MCP's stdio transport (newline-delimited JSON-RPC 2.0):
-`initialize` / `tools/list` / `tools/call`, four tools:
+`initialize` / `tools/list` / `tools/call`, seven tools:
 
-  query        read-only SQL (SELECT/WITH only) over the 26 tables +
-               6 join views, row-capped
-  lookup       keyed lookup (rpc / option / routine / file / package /
-               global) with the release-pinned citation line
-  bridge       vdocs entity_id → its vista-meta row (the W3 bridge)
-  orientation  provenance pins + query surface + citation contract
+  query         read-only SQL (SELECT/WITH only) over the 26 tables +
+                6 join views, row-capped
+  lookup        keyed lookup (rpc / option / routine / file / package /
+                global) with the release-pinned citation line
+  bridge        vdocs entity_id → its vista-meta row (the W3 bridge)
+  orientation   provenance pins + query surface + citation contract
+  routine_card  one routine or TAG^ROUTINE: its row, source text,
+                callers, callees, globals, bindings, vdocs counterpart
+  package_card  a package's RPCs, options, protocols and the entry
+                points other packages call
+  listing       RPCs / options by name prefix, the fields of a file
+
+The cards and listings live in `mcp_cards.py`; the source text they
+quote comes from the host tree `vista/vista-m-host/` and never from
+meta.db.
 
 The database is the generated dist projection (`make meta-db`); on
 startup the server builds/rebuilds it when missing or stale, so
@@ -31,9 +40,15 @@ import sys
 from pathlib import Path
 
 import build_meta_db
+from mcp_cards import (CAP_CALLER_PACKAGES, CAP_CALLERS, CARD_TOOLS,  # noqa: F401
+                       LISTING_DEFAULT_ROWS, LISTING_MAX_ROWS,
+                       CardInputError, Cards)
 
 PROTOCOL_VERSION = "2024-11-05"
 SERVER_INFO = {"name": "vista-meta", "version": "1.0.0"}
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+SOURCE_ROOT = PROJECT_ROOT / "vista/vista-m-host"
 
 MAX_ROWS_CEILING = 500
 DEFAULT_MAX_ROWS = 50
@@ -120,6 +135,7 @@ TOOLS = [
             "session before querying.",
         "inputSchema": {"type": "object", "properties": {}},
     },
+    *CARD_TOOLS,
 ]
 
 
@@ -134,11 +150,16 @@ def _rows_to_dicts(cursor, rows) -> list[dict]:
 
 
 class Handler:
-    def __init__(self, db_path: Path):
+    def __init__(self, db_path: Path, source_root: Path = SOURCE_ROOT):
         self.con = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
         self.meta = dict(self.con.execute(
             "SELECT key, value FROM meta").fetchall())
         self.tag = self.meta.get("tag", "data-v1")
+        try:
+            display = source_root.relative_to(PROJECT_ROOT).as_posix()
+        except ValueError:
+            display = str(source_root)
+        self.cards = Cards(self.con, self.tag, source_root, display)
 
     # ── arguments ─────────────────────────────────────────────────
     @staticmethod
@@ -253,6 +274,44 @@ class Handler:
                     "row means the entity_id/name is wrong)")
         return json.dumps({"rows": rows}, indent=1, ensure_ascii=False)
 
+    @staticmethod
+    def _card_text(answer) -> str:
+        """A card is JSON; a miss is the "not measured" sentence."""
+        if isinstance(answer, str):
+            return answer
+        return json.dumps(answer, ensure_ascii=False)
+
+    def tool_routine_card(self, args: dict) -> str:
+        try:
+            return self._card_text(
+                self.cards.routine_card(str(args["name"])))
+        except CardInputError as e:
+            raise ToolError(str(e)) from e
+
+    def tool_package_card(self, args: dict) -> str:
+        try:
+            return self._card_text(
+                self.cards.package_card(str(args["name"])))
+        except CardInputError as e:
+            raise ToolError(str(e)) from e
+
+    def tool_listing(self, args: dict) -> str:
+        kind = args["kind"]
+        if kind not in ("rpc", "option", "field"):
+            raise ToolError("kind must be one of field, option, rpc")
+        max_rows = args.get("max_rows", LISTING_DEFAULT_ROWS)
+        offset = args.get("offset", 0)
+        if (not isinstance(max_rows, int)
+                or not 1 <= max_rows <= LISTING_MAX_ROWS):
+            raise ToolError(f"max_rows must be 1..{LISTING_MAX_ROWS}")
+        if not isinstance(offset, int) or offset < 0:
+            raise ToolError("offset must be a whole number, 0 or more")
+        try:
+            return self._card_text(self.cards.listing(
+                kind, str(args["key"]), max_rows, offset))
+        except CardInputError as e:
+            raise ToolError(str(e)) from e
+
     def tool_orientation(self, args: dict) -> str:
         kinds = dict(self.con.execute(
             "SELECT name, type FROM sqlite_master "
@@ -281,6 +340,13 @@ class Handler:
             "(the `lookup` tool returns this line ready-made). If no row "
             "answers the question, the correct answer is \"not measured "
             f"in vista-meta {self.tag}\" — say so and stop.\n\n"
+            "Before reading or grepping routine source: `routine_card` "
+            "(ROUTINE or TAG^ROUTINE) returns the source text with TAG+n "
+            "offsets, callers, callees, globals and bindings in one call; "
+            "`package_card` returns a package's RPCs, options, protocols "
+            "and cross-package entry points; `listing` gives RPCs or "
+            "options by name prefix and the fields of a file. Each part "
+            "carries its citation; long lists say what was cut.\n\n"
             "Peer front door: `vdocs serve-mcp` holds what the VA "
             "documentation SAYS (same tool conventions; its extra tool is "
             "`search`, this side's is `bridge` — vdocs entity_id → "
@@ -295,7 +361,10 @@ class Handler:
         name = params.get("name", "")
         tool = {"query": self.tool_query, "lookup": self.tool_lookup,
                 "bridge": self.tool_bridge,
-                "orientation": self.tool_orientation}.get(name)
+                "orientation": self.tool_orientation,
+                "routine_card": self.tool_routine_card,
+                "package_card": self.tool_package_card,
+                "listing": self.tool_listing}.get(name)
         if tool is None:
             return _error(msg_id, -32602, f"unknown tool {name!r}")
         args = params.get("arguments")
