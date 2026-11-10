@@ -1,0 +1,23 @@
+{
+  "comment": "Derived projections published as supplementary data-v1.3 release assets. Generated (never hand-edited), gate-verified against the pinned TSVs before upload; the TSVs remain the model of record. The main record (data-v1.3.manifest.json) stays byte-identical to its assets; this sidecar records the derived tier.",
+  "content_hash": "5778c17499194460d94a51501ee53512a625ceb322bdde93294571f9f56b3cee",
+  "files": {
+    "entity-bridge.meta.json": {
+      "bytes": 4045,
+      "sha256": "ce68bc9d8257192ec91d22ac0e99c847b733de649d24a23fceb9927a098b3a94"
+    },
+    "entity-bridge.tsv": {
+      "bytes": 438722,
+      "sha256": "ffb5cf708bf4ca1be7a3e4635bebf37e264f14dcfbf317adcaf5e024916ab596"
+    },
+    "vista-meta-data-v1.3.db": {
+      "bytes": 108888064,
+      "sha256": "9f3aaeec68f30b6e2476e27589e19e112036c57c3b19ceec26daebecae7504f5"
+    }
+  },
+  "generated_by": [
+    "host/scripts/build_meta_db.py",
+    "host/scripts/build_entity_bridge.py"
+  ],
+  "release": "data-v1.3"
+}
