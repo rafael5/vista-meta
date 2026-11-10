@@ -417,7 +417,7 @@ conversion), shell `awk`, or plain Python.
 | [`build_package_manifest.py`](../../host/scripts/build_package_manifest.py) | Per-package joins: role counts, edge counts, coupling |
 | [`build_package_edge_matrix.py`](../../host/scripts/build_package_edge_matrix.py) | Sparse source→dest package call matrix |
 | [`build_routines_comprehensive.py`](../../host/scripts/build_routines_comprehensive.py) | Multi-way join over all 19 layers |
-| [`validate_against_xindex.py`](../../host/scripts/validate_against_xindex.py) | Cross-check regex extraction against XINDEX — published as `xindex-validation.tsv` |
+| [`validate_against_xindex.py`](../../host/scripts/validate_against_xindex.py) | Cross-check regex extraction against XINDEX — published as `xindex-validation.tsv`; also checks that every XINDEX call-site location (`TAG+n`) points at a source line naming the callee, and fails past 0.1 % misses (data-v1.2: 3 of 456,866) |
 
 XINDEX is VA's official static analyzer (part of Kernel); we drive
 it through the container via the **VMXIDX bridge**

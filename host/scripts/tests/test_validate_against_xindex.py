@@ -50,5 +50,69 @@ class TestValidatedNames(unittest.TestCase):
         self.assertEqual(skipped, ["%YDBX"])
 
 
+SOURCE = {
+    "CALLER": ["CALLER ;demo", " Q", "EN ;entry", " S X=1",
+               " D ^DIC,LIST^ORWPT", " S Y=$$FMTE^XLFDT(X)",
+               "IND D @RTN", " D EN1^@RTN"],
+}
+
+
+def xref(ref: str, locations: str, routine: str = "CALLER") -> dict:
+    return {"routine_name": routine, "ref": ref, "location_list": locations}
+
+
+class TestCallSiteMisses(unittest.TestCase):
+    def misses(self, rows):
+        return v.call_site_misses(rows, SOURCE.get)
+
+    def test_a_location_naming_the_callee_is_no_miss(self):
+        checked, indirect, misses = self.misses([
+            xref("DIC ", "EN+2,"), xref("ORWPT LIST", "EN+2,"),
+            xref("XLFDT $$FMTE", "EN+3,")])
+        self.assertEqual((checked, indirect, misses), (3, 0, []))
+
+    def test_a_bare_label_is_the_label_line_itself(self):
+        _, _, misses = self.misses([xref("DIC ", "IND,")])
+        self.assertEqual(misses, ["CALLER IND -> DIC "])
+        _, _, misses = self.misses([xref("XLFDT $$FMTE", "EN+3,")])
+        self.assertEqual(misses, [])
+
+    def test_xindex_flags_after_a_location_are_ignored(self):
+        _, _, misses = self.misses([xref("XLFDT $$FMTE", "EN+3~,EN+3*,")])
+        self.assertEqual(misses, [])
+
+    def test_a_wrong_line_or_unknown_label_is_a_miss(self):
+        _, _, misses = self.misses([xref("XLFDT $$FMTE", "EN+1,NOPE+2,0,")])
+        self.assertEqual(misses, ["CALLER EN+1 -> XLFDT $$FMTE",
+                                  "CALLER NOPE+2 -> XLFDT $$FMTE",
+                                  "CALLER 0 -> XLFDT $$FMTE"])
+
+    def test_a_caller_without_source_is_a_miss(self):
+        checked, _, misses = self.misses([xref("DIC ", "A+1,", "GONE")])
+        self.assertEqual((checked, misses), (1, ["GONE A+1 -> DIC "]))
+
+    def test_an_indirect_ref_is_counted_not_checked(self):
+        checked, indirect, misses = self.misses([xref("@(", "IND+1,")])
+        self.assertEqual((checked, indirect, misses), (0, 1, []))
+
+
+class TestCallSiteReport(unittest.TestCase):
+    def test_passes_within_the_tolerance_and_names_the_misses(self):
+        lines, ok = v.call_site_report(10_000, 2, ["CALLER EN+1 -> DIC "])
+        self.assertTrue(ok)
+        text = "\n".join(lines)
+        self.assertIn("10,000", text)
+        self.assertIn("CALLER EN+1 -> DIC ", text)
+        self.assertIn("indirect", text)
+
+    def test_fails_past_the_tolerance(self):
+        _, ok = v.call_site_report(100, 0, ["a", "b"])
+        self.assertFalse(ok)
+
+    def test_fails_when_nothing_was_checked(self):
+        _, ok = v.call_site_report(0, 0, [])
+        self.assertFalse(ok)
+
+
 if __name__ == "__main__":
     unittest.main()

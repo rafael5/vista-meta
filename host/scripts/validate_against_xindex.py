@@ -11,6 +11,9 @@ Reads (all from vista/export/code-model/):
   - xindex-routines.tsv      (XINDEX — line_count, tag_count, xref_count)
   - xindex-xrefs.tsv         (XINDEX — routine → external refs)
 
+Checks each xindex-xrefs location against the caller's source text
+in vista/vista-m-host/ (exit 1 past CALL_SITE_TOLERANCE).
+
 Writes:
   - vista/export/code-model/xindex-validation.tsv
     one row per routine (joined inner on the ones XINDEX processed)
@@ -31,11 +34,14 @@ import csv
 import sys
 from collections import defaultdict
 from pathlib import Path
+from typing import Callable
 
 import schema_v1
 import tsvio
+from mcp_cards import host_relative, parse_labels
 
 NORM = Path(__file__).resolve().parents[2] / "vista/export/code-model"
+SOURCE_ROOT = Path(__file__).resolve().parents[2] / "vista/vista-m-host"
 OUT_TSV = NORM / "xindex-validation.tsv"
 
 SPEC = schema_v1.spec_for("xindex-validation.tsv")
@@ -66,7 +72,9 @@ def main() -> int:
 
     # Our regex per-routine data
     our_rou: dict[str, dict] = {}
+    source_paths: dict[str, str] = {}
     for r in load_tsv(NORM / "routines.tsv"):
+        source_paths[r["routine_name"]] = r["source_path"]
         our_rou[r["routine_name"]] = {
             "package": r["package"],
             "lines": int(r["line_count"]),
@@ -89,7 +97,8 @@ def main() -> int:
 
     # XINDEX xrefs: routine → set of callee routine names
     xindex_callees: dict[str, set[str]] = defaultdict(set)
-    for r in load_tsv(NORM / "xindex-xrefs.tsv"):
+    xrefs = load_tsv(NORM / "xindex-xrefs.tsv")
+    for r in xrefs:
         rou, _tag = parse_xref_ref(r["ref"])
         if rou:
             xindex_callees[r["routine_name"]].add(rou)
@@ -157,7 +166,19 @@ def main() -> int:
     print(f"  processed but left out of xindex-validation (no package): "
           f"{len(no_package):,}" + (f" — {', '.join(no_package)}"
                                     if no_package else ""))
-    return 0
+    print()
+
+    def lines_of(routine: str) -> list[str] | None:
+        rel = host_relative(source_paths.get(routine))
+        if rel is None or not (SOURCE_ROOT / rel).is_file():
+            return None
+        return (SOURCE_ROOT / rel).read_text(
+            encoding="utf-8", errors="replace").splitlines()
+
+    report, ok = call_site_report(*call_site_misses(xrefs, lines_of))
+    for line in report:
+        print(line)
+    return 0 if ok else 1
 
 
 def validated_names(our_rou: dict[str, dict],
@@ -172,6 +193,72 @@ def validated_names(our_rou: dict[str, dict],
     both = sorted(n for n in xindexed if n in our_rou)
     return ([n for n in both if our_rou[n]["package"]],
             [n for n in both if not our_rou[n]["package"]])
+
+
+INDIRECT_REF = "@("        # XINDEX's key for `D @X`, `D ^@X`: no name
+LOCATION_FLAGS = "*!~"     # XINDX5 CR2 appends these to a location
+CALL_SITE_TOLERANCE = 0.001
+
+
+def call_site_misses(xrefs: list[dict],
+                     lines_of: Callable[[str], list[str] | None]
+                     ) -> tuple[int, int, list[str]]:
+    """Check each XINDEX location against the caller's source text.
+
+    A location is `TAG+n` (a bare `TAG` is the label line itself); the
+    line it points at must name the called routine. data-v1 shipped
+    XINDEX chunk numbers here instead ("0" on 213,713 rows) and every
+    shape check passed — only the source shows the values are wrong.
+    Returns (locations checked, indirect refs skipped, misses).
+    """
+    checked = indirect = 0
+    misses: list[str] = []
+    current, lines, labels = None, None, {}
+    for row in xrefs:
+        if row["ref"] == INDIRECT_REF:
+            indirect += 1
+            continue
+        if row["routine_name"] != current:
+            current = row["routine_name"]
+            lines = lines_of(current)
+            labels = {lb["tag"]: lb["line"]
+                      for lb in parse_labels(lines or [])}
+        callee = row["ref"].split(" ")[0]
+        for loc in filter(None, row["location_list"].split(",")):
+            checked += 1
+            text = _line_at(lines or [], labels, loc.rstrip(LOCATION_FLAGS))
+            if text is None or callee not in text:
+                misses.append(f"{current} {loc} -> {row['ref']}")
+    return checked, indirect, misses
+
+
+def _line_at(lines: list[str], labels: dict[str, int],
+             loc: str) -> str | None:
+    tag, _, offset = loc.partition("+")
+    offset = offset or "0"
+    if tag not in labels or not offset.isdigit():
+        return None
+    i = labels[tag] + int(offset) - 1
+    return lines[i] if i < len(lines) else None
+
+
+def call_site_report(checked: int, indirect: int,
+                     misses: list[str]) -> tuple[list[str], bool]:
+    """The summary lines, and whether the misses are within tolerance."""
+    limit = int(checked * CALL_SITE_TOLERANCE)
+    ok = checked > 0 and len(misses) <= limit
+    lines = ["=== Call sites (xindex-xrefs location_list vs the source) ===",
+             f"  locations checked: {checked:,}",
+             f"  not naming the callee: {len(misses):,} (limit {limit:,})"
+             + ("" if ok else " — FAIL"),
+             f"  indirect refs skipped (no routine name to find): "
+             f"{indirect:,}"]
+    if misses:
+        shown = misses[:SHOW_NAMES]
+        more = len(misses) - len(shown)
+        lines.append("    " + "; ".join(shown)
+                     + (f" (and {more:,} more)" if more else ""))
+    return lines, ok
 
 
 SHOW_NAMES = 10
