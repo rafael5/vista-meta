@@ -1,0 +1,11 @@
+{
+  "comment": "Gate R mutual pinning — the peer artifact this release is measured against. The main record (data-v1.3.manifest.json) stays byte-identical to the published asset; peers are recorded here.",
+  "peers": {
+    "vdocs-data:data-v1": {
+      "corpus_content_hash": "3ce0872e32ec3187eabcee703165134710cc6b92f8c897f149575ddd6ffa01ad",
+      "bundle_sha256": "56e6bd68c367eea57bc283c98ff068809169885e746e483e3d362673019d71a4",
+      "release": "https://github.com/rafael5/vdocs/releases/tag/data-v1",
+      "relation": "vdocs data-v1 is the peer this release's entity bridge is built from. vdocs measured its entity-quality floors against vista-meta data-v1, not data-v1.3. data-v1.3 is a re-extraction under schema_version 1 from the same pinned image as data-v1.2 (VistA-VEHU-M 62622e63); it differs from data-v1.2 only in routine-calls and the tables derived from it, now that the call extractor reads every argument of a DO/GOTO/JOB."
+    }
+  }
+}

@@ -17,7 +17,7 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-TAG = "data-v1.2"
+TAG = "data-v1.3"
 ARTIFACT = "vista-meta-data"
 STEM = f"{ARTIFACT}-{TAG.removeprefix('data-')}"   # vista-meta-data-v1.2
 

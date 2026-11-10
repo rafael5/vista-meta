@@ -166,13 +166,13 @@
         },
         {
           "column": "callee_routine",
-          "distinct_values": 21092,
+          "distinct_values": 21607,
           "file": "routine-calls.tsv",
           "note": "External/unmapped call targets, incl. calls into the %-namespace beyond the %-routines shipped as source on this instance.",
           "open_world": true,
           "target": "routines.tsv:routine_name",
-          "unresolved": 461,
-          "unresolved_rate": 0.0219
+          "unresolved": 488,
+          "unresolved_rate": 0.0226
         },
         {
           "column": "caller_package",
@@ -185,7 +185,7 @@
         },
         {
           "column": "caller_routine",
-          "distinct_values": 32470,
+          "distinct_values": 32496,
           "file": "routine-calls.tsv",
           "open_world": false,
           "target": "routines.tsv:routine_name",
@@ -355,8 +355,8 @@
     },
     "xindex_static_call_authority": {
       "measured": {
-        "callee_divergence_rate": 0.082,
-        "callee_divergent_routines": 3240,
+        "callee_divergence_rate": 0.0076,
+        "callee_divergent_routines": 301,
         "lines_mismatch": 0,
         "tags_mismatch": 1,
         "validated_routines": 39518
