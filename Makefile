@@ -250,8 +250,8 @@ routine-globals: ## Scan each routine for subscripted ^GLOBAL refs (ADR-045 Phas
 
 .PHONY: routine-calls
 routine-calls: ## Scan each routine for DO/GOTO/JOB and $$ calls → routine-calls.tsv (ADR-045 Phase 5)
-	@[ -f vista/vista-m-host/MANIFEST.tsv ] || \
-		{ echo "Run 'make sync-routines' first."; exit 1; }
+	@[ -f vista/export/code-model/routines.tsv ] || \
+		{ echo "Run 'make inventory' first."; exit 1; }
 	/usr/bin/python3 host/scripts/build_routine_calls.py
 
 .PHONY: protocol-calls
