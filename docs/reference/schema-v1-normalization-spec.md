@@ -193,7 +193,8 @@ are the V4 emission's — the machine-checkable copy in fidelity.json is authori
   routine and decomposes the gap by File 9.8 registration. **Divergence denominator:** the
   rows of xindex-validation.tsv — every processed census routine in a package (39,518; the
   package-less `%YDBOCTOVISTAM` has no row because that table's `package` is a non-null FK).
-  Re-measured at data-v1.2: callee divergence 3,240 of 39,518 (8.2%); line counts agree on all;
+  Re-measured at data-v1.2: callee divergence 3,240 of 39,518 (8.2%). At data-v1.3, with
+  routine-calls reading every DO/GOTO/JOB argument: 301 of 39,518 (0.76%). Line counts agree on all;
   tag counts on all but ZZBACSUA, whose source has two broken lines starting in column 1 that
   XINDEX reads as labels.
 

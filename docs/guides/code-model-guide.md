@@ -19,7 +19,7 @@ ones above it.
 
 Shapes are `schema_version: 1` — the normalization contract is
 [../reference/schema-v1-normalization-spec.md](../reference/schema-v1-normalization-spec.md);
-per-release integrity in [../releases/data-v1.2.manifest.json](../releases/data-v1.2.manifest.json)
+per-release integrity in [../releases/data-v1.3.manifest.json](../releases/data-v1.3.manifest.json)
 (current; earlier releases have their own records in [../releases/](../releases/)).
 
 ### 1.1 Inventory layer — "what exists"
@@ -60,11 +60,11 @@ Regex-based extraction from `.m` source and FileMan-stored MUMPS text.
 
 | File | Rows | Columns | Contents |
 |---|---|---|---|
-| `routine-calls.tsv` | 241,781 | 6 | Routine → routine edges (DO/GOTO/JOB/$$): caller_routine, caller_package, callee_tag, callee_routine, kind, ref_count |
+| `routine-calls.tsv` | 252,127 | 6 | Routine → routine edges (DO/GOTO/JOB/$$): caller_routine, caller_package, callee_tag, callee_routine, kind, ref_count |
 | `routine-globals.tsv` | 77,939 | 4 | Routine → subscripted-global edges: routine_name, package, global_name, ref_count |
 | `protocol-calls.tsv` | 5,081 | 7 | Protocol ENTRY/EXIT ACTION → routine invocations: protocol_name, protocol_package, action_kind, callee_tag, callee_routine, call_kind, ref_count |
 
-These are approximate (regex, not parsed MUMPS) but broad-coverage — they include the 7 routines XINDEX cannot load (KMP routines in Caché object syntax). Until data-v1.2 XINDEX also skipped the ~10,400 routines never registered in File 9.8; it now walks the source tree.
+These are approximate (regex, not parsed MUMPS; since data-v1.3 `routine-calls` reads every DO/GOTO/JOB argument, and its callee sets agree with XINDEX for 99.24% of routines) but broad-coverage — they include the 7 routines XINDEX cannot load (KMP routines in Caché object syntax). Until data-v1.2 XINDEX also skipped the ~10,400 routines never registered in File 9.8; it now walks the source tree.
 
 ### 1.4 Code-quality layer — "how the code behaves"
 

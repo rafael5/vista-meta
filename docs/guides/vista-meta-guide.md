@@ -386,8 +386,9 @@ stable keys:
 - **Routines ↔ tags**: `xindex-tags.tsv` maps every tag back to its
   routine, with Supported-Entry-Point classification from VA docs.
 - **Routines ↔ callees**: `routine-calls.tsv` (caller, callee,
-  kind, ref_count). 241,781 edges. XINDEX call graph
-  (`xindex-xrefs.tsv`, 214,101 edges) cross-validates at 98.75%.
+  kind, ref_count). 252,127 edges. Against the XINDEX call graph
+  (`xindex-xrefs.tsv`, 252,728 rows) the callee sets agree for 99.24%
+  of routines (data-v1.3).
 - **Routines ↔ globals**: `routine-globals.tsv` (routine, global,
   ref_count). 77,939 edges.
 - **Routines ↔ roles**: RPC definitions (`rpcs.tsv`), options
@@ -417,7 +418,7 @@ conversion), shell `awk`, or plain Python.
 | [`build_package_manifest.py`](../../host/scripts/build_package_manifest.py) | Per-package joins: role counts, edge counts, coupling |
 | [`build_package_edge_matrix.py`](../../host/scripts/build_package_edge_matrix.py) | Sparse source→dest package call matrix |
 | [`build_routines_comprehensive.py`](../../host/scripts/build_routines_comprehensive.py) | Multi-way join over all 19 layers |
-| [`validate_against_xindex.py`](../../host/scripts/validate_against_xindex.py) | Cross-check regex extraction against XINDEX — published as `xindex-validation.tsv`; also checks that every XINDEX call-site location (`TAG+n`) points at a source line naming the callee, and fails past 0.1 % misses (data-v1.2: 3 of 456,866) |
+| [`validate_against_xindex.py`](../../host/scripts/validate_against_xindex.py) | Cross-check regex extraction against XINDEX — published as `xindex-validation.tsv`; also checks that every XINDEX call-site location (`TAG+n`) points at a source line naming the callee, and fails past 0.1 % misses (data-v1.3: 3 of 456,866) |
 
 XINDEX is VA's official static analyzer (part of Kernel); we drive
 it through the container via the **VMXIDX bridge**
@@ -570,16 +571,22 @@ producer-contracts workstream (2026-07-03):
   `location_list`. A re-extraction under the same schema takes a minor
   number; the tag lives only in `host/scripts/release_id.py`. Record:
   [`../releases/data-v1.1.manifest.json`](../releases/data-v1.1.manifest.json).
-- **Current release: `data-v1.2`** (2026-11-09) — the xindex-* family
-  covers the whole source tree (39,519 of 39,526 routines; data-v1.1
-  covered only the 29,097 registered in File 9.8); every other TSV is
-  unchanged. Record:
+- **`data-v1.2`** (2026-11-09) — the xindex-* family covers the whole
+  source tree (39,519 of 39,526 routines; data-v1.1 covered only the
+  29,097 registered in File 9.8); every other TSV is unchanged. Record:
   [`../releases/data-v1.2.manifest.json`](../releases/data-v1.2.manifest.json).
+- **Current release: `data-v1.3`** (2026-11-09) — `routine-calls.tsv`
+  reads every argument of a DO/GOTO/JOB (data-v1.2 read only the first)
+  and scans the 10 packaged %-routines outside `Packages/`: 252,127
+  rows, callee divergence against XINDEX 301 routines (0.76%, was
+  3,240). Only routine-calls and the tables derived from it changed.
+  Record:
+  [`../releases/data-v1.3.manifest.json`](../releases/data-v1.3.manifest.json).
 - **Peer pin (Gate R):** the vdocs corpus release (`vdocs-data:data-v1`)
   measured its entity-quality floors against data-v1 and the two releases
   pin each other — [`../releases/data-v1-peers.json`](../releases/data-v1-peers.json);
-  data-v1.1 and data-v1.2 keep the same vdocs pin
-  ([`../releases/data-v1.2-peers.json`](../releases/data-v1.2-peers.json)).
+  data-v1.1, data-v1.2 and data-v1.3 keep the same vdocs pin
+  ([`../releases/data-v1.3-peers.json`](../releases/data-v1.3-peers.json)).
 - **Consumers:** the Compass extension (§7.1) auto-discovers either the live
   `vista/export/` tree or an unpacked `vista-meta-data-v1` bundle and shows
   the data vintage (`data-v1 · content_hash…`) in its sidebar.

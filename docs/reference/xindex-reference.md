@@ -157,8 +157,9 @@ output surface — everything XINDEX computes passes through here.
 
 Keys to notice:
 - The `"X"` subtree is the **real call graph** with MUMPS-parser
-  accuracy — catches comma-continuation, indirection, `D @X`
-  patterns that our Phase 5 regex misses (T-003 relevance).
+  accuracy — it records `$TEXT` references and indirection (`D @X`),
+  which our Phase 5 regex does not (T-003 relevance); until data-v1.3
+  the regex also missed every DO/GOTO/JOB argument after the first.
 - `"COM"` holds per-line command/argument tokenization — much
   richer than anything regex can produce.
 - `"T"/"L"/"P"` together give the complete label/tag inventory
@@ -269,7 +270,7 @@ Legend for **Overlap** column:
 | 4b | `rpcs.tsv` | File 8994 dump | — | NONE | XINDEX's scope is routines, not RPC Broker registry. |
 | 4c | `options.tsv` | File 19 dump | — | NONE | XINDEX's scope is routines, not menu system. |
 | 4d | `protocols.tsv` | File 101 dump | — | NONE | XINDEX's scope is routines, not protocol system. |
-| 5 | `routine-calls.tsv` | routine → routine call graph via DO/GOTO/JOB/`$$` | `xindex-xrefs.tsv`: authoritative call graph. File 9.8 subfile 19 (ROUTINE INVOKED) + 20 (INVOKED BY). | **FULL** | **XINDEX is the authoritative source.** Our regex is 98.75% accurate, misses `$TEXT()` patch-version checks, comma-continuation, line-offset calls, indirection. XINDEX also gives inbound-direction (INVOKED BY) natively without aggregation. |
+| 5 | `routine-calls.tsv` | routine → routine call graph via DO/GOTO/JOB/`$$` | `xindex-xrefs.tsv`: authoritative call graph. File 9.8 subfile 19 (ROUTINE INVOKED) + 20 (INVOKED BY). | **FULL** | **XINDEX is the authoritative source.** Since data-v1.3 our regex agrees on the callee set for 99.24% of routines (98.75% before); it does not record `$TEXT()` patch-version checks or indirection, and reads every DO/GOTO/JOB argument and line-offset calls. XINDEX also gives inbound-direction (INVOKED BY) natively without aggregation. |
 | 5b | `protocol-calls.tsv` | protocol ENTRY/EXIT ACTION → routine edges | — | NONE | XINDEX parses .m source only, not MUMPS text stored in FileMan ENTRY ACTION fields. |
 | 6a | `package-manifest.tsv` | per-package unified view | — | NONE | Cross-source join; XINDEX has no concept of packages. |
 | 6b | `routines-comprehensive.tsv` | per-routine unified view | Much of it derivable from `xindex-routines.tsv` + File 9.8 subfiles + xindex-xrefs | COMPLEMENTARY | Joining XINDEX's xref data INTO our comprehensive.tsv would improve in/out-degree accuracy. Adds: error_count, RSUM, tag-with-SEP-flag. Doesn't add: package assignment, RPC/option/protocol signals, size buckets. |

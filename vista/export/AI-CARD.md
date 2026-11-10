@@ -2,7 +2,7 @@
 
 > **GENERATED — do not edit.** Emitted by `host/scripts/build_ai_card.py`
 > from `schema_v1` + the live TSVs + the pinned release record
-> (`docs/releases/data-v1.2.manifest.json`). Regenerate with `make ai-card`;
+> (`docs/releases/data-v1.3.manifest.json`). Regenerate with `make ai-card`;
 > drift-gated by `make card-check` (stale card = RED, card pin must equal
 > the release manifest's `content_hash`). Machine-readable twin:
 > `vista/export/ai-manifest.json`.
@@ -27,11 +27,11 @@ silently.
 
 | Field | Value |
 |---|---|
-| release | `data-v1.2` (`schema_version: 1`) |
-| content_hash | `38baa362af0103fa6b80f213c93ecb273778d55ad808adf400ad61db8a3c0548` |
+| release | `data-v1.3` (`schema_version: 1`) |
+| content_hash | `5778c17499194460d94a51501ee53512a625ceb322bdde93294571f9f56b3cee` |
 | db_state_fingerprint | `b8518a87f50f0f14186f3f3da97155345979d6d6c5d2878d6a379b74e9fe0d32` |
-| extracted | 2026-11-09T18:40:05Z, engine `ydb`, image `vista-meta:latest` |
-| manifest | `docs/releases/data-v1.2.manifest.json` (in-repo record; per-file sha256) |
+| extracted | 2026-11-10T02:21:51Z, engine `ydb`, image `vista-meta:latest` |
+| manifest | `docs/releases/data-v1.3.manifest.json` (in-repo record; per-file sha256) |
 | schema contract | `docs/reference/schema-v1-normalization-spec.md` |
 
 **Scope caveats (state these when they matter):**
@@ -70,7 +70,7 @@ silently.
    SQL
    ```
    Or generate the one-file projection: `make meta-db` →
-   `dist/vista-meta-data-v1.2.db` (all tables typed + the entity bridge + join
+   `dist/vista-meta-data-v1.3.db` (all tables typed + the entity bridge + join
    views `v_rpc_impl`, `v_routine_global_piks`, `v_rpc_data_piks`,
    `v_package_overview`, …). The TSVs stay canonical; the db is derived.
 4. **MCP** — `python3 host/scripts/mcp_server.py` (stdio; wired by the repo's
@@ -105,14 +105,14 @@ tables, templates, rules. **S** System — Kernel/FileMan plumbing, menus, queue
 |---|---|---|---|
 | `options.tsv` | 13,163 | `ien` | ien · name · menu_text · type · package · routine_raw · tag · routine_name · package_dir |
 | `package-data.tsv` | 3,152 | `package`+`kind`+`file_number`+`chunk`+`entity_name` | package · kind · file_number · chunk · entity_name · source_path · byte_size |
-| `package-edge-matrix.tsv` | 1,884 | `source_package`+`dest_package` | source_package · dest_package · call_edges · distinct_caller_routines · distinct_callee_routines |
+| `package-edge-matrix.tsv` | 1,888 | `source_package`+`dest_package` | source_package · dest_package · call_edges · distinct_caller_routines · distinct_callee_routines |
 | `package-manifest.tsv` | 176 | `package` | package · routine_count · total_lines · files_shipped · p_files · i_files · k_files · s_files · rpc_routines · option_routines · distinct_globals_touched · outbound_edges · outbound_cross_pkg |
 | `package-namespace.tsv` | 175 | `package` | package · package_name · namespace · prefixes · app_code · vdl_id |
 | `package-piks-summary.tsv` | 120 | `package` | package · p_files · i_files · k_files · s_files · unclassified · total_distinct_files |
 | `packages.tsv` | 175 | `package` | package · routine_count · percent_routine_count · total_lines · total_bytes |
 | `protocol-calls.tsv` | 5,081 | `protocol_name`+`action_kind`+`callee_tag`+`callee_routine`+`call_kind` | protocol_name · protocol_package · action_kind · callee_tag · callee_routine · call_kind · ref_count |
 | `protocols.tsv` | 6,556 | `ien` | ien · name · item_text · type · package · entry_action · exit_action · package_dir |
-| `routine-calls.tsv` | 243,409 | `caller_routine`+`callee_tag`+`callee_routine`+`kind` | caller_routine · caller_package · callee_tag · callee_routine · kind · ref_count |
+| `routine-calls.tsv` | 252,127 | `caller_routine`+`callee_tag`+`callee_routine`+`kind` | caller_routine · caller_package · callee_tag · callee_routine · kind · ref_count |
 | `routine-globals.tsv` | 78,281 | `routine_name`+`global_name` | routine_name · package · global_name · ref_count |
 | `routines-comprehensive.tsv` | 39,526 | `routine_name` | routine_name · package · source_path · line_count · byte_size · tag_count · comment_line_count · version_line · is_percent_routine · in_file_9_8 · file_9_8_type · rpc_count · option_count · protocol_invoked_count · out_degree · in_degree · out_calls_total · in_calls_total · distinct_globals_touched · global_ref_total |
 | `routines.tsv` | 39,526 | `routine_name` | routine_name · package · source_path · line_count · byte_size · first_line_comment · version_line · tag_count · comment_line_count · is_percent_routine |
@@ -174,11 +174,11 @@ awk -F'\t' '$2=="VA FileMan"' $X/code-model/package-edge-matrix.tsv | sort -t$'\
 
 Cite every measured claim as:
 
-> **vista-meta data-v1.2** · `<tsv path>` · `<key>=<value>` — *or* the exact CLI command run.
+> **vista-meta data-v1.3** · `<tsv path>` · `<key>=<value>` — *or* the exact CLI command run.
 
 Example: *"ORWPT SELECT is served by SELECT^ORWPT"* →
-**vista-meta data-v1.2** · `code-model/rpcs.tsv` · `name=ORWPT SELECT`.
+**vista-meta data-v1.3** · `code-model/rpcs.tsv` · `name=ORWPT SELECT`.
 
 If no row answers the question, the correct answer is
-**"not measured in vista-meta data-v1.2"** — say so and stop; do not substitute
+**"not measured in vista-meta data-v1.3"** — say so and stop; do not substitute
 general knowledge.

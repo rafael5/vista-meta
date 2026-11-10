@@ -33,7 +33,7 @@ deterministic artifact set.
 | **B. Code model** | `vista/export/code-model/` (20 TSVs, ~1.0M rows) | Per-routine intelligence: calls, callers, globals, RPCs, options, protocols, XINDEX findings, package topology |
 | **1. VistA Compass** | `vscode-extension/` | VSCode sidebar + hovers: tags, callers, callees, globals→PIKS joins — pure TSV reads, no runtime dependency |
 | **2. CLI + hook + formatter** | `bin/vista-meta`, `bin/mfmt`, `hooks/pre-commit` | doctor, pkg, context, where, callers, search, file, new-test, lint, xindex; SAC-compliant pre-commit gate |
-| **3. Data release** | [`data-v1.2`](https://github.com/rafael5/vista-meta/releases/tag/data-v1.2) | The models as a verifiable public bundle (`schema_version: 1`, per-file sha256, content hash) — mutually pinned with the [vdocs](https://github.com/rafael5/vdocs) corpus release |
+| **3. Data release** | [`data-v1.3`](https://github.com/rafael5/vista-meta/releases/tag/data-v1.3) | The models as a verifiable public bundle (`schema_version: 1`, per-file sha256, content hash) — mutually pinned with the [vdocs](https://github.com/rafael5/vdocs) corpus release |
 
 ## What comes out — and who consumes it
 
@@ -52,7 +52,7 @@ FileMan DD walks                   materialize_piks       ├─ code-model/  20
                                                           └─ RESEARCH.md  (RF-001…RF-034)
                                                                    │
                                           packaged + hashed as the public
-                                          data-v1.2 release bundle ──────▶ anyone
+                                          data-v1.3 release bundle ──────▶ anyone
 ```
 
 | Consumer | What it reads | What it does with it |
